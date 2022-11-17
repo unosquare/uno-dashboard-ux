@@ -1,0 +1,45 @@
+{
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": ["./src"]
+            }
+        }
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "jest": true
+    },
+    "extends": "eslint-config-unosquare",
+    "plugins": ["eslint-plugin-prettier","unused-imports"],
+    "rules": {
+        "react-hooks/exhaustive-deps": "warn",
+        "no-param-reassign": "warn",
+        "spaced-comment": "warn",
+        "import/prefer-default-export": "warn",
+        "react/no-array-index-key": "warn",
+        "react/require-default-props": "warn",
+        "react/function-component-definition": [
+            "error",
+            { "unnamedComponents": "arrow-function", "namedComponents": "arrow-function" }
+        ],
+        "array-callback-return": ["error", { "checkForEach": true }],
+        "unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{ "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+		],
+        "sort-imports": [
+            "warn",
+            {
+                "ignoreCase": true,
+                "ignoreDeclarationSort": true,
+                "ignoreMemberSort": false,
+                "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+                "allowSeparatedGroups": false
+            }
+        ],
+        "@typescript-eslint/no-explicit-any": 0
+    }
+}
