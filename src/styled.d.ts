@@ -1,24 +1,24 @@
-import "styled-components";
+import 'styled-components';
 
 interface ChartColors {
-  [palette: string]: string[];
+    [palette: string]: string[];
 }
 
-declare module "styled-components" {
-  export interface DefaultTheme {
-    colors: {
-      main: string;
-      secondary: string;
-      fontMain: string;
-      fontSecondary: string;
-      background: string;
-      tableContent: string;
-      blackOpacity: string;
-      cardBackground: string;
-      footerBackground: string;
-      table: string;
-      charts?: ChartColors;
-    };
-    maxWidth: string;
-  }
+declare module 'styled-components' {
+    export interface DefaultTheme {
+        colors: {
+            main: string;
+            secondary: string;
+            fontMain: string;
+            fontSecondary: string;
+            background: string;
+            tableContent: string;
+            blackOpacity: string;
+            cardBackground: string;
+            footerBackground: string;
+            table: string;
+            charts?: ChartColors;
+        };
+        maxWidth: string;
+    }
 }
