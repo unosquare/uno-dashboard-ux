@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { device } from '../theme';
 
 export interface HeaderSettings {
     transparent?: boolean;
@@ -16,16 +17,36 @@ const StyledNavbar = styled.div`
     margin: auto;
     display: flex;
     justify-content: space-between;
-    img {
-        width: 160px;
-        height: 52px;
+`;
+
+const StyledImg = styled.img`
+    width: 160px;
+    height: 52px;
+`;
+
+export const NavBarTitle = styled.div`
+    display: flex;
+    align-items: center;
+    h2 {
+        color: ${({ theme }) => theme.colors.fontSecondary};
+        font-size: 35px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        line-height: 37px;
+        text-transform: uppercase;
+        margin: 0px 15px;
+    }
+    ${device.md} {
+        h2 {
+            font-size: 25px;
+        }
     }
 `;
 
 export const NavBar = ({ transparent, img, children }: any) => (
     <StyledHeader transparent={transparent}>
         <StyledNavbar>
-            <img src={img} alt="Unosquare Logo" />
+            <StyledImg src={img} alt="Unosquare Logo" />
             {children}
         </StyledNavbar>
     </StyledHeader>
