@@ -46,7 +46,7 @@ export const NavBarTitle = styled.div`
 export const NavBar = ({ transparent, img, children }: any) => (
     <StyledHeader transparent={transparent}>
         <StyledNavbar>
-            <StyledImg src={img} alt="Unosquare Logo" />
+            <StyledImg src={img} alt='Unosquare Logo' />
             {children}
         </StyledNavbar>
     </StyledHeader>

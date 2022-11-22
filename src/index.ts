@@ -11,3 +11,4 @@ export * from './Ellipse';
 export * from './Footer';
 export * from './NavBar';
 export * from './Text';
+export * from './SearchBox';

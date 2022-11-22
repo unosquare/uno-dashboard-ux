@@ -42,20 +42,13 @@ const getColor = (type: ChartTypes, category: any) => {
     }
 };
 
-const getCustomName = (customLabel: CustomOptions, index: number, category: any) =>
-    customLabel.prefix
-        ? `${customLabel.values[index]} ${category.name}`
-        : `${category.name} ${customLabel.values[index]}`;
+const getCustom = ({ values, prefix }: CustomOptions, index: number, { name }: any) =>
+    prefix ? `${values[index]} ${name}` : `${name} ${values[index]}`;
 
-const getCustomValue = (customValue: CustomOptions, index: number, category: any) =>
-    customValue.prefix
-        ? `${customValue.values[index]} ${category.name}`
-        : `${category.name} ${customValue.values[index]}`;
-
-const getMaleFemaleLabel = (category: any) =>
-    category.dataKey === 'female'
-        ? `${humanize(category.dataKey)}: ${category.payload.femaleNumber} - ${Math.abs(category.payload.female)}%`
-        : `${humanize(category.dataKey)}: ${category.payload.maleNumber} - ${category.payload.male}%`;
+const getMaleFemaleLabel = ({ dataKey, payload }: any) =>
+    dataKey === 'female'
+        ? `${humanize(dataKey)}: ${payload.femaleNumber} - ${Math.abs(payload.female)}%`
+        : `${humanize(dataKey)}: ${payload.maleNumber} - ${payload.male}%`;
 
 const getLabel =
     (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined) =>
@@ -79,11 +72,11 @@ const getLabel =
 
         if (ignoreValue && value === 0.001) value = 0;
         if (customLabel && customLabel.values.length > 0) {
-            name = getCustomName(customLabel, index, category);
+            name = getCustom(customLabel, index, category);
         }
 
         if (customValue && customValue.values.length > 0) {
-            value = getCustomValue(customValue, index, category);
+            value = getCustom(customValue, index, category);
         }
 
         if (money) {

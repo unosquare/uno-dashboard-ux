@@ -8,24 +8,26 @@ export interface AppContainerSettings {
     children: React.ReactNode;
 }
 
+const getTemplateRows = (rows: number) => {
+    switch (rows) {
+        case 5:
+            return 'repeat(5, 18%)';
+        case 4:
+            return 'repeat(4, 23%)';
+        case 3:
+            return 'repeat(3, 31%)';
+        case 2:
+            return 'repeat(2, 46.5%)';
+        default:
+            return '';
+    }
+};
+
 const StyledAppContainer = styled.div<AppContainerSettings>`
     display: grid;
     grid-template-columns: ${({ columns }) => `repeat(${columns}, 1fr)`};
     grid-column-gap: 35px;
-    grid-template-rows: ${({ rows }) => {
-        switch (rows) {
-            case 5:
-                return 'repeat(5, 18%)';
-            case 4:
-                return 'repeat(4, 23%)';
-            case 3:
-                return 'repeat(3, 31%)';
-            case 2:
-                return 'repeat(2, 46.5%)';
-            default:
-                return '';
-        }
-    }};
+    grid-template-rows: ${({ rows }) => getTemplateRows(rows)};
     grid-row-gap: ${({ rows }) => (rows === 5 ? '35px' : '30px')};
     width: calc(100% - 80px);
     max-width: ${(props) => props.theme.maxWidth};

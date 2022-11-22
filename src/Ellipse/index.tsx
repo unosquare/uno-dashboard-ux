@@ -7,6 +7,6 @@ export interface EllipseSettings {
 
 export const Ellipse = ({ color, small }: EllipseSettings) => (
     <svg height={small ? '15' : '20'} width={small ? '15' : '20'}>
-        <ellipse cx={small ? '7.5' : '10'} cy={small ? '8' : '10'} rx="5" ry="5" style={{ fill: color }} />
+        <ellipse cx={small ? '7.5' : '10'} cy={small ? '8' : '10'} rx='5' ry='5' style={{ fill: color }} />
     </svg>
 );
