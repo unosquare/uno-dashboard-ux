@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FormatTypes } from 'uno-js';
+import { formatter, FormatTypes, humanize } from 'uno-js';
 import { ChartTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { TooltipTitle, LabelInfo } from '../Text';
@@ -180,11 +180,3 @@ export const ChartLegend = ({
         </StyledLegend>
     );
 };
-
-function humanize(dataKey: any) {
-    throw new Error('Function not implemented.');
-}
-
-function formatter(value: any, MONEY: any) {
-    throw new Error('Function not implemented.');
-}
