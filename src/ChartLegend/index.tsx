@@ -19,7 +19,7 @@ export interface ChartLegendSettings {
     type: ChartTypes;
     customValue?: CustomOptions;
     customLabel?: CustomOptions;
-    legendFormatType: LegendFormatTypes;
+    legendFormatType?: LegendFormatTypes;
     title?: boolean;
     ignoreValue?: boolean;
     formats?: FormatTypes[];
@@ -42,12 +42,27 @@ const getColor = (type: ChartTypes, category: any) => {
     }
 };
 
+const getCustomName = (customLabel: CustomOptions, index: number, category: any) =>
+    customLabel.prefix
+        ? `${customLabel.values[index]} ${category.name}`
+        : `${category.name} ${customLabel.values[index]}`;
+
+const getCustomValue = (customValue: CustomOptions, index: number, category: any) =>
+    customValue.prefix
+        ? `${customValue.values[index]} ${category.name}`
+        : `${category.name} ${customValue.values[index]}`;
+
+const getMaleFemaleLabel = (category: any) =>
+    category.dataKey === 'female'
+        ? `${humanize(category.dataKey)}: ${category.payload.femaleNumber} - ${Math.abs(category.payload.female)}%`
+        : `${humanize(category.dataKey)}: ${category.payload.maleNumber} - ${category.payload.male}%`;
+
 const getLabel =
     (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined) =>
     (
         category: any,
         index: number,
-        legendFormatType: LegendFormatTypes,
+        legendFormatType?: LegendFormatTypes,
         percentage = false,
         money = false,
         ignoreValue = false,
@@ -57,26 +72,18 @@ const getLabel =
         }
 
         if (category.payload.maleNumber || category.payload.femaleNumber) {
-            return category.dataKey === 'female'
-                ? `${humanize(category.dataKey)}: ${category.payload.femaleNumber} - ${Math.abs(
-                      category.payload.female,
-                  )}%`
-                : `${humanize(category.dataKey)}: ${category.payload.maleNumber} - ${category.payload.male}%`;
+            return getMaleFemaleLabel(category);
         }
 
         let { name, value } = category;
 
         if (ignoreValue && value === 0.001) value = 0;
         if (customLabel && customLabel.values.length > 0) {
-            name = customLabel.prefix
-                ? `${customLabel.values[index]} ${category.name}`
-                : `${category.name} ${customLabel.values[index]}`;
+            name = getCustomName(customLabel, index, category);
         }
 
         if (customValue && customValue.values.length > 0) {
-            value = customValue.prefix
-                ? `${customValue.values[index]} ${category.name}`
-                : `${category.name} ${customValue.values[index]}`;
+            value = getCustomValue(customValue, index, category);
         }
 
         if (money) {
@@ -127,6 +134,7 @@ export const ChartLegend = ({
     const localPayload = payload || [];
     const legendTitle = localPayload.length > 0 ? localPayload.map((c: any) => c.payload.name) : '0';
     const getLabelFunc = getLabel(customLabel, customValue);
+
     if (localPayload.some((c: any) => c.payload.name === 'IgnoreToolTip')) return payload[0].payload.label;
 
     return (
