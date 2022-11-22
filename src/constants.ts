@@ -16,6 +16,7 @@ export enum SizeValues {
     SMALL = 'sm',
     SMALL_INTER = 'si',
     EXTRA_SMALL = 'xs',
+    MICRO = 'mc',
     LARGE_PADDED = 'lp',
 }
 
@@ -27,4 +28,17 @@ export enum Colors {
     BORDER_GRAY = '#C7C7C7',
     VALID_CELL_DATA = '#2FAA90',
     INVALID_CELL_DATA = 'red',
+}
+
+export enum ChartTypes {
+    PIE = 'pie',
+    FUNNEL = 'funnel',
+    LINE = 'line',
+    BAR = 'bar',
+}
+
+export interface ChartData {
+    name: string;
+    value: number;
+    subValue?: string | number;
 }

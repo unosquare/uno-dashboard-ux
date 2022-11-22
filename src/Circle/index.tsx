@@ -10,72 +10,86 @@ export interface CircleSettings {
     subValue?: string | number;
 }
 
+const calculateSize = (size: SizeValues) => {
+    switch (size) {
+        case SizeValues.SMALL:
+            return `
+                min-width: 100px;
+                min-height: 100px;
+                max-height: 100px;
+                margin: 15px auto;
+                span {
+                  font-size: 30px;
+                };
+            `;
+        case SizeValues.SMALL_INTER:
+            return `
+                min-width: 50px;
+                min-height: 50px;
+                max-height: 80px;
+                font-size: 16px;
+                margin: 5px 5px 0px auto
+                span {
+                  color: '#fff';
+                };
+            `;
+        case SizeValues.EXTRA_SMALL:
+            return `
+                min-width: 50px;
+                min-height: 50px;
+                max-height: 50px;
+                margin: 5px 5px 0px auto
+                span {
+                    font-size: 22px;
+                };
+            `;
+        case SizeValues.MEDIUM:
+            return `
+                min-width: 115px;
+                min-height: 115px;
+                max-height: 115px;
+                margin: 20px 20px;
+                span {
+                  font-size: 16px;
+                };
+            `;
+        case SizeValues.LARGE_PADDED:
+            return `
+                min-width: 131px;
+                min-height: 131px;
+                max-height: 131px;
+                margin: 20px 45px;
+                span {
+                  font-size: 24px;
+                };
+            `;
+        case SizeValues.MICRO:
+            return `
+                    height: 35px;
+                    min-width: 35px;
+                    span {
+                        font-size: 10px;
+                    };
+                    ${device.md} {
+                        height: 25px;
+                        min-width: 25px;
+                    }
+                `;
+        default:
+            return `
+                min-width: 131px;
+                min-height: 131px;
+                max-height: 131px;
+                margin: 20px 45px;
+                span {
+                  font-size: 16px;
+                };
+            `;
+    }
+};
+
 const StyledCircle = styled.div<CircleSettings>`
-    ${({ size }) => {
-        switch (size) {
-            case SizeValues.SMALL:
-                return `
-                    min-width: 100px;
-                    min-height: 100px;
-                    max-height: 100px;
-                    margin: 15px auto;
-                    span {
-                      font-size: 30px;
-                    };
-                `;
-            case SizeValues.SMALL_INTER:
-                return `
-                    min-width: 50px;
-                    min-height: 50px;
-                    max-height: 80px;
-                    font-size: 16px;
-                    margin: 5px 5px 0px auto
-                    span {
-                      color: '#fff';
-                    };
-                `;
-            case SizeValues.EXTRA_SMALL:
-                return `
-                    min-width: 50px;
-                    min-height: 50px;
-                    max-height: 50px;
-                    margin: 5px 5px 0px auto
-                    span {
-                        font-size: 22px;
-                    };
-                `;
-            case SizeValues.MEDIUM:
-                return `
-                    min-width: 115px;
-                    min-height: 115px;
-                    max-height: 115px;
-                    margin: 20px 20px;
-                    span {
-                      font-size: 16px;
-                    };
-                `;
-            case SizeValues.LARGE_PADDED:
-                return `
-                    min-width: 131px;
-                    min-height: 131px;
-                    max-height: 131px;
-                    margin: 20px 45px;
-                    span {
-                      font-size: 24px;
-                    };
-                `;
-            default:
-                return `
-                    min-width: 131px;
-                    min-height: 131px;
-                    max-height: 131px;
-                    margin: 20px 45px;
-                    span {
-                      font-size: 16px;
-                    };
-                `;
-        }
-    }};
+    ${({ size }) => calculateSize(size)}
     ${({ color, theme }) => {
         if (color === Colors.BLUE) {
             return `

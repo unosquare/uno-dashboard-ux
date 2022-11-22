@@ -18,6 +18,7 @@ import {
     CardContent,
     Divider,
     Ellipse,
+    Badge,
 } from '../src';
 import unologo from '../public/assets/unosquare_logo.svg';
 
@@ -36,8 +37,9 @@ const Application = () => (
                     <h2>TOTAL</h2>
                 </Title>
             </Card>
-            <Card column={2} row={1} direction={Directions.ROW}>
-                <Circle size={SizeValues.SMALL} value={50} color={Colors.GRAY} />
+            <Card column={2} row={1} direction={Directions.ROW} extraBottom>
+                <Badge value={500} content="Goal" right={30} />
+                <Circle size={SizeValues.EXTRA_SMALL} value={50} color={Colors.GRAY} />
                 <Divider />
                 <CardContent direction={Directions.COLUMN} size={SizeValues.EXTRA_SMALL}>
                     <h3>Subtitle</h3>
