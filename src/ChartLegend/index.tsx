@@ -5,19 +5,24 @@ import { ChartTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { TooltipTitle, LabelInfo } from '../Text';
 
+export enum LegendFormatTypes {
+    NORMAL = 'normal',
+    PERCENTAGE = 'percentage',
+    MONEY = 'money',
+    TENURE = 'tenure',
+    NEGATIVE = 'negative',
+}
+
 export interface ChartLegendSettings {
     active?: boolean;
     payload?: any;
     type: ChartTypes;
-    percentage?: boolean;
     customValue?: CustomOptions;
     customLabel?: CustomOptions;
-    tenure?: boolean;
-    money?: boolean;
-    allownegative?: boolean;
+    legendFormatType: LegendFormatTypes;
     title?: boolean;
     ignoreValue?: boolean;
-    formats?: any[];
+    formats?: FormatTypes[];
     accumulated?: boolean;
 }
 
@@ -37,50 +42,51 @@ const getColor = (type: ChartTypes, category: any) => {
     }
 };
 
-const getLabel = (
-    customLabel: CustomOptions | undefined,
-    customValue: CustomOptions | undefined,
-    category: any,
-    index: number,
-    percentage = false,
-    tenure = false,
-    money = false,
-    allownegative = false,
-    ignoreValue = false,
-) => {
-    if (tenure) {
-        return `Month ${category.payload.x}: ${category.value} DPs`;
-    }
-    if (category.payload.maleNumber || category.payload.femaleNumber) {
-        return category.dataKey === 'female'
-            ? `${humanize(category.dataKey)}: ${category.payload.femaleNumber} - ${Math.abs(category.payload.female)}%`
-            : `${humanize(category.dataKey)}: ${category.payload.maleNumber} - ${category.payload.male}%`;
-    }
-    let { name } = category;
-    let { value } = category;
-    if (ignoreValue && value === 0.001) value = 0;
-    if (customLabel && customLabel.values.length > 0) {
-        name = customLabel.prefix
-            ? `${customLabel.values[index]} ${category.name}`
-            : `${category.name} ${customLabel.values[index]}`;
-    }
+const getLabel =
+    (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined) =>
+    (
+        category: any,
+        index: number,
+        legendFormatType: LegendFormatTypes,
+        percentage = false,
+        money = false,
+        ignoreValue = false,
+    ) => {
+        if (legendFormatType === LegendFormatTypes.TENURE) {
+            return `Month ${category.payload.x}: ${category.value} DPs`;
+        }
 
-    if (customValue && customValue.values.length > 0) {
-        value = customValue.prefix
-            ? `${customValue.values[index]} ${category.name}`
-            : `${category.name} ${customValue.values[index]}`;
-    }
+        if (category.payload.maleNumber || category.payload.femaleNumber) {
+            return category.dataKey === 'female'
+                ? `${humanize(category.dataKey)}: ${category.payload.femaleNumber} - ${Math.abs(
+                      category.payload.female,
+                  )}%`
+                : `${humanize(category.dataKey)}: ${category.payload.maleNumber} - ${category.payload.male}%`;
+        }
 
-    if (money) {
-        return `${humanize(name)}: ${formatter(value, FormatTypes.MONEY)}`;
-    }
+        let { name, value } = category;
 
-    if (allownegative) {
+        if (ignoreValue && value === 0.001) value = 0;
+        if (customLabel && customLabel.values.length > 0) {
+            name = customLabel.prefix
+                ? `${customLabel.values[index]} ${category.name}`
+                : `${category.name} ${customLabel.values[index]}`;
+        }
+
+        if (customValue && customValue.values.length > 0) {
+            value = customValue.prefix
+                ? `${customValue.values[index]} ${category.name}`
+                : `${category.name} ${customValue.values[index]}`;
+        }
+
+        if (money) {
+            return `${humanize(name)}: ${formatter(value, FormatTypes.MONEY)}`;
+        }
+
+        value = legendFormatType === LegendFormatTypes.NEGATIVE ? value : Math.abs(value);
+
         return `${humanize(name)}: ${value}${percentage ? '%' : ''}`;
-    }
-
-    return `${humanize(name)}: ${Math.abs(value)}${percentage ? '%' : ''}`;
-};
+    };
 
 const StyledLegend = styled.div`
     box-shadow: 0 0px 2px 0px ${({ theme }) => theme.colors.blackOpacity};
@@ -110,22 +116,17 @@ export const ChartLegend = ({
     active,
     payload,
     type,
-    percentage,
     customLabel,
     customValue,
-    tenure,
-    money,
-    allownegative,
-    title = false,
     ignoreValue,
     formats,
     accumulated,
+    legendFormatType,
+    title = false,
 }: ChartLegendSettings) => {
     const localPayload = payload || [];
-    let legendTitle = '0';
-
-    if (localPayload.length > 0) legendTitle = localPayload.map((c: any) => c.payload.name);
-
+    const legendTitle = localPayload.length > 0 ? localPayload.map((c: any) => c.payload.name) : '0';
+    const getLabelFunc = getLabel(customLabel, customValue);
     if (localPayload.some((c: any) => c.payload.name === 'IgnoreToolTip')) return payload[0].payload.label;
 
     return (
@@ -145,35 +146,20 @@ export const ChartLegend = ({
                     return (
                         <div key={index}>
                             <Ellipse color={getColor(type, category)} />
-                            {formats ? (
-                                <LabelInfo>
-                                    {getLabel(
-                                        customLabel,
-                                        customValue,
-                                        category,
-                                        index,
-                                        formats[index] === FormatTypes.PERCENTAGE,
-                                        tenure,
-                                        formats[index] === FormatTypes.MONEY,
-                                        allownegative,
-                                        ignoreValue,
-                                    )}
-                                </LabelInfo>
-                            ) : (
-                                <LabelInfo>
-                                    {getLabel(
-                                        customLabel,
-                                        customValue,
-                                        category,
-                                        index,
-                                        percentage,
-                                        tenure,
-                                        money,
-                                        allownegative,
-                                        ignoreValue,
-                                    )}
-                                </LabelInfo>
-                            )}
+                            <LabelInfo>
+                                {getLabelFunc(
+                                    category,
+                                    index,
+                                    legendFormatType,
+                                    formats
+                                        ? formats[index] === FormatTypes.PERCENTAGE
+                                        : legendFormatType === LegendFormatTypes.PERCENTAGE,
+                                    formats
+                                        ? formats[index] === FormatTypes.MONEY
+                                        : legendFormatType === LegendFormatTypes.MONEY,
+                                    ignoreValue,
+                                )}
+                            </LabelInfo>
                         </div>
                     );
                 })}
