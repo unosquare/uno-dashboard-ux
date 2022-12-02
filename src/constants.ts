@@ -42,3 +42,12 @@ export interface ChartData {
     value: number;
     subValue?: string | number;
 }
+
+export enum LegendFormatTypes {
+    NORMAL = 'normal',
+    PERCENTAGE = 'percentage',
+    MONEY = 'money',
+    TENURE = 'tenure',
+    NEGATIVE = 'negative',
+    NUMBER = 'number',
+}

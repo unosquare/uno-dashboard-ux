@@ -1,17 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatter, FormatTypes, humanize } from 'uno-js';
-import { ChartTypes } from '../constants';
+import { ChartTypes, LegendFormatTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { TooltipTitle, LabelInfo } from '../Text';
-
-export enum LegendFormatTypes {
-    NORMAL = 'normal',
-    PERCENTAGE = 'percentage',
-    MONEY = 'money',
-    TENURE = 'tenure',
-    NEGATIVE = 'negative',
-}
 
 export interface ChartLegendSettings {
     active?: boolean;
