@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { device } from '../theme';
+import { UnoLogo } from '../UnoLogo';
 
 export interface HeaderSettings {
     transparent?: boolean;
@@ -17,11 +18,6 @@ const StyledNavbar = styled.div`
     margin: auto;
     display: flex;
     justify-content: space-between;
-`;
-
-const StyledImg = styled.img`
-    width: 160px;
-    height: 52px;
 `;
 
 export const NavBarTitle = styled.div`
@@ -43,10 +39,10 @@ export const NavBarTitle = styled.div`
     }
 `;
 
-export const NavBar = ({ transparent, img, children }: any) => (
+export const NavBar = ({ transparent, children }: any) => (
     <StyledHeader transparent={transparent}>
         <StyledNavbar>
-            <StyledImg src={img} alt='Unosquare Logo' />
+            <UnoLogo width={160} height={52} />
             {children}
         </StyledNavbar>
     </StyledHeader>

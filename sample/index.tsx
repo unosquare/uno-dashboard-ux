@@ -21,12 +21,11 @@ import {
     Badge,
     SearchBox,
 } from '../src';
-import unologo from '../public/assets/unosquare_logo.svg';
 
 const Application = () => (
     <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <NavBar img={unologo}>
+        <NavBar>
             <NavBarTitle>
                 <h2>Sample App</h2>
             </NavBarTitle>
