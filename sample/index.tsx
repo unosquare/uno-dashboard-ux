@@ -20,6 +20,7 @@ import {
     Ellipse,
     Badge,
     SearchBox,
+    Loading,
 } from '../src';
 
 const Application = () => (
@@ -50,8 +51,9 @@ const Application = () => (
                 <Divider />
                 <Circle size={SizeValues.SMALL} value={100} color={Colors.GRAY} />
             </Card>
-            <Card column={1} row={2} direction={Directions.ROW}>
+            <Card column={1} row={2} direction={Directions.COLUMN} fit>
                 <SearchBox search={console.log} />
+                <Loading />
             </Card>
         </AppContainer>
         <Footer />

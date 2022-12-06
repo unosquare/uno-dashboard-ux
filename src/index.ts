@@ -7,6 +7,7 @@ export * from './Card';
 export * from './ChartLegend';
 export * from './Circle';
 export * from './Divider';
+export * from './Loading';
 export * from './Ellipse';
 export * from './Footer';
 export * from './NavBar';
