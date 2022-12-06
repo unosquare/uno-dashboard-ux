@@ -11,6 +11,8 @@ export * from './Loading';
 export * from './Ellipse';
 export * from './Footer';
 export * from './NavBar';
+export * from './TableSelect';
+export * from './Toolbar';
 export * from './Text';
 export * from './SearchBox';
 export * from './UnoLogo';

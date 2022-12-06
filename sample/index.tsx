@@ -21,7 +21,10 @@ import {
     Badge,
     SearchBox,
     Loading,
+    ToolBar,
 } from '../src';
+
+const noOp = () => {};
 
 const Application = () => (
     <ThemeProvider theme={theme}>
@@ -54,6 +57,9 @@ const Application = () => (
             <Card column={1} row={2} direction={Directions.COLUMN} fit>
                 <SearchBox search={console.log} />
                 <Loading />
+            </Card>
+            <Card column={2} row={2} direction={Directions.COLUMN} fit>
+                <ToolBar dataTitle='This is a header' onSearch={noOp} onCsvClick={noOp} switchTbl={noOp} />
             </Card>
         </AppContainer>
         <Footer />
