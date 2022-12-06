@@ -1,5 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { ActionButton, ActionButtonContainer, imgStyle } from '../ActionButton';
+import { ExportCsvButton } from '../ExportCsvButton';
 import { SearchBox } from '../SearchBox';
 import { SelectSettings, TableSelect } from '../TableSelect';
 
@@ -15,12 +17,6 @@ export interface ToolBarSettings {
 export interface TableTitleSettings {
     rightAlign?: boolean;
     margin?: boolean;
-}
-
-export interface ButtonSettings {
-    width?: string;
-    fitContent?: boolean;
-    ignoreFocus?: boolean;
 }
 
 const StyledTableTitleContainer = styled.div`
@@ -44,43 +40,6 @@ const StyledTableTitle = styled.h6<TableTitleSettings>`
     display: block;
 `;
 
-export const ActionButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    height: 100%;
-`;
-
-export const ActionButton = styled.button<ButtonSettings>`
-    ${({ width }) => (width ? `width: ${width}` : 'width: 130px')};
-    ${({ fitContent }) => fitContent && 'min-width: max-content'};
-    display: inline-flex;
-    margin-right: 0.5rem;
-    align-items: center;
-    padding: 0.5rem;
-    line-height: 1.5;
-    font-weight: normal;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    border-width: 0px;
-    background-color: transparent;
-    height: 32px;
-    svg {
-        margin-right: 0.5rem;
-    }
-    ${({ ignoreFocus }) =>
-        !ignoreFocus &&
-        `
-        :hover {
-            background-color: rgba(229, 231, 235, 1);
-        }
-        :focus {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-        }
-    `}
-`;
-
 const SearchboxContainer = styled.div`
     margin-bottom: 1.5rem;
     margin-right: 2.5rem;
@@ -90,19 +49,6 @@ const SearchboxContainer = styled.div`
     align-items: center;
     justify-content: end;
 `;
-
-const imgStyle = { width: '1rem', height: '1rem' };
-
-export const ExportCsvIcon = (props: any) => (
-    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 12 12' {...props}>
-        <title>Export CSV</title>
-        <path
-            d='M0 9.75h12V0H0v9.75Zm.75-7.5h10.5V.75H.75v1.5ZM.75 9h10.5V3H.75v6ZM6 8.25h.75v-4.5H6v4.5Zm3 0h.75V4.501H9V8.25Zm-7.5 0h.75V4.501H1.5V8.25Zm6 0h.751V6H7.5v2.25Zm-3 0h.75V6H4.5v2.25Zm-1.5 0h.751V6.751H3V8.25Z'
-            fill='#304FF3'
-            fillRule='evenodd'
-        />
-    </svg>
-);
 
 export const ToggleOnIcon = (props: any) => (
     <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 12 12' {...props}>
@@ -160,14 +106,7 @@ export const ToolBar = ({ dataTitle, switchTbl, isExchange, onCsvClick, onSearch
                             </ActionButton>
                         </ActionButtonContainer>
                     )}
-                    {onCsvClick && (
-                        <ActionButtonContainer>
-                            <ActionButton width='125px' type='button' onClick={onCsvClick}>
-                                <ExportCsvIcon {...imgStyle} />
-                                Export to CSV
-                            </ActionButton>
-                        </ActionButtonContainer>
-                    )}
+                    {onCsvClick && <ExportCsvButton onClick={onCsvClick} />}
                     {onSearch && (
                         <SearchboxContainer>
                             <SearchBox search={onSearch} />
