@@ -367,7 +367,7 @@ const UncheckIcon = (props: any) => (
     </svg>
 );
 
-const renderTableCell = (
+export const renderTableCell = (
     data: Record<string, unknown> | string | number | boolean | string[] | any,
     type: DataTypes | undefined,
 ) => {
