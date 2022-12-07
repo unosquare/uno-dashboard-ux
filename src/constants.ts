@@ -51,3 +51,36 @@ export enum LegendFormatTypes {
     NEGATIVE = 'negative',
     NUMBER = 'number',
 }
+
+export enum DataTypes {
+    MONEY = 'money',
+    DECIMAL = 'decimal',
+    NUMBER = 'number',
+    STRING = 'string',
+    PERCENTAGE = 'percentage',
+    DECIMAL_PERCENTAGE = 'decimalPpercentage',
+    LINK = 'link',
+    DATE = 'date',
+    DATE_LOCAL = 'dateLocal',
+    LOCATION = 'location',
+    DAYS = 'days',
+    MONTHS = 'months',
+    BOOLEAN = 'boolean',
+    LINK_STRING = 'linkString',
+    LINK_ICON = 'linkIcon',
+    BULLET = 'bullet',
+    PARAGRAPH = 'paragraph',
+    BOLD_STRING = 'boldstring',
+}
+
+export enum SortDirection {
+    ASC = 'asc',
+    DESC = 'desc',
+}
+
+export interface CurrencyRate {
+    CurrencyRateId: number;
+    CurrencyCode: string;
+    RateToUsd: number;
+    DateModified: string;
+}

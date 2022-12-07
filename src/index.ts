@@ -14,6 +14,7 @@ export * from './ExportCsvButton';
 export * from './Footer';
 export * from './NavBar';
 export * from './TableSelect';
+export * from './Table';
 export * from './Toolbar';
 export * from './Text';
 export * from './SearchBox';

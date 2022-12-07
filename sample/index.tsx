@@ -19,15 +19,24 @@ import {
     Divider,
     Ellipse,
     Badge,
-    SearchBox,
     Loading,
-    ToolBar,
+    Table,
+    DataTypes,
 } from '../src';
 
-const noOp = () => {};
+const defaultData = [
+    ['Pepe', 20],
+    ['Juan', 30],
+];
 
 const Application = () => {
     const [value, setValue] = React.useState(false);
+    const [data, setData] = React.useState(defaultData);
+
+    const toggle = () => {
+        setValue(!value);
+        setData(value ? defaultData : []);
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -44,8 +53,21 @@ const Application = () => {
                         <h2>TOTAL</h2>
                     </Title>
                 </Card>
-                <Card column={2} row={1} direction={Directions.ROW} extraBottom>
+                <Card column={2} row={1} direction={Directions.COLUMN}>
+                    <Table
+                        columns={[{ label: 'Name' }, { label: 'Age', dataType: DataTypes.DAYS }]}
+                        rawData={data}
+                        dataCallback={(d) => d}
+                        dataTitle='Data Table'
+                        searchable
+                        sortable
+                        exportCsv
+                        switchTbl={toggle}
+                        isExchange={value}
+                    />
                     <Badge value={500} content='Goal' right={30} />
+                </Card>
+                <Card column={2} row={2} direction={Directions.ROW}>
                     <Circle size={SizeValues.EXTRA_SMALL} value={50} color={Colors.GRAY} />
                     <Divider />
                     <CardContent direction={Directions.COLUMN} size={SizeValues.EXTRA_SMALL}>
@@ -54,21 +76,11 @@ const Application = () => {
                             <Ellipse color='#4CDD28' small /> This is OK
                         </h4>
                     </CardContent>
+                </Card>
+                <Card column={1} row={2} direction={Directions.ROW} fit>
+                    <Loading />
                     <Divider />
                     <Circle size={SizeValues.SMALL} value={100} color={Colors.GRAY} />
-                </Card>
-                <Card column={1} row={2} direction={Directions.COLUMN} fit>
-                    <SearchBox search={console.log} />
-                    <Loading />
-                </Card>
-                <Card column={2} row={2} direction={Directions.COLUMN} fit>
-                    <ToolBar
-                        dataTitle='This is a header'
-                        onSearch={noOp}
-                        onCsvClick={noOp}
-                        switchTbl={() => setValue(!value)}
-                        isExchange={value}
-                    />
                 </Card>
             </AppContainer>
             <Footer />
