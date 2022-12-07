@@ -13,6 +13,7 @@ export * from './Ellipse';
 export * from './ExportCsvButton';
 export * from './Footer';
 export * from './NavBar';
+export * from './NoData';
 export * from './TableSelect';
 export * from './Table';
 export * from './Toolbar';
