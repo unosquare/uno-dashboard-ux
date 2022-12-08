@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import {
     GlobalStyle,
-    theme,
+    baseTheme,
     NavBar,
     NavBarTitle,
     Footer,
@@ -31,10 +31,6 @@ const defaultData = [
     ['Juan', 30],
 ];
 
-const chartColors = {
-    default: ['#22D3C5', '#009776', '#f65097', '#ff8300', '#304ff3', '#003d6e', '#d0dd28'],
-};
-
 const chartData = [
     { name: 'Group A', value: 400 },
     { name: 'Group B', value: 300 },
@@ -51,7 +47,7 @@ const Application = () => {
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={baseTheme}>
             <GlobalStyle />
             <NavBar>
                 <NavBarTitle>
@@ -80,13 +76,7 @@ const Application = () => {
                     <Badge value={500} content='Goal' right={30} />
                 </Card>
                 <Card column={1} row={1} direction={Directions.COLUMN}>
-                    <PieChart
-                        chartColors={chartColors}
-                        palette='default'
-                        rawData={chartData}
-                        dataCallback={(d) => d}
-                        legendFormatType={LegendFormatTypes.NUMBER}
-                    />
+                    <PieChart rawData={chartData} dataCallback={(d) => d} legendFormatType={LegendFormatTypes.NUMBER} />
                 </Card>
                 <Card column={2} row={2} direction={Directions.ROW}>
                     <Circle size={SizeValues.EXTRA_SMALL} value={50} color={Colors.GRAY} />

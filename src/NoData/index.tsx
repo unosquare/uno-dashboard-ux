@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DefaultImg } from '../Icons';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -31,16 +32,6 @@ const DefaultNoDataLegend = () => (
         <DefaultImg />
         <DefaultLegend />
     </>
-);
-
-export const DefaultImg = (props: any) => (
-    <svg xmlns='http://www.w3.org/2000/svg' width={77.36} height={67.69} {...props}>
-        <path
-            fill='#505050'
-            fillRule='evenodd'
-            d='M4.83 4.84v14.5h72.52v4.83h-14.5v14.51h14.5v4.83h-14.5v14.51h14.5v4.83h-14.5v4.84h-4.84v-4.84H33.84v4.84H29v-4.84H4.83v4.84H0V0h77.36v4.84H4.83zm0 19.33v14.51H29V24.17H4.83zm53.19 0H33.85v14.51h24.17V24.17zM29.01 43.51v14.51H4.83V43.51h24.18zm4.84 0h24.17v14.51H33.85V43.51z'
-        />
-    </svg>
 );
 
 export const PieNoDataLegend = (props: any) => (

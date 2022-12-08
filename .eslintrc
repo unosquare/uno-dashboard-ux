@@ -14,12 +14,12 @@
     "extends": "eslint-config-unosquare",
     "plugins": ["eslint-plugin-prettier","unused-imports"],
     "rules": {
+        "react/require-default-props": "off",
         "react-hooks/exhaustive-deps": "warn",
         "no-param-reassign": "warn",
         "spaced-comment": "warn",
         "import/prefer-default-export": "warn",
         "react/no-array-index-key": "warn",
-        "react/require-default-props": "warn",
         "react/function-component-definition": [
             "error",
             { "unnamedComponents": "arrow-function", "namedComponents": "arrow-function" }

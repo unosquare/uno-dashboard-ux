@@ -3,30 +3,23 @@ import { ResponsiveContainer, PieChart as PieChartRechart, Pie, Cell, Tooltip } 
 import styled from 'styled-components';
 import { formatter, FormatTypes } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
-import {
-    ChartComponent,
-    Directions,
-    SizeValues,
-    ChartData,
-    ChartTypes,
-    LegendFormatTypes,
-    ChartColors,
-} from '../constants';
+import { Directions, SizeValues, ChartData, ChartTypes, LegendFormatTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { NoData, PieNoDataLegend } from '../NoData';
-import { device, theme as basetheme } from '../theme';
+import { device, baseTheme } from '../theme';
 
-interface ChartCommon extends ChartComponent {
+interface ChartCommon {
+    legendFormatType?: LegendFormatTypes;
     label?: string;
     subLabel?: string;
     capped?: number;
-    chartColors: ChartColors;
 }
 
 export interface ChartLabel extends ChartCommon {
     subDirection: Directions;
     size: SizeValues;
     dataStore: ChartData[];
+    colors: string[];
 }
 
 export interface ChartSettings<TDataIn> extends ChartCommon {
@@ -36,6 +29,7 @@ export interface ChartSettings<TDataIn> extends ChartCommon {
     subDirection?: Directions;
     size?: SizeValues;
     noDataElement?: React.ReactNode;
+    colors?: string[];
 }
 
 export interface ChartContainerSettings {
@@ -169,16 +163,15 @@ export const ChartContainer = styled.div<ChartContainerSettings>`
 
 const getCategories = (
     data: ChartData[],
-    palette: string,
     subDirection: Directions,
     legendFormatType: LegendFormatTypes | undefined,
-    chartColors: ChartColors,
+    colors: string[],
 ) => {
     const money = legendFormatType === LegendFormatTypes.MONEY;
 
     return data.map(({ value, name, subValue }, i) => (
         <StyledCategory subDirection={subDirection} key={i} money={money}>
-            <Ellipse color={chartColors[palette][i]} />
+            <Ellipse color={colors[i]} />
             {money ? (
                 <>
                     <span>{name}</span>
@@ -195,20 +188,10 @@ const getCategories = (
     ));
 };
 
-const Label = ({
-    size,
-    label,
-    subLabel,
-    dataStore,
-    palette,
-    subDirection,
-    legendFormatType,
-    capped,
-    chartColors,
-}: ChartLabel) => {
+const Label = ({ size, label, subLabel, dataStore, subDirection, legendFormatType, capped, colors }: ChartLabel) => {
     switch (size) {
         case SizeValues.LARGE: {
-            const subset = getCategories(dataStore, palette, subDirection, legendFormatType, chartColors);
+            const subset = getCategories(dataStore, subDirection, legendFormatType, colors);
             return (
                 <StyledLabel>
                     <h6>{label}</h6>
@@ -238,11 +221,10 @@ export const PieChart = ({
     direction = Directions.ROW,
     subDirection = Directions.COLUMN,
     size = SizeValues.LARGE,
-    palette,
     legendFormatType,
     capped,
     noDataElement,
-    chartColors,
+    colors = ['#22D3C5', '#009776', '#f65097', '#ff8300', '#304ff3', '#003d6e', '#d0dd28'],
 }: ChartSettings<any>) => {
     const dataStore: ChartData[] = (dataCallback && rawData && dataCallback(rawData)) || [];
 
@@ -256,12 +238,12 @@ export const PieChart = ({
                                 <Pie
                                     data={dataStore}
                                     dataKey='value'
-                                    fill={basetheme.colors.background}
+                                    fill={baseTheme.colors.background}
                                     startAngle={90}
                                     endAngle={-360}
                                 >
                                     {dataStore.map((_, index) => (
-                                        <Cell key={`cell-${index}`} fill={chartColors[palette][index]} />
+                                        <Cell key={`cell-${index}`} fill={colors[index]} />
                                     ))}
                                 </Pie>
                                 <Tooltip
@@ -275,11 +257,10 @@ export const PieChart = ({
                         dataStore={dataStore}
                         label={label}
                         legendFormatType={legendFormatType}
-                        palette={palette}
+                        colors={colors}
                         size={size}
                         subDirection={subDirection}
                         subLabel={subLabel}
-                        chartColors={chartColors}
                     />
                 </>
             ) : (
