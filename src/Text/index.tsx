@@ -5,6 +5,7 @@ import { device } from '../theme';
 interface TitleSettings {
     children: React.ReactNode;
     width?: string;
+    center?: boolean;
 }
 
 interface TextSettings {
@@ -14,9 +15,10 @@ interface TextSettings {
 const StyledTitle = styled.div<TitleSettings>`
     color: ${({ theme }) => theme.colors.fontMain};
     width: ${({ width }) => width || ''};
-    max-width: 250px;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
+    ${({ center }) => center && 'text-align: center;'}
     h2 {
         font-size: 40px;
         font-weight: 700;
@@ -26,26 +28,34 @@ const StyledTitle = styled.div<TitleSettings>`
         margin: 0px;
     }
     h3 {
-        font-size: 22px;
+        font-size: 36px;
         font-weight: 700;
-        letter-spacing: 1px;
-        line-height: 20px;
+        letter-spacing: 2px;
+        line-height: 36px;
+        text-transform: uppercase;
+        margin: 0px;
+    }
+    h4 {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        line-height: 32px;
         text-transform: uppercase;
         margin: 0px;
     }
     h5 {
         font-size: 28px;
         font-weight: 700;
-        letter-spacing: 1.09px;
-        line-height: 35px;
+        letter-spacing: 1.25px;
+        line-height: 28px;
         text-transform: uppercase;
         margin: 0px;
     }
     h6 {
-        font-size: 25px;
+        font-size: 24px;
         font-weight: 700;
-        letter-spacing: 1.09px;
-        line-height: 33px;
+        letter-spacing: 1px;
+        line-height: 24px;
         text-transform: uppercase;
         margin: 0px;
     }
@@ -149,14 +159,17 @@ const StyledCenteredBoldSpan = styled.div`
 
 const StyledLeftSpan = styled.div`
     display: flex;
-    align-items: center;
-    align="left";
+    align-items: left;
     padding-left: 6px;
-    font-family: 'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 12px;
 `;
 
-export const Title = ({ children, width }: TitleSettings) => <StyledTitle width={width}>{children}</StyledTitle>;
+export const Title = ({ children, width, center }: TitleSettings) => (
+    <StyledTitle width={width} center={center}>
+        {children}
+    </StyledTitle>
+);
 
 export const LabelWithImage = ({ children }: TextSettings) => <StyledLabelWithImage>{children}</StyledLabelWithImage>;
 
