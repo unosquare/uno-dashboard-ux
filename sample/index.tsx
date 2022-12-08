@@ -22,11 +22,23 @@ import {
     Loading,
     Table,
     DataTypes,
+    LegendFormatTypes,
+    PieChart,
 } from '../src';
 
 const defaultData = [
     ['Pepe', 20],
     ['Juan', 30],
+];
+
+const chartColors = {
+    default: ['#22D3C5', '#009776', '#f65097', '#ff8300', '#304ff3', '#003d6e', '#d0dd28'],
+};
+
+const chartData = [
+    { name: 'Group A', value: 400 },
+    { name: 'Group B', value: 300 },
+    { name: 'Group C', value: 300 },
 ];
 
 const Application = () => {
@@ -53,7 +65,7 @@ const Application = () => {
                         <h2>TOTAL</h2>
                     </Title>
                 </Card>
-                <Card column={2} row={1} direction={Directions.COLUMN}>
+                <Card column={1} row={1} direction={Directions.COLUMN}>
                     <Table
                         columns={[{ label: 'Name' }, { label: 'Age', dataType: DataTypes.DAYS }]}
                         rawData={data}
@@ -66,6 +78,15 @@ const Application = () => {
                         isExchange={value}
                     />
                     <Badge value={500} content='Goal' right={30} />
+                </Card>
+                <Card column={1} row={1} direction={Directions.COLUMN}>
+                    <PieChart
+                        chartColors={chartColors}
+                        palette='default'
+                        rawData={chartData}
+                        dataCallback={(d) => d}
+                        legendFormatType={LegendFormatTypes.NUMBER}
+                    />
                 </Card>
                 <Card column={2} row={2} direction={Directions.ROW}>
                     <Circle size={SizeValues.EXTRA_SMALL} value={50} color={Colors.GRAY} />
