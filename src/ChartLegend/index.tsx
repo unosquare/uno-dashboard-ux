@@ -131,38 +131,57 @@ export const ChartLegend = ({
             {title && <TooltipTitle>{legendTitle}</TooltipTitle>}
             {active &&
                 localPayload.length > 0 &&
-                localPayload
-                    .map((category: any, index: number) => {
-                        if (accumulated)
-                            localPayload[index].value = Object.values(category.payload)
-                                .filter((x: any) => x !== category.payload.name)
-                                .map((y: any, j: any, arr: any[]) =>
-                                    arr
-                                        .filter((__: any, k: any) => k <= j)
-                                        .reduce((prev: any, curr: any) => prev + curr, 0),
-                                )[index];
+                (accumulated
+                    ? localPayload
+                          .map((category: any, index: number) => {
+                              localPayload[index].value = Object.values(category.payload)
+                                  .filter((x: any) => x !== category.payload.name)
+                                  .map((y: any, j: any, arr: any[]) =>
+                                      arr
+                                          .filter((__: any, k: any) => k <= j)
+                                          .reduce((prev: any, curr: any) => prev + curr, 0),
+                                  )[index];
 
-                        return (
-                            <div key={index}>
-                                <Ellipse color={getColor(type, category)} />
-                                <LabelInfo>
-                                    {getLabelFunc(
-                                        category,
-                                        index,
-                                        legendFormatType,
-                                        formats
-                                            ? formats[index] === FormatTypes.PERCENTAGE
-                                            : legendFormatType === LegendFormatTypes.PERCENTAGE,
-                                        formats
-                                            ? formats[index] === FormatTypes.MONEY
-                                            : legendFormatType === LegendFormatTypes.MONEY,
-                                        ignoreValue,
-                                    )}
-                                </LabelInfo>
-                            </div>
-                        );
-                    })
-                    .reverse()}
+                              return (
+                                  <div key={index}>
+                                      <Ellipse color={getColor(type, category)} />
+                                      <LabelInfo>
+                                          {getLabelFunc(
+                                              category,
+                                              index,
+                                              legendFormatType,
+                                              formats
+                                                  ? formats[index] === FormatTypes.PERCENTAGE
+                                                  : legendFormatType === LegendFormatTypes.PERCENTAGE,
+                                              formats
+                                                  ? formats[index] === FormatTypes.MONEY
+                                                  : legendFormatType === LegendFormatTypes.MONEY,
+                                              ignoreValue,
+                                          )}
+                                      </LabelInfo>
+                                  </div>
+                              );
+                          })
+                          .reverse()
+                    : localPayload.map((category: any, index: number) => (
+                          <div key={index}>
+                              <Ellipse color={getColor(type, category)} />
+                              <LabelInfo>
+                                  {getLabelFunc(
+                                      category,
+                                      index,
+                                      legendFormatType,
+                                      formats
+                                          ? formats[index] === FormatTypes.PERCENTAGE
+                                          : legendFormatType === LegendFormatTypes.PERCENTAGE,
+                                      formats
+                                          ? formats[index] === FormatTypes.MONEY
+                                          : legendFormatType === LegendFormatTypes.MONEY,
+                                      ignoreValue,
+                                  )}
+                              </LabelInfo>
+                          </div>
+                      )))}
         </StyledLegend>
     );
 };
