@@ -34,8 +34,11 @@ const getColor = (type: ChartTypes, category: any) => {
     }
 };
 
-const getCustom = ({ values, prefix }: CustomOptions, index: number, { name }: any) =>
+const getCustomLabel = ({ values, prefix }: CustomOptions, index: number, { name }: any) =>
     prefix ? `${values[index]} ${name}` : `${name} ${values[index]}`;
+
+const getCustomValue = ({ values, prefix }: CustomOptions, index: number, { value }: any) =>
+    prefix ? `${values[index]} ${value}` : `${value} ${values[index]}`;
 
 const getMaleFemaleLabel = ({ dataKey, payload }: any) =>
     dataKey === 'female'
@@ -63,12 +66,13 @@ const getLabel =
         let { name, value } = category;
 
         if (ignoreValue && value === 0.001) value = 0;
+
         if (customLabel && customLabel.values.length > 0) {
-            name = getCustom(customLabel, index, category);
+            name = getCustomLabel(customLabel, index, category);
         }
 
         if (customValue && customValue.values.length > 0) {
-            value = getCustom(customValue, index, category);
+            value = getCustomValue(customValue, index, category);
         }
 
         if (money) {
@@ -132,10 +136,11 @@ export const ChartLegend = ({
                         if (accumulated)
                             localPayload[index].value = Object.values(category.payload)
                                 .filter((x: any) => x !== category.payload.name)
-                                .sort()
-                                .map((y: any, j: any, arr: any[]) => (j === arr.length - 1 ? y + arr[j - 1] : y))[
-                                index
-                            ];
+                                .map((y: any, j: any, arr: any[]) =>
+                                    arr
+                                        .filter((__: any, k: any) => k <= j)
+                                        .reduce((prev: any, curr: any) => prev + curr, 0),
+                                )[index];
 
                         return (
                             <div key={index}>
