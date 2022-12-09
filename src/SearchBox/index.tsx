@@ -39,8 +39,8 @@ const Input = styled.input`
 `;
 
 export const CrossContainer = styled.div`
-    position: 'relative';
-    height: '1.75rem';
+    position: relative;
+    height: 1.75rem;
 `;
 
 const CrossButton = styled.button<CrossButtonSettings>`
