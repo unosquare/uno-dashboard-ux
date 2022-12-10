@@ -44,7 +44,8 @@
         "prettier": "prettier --check src/**/*.ts*",
         "prettier:fix": "prettier --write src/**/*.ts*",
         "codestyle:fix": "npm run lint:fix && npm run prettier:fix",
-        "husky-install": "npm install -D husky@4 && npm install"
+        "husky-install": "npm install -D husky@4 && npm install",
+        "test": "tsc --noEmit"
     },
     "prettier": {
         "endOfLine": "auto",
