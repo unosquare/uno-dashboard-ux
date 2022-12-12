@@ -1,42 +1,35 @@
 import React from 'react';
-import styled from 'styled-components';
-import { device } from '../theme';
+import tw from 'tailwind-styled-components';
 import { UnoLogo } from '../UnoLogo';
 
 export interface HeaderSettings {
     transparent?: boolean;
 }
 
-const StyledHeader = styled.div<HeaderSettings>`
-    width: 100%;
-    background-color: ${({ theme, transparent }) => (transparent ? theme.colors.background : theme.colors.main)};
+export const StyledHeader = tw.div<HeaderSettings>`
+    w-full
+    ${({ transparent }) => (transparent ? 'bg-transparent' : 'bg-unoblue')}
+    flex
 `;
 
-const StyledNavbar = styled.div`
-    max-width: ${({ theme }) => theme.maxWidth};
-    padding: 20px 40px 15px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
+const StyledNavbar = tw.div<any>`
+    w-full
+    max-w-unomax
+    p-[20px_40px_15px]
+    m-auto
+    flex
+    justify-between
+    box-content
 `;
 
-export const NavBarTitle = styled.div`
-    display: flex;
-    align-items: center;
-    h2 {
-        color: ${({ theme }) => theme.colors.fontSecondary};
-        font-size: 35px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        line-height: 37px;
-        text-transform: uppercase;
-        margin: 0px 15px;
-    }
-    ${device.md} {
-        h2 {
-            font-size: 25px;
-        }
-    }
+export const NavBarTitle = tw.div<any>`
+    text-white
+    text-3xl
+    font-bold
+    tracking-wider
+    uppercase
+    my-2
+    mx-8
 `;
 
 export const NavBar = ({ transparent, children }: any) => (
