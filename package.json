@@ -9,7 +9,7 @@
     "dependencies": {
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "uno-js": "^2.0.63",
+        "uno-js": "^2.0.68",
         "dayjs": "^1.11.7",
         "recharts": "^2.2.0",
         "styled-components": "^5.3.6"
