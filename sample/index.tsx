@@ -24,11 +24,23 @@ import {
     DataTypes,
     LegendFormatTypes,
     PieChart,
+    SortDirection,
 } from '../src';
 
+const columns = [
+    { label: 'Name', sortOrder: 1, sortDirection: SortDirection.ASC },
+    { label: 'City' },
+    { label: 'Age', dataType: DataTypes.DAYS, sortOrder: 2, sortDirection: SortDirection.DESC },
+];
+
 const defaultData = [
-    ['Pepe', 20],
-    ['Juan', 30],
+    ['Pepe', 'Mexico', 20],
+    ['Pepe', 'LA', 25],
+    ['Juan', 'Chicago', 30],
+    ['Juan', 'Oaxaca', 35],
+    ['Maria', 'NY', 40],
+    ['Laura', 'Guadalajara', 45],
+    ['Laura', 'Mexico', 50],
 ];
 
 const chartData = [
@@ -63,7 +75,7 @@ const Application = () => {
                 </Card>
                 <Card column={1} row={1} direction={Directions.COLUMN}>
                     <Table
-                        columns={[{ label: 'Name' }, { label: 'Age', dataType: DataTypes.DAYS }]}
+                        columns={columns}
                         rawData={data}
                         dataCallback={(d) => d}
                         dataTitle='Data Table'

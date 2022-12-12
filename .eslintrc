@@ -14,6 +14,7 @@
     "extends": "eslint-config-unosquare",
     "plugins": ["eslint-plugin-prettier","unused-imports"],
     "rules": {
+        "guard-for-in": "warn",
         "react/require-default-props": "off",
         "react-hooks/exhaustive-deps": "warn",
         "no-param-reassign": "warn",

@@ -68,51 +68,65 @@ const compareDates = (date1: any, date2: any) => {
     return 0;
 };
 
-const compare = (a: any, b: any, sortColumn: number, definition: TableColumn[]) => {
-    if (a[sortColumn] === null) return 1;
-    if (b[sortColumn] === null) return -1;
+export const sortData = (data: any[], definition: TableColumn[]) =>
+    data.sort((left: any, right: any) => {
+        const sortColumns = definition
+            .filter((x) => x.sortOrder && x.sortOrder >= 1)
+            .sort((x, y) => Number(x.sortOrder) - Number(y.sortOrder));
 
-    const { dataType } = definition[sortColumn];
+        for (const index in sortColumns) {
+            const { sortOrder, dataType, sortDirection } = sortColumns[index];
+            const sortColumn = definition.findIndex((x) => x.sortOrder === sortOrder);
 
-    if (dataType === DataTypes.DATE || dataType === DataTypes.DATE_LOCAL)
-        return compareDates(a[sortColumn], b[sortColumn]);
+            if (left[sortColumn] === null) return 1;
+            if (right[sortColumn] === null) return -1;
 
-    if (
-        dataType === DataTypes.NUMBER ||
-        dataType === DataTypes.DECIMAL ||
-        dataType === DataTypes.PERCENTAGE ||
-        dataType === DataTypes.DECIMAL_PERCENTAGE ||
-        dataType === DataTypes.MONEY ||
-        dataType === DataTypes.DAYS ||
-        dataType === DataTypes.MONTHS
-    )
-        return a[sortColumn] - b[sortColumn];
+            const a = sortDirection === SortDirection.DESC ? right : left;
+            const b = sortDirection === SortDirection.DESC ? left : right;
 
-    if (
-        (a[sortColumn].includes('$') && b[sortColumn].includes('$')) ||
-        (a[sortColumn].includes('%') && b[sortColumn].includes('%'))
-    ) {
-        const numStrA = sanitizeNumericString(a);
-        const numStrB = sanitizeNumericString(b);
+            if (dataType === DataTypes.DATE || dataType === DataTypes.DATE_LOCAL) {
+                const result = compareDates(a[sortColumn], b[sortColumn]);
 
-        if (typeof numStrA === 'number' && typeof numStrB === 'number') return numStrA - numStrB;
-    }
+                if (result !== 0) return result;
+            }
 
-    return a[sortColumn]
-        .toString()
-        .trim()
-        .localeCompare(b[sortColumn].toString().trim(), undefined, { numeric: true, sensitivity: 'base' });
-};
+            if (
+                dataType === DataTypes.NUMBER ||
+                dataType === DataTypes.DECIMAL ||
+                dataType === DataTypes.PERCENTAGE ||
+                dataType === DataTypes.DECIMAL_PERCENTAGE ||
+                dataType === DataTypes.MONEY ||
+                dataType === DataTypes.DAYS ||
+                dataType === DataTypes.MONTHS
+            ) {
+                const result = a[sortColumn] - b[sortColumn];
 
-export const sortData = (data: any, definition: TableColumn[]) => {
-    const sortColumn = definition.findIndex((column) => column.sortOrder === 1);
-    const sortType = sortColumn >= 0 && definition[sortColumn].sortDirection === SortDirection.ASC;
+                if (result !== 0) return result;
+            }
 
-    return data.sort((a: any, b: any) => {
-        if (sortColumn === -1) return 0;
-        return sortType ? compare(a, b, sortColumn, definition) : compare(b, a, sortColumn, definition);
+            if (
+                (a[sortColumn].includes('$') && b[sortColumn].includes('$')) ||
+                (a[sortColumn].includes('%') && b[sortColumn].includes('%'))
+            ) {
+                const numStrA = sanitizeNumericString(a);
+                const numStrB = sanitizeNumericString(b);
+
+                if (typeof numStrA === 'number' && typeof numStrB === 'number') {
+                    const result = numStrA - numStrB;
+                    if (result !== 0) return result;
+                }
+            }
+
+            const result = a[sortColumn]
+                .toString()
+                .trim()
+                .localeCompare(b[sortColumn].toString().trim(), undefined, { numeric: true, sensitivity: 'base' });
+
+            if (result !== 0) return result;
+        }
+
+        return 0;
     });
-};
 
 const getSortDirection = (current?: SortDirection) =>
     current === SortDirection.DESC ? SortDirection.ASC : SortDirection.DESC;
@@ -358,7 +372,7 @@ const getHeaders = (
                 textAlign: getAlignment(header.dataType, index),
             }}
         >
-            <HeaderDiv sortable={sortable} sorted={header.sortOrder === index}>
+            <HeaderDiv sortable={sortable} sorted={Number(header.sortOrder) >= 1}>
                 <span>{header.label}</span>
                 {sortable && (
                     <span style={{ alignSelf: 'center' }}>
@@ -369,7 +383,7 @@ const getHeaders = (
                                 d='M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z'
                                 clipRule='evenodd'
                                 transform={
-                                    header.sortDirection === SortDirection.DESC && header.sortOrder === 1
+                                    header.sortDirection === SortDirection.DESC && Number(header.sortOrder) >= 1
                                         ? ''
                                         : 'rotate(180,0,0)'
                                 }
