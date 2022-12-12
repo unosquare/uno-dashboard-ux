@@ -105,8 +105,8 @@ export const sortData = (data: any[], definition: TableColumn[]) =>
             }
 
             if (
-                (a[sortColumn].includes('$') && b[sortColumn].includes('$')) ||
-                (a[sortColumn].includes('%') && b[sortColumn].includes('%'))
+                (a[sortColumn].toString().includes('$') && b[sortColumn].toString().includes('$')) ||
+                (a[sortColumn].toString().includes('%') && b[sortColumn].toString().includes('%'))
             ) {
                 const numStrA = sanitizeNumericString(a);
                 const numStrB = sanitizeNumericString(b);
