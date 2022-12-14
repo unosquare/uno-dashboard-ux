@@ -1,28 +1,15 @@
-name: Node CI
+name: Build
 
-on: pull_request
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  build:
-    runs-on: [ubuntu-latest]
-    env:
-      CI: true
-
-    steps:
-      - name: 🛎 Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: 📦 Cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            node-
-      - name: 🎠 npm install
-        run: npm ci
-      - name: 🏗 npm lint & build
-        run: |
-          npm run lint
-          npm run build
+  build:    
+    uses: unosquare/bump-npm-version/.github/workflows/build-no-test.yml@master
+    secrets:
+      github-token: ${{ secrets.GPR_ACCESS_TOKEN }}
+      cache-version: ${{ secrets.CACHE_VERSION }}
