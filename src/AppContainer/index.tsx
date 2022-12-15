@@ -8,9 +8,24 @@ export interface AppContainerSettings {
     children: React.ReactNode;
 }
 
+const getTemplateRows = (rows: number) => {
+    switch (rows) {
+        case 5:
+            return 'repeat(5, 18%)';
+        case 4:
+            return 'repeat(4, 23%)';
+        case 3:
+            return 'repeat(3, 31%)';
+        case 2:
+            return 'repeat(2, 46.5%)';
+        default:
+            return '';
+    }
+};
+
 const AppContainerBase = styled.div<AppContainerSettings>`
     grid-template-columns: repeat(${({ columns }) => columns}, 1fr);
-    grid-template-rows: repeat(${({ rows }) => rows}, 1fr);
+    grid-template-rows: ${({ rows }) => getTemplateRows(rows)};
 `;
 
 export const StyledAppContainer = tw(AppContainerBase)<AppContainerSettings>`
@@ -21,7 +36,7 @@ export const StyledAppContainer = tw(AppContainerBase)<AppContainerSettings>`
     w-[calc(100%-80px)]
     max-w-unomax
     m-auto
-    p-7
+    p-[30px]
     h-auto
     min-h-[calc(100%-70px)]
     box-content

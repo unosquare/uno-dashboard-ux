@@ -17,34 +17,6 @@
     }
 }
 
-@layer components {
-    .border-rounded-blue {
-        border: 1px solid #304ff3;
-        border-radius: 2px;
-    }
-
-    .scrollbar-stable {
-        scrollbar-gutter: stable;
-    }
-
-    .button-transparent {
-        @apply flex
-            items-center
-            justify-center
-            pb-[2px]
-            h-[38px]
-            rounded
-            border-solid
-            border-2
-            border-unoblue
-            text-unoblue
-            font-semibold
-            text-lg
-            hover:bg-unoblue
-            hover:text-white;
-    }
-}
-
 @layer utilities {
     .animated-menu {
         -webkit-animation-duration: 600ms;
