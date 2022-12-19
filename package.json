@@ -9,7 +9,7 @@
     "dependencies": {
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "uno-js": "^2.0.68",
+        "uno-js": "^2.0.70",
         "dayjs": "^1.11.7",
         "recharts": "^2.2.0",
         "tailwind-styled-components": "^2.2.0",
@@ -20,10 +20,10 @@
     "devDependencies": {
         "@types/react-dom": "^18.0.9",
         "@types/styled-components": "^5.1.26",
-        "@typescript-eslint/eslint-plugin": "^5.46.0",
+        "@typescript-eslint/eslint-plugin": "^5.46.1",
         "copy-webpack-plugin": "^11.0.0",
         "autoprefixer": "^10.4.13",
-        "eslint": "^8.29.0",
+        "eslint": "^8.30.0",
         "eslint-config-unosquare": "^0.1.4y",
         "eslint-plugin-jsx-a11y": "^6.6.1",
         "eslint-plugin-prettier": "^4.2.1",
