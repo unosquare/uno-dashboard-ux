@@ -13,7 +13,9 @@
         "dayjs": "^1.11.7",
         "recharts": "^2.2.0",
         "tailwind-styled-components": "^2.2.0",
-        "styled-components": "^5.3.6"
+        "styled-components": "^5.3.6",
+        "style-loader": "^3.3.1",
+        "css-loader": "^6.7.2"
     },
     "devDependencies": {
         "@types/react-dom": "^18.0.9",
@@ -22,7 +24,6 @@
         "copy-webpack-plugin": "^11.0.0",
         "autoprefixer": "^10.4.13",
         "eslint": "^8.29.0",
-        "css-loader": "^6.7.2",
         "eslint-config-unosquare": "^0.1.4y",
         "eslint-plugin-jsx-a11y": "^6.6.1",
         "eslint-plugin-prettier": "^4.2.1",
@@ -34,7 +35,6 @@
         "lint-staged": "^13.1.0",
         "postcss": "^8.4.19",
         "postcss-cli": "^10.0.0",
-        "style-loader": "^3.3.1",
         "postcss-loader": "^7.0.1",
         "prettier": "^2.8.1",
         "ts-loader": "^9.4.2",
@@ -47,8 +47,6 @@
     "scripts": {
         "start": "webpack serve",
         "build": "tsc && npx ncp src/resources/ dist/resources",
-        "build:css": "postcss src/styled/tailwind.css -o src/styled/styles.css",
-        "watch:css": "postcss src/styled/tailwind.css -o src/styled/styles.css",
         "lint": "tsc --noEmit && eslint ./src/**/*.{js,ts,tsx}",
         "lint:fix": "eslint ./src/**/*.{js,ts,tsx} --quiet --fix",
         "prettier": "prettier --check src/**/*.ts*",

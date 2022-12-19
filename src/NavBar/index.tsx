@@ -23,15 +23,18 @@ const StyledNavbar = tw.div<any>`
 `;
 
 export const NavBarTitle = tw.div<any>`
+    flex
+    flex-row
+    items-center
     text-white
-    text-[35px]
     md:[&>h2]:text-[25px]
     font-bold
-    tracking-wider
     uppercase
+    [&>h2]:tracking-[1.5px]
+    [&>h2]:text-[35px]
     [&>h2]:leading-9
-    [&>h2]:my-2
-    [&>h2]:mx-8
+    [&>h2]:my-0
+    [&>h2]:mx-[15px]
 `;
 
 export const NavBar = ({ transparent, children }: any) => (

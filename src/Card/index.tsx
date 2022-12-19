@@ -42,32 +42,38 @@ const calculateSize = (size: SizeValues) => {
     }
 };
 
+const getHeight = (height: string | undefined, fit: boolean | undefined) => {
+    if (height) return height;
+    return fit ? 'fit-content' : 'auto';
+};
+
 const CardBase = styled.div<CardSettings>`
-    ${({ direction }) => direction && 'flex-direction: column'};
+    flex-direction: ${({ direction }) => direction};
     grid-row: span ${({ row }) => row};
     grid-column: span ${({ column }) => column};
     ${({ start }) => start && `grid-column-start: ${start};`}
     ${({ end }) => end && `grid-column-end: ${end};`}
     align-items: ${({ align }) => align};
     justify-content: ${({ justify }) => justify};
-    height: ${({ height }) => height};
+    height: ${({ height, fit }) => getHeight(height, fit)};
+    padding: ${({ extraBottom }) => (extraBottom ? '15px 10px 35px' : '15px 10px')};
+    ${({ isActive }) => isActive && 'border: 1px solid #304ff3;'}
+    ${({ onClick }) => onClick && 'cursor: pointer;'}
 `;
 
 const StyledCard = tw(CardBase)<CardSettings>`
     bg-white
     flex
-    px-3
-    py-4
     relative
     h-max
     max-h-full
     min-h-[170px]
     min-w-0
-    border-rad
     rounded
     shadow-card
     md:!justify-center
-    md:min-h-[200px]
+    md:!min-h-[200px]
+    md:!p-[15px_25px]
     md:!col-span-1
 `;
 

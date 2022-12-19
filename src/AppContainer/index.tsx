@@ -51,7 +51,6 @@ export const StyledContainer = tw.div<any>`
     w-full
     h-[calc(100vh-145px)]
     overflow-y-auto
-    scrollbar-stable
 `;
 
 export const AppContainer = ({ rows, children, columns = 5 }: AppContainerSettings) => (

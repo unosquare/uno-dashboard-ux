@@ -1,13 +1,53 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@layer components {
     body {
-        @apply m-0 p-0 overflow-hidden h-screen bg-unolightgray;
+        background-color: #f1f2f3;
+        padding: 0px;
+        margin: 0px;
+        overflow: hidden !important;
     }
-    :root {
-        @apply h-full overflow-hidden;
+
+    #root {
+        height: 100%;
+        overflow: hidden !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    span,
+    p,
+    a,
+    strong,
+    td,
+    th,
+    text,
+    .__react_component_tooltip {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    td {
+        padding: 0 10px;
+    }
+
+    th {
+        background: #fff;
+        position: sticky;
+        top: 0px;
+    }
+
+    .recharts-legend-item-text,
+    .recharts-cartesian-axis-tick-value {
+        font-size: 13px;
+    }
+
+    .recharts-legend-item {
+        margin-right: 25px;
     }
 
     input::-webkit-outer-spin-button,
