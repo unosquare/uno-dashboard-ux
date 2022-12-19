@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { device } from '../theme';
+import tw from 'tailwind-styled-components';
 
 export interface AppContainerSettings {
     rows: number;
@@ -23,37 +23,40 @@ const getTemplateRows = (rows: number) => {
     }
 };
 
-const StyledAppContainer = styled.div<AppContainerSettings>`
-    display: grid;
-    grid-template-columns: ${({ columns }) => `repeat(${columns}, 1fr)`};
-    grid-column-gap: 35px;
+const AppContainerBase = styled.div<AppContainerSettings>`
+    grid-template-columns: repeat(${({ columns }) => columns}, 1fr);
     grid-template-rows: ${({ rows }) => getTemplateRows(rows)};
-    grid-row-gap: ${({ rows }) => (rows === 5 ? '35px' : '30px')};
-    width: calc(100% - 80px);
-    max-width: ${(props) => props.theme.maxWidth};
-    margin: auto;
-    padding: 30px;
-    min-height: calc(100% - 70px);
-    height: auto;
-    ${device.md} {
-        height: unset;
-        max-height: unset;
-        padding-bottom: 50px;
-        grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: none;
-    }
 `;
 
-const StyledAppContainerScroll = styled.div`
-    height: calc(100vh - 145px);
-    width: 100%;
-    overflow-y: auto;
+export const StyledAppContainer = tw(AppContainerBase)<AppContainerSettings>`
+    grid
+    gap-x-[35px]
+    gap-y-[30px]
+    auto-rows-max
+    w-[calc(100%-80px)]
+    max-w-unomax
+    m-auto
+    p-[30px]
+    h-auto
+    min-h-[calc(100%-70px)]
+    box-content
+    md:h-[unset]
+    md:max-h-[unset]
+    md:pb-[50px]
+    md:!grid-rows-none
+    md:!grid-cols-[repeat(1,1fr)]
+`;
+
+export const StyledContainer = tw.div<any>`
+    w-full
+    h-[calc(100vh-145px)]
+    overflow-y-auto
 `;
 
 export const AppContainer = ({ rows, children, columns = 5 }: AppContainerSettings) => (
-    <StyledAppContainerScroll>
+    <StyledContainer>
         <StyledAppContainer rows={rows} columns={columns}>
             {children}
         </StyledAppContainer>
-    </StyledAppContainerScroll>
+    </StyledContainer>
 );

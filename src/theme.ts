@@ -1,4 +1,4 @@
-import { createGlobalStyle, DefaultTheme } from 'styled-components';
+import { DefaultTheme } from 'styled-components';
 
 export const baseTheme: DefaultTheme = {
     colors: {
@@ -34,33 +34,3 @@ export const device = {
     lg: `@media (max-width: ${mediaSizes.lg}px)`,
     xl: `@media (max-width: ${mediaSizes.xl}px)`,
 };
-
-export const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: ${(props) => props.theme.colors.background};
-    padding: 0px;
-    margin: 0px;
-    overflow: hidden !important;
-  }
-  #root {
-    height: 100%;
-    overflow: hidden !important;
-  }
-  h1, h2, h3, h4, h5, h6, span, p, a, strong, td, th, text, .__react_component_tooltip {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  td {
-    padding: 0px 10px;
-  }
-  th {
-    position: sticky;
-    top: 0px;
-    background: #fff;
-  }
-  .recharts-legend-item-text, .recharts-cartesian-axis-tick-value {
-    font-size: 13px;
-  }
-  .recharts-legend-item {
-    margin-right: 25px;
-  }
-`;

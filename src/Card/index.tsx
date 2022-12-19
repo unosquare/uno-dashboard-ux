@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { Directions, FlexValues, SizeValues } from '../constants';
-import { device } from '../theme';
 
 export interface CardSettings {
     column: number;
@@ -29,11 +29,6 @@ export interface CardContentSettings {
     smallHeight?: boolean;
 }
 
-const getHeight = (height: string | undefined, fit: boolean | undefined) => {
-    if (height) return height;
-    return fit ? 'fit-content' : 'auto';
-};
-
 const calculateSize = (size: SizeValues) => {
     switch (size) {
         case SizeValues.LARGE:
@@ -47,33 +42,39 @@ const calculateSize = (size: SizeValues) => {
     }
 };
 
-const StyledCard = styled.div<CardSettings>`
-    box-shadow: 0 1px 3px 0px ${({ theme }) => theme.colors.blackOpacity};
-    -moz-box-shadow: 0 1px 3px 0px ${({ theme }) => theme.colors.blackOpacity};
-    -webkit-box-shadow: 0 1px 3px 0px ${({ theme }) => theme.colors.blackOpacity};
-    background: ${({ theme }) => theme.colors.cardBackground};
+const getHeight = (height: string | undefined, fit: boolean | undefined) => {
+    if (height) return height;
+    return fit ? 'fit-content' : 'auto';
+};
+
+const CardBase = styled.div<CardSettings>`
+    flex-direction: ${({ direction }) => direction};
     grid-row: span ${({ row }) => row};
     grid-column: span ${({ column }) => column};
     ${({ start }) => start && `grid-column-start: ${start};`}
     ${({ end }) => end && `grid-column-end: ${end};`}
-    flex-direction: ${({ direction }) => direction};
-    display: flex;
     align-items: ${({ align }) => align};
-    padding: ${({ extraBottom }) => (extraBottom ? '15px 10px 35px' : '15px 10px')};
     justify-content: ${({ justify }) => justify};
-    position: relative;
-    min-height: 170px;
-    max-height: 100%;
     height: ${({ height, fit }) => getHeight(height, fit)};
-    border-radius: 0.25rem;
+    padding: ${({ extraBottom }) => (extraBottom ? '15px 10px 35px' : '15px 10px')};
     ${({ isActive }) => isActive && 'border: 1px solid #304ff3;'}
     ${({ onClick }) => onClick && 'cursor: pointer;'}
-    ${device.md} {
-        grid-column: span ${({ column }) => (column > 1 ? 6 : 2)};
-        justify-content: center;
-        padding: 15px 25px;
-        min-height: 200px;
-    }
+`;
+
+const StyledCard = tw(CardBase)<CardSettings>`
+    bg-white
+    flex
+    relative
+    h-max
+    max-h-full
+    min-h-[170px]
+    min-w-0
+    rounded
+    shadow-card
+    md:!justify-center
+    md:!min-h-[200px]
+    md:!p-[15px_25px]
+    md:!col-span-1
 `;
 
 const StyledCardContent = styled.div<CardContentSettings>`

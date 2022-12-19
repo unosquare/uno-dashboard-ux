@@ -2,7 +2,6 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import {
-    GlobalStyle,
     baseTheme,
     NavBar,
     NavBarTitle,
@@ -26,6 +25,7 @@ import {
     PieChart,
     SortDirection,
 } from '../src';
+import '../src/resources/global.css';
 
 const columns = [
     { label: 'Name', sortOrder: 1, sortDirection: SortDirection.ASC },
@@ -60,7 +60,6 @@ const Application = () => {
 
     return (
         <ThemeProvider theme={baseTheme}>
-            <GlobalStyle />
             <NavBar>
                 <NavBarTitle>
                     <h2>Sample App</h2>

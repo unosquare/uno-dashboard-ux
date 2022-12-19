@@ -1,23 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 
 export interface FooterSettings {
     transparent?: boolean;
     copyright?: string;
 }
 
-const StyledFooter = styled.div<FooterSettings>`
-    background-color: ${({ theme, transparent }) =>
-        transparent ? theme.colors.background : theme.colors.footerBackground};
-    width: 100%;
-    height: 40px;
-    padding-top: 20px;
-    text-align: center;
-    color: ${({ theme, transparent }) => (transparent ? theme.colors.fontMain : theme.colors.fontSecondary)};
-    font-size: 14px;
-    position: fixed;
-    bottom: 0px;
-    z-index: 2000;
+const StyledFooter = tw.div<FooterSettings>`
+    w-full
+    h-10
+    pt-5
+    text-center
+    ${({ transparent }) => (transparent ? 'bg-transparent' : 'bg-black')}
+    ${({ transparent }) => (transparent ? 'text-black' : 'text-white')}
+    text-sm
+    fixed
+    bottom-0
+    z-30
 `;
 
 export const Footer = ({ transparent, copyright = 'Copyright © Unosquare, LLC' }: FooterSettings) => (
