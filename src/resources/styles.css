@@ -1,0 +1,225 @@
+.visible {
+    visibility: visible;
+}
+.collapse {
+    visibility: collapse;
+}
+.fixed {
+    position: fixed;
+}
+.absolute {
+    position: absolute;
+}
+.relative {
+    position: relative;
+}
+.sticky {
+    position: sticky;
+}
+.bottom-0 {
+    bottom: 0px;
+}
+.z-30 {
+    z-index: 30;
+}
+.m-auto {
+    margin: auto;
+}
+.box-content {
+    box-sizing: content-box;
+}
+.block {
+    display: block;
+}
+.flex {
+    display: flex;
+}
+.table {
+    display: table;
+}
+.grid {
+    display: grid;
+}
+.hidden {
+    display: none;
+}
+.h-auto {
+    height: auto;
+}
+.h-\[calc\(100vh-145px\)\] {
+    height: calc(100vh - 145px);
+}
+.h-max {
+    height: -moz-max-content;
+    height: max-content;
+}
+.h-10 {
+    height: 2.5rem;
+}
+.max-h-full {
+    max-height: 100%;
+}
+.min-h-\[calc\(100\%-70px\)\] {
+    min-height: calc(100% - 70px);
+}
+.min-h-\[170px\] {
+    min-height: 170px;
+}
+.w-\[calc\(100\%-80px\)\] {
+    width: calc(100% - 80px);
+}
+.w-full {
+    width: 100%;
+}
+.min-w-0 {
+    min-width: 0px;
+}
+.max-w-unomax {
+    max-width: 1460px;
+}
+.flex-grow {
+    flex-grow: 1;
+}
+.border-collapse {
+    border-collapse: collapse;
+}
+.transform {
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
+        skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.auto-rows-max {
+    grid-auto-rows: max-content;
+}
+.flex-row {
+    flex-direction: row;
+}
+.items-center {
+    align-items: center;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.gap-x-\[35px\] {
+    -moz-column-gap: 35px;
+    column-gap: 35px;
+}
+.gap-y-\[30px\] {
+    row-gap: 30px;
+}
+.overflow-y-auto {
+    overflow-y: auto;
+}
+.rounded {
+    border-radius: 0.25rem;
+}
+.border {
+    border-width: 1px;
+}
+.bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.bg-transparent {
+    background-color: transparent;
+}
+.bg-black {
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+.bg-unoblue {
+    --tw-bg-opacity: 1;
+    background-color: rgb(48 79 243 / var(--tw-bg-opacity));
+}
+.p-\[30px\] {
+    padding: 30px;
+}
+.p-\[20px_40px_15px\] {
+    padding: 20px 40px 15px;
+}
+.pt-5 {
+    padding-top: 1.25rem;
+}
+.text-center {
+    text-align: center;
+}
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+.font-bold {
+    font-weight: 700;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+.text-black {
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+.text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.shadow-card {
+    --tw-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.5);
+    --tw-shadow-colored: 0 1px 3px 0px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.outline {
+    outline-style: solid;
+}
+.filter {
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate)
+        var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+@media (max-width: 1024px) {
+    .md\:\!col-span-1 {
+        grid-column: span 1 / span 1 !important;
+    }
+    .md\:h-\[unset\] {
+        height: unset;
+    }
+    .md\:max-h-\[unset\] {
+        max-height: unset;
+    }
+    .md\:\!min-h-\[200px\] {
+        min-height: 200px !important;
+    }
+    .md\:\!grid-cols-\[repeat\(1\2c 1fr\)\] {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+    .md\:\!grid-rows-none {
+        grid-template-rows: none !important;
+    }
+    .md\:\!justify-center {
+        justify-content: center !important;
+    }
+    .md\:\!p-\[15px_25px\] {
+        padding: 15px 25px !important;
+    }
+    .md\:pb-\[50px\] {
+        padding-bottom: 50px;
+    }
+}
+.\[\&\>h2\]\:my-0 > h2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.\[\&\>h2\]\:mx-\[15px\] > h2 {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.\[\&\>h2\]\:text-\[35px\] > h2 {
+    font-size: 35px;
+}
+.\[\&\>h2\]\:leading-9 > h2 {
+    line-height: 2.25rem;
+}
+.\[\&\>h2\]\:tracking-\[1\.5px\] > h2 {
+    letter-spacing: 1.5px;
+}
+@media (max-width: 1024px) {
+    .md\:\[\&\>h2\]\:text-\[25px\] > h2 {
+        font-size: 25px;
+    }
+}
