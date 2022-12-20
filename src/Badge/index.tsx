@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Circle } from '../Circle';
-import { SizeValues, Colors } from '../constants';
+import { Colors, SizeValues } from '../constants';
 import { device } from '../theme';
 
 export interface BadgeSettings {

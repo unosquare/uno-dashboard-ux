@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { formatter, FormatTypes, humanize } from 'uno-js';
 import { ChartTypes, LegendFormatTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
-import { TooltipTitle, LabelInfo } from '../Text';
+import { LabelInfo, TooltipTitle } from '../Text';
 
 export interface ChartLegendSettings {
     active?: boolean;

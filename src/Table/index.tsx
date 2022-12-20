@@ -6,7 +6,7 @@ import { createCsv, formatter, FormatTypes } from 'uno-js';
 import { CardContent } from '../Card';
 import { Colors, CurrencyRate, DataTypes, Directions, FlexValues, SizeValues, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
-import { LinkIcon, CheckIcon, UncheckIcon } from '../Icons';
+import { CheckIcon, LinkIcon, UncheckIcon } from '../Icons';
 import { Loading } from '../Loading';
 import { NoData } from '../NoData';
 import { CenteredSpan } from '../Text';
@@ -402,7 +402,7 @@ const getFooter = (footer: (string | number)[], definition: TableColumn[]) =>
         </td>
     ));
 
-const getRows = (data: (string | number)[], definitions: TableColumn[], _: any) =>
+const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
     data.map((section: any, i: number) => (
         <tr key={i}>
             {section.map((cell: any, index: number) => {

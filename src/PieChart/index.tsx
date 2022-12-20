@@ -1,12 +1,12 @@
 import React from 'react';
-import { ResponsiveContainer, PieChart as PieChartRechart, Pie, Cell, Tooltip } from 'recharts';
+import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled from 'styled-components';
 import { formatter, FormatTypes } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
-import { Directions, SizeValues, ChartData, ChartTypes, LegendFormatTypes } from '../constants';
+import { ChartData, ChartTypes, Directions, LegendFormatTypes, SizeValues } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { NoData, PieNoDataLegend } from '../NoData';
-import { device, baseTheme } from '../theme';
+import { baseTheme, device } from '../theme';
 
 interface ChartCommon {
     legendFormatType?: LegendFormatTypes;
