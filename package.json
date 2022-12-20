@@ -4,7 +4,8 @@
     "description": "Unosquare Dashboard UX/UI",
     "main": "dist/index.js",
     "files": [
-        "dist"
+        "dist",
+        "tailwind.config.js"
     ],
     "dependencies": {
         "react": "^18.2.0",
