@@ -17,6 +17,7 @@ const StyledFooter = tw.div<FooterSettings>`
     fixed
     bottom-0
     z-30
+    box-content
 `;
 
 export const Footer = ({ transparent, copyright = 'Copyright © Unosquare, LLC' }: FooterSettings) => (

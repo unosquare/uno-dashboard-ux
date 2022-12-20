@@ -17,6 +17,7 @@ export interface CardSettings {
     end?: number;
     onClick?: () => void;
     isActive?: boolean;
+    extraStyles?: string;
 }
 
 export interface CardContentSettings {
@@ -101,6 +102,7 @@ export const Card = ({
     end,
     onClick,
     isActive,
+    extraStyles,
 }: CardSettings) => (
     <StyledCard
         column={column}
@@ -115,6 +117,7 @@ export const Card = ({
         end={end}
         onClick={onClick}
         isActive={isActive}
+        className={extraStyles}
     >
         {children}
     </StyledCard>

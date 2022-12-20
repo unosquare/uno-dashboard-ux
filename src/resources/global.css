@@ -1,6 +1,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.recharts-legend-item-text,
+.recharts-cartesian-axis-tick-value {
+    font-size: 13px;
+}
+
+.recharts-legend-item {
+    margin-right: 25px;
+}
+
 @layer components {
     body {
         background-color: #f1f2f3;
@@ -39,15 +48,6 @@
         background: #fff;
         position: sticky;
         top: 0px;
-    }
-
-    .recharts-legend-item-text,
-    .recharts-cartesian-axis-tick-value {
-        font-size: 13px;
-    }
-
-    .recharts-legend-item {
-        margin-right: 25px;
     }
 
     input::-webkit-outer-spin-button,
