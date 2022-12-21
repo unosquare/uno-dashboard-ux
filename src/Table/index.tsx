@@ -215,7 +215,7 @@ export const StyledTd = styled.td<TdSettings>`
 `;
 
 export const StyledCellInput = tw.input`
-    flex
+    inline-flex
     items-center
     text-sm
     leading-normal
