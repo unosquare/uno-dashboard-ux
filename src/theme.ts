@@ -34,4 +34,4 @@ export const device = {
     xl: `@media (max-width: ${mediaSizes.xl}px)`,
 };
 
-export const defaultChartPalette = ['#003DE6', '#bb00c2', '#fb0090', '#ff215e', '#ff6f31', '#ffa600'];
+export const defaultChartPalette = ['#003DE6', '#ac00c9', '#ea00a1', '#ff0077', '#ff414f', '#ff792a', '#ffa600'];
