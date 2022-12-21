@@ -15,7 +15,6 @@ declare module 'styled-components' {
             tableContent: string;
             blackOpacity: string;
             cardBackground: string;
-            footerBackground: string;
             table: string;
             charts?: ChartColors;
         };

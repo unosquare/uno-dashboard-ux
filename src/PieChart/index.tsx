@@ -6,7 +6,7 @@ import { ChartLegend } from '../ChartLegend';
 import { ChartData, ChartTypes, Directions, LegendFormatTypes, SizeValues } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { NoData, PieNoDataLegend } from '../NoData';
-import { baseTheme, device } from '../theme';
+import { baseTheme, defaultChartPalette, device } from '../theme';
 
 interface ChartCommon {
     legendFormatType?: LegendFormatTypes;
@@ -224,7 +224,7 @@ export const PieChart = ({
     legendFormatType,
     capped,
     noDataElement,
-    colors = ['#22D3C5', '#009776', '#f65097', '#ff8300', '#304ff3', '#003d6e', '#d0dd28'],
+    colors = defaultChartPalette,
 }: ChartSettings<any>) => {
     const dataStore: ChartData[] = (dataCallback && rawData && dataCallback(rawData)) || [];
 

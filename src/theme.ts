@@ -8,7 +8,6 @@ export const baseTheme: DefaultTheme = {
         fontSecondary: '#fff',
         background: '#f1f2f3',
         cardBackground: '#fff',
-        footerBackground: '#191919',
         tableContent: '#808080',
         blackOpacity: 'rgba(0, 0, 0, 0.5)',
         table: '#808080',
@@ -34,3 +33,5 @@ export const device = {
     lg: `@media (max-width: ${mediaSizes.lg}px)`,
     xl: `@media (max-width: ${mediaSizes.xl}px)`,
 };
+
+export const defaultChartPalette = ['#003DE6', '#bb00c2', '#fb0090', '#ff215e', '#ff6f31', '#ffa600'];
