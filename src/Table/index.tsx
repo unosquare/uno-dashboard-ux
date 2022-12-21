@@ -68,7 +68,36 @@ const compareDates = (date1: any, date2: any) => {
     return 0;
 };
 
-export const sortData = (data: any[], definition: TableColumn[]) =>
+const dateType = [DataTypes.DATE, DataTypes.DATE_LOCAL];
+
+const numericTypes = [
+    DataTypes.NUMBER,
+    DataTypes.DECIMAL,
+    DataTypes.PERCENTAGE,
+    DataTypes.DECIMAL_PERCENTAGE,
+    DataTypes.MONEY,
+    DataTypes.DAYS,
+    DataTypes.MONTHS,
+];
+
+const checkNumericString = (a: any, b: any, sortColumn: number) => {
+    if (
+        (a[sortColumn].toString().includes('$') && b[sortColumn].toString().includes('$')) ||
+        (a[sortColumn].toString().includes('%') && b[sortColumn].toString().includes('%'))
+    ) {
+        const numStrA = sanitizeNumericString(a);
+        const numStrB = sanitizeNumericString(b);
+
+        if (typeof numStrA === 'number' && typeof numStrB === 'number') {
+            const result = numStrA - numStrB;
+            if (result !== 0) return result;
+        }
+    }
+
+    return 0;
+};
+
+export const sortData = (data: any[], definition: TableColumn[]) => {
     data.sort((left: any, right: any) => {
         const sortColumns = definition
             .filter((x) => x.sortOrder && x.sortOrder >= 1)
@@ -84,38 +113,21 @@ export const sortData = (data: any[], definition: TableColumn[]) =>
             const a = sortDirection === SortDirection.DESC ? right : left;
             const b = sortDirection === SortDirection.DESC ? left : right;
 
-            if (dataType === DataTypes.DATE || dataType === DataTypes.DATE_LOCAL) {
+            if (dateType.some((x) => x === dataType)) {
                 const result = compareDates(a[sortColumn], b[sortColumn]);
 
                 if (result !== 0) return result;
             }
 
-            if (
-                dataType === DataTypes.NUMBER ||
-                dataType === DataTypes.DECIMAL ||
-                dataType === DataTypes.PERCENTAGE ||
-                dataType === DataTypes.DECIMAL_PERCENTAGE ||
-                dataType === DataTypes.MONEY ||
-                dataType === DataTypes.DAYS ||
-                dataType === DataTypes.MONTHS
-            ) {
+            if (numericTypes.some((x) => x === dataType)) {
                 const result = a[sortColumn] - b[sortColumn];
 
                 if (result !== 0) return result;
             }
 
-            if (
-                (a[sortColumn].toString().includes('$') && b[sortColumn].toString().includes('$')) ||
-                (a[sortColumn].toString().includes('%') && b[sortColumn].toString().includes('%'))
-            ) {
-                const numStrA = sanitizeNumericString(a);
-                const numStrB = sanitizeNumericString(b);
+            const resultNumericString = checkNumericString(a, b, sortColumn);
 
-                if (typeof numStrA === 'number' && typeof numStrB === 'number') {
-                    const result = numStrA - numStrB;
-                    if (result !== 0) return result;
-                }
-            }
+            if (resultNumericString !== 0) return resultNumericString;
 
             const result = a[sortColumn]
                 .toString()
@@ -127,6 +139,9 @@ export const sortData = (data: any[], definition: TableColumn[]) =>
 
         return 0;
     });
+
+    return data;
+};
 
 const getSortDirection = (current?: SortDirection) =>
     current === SortDirection.DESC ? SortDirection.ASC : SortDirection.DESC;
