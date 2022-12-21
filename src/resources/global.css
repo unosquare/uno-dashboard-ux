@@ -58,6 +58,10 @@
 }
 
 @layer utilities {
+    .border-table {
+        border-top: 1px solid #808080;
+    }
+
     .animated-menu {
         -webkit-animation-duration: 600ms;
         animation-duration: 600ms;
