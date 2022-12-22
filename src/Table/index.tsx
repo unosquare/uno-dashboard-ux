@@ -45,10 +45,11 @@ export interface TableSettings<TDataIn, TDataOut> extends TableContainerSettings
 }
 
 interface TdSettings {
-    bold?: boolean;
     color?: string;
     background?: string;
     border?: boolean;
+    type?: DataTypes;
+    index?: number;
 }
 
 interface HeaderSettings {
@@ -153,6 +154,11 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
         sortDirection: i === index ? getSortDirection(field.sortDirection) : undefined,
     }));
 
+const leftAlign = [DataTypes.STRING, DataTypes.LINK_STRING, DataTypes.BULLET, undefined];
+
+export const getAlignment = (dataType: DataTypes | undefined, index?: number) =>
+    dataType === DataTypes.PARAGRAPH || (leftAlign.includes(dataType) && index === 0) ? 'text-left' : 'text-center';
+
 export const StyledTable = tw.table<any>`
     w-full
     border-collapse
@@ -206,12 +212,16 @@ export const StyledTableContainer = tw(TableContainerBase)<TableContainerSetting
     overflow-y-auto
 `;
 
-export const StyledTd = styled.td<TdSettings>`
-    ${({ bold }) => (bold ? 'font-weight: 500; color: black !important' : 'font-weight: normal')};
+export const TdBase = styled.td<TdSettings>`
     ${({ color }) => color && `color: ${color} !important`};
     ${({ background }) => background && `background-color: ${background}`};
     ${({ border }) =>
         border && `border-left: 2px solid ${Colors.BORDER_GRAY}; border-right: 2px solid ${Colors.BORDER_GRAY}`};
+`;
+
+export const StyledTd = tw(TdBase)<TdSettings>`
+    ${({ type }) => (type === DataTypes.BOLD_STRING ? 'font-medium !text-black' : 'font-normal')};
+    ${({ type, index }) => getAlignment(type, index)};
 `;
 
 export const StyledCellInput = tw.input`
@@ -333,11 +343,6 @@ export const renderTableCell = (
     }
 };
 
-const leftAlign = [DataTypes.STRING, DataTypes.LINK_STRING, DataTypes.BULLET, undefined];
-
-export const getAlignment = (dataType: DataTypes | undefined, index: number) =>
-    dataType === DataTypes.PARAGRAPH || (leftAlign.includes(dataType) && index === 0) ? 'text-left' : 'text-center';
-
 const getHeaders = (
     definitions: TableColumn[],
     sortable: boolean,
@@ -386,13 +391,7 @@ const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
             {section.map((cell: any, index: number) => {
                 const dataType = definitions[index]?.dataType || undefined;
                 return (
-                    <StyledTd
-                        className={`${getAlignment(dataType, index)} ${getAlignment(dataType, index)} ${
-                            dataType === DataTypes.BOLD_STRING ? 'font-medium !text-black' : 'font-normal'
-                        }`}
-                        key={index}
-                        bold={dataType === DataTypes.BOLD_STRING}
-                    >
+                    <StyledTd key={index} index={index} type={dataType}>
                         {renderTableCell(cell, dataType)}
                     </StyledTd>
                 );
