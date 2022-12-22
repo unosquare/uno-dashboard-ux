@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import React, { startTransition, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { createCsv, formatter, FormatTypes } from 'uno-js';
 import { CardContent } from '../Card';
 import { Colors, CurrencyRate, DataTypes, Directions, FlexValues, SizeValues, SortDirection } from '../constants';
@@ -10,7 +11,6 @@ import { CheckIcon, LinkIcon, UncheckIcon } from '../Icons';
 import { Loading } from '../Loading';
 import { NoData } from '../NoData';
 import { CenteredSpan } from '../Text';
-import { device } from '../theme';
 import { ToolBar } from '../Toolbar';
 
 export interface TableColumn {
@@ -52,8 +52,8 @@ interface TdSettings {
 }
 
 interface HeaderSettings {
-    sortable: boolean;
-    sorted: boolean;
+    $sortable: boolean;
+    $sorted: boolean;
 }
 
 dayjs.extend(utc);
@@ -153,47 +153,31 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
         sortDirection: i === index ? getSortDirection(field.sortDirection) : undefined,
     }));
 
-export const StyledTable = styled.table`
-    width: 100%;
-    border-collapse: collapse;
-    tr:first-child {
-        border-top: none;
-    }
-    th {
-        font-weight: 500;
-        padding: 0px 10px 0px 6px;
-    }
-    tr,
-    td {
-        border-top: ${({ theme }) => theme.colors.table} 1px solid;
-        font-size: 13px;
-    }
-    td {
-        color: ${({ theme }) => theme.colors.tableContent};
-        padding: 7px;
-    }
-    ${device.md} {
-        td {
-            font-size: 10px;
-        }
-        th {
-            font-size: 11px;
-        }
-    }
-    tfoot {
-        position: sticky;
-        inset-block-end: 0;
-        background-color: white;
-    }
+export const StyledTable = tw.table<any>`
+    w-full
+    border-collapse
+    [&_tr:first-child]:border-t-0
+    [&_th]:font-medium
+    [&_th]:p-[0_10px_0_6px]
+    [&_tr]:border-table
+    [&_tr]:text-[13px]
+    [&_td]:text-unogray
+    [&_td]:border-table
+    [&_td]:p-[7px]
+    [&_tfoot]:bg-white
+    [&_tfoot]:sticky
+    [&>tfoot]:inset-y-0
+    md:[&_td]:text-[10px]
+    md:[&_th]:text-[11px]
 `;
 
 const getHeightStyle = (dataTitle: string | undefined, minValue: number, maxValue: number) => {
     const value = dataTitle ? `${minValue}vmin` : `${maxValue}vmin`;
 
     return `
-max-height: ${value};
-height: ${value};
-`;
+        max-height: ${value};
+        height: ${value};
+    `;
 };
 
 const calculateHeight = (height: SizeValues | undefined, dataTitle: string | undefined) => {
@@ -211,71 +195,53 @@ const calculateHeight = (height: SizeValues | undefined, dataTitle: string | und
     }
 };
 
-export const StyledTableContainer = styled.div<TableContainerSettings>`
+export const TableContainerBase = styled.div<TableContainerSettings>`
     ${({ height, dataTitle }) => calculateHeight(height, dataTitle)};
-    ${({ dataTitle }) =>
-        dataTitle
-            ? `
-    margin: auto;
-    margin-top: 0px;
-    `
-            : `
-    margin: 0px auto;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    `};
-    width: 100%;
-    overflow-y: auto;
     justify-content: ${({ justify }) => justify};
+`;
+
+export const StyledTableContainer = tw(TableContainerBase)<TableContainerSettings>`
+    ${({ dataTitle }) => (dataTitle ? 'm-auto mt-0' : 'my-0 mx-auto py-[5px]')}
+    w-full
+    overflow-y-auto
 `;
 
 export const StyledTd = styled.td<TdSettings>`
     ${({ bold }) => (bold ? 'font-weight: 500; color: black !important' : 'font-weight: normal')};
-    ${({ align }) => align && `text-align: ${align}`};
     ${({ color }) => color && `color: ${color} !important`};
     ${({ background }) => background && `background-color: ${background}`};
     ${({ border }) =>
         border && `border-left: 2px solid ${Colors.BORDER_GRAY}; border-right: 2px solid ${Colors.BORDER_GRAY}`};
 `;
 
-const commonProps = `
-    display: inline-flex;
-    margin-right: 0.5rem;
-    align-items: center;
-    padding: 0.5rem;
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: normal;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+export const StyledCellInput = tw.input`
+    inline-flex
+    items-center
+    text-sm
+    leading-normal
+    font-sans
+    text-maingray
+    p-[0.35rem]
+    text-[13px]
+    h-2
+    w-[90px]
+    mr-0
+    rounded-sm
+    border-solid
+    border-[1px]
+    border-[#3e4f45]
 `;
 
-export const StyledCellInput = styled.input`
-    ${commonProps}
-    color: #333;
-    border-width: 0px;
-    padding: 0.35rem;
-    font-size: 13px;
-    height: 8px;
-    width: 90px;
-    margin-right: 0;
-    border-radius: 2px;
-    border: solid 1px #3e4f45;
-`;
-
-export const HeaderDiv = styled.div<HeaderSettings>`
-    flex: 1;
-    flex-direction: row;
-    display: inline-flex;
-    svg {
-        opacity: ${({ sorted }) => (sorted ? 1 : 0.3)};
-        height: 1rem;
-        width: 1rem;
-        margin-left: 0.25rem;
-    }
-    :hover svg {
-        opacity: 1;
-    }
-    ${({ sortable }) => (sortable ? 'cursor: pointer;' : '')}
+export const HeaderDiv = tw.div<HeaderSettings>`
+    flex-1
+    flex-row
+    inline-flex
+    [&_svg]:h-4
+    [&_svg]:w-4
+    [&_svg]:ml-1
+    [&_svg:hover]:opacity-100
+    ${({ $sorted }) => ($sorted ? '[&_svg]:opacity-100' : '[&_svg]:opacity-30')}
+    ${({ $sorted }) => ($sorted ? 'cursor-pointer' : '')}
 `;
 
 const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -370,7 +336,7 @@ export const renderTableCell = (
 const leftAlign = [DataTypes.STRING, DataTypes.LINK_STRING, DataTypes.BULLET, undefined];
 
 export const getAlignment = (dataType: DataTypes | undefined, index: number) =>
-    dataType === DataTypes.PARAGRAPH || (leftAlign.includes(dataType) && index === 0) ? 'left' : 'center';
+    dataType === DataTypes.PARAGRAPH || (leftAlign.includes(dataType) && index === 0) ? 'text-left' : 'text-center';
 
 const getHeaders = (
     definitions: TableColumn[],
@@ -382,18 +348,15 @@ const getHeaders = (
         <th
             key={index}
             onClick={() => setSortColumn(index)}
-            style={{
-                minWidth: useMinWidth ? '100px' : '',
-                textAlign: getAlignment(header.dataType, index),
-            }}
+            className={`${useMinWidth && 'min-w-[100px]'} ${getAlignment(header.dataType, index)}`}
         >
-            <HeaderDiv sortable={sortable} sorted={Number(header.sortOrder) >= 1}>
+            <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
                 <span>{header.label}</span>
                 {sortable && (
-                    <span style={{ alignSelf: 'center' }}>
+                    <span className='self-center'>
                         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'>
                             <path
-                                style={{ transformOrigin: 'center' }}
+                                className='origin-center'
                                 fillRule='evenodd'
                                 d='M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z'
                                 clipRule='evenodd'
@@ -412,7 +375,7 @@ const getHeaders = (
 
 const getFooter = (footer: (string | number)[], definition: TableColumn[]) =>
     footer.map((foot, index) => (
-        <td key={index} style={{ textAlign: getAlignment(definition[index]?.dataType || undefined, index) }}>
+        <td key={index} className={getAlignment(definition[index]?.dataType || undefined, index)}>
             {foot}
         </td>
     ));
@@ -424,7 +387,9 @@ const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
                 const dataType = definitions[index]?.dataType || undefined;
                 return (
                     <StyledTd
-                        align={getAlignment(dataType, index)}
+                        className={`${getAlignment(dataType, index)} ${getAlignment(dataType, index)} ${
+                            dataType === DataTypes.BOLD_STRING ? 'font-medium !text-black' : 'font-normal'
+                        }`}
                         key={index}
                         bold={dataType === DataTypes.BOLD_STRING}
                     >
