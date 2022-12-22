@@ -8,6 +8,7 @@ export * from './Card';
 export * from './PieChart';
 export * from './ChartLegend';
 export * from './Circle';
+export * from './DataChart';
 export * from './Divider';
 export * from './Loading';
 export * from './Icons';

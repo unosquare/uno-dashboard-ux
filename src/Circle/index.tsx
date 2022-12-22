@@ -4,8 +4,8 @@ import { Colors, SizeValues } from '../constants';
 import { device } from '../theme';
 
 export interface CircleSettings {
-    size: SizeValues;
-    color: Colors;
+    size?: SizeValues;
+    color?: Colors;
     value?: string | number;
     subValue?: string | number;
 }
@@ -88,7 +88,12 @@ const calculateSize = (size: SizeValues) => {
     }
 };
 
-const StyledCircle = styled.div<CircleSettings>`
+interface StyledCircleSettings {
+    size: SizeValues;
+    color: Colors;
+}
+
+const StyledCircle = styled.div<StyledCircleSettings>`
     ${({ size }) => calculateSize(size)}
     ${({ color, theme }) => {
         if (color === Colors.BLUE) {
@@ -131,7 +136,7 @@ const Label = ({ size, value }: any) => {
     return <span>{value}</span>;
 };
 
-export const Circle = ({ value, subValue, color, size }: CircleSettings) => (
+export const Circle = ({ value, subValue, color = Colors.BLUE, size = SizeValues.LARGE }: CircleSettings) => (
     <StyledCircle color={color} size={size}>
         <Label size={size} value={value} />
         {size === SizeValues.LARGE && subValue && <span>{subValue}</span>}

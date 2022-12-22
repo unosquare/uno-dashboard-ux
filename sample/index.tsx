@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
+import { identity } from 'uno-js';
 import {
     baseTheme,
     NavBar,
@@ -24,6 +25,7 @@ import {
     LegendFormatTypes,
     PieChart,
     SortDirection,
+    DataChart,
 } from '../src';
 import '../src/resources/global.css';
 
@@ -65,18 +67,26 @@ const Application = () => {
                     <h2>Sample App</h2>
                 </NavBarTitle>
             </NavBar>
-            <AppContainer rows={2} columns={3}>
-                <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START}>
-                    <Circle value={100} color={Colors.BLUE} size={SizeValues.LARGE} />
+            <AppContainer rows={3} columns={3}>
+                <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
+                    <Circle value={100} />
                     <Title>
                         <h2>TOTAL</h2>
+                        <h6>Rows</h6>
                     </Title>
                 </Card>
-                <Card column={1} row={1} direction={Directions.COLUMN}>
+                <Card column={2} row={1} direction={Directions.COLUMN}>
+                    <DataChart rawData={chartData} dataCallback={identity} legend />
+                    <Badge value={500} content='Goal' right={30} />
+                </Card>
+                <Card column={1} row={2} direction={Directions.COLUMN}>
+                    <PieChart rawData={chartData} dataCallback={identity} legendFormatType={LegendFormatTypes.NUMBER} />
+                </Card>
+                <Card column={2} row={2} direction={Directions.COLUMN} fit>
                     <Table
                         columns={columns}
                         rawData={data}
-                        dataCallback={(d) => d}
+                        dataCallback={identity}
                         dataTitle='Data Table'
                         searchable
                         sortable
@@ -84,12 +94,13 @@ const Application = () => {
                         switchTbl={toggle}
                         isExchange={value}
                     />
-                    <Badge value={500} content='Goal' right={30} />
                 </Card>
-                <Card column={1} row={1} direction={Directions.COLUMN}>
-                    <PieChart rawData={chartData} dataCallback={(d) => d} legendFormatType={LegendFormatTypes.NUMBER} />
+                <Card column={1} row={3} direction={Directions.ROW} fit>
+                    <Loading />
+                    <Divider />
+                    <Circle size={SizeValues.SMALL} value={100} color={Colors.GRAY} />
                 </Card>
-                <Card column={2} row={2} direction={Directions.ROW}>
+                <Card column={2} row={3} direction={Directions.ROW}>
                     <Circle size={SizeValues.EXTRA_SMALL} value={50} color={Colors.GRAY} />
                     <Divider />
                     <CardContent direction={Directions.COLUMN} size={SizeValues.EXTRA_SMALL}>
@@ -98,11 +109,6 @@ const Application = () => {
                             <Ellipse color='#4CDD28' small /> This is OK
                         </h4>
                     </CardContent>
-                </Card>
-                <Card column={1} row={2} direction={Directions.ROW} fit>
-                    <Loading />
-                    <Divider />
-                    <Circle size={SizeValues.SMALL} value={100} color={Colors.GRAY} />
                 </Card>
             </AppContainer>
             <Footer />
