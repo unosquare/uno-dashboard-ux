@@ -19,7 +19,7 @@
         "css-loader": "^6.7.3"
     },
     "devDependencies": {
-        "@types/react-dom": "^18.0.9",
+        "@types/react-dom": "^18.0.10",
         "@types/styled-components": "^5.1.26",
         "@typescript-eslint/eslint-plugin": "^5.47.0",
         "copy-webpack-plugin": "^11.0.0",
