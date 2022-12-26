@@ -1,7 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { Colors, SizeValues } from '../constants';
-import { device } from '../theme';
 
 export interface CircleSettings {
     size?: SizeValues;
@@ -14,77 +13,52 @@ const calculateSize = (size: SizeValues) => {
     switch (size) {
         case SizeValues.SMALL:
             return `
-                min-width: 100px;
-                min-height: 100px;
-                max-height: 100px;
-                margin: 15px auto;
-                span {
-                  font-size: 30px;
-                };
+                min-w-[100px]
+                min-h-[100px]
+                max-h-[100px]
+                my-[15px]
+                mx-auto
+                [&_span]:text-3xl
             `;
         case SizeValues.SMALL_INTER:
             return `
-                min-width: 50px;
-                min-height: 50px;
-                max-height: 80px;
-                font-size: 16px;
-                margin: 5px 5px 0px auto
-                span {
-                  color: '#fff';
-                };
+                min-w-[50px]
+                min-h-[50px]
+                max-h-[80px]
+                text-base
+                m-[5px_5px_0px_auto]
+                [&_span]:text-white
             `;
         case SizeValues.EXTRA_SMALL:
             return `
-                min-width: 50px;
-                min-height: 50px;
-                max-height: 50px;
-                margin: 5px 5px 0px auto
-                span {
-                    font-size: 22px;
-                };
+                min-w-[50px]
+                min-h-[50px]
+                max-h-[50px]
+                m-[5px_5px_0px_auto]
+                [&_span]:text-base
             `;
         case SizeValues.MEDIUM:
             return `
-                min-width: 115px;
-                min-height: 115px;
-                max-height: 115px;
-                margin: 20px 20px;
-                span {
-                  font-size: 16px;
-                };
+                min-w-[115px]
+                min-h-[115px]
+                max-h-[115px]
+                [&_span]:text-base
+                m-5
             `;
         case SizeValues.LARGE_PADDED:
-            return `
-                min-width: 131px;
-                min-height: 131px;
-                max-height: 131px;
-                margin: 20px 45px;
-                span {
-                  font-size: 24px;
-                };
-            `;
+            return '[&_span]:text-2xl';
         case SizeValues.MICRO:
             return `
-                    height: 35px;
-                    min-width: 35px;
-                    span {
-                        font-size: 10px;
-                    };
-                    ${device.md} {
-                        height: 25px;
-                        min-width: 25px;
-                    }
+                m-0
+                min-h-[35px]
+                max-h-[35px]
+                min-w-[35px]
+                [&_span]:text-[10px]
+                md:h-[25px]
+                md:min-w-[25px]
                 `;
         default:
-            return `
-                min-width: 131px;
-                min-height: 131px;
-                max-height: 131px;
-                margin: 20px 45px;
-                span {
-                  font-size: 16px;
-                };
-            `;
+            return '[&_span]:text-base';
     }
 };
 
@@ -93,40 +67,37 @@ interface StyledCircleSettings {
     color: Colors;
 }
 
-const StyledCircle = styled.div<StyledCircleSettings>`
+const StyledCircle = tw.div<StyledCircleSettings>`
+    rounded-[50%]
+    flex
+    justify-center
+    items-center
+    flex-col
+    [&_h6]:text-[50px]
+    [&_h6]:font-bold
+    [&_h6]:leading-[50px]
+    [&_h6]:text-center
+    [&_h6]:m-0
+    [&_span]:font-bold
+    [&_span]:leading-[30px]
+    [&_span]:text-center
+    sm:m-[5px]
+    min-w-[131px]
+    min-h-[131px]
+    max-h-[131px]
+    my-5
+    mx-11
     ${({ size }) => calculateSize(size)}
-    ${({ color, theme }) => {
-        if (color === Colors.BLUE) {
-            return `
-        background: ${theme.colors.main};
-        color: ${theme.colors.fontSecondary};
-      `;
-        }
-        return `
-      background: ${theme.colors.background};
-      color: ${theme.colors.fontMain};
-    `;
-    }};
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    h6 {
-        font-size: 50px;
-        font-weight: 700;
-        line-height: 50px;
-        text-align: center;
-        margin: 0px;
-    }
-    span {
-        font-weight: 700;
-        line-height: 30px;
-        text-align: center;
-    }
-    ${device.sm} {
-        margin: 5px;
-    }
+    ${({ color }) =>
+        color === Colors.BLUE
+            ? `
+            bg-unoblue
+            text-white
+      `
+            : `
+            bg-unolightgray
+            text-maingray
+    `}
 `;
 
 const Label = ({ size, value }: any) => {
