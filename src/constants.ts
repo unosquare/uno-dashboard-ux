@@ -89,7 +89,3 @@ export interface ChartComponent {
     legendFormatType?: LegendFormatTypes;
     palette: string;
 }
-
-export interface ChartColors {
-    [palette: string]: string[];
-}

@@ -1,9 +1,5 @@
 import 'styled-components';
 
-interface ChartColors {
-    [palette: string]: string[];
-}
-
 declare module 'styled-components' {
     export interface DefaultTheme {
         colors: {
@@ -16,7 +12,6 @@ declare module 'styled-components' {
             blackOpacity: string;
             cardBackground: string;
             table: string;
-            charts?: ChartColors;
         };
         maxWidth: string;
     }
