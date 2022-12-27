@@ -4,10 +4,16 @@ import React, { startTransition, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { createCsv, formatter, FormatTypes } from 'uno-js';
+import {
+    CaretDown12Regular,
+    CaretUp12Regular,
+    CheckboxChecked16Regular,
+    CheckboxUnchecked16Regular,
+    Link16Regular,
+} from '@fluentui/react-icons';
 import { CardContent } from '../Card';
 import { Colors, CurrencyRate, DataTypes, Directions, FlexValues, SizeValues, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
-import { CheckIcon, LinkIcon, UncheckIcon } from '../Icons';
 import { Loading } from '../Loading';
 import { NoData } from '../NoData';
 import { CenteredSpan } from '../Text';
@@ -79,6 +85,7 @@ const numericTypes = [
     DataTypes.MONEY,
     DataTypes.DAYS,
     DataTypes.MONTHS,
+    DataTypes.BOOLEAN,
 ];
 
 const checkNumericString = (a: any, b: any, sortColumn: number) => {
@@ -283,7 +290,7 @@ const renderLinkCell = (data: any) => {
     return (
         <>
             <a href={(data as string[])[0].toString()} target='_blank' rel='noopener noreferrer'>
-                <LinkIcon />
+                <Link16Regular />
             </a>
             <span>{`   ${new Date((data as string[])[1].toString()).toLocaleDateString(
                 'en-us',
@@ -322,13 +329,13 @@ export const renderTableCell = (
             if (!data) return '';
             return (
                 <a href={data.toString()} target='_blank' rel='noopener noreferrer'>
-                    <LinkIcon />
+                    <Link16Regular />
                 </a>
             );
         case DataTypes.LINK_STRING:
             return renderLinkString(data);
         case DataTypes.BOOLEAN:
-            return data ? <CheckIcon /> : <UncheckIcon />;
+            return data ? <CheckboxChecked16Regular /> : <CheckboxUnchecked16Regular />;
         case DataTypes.BULLET:
             return (
                 <CenteredSpan>
@@ -357,23 +364,12 @@ const getHeaders = (
         >
             <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
                 <span>{header.label}</span>
-                {sortable && (
-                    <span className='self-center'>
-                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'>
-                            <path
-                                className='origin-center'
-                                fillRule='evenodd'
-                                d='M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z'
-                                clipRule='evenodd'
-                                transform={
-                                    header.sortDirection === SortDirection.DESC && Number(header.sortOrder) >= 1
-                                        ? ''
-                                        : 'rotate(180,0,0)'
-                                }
-                            />
-                        </svg>
-                    </span>
-                )}
+                {sortable &&
+                    (header.sortDirection === SortDirection.DESC && Number(header.sortOrder) >= 1 ? (
+                        <CaretDown12Regular />
+                    ) : (
+                        <CaretUp12Regular />
+                    ))}
             </HeaderDiv>
         </th>
     ));

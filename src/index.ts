@@ -11,7 +11,6 @@ export * from './Circle';
 export * from './DataChart';
 export * from './Divider';
 export * from './Loading';
-export * from './Icons';
 export * from './Ellipse';
 export * from './ExportCsvButton';
 export * from './Footer';

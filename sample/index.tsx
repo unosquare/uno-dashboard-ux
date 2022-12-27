@@ -26,6 +26,7 @@ import {
     PieChart,
     SortDirection,
     DataChart,
+    DefaultImg,
 } from '../src';
 import '../src/resources/global.css';
 
@@ -33,16 +34,18 @@ const columns = [
     { label: 'Name', sortOrder: 1, sortDirection: SortDirection.ASC },
     { label: 'City' },
     { label: 'Age', dataType: DataTypes.DAYS, sortOrder: 2, sortDirection: SortDirection.DESC },
+    { label: 'Like Ice cream', dataType: DataTypes.BOOLEAN },
+    { label: 'Profile', dataType: DataTypes.LINK_ICON },
 ];
 
 const defaultData = [
-    ['Pepe', 'Mexico', 20],
-    ['Pepe', 'LA', 25],
-    ['Juan', 'Chicago', 30],
-    ['Juan', 'Oaxaca', 35],
-    ['Maria', 'NY', 40],
-    ['Laura', 'Guadalajara', 45],
-    ['Laura', 'Mexico', 50],
+    ['Pepe', 'Mexico', 20, true, 'https://www.google.com'],
+    ['Pepe', 'LA', 25, true, ''],
+    ['Juan', 'Chicago', 30, true, 'https://www.google.com'],
+    ['Juan', 'Oaxaca', 35, false, 'https://www.google.com'],
+    ['Maria', 'NY', 40, false, ''],
+    ['Laura', 'Guadalajara', 45, true, 'https://www.google.com'],
+    ['Laura', 'Mexico', 50, true, 'https://www.google.com'],
 ];
 
 const chartData = [
