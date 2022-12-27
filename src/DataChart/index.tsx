@@ -10,7 +10,7 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { Dictionary, formatter, FormatTypes } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
 import { ChartTypes, LegendFormatTypes } from '../constants';
@@ -34,27 +34,27 @@ export interface DataChartSettings<TDataIn> {
 }
 
 interface LegendSettings {
-    clickable?: boolean;
+    $clickable?: boolean;
 }
 
-const StyledChartTitle = styled.h6`
-    margin: 0px;
-    font-size: 20px;
+const StyledChartTitle = tw.h6`
+    m-0
+    text-xl
 `;
 
-const StyledChart = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    margin-left: -30px;
+const StyledChart = tw.div`
+    flex
+    flex-col
+    items-center
+    justify-center
+    w-full
+    h-full
+    -ml-[30px]
 `;
 
-const StyledLegend = styled.span<LegendSettings>`
-    color: #333333;
-    ${({ clickable }) => (clickable ? 'cursor: pointer;' : '')}
+const StyledLegend = tw.span<LegendSettings>`
+    text-maingray
+    ${({ $clickable }) => $clickable && 'cursor-pointer'}
 `;
 
 const margin = {
@@ -103,7 +103,7 @@ export const getChartSeries = (data: any) =>
     }, []);
 
 const renderLegendText = (value: string, clickable: boolean) => (
-    <StyledLegend clickable={clickable}>{value}</StyledLegend>
+    <StyledLegend $clickable={clickable}>{value}</StyledLegend>
 );
 
 export const DataChart = ({

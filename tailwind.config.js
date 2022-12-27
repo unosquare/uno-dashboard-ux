@@ -1,27 +1,27 @@
+/** @type {import('tailwindcss').Config} */
+
 module.exports = {
     content: ['./src/**/*.{js,ts,jsx,tsx}', './src/**/**/*.{js,ts,jsx,tsx}'],
     media: false, // or 'media' or 'class'
     theme: {
         extend: {
-            textColor: {
+            colors: {
                 unoblue: '#304FF3',
+            },
+            textColor: {
                 unogray: '#808080',
-                noresultsred: '#F2545B',
                 errorgray: '#707070',
                 filtergray: '#505050',
                 maingray: '#333',
             },
             backgroundColor: {
-                unoblue: '#304FF3',
                 unodarkblue: '#1B2E93',
-                layoutheader: '#191919',
                 unolightgray: '#F1F2F3',
                 inputGray: '#F5F5F5',
                 unoWarning: '#D7C600',
                 blackOpacity: 'rgba(0, 0, 0, 0.5)',
             },
             borderColor: {
-                unoblue: '#304FF3',
                 unogray: '#D3D3D3',
             },
             boxShadow: {

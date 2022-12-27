@@ -26,7 +26,7 @@ const calculateSize = (size: SizeValues) => {
                 min-h-[50px]
                 max-h-[80px]
                 text-base
-                m-[5px_5px_0px_auto]
+                m-0
                 [&_span]:text-white
             `;
         case SizeValues.EXTRA_SMALL:
@@ -34,7 +34,7 @@ const calculateSize = (size: SizeValues) => {
                 min-w-[50px]
                 min-h-[50px]
                 max-h-[50px]
-                m-[5px_5px_0px_auto]
+                m-0
                 [&_span]:text-base
             `;
         case SizeValues.MEDIUM:
@@ -79,14 +79,13 @@ const StyledCircle = tw.div<StyledCircleSettings>`
     [&_h6]:text-center
     [&_h6]:m-0
     [&_span]:font-bold
-    [&_span]:leading-[30px]
     [&_span]:text-center
     sm:m-[5px]
     min-w-[131px]
     min-h-[131px]
     max-h-[131px]
     my-5
-    mx-11
+    mx-[45px]
     ${({ size }) => calculateSize(size)}
     ${({ color }) =>
         color === Colors.BLUE
@@ -98,6 +97,7 @@ const StyledCircle = tw.div<StyledCircleSettings>`
             bg-unolightgray
             text-maingray
     `}
+    [&_span]:leading-[30px]
 `;
 
 const Label = ({ size, value }: any) => {
