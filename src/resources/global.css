@@ -12,10 +12,8 @@
 
 @layer components {
     body {
-        background-color: #f1f2f3;
-        padding: 0px;
-        margin: 0px;
         overflow: hidden !important;
+        @apply bg-[#f1f2f3] p-0 m-0;
     }
 
     #root {
@@ -41,19 +39,16 @@
     }
 
     td {
-        padding: 0 10px;
+        @apply py-0 px-[10px];
     }
 
     th {
-        background: #fff;
-        position: sticky;
-        top: 0px;
+        @apply bg-white sticky top-0;
     }
 
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
-        appearance: none;
-        margin: 0;
+        @apply appearance-none m-0;
     }
 }
 

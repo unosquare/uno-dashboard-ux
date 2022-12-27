@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { Circle } from '../Circle';
 import { Colors, SizeValues } from '../constants';
-import { device } from '../theme';
 
 export interface BadgeSettings {
     value: string | number;
@@ -12,47 +12,41 @@ export interface BadgeSettings {
     right?: number;
 }
 
-const StyledBadge = styled.div<BadgeSettings>`
-    width: 120px;
-    max-height: 50px;
-    min-height: 35px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    position: absolute;
-    ${({ top }) => (top ? 'top: 10px' : 'bottom: 10px')};
-    bottom: 5px;
+const BadgeBase = styled.div<BadgeSettings>`
+    ${({ top }) => (top ? 'top: 10px' : 'bottom: 5px')};
     ${({ right }) => `right: ${right || 20}px`};
-    z-index: 3000;
 `;
 
-const StyledText = styled.div`
-    width: 90px;
-    max-height: 50px;
-    min-height: 35px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    p {
-        font-size: 10px;
-        font-weight: 700;
-        text-align: left;
-        margin: 0px;
-        margin-left: 3px;
-        line-height: 12px;
-    }
-    span {
-        font-size: 10px;
-        text-align: left;
-        margin: 0px 3px;
-    }
-    ${device.md} {
-        width: 115px;
-        p {
-            font-size: 9px;
-        }
-    }
+const StyledBadge = tw(BadgeBase)<BadgeSettings>`
+    w-[120px]
+    max-h-[50px]
+    min-h-[35px]
+    flex
+    justify-between
+    items-center
+    flex-row
+    absolute
+    z-[3000]
+`;
+
+const StyledText = tw.div`
+    w-[90px]
+    max-h-[50px]
+    min-h-[35px]
+    flex
+    flex-col
+    justify-center
+    [&_p]:text-[10px]
+    [&_p]:font-bold
+    [&_p]:text-left
+    [&_p]:m-0
+    [&_p]:ml-[3px]
+    [&_p]:leading-3
+    [&_span]:text-[10px]
+    [&_span]:text-left
+    [&_span]:my-0
+    [&_span]:mx-[3px]
+    md:[&_p]:text-[9px]
 `;
 
 export const Badge = ({ value, content, subContent, top, right }: BadgeSettings) => (
