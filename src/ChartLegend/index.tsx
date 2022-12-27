@@ -46,15 +46,8 @@ const getMaleFemaleLabel = ({ dataKey, payload }: any) =>
         : `${humanize(dataKey)}: ${payload.maleNumber} - ${payload.male}%`;
 
 const getLabel =
-    (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined) =>
-    (
-        category: any,
-        index: number,
-        legendFormatType?: LegendFormatTypes,
-        percentage = false,
-        money = false,
-        ignoreValue = false,
-    ) => {
+    (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined, ignoreValue: boolean) =>
+    (category: any, index: number, legendFormatType?: LegendFormatTypes, percentage = false, money = false) => {
         if (legendFormatType === LegendFormatTypes.TENURE) {
             return `Month ${category.payload.x}: ${category.value} DPs`;
         }
@@ -108,13 +101,28 @@ const StyledLegend = styled.div`
     }
 `;
 
+const Component = ({ type, category, index, legendFormatType, formats, getLabelFunc }: any) => (
+    <div>
+        <Ellipse color={getColor(type, category)} />
+        <LabelInfo>
+            {getLabelFunc(
+                category,
+                index,
+                legendFormatType,
+                formats ? formats[index] === FormatTypes.PERCENTAGE : legendFormatType === LegendFormatTypes.PERCENTAGE,
+                formats ? formats[index] === FormatTypes.MONEY : legendFormatType === LegendFormatTypes.MONEY,
+            )}
+        </LabelInfo>
+    </div>
+);
+
 export const ChartLegend = ({
     active,
     payload,
     type,
     customLabel,
     customValue,
-    ignoreValue,
+    ignoreValue = false,
     formats,
     accumulated,
     legendFormatType,
@@ -122,7 +130,7 @@ export const ChartLegend = ({
 }: ChartLegendSettings) => {
     const localPayload = payload || [];
     const legendTitle = localPayload.length > 0 ? localPayload[0].payload.name : '0';
-    const getLabelFunc = getLabel(customLabel, customValue);
+    const getLabelFunc = getLabel(customLabel, customValue, ignoreValue);
 
     if (localPayload.some((c: any) => c.payload.name === 'IgnoreToolTip')) return payload[0].payload.label;
 
@@ -142,46 +150,28 @@ export const ChartLegend = ({
                                           .reduce((prev: any, curr: any) => prev + curr, 0),
                                   )[index];
 
-                              return (
-                                  <div key={index}>
-                                      <Ellipse color={getColor(type, category)} />
-                                      <LabelInfo>
-                                          {getLabelFunc(
-                                              category,
-                                              index,
-                                              legendFormatType,
-                                              formats
-                                                  ? formats[index] === FormatTypes.PERCENTAGE
-                                                  : legendFormatType === LegendFormatTypes.PERCENTAGE,
-                                              formats
-                                                  ? formats[index] === FormatTypes.MONEY
-                                                  : legendFormatType === LegendFormatTypes.MONEY,
-                                              ignoreValue,
-                                          )}
-                                      </LabelInfo>
-                                  </div>
-                              );
+                              const options = {
+                                  type,
+                                  category,
+                                  index,
+                                  legendFormatType,
+                                  formats,
+                                  getLabelFunc,
+                              };
+                              return <Component key={index} {...options} />;
                           })
                           .reverse()
-                    : localPayload.map((category: any, index: number) => (
-                          <div key={index}>
-                              <Ellipse color={getColor(type, category)} />
-                              <LabelInfo>
-                                  {getLabelFunc(
-                                      category,
-                                      index,
-                                      legendFormatType,
-                                      formats
-                                          ? formats[index] === FormatTypes.PERCENTAGE
-                                          : legendFormatType === LegendFormatTypes.PERCENTAGE,
-                                      formats
-                                          ? formats[index] === FormatTypes.MONEY
-                                          : legendFormatType === LegendFormatTypes.MONEY,
-                                      ignoreValue,
-                                  )}
-                              </LabelInfo>
-                          </div>
-                      )))}
+                    : localPayload.map((category: any, index: number) => {
+                          const options = {
+                              type,
+                              category,
+                              index,
+                              legendFormatType,
+                              formats,
+                              getLabelFunc,
+                          };
+                          return <Component key={index} {...options} />;
+                      }))}
         </StyledLegend>
     );
 };
