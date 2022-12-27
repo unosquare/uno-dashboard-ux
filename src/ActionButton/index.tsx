@@ -6,8 +6,6 @@ export interface ButtonSettings {
     ignoreFocus?: boolean;
 }
 
-export const imgStyle = { width: '1rem', height: '1rem' };
-
 export const ActionButtonContainer = styled.div`
     display: flex;
     align-items: center;
