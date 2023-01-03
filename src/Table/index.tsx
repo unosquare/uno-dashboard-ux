@@ -11,6 +11,7 @@ import {
     CheckboxUnchecked16Regular,
     Link16Regular,
 } from '@fluentui/react-icons';
+import objectHash from 'object-hash';
 import { CardContent } from '../Card';
 import { Colors, CurrencyRate, DataTypes, Directions, FlexValues, SizeValues, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
@@ -358,7 +359,7 @@ const getHeaders = (
 ) =>
     definitions.map((header, index) => (
         <th
-            key={index}
+            key={objectHash(header)}
             onClick={() => setSortColumn(index)}
             className={`${useMinWidth && 'min-w-[100px]'} ${getAlignment(header.dataType, index)}`}
         >
@@ -376,18 +377,21 @@ const getHeaders = (
 
 const getFooter = (footer: (string | number)[], definition: TableColumn[]) =>
     footer.map((foot, index) => (
-        <td key={index} className={getAlignment(definition[index]?.dataType || undefined, index)}>
+        <td
+            key={objectHash(definition[index])}
+            className={getAlignment(definition[index]?.dataType || undefined, index)}
+        >
             {foot}
         </td>
     ));
 
 const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
     data.map((section: any, i: number) => (
-        <tr key={i}>
+        <tr key={objectHash(section)}>
             {section.map((cell: any, index: number) => {
                 const dataType = definitions[index]?.dataType || undefined;
                 return (
-                    <StyledTd key={index} index={index} type={dataType}>
+                    <StyledTd key={objectHash(dataType || cell)} index={index} type={dataType}>
                         {renderTableCell(cell, dataType)}
                     </StyledTd>
                 );

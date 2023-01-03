@@ -1,36 +1,33 @@
+import objectHash from 'object-hash';
 import React from 'react';
 import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
-import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { formatter, FormatTypes } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
-import { ChartData, ChartTypes, Directions, LegendFormatTypes, SizeValues } from '../constants';
+import { ChartComponent, ChartData, ChartTypes, Directions, LegendFormatTypes, SizeValues } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { NoData, PieNoDataLegend } from '../NoData';
 import { baseTheme, defaultChartPalette } from '../theme';
 
 interface ChartCommon {
-    legendFormatType?: LegendFormatTypes;
     label?: string;
     subLabel?: string;
     capped?: number;
 }
 
 export interface ChartLabel extends ChartCommon {
+    legendFormatType?: LegendFormatTypes;
     subDirection: Directions;
     size: SizeValues;
     dataStore: ChartData[];
     colors: string[];
 }
 
-export interface ChartSettings<TDataIn> extends ChartCommon {
-    rawData?: TDataIn;
-    dataCallback?: (data: TDataIn) => ChartData[];
+export interface ChartSettings<TDataIn> extends ChartCommon, ChartComponent<TDataIn> {
     direction?: Directions;
     subDirection?: Directions;
     size?: SizeValues;
     noDataElement?: React.ReactNode;
-    colors?: string[];
 }
 
 export interface ChartContainerSettings {
@@ -43,11 +40,8 @@ export interface CategorySettings {
     $money?: boolean;
 }
 
-const ChartBase = styled.div<ChartContainerSettings>`
-    flex-direction: ${({ direction }) => direction};
-`;
-
-export const StyledChart = tw(ChartBase)<ChartContainerSettings>`
+export const StyledChart = tw.div<ChartContainerSettings>`
+    ${({ direction }) => (direction === Directions.ROW ? 'flex-row' : 'flex-col')}
     ${({ size }) =>
         size === SizeValues.LARGE
             ? ` min-w-[300px]
@@ -98,13 +92,10 @@ export const StyledCategory = tw.div<CategorySettings>`
    `}
 `;
 
-const ContainerBase = styled.div<CategorySettings>`
-    flex-direction: ${({ direction }) => direction};
-`;
-
-export const CategoryContainer = tw(ContainerBase)<CategorySettings>`
+const CategoryContainer = tw.div<CategorySettings>`
     flex
     justify-between
+    ${({ direction }) => (direction === Directions.ROW ? 'flex-row' : 'flex-col')}
 `;
 
 export const StyledLabel = tw.div`
@@ -151,7 +142,7 @@ const getCategories = (
     const money = legendFormatType === LegendFormatTypes.MONEY;
 
     return data.map(({ value, name, subValue }, i) => (
-        <StyledCategory direction={subDirection} key={i} $money={money}>
+        <StyledCategory direction={subDirection} key={objectHash({ value, name, subValue })} $money={money}>
             <Ellipse color={colors[i]} />
             {money ? (
                 <>
@@ -210,7 +201,7 @@ export const PieChart = ({
     const dataStore: ChartData[] = (dataCallback && rawData && dataCallback(rawData)) || [];
 
     return (
-        <StyledChart direction={direction} subDirection={subDirection} size={size}>
+        <StyledChart direction={direction} size={size}>
             {dataStore.length > 0 ? (
                 <>
                     <ChartContainer direction={direction} size={size}>
@@ -223,8 +214,8 @@ export const PieChart = ({
                                     startAngle={90}
                                     endAngle={-360}
                                 >
-                                    {dataStore.map((_, index) => (
-                                        <Cell key={`cell-${index}`} fill={colors[index]} />
+                                    {dataStore.map((data, index) => (
+                                        <Cell key={objectHash(data)} fill={colors[index]} />
                                     ))}
                                 </Pie>
                                 <Tooltip

@@ -1,3 +1,4 @@
+import objectHash from 'object-hash';
 import React from 'react';
 import {
     CartesianGrid,
@@ -13,16 +14,12 @@ import {
 import tw from 'tailwind-styled-components';
 import { Dictionary, formatter, FormatTypes } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
-import { ChartTypes, LegendFormatTypes } from '../constants';
+import { ChartComponent, ChartTypes, LegendFormatTypes } from '../constants';
 import { Loading } from '../Loading';
 import { ChartNoDataLegend, NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 
-export interface DataChartSettings<TDataIn> {
-    rawData?: TDataIn;
-    legendFormatType?: LegendFormatTypes;
-    colors?: string[];
-    dataCallback?: (data: TDataIn) => Dictionary[];
+export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn> {
     legend?: boolean;
     title?: string;
     onClick?: (e: any) => void;
@@ -165,7 +162,12 @@ export const DataChart = ({
                             />
                         )}
                         {getChartSeries(dataStore).map((property: any, index: number) => (
-                            <Line type='monotone' dataKey={property} stroke={colors[index]} key={index} />
+                            <Line
+                                type='monotone'
+                                dataKey={property}
+                                stroke={colors[index]}
+                                key={objectHash(property)}
+                            />
                         ))}
                     </LineChart>
                 </ResponsiveContainer>

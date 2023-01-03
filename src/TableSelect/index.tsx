@@ -1,3 +1,4 @@
+import objectHash from 'object-hash';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -36,7 +37,7 @@ export const TableSelect = ({ label, options, handler, selected, styles }: Selec
     <StyledTableSelect>
         <select name='selector' id='selector' onChange={handler} value={selected} style={styles}>
             {[...options].map((option: any) => (
-                <option key={option.value} value={option.value}>
+                <option key={objectHash(option)} value={option.value}>
                     {option.label}
                 </option>
             ))}

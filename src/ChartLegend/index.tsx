@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatter, FormatTypes, humanize } from 'uno-js';
+import objectHash from 'object-hash';
 import { ChartTypes, LegendFormatTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { LabelInfo, TooltipTitle } from '../Text';
 
 export interface ChartLegendSettings {
+    legendFormatType?: LegendFormatTypes;
     active?: boolean;
     payload?: any;
     type: ChartTypes;
     customValue?: CustomOptions;
     customLabel?: CustomOptions;
-    legendFormatType?: LegendFormatTypes;
     title?: boolean;
     ignoreValue?: boolean;
     formats?: FormatTypes[];
@@ -158,7 +159,7 @@ export const ChartLegend = ({
                                   formats,
                                   getLabelFunc,
                               };
-                              return <Component key={index} {...options} />;
+                              return <Component key={objectHash(options)} {...options} />;
                           })
                           .reverse()
                     : localPayload.map((category: any, index: number) => {
@@ -170,7 +171,7 @@ export const ChartLegend = ({
                               formats,
                               getLabelFunc,
                           };
-                          return <Component key={index} {...options} />;
+                          return <Component key={objectHash(options)} {...options} />;
                       }))}
         </StyledLegend>
     );
