@@ -19,7 +19,7 @@ import { Loading } from '../Loading';
 import { ChartNoDataLegend, NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 
-export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn> {
+export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn, Dictionary[]> {
     legend?: boolean;
     title?: string;
     onClick?: (e: any) => void;

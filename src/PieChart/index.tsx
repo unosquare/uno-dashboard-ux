@@ -23,7 +23,7 @@ export interface ChartLabel extends ChartCommon {
     colors: string[];
 }
 
-export interface ChartSettings<TDataIn> extends ChartCommon, ChartComponent<TDataIn> {
+export interface ChartSettings<TDataIn> extends ChartCommon, ChartComponent<TDataIn, ChartData[]> {
     direction?: Directions;
     subDirection?: Directions;
     size?: SizeValues;

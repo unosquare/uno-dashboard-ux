@@ -85,9 +85,9 @@ export interface CurrencyRate {
     DateModified: string;
 }
 
-export interface ChartComponent<TDataIn> {
+export interface ChartComponent<TDataIn, TDataOut> {
     colors?: string[];
     legendFormatType?: LegendFormatTypes;
     rawData?: TDataIn;
-    dataCallback?: (data: TDataIn) => ChartData[];
+    dataCallback?: (data: TDataIn) => TDataOut;
 }
