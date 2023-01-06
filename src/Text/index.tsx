@@ -15,7 +15,7 @@ interface TextSettings {
 const StyledTitle = styled.div<TitleSettings>`
     color: ${({ theme }) => theme.colors.fontMain};
     width: ${({ width }) => width || ''};
-    max-width: 300px;
+    max-width: 350px;
     display: flex;
     flex-direction: column;
     ${({ center }) => center && 'text-align: center;'}
@@ -42,6 +42,7 @@ const StyledTitle = styled.div<TitleSettings>`
         line-height: 32px;
         text-transform: uppercase;
         margin: 0px;
+        margin-bottom: 10px;
     }
     h5 {
         font-size: 28px;
@@ -50,14 +51,28 @@ const StyledTitle = styled.div<TitleSettings>`
         line-height: 28px;
         text-transform: uppercase;
         margin: 0px;
+        margin-bottom: 10px;
     }
     h6 {
         font-size: 24px;
         font-weight: 700;
         letter-spacing: 1px;
-        line-height: 24px;
+        line-height: 28px;
         text-transform: uppercase;
         margin: 0px;
+        margin-bottom: 10px;
+    }
+    ul {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        font-size: 16px;
+        text-align: justify;
+        list-style-type: none;
+    }
+    li {
+        margin: 15px 3px;
+        line-height: 22px;
     }
     span {
         margin: 0px;
