@@ -94,8 +94,8 @@ const checkNumericString = (a: any, b: any, sortColumn: number) => {
         (a[sortColumn].toString().includes('$') && b[sortColumn].toString().includes('$')) ||
         (a[sortColumn].toString().includes('%') && b[sortColumn].toString().includes('%'))
     ) {
-        const numStrA = sanitizeNumericString(a);
-        const numStrB = sanitizeNumericString(b);
+        const numStrA = sanitizeNumericString(a[sortColumn]);
+        const numStrB = sanitizeNumericString(b[sortColumn]);
 
         if (typeof numStrA === 'number' && typeof numStrB === 'number') {
             const result = numStrA - numStrB;
