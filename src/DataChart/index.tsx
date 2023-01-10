@@ -16,7 +16,7 @@ import { Dictionary, formatter, FormatTypes } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
 import { ChartComponent, ChartTypes, LegendFormatTypes } from '../constants';
 import { Loading } from '../Loading';
-import { ChartNoDataLegend, NoData } from '../NoData';
+import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 
 export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn, Dictionary[]> {
@@ -172,11 +172,7 @@ export const DataChart = ({
                     </LineChart>
                 </ResponsiveContainer>
             ) : (
-                !loading && (
-                    <NoData>
-                        <ChartNoDataLegend />
-                    </NoData>
-                )
+                !loading && <NoData />
             )}
         </StyledChart>
     );

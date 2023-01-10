@@ -1,72 +1,32 @@
 import React from 'react';
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
+import { CloudDismiss48Regular } from '@fluentui/react-icons';
 
-export const DefaultImg = (props: any) => (
-    <svg xmlns='http://www.w3.org/2000/svg' width={77.36} height={67.69} {...props}>
-        <path
-            fill='#505050'
-            fillRule='evenodd'
-            d='M4.83 4.84v14.5h72.52v4.83h-14.5v14.51h14.5v4.83h-14.5v14.51h14.5v4.83h-14.5v4.84h-4.84v-4.84H33.84v4.84H29v-4.84H4.83v4.84H0V0h77.36v4.84H4.83zm0 19.33v14.51H29V24.17H4.83zm53.19 0H33.85v14.51h24.17V24.17zM29.01 43.51v14.51H4.83V43.51h24.18zm4.84 0h24.17v14.51H33.85V43.51z'
-        />
-    </svg>
-);
+const StyledContainer = tw.div`
+    flex
+    justify-center
+    items-center
+    flex-col
+    h-full
+`;
 
-const StyledContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
-    img {
-        height: 60px;
-    }
-    h6 {
-        color: ${({ theme }) => theme.colors.fontMain};
-        font-size: 18px;
-        text-align: center;
-        font-weight: normal;
-        margin: 15px;
-    }
+const StyleHeader = tw.h6`
+    text-base
+    text-maingray
+    text-center
+    m-2
 `;
 
 const DefaultLegend = () => (
     <>
-        <h6>This information is not ready yet</h6>
-        <h6>Please check again later</h6>
+        <StyleHeader>This information is not ready yet</StyleHeader>
+        <StyleHeader>Please check again later</StyleHeader>
     </>
 );
 
-const DefaultNoDataLegend = () => (
-    <>
-        <DefaultImg />
-        <DefaultLegend />
-    </>
+export const NoData = ({ children }: any) => (
+    <StyledContainer>
+        <CloudDismiss48Regular primaryFill='#505050' />
+        {children || <DefaultLegend />}
+    </StyledContainer>
 );
-
-export const PieNoDataLegend = (props: any) => (
-    <>
-        <svg xmlns='http://www.w3.org/2000/svg' width={77.38} height={77.37} {...props}>
-            <path
-                fill='#505050'
-                fillRule='evenodd'
-                d='M52.54 1.21C49.66.4 46.65 0 43.53 0v33.85h33.85c0-3.12-.41-6.13-1.21-9.01-.81-2.88-1.95-5.57-3.42-8.08a33.809 33.809 0 0 0-5.29-6.84 34.088 34.088 0 0 0-6.84-5.29c-2.5-1.47-5.2-2.61-8.08-3.42zm20 37.47H38.69V4.83h-2.42c-3.35 0-6.57.42-9.65 1.28-3.09.86-5.98 2.08-8.67 3.65a36.22 36.22 0 0 0-7.35 5.67c-2.21 2.21-4.1 4.66-5.67 7.35-1.58 2.7-2.79 5.59-3.65 8.67C.43 34.53 0 37.75 0 41.1c0 3.35.42 6.57 1.28 9.65.86 3.09 2.08 5.98 3.65 8.67a36.22 36.22 0 0 0 5.67 7.35c2.21 2.21 4.66 4.1 7.35 5.67 2.7 1.58 5.58 2.8 8.67 3.65 3.08.85 6.3 1.28 9.65 1.28 3.65 0 7.18-.52 10.58-1.57a36.47 36.47 0 0 0 9.46-4.46 36.58 36.58 0 0 0 7.8-6.97c2.29-2.72 4.15-5.76 5.59-9.14.58-1.36 1.06-2.71 1.42-4.06.37-1.35.66-2.7.87-4.06.22-1.36.36-2.73.44-4.12.07-1.39.11-2.82.11-4.31z'
-            />
-        </svg>
-        <DefaultLegend />
-    </>
-);
-
-export const ChartNoDataLegend = (props: any) => (
-    <>
-        <svg xmlns='http://www.w3.org/2000/svg' width={77.36} height={77.37} {...props}>
-            <path
-                fill='#505050'
-                fillRule='evenodd'
-                d='M9.67 53.18v-9.67H0V0h58.02v9.67h9.67v19.34h-4.83V14.5H14.5v33.84h29.01v4.84H9.67zm0-14.51v-29h43.51V4.83H4.83v33.84h4.84zm19.34 4.84V24.17h4.84v19.34h-4.84zm9.67.01V29.01h4.83v14.51h-4.83zm-19.34-9.68v9.67h4.83v-9.67h-4.83zm49.14 1.13c-1.76-.75-3.64-1.13-5.63-1.13-2.01 0-3.89.38-5.64 1.12-1.75.76-3.28 1.79-4.61 3.12a14.54 14.54 0 0 0-3.12 4.63c-.75 1.76-1.13 3.64-1.13 5.63 0 1.51.23 2.98.68 4.42.45 1.44 1.12 2.76 2 3.97L34.56 73.25c-.48.48-.72 1.04-.72 1.7 0 .66.24 1.22.72 1.7s1.04.72 1.7.72c.66 0 1.22-.24 1.7-.72l16.51-16.47c1.2.88 2.52 1.55 3.96 2 1.44.45 2.91.68 4.42.68 1.99 0 3.87-.38 5.63-1.13 1.76-.76 3.3-1.8 4.63-3.12s2.37-2.86 3.12-4.61c.75-1.75 1.13-3.63 1.13-5.65 0-1.99-.37-3.87-1.13-5.63-.76-1.77-1.79-3.3-3.12-4.63a14.706 14.706 0 0 0-4.63-3.12zm-1.87 22.3c-1.17.5-2.43.75-3.76.75a9.49 9.49 0 0 1-3.76-.75c-1.17-.51-2.2-1.2-3.08-2.08a9.737 9.737 0 0 1-2.08-3.08c-.51-1.17-.76-2.42-.76-3.76 0-1.34.26-2.59.76-3.76.51-1.17 1.2-2.2 2.08-3.08.88-.88 1.91-1.58 3.08-2.08 1.17-.51 2.42-.76 3.76-.76 1.34 0 2.59.26 3.76.76 1.17.51 2.2 1.2 3.08 2.08.88.88 1.58 1.91 2.08 3.08.51 1.17.76 2.43.76 3.76 0 1.34-.26 2.59-.76 3.76-.51 1.17-1.2 2.2-2.08 3.08-.88.88-1.91 1.58-3.08 2.08z'
-            />
-        </svg>
-        <DefaultLegend />
-    </>
-);
-
-export const NoData = ({ children }: any) => <StyledContainer>{children || <DefaultNoDataLegend />}</StyledContainer>;

@@ -26,7 +26,6 @@ import {
     PieChart,
     SortDirection,
     DataChart,
-    DefaultImg,
 } from '../src';
 import '../src/resources/global.css';
 

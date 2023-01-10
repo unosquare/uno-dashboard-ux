@@ -53,7 +53,7 @@ const calculateSize = (size: SizeValues) => {
                 min-h-[35px]
                 max-h-[35px]
                 min-w-[35px]
-                [&_span]:text-[10px]
+                [&_span]:text-[11px]
                 md:h-[25px]
                 md:min-w-[25px]
                 `;

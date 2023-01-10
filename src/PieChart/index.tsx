@@ -6,7 +6,7 @@ import { formatter, FormatTypes } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
 import { ChartComponent, ChartData, ChartTypes, Directions, LegendFormatTypes, SizeValues } from '../constants';
 import { Ellipse } from '../Ellipse';
-import { NoData, PieNoDataLegend } from '../NoData';
+import { NoData } from '../NoData';
 import { baseTheme, defaultChartPalette } from '../theme';
 
 interface ChartCommon {
@@ -236,7 +236,7 @@ export const PieChart = ({
                     />
                 </>
             ) : (
-                <NoData>{noDataElement || <PieNoDataLegend />}</NoData>
+                <NoData />
             )}
         </StyledChart>
     );
