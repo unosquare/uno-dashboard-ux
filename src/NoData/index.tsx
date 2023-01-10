@@ -10,7 +10,7 @@ const StyledContainer = tw.div`
     h-full
 `;
 
-const StyleHeader = tw.h6`
+export const NoDataHeader = tw.h6`
     text-base
     text-maingray
     text-center
@@ -19,8 +19,8 @@ const StyleHeader = tw.h6`
 
 const DefaultLegend = () => (
     <>
-        <StyleHeader>This information is not ready yet</StyleHeader>
-        <StyleHeader>Please check again later</StyleHeader>
+        <NoDataHeader>This information is not ready yet</NoDataHeader>
+        <NoDataHeader>Please check again later</NoDataHeader>
     </>
 );
 
