@@ -386,12 +386,12 @@ const getFooter = (footer: (string | number)[], definition: TableColumn[]) =>
     ));
 
 const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
-    data.map((section: any, i: number) => (
-        <tr key={objectHash(section)}>
-            {section.map((cell: any, index: number) => {
+    data.map((row: any) => (
+        <tr key={objectHash(row)}>
+            {row.map((cell: any, index: number) => {
                 const dataType = definitions[index]?.dataType || undefined;
                 return (
-                    <StyledTd key={objectHash(dataType || cell)} index={index} type={dataType}>
+                    <StyledTd key={objectHash({ a: definitions[index], c: cell })} index={index} type={dataType}>
                         {renderTableCell(cell, dataType)}
                     </StyledTd>
                 );
