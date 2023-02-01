@@ -106,7 +106,7 @@ const checkNumericString = (a: any, b: any, sortColumn: number) => {
     return 0;
 };
 
-export const sortData = (data: any[], definition: TableColumn[]) => {
+const sortData = <T extends TableColumn>(data: any[], definition: T[], getSortIndex?: (order: any) => any) => {
     data.sort((left: any, right: any) => {
         const sortColumns = definition
             .filter((x) => x.sortOrder && x.sortOrder >= 1)
@@ -114,7 +114,8 @@ export const sortData = (data: any[], definition: TableColumn[]) => {
 
         for (const index in sortColumns) {
             const { sortOrder, dataType, sortDirection } = sortColumns[index];
-            const sortColumn = definition.findIndex((x) => x.sortOrder === sortOrder);
+            const baseSortColumn = definition.findIndex((x) => x.sortOrder === sortOrder);
+            const sortColumn = getSortIndex ? getSortIndex(sortOrder) : baseSortColumn;
 
             if (left[sortColumn] === null) return 1;
             if (right[sortColumn] === null) return -1;
