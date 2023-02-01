@@ -106,7 +106,7 @@ const checkNumericString = (a: any, b: any, sortColumn: number) => {
     return 0;
 };
 
-const sortData = <T extends TableColumn>(data: any[], definition: T[], getSortIndex?: (order: any) => any) => {
+export const sortData = <T extends TableColumn>(data: any[], definition: T[], getSortIndex?: (order: any) => any) => {
     data.sort((left: any, right: any) => {
         const sortColumns = definition
             .filter((x) => x.sortOrder && x.sortOrder >= 1)
