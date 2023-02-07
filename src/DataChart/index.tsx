@@ -73,6 +73,7 @@ const translateFormat = (format: LegendFormatTypes) => {
         case LegendFormatTypes.PERCENTAGE:
             return FormatTypes.PERCENTAGE;
         case LegendFormatTypes.NUMBER:
+        case LegendFormatTypes.NEGATIVE:
             return FormatTypes.NUMBER;
         default:
             return FormatTypes.DECIMAL;
