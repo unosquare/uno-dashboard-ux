@@ -47,6 +47,8 @@ const defaultData = [
     ['Laura', 'Mexico', 50, true, 'https://www.google.com'],
 ];
 
+const calculateFooter = (data: any[]) => ['Total', '', data.length, '', ''];
+
 const chartData = [
     { name: 'Group A', value: 400 },
     { name: 'Group B', value: 300 },
@@ -95,6 +97,7 @@ const Application = () => {
                         exportCsv
                         switchTbl={toggle}
                         isExchange={value}
+                        calculateFooter={calculateFooter}
                     />
                 </Card>
                 <Card column={1} row={3} direction={Directions.ROW} fit>

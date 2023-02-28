@@ -263,6 +263,10 @@ export const HeaderDiv = tw.div<HeaderSettings>`
     ${({ $sorted }) => ($sorted ? 'cursor-pointer' : '')}
 `;
 
+const BoldTd = tw.td`
+    font-medium
+`;
+
 const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
 
 const translateType = (type: DataTypes | undefined) => {
@@ -378,12 +382,12 @@ const getHeaders = (
 
 const getFooter = (footer: (string | number)[], definition: TableColumn[]) =>
     footer.map((foot, index) => (
-        <td
+        <BoldTd
             key={objectHash(definition[index])}
             className={getAlignment(definition[index]?.dataType || undefined, index)}
         >
             {foot}
-        </td>
+        </BoldTd>
     ));
 
 const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
