@@ -15,9 +15,9 @@
         "react-dom": "^18.2.0",
         "recharts": "^2.4.3",
         "style-loader": "^3.3.1",
-        "styled-components": "^5.3.6",
+        "styled-components": "^5.3.8",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^2.0.82"
+        "uno-js": "^2.0.83"
     },
     "devDependencies": {
         "@types/object-hash": "^3.0.2",
