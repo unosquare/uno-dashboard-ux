@@ -26,6 +26,7 @@ import {
     PieChart,
     SortDirection,
     DataChart,
+    ChartBar,
 } from '../src';
 import '../src/resources/global.css';
 
@@ -71,7 +72,7 @@ const Application = () => {
                     <h2>Sample App</h2>
                 </NavBarTitle>
             </NavBar>
-            <AppContainer rows={3} columns={3}>
+            <AppContainer rows={4} columns={3}>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
                     <Circle value={100} />
                     <Title>
@@ -114,6 +115,9 @@ const Application = () => {
                             <Ellipse color='#4CDD28' small /> This is OK
                         </h4>
                     </CardContent>
+                </Card>
+                <Card column={3} row={4} direction={Directions.ROW}>
+                    <ChartBar rawData={chartData} dataCallback={identity} legendFormatType={LegendFormatTypes.MONEY} legend />
                 </Card>
             </AppContainer>
             <Footer />

@@ -5,6 +5,7 @@ export * from './AppContainer';
 export * from './ActionButton';
 export * from './Badge';
 export * from './Card';
+export * from './ChartBar';
 export * from './PieChart';
 export * from './ChartLegend';
 export * from './Circle';
