@@ -17,12 +17,7 @@ export const NoDataHeader = tw.h6`
     m-2
 `;
 
-const DefaultLegend = () => (
-    <>
-        <NoDataHeader>This information is not ready yet</NoDataHeader>
-        <NoDataHeader>Please check again later</NoDataHeader>
-    </>
-);
+const DefaultLegend = () => <NoDataHeader>No record found</NoDataHeader>;
 
 export const NoData = ({ children }: any) => (
     <StyledContainer>
