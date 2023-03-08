@@ -32,7 +32,7 @@ import '../src/resources/global.css';
 
 const columns = [
     { label: 'Name', sortOrder: 1, sortDirection: SortDirection.ASC },
-    { label: 'City' },
+    { label: 'City', disableSearch: true },
     { label: 'Age', dataType: DataTypes.DAYS, sortOrder: 2, sortDirection: SortDirection.DESC },
     { label: 'Like Ice cream', dataType: DataTypes.BOOLEAN },
     { label: 'Profile', dataType: DataTypes.LINK_ICON },
@@ -117,7 +117,12 @@ const Application = () => {
                     </CardContent>
                 </Card>
                 <Card column={3} row={4} direction={Directions.ROW}>
-                    <ChartBar rawData={chartData} dataCallback={identity} legendFormatType={LegendFormatTypes.MONEY} legend />
+                    <ChartBar
+                        rawData={chartData}
+                        dataCallback={identity}
+                        legendFormatType={LegendFormatTypes.MONEY}
+                        legend
+                    />
                 </Card>
             </AppContainer>
             <Footer />

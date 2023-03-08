@@ -25,6 +25,7 @@ export interface TableColumn {
     dataType?: DataTypes;
     sortOrder?: number;
     sortDirection?: SortDirection;
+    disableSearch?: boolean;
 }
 
 export interface TableContainerSettings {
@@ -407,8 +408,15 @@ const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
 const defaultFilter = (search: string) => (element: any) =>
     element && element.toString().toLowerCase().match(search.toLowerCase());
 
-export const searchData = (search: string, newData: any) =>
-    newData.filter((section: any) => section.some(defaultFilter(search)));
+const searchData = (search: string, newData: any[], definitions: TableColumn[]) => {
+    const ignoreColumns = definitions
+        .filter((y) => y.disableSearch === true)
+        .map((x) => definitions.findIndex((z) => z.label === x.label));
+
+    return newData.filter((section: any[]) =>
+        section.filter((_, i) => !ignoreColumns.includes(i)).some(defaultFilter(search)),
+    );
+};
 
 const searchFooter = (search: string, newRaw: any) =>
     Array.isArray(newRaw)
@@ -447,11 +455,11 @@ export const Table = <TDataIn, TDataOut>({
 
     const onSearch = !searchable
         ? undefined
-        : (search: string, newData?: any, newRaw?: any) =>
+        : (search: string, newData?: TDataOut[], newRaw?: any) =>
               startTransition(() => {
                   setLastSearch(search);
                   const searchableRaw = newRaw || rawData;
-                  setSearched(searchData(search, newData || filteredData));
+                  setSearched(searchData(search, newData || filteredData, definitions));
 
                   if (calculateFooter && searchableRaw) {
                       setFilteredFooter(calculateFooter(searchFooter(search, searchableRaw)));
@@ -462,7 +470,7 @@ export const Table = <TDataIn, TDataOut>({
         const subSet = (dataCallback && rawData && dataCallback(rawData)) || [];
 
         setFilteredData(subSet);
-        setSearched(lastSearch ? searchData(lastSearch, subSet) : subSet);
+        setSearched(lastSearch ? searchData(lastSearch, subSet, definitions) : subSet);
 
         if (calculateFooter && rawData) {
             setFilteredFooter(calculateFooter(lastSearch ? searchFooter(lastSearch, rawData) : rawData));
