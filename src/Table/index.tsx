@@ -501,6 +501,7 @@ export const Table = <TDataIn, TDataOut>({
                     switchTbl={switchTbl}
                     onCsvClick={onCsvClick}
                     onSearch={onSearch}
+                    exportCsvDisabled={dataStore.length <= 0}
                 >
                     {children}
                 </ToolBar>
