@@ -13,6 +13,7 @@ export interface ToolBarSettings {
     switchTbl?: () => void;
     onCsvClick?: () => void;
     onSearch?: (search: string, newData?: any, newRaw?: any) => void;
+    exportCsvDisabled?: boolean;
 }
 
 export interface TableTitleSettings {
@@ -66,7 +67,15 @@ const containerStyle = {
     justifyContent: 'end',
 };
 
-export const ToolBar = ({ dataTitle, switchTbl, isExchange, onCsvClick, onSearch, children }: ToolBarSettings) => (
+export const ToolBar = ({
+    dataTitle,
+    switchTbl,
+    isExchange,
+    onCsvClick,
+    onSearch,
+    children,
+    exportCsvDisabled,
+}: ToolBarSettings) => (
     <StyledTableTitleContainer>
         {dataTitle && <StyledTableTitle>{dataTitle}</StyledTableTitle>}
         {(onSearch || onCsvClick || switchTbl || children) && (
@@ -84,7 +93,7 @@ export const ToolBar = ({ dataTitle, switchTbl, isExchange, onCsvClick, onSearch
                         </ActionButton>
                     </ActionButtonContainer>
                 )}
-                {onCsvClick && <ExportCsvButton onClick={onCsvClick} />}
+                {onCsvClick && <ExportCsvButton onClick={onCsvClick} disable={exportCsvDisabled} />}
                 {onSearch && (
                     <SearchboxContainer>
                         <SearchBox search={onSearch} />
