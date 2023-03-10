@@ -354,11 +354,7 @@ const LongTextCell = ({ text }: { text: string }) => {
     );
 };
 
-const RenderLongTextCell = (data: any) => {
-    if (!(data as string[])[1]) return 'N/A';
-
-    return <LongTextCell text={data} />;
-};
+const RenderLongTextCell = (data: any) => ((data as string[])[1] ? <LongTextCell text={data} /> : 'N/A');
 
 export const renderTableCell = (
     data: Record<string, unknown> | string | number | boolean | string[] | any,
