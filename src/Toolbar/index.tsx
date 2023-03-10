@@ -4,7 +4,7 @@ import { ActionButton, ActionButtonContainer } from '../ActionButton';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { SearchBox } from '../SearchBox';
 import { SelectSettings, TableSelect } from '../TableSelect';
-import {ToggleButton} from '../ToggleButton';
+import { ToggleButton } from '../ToggleButton';
 
 export interface ToolBarSettings {
     dataTitle?: string;
