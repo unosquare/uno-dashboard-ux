@@ -36,7 +36,7 @@ const columns = [
     { label: 'Age', dataType: DataTypes.DAYS, sortOrder: 2, sortDirection: SortDirection.DESC },
     { label: 'Like Ice cream', dataType: DataTypes.BOOLEAN },
     { label: 'Profile', dataType: DataTypes.LINK_ICON },
-    { label: 'Long text', dataType: DataTypes.LONG_TEXT },
+    { label: 'Long text', dataType: DataTypes.PARAGRAPH },
 ];
 
 const defaultData = [

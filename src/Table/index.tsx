@@ -268,6 +268,14 @@ const BoldTd = tw.td`
     font-medium
 `;
 
+const StyledLinkButton = tw.button`
+    bg-transparent
+    border-0
+    text-unoblue
+    underline
+    cursor-pointer
+`;
+
 const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
 
 const translateType = (type: DataTypes | undefined) => {
@@ -322,53 +330,31 @@ const renderLinkString = (data: any) =>
         </>
     );
 
-const renderLongTextCell = (data: any) => {
-    if (!(data as string[])[1]) return 'N/A';
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+const LongTextCell = ({ text }: { text: string }) => {
     const [showFullText, setShowFullText] = useState(false);
+    const toggleDisplayText = (display: boolean) => () => setShowFullText(display);
 
-    if (data.length > 300 && !showFullText) {
-        const truncatedText = `${data.substring(0, 300)}...`;
-        return (
-            <>
-                {truncatedText}
-                <button
-                    type='button'
-                    onClick={() => setShowFullText(true)}
-                    style={{
-                        background: 'none',
-                        border: 'none',
-                        color: 'blue',
-                        textDecoration: 'underline',
-                        cursor: 'pointer',
-                    }}
-                >
-                    Continue Reading
-                </button>
-            </>
-        );
-    }
     return (
         <>
-            {data}
-            {data.length > 300 && showFullText && (
-                <button
-                    type='button'
-                    onClick={() => setShowFullText(false)}
-                    style={{
-                        background: 'none',
-                        border: 'none',
-                        color: 'blue',
-                        textDecoration: 'underline',
-                        cursor: 'pointer',
-                    }}
-                >
+            {text.length <= 300 || showFullText ? text : `${text.substring(0, 300)}...`}
+            {text.length > 300 && showFullText && (
+                <StyledLinkButton type='button' onClick={toggleDisplayText(false)}>
                     Show Less
-                </button>
+                </StyledLinkButton>
+            )}
+            {text.length > 300 && !showFullText && (
+                <StyledLinkButton type='button' onClick={toggleDisplayText(true)}>
+                    Continue Reading
+                </StyledLinkButton>
             )}
         </>
     );
+};
+
+const RenderLongTextCell = (data: any) => {
+    if (!(data as string[])[1]) return 'N/A';
+
+    return <LongTextCell text={data} />;
 };
 
 export const renderTableCell = (
@@ -399,8 +385,8 @@ export const renderTableCell = (
                     {(data as string[])[0].toString()}
                 </CenteredSpan>
             );
-        case DataTypes.LONG_TEXT:
-            return renderLongTextCell(data);
+        case DataTypes.PARAGRAPH:
+            return RenderLongTextCell(data);
         default: {
             const formatType = translateType(type);
             return formatType ? formatter(data.toString(), formatType) : data;
