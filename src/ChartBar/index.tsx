@@ -1,12 +1,12 @@
 import React from 'react';
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Legend, Bar, Cell, Brush } from 'recharts';
+import { Bar, BarChart, Brush, Cell, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import tw from 'tailwind-styled-components';
 import { Dictionary, humanize } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
 import { ChartTypes, LegendFormatTypes } from '../constants';
 import { formatTicks } from '../DataChart';
 import { NoData } from '../NoData';
-import { defaultChartPalette, baseTheme } from '../theme';
+import { baseTheme, defaultChartPalette } from '../theme';
 
 interface XAxisPrimaryFormatter {
     (input: string): string;
