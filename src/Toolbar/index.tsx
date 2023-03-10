@@ -5,6 +5,7 @@ import { ActionButton, ActionButtonContainer } from '../ActionButton';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { SearchBox } from '../SearchBox';
 import { SelectSettings, TableSelect } from '../TableSelect';
+import ToggleButton from '../ToggleButton';
 
 export interface ToolBarSettings {
     dataTitle?: string;
@@ -81,18 +82,7 @@ export const ToolBar = ({
         {(onSearch || onCsvClick || switchTbl || children) && (
             <div style={containerStyle}>
                 {children}
-                {switchTbl && (
-                    <ActionButtonContainer>
-                        <ActionButton width='max-content' type='button' onClick={switchTbl}>
-                            {isExchange ? (
-                                <ToggleRight16Regular primaryFill='#304FF3' />
-                            ) : (
-                                <ToggleLeft16Regular primaryFill='#304FF3' />
-                            )}
-                            {isExchange ? 'Back to Data' : 'Exchange Rate'}
-                        </ActionButton>
-                    </ActionButtonContainer>
-                )}
+                {switchTbl && <ToggleButton leftLabel='Back to Data' rightLabel='Exchange Rate' onClick={switchTbl} />}
                 {onCsvClick && <ExportCsvButton onClick={onCsvClick} disable={exportCsvDisabled} />}
                 {onSearch && (
                     <SearchboxContainer>
