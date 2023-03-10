@@ -268,6 +268,17 @@ const BoldTd = tw.td`
     font-medium
 `;
 
+const StyledLinkButton = tw.button`
+    bg-transparent
+    border-0
+    text-unoblue
+    underline
+    cursor-pointer
+    text-[10px]
+    position-[horizontal]
+    font-sans
+`;
+
 const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
 
 const translateType = (type: DataTypes | undefined) => {
@@ -322,6 +333,29 @@ const renderLinkString = (data: any) =>
         </>
     );
 
+const LongTextCell = ({ text }: { text: string }) => {
+    const [showFullText, setShowFullText] = useState(false);
+    const toggleDisplayText = (display: boolean) => () => setShowFullText(display);
+
+    return (
+        <>
+            {text.length <= 300 || showFullText ? text : `${text.substring(0, 300)}...`}
+            {text.length > 300 && showFullText && (
+                <StyledLinkButton type='button' onClick={toggleDisplayText(false)}>
+                    Show Less
+                </StyledLinkButton>
+            )}
+            {text.length > 300 && !showFullText && (
+                <StyledLinkButton type='button' onClick={toggleDisplayText(true)}>
+                    Continue Reading
+                </StyledLinkButton>
+            )}
+        </>
+    );
+};
+
+const RenderLongTextCell = (data: any) => ((data as string[])[1] ? <LongTextCell text={data} /> : 'N/A');
+
 export const renderTableCell = (
     data: Record<string, unknown> | string | number | boolean | string[] | any,
     type: DataTypes | undefined,
@@ -350,6 +384,8 @@ export const renderTableCell = (
                     {(data as string[])[0].toString()}
                 </CenteredSpan>
             );
+        case DataTypes.PARAGRAPH:
+            return RenderLongTextCell(data);
         default: {
             const formatType = translateType(type);
             return formatType ? formatter(data.toString(), formatType) : data;

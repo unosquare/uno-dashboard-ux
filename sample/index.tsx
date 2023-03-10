@@ -36,16 +36,25 @@ const columns = [
     { label: 'Age', dataType: DataTypes.DAYS, sortOrder: 2, sortDirection: SortDirection.DESC },
     { label: 'Like Ice cream', dataType: DataTypes.BOOLEAN },
     { label: 'Profile', dataType: DataTypes.LINK_ICON },
+    { label: 'Long text', dataType: DataTypes.PARAGRAPH },
 ];
 
 const defaultData = [
-    ['Pepe', 'Mexico', 20, true, 'https://www.google.com'],
-    ['Pepe', 'LA', 25, true, ''],
-    ['Juan', 'Chicago', 30, true, 'https://www.google.com'],
-    ['Juan', 'Oaxaca', 35, false, 'https://www.google.com'],
-    ['Maria', 'NY', 40, false, ''],
-    ['Laura', 'Guadalajara', 45, true, 'https://www.google.com'],
-    ['Laura', 'Mexico', 50, true, 'https://www.google.com'],
+    ['Pepe', 'Mexico', 20, true, 'https://www.google.com', 'Small text'],
+    ['Pepe', 'LA', 25, true, '', 'Small text'],
+    ['Juan', 'Chicago', 30, true, 'https://www.google.com', 'Small text'],
+    ['Juan', 'Oaxaca', 35, false, 'https://www.google.com', 'Small text'],
+    ['Maria', 'NY', 40, false, '', 'Small text'],
+    ['Laura', 'Guadalajara', 45, true, 'https://www.google.com', 'Small text'],
+    ['Laura', 'Mexico', 50, true, 'https://www.google.com', 'Small text'],
+    [
+        'Brian',
+        'Guasave',
+        30,
+        true,
+        'https://www.google.com',
+        'This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type',
+    ],
 ];
 
 const calculateFooter = (data: any[]) => ['Total', '', data.length, '', ''];
