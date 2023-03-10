@@ -276,6 +276,7 @@ const StyledLinkButton = tw.button`
     cursor-pointer
     text-[10px]
     position-[horizontal]
+    font-sans
 `;
 
 const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
