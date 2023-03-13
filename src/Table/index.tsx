@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
 import React, { startTransition, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
@@ -19,14 +17,7 @@ import { Loading } from '../Loading';
 import { NoData } from '../NoData';
 import { CenteredSpan } from '../Text';
 import { ToolBar } from '../Toolbar';
-
-export interface TableColumn {
-    label: string;
-    dataType?: DataTypes;
-    sortOrder?: number;
-    sortDirection?: SortDirection;
-    disableSearch?: boolean;
-}
+import { sortData, TableColumn } from './sortData';
 
 export interface TableContainerSettings {
     dataTitle?: string;
@@ -64,95 +55,6 @@ interface HeaderSettings {
     $sortable: boolean;
     $sorted: boolean;
 }
-
-dayjs.extend(utc);
-
-const sanitizeNumericString = (str: any) =>
-    Number(str.toString().replaceAll(',', '').replaceAll('$', '').replaceAll('%', '').trim());
-
-const compareDates = (date1: any, date2: any) => {
-    if (dayjs.utc(date1).isAfter(dayjs.utc(date2), 'day')) return 1;
-    if (dayjs.utc(date2).isAfter(dayjs.utc(date1), 'day')) return -1;
-
-    return 0;
-};
-
-const dateType = [DataTypes.DATE, DataTypes.DATE_LOCAL];
-
-const numericTypes = [
-    DataTypes.NUMBER,
-    DataTypes.DECIMAL,
-    DataTypes.PERCENTAGE,
-    DataTypes.DECIMAL_PERCENTAGE,
-    DataTypes.MONEY,
-    DataTypes.DAYS,
-    DataTypes.MONTHS,
-    DataTypes.BOOLEAN,
-];
-
-const checkNumericString = (a: any, b: any, sortColumn: number) => {
-    if (
-        (a[sortColumn].toString().includes('$') && b[sortColumn].toString().includes('$')) ||
-        (a[sortColumn].toString().includes('%') && b[sortColumn].toString().includes('%'))
-    ) {
-        const numStrA = sanitizeNumericString(a[sortColumn]);
-        const numStrB = sanitizeNumericString(b[sortColumn]);
-
-        if (typeof numStrA === 'number' && typeof numStrB === 'number') {
-            const result = numStrA - numStrB;
-            if (result !== 0) return result;
-        }
-    }
-
-    return 0;
-};
-
-export const sortData = <T extends TableColumn>(data: any[], definition: T[], getSortIndex?: (order: any) => any) => {
-    data.sort((left: any, right: any) => {
-        const sortColumns = definition
-            .filter((x) => x.sortOrder && x.sortOrder >= 1)
-            .sort((x, y) => Number(x.sortOrder) - Number(y.sortOrder));
-
-        for (const index in sortColumns) {
-            const { sortOrder, dataType, sortDirection } = sortColumns[index];
-            const baseSortColumn = definition.findIndex((x) => x.sortOrder === sortOrder);
-            const sortColumn = getSortIndex ? getSortIndex(sortOrder) : baseSortColumn;
-
-            if (left[sortColumn] === null) return 1;
-            if (right[sortColumn] === null) return -1;
-
-            const a = sortDirection === SortDirection.DESC ? right : left;
-            const b = sortDirection === SortDirection.DESC ? left : right;
-
-            if (dateType.some((x) => x === dataType)) {
-                const result = compareDates(a[sortColumn], b[sortColumn]);
-
-                if (result !== 0) return result;
-            }
-
-            if (numericTypes.some((x) => x === dataType)) {
-                const result = a[sortColumn] - b[sortColumn];
-
-                if (result !== 0) return result;
-            }
-
-            const resultNumericString = checkNumericString(a, b, sortColumn);
-
-            if (resultNumericString !== 0) return resultNumericString;
-
-            const result = a[sortColumn]
-                .toString()
-                .trim()
-                .localeCompare(b[sortColumn].toString().trim(), undefined, { numeric: true, sensitivity: 'base' });
-
-            if (result !== 0) return result;
-        }
-
-        return 0;
-    });
-
-    return data;
-};
 
 const getSortDirection = (current?: SortDirection) =>
     current === SortDirection.DESC ? SortDirection.ASC : SortDirection.DESC;
@@ -393,39 +295,56 @@ export const renderTableCell = (
     }
 };
 
-const getHeaders = (
-    definitions: TableColumn[],
-    sortable: boolean,
-    setSortColumn: (index: any) => void,
-    useMinWidth: boolean | undefined,
-) =>
-    definitions.map((header, index) => (
-        <th
-            key={objectHash(header)}
-            onClick={() => setSortColumn(index)}
-            className={`${useMinWidth && 'min-w-[100px]'} ${getAlignment(header.dataType, index)}`}
-        >
-            <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
-                <span>{header.label}</span>
-                {sortable &&
-                    (header.sortDirection === SortDirection.DESC && Number(header.sortOrder) >= 1 ? (
-                        <CaretDown12Regular />
-                    ) : (
-                        <CaretUp12Regular />
-                    ))}
-            </HeaderDiv>
-        </th>
-    ));
+interface TableHeadersProps {
+    definitions: TableColumn[];
+    sortable: boolean;
+    setSortColumn: (index: number) => void;
+    useMinWidth: boolean | undefined;
+}
 
-const getFooter = (footer: (string | number)[], definition: TableColumn[]) =>
-    footer.map((foot, index) => (
-        <BoldTd
-            key={objectHash(definition[index])}
-            className={getAlignment(definition[index]?.dataType || undefined, index)}
-        >
-            {foot}
-        </BoldTd>
-    ));
+const TableHeaders = ({ definitions, sortable, setSortColumn, useMinWidth }: TableHeadersProps) => (
+    <thead>
+        <tr>
+            {definitions.map((header, index) => (
+                <th
+                    key={objectHash(header)}
+                    onClick={() => setSortColumn(index)}
+                    className={`${useMinWidth && 'min-w-[100px]'} ${getAlignment(header.dataType, index)}`}
+                >
+                    <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
+                        <span>{header.label}</span>
+                        {sortable &&
+                            (header.sortDirection === SortDirection.DESC && Number(header.sortOrder) >= 1 ? (
+                                <CaretDown12Regular />
+                            ) : (
+                                <CaretUp12Regular />
+                            ))}
+                    </HeaderDiv>
+                </th>
+            ))}
+        </tr>
+    </thead>
+);
+
+interface TableFooterProps {
+    footer: (string | number)[];
+    definition: TableColumn[];
+}
+
+const TableFooter = ({ footer, definition }: TableFooterProps) => (
+    <tfoot>
+        <tr>
+            {footer.map((foot, index) => (
+                <BoldTd
+                    key={objectHash(definition[index])}
+                    className={getAlignment(definition[index]?.dataType || undefined, index)}
+                >
+                    {foot}
+                </BoldTd>
+            ))}
+        </tr>
+    </tfoot>
+);
 
 const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
     data.map((row: any) => (
@@ -546,15 +465,16 @@ export const Table = <TDataIn, TDataOut>({
                 {loading && <Loading />}
                 {searched.length > 0 && !loading && (
                     <StyledTable>
-                        <thead>
-                            <tr>{getHeaders(definitions, sortable, setSortHeader, useMinWidth)}</tr>
-                        </thead>
+                        <TableHeaders
+                            definitions={definitions}
+                            sortable={sortable}
+                            setSortColumn={setSortHeader}
+                            useMinWidth={useMinWidth}
+                        />
                         <tbody>
                             {renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
                         </tbody>
-                        <tfoot>
-                            <tr>{getFooter(filteredFooter, definitions)}</tr>
-                        </tfoot>
+                        <TableFooter footer={filteredFooter} definition={definitions} />
                     </StyledTable>
                 )}
                 {searched.length <= 0 && !loading && <NoData>{noDataElement}</NoData>}

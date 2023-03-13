@@ -57,7 +57,7 @@ const defaultData = [
     ],
 ];
 
-const calculateFooter = (data: any[]) => ['Total', '', data.length, '', ''];
+const calculateFooter = (data: any[]) => ['Total', '', data.length, '', '', ''];
 
 const chartData = [
     { name: 'Group A', value: 400 },
