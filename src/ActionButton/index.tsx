@@ -40,5 +40,9 @@ export const ActionButton = styled.button<ButtonSettings>`
         outline: 2px solid transparent;
         outline-offset: 2px;
     }
-`}
+  `}
+    :disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 `;
