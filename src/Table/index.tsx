@@ -19,6 +19,8 @@ import { CenteredSpan } from '../Text';
 import { ToolBar } from '../Toolbar';
 import { sortData, TableColumn } from './sortData';
 
+export * from './sortData';
+
 export interface TableContainerSettings {
     dataTitle?: string;
     height?: SizeValues;
