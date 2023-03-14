@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { formatter, FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
 import { ChartTypes, LegendFormatTypes } from '../constants';
@@ -78,28 +78,22 @@ const getLabel =
         return `${humanize(name)}: ${value}${percentage ? '%' : ''}`;
     };
 
-const StyledLegend = styled.div`
-    box-shadow: 0 0px 2px 0px ${({ theme }) => theme.colors.blackOpacity};
-    -moz-box-shadow: 0 0px 2px 0px ${({ theme }) => theme.colors.blackOpacity};
-    -webkit-box-shadow: 0 0px 2px 0px ${({ theme }) => theme.colors.blackOpacity};
-    background-color: ${({ theme }) => theme.colors.secondary};
-    color: ${({ theme }) => theme.colors.fontMain};
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    div {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-    }
-    span {
-        font-weight: 500 !important;
-        font-size: 12px !important;
-        margin: 0px;
-    }
+const StyledLegend = tw.div`
+    text-maingray
+    bg-white
+    shadow-legend
+    flex
+    flex-col
+    justify-center
+    items-center
+    p-[5px]
+    [&_div]:flex
+    [&_div]:flex-row
+    [&_div]:justify-between
+    [&_div]:w-full
+    [&_span]:!font-medium
+    [&_span]:!text-xs
+    [&_span]:m-0
 `;
 
 const Component = ({ type, category, index, legendFormatType, formats, getLabelFunc }: any) => (
