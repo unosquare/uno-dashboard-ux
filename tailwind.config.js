@@ -27,6 +27,7 @@ module.exports = {
             boxShadow: {
                 card: '0 1px 3px 0px rgba(0, 0, 0, 0.5)',
                 alert: '0px 1px 7px 2px rgba(0, 0, 0, 0.5)',
+                legend: '0 0px 2px 0px rgba(0, 0, 0, 0.5)',
             },
             fontFamily: {
                 sans: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',

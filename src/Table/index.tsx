@@ -19,6 +19,8 @@ import { CenteredSpan } from '../Text';
 import { ToolBar } from '../Toolbar';
 import { sortData, TableColumn } from './sortData';
 
+export * from './sortData';
+
 export interface TableContainerSettings {
     dataTitle?: string;
     height?: SizeValues;
@@ -308,12 +310,13 @@ const TableHeaders = ({ definitions, sortable, setSortColumn, useMinWidth }: Tab
             {definitions.map((header, index) => (
                 <th
                     key={objectHash(header)}
-                    onClick={() => setSortColumn(index)}
+                    onClick={() => !header.excludeFromSort && setSortColumn(index)}
                     className={`${useMinWidth && 'min-w-[100px]'} ${getAlignment(header.dataType, index)}`}
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
                         <span>{header.label}</span>
                         {sortable &&
+                            !header.excludeFromSort &&
                             (header.sortDirection === SortDirection.DESC && Number(header.sortOrder) >= 1 ? (
                                 <CaretDown12Regular />
                             ) : (
@@ -430,6 +433,7 @@ export const Table = <TDataIn, TDataOut>({
         if (calculateFooter && rawData) {
             setFilteredFooter(calculateFooter(lastSearch ? searchFooter(lastSearch, rawData) : rawData));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [calculateFooter, lastSearch, rawData, dataCallback]);
 
     useEffect(() => setDefinitions(columns), [columns]);

@@ -10,6 +10,7 @@ export interface TableColumn {
     sortOrder?: number;
     sortDirection?: SortDirection;
     disableSearch?: boolean;
+    excludeFromSort?: boolean;
 }
 
 const sanitizeNumericString = (str: any) =>
@@ -98,6 +99,7 @@ export const sortData = <T extends TableColumn>(data: any[], definition: T[], ge
             .filter((x) => x.sortOrder && x.sortOrder >= 1)
             .sort((x, y) => Number(x.sortOrder) - Number(y.sortOrder));
 
+        // eslint-disable-next-line guard-for-in
         for (const index in sortColumns) {
             const result = sortOneColumn(left, right, index, definition, sortColumns, getSortIndex);
             if (result !== 0) return result;
