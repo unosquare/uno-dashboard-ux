@@ -23,4 +23,5 @@ export * from './ToggleButton';
 export * from './Toolbar';
 export * from './Text';
 export * from './SearchBox';
+export * from './Select';
 export * from './UnoLogo';
