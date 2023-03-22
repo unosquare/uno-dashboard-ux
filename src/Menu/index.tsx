@@ -1,6 +1,5 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
-import burger from '../resources/burger.svg';
 
 export interface SubSectionSettings {
     disabled?: boolean;
@@ -57,12 +56,25 @@ export const MenuSubSection = tw.div<SubSectionSettings>`
     `}
 `;
 
-const StyledBurger = tw.img`
-    w-[30px]
-    h-[35px]
-    cursor-pointer
-`;
-
 export const Burger = ({ onClick }: BurgerSettings) => (
-    <StyledBurger src={burger} onClick={onClick} alt='Menu Icon' aria-hidden='true' />
+    <svg
+        xmlns='http://www.w3.org/2000/svg'
+        xmlnsXlink='http://www.w3.org/1999/xlink'
+        width={30}
+        height={17}
+        onClick={onClick}
+        cursor='pointer'
+    >
+        <defs>
+            <path id='a' d='M0 0h30v16.886H0z' />
+            <mask id='b' maskContentUnits='userSpaceOnUse' maskUnits='userSpaceOnUse'>
+                <path d='M0 0h30v16.886H0z' />
+                <use fill='#fff' xlinkHref='#a' />
+            </mask>
+        </defs>
+        <use fill='none' xlinkHref='#a' />
+        <g mask='url(#b)'>
+            <path fill='#FFF' fillRule='evenodd' d='M0 1.886V0h30v1.886H0zm0 7.5V7.5h30v1.886H0zM0 15v1.886h30V15H0z' />
+        </g>
+    </svg>
 );
