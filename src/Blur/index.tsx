@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components';
 export const Blur = tw.div`
     w-full
     h-screen
-    absolute
+    fixed
     z-30
     bg-blackOpacity
     top-0
