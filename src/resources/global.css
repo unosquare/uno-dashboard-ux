@@ -117,4 +117,21 @@
             }
         }
     }
+
+    .scrollbar::-webkit-scrollbar {
+        width: 5px;
+        position: relative;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        border-radius: 100vh;
+        background: #f1f2f3;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: #304ff3;
+        border-radius: 100vh;
+        height: 20px;
+        border: 1px solid #304ff3;
+    }
 }

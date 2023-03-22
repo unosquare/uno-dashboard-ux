@@ -7,17 +7,17 @@ module.exports = {
         extend: {
             colors: {
                 unoblue: '#304FF3',
+                unolightgray: '#F1F2F3',
+                inputGray: '#F5F5F5',
+                unogray: '#808080',
+                maingray: '#333',
             },
             textColor: {
-                unogray: '#808080',
                 errorgray: '#707070',
                 filtergray: '#505050',
-                maingray: '#333',
             },
             backgroundColor: {
                 unodarkblue: '#1B2E93',
-                unolightgray: '#F1F2F3',
-                inputGray: '#F5F5F5',
                 unoWarning: '#D7C600',
                 blackOpacity: 'rgba(0, 0, 0, 0.5)',
             },
