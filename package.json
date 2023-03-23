@@ -8,7 +8,7 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.196",
+        "@fluentui/react-icons": "^2.0.197",
         "css-loader": "^6.7.3",
         "dayjs": "^1.11.7",
         "react": "^18.2.0",
@@ -41,7 +41,7 @@
         "tailwindcss": "^3.2.7",
         "ts-loader": "^9.4.2",
         "typescript": "^5.0.2",
-        "webpack": "^5.76.2",
+        "webpack": "^5.76.3",
         "webpack-cli": "^5.0.1",
         "webpack-dev-server": "^4.13.1"
     },

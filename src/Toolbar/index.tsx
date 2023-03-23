@@ -84,8 +84,8 @@ export const ToolBar = ({
                 {switchTbl && (
                     <ToggleButton
                         value={isExchange}
-                        leftLabel='Back to Data'
-                        rightLabel='Exchange Rate'
+                        rightLabel='Back to Data'
+                        leftLabel='Exchange Rate'
                         onClick={switchTbl}
                     />
                 )}

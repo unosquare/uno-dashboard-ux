@@ -6,6 +6,8 @@ import {
     AppContainer,
     Badge,
     baseTheme,
+    Blur,
+    Burger,
     Card,
     CardContent,
     ChartBar,
@@ -20,6 +22,7 @@ import {
     Footer,
     LegendFormatTypes,
     Loading,
+    MenuContainer,
     NavBar,
     NavBarTitle,
     PieChart,
@@ -67,6 +70,7 @@ const chartData = [
 
 const Application = () => {
     const [value, setValue] = React.useState(false);
+    const [openMenu, setOpenMenu] = React.useState(false);
     const [data, setData] = React.useState(defaultData);
 
     const toggle = () => {
@@ -74,12 +78,25 @@ const Application = () => {
         setData(value ? defaultData : []);
     };
 
+    const onToggleMenu = () => {
+        const body = document.getElementById('body');
+        if (body) body.style.overflow = openMenu ? 'auto' : 'hidden';
+        setOpenMenu(!openMenu);
+    };
+
     return (
         <ThemeProvider theme={baseTheme}>
             <NavBar>
                 <NavBarTitle>
                     <h2>Sample App</h2>
+                    <Burger onClick={onToggleMenu} aria-hidden='true' />
                 </NavBarTitle>
+                {openMenu && (
+                    <>
+                        <MenuContainer>This is a menu</MenuContainer>
+                        <Blur onClick={onToggleMenu} />
+                    </>
+                )}
             </NavBar>
             <AppContainer rows={4} columns={3}>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
