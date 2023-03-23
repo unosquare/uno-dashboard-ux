@@ -26,7 +26,7 @@ const StyledBadge = tw(BadgeBase)<BadgeSettings>`
     items-center
     flex-row
     absolute
-    z-[3000]
+    z-29
 `;
 
 const StyledText = tw.div`
