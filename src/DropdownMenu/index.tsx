@@ -56,7 +56,14 @@ const StyledDropdownContainer = tw(StyledButtonContainer)`
     relative
 `;
 
-const StyledDropdownSelected = tw.div`
+const BaseItem = tw.div`
+    flex
+    justify-center
+    items-center
+    leading-[18px]
+`;
+
+const StyledDropdownSelected = tw(BaseItem)`
     bg-white
     w-full
     h-full
@@ -89,7 +96,7 @@ const StyledDropDownList = tw.div`
     relative
 `;
 
-const StyledListItem = tw.div`
+const StyledListItem = tw(BaseItem)`
     bg-white
     min-h-[32px]
     text-center
@@ -97,8 +104,11 @@ const StyledListItem = tw.div`
     m-0
     pl-[5px]
     pr-6
-    list-none
     hover:bg-unolightgray
+    flex
+    justify-centert
+    items-center
+    leading-[18px]
 `;
 
 const StyledListContainer = tw.div`
