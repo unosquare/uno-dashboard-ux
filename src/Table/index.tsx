@@ -7,6 +7,7 @@ import {
     CaretUp12Regular,
     CheckboxChecked16Regular,
     CheckboxUnchecked16Regular,
+    DocumentArrowDown16Filled,
     Link16Regular,
 } from '@fluentui/react-icons';
 import objectHash from 'object-hash';
@@ -222,6 +223,8 @@ const renderLinkCell = (data: any) => {
     );
 };
 
+const renderFileCell = (data: any) => <DocumentArrowDown16Filled onClick={data} />;
+
 const renderLinkString = (data: any) =>
     (data as string[])[0] ? (
         <>
@@ -290,6 +293,8 @@ export const renderTableCell = (
             );
         case DataTypes.PARAGRAPH:
             return RenderLongTextCell(data);
+        case DataTypes.FILE:
+            return renderFileCell(data);
         default: {
             const formatType = translateType(type);
             return formatType ? formatter(data.toString(), formatType) : data;

@@ -23,6 +23,8 @@ const compareDates = (date1: any, date2: any) => {
     return 0;
 };
 
+const actionType = [DataTypes.LINK, DataTypes.FILE];
+
 const dateType = [DataTypes.DATE, DataTypes.DATE_LOCAL];
 
 const numericTypes = [
@@ -62,8 +64,10 @@ const sortOneColumn = <T extends TableColumn>(
     getSortIndex?: (order: any) => any,
 ) => {
     const { sortOrder, dataType, sortDirection } = sortColumns[index];
+
     const baseSortColumn = definition.findIndex((x) => x.sortOrder === sortOrder);
     const sortColumn = getSortIndex ? getSortIndex(sortOrder) : baseSortColumn;
+    if (actionType.includes(dataType?.toString())) return 0;
 
     if (left[sortColumn] === null) return 1;
     if (right[sortColumn] === null) return -1;

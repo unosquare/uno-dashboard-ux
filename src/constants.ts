@@ -71,6 +71,7 @@ export enum DataTypes {
     BULLET = 'bullet',
     PARAGRAPH = 'paragraph',
     BOLD_STRING = 'boldstring',
+    FILE = 'file',
 }
 
 export enum SortDirection {
