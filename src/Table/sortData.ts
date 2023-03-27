@@ -67,7 +67,7 @@ const sortOneColumn = <T extends TableColumn>(
 
     const baseSortColumn = definition.findIndex((x) => x.sortOrder === sortOrder);
     const sortColumn = getSortIndex ? getSortIndex(sortOrder) : baseSortColumn;
-    if (actionType.includes(dataType?.toString())) return 0;
+    if (dataType && actionType.includes(dataType)) return 0;
 
     if (left[sortColumn] === null) return 1;
     if (right[sortColumn] === null) return -1;
