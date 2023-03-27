@@ -223,7 +223,8 @@ const renderLinkCell = (data: any) => {
     );
 };
 
-const renderFileCell = (data: any) => (data[1] ? <DocumentArrowDown16Filled onClick={data[0]} /> : null);
+const renderFileCell = (data: any) =>
+    data[1] ? <DocumentArrowDown16Filled primaryFill='#304FF3' onClick={data[0]} /> : null;
 
 const renderLinkString = (data: any) =>
     (data as string[])[0] ? (
