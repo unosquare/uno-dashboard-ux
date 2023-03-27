@@ -223,7 +223,7 @@ const renderLinkCell = (data: any) => {
     );
 };
 
-const renderFileCell = (data: any) => <DocumentArrowDown16Filled onClick={data} />;
+const renderFileCell = (data: any) => (data[1] ? <DocumentArrowDown16Filled onClick={data[0]} /> : null);
 
 const renderLinkString = (data: any) =>
     (data as string[])[0] ? (
