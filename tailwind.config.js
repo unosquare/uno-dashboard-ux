@@ -25,7 +25,7 @@ module.exports = {
                 unogray: '#D3D3D3',
             },
             boxShadow: {
-                card: '0 1px 3px 0px rgba(0, 0, 0, 0.5)',
+                card: 'rgb(255,255,255) 0px 0px 0px 0px, rgb(229,231, 235) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 1px 3px 0px, rgba(0,0,0,0.1) 0px 1px 2px -1px',
                 alert: '0px 1px 7px 2px rgba(0, 0, 0, 0.5)',
                 legend: '0 0px 2px 0px rgba(0, 0, 0, 0.5)',
             },

@@ -27,7 +27,6 @@ export interface ChartSettings<TDataIn> extends ChartCommon, ChartComponent<TDat
     direction?: Directions;
     subDirection?: Directions;
     size?: SizeValues;
-    noDataElement?: React.ReactNode;
 }
 
 export interface ChartContainerSettings {
@@ -195,7 +194,6 @@ export const PieChart = ({
     size = SizeValues.LARGE,
     legendFormatType,
     capped,
-    noDataElement,
     colors = defaultChartPalette,
 }: ChartSettings<any>) => {
     const dataStore: ChartData[] = (dataCallback && rawData && dataCallback(rawData)) || [];

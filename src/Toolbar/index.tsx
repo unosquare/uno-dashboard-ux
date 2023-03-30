@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { ActionButton, ActionButtonContainer } from '../ActionButton';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { SearchBox } from '../SearchBox';
@@ -29,17 +30,15 @@ const StyledTableTitleContainer = styled.div`
     height: 50px;
 `;
 
-const StyledTableTitle = styled.h6<TableTitleSettings>`
-    margin: 0px;
-    font-size: 16px;
-    width: 65%;
-    height: 20px;
-    text-align: start;
-    margin-bottom: 10px;
-    margin-right: ${({ margin }) => (margin ? 'auto' : '0px')};
-    text-align: ${({ rightAlign }) => (rightAlign ? 'right' : 'left')};
-    font-weight: 500;
-    display: block;
+const StyledTableTitle = tw.p<TableTitleSettings>`
+    m-0
+    mb-10
+    ${({ margin }) => (margin ? 'mt-auto' : 'mt-0')};
+    ${({ rightAlign }) => (rightAlign ? 'text-right' : 'text-left')};
+    text-gray-700
+    text-base
+    font-medium
+    block
 `;
 
 const SearchboxContainer = styled.div`

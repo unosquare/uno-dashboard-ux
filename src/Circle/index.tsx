@@ -73,7 +73,7 @@ const StyledCircle = tw.div<StyledCircleSettings>`
     justify-center
     items-center
     flex-col
-    [&_h6]:text-[50px]
+    [&_h6]:text-4xl
     [&_h6]:font-bold
     [&_h6]:leading-[50px]
     [&_h6]:text-center

@@ -93,6 +93,7 @@ const StyledLegend = tw.div`
     [&_div]:w-full
     [&_span]:!font-medium
     [&_span]:!text-xs
+    [&_span]:!text-gray-800
     [&_span]:m-0
 `;
 

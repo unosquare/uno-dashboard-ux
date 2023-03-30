@@ -70,7 +70,7 @@ const StyledCard = tw(CardBase)<CardSettings>`
     max-h-full
     min-h-[170px]
     min-w-0
-    rounded
+    rounded-lg
     shadow-card
     md:!justify-center
     md:!min-h-[200px]

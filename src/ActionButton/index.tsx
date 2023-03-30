@@ -21,9 +21,7 @@ export const ActionButton = styled.button<ButtonSettings>`
     align-items: center;
     padding: 0.5rem;
     line-height: 1.5;
-    font-weight: normal;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
+    color: #374151;
     border-width: 0px;
     background-color: transparent;
     height: 32px;

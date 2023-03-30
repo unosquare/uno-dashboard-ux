@@ -79,6 +79,7 @@ export const StyledTable = tw.table<any>`
     border-collapse
     [&_tr:first-child]:border-t-0
     [&_th]:font-medium
+    [&_th]:text-gray-500
     [&_th]:p-[0_10px_0_6px]
     [&_tr]:border-table
     [&_tr]:text-[13px]

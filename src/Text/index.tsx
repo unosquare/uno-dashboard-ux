@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { device } from '../theme';
+import tw from 'tailwind-styled-components';
 
 interface TitleSettings {
     children: React.ReactNode;
@@ -12,56 +12,28 @@ interface TextSettings {
     children: React.ReactNode;
 }
 
+const WrapperTitle = tw.div`
+    text-gray-700
+    tracking-wide
+    uppercase
+    [&_h2]:text-4xl
+    [&_h2]:m-0
+    [&_h3]:text-3xl
+    [&_h3]:m-0
+    [&_h4]:text-2xl
+    [&_h4]:m-0
+    [&_h5]:text-xl
+    [&_h5]:m-0
+    [&_h6]:text-lg
+    [&_h6]:m-0
+`;
+
 const StyledTitle = styled.div<TitleSettings>`
-    color: ${({ theme }) => theme.colors.fontMain};
     width: ${({ width }) => width || ''};
     max-width: 350px;
     display: flex;
     flex-direction: column;
     ${({ center }) => center && 'text-align: center;'}
-    h2 {
-        font-size: 40px;
-        font-weight: 700;
-        letter-spacing: 4px;
-        line-height: 40px;
-        text-transform: uppercase;
-        margin: 0px;
-    }
-    h3 {
-        font-size: 36px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        line-height: 36px;
-        text-transform: uppercase;
-        margin: 0px;
-    }
-    h4 {
-        font-size: 32px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        line-height: 32px;
-        text-transform: uppercase;
-        margin: 0px;
-        margin-bottom: 10px;
-    }
-    h5 {
-        font-size: 28px;
-        font-weight: 700;
-        letter-spacing: 1.25px;
-        line-height: 28px;
-        text-transform: uppercase;
-        margin: 0px;
-        margin-bottom: 10px;
-    }
-    h6 {
-        font-size: 24px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        line-height: 28px;
-        text-transform: uppercase;
-        margin: 0px;
-        margin-bottom: 10px;
-    }
     ul {
         width: 100%;
         margin: 0px;
@@ -93,9 +65,6 @@ const StyledTitle = styled.div<TitleSettings>`
             width: 50px;
             justify-content: space-between;
         }
-    }
-    ${device.md} {
-        margin-left: 20px;
     }
 `;
 
@@ -182,7 +151,7 @@ const StyledLeftSpan = styled.div`
 
 export const Title = ({ children, width, center }: TitleSettings) => (
     <StyledTitle width={width} center={center}>
-        {children}
+        <WrapperTitle>{children}</WrapperTitle>
     </StyledTitle>
 );
 

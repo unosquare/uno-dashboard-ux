@@ -8,7 +8,7 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.198",
+        "@fluentui/react-icons": "^2.0.199",
         "css-loader": "^6.7.3",
         "dayjs": "^1.11.7",
         "react": "^18.2.0",
@@ -26,7 +26,7 @@
         "@typescript-eslint/eslint-plugin": "^5.57.0",
         "autoprefixer": "^10.4.14",
         "copy-webpack-plugin": "^11.0.0",
-        "eslint": "^8.36.0",
+        "eslint": "^8.37.0",
         "eslint-config-unosquare": "^0.1.4y",
         "eslint-plugin-prettier": "^4.2.1",
         "eslint-plugin-react": "^7.32.2",
@@ -41,7 +41,7 @@
         "tailwindcss": "^3.3.0",
         "ts-loader": "^9.4.2",
         "typescript": "^5.0.2",
-        "webpack": "^5.76.3",
+        "webpack": "^5.77.0",
         "webpack-cli": "^5.0.1",
         "webpack-dev-server": "^4.13.1"
     },
