@@ -28,6 +28,7 @@ import {
     PieChart,
     SizeValues,
     SortDirection,
+    SubTitle,
     Table,
     Title,
 } from '../src';
@@ -136,12 +137,12 @@ const Application = () => {
                     <Circle size={SizeValues.EXTRA_SMALL} value={50} color={Colors.GRAY} />
                     <Divider />
                     <CardContent direction={Directions.COLUMN} size={SizeValues.EXTRA_SMALL}>
-                        <Title>
+                        <SubTitle>
                             <h4>Subtitle</h4>
                             <h5>
                                 <Ellipse color='#4CDD28' small /> This is OK
                             </h5>
-                        </Title>
+                        </SubTitle>
                     </CardContent>
                 </Card>
                 <Card column={3} row={4} direction={Directions.ROW}>

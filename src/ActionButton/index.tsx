@@ -25,6 +25,7 @@ export const ActionButton = styled.button<ButtonSettings>`
     border-width: 0px;
     background-color: transparent;
     height: 32px;
+    font-size: 13px;
     svg {
         margin-right: 0.5rem;
     }

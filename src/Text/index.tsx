@@ -28,6 +28,23 @@ const WrapperTitle = tw.div`
     [&_h6]:m-0
 `;
 
+const WrapperSubtitle = tw.div`
+    flex
+    flex-col
+    text-gray-700
+    text-center
+    [&_h2]:text-4xl
+    [&_h2]:m-0
+    [&_h3]:text-3xl
+    [&_h3]:m-0
+    [&_h4]:text-2xl
+    [&_h4]:m-0
+    [&_h5]:text-xl
+    [&_h5]:m-0
+    [&_h6]:text-lg
+    [&_h6]:m-0
+`;
+
 const StyledTitle = styled.div<TitleSettings>`
     width: ${({ width }) => width || ''};
     max-width: 350px;
@@ -114,22 +131,6 @@ const StyledLabelWithIcon = styled.div`
     }
 `;
 
-const StyledRevenue = styled.div`
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    color: ${({ theme }) => theme.colors.fontMain};
-    h2 {
-        font-size: 60px;
-        line-height: 60px;
-        margin: 0px 0px 20px;
-    }
-    h5 {
-        font-size: 20px;
-        margin: 0px;
-    }
-`;
-
 const StyledCenteredBoldSpan = styled.div`
     display: flex;
     align-items: center;
@@ -159,7 +160,7 @@ export const LabelWithImage = ({ children }: TextSettings) => <StyledLabelWithIm
 
 export const LabelWithIcon = ({ children }: TextSettings) => <StyledLabelWithIcon>{children}</StyledLabelWithIcon>;
 
-export const Revenue = ({ children }: TextSettings) => <StyledRevenue>{children}</StyledRevenue>;
+export const SubTitle = ({ children }: TextSettings) => <WrapperSubtitle>{children}</WrapperSubtitle>;
 
 export const CenteredSpan = ({ children }: TextSettings) => <StyledCenteredSpan>{children}</StyledCenteredSpan>;
 

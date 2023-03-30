@@ -177,7 +177,7 @@ const BoldTd = tw.td`
 const StyledLinkButton = tw.button`
     bg-transparent
     border-0
-    text-unoblue
+    text-gray-800
     underline
     cursor-pointer
     text-[10px]

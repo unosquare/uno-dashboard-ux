@@ -16,6 +16,14 @@
         @apply bg-[#f1f2f3] p-0 m-0 text-gray-800;
     }
 
+    a {
+        @apply text-gray-800;
+    }
+
+    a:hover {
+        @apply text-gray-600 underline;
+    }
+
     #root {
         height: 100%;
         overflow: hidden !important;
