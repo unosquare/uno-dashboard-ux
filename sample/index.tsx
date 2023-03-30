@@ -6,6 +6,7 @@ import {
     AppContainer,
     Badge,
     baseTheme,
+    BasicToolbar,
     Blur,
     Burger,
     Card,
@@ -99,6 +100,9 @@ const Application = () => {
                     </>
                 )}
             </NavBar>
+            <BasicToolbar>
+                <span>This is a toolbar</span>
+            </BasicToolbar>
             <AppContainer rows={4} columns={3}>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
                     <Circle value={123456} />

@@ -19,6 +19,7 @@ export * from './NavBar';
 export * from './NoData';
 export * from './TableSelect';
 export * from './Table';
+export * from './PageToolbar';
 export * from './ToggleButton';
 export * from './Toolbar';
 export * from './Text';
