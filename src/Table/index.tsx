@@ -185,6 +185,10 @@ const StyledLinkButton = tw.button`
     font-sans
 `;
 
+const StyledFile = tw.div`
+    cursor-pointer
+`;
+
 const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
 
 const translateType = (type: DataTypes | undefined) => {
@@ -225,7 +229,11 @@ const renderLinkCell = (data: any) => {
 };
 
 const renderFileCell = (data: any) =>
-    data[1] ? <DocumentArrowDown16Filled primaryFill='#304FF3' onClick={data[0]} /> : null;
+    data[1] ? (
+        <StyledFile>
+            <DocumentArrowDown16Filled primaryFill='#304FF3' onClick={data[0]} />
+        </StyledFile>
+    ) : null;
 
 const renderLinkString = (data: any) =>
     (data as string[])[0] ? (

@@ -26,6 +26,7 @@ export const StyledToolbarActionContainer = tw.div`
     ml-auto
     w-5/12
     justify-end
+    [&>svg]:cursor-pointer
 `;
 
 export const StyledToolbarContainer = tw.div`
