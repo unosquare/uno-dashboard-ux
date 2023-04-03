@@ -34,7 +34,7 @@ export const StyledToolbarContainer = tw.div`
     w-full
     bg-white
     shadow-card
-    z-50
+    z-10
 `;
 
 export const StyledSelectContainer = tw.div`
