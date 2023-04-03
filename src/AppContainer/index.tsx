@@ -6,7 +6,7 @@ export interface AppContainerSettings {
     rows: number;
     columns?: number;
     children: React.ReactNode;
-    small?: boolean;
+    hasToolbar?: boolean;
 }
 
 const getTemplateRows = (rows: number) => {
@@ -51,12 +51,12 @@ export const StyledAppContainer = tw(AppContainerBase)<AppContainerSettings>`
 export const StyledContainer = tw.div<any>`
     w-full
     h-[calc(100vh-145px)]
-    ${({ $small }) => $small && 'h-[calc(100vh-203px)]'}
+    ${({ $hasToolbar }) => $hasToolbar && 'h-[calc(100vh-203px)]'}
     overflow-y-auto
 `;
 
-export const AppContainer = ({ rows, children, columns = 5, small }: AppContainerSettings) => (
-    <StyledContainer $small={small}>
+export const AppContainer = ({ rows, children, columns = 5, hasToolbar }: AppContainerSettings) => (
+    <StyledContainer $hasToolbar={hasToolbar}>
         <StyledAppContainer rows={rows} columns={columns}>
             {children}
         </StyledAppContainer>

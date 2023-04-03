@@ -103,7 +103,7 @@ const Application = () => {
             <BasicToolbar>
                 <span>This is a toolbar</span>
             </BasicToolbar>
-            <AppContainer rows={4} columns={3} small>
+            <AppContainer rows={4} columns={3} hasToolbar>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
                     <Circle value={123456} />
                     <Title>
