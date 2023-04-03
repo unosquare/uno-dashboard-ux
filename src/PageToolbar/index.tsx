@@ -8,7 +8,7 @@ export const StyledToolbar = tw.div`
     max-w-unomax
     m-auto
     px-[40px]
-    h-20
+    h-14
 `;
 
 export const StyledToolbarSelectorContainer = tw.div`
@@ -30,10 +30,11 @@ export const StyledToolbarActionContainer = tw.div`
 `;
 
 export const StyledToolbarContainer = tw.div`
-    h-20
+    h-14
     w-full
     bg-white
     shadow-card
+    z-50
 `;
 
 export const StyledSelectContainer = tw.div`
