@@ -31,6 +31,7 @@ export const StyledToolbarActionContainer = tw.div`
 
 export const StyledToolbarContainer = tw.div`
     h-14
+    relative
     w-full
     bg-white
     shadow-card
