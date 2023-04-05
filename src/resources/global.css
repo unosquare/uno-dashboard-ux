@@ -126,17 +126,17 @@
         }
     }
 
-    .scrollbar::-webkit-scrollbar {
+    div::-webkit-scrollbar {
         width: 5px;
         position: relative;
     }
 
-    .scrollbar::-webkit-scrollbar-track {
+    div::-webkit-scrollbar-track {
         border-radius: 100vh;
         background: #f1f2f3;
     }
 
-    .scrollbar::-webkit-scrollbar-thumb {
+    div::-webkit-scrollbar-thumb {
         background: #304ff3;
         border-radius: 100vh;
         height: 20px;

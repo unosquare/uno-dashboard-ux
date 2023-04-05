@@ -126,6 +126,7 @@ export const StyledTableContainer = tw(TableContainerBase)<TableContainerSetting
     ${({ dataTitle }) => (dataTitle ? 'm-auto mt-0' : 'my-0 mx-auto py-[5px]')}
     w-full
     overflow-y-auto
+    pr-1
 `;
 
 export const TdBase = styled.td<TdSettings>`
