@@ -70,77 +70,52 @@ const chartData = [
     { name: 'Group C', value: 300 },
 ];
 
-const linkData: EmployeeAtRisk[] = [
+const linkData: Scores[] = [
     {
-        UserFormId: 24043,
-        Name: 'Michael Mackin',
+        Id: 22334,
+        Name: 'Miguel',
         Quarter: '2022-Q3',
-        ProjectScore: 2,
-        UnosquareScore: 4,
-        TeamScore: 4,
-        TeamLeadScore: 5,
+        Score: 3,
     },
     {
-        UserFormId: 26835,
-        Name: 'Michael Mackin',
+        Id: 22445,
+        Name: 'Miguel',
         Quarter: '2022-Q4',
-        ProjectScore: 2,
-        UnosquareScore: 5,
-        TeamScore: 3,
-        TeamLeadScore: 5,
+        Score: 2,
     },
     {
-        UserFormId: 26995,
-        Name: 'Eduardo Baltazar',
+        Id: 22667,
+        Name: 'Baltazar',
         Quarter: '2022-Q4',
-        ProjectScore: 2,
-        UnosquareScore: 5,
-        TeamScore: 2,
-        TeamLeadScore: 4,
+        Score: 4,
     },
     {
-        UserFormId: 26315,
-        Name: 'Andrew TayloR',
+        Id: 22880,
+        Name: 'Andres',
         Quarter: '2022-Q4',
-        ProjectScore: 2,
-        UnosquareScore: 4,
-        TeamScore: 5,
-        TeamLeadScore: 5,
+        Score: 1,
     },
 ];
 
 const employeesAtRiskHeaders = [
     { label: 'Employee', sortOrder: 2, dataType: DataTypes.LINK_STRING },
     { label: 'Quarter', sortOrder: 1, sortDirection: SortDirection.DESC },
-    { label: 'Project Score' },
-    { label: 'Unosquare Score' },
-    { label: 'Team Score' },
-    { label: 'TL Score' },
+    { label: 'Score' },
 ];
 
-interface EmployeeAtRisk {
-    UserFormId: number;
+interface Scores {
+    Id: number;
     Quarter: string;
     Name: string;
-    ProjectScore?: number;
-    UnosquareScore?: number;
-    TeamScore?: number;
-    TeamLeadScore?: number;
+    Score?: number;
 }
 
 enum ExternalUrls {
-    ONE_ON_ONE = 'https://unosquare.sharepoint.com/sites/Intranet/SitePages/One-on-One.aspx/',
+    URL = 'https://www.google.com/',
 }
 
-const getLinkSortData = (data: EmployeeAtRisk[]) =>
-    data.map((entry) => [
-        [`${ExternalUrls.ONE_ON_ONE}${entry.UserFormId}`, entry.Name, ''],
-        entry.Quarter,
-        entry.ProjectScore,
-        entry.UnosquareScore,
-        entry.TeamScore,
-        entry.TeamLeadScore,
-    ]);
+const getLinkSortData = (data: Scores[]) =>
+    data.map((entry) => [[`${ExternalUrls.URL}${entry.Id}`, entry.Name, ''], entry.Quarter, entry.Score]);
 
 const Application = () => {
     const [value, setValue] = React.useState(false);
