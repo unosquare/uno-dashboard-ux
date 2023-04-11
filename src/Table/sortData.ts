@@ -55,6 +55,9 @@ const checkNumericString = (a: any, b: any, sortColumn: number) => {
     return 0;
 };
 
+const sortComparer = (left: any, right: any) =>
+    left.toString().trim().localeCompare(right.toString().trim(), undefined, { numeric: true, sensitivity: 'base' });
+
 const sortOneColumn = <T extends TableColumn>(
     left: any,
     right: any,
@@ -75,6 +78,10 @@ const sortOneColumn = <T extends TableColumn>(
     const a = sortDirection === SortDirection.DESC ? right : left;
     const b = sortDirection === SortDirection.DESC ? left : right;
 
+    if (dataType && dataType === DataTypes.LINK_STRING) {
+        return sortComparer(a[sortColumn][1], b[sortColumn][1]);
+    }
+
     if (dateType.includes(dataType || DataTypes.STRING)) {
         const result = compareDates(a[sortColumn], b[sortColumn]);
 
@@ -91,10 +98,7 @@ const sortOneColumn = <T extends TableColumn>(
 
     if (resultNumericString !== 0) return resultNumericString;
 
-    return a[sortColumn]
-        .toString()
-        .trim()
-        .localeCompare(b[sortColumn].toString().trim(), undefined, { numeric: true, sensitivity: 'base' });
+    return sortComparer(a[sortColumn], b[sortColumn]);
 };
 
 export const sortData = <T extends TableColumn>(data: any[], definition: T[], getSortIndex?: (order: any) => any) => {

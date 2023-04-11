@@ -70,6 +70,78 @@ const chartData = [
     { name: 'Group C', value: 300 },
 ];
 
+const linkData: EmployeeAtRisk[] = [
+    {
+        UserFormId: 24043,
+        Name: 'Michael Mackin',
+        Quarter: '2022-Q3',
+        ProjectScore: 2,
+        UnosquareScore: 4,
+        TeamScore: 4,
+        TeamLeadScore: 5,
+    },
+    {
+        UserFormId: 26835,
+        Name: 'Michael Mackin',
+        Quarter: '2022-Q4',
+        ProjectScore: 2,
+        UnosquareScore: 5,
+        TeamScore: 3,
+        TeamLeadScore: 5,
+    },
+    {
+        UserFormId: 26995,
+        Name: 'Eduardo Baltazar',
+        Quarter: '2022-Q4',
+        ProjectScore: 2,
+        UnosquareScore: 5,
+        TeamScore: 2,
+        TeamLeadScore: 4,
+    },
+    {
+        UserFormId: 26315,
+        Name: 'Andrew TayloR',
+        Quarter: '2022-Q4',
+        ProjectScore: 2,
+        UnosquareScore: 4,
+        TeamScore: 5,
+        TeamLeadScore: 5,
+    },
+];
+
+const employeesAtRiskHeaders = [
+    { label: 'Employee', sortOrder: 2, dataType: DataTypes.LINK_STRING },
+    { label: 'Quarter', sortOrder: 1, sortDirection: SortDirection.DESC },
+    { label: 'Project Score' },
+    { label: 'Unosquare Score' },
+    { label: 'Team Score' },
+    { label: 'TL Score' },
+];
+
+interface EmployeeAtRisk {
+    UserFormId: number;
+    Quarter: string;
+    Name: string;
+    ProjectScore?: number;
+    UnosquareScore?: number;
+    TeamScore?: number;
+    TeamLeadScore?: number;
+}
+
+enum ExternalUrls {
+    ONE_ON_ONE = 'https://unosquare.sharepoint.com/sites/Intranet/SitePages/One-on-One.aspx/',
+}
+
+const getLinkSortData = (data: EmployeeAtRisk[]) =>
+    data.map((entry) => [
+        [`${ExternalUrls.ONE_ON_ONE}${entry.UserFormId}`, entry.Name, ''],
+        entry.Quarter,
+        entry.ProjectScore,
+        entry.UnosquareScore,
+        entry.TeamScore,
+        entry.TeamLeadScore,
+    ]);
+
 const Application = () => {
     const [value, setValue] = React.useState(false);
     const [openMenu, setOpenMenu] = React.useState(false);
@@ -103,7 +175,7 @@ const Application = () => {
             <BasicToolbar>
                 <span>This is a toolbar</span>
             </BasicToolbar>
-            <AppContainer rows={4} columns={3} hasToolbar>
+            <AppContainer rows={5} columns={3} hasToolbar>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
                     <Circle value={123456} />
                     <Title>
@@ -155,6 +227,17 @@ const Application = () => {
                         dataCallback={identity}
                         legendFormatType={LegendFormatTypes.MONEY}
                         legend
+                    />
+                </Card>
+                <Card column={3} row={5} direction={Directions.COLUMN} fit>
+                    <Table
+                        columns={employeesAtRiskHeaders}
+                        dataTitle='Link string sorting'
+                        dataCallback={getLinkSortData}
+                        rawData={linkData}
+                        height={SizeValues.SMALL}
+                        sortable
+                        searchable
                     />
                 </Card>
             </AppContainer>
