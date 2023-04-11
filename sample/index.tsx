@@ -70,6 +70,53 @@ const chartData = [
     { name: 'Group C', value: 300 },
 ];
 
+const linkData: Scores[] = [
+    {
+        Id: 22334,
+        Name: 'Miguel',
+        Quarter: '2022-Q3',
+        Score: 3,
+    },
+    {
+        Id: 22445,
+        Name: 'Miguel',
+        Quarter: '2022-Q4',
+        Score: 2,
+    },
+    {
+        Id: 22667,
+        Name: 'Baltazar',
+        Quarter: '2022-Q4',
+        Score: 4,
+    },
+    {
+        Id: 22880,
+        Name: 'Andres',
+        Quarter: '2022-Q4',
+        Score: 1,
+    },
+];
+
+const employeesAtRiskHeaders = [
+    { label: 'Employee', sortOrder: 2, dataType: DataTypes.LINK_STRING },
+    { label: 'Quarter', sortOrder: 1, sortDirection: SortDirection.DESC },
+    { label: 'Score' },
+];
+
+interface Scores {
+    Id: number;
+    Quarter: string;
+    Name: string;
+    Score?: number;
+}
+
+enum ExternalUrls {
+    URL = 'https://www.google.com/',
+}
+
+const getLinkSortData = (data: Scores[]) =>
+    data.map((entry) => [[`${ExternalUrls.URL}${entry.Id}`, entry.Name, ''], entry.Quarter, entry.Score]);
+
 const Application = () => {
     const [value, setValue] = React.useState(false);
     const [openMenu, setOpenMenu] = React.useState(false);
@@ -103,7 +150,7 @@ const Application = () => {
             <BasicToolbar>
                 <span>This is a toolbar</span>
             </BasicToolbar>
-            <AppContainer rows={4} columns={3} hasToolbar>
+            <AppContainer rows={5} columns={3} hasToolbar>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
                     <Circle value={123456} />
                     <Title>
@@ -155,6 +202,17 @@ const Application = () => {
                         dataCallback={identity}
                         legendFormatType={LegendFormatTypes.MONEY}
                         legend
+                    />
+                </Card>
+                <Card column={3} row={5} direction={Directions.COLUMN} fit>
+                    <Table
+                        columns={employeesAtRiskHeaders}
+                        dataTitle='Link string sorting'
+                        dataCallback={getLinkSortData}
+                        rawData={linkData}
+                        height={SizeValues.SMALL}
+                        sortable
+                        searchable
                     />
                 </Card>
             </AppContainer>
