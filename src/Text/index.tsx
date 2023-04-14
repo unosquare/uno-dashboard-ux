@@ -1,38 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
+import { HasChildrenComponent } from '../constants';
 
-interface TitleSettings {
-    children: React.ReactNode;
+interface TitleSettings extends HasChildrenComponent {
     width?: string;
     center?: boolean;
 }
 
-interface TextSettings {
-    children: React.ReactNode;
+interface SubtitleSettings extends HasChildrenComponent {
+    rightAlign?: boolean;
+    margin?: boolean;
 }
 
 const WrapperTitle = tw.div`
     text-gray-700
     tracking-wide
     uppercase
-    [&_h2]:text-4xl
-    [&_h2]:m-0
-    [&_h3]:text-3xl
-    [&_h3]:m-0
-    [&_h4]:text-2xl
-    [&_h4]:m-0
-    [&_h5]:text-xl
-    [&_h5]:m-0
-    [&_h6]:text-lg
-    [&_h6]:m-0
-`;
-
-const WrapperSubtitle = tw.div`
-    flex
-    flex-col
-    text-gray-700
-    text-center
     [&_h2]:text-4xl
     [&_h2]:m-0
     [&_h3]:text-3xl
@@ -135,7 +119,6 @@ const StyledCenteredBoldSpan = styled.div`
     display: flex;
     align-items: center;
     font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     padding-left: 6px;
     padding-bottom: 5px;
@@ -146,8 +129,31 @@ const StyledLeftSpan = styled.div`
     display: flex;
     align-items: left;
     padding-left: 6px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 12px;
+`;
+
+const StyledSubTitle = tw.p<SubtitleSettings>`
+    m-0
+    mb-10
+    ${({ margin }) => (margin ? 'mt-auto' : 'mt-0')};
+    ${({ rightAlign }) => (rightAlign ? 'text-right' : 'text-left')};
+    text-gray-700
+    text-base
+    font-medium
+    block
+    flex
+    flex-col
+    text-gray-700
+    [&_h2]:text-4xl
+    [&_h2]:m-0
+    [&_h3]:text-3xl
+    [&_h3]:m-0
+    [&_h4]:text-2xl
+    [&_h4]:m-0
+    [&_h5]:text-xl
+    [&_h5]:m-0
+    [&_h6]:text-lg
+    [&_h6]:m-0
 `;
 
 export const Title = ({ children, width, center }: TitleSettings) => (
@@ -156,14 +162,22 @@ export const Title = ({ children, width, center }: TitleSettings) => (
     </StyledTitle>
 );
 
-export const LabelWithImage = ({ children }: TextSettings) => <StyledLabelWithImage>{children}</StyledLabelWithImage>;
+export const LabelWithImage = ({ children }: HasChildrenComponent) => (
+    <StyledLabelWithImage>{children}</StyledLabelWithImage>
+);
 
-export const LabelWithIcon = ({ children }: TextSettings) => <StyledLabelWithIcon>{children}</StyledLabelWithIcon>;
+export const LabelWithIcon = ({ children }: HasChildrenComponent) => (
+    <StyledLabelWithIcon>{children}</StyledLabelWithIcon>
+);
 
-export const SubTitle = ({ children }: TextSettings) => <WrapperSubtitle>{children}</WrapperSubtitle>;
+export const SubTitle = ({ children, ...props }: SubtitleSettings) => (
+    <StyledSubTitle {...props}>{children}</StyledSubTitle>
+);
 
-export const CenteredSpan = ({ children }: TextSettings) => <StyledCenteredSpan>{children}</StyledCenteredSpan>;
+export const CenteredSpan = ({ children }: HasChildrenComponent) => <StyledCenteredSpan>{children}</StyledCenteredSpan>;
 
-export const TooltipTitle = ({ children }: TextSettings) => <StyledCenteredBoldSpan>{children}</StyledCenteredBoldSpan>;
+export const TooltipTitle = ({ children }: HasChildrenComponent) => (
+    <StyledCenteredBoldSpan>{children}</StyledCenteredBoldSpan>
+);
 
-export const LabelInfo = ({ children }: TextSettings) => <StyledLeftSpan>{children}</StyledLeftSpan>;
+export const LabelInfo = ({ children }: HasChildrenComponent) => <StyledLeftSpan>{children}</StyledLeftSpan>;

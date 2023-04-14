@@ -11,7 +11,7 @@ export * from './ChartLegend';
 export * from './Circle';
 export * from './DataChart';
 export * from './Divider';
-export * from './Loading';
+export * from './CardLoading';
 export * from './Ellipse';
 export * from './ExportCsvButton';
 export * from './Footer';

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import tw from 'tailwind-styled-components';
 import { ChevronDown24Regular, ChevronUp24Regular } from '@fluentui/react-icons';
-import { Loading } from '../Loading';
+import { CardLoading } from '../CardLoading';
 
 export interface DropdownSettings {
     options: any;
@@ -135,7 +135,7 @@ export const DropdownMenu = ({ options, value, label, onOptionClicked, extraBott
         setIsOpen(false);
     };
 
-    if (!options) return <Loading />;
+    if (!options) return <CardLoading />;
 
     return (
         <StyledMenuSelector $extraBottom={extraBottom} className={className}>

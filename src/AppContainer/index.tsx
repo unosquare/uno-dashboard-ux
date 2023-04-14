@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
+import { HasChildrenComponent } from '../constants';
 
-export interface AppContainerSettings {
+export interface AppContainerSettings extends HasChildrenComponent {
     rows: number;
     columns?: number;
-    children: React.ReactNode;
     hasToolbar?: boolean;
 }
 

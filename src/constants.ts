@@ -92,3 +92,7 @@ export interface ChartComponent<TDataIn, TDataOut> {
     rawData?: TDataIn;
     dataCallback?: (data: TDataIn) => TDataOut;
 }
+
+export interface HasChildrenComponent {
+    children: React.ReactNode;
+}

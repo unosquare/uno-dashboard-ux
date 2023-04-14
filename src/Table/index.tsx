@@ -14,7 +14,7 @@ import objectHash from 'object-hash';
 import { CardContent } from '../Card';
 import { Colors, CurrencyRate, DataTypes, Directions, FlexValues, SizeValues, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
-import { Loading } from '../Loading';
+import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { CenteredSpan } from '../Text';
 import { ToolBar } from '../Toolbar';
@@ -482,7 +482,7 @@ export const Table = <TDataIn, TDataOut>({
                 </ToolBar>
             )}
             <StyledTableContainer dataTitle={dataTitle} height={height} justify={justify}>
-                {loading && <Loading />}
+                {loading && <CardLoading />}
                 {searched.length > 0 && !loading && (
                     <StyledTable>
                         <TableHeaders

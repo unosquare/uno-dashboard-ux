@@ -1,5 +1,6 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
+import { HasChildrenComponent } from '../constants';
 
 export const StyledToolbar = tw.div`
     flex
@@ -45,11 +46,7 @@ export const StyledSelectContainer = tw.div`
     [&>span]:w-[100px]
 `;
 
-export interface BasicToolbarProps {
-    children: React.ReactNode;
-}
-
-export const BasicToolbar = ({ children }: BasicToolbarProps) => (
+export const BasicToolbar = ({ children }: HasChildrenComponent) => (
     <StyledToolbarContainer>
         <StyledToolbar>
             <StyledToolbarSelectorContainer>

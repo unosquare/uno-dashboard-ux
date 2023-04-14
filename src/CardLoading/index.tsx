@@ -8,4 +8,4 @@ const StyledLoading = styled.img`
     display: block;
 `;
 
-export const Loading = ({ img }: any) => <StyledLoading src={img || loadingGif} alt='Loading' />;
+export const CardLoading = ({ img }: any) => <StyledLoading src={img || loadingGif} alt='Loading' />;

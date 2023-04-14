@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
-import { Directions, FlexValues, SizeValues } from '../constants';
+import { Directions, FlexValues, HasChildrenComponent, SizeValues } from '../constants';
 
-export interface CardSettings {
+export interface CardSettings extends HasChildrenComponent {
     column: number;
     row: number;
     direction: Directions;
-    children: React.ReactNode;
     justify?: FlexValues;
     align?: FlexValues;
     extraBottom?: boolean;
@@ -20,10 +19,9 @@ export interface CardSettings {
     extraStyles?: string;
 }
 
-export interface CardContentSettings {
+export interface CardContentSettings extends HasChildrenComponent {
     direction: Directions;
     size: SizeValues;
-    children: React.ReactNode;
     justify?: FlexValues;
     align?: FlexValues;
     show?: boolean;

@@ -15,7 +15,7 @@ import tw from 'tailwind-styled-components';
 import { Dictionary, formatter, FormatTypes } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
 import { ChartComponent, ChartTypes, LegendFormatTypes } from '../constants';
-import { Loading } from '../Loading';
+import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 
@@ -121,12 +121,11 @@ export const DataChart = ({
     const dataStore: Dictionary[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t);
 
-    if (loading) return <Loading />;
-
     return (
         <StyledChart>
             {title && <StyledChartTitle>{title}</StyledChartTitle>}
-            {dataStore.length > 0 ? (
+            {loading && <CardLoading />}
+            {!loading && dataStore.length > 0 ? (
                 <ResponsiveContainer>
                     <LineChart data={dataStore} margin={margin} onClick={onClick}>
                         <CartesianGrid strokeDasharray='2 2' />

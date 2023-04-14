@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind-styled-components';
 import { ActionButton, ActionButtonContainer } from '../ActionButton';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { SearchBox } from '../SearchBox';
 import { SelectSettings, TableSelect } from '../TableSelect';
 import { ToggleButton } from '../ToggleButton';
+import { SubTitle } from '../Text';
 
 export interface ToolBarSettings {
     dataTitle?: string;
@@ -17,28 +17,12 @@ export interface ToolBarSettings {
     exportCsvDisabled?: boolean;
 }
 
-export interface TableTitleSettings {
-    rightAlign?: boolean;
-    margin?: boolean;
-}
-
 const StyledTableTitleContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
     height: 50px;
-`;
-
-const StyledTableTitle = tw.p<TableTitleSettings>`
-    m-0
-    mb-10
-    ${({ margin }) => (margin ? 'mt-auto' : 'mt-0')};
-    ${({ rightAlign }) => (rightAlign ? 'text-right' : 'text-left')};
-    text-gray-700
-    text-base
-    font-medium
-    block
 `;
 
 const SearchboxContainer = styled.div`
@@ -76,7 +60,7 @@ export const ToolBar = ({
     exportCsvDisabled,
 }: ToolBarSettings) => (
     <StyledTableTitleContainer>
-        {dataTitle && <StyledTableTitle>{dataTitle}</StyledTableTitle>}
+        {dataTitle && <SubTitle>{dataTitle}</SubTitle>}
         {(onSearch || onCsvClick || switchTbl || children) && (
             <div style={containerStyle}>
                 {children}

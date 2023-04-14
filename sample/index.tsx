@@ -22,7 +22,7 @@ import {
     FlexValues,
     Footer,
     LegendFormatTypes,
-    Loading,
+    CardLoading,
     MenuContainer,
     NavBar,
     NavBarTitle,
@@ -180,7 +180,7 @@ const Application = () => {
                     />
                 </Card>
                 <Card column={1} row={3} direction={Directions.ROW} fit>
-                    <Loading />
+                    <CardLoading />
                     <Divider />
                     <Circle size={SizeValues.SMALL} value={100} color={Colors.GRAY} />
                 </Card>
