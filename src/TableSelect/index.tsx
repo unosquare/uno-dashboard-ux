@@ -16,7 +16,6 @@ export interface SelectSettings {
 const StyledTableSelect = styled.div`
     select {
         font-size: 13px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         padding: 5px;
         border-radius: 5px;
         :active,
@@ -29,7 +28,6 @@ const StyledTableSelect = styled.div`
     }
     label {
         font-size: 13px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 `;
 

@@ -146,7 +146,6 @@ export const StyledCellInput = tw.input`
     items-center
     text-sm
     leading-normal
-    font-sans
     text-maingray
     p-[0.35rem]
     text-[13px]
@@ -183,7 +182,6 @@ const StyledLinkButton = tw.button`
     cursor-pointer
     text-[10px]
     position-[horizontal]
-    font-sans
 `;
 
 const StyledFile = tw.div`

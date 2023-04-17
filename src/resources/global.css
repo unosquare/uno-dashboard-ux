@@ -29,6 +29,7 @@
         overflow: hidden !important;
     }
 
+    *,
     h1,
     h2,
     h3,
@@ -42,6 +43,7 @@
     td,
     th,
     text,
+    svg,
     .__react_component_tooltip {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }

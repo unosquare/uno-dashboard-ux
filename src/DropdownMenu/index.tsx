@@ -25,7 +25,6 @@ export const StyledMenuSelector = tw.div<ContainerSettings>`
     flex
     items-center
     justify-center
-    font-sans
     ${({ $extraBottom }) => $extraBottom && 'mb-[10px]'}
 `;
 
