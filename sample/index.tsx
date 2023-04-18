@@ -32,8 +32,16 @@ import {
     SubTitle,
     Table,
     Title,
+    DropdownMenu,
 } from '../src';
 import '../src/resources/global.css';
+
+export enum options {
+    A = 'Apple',
+    B = 'Bolt',
+    C = 'Cactus',
+    D = 'Dragon',
+}
 
 const columns = [
     { label: 'Name', sortOrder: 1, sortDirection: SortDirection.ASC },
@@ -118,6 +126,7 @@ const getLinkSortData = (data: Scores[]) =>
     data.map((entry) => [[`${ExternalUrls.URL}${entry.Id}`, entry.Name, ''], entry.Quarter, entry.Score]);
 
 const Application = () => {
+    const [currentOption, setCurrentOption] = React.useState(options.A);
     const [value, setValue] = React.useState(false);
     const [openMenu, setOpenMenu] = React.useState(false);
     const [data, setData] = React.useState(defaultData);
@@ -125,6 +134,10 @@ const Application = () => {
     const toggle = () => {
         setValue(!value);
         setData(value ? defaultData : []);
+    };
+
+    const handleOptionChange = (option: options) => {
+        setCurrentOption(option);
     };
 
     const onToggleMenu = () => {
@@ -149,6 +162,7 @@ const Application = () => {
             </NavBar>
             <BasicToolbar>
                 <span>This is a toolbar</span>
+                <DropdownMenu options={options} value={currentOption} label='Options' onOptionClicked={handleOptionChange} />
             </BasicToolbar>
             <AppContainer rows={5} columns={3} hasToolbar>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>

@@ -145,11 +145,13 @@ export const DropdownMenu = ({ options, value, label, onOptionClicked, extraBott
                     <>
                         <StyledListContainer>
                             <StyledDropDownList>
-                                {Object.keys(options).map((countryUrl) => (
-                                    <StyledListItem key={countryUrl} onClick={onSelect(countryUrl)}>
-                                        {options[countryUrl]}
-                                    </StyledListItem>
-                                ))}
+                                {Object.keys(options)
+                                    .filter((key) => key !== value)
+                                    .map((countryUrl) => (
+                                        <StyledListItem key={countryUrl} onClick={onSelect(countryUrl)}>
+                                            {options[countryUrl]}
+                                        </StyledListItem>
+                                    ))}
                             </StyledDropDownList>
                         </StyledListContainer>
                         <ChevronUp24Regular primaryFill='#304FF3' />
