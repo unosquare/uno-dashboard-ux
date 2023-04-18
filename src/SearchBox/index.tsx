@@ -1,67 +1,65 @@
 import React from 'react';
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 
-const SearchBoxLayout = styled.div`
-    display: flex;
-    flex-direction: row;
-    position: relative;
+const SearchBoxLayout = tw.div`
+    flex
+    flex-row
+    relative
 `;
 
-const SearchGlass = styled.svg`
-    height: 1.25rem;
-    width: 1.25rem;
-    opacity: 0.75;
-    position: absolute;
-    top: 0.7rem;
-    left: 0.5rem;
-    color: #304ff3;
+const SearchGlass = tw.svg`
+    h-[1.25rem]
+    w-[1.25rem]
+    opacity-75
+    absolute
+    top-[0.7rem]
+    left-[0.5rem]
+    text-[#304ff3]
 `;
 
-const Input = styled.input`
-    flex-grow: 1;
-    border-width: 0px;
-    border-bottom-width: 1.5px;
-    display: block;
-    height: 100%;
-    width: 100%;
-    margin-left: 0.5rem;
-    padding-bottom: 0px;
-    padding-top: 0.5rem;
-    padding-left: 1.5rem;
-    line-height: 1rem;
-    font-weight: 500;
-    line-height: 1.25;
-    background-color: transparent;
-    :focus {
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-    }
+const Input = tw.input`
+    flex-grow
+    border-0
+    border-b-[1.5px]
+    block
+    h-full
+    w-full
+    ml-[0.5rem]
+    pb-0
+    pt-[0.5rem]
+    pl-[1.5rem]
+    leading-[1rem]
+    bg-transparent
+    focus:outline-[2px]
+    focus:outline-offset-[2px]
+    focus:outline-transparent
+    focus:outline-solid
 `;
 
-export const CrossContainer = styled.div`
-    position: relative;
-    height: 1.75rem;
+export const CrossContainer = tw.div`
+    relative
+    h-[1.75rem]
 `;
 
-const CrossButton = styled.button<CrossButtonSettings>`
-    border-width: 0px;
-    cursor: pointer;
-    align-self: center;
-    right: -2rem;
-    bottom: -0.5rem;
-    position: absolute;
-    background-color: transparent;
-    :focus {
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-    }
-    visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+const CrossButton = tw.button<CrossButtonSettings>`
+    border-0
+    cursor-pointer
+    align-self-center
+    -right-[2rem]
+    -bottom-[0.5rem]
+    absolute
+    bg-transparent
+    focus:outline-[2px]
+    focus:outline-offset-[2px]
+    focus:outline-transparent
+    focus:outline-solid
+    ${({ visible }) => (visible ? 'visible' : 'invisible')};
 `;
 
-const Cross = styled.svg`
-    height: 1rem;
-    width: 1rem;
-    opacity: 0.75;
+const Cross = tw.svg`
+    h-[1rem]
+    w-[1rem]
+    opacity-75
 `;
 
 export interface SearchBoxSettings {
