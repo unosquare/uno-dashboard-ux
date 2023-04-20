@@ -130,6 +130,7 @@ const Application = () => {
     const [value, setValue] = React.useState(false);
     const [openMenu, setOpenMenu] = React.useState(false);
     const [data, setData] = React.useState(defaultData);
+    const [circleValue, setCircleValue] = React.useState(1234);
 
     const toggle = () => {
         setValue(!value);
@@ -145,6 +146,8 @@ const Application = () => {
         if (body) body.style.overflow = openMenu ? 'auto' : 'hidden';
         setOpenMenu(!openMenu);
     };
+
+    const CircleClicked = () => setCircleValue(circleValue + 1);
 
     return (
         <ThemeProvider theme={baseTheme}>
@@ -162,11 +165,16 @@ const Application = () => {
             </NavBar>
             <BasicToolbar>
                 <span>This is a toolbar</span>
-                <DropdownMenu options={options} value={currentOption} label='Options' onOptionClicked={handleOptionChange} />
+                <DropdownMenu
+                    options={options}
+                    value={currentOption}
+                    label='Options'
+                    onOptionClicked={handleOptionChange}
+                />
             </BasicToolbar>
             <AppContainer rows={5} columns={3} hasToolbar>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
-                    <Circle value={123456} />
+                    <Circle value={circleValue} onClick={CircleClicked} />
                     <Title>
                         <h2>TOTAL</h2>
                         <h3>Rows</h3>
