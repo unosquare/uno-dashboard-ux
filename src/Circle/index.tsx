@@ -7,6 +7,7 @@ export interface CircleSettings {
     color?: Colors;
     value?: string | number;
     subValue?: string | number;
+    onClick?: () => void;
 }
 
 const calculateSize = (size: SizeValues) => {
@@ -107,8 +108,8 @@ const Label = ({ size, value }: any) => {
     return <span>{value}</span>;
 };
 
-export const Circle = ({ value, subValue, color = Colors.BLUE, size = SizeValues.LARGE }: CircleSettings) => (
-    <StyledCircle color={color} size={size}>
+export const Circle = ({ value, subValue, color = Colors.BLUE, size = SizeValues.LARGE, onClick }: CircleSettings) => (
+    <StyledCircle color={color} size={size} onClick={onClick}>
         <Label size={size} value={value} />
         {size === SizeValues.LARGE && subValue && <span>{subValue}</span>}
     </StyledCircle>
