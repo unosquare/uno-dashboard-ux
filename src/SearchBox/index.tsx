@@ -53,7 +53,7 @@ const CrossButton = tw.button<CrossButtonSettings>`
     focus:outline-offset-[2px]
     focus:outline-transparent
     focus:outline-solid
-    ${({ visible }) => (visible ? 'visible' : 'invisible')};
+    ${({ $visible }) => ($visible ? 'visible' : 'invisible')};
 `;
 
 const Cross = tw.svg`
@@ -68,7 +68,7 @@ export interface SearchBoxSettings {
 }
 
 interface CrossButtonSettings extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    visible?: boolean;
+    $visible: boolean;
 }
 
 export const SearchBox = ({ search, placeholder = 'Search' }: SearchBoxSettings) => {
@@ -101,7 +101,7 @@ export const SearchBox = ({ search, placeholder = 'Search' }: SearchBoxSettings)
             </SearchGlass>
             <CrossContainer>
                 <Input value={value} onChange={onChange} type='text' placeholder={placeholder} />
-                <CrossButton visible={value !== ''} onClick={onCrossPressed}>
+                <CrossButton $visible={value !== ''} onClick={onCrossPressed}>
                     <Cross xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'>
                         <path
                             fillRule='evenodd'
