@@ -15,7 +15,7 @@ export const StyledHeader = tw.div<HeaderSettings>`
 const StyledNavbar = tw.div<any>`
     w-full
     max-w-unomax
-    p-[20px_40px_15px]
+    p-[15px_20px]
     m-auto
     flex
     justify-between
@@ -27,11 +27,9 @@ export const NavBarTitle = tw.div<any>`
     flex-row
     items-center
     text-white
-    md:[&>h2]:text-[25px]
-    font-bold
     uppercase
     [&>h2]:tracking-[1.5px]
-    [&>h2]:text-[35px]
+    [&>h2]:text-3xl
     [&>h2]:leading-9
     [&>h2]:my-0
     [&>h2]:mx-[15px]

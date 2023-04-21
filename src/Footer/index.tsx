@@ -9,7 +9,7 @@ export interface FooterSettings {
 const StyledFooter = tw.div<FooterSettings>`
     w-full
     h-10
-    pt-5
+    pt-3
     text-center
     ${({ transparent }) => (transparent ? 'bg-transparent' : 'bg-black')}
     ${({ transparent }) => (transparent ? 'text-black' : 'text-white')}

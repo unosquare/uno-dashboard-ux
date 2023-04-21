@@ -158,19 +158,20 @@ const Application = () => {
                 </NavBarTitle>
                 {openMenu && (
                     <>
-                        <MenuContainer>This is a menu</MenuContainer>
+                        <MenuContainer>
+                            <DropdownMenu
+                                options={options}
+                                value={currentOption}
+                                label='Options'
+                                onOptionClicked={handleOptionChange}
+                            />
+                        </MenuContainer>
                         <Blur onClick={onToggleMenu} />
                     </>
                 )}
             </NavBar>
             <BasicToolbar>
                 <span>This is a toolbar</span>
-                <DropdownMenu
-                    options={options}
-                    value={currentOption}
-                    label='Options'
-                    onOptionClicked={handleOptionChange}
-                />
             </BasicToolbar>
             <AppContainer rows={5} columns={3} hasToolbar>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
