@@ -15,7 +15,7 @@ export const StyledHeader = tw.div<HeaderSettings>`
 const StyledNavbar = tw.div<any>`
     w-full
     max-w-unomax
-    p-[15px_20px]
+    p-[11px_18px]
     m-auto
     flex
     justify-between
@@ -38,7 +38,7 @@ export const NavBarTitle = tw.div<any>`
 export const NavBar = ({ transparent, children }: any) => (
     <StyledHeader transparent={transparent}>
         <StyledNavbar>
-            <UnoLogo width={160} height={52} />
+            <UnoLogo width={150} height={48} />
             {children}
         </StyledNavbar>
     </StyledHeader>

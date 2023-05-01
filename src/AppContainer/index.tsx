@@ -51,7 +51,7 @@ export const StyledAppContainer = tw(AppContainerBase)<AppContainerSettings>`
 export const StyledContainer = tw.div<any>`
     w-full
     h-[calc(100vh-145px)]
-    ${({ $hasToolbar }) => $hasToolbar && 'h-[calc(100vh-203px)]'}
+    ${({ $hasToolbar }) => $hasToolbar && 'h-[calc(100vh-185px)]'}
     overflow-y-auto
 `;
 
