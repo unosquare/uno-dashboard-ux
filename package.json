@@ -17,7 +17,7 @@
         "style-loader": "^3.3.2",
         "styled-components": "^5.3.10",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^2.2.9"
+        "uno-js": "^3.1.0"
     },
     "devDependencies": {
         "@types/object-hash": "^3.0.2",
