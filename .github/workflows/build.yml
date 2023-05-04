@@ -1,14 +1,9 @@
 name: Build
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
   build:    
     uses: unosquare/bump-npm-version/.github/workflows/build-no-test.yml@master
-    secrets:
-      cache-version: ${{ secrets.CACHE_VERSION }}
