@@ -1,5 +1,16 @@
 import React from 'react';
-import { Bar, BarChart, Brush, Cell, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+    Bar,
+    BarChart,
+    Brush,
+    Cell,
+    Legend,
+    ReferenceLine,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from 'recharts';
 import tw from 'tailwind-styled-components';
 import { Dictionary, humanize } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
@@ -39,6 +50,7 @@ export interface ChartBarSettings<TDataIn> {
     tooltipOffset?: number;
     accumulated?: boolean;
     scroll?: boolean;
+    refLineY?: { value: number; label: string; color: string };
 }
 
 interface LegendSettings {
@@ -91,6 +103,7 @@ export const ChartBar = ({
     tooltipOffset = 10,
     accumulated = false,
     scroll = false,
+    refLineY,
 }: ChartBarSettings<any>) => {
     const dataStore: Dictionary[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const keys = dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : [];
@@ -135,6 +148,18 @@ export const ChartBar = ({
                             allowDecimals={false}
                             width={70}
                         />
+                        {refLineY && (
+                            <ReferenceLine
+                                y={refLineY.value}
+                                label={{
+                                    position: 'insideTopRight',
+                                    value: refLineY.label,
+                                    fontSize: 11,
+                                    offset: 7,
+                                }}
+                                stroke={refLineY.color}
+                            />
+                        )}
                         <Tooltip
                             content={
                                 <ChartLegend
