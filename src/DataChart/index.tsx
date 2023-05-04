@@ -36,7 +36,8 @@ interface LegendSettings {
 
 const StyledChartTitle = tw.h6`
     m-0
-    text-xl
+    text-base
+    font-medium
 `;
 
 const StyledChart = tw.div`
