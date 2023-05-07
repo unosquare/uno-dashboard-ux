@@ -43,7 +43,8 @@ export const StyledSelectContainer = tw.div`
     flex
     items-center
     gap-2
-    [&>span]:w-[100px]
+    [&>span]:max-w-[100px]
+    [&>span]:min-w-fit
 `;
 
 export const BasicToolbar = ({ children }: HasChildrenComponent) => (
