@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 
 export interface SubSectionSettings {
@@ -8,6 +9,14 @@ export interface SubSectionSettings {
 export interface BurgerSettings {
     onClick: () => void;
 }
+
+export const StyledMenuActions = tw.div`
+    flex
+    justify-between
+    py-5
+    px-[25px]
+    [&_svg]:cursor-pointer
+`;
 
 export const MenuContainer = tw.div`
     absolute
@@ -21,6 +30,11 @@ export const MenuContainer = tw.div`
     pb-14
     flex-col
     animated-menu
+`;
+
+export const StyledMenuSearchBox = styled.div`
+    height: 5vh;
+    margin: 0 auto 0 58px;
 `;
 
 export const MenuSection = tw.div`

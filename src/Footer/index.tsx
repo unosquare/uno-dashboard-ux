@@ -6,7 +6,7 @@ export interface FooterSettings {
     copyright?: string;
 }
 
-const StyledFooter = tw.div<FooterSettings>`
+const StyledFooter = tw.footer<FooterSettings>`
     w-full
     h-10
     pt-3

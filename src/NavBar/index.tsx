@@ -6,13 +6,13 @@ export interface HeaderSettings {
     transparent?: boolean;
 }
 
-export const StyledHeader = tw.div<HeaderSettings>`
+export const StyledHeader = tw.header<HeaderSettings>`
     w-full
     ${({ transparent }) => (transparent ? 'bg-transparent' : 'bg-unoblue')}
     flex
 `;
 
-const StyledNavbar = tw.div<any>`
+const StyledNavbar = tw.nav`
     w-full
     max-w-unomax
     p-[11px_18px]
@@ -22,7 +22,7 @@ const StyledNavbar = tw.div<any>`
     box-content
 `;
 
-export const NavBarTitle = tw.div<any>`
+export const NavBarTitle = tw.div`
     flex
     flex-row
     items-center

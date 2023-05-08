@@ -46,7 +46,7 @@ const getHeight = (height: string | undefined, fit: boolean | undefined) => {
     return fit ? 'fit-content' : 'auto';
 };
 
-const CardBase = styled.div<CardSettings>`
+const CardBase = styled.section<CardSettings>`
     flex-direction: ${({ direction }) => direction};
     grid-row: span ${({ row }) => row};
     grid-column: span ${({ column }) => column};

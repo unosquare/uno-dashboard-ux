@@ -31,13 +31,12 @@ const AppContainerBase = styled.div<AppContainerSettings>`
 
 export const StyledAppContainer = tw(AppContainerBase)<AppContainerSettings>`
     grid
-    gap-x-[35px]
-    gap-y-[30px]
+    gap-[25px]
     auto-rows-max
     w-[calc(100%-80px)]
     max-w-unomax
     m-auto
-    p-[30px]
+    p-[25px]
     h-auto
     min-h-[calc(100%-70px)]
     box-content
@@ -48,7 +47,7 @@ export const StyledAppContainer = tw(AppContainerBase)<AppContainerSettings>`
     md:!grid-cols-[repeat(1,1fr)]
 `;
 
-export const StyledContainer = tw.div<any>`
+export const StyledContainer = tw.main<any>`
     w-full
     h-[calc(100vh-145px)]
     ${({ $hasToolbar }) => $hasToolbar && 'h-[calc(100vh-185px)]'}

@@ -30,7 +30,7 @@ export const StyledToolbarActionContainer = tw.div`
     [&>svg]:cursor-pointer
 `;
 
-export const StyledToolbarContainer = tw.div`
+export const StyledToolbarContainer = tw.aside`
     h-14
     relative
     w-full
