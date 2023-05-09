@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import loadingGif from '../resources/loading.gif';
 
-const StyledLoading = styled.img`
-    width: 160px;
-    margin: auto;
-    display: block;
+const StyledLoading = tw.img`
+    w-40 
+    m-auto 
+    block
 `;
 
 export const CardLoading = ({ img }: any) => <StyledLoading src={img || loadingGif} alt='Loading' />;

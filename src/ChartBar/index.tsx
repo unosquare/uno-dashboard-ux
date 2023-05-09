@@ -17,7 +17,7 @@ import { ChartLegend } from '../ChartLegend';
 import { ChartTypes, LegendFormatTypes } from '../constants';
 import { formatTicks } from '../DataChart';
 import { NoData } from '../NoData';
-import { baseTheme, defaultChartPalette } from '../theme';
+import { defaultChartPalette } from '../theme';
 
 interface XAxisPrimaryFormatter {
     (input: string): string;
@@ -207,13 +207,7 @@ export const ChartBar = ({
                             ),
                         )}
                         {scroll && (
-                            <Brush
-                                dataKey='name'
-                                height={15}
-                                stroke={baseTheme.colors.table}
-                                endIndex={11}
-                                travellerWidth={10}
-                            />
+                            <Brush dataKey='name' height={15} stroke='#f1f2f3' endIndex={11} travellerWidth={10} />
                         )}
                     </BarChart>
                 </ResponsiveContainer>

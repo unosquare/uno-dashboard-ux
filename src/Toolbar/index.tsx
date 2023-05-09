@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { ActionButton, ActionButtonContainer } from '../ActionButton';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { SearchBox } from '../SearchBox';
@@ -17,22 +17,22 @@ export interface ToolBarSettings {
     exportCsvDisabled?: boolean;
 }
 
-const StyledTableTitleContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    height: 50px;
+const StyledTableTitleContainer = tw.div`
+    flex 
+    flex-row 
+    justify-between 
+    w-full 
+    h-12
 `;
 
-const SearchboxContainer = styled.div`
-    margin-bottom: 1.5rem;
-    margin-right: 2.5rem;
-    width: 250px;
-    min-width: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: end;
+const SearchboxContainer = tw.div`
+    mb-6 
+    mr-10 
+    w-64 
+    flex 
+    items-center
+    justify-end
+    min-w-[90px]
 `;
 
 export const ToolBarSelect = ({ label, options, handler, selected, styles }: SelectSettings) => (

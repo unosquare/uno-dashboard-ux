@@ -43,7 +43,7 @@ export const StyledSelectContainer = tw.div`
     flex
     items-center
     gap-2
-    [&>span]:max-w-[100px]
+    [&>span]:max-w-[120px]
     [&>span]:min-w-fit
 `;
 

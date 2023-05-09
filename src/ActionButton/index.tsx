@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 
 export interface ButtonSettings {
     width?: string;
@@ -6,11 +7,11 @@ export interface ButtonSettings {
     ignoreFocus?: boolean;
 }
 
-export const ActionButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    height: 100%;
+export const ActionButtonContainer = tw.div`
+    flex 
+    items-center 
+    h-full
+    justify-end
 `;
 
 export const ActionButton = styled.button<ButtonSettings>`

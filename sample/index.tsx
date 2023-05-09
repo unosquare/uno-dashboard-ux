@@ -1,11 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { ThemeProvider } from 'styled-components';
 import { identity } from 'uno-js';
 import {
     AppContainer,
     Badge,
-    baseTheme,
     BasicToolbar,
     Blur,
     Burger,
@@ -109,7 +107,7 @@ const Application = () => {
     const CircleClicked = () => setCircleValue(circleValue + 1);
 
     return (
-        <ThemeProvider theme={baseTheme}>
+        <>
             <NavBar>
                 <NavBarTitle>
                     <h2>Sample App</h2>
@@ -129,7 +127,7 @@ const Application = () => {
                                 onOptionClicked={handleOptionChange}
                             />
                             <StyledMenuSearchBox>
-                                <SearchBox search={(v) => console.log(v)} />
+                                <SearchBox focus search={(v) => console.log(v)} />
                             </StyledMenuSearchBox>
                             <MenuSection>
                                 <h6>This is a Section</h6>
@@ -201,7 +199,7 @@ const Application = () => {
                 </Card>
             </AppContainer>
             <Footer />
-        </ThemeProvider>
+        </>
     );
 };
 

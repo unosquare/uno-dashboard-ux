@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import tw from 'tailwind-styled-components';
 
 const SearchBoxLayout = tw.div`
@@ -65,14 +65,22 @@ const Cross = tw.svg`
 export interface SearchBoxSettings {
     placeholder?: string;
     search: (value: string) => void;
+    focus?: boolean;
 }
 
 interface CrossButtonSettings extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     $visible: boolean;
 }
 
-export const SearchBox = ({ search, placeholder = 'Search' }: SearchBoxSettings) => {
+export const SearchBox = ({ search, placeholder = 'Search', focus = false }: SearchBoxSettings) => {
     const [value, setValue] = React.useState('');
+    const ref = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (focus && ref.current) {
+            ref.current.focus();
+        }
+    }, []);
 
     const onSearch = (val: string) => {
         setValue(val);
@@ -100,7 +108,7 @@ export const SearchBox = ({ search, placeholder = 'Search' }: SearchBoxSettings)
                 />
             </SearchGlass>
             <CrossContainer>
-                <Input value={value} onChange={onChange} type='text' placeholder={placeholder} />
+                <Input ref={ref} value={value} onChange={onChange} type='text' placeholder={placeholder} />
                 <CrossButton $visible={value !== ''} onClick={onCrossPressed}>
                     <Cross xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'>
                         <path

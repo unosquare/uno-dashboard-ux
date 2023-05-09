@@ -70,7 +70,6 @@ const StyledTitle = styled.div<TitleSettings>`
 `;
 
 const StyledLabelWithImage = styled.div`
-    color: ${({ theme }) => theme.colors.fontMain};
     margin-bottom: 10px;
     display: flex;
     span {
@@ -91,9 +90,9 @@ const StyledLabelWithImage = styled.div`
     }
 `;
 
-const StyledCenteredSpan = styled.span`
-    display: flex;
-    align-items: center;
+const StyledCenteredSpan = tw.span`
+    flex 
+    items-center
 `;
 
 const StyledLabelWithIcon = styled.div`
@@ -102,7 +101,6 @@ const StyledLabelWithIcon = styled.div`
     display: flex;
     justify-content: space-between;
     padding-left: 15px;
-    color: ${({ theme }) => theme.colors.fontMain};
     span {
         font-size: 14px;
         letter-spacing: 0.8px;
@@ -115,21 +113,21 @@ const StyledLabelWithIcon = styled.div`
     }
 `;
 
-const StyledCenteredBoldSpan = styled.div`
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 14px;
-    padding-left: 6px;
-    padding-bottom: 5px;
-    padding-top: 3px;
+const StyledCenteredBoldSpan = tw.div`
+    flex 
+    items-center 
+    font-bold 
+    text-sm 
+    pl-1 
+    pb-1 
+    pt-1
 `;
 
-const StyledLeftSpan = styled.div`
-    display: flex;
-    align-items: left;
-    padding-left: 6px;
-    font-size: 12px;
+const StyledLeftSpan = tw.div`
+    flex 
+    pl-1 
+    text-xs
+    items-start
 `;
 
 const StyledSubTitle = tw.p<SubtitleSettings>`

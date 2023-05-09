@@ -7,7 +7,7 @@ import { ChartLegend } from '../ChartLegend';
 import { ChartComponent, ChartData, ChartTypes, Directions, LegendFormatTypes, SizeValues } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { NoData } from '../NoData';
-import { baseTheme, defaultChartPalette } from '../theme';
+import { defaultChartPalette } from '../theme';
 
 interface ChartCommon {
     label?: string;
@@ -205,13 +205,7 @@ export const PieChart = ({
                     <ChartContainer direction={direction} size={size}>
                         <ResponsiveContainer>
                             <PieChartRechart>
-                                <Pie
-                                    data={dataStore}
-                                    dataKey='value'
-                                    fill={baseTheme.colors.background}
-                                    startAngle={90}
-                                    endAngle={-360}
-                                >
+                                <Pie data={dataStore} dataKey='value' fill='#f1f2f3' startAngle={90} endAngle={-360}>
                                     {dataStore.map((data, index) => (
                                         <Cell key={objectHash(data)} fill={colors[index]} />
                                     ))}
