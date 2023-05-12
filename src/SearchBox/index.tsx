@@ -78,9 +78,9 @@ export const SearchBox = ({ search, placeholder = 'Search', focus = false }: Sea
 
     useEffect(() => {
         if (focus && ref.current) {
-            ref.current.focus();
+            setTimeout(() => ref.current?.focus(), 3000);
         }
-    }, []);
+    }, [focus]);
 
     const onSearch = (val: string) => {
         setValue(val);

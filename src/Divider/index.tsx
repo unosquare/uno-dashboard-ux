@@ -1,8 +1,10 @@
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 
-export const Divider = styled.div`
-    height: 80%;
-    border-left: #f1f2f3 2px solid;
-    margin-left: 20px;
-    margin-right: 20px;
+export const Divider = tw.div`
+    h-4/5
+    ml-[20px]
+    mr-[20px]
+    border-l-[2px]
+    border-[#f1f2f3]
+    border-solid
 `;

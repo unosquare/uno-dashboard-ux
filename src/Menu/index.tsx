@@ -32,9 +32,11 @@ export const MenuContainer = tw.div`
     animated-menu
 `;
 
-export const StyledMenuSearchBox = styled.div`
-    height: 5vh;
-    margin: 0 auto 0 58px;
+export const StyledMenuSearchBox = tw.div`
+    h-[5vh]
+    margin-0
+    margin-l-auto
+    margin-r-[58px]
 `;
 
 export const MenuSection = tw.div`
