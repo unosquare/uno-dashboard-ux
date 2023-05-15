@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { identity } from 'uno-js';
+import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
 import {
     AppContainer,
     Badge,
@@ -38,7 +39,6 @@ import {
     StyledMenuActions,
 } from '../src';
 import '../src/resources/global.css';
-import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
 
 export enum options {
     A = 'Apple',
