@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 
 export interface SubSectionSettings {
@@ -34,9 +33,9 @@ export const MenuContainer = tw.div`
 
 export const StyledMenuSearchBox = tw.div`
     h-[5vh]
-    margin-0
-    margin-l-auto
-    margin-r-[58px]
+    m-0
+    mr-auto
+    ml-[58px]
 `;
 
 export const MenuSection = tw.div`
