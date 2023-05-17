@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 
@@ -5,6 +6,10 @@ export interface ButtonSettings {
     width?: string;
     fitContent?: boolean;
     ignoreFocus?: boolean;
+}
+
+export interface ButtonBaseSettings extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    children: React.ReactNode;
 }
 
 export const ActionButtonContainer = tw.div`
@@ -46,3 +51,34 @@ export const ActionButton = styled.button<ButtonSettings>`
         cursor: not-allowed;
     }
 `;
+
+export const StyledButton = tw.button`
+    flex
+    items-center
+    justify-center
+    h-[38px]
+    rounded
+    border-solid
+    border-unoblue
+    text-unoblue
+    font-semibold
+    hover:bg-unoblue
+    hover:text-white
+    cursor-pointer
+    mx-auto
+    min-w-[160px]
+    font-sans
+    bg-white
+    py-0
+    px-4
+    pb-[2px]
+    border-[1px] 
+    text-xs
+    box-border
+`;
+
+export const Button = ({ children, ...rest }: ButtonBaseSettings) => (
+    <StyledButton type='button' {...rest}>
+        {children}
+    </StyledButton>
+);

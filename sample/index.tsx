@@ -8,8 +8,10 @@ import {
     BasicToolbar,
     Blur,
     Burger,
+    Button,
     Card,
     CardContent,
+    CardLoading,
     ChartBar,
     Circle,
     Colors,
@@ -17,26 +19,25 @@ import {
     DataTypes,
     Directions,
     Divider,
+    DropdownMenu,
     Ellipse,
     FlexValues,
     Footer,
     LegendFormatTypes,
-    CardLoading,
     MenuContainer,
+    MenuSection,
+    MenuSubSection,
     NavBar,
     NavBarTitle,
     PieChart,
+    SearchBox,
     SizeValues,
     SortDirection,
+    StyledMenuActions,
+    StyledMenuSearchBox,
     SubTitle,
     Table,
     Title,
-    DropdownMenu,
-    StyledMenuSearchBox,
-    SearchBox,
-    MenuSection,
-    MenuSubSection,
-    StyledMenuActions,
 } from '../src';
 import '../src/resources/global.css';
 
@@ -142,6 +143,9 @@ const Application = () => {
             </NavBar>
             <BasicToolbar>
                 <span>This is a toolbar</span>
+                <Button onClick={() => console.log('destroying all...')}>
+                    Never click here (it will destroy everything)
+                </Button>
             </BasicToolbar>
             <AppContainer rows={4} columns={3} hasToolbar>
                 <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
