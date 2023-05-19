@@ -12,12 +12,13 @@ import {
     YAxis,
 } from 'recharts';
 import tw from 'tailwind-styled-components';
-import { Dictionary, formatter, FormatTypes } from 'uno-js';
+import { Dictionary } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
-import { ChartComponent, ChartTypes, LegendFormatTypes } from '../constants';
+import { ChartComponent, ChartTypes } from '../constants';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
+import { formatTicks, StyledChartTitle } from '../ChartBar';
 
 export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn, Dictionary[]> {
     legend?: boolean;
@@ -27,18 +28,12 @@ export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn, Dict
     unit?: string;
     onLegendClick?: (e: any) => void;
     refLineY?: { value: number; label: string; color: string };
-    loading?: boolean;
+    isLoading?: boolean;
 }
 
 interface LegendSettings {
     $clickable?: boolean;
 }
-
-const StyledChartTitle = tw.h6`
-    m-0
-    text-base
-    font-medium
-`;
 
 const StyledChart = tw.div`
     flex
@@ -67,30 +62,6 @@ const xPadding = {
     right: 20,
 };
 
-const translateFormat = (format: LegendFormatTypes) => {
-    switch (format) {
-        case LegendFormatTypes.MONEY:
-            return FormatTypes.MONEY;
-        case LegendFormatTypes.PERCENTAGE:
-            return FormatTypes.PERCENTAGE;
-        case LegendFormatTypes.NUMBER:
-        case LegendFormatTypes.NEGATIVE:
-            return FormatTypes.NUMBER;
-        default:
-            return FormatTypes.DECIMAL;
-    }
-};
-
-export const formatTicks = (t: any, formatType: LegendFormatTypes) => {
-    if (formatType === LegendFormatTypes.MONEY) {
-        if (t >= 1000000) return `${t / 1000000}M`;
-
-        return t >= 1000 ? `${t / 1000}K` : formatter(t, FormatTypes.MONEY);
-    }
-
-    return formatter(t, translateFormat(formatType));
-};
-
 export const getChartSeries = (data: any) =>
     data.reduce((current: any[], serie: any) => {
         Object.keys(serie)
@@ -117,7 +88,7 @@ export const DataChart = ({
     unit,
     onLegendClick,
     refLineY,
-    loading,
+    isLoading,
 }: DataChartSettings<any>) => {
     const dataStore: Dictionary[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t);
@@ -125,8 +96,8 @@ export const DataChart = ({
     return (
         <StyledChart>
             {title && <StyledChartTitle>{title}</StyledChartTitle>}
-            {loading && <CardLoading />}
-            {!loading && dataStore.length > 0 ? (
+            {isLoading && <CardLoading />}
+            {!isLoading && dataStore.length > 0 ? (
                 <ResponsiveContainer>
                     <LineChart data={dataStore} margin={margin} onClick={onClick}>
                         <CartesianGrid strokeDasharray='2 2' />
@@ -173,7 +144,7 @@ export const DataChart = ({
                     </LineChart>
                 </ResponsiveContainer>
             ) : (
-                !loading && <NoData />
+                !isLoading && <NoData />
             )}
         </StyledChart>
     );
