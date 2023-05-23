@@ -14,6 +14,8 @@ import {
     Footer,
     LegendFormatTypes,
     MenuContainer,
+    MenuSection,
+    MenuSubSection,
     NavBar,
     NavBarTitle,
     PieChart,
@@ -143,6 +145,9 @@ const Application = () => {
             </NavBar>
             <BasicToolbar>
                 <span>This is a toolbar</span>
+                <Button onClick={() => console.log('destroying all...')}>
+                    Never click here (it will destroy everything)
+                </Button>
             </BasicToolbar>
             <TremorContainer>
                 <Grid numCols={3} className='mt-6 gap-6'>

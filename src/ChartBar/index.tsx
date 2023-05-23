@@ -12,12 +12,36 @@ import {
     YAxis,
 } from 'recharts';
 import tw from 'tailwind-styled-components';
-import { Dictionary, humanize } from 'uno-js';
+import { Dictionary, formatter, FormatTypes, humanize } from 'uno-js';
 import { ChartLegend } from '../ChartLegend';
 import { ChartTypes, LegendFormatTypes } from '../constants';
-import { formatTicks } from '../DataChart';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
+import { CardLoading } from '../CardLoading';
+
+const translateFormat = (format: LegendFormatTypes) => {
+    switch (format) {
+        case LegendFormatTypes.MONEY:
+            return FormatTypes.MONEY;
+        case LegendFormatTypes.PERCENTAGE:
+            return FormatTypes.PERCENTAGE;
+        case LegendFormatTypes.NUMBER:
+        case LegendFormatTypes.NEGATIVE:
+            return FormatTypes.NUMBER;
+        default:
+            return FormatTypes.DECIMAL;
+    }
+};
+
+export const formatTicks = (t: any, formatType: LegendFormatTypes) => {
+    if (formatType === LegendFormatTypes.MONEY) {
+        if (t >= 1000000) return `${t / 1000000}M`;
+
+        return t >= 1000 ? `${t / 1000}K` : formatter(t, FormatTypes.MONEY);
+    }
+
+    return formatter(t, translateFormat(formatType));
+};
 
 interface XAxisPrimaryFormatter {
     (input: string): string;
@@ -51,13 +75,14 @@ export interface ChartBarSettings<TDataIn> {
     accumulated?: boolean;
     scroll?: boolean;
     refLineY?: { value: number; label: string; color: string };
+    isLoading?: boolean;
 }
 
 interface LegendSettings {
     $clickable: boolean;
 }
 
-const StyledChartTitle = tw.h6`
+export const StyledChartTitle = tw.h6`
     m-0
     text-base
     font-medium
@@ -103,6 +128,7 @@ export const ChartBar = ({
     tooltipOffset = 10,
     accumulated = false,
     scroll = false,
+    isLoading = false,
     refLineY,
 }: ChartBarSettings<any>) => {
     const dataStore: Dictionary[] = (dataCallback && rawData && dataCallback(rawData)) || [];
@@ -113,7 +139,8 @@ export const ChartBar = ({
     return (
         <StyledChart>
             {title && <StyledChartTitle>{title}</StyledChartTitle>}
-            {dataStore.length > 0 ? (
+            {isLoading && <CardLoading />}
+            {!isLoading && dataStore.length > 0 ? (
                 <ResponsiveContainer>
                     <BarChart
                         data={dataStore}
@@ -212,7 +239,7 @@ export const ChartBar = ({
                     </BarChart>
                 </ResponsiveContainer>
             ) : (
-                <NoData />
+                !isLoading && <NoData />
             )}
         </StyledChart>
     );
