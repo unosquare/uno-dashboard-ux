@@ -14,8 +14,6 @@ import {
     Footer,
     LegendFormatTypes,
     MenuContainer,
-    MenuSection,
-    MenuSubSection,
     NavBar,
     NavBarTitle,
     PieChart,
@@ -29,6 +27,7 @@ import {
     MenuSubSection,
     StyledMenuActions,
     TremorContainer,
+    Button,
 } from '../src';
 import '../src/resources/global.css';
 import {
