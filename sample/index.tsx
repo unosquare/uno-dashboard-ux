@@ -85,6 +85,8 @@ const chartData = [
     { name: 'Group C', value: 300 },
 ];
 
+const dataFormatter = (number: number) => Intl.NumberFormat('us').format(number).toString();
+
 const Application = () => {
     const [currentOption, setCurrentOption] = React.useState(options.A);
     const [value, setValue] = React.useState(false);
@@ -95,10 +97,6 @@ const Application = () => {
     const toggle = () => {
         setValue(!value);
         setData(value ? defaultData : []);
-    };
-
-    const handleOptionChange = (option: options) => {
-        setCurrentOption(option);
     };
 
     const onToggleMenu = () => {
@@ -127,7 +125,7 @@ const Application = () => {
                                 options={options}
                                 value={currentOption}
                                 label='Options'
-                                onOptionClicked={handleOptionChange}
+                                onOptionClicked={setCurrentOption}
                             />
                             <StyledMenuSearchBox>
                                 <SearchBox focus search={(v) => console.log(v)} />
@@ -161,14 +159,13 @@ const Application = () => {
                     <TremorCard>
                         <Text>Goal</Text>
                         <LineChart
-                            className='mt-4 h-56'
+                            className='mt-6'
                             data={chartData}
                             index='name'
                             categories={['value']}
-                            colors={['blue']}
-                            showYAxis={false}
-                            showLegend={false}
-                            showAnimation={true}
+                            colors={['emerald']}
+                            valueFormatter={dataFormatter}
+                            yAxisWidth={40}
                         />
                     </TremorCard>
                     <TremorCard>
