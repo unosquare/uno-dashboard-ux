@@ -3,43 +3,46 @@ import { createRoot } from 'react-dom/client';
 import { identity } from 'uno-js';
 import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
 import {
-    AppContainer,
     Badge,
     BasicToolbar,
     Blur,
     Burger,
-    Button,
-    Card,
-    CardContent,
-    CardLoading,
     ChartBar,
     Circle,
-    Colors,
     DataChart,
     DataTypes,
-    Directions,
-    Divider,
-    DropdownMenu,
-    Ellipse,
-    FlexValues,
     Footer,
     LegendFormatTypes,
     MenuContainer,
-    MenuSection,
-    MenuSubSection,
     NavBar,
     NavBarTitle,
     PieChart,
-    SearchBox,
-    SizeValues,
     SortDirection,
-    StyledMenuActions,
-    StyledMenuSearchBox,
-    SubTitle,
     Table,
     Title,
+    DropdownMenu,
+    StyledMenuSearchBox,
+    SearchBox,
+    MenuSection,
+    MenuSubSection,
+    StyledMenuActions,
+    TremorContainer,
+    Button,
 } from '../src';
 import '../src/resources/global.css';
+import {
+    Text,
+    Metric,
+    Grid,
+    Card as TremorCard,
+    Col,
+    Flex,
+    BadgeDelta,
+    AreaChart,
+    CategoryBar,
+    Legend,
+    LineChart,
+} from '@tremor/react';
 
 export enum options {
     A = 'Apple',
@@ -83,6 +86,8 @@ const chartData = [
     { name: 'Group C', value: 300 },
 ];
 
+const dataFormatter = (number: number) => Intl.NumberFormat('us').format(number).toString();
+
 const Application = () => {
     const [currentOption, setCurrentOption] = React.useState(options.A);
     const [value, setValue] = React.useState(false);
@@ -93,10 +98,6 @@ const Application = () => {
     const toggle = () => {
         setValue(!value);
         setData(value ? defaultData : []);
-    };
-
-    const handleOptionChange = (option: options) => {
-        setCurrentOption(option);
     };
 
     const onToggleMenu = () => {
@@ -125,7 +126,7 @@ const Application = () => {
                                 options={options}
                                 value={currentOption}
                                 label='Options'
-                                onOptionClicked={handleOptionChange}
+                                onOptionClicked={setCurrentOption}
                             />
                             <StyledMenuSearchBox>
                                 <SearchBox focus search={(v) => console.log(v)} />
@@ -147,61 +148,88 @@ const Application = () => {
                     Never click here (it will destroy everything)
                 </Button>
             </BasicToolbar>
-            <AppContainer rows={4} columns={3} hasToolbar>
-                <Card column={1} row={1} direction={Directions.ROW} justify={FlexValues.START} fit>
-                    <Circle value={circleValue} onClick={CircleClicked} />
-                    <Title>
-                        <h2>TOTAL</h2>
-                        <h3>Rows</h3>
-                    </Title>
-                </Card>
-                <Card column={2} row={1} direction={Directions.COLUMN}>
-                    <DataChart rawData={chartData} dataCallback={identity} legend />
-                    <Badge value={500} content='Goal' right={30} />
-                </Card>
-                <Card column={1} row={2} direction={Directions.COLUMN}>
-                    <PieChart rawData={chartData} dataCallback={identity} legendFormatType={LegendFormatTypes.NUMBER} />
-                </Card>
-                <Card column={2} row={2} direction={Directions.COLUMN} fit>
-                    <Table
-                        columns={columns}
-                        rawData={data}
-                        dataCallback={identity}
-                        dataTitle='Data Table'
-                        searchable
-                        sortable
-                        exportCsv
-                        switchTbl={toggle}
-                        isExchange={value}
-                        calculateFooter={calculateFooter}
-                    />
-                </Card>
-                <Card column={1} row={3} direction={Directions.ROW} fit>
-                    <CardLoading />
-                    <Divider />
-                    <Circle size={SizeValues.SMALL} value={100} color={Colors.GRAY} />
-                </Card>
-                <Card column={2} row={3} direction={Directions.ROW}>
-                    <Circle size={SizeValues.EXTRA_SMALL} value={50} color={Colors.GRAY} />
-                    <Divider />
-                    <CardContent direction={Directions.COLUMN} size={SizeValues.EXTRA_SMALL}>
-                        <SubTitle>
-                            <h4>Subtitle</h4>
-                            <h5>
-                                <Ellipse color='#4CDD28' small /> This is OK
-                            </h5>
-                        </SubTitle>
-                    </CardContent>
-                </Card>
-                <Card column={3} row={4} direction={Directions.ROW}>
-                    <ChartBar
-                        rawData={chartData}
-                        dataCallback={identity}
-                        legendFormatType={LegendFormatTypes.MONEY}
-                        legend
-                    />
-                </Card>
-            </AppContainer>
+            <TremorContainer>
+                <Grid numCols={3} className='mt-6 gap-6'>
+                    <TremorCard>
+                        <Flex alignItems='start'>
+                            <Text>Total Rows</Text>
+                            <BadgeDelta deltaType={'increase'}>{50}</BadgeDelta>
+                        </Flex>
+                        <Flex justifyContent='start' alignItems='baseline' className='truncate space-x-3'>
+                            <Metric>1234</Metric>
+                            <Text className='truncate'>from 2000</Text>
+                        </Flex>
+                    </TremorCard>
+                    <TremorCard>
+                        <Text>Goal</Text>
+                        <LineChart
+                            className='mt-6'
+                            data={chartData}
+                            index='name'
+                            categories={['value']}
+                            colors={['emerald']}
+                            valueFormatter={dataFormatter}
+                            yAxisWidth={40}
+                        />
+                    </TremorCard>
+                    <TremorCard>
+                        <Text>Value</Text>
+                        <Metric>100%</Metric>
+                        <CategoryBar
+                            categoryPercentageValues={chartData.map((y) => y.value)}
+                            colors={['emerald', 'yellow', 'rose']}
+                            className='mt-4'
+                        />
+                        <Legend
+                            categories={chartData.map((y) => y.name)}
+                            colors={['emerald', 'yellow', 'rose']}
+                            className='mt-3'
+                        />
+                    </TremorCard>
+                    <TremorCard className='flex flex-row'>
+                        <Circle value={circleValue} onClick={CircleClicked} />
+                        <Title>
+                            <h2>TOTAL</h2>
+                            <h3>Rows</h3>
+                        </Title>
+                    </TremorCard>
+                    <TremorCard className='flex flex-col h-28'>
+                        <DataChart rawData={chartData} dataCallback={identity} legend />
+                        <Badge value={500} content='Goal' right={30} />
+                    </TremorCard>
+                    <TremorCard>
+                        <ChartBar
+                            rawData={chartData}
+                            dataCallback={identity}
+                            legendFormatType={LegendFormatTypes.MONEY}
+                            legend
+                        />
+                    </TremorCard>
+                    <TremorCard>
+                        <PieChart
+                            rawData={chartData}
+                            dataCallback={identity}
+                            legendFormatType={LegendFormatTypes.NUMBER}
+                        />
+                    </TremorCard>
+                    <Col numColSpan={2}>
+                        <TremorCard>
+                            <Table
+                                columns={columns}
+                                rawData={data}
+                                dataCallback={identity}
+                                dataTitle='Data Table'
+                                searchable
+                                sortable
+                                exportCsv
+                                switchTbl={toggle}
+                                isExchange={value}
+                                calculateFooter={calculateFooter}
+                            />
+                        </TremorCard>
+                    </Col>
+                </Grid>
+            </TremorContainer>
             <Footer />
         </>
     );

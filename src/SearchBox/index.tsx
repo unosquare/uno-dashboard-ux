@@ -30,6 +30,7 @@ const Input = tw.input`
     pl-[1.5rem]
     leading-[1rem]
     bg-transparent
+    text-sm
     focus:outline-[2px]
     focus:outline-offset-[2px]
     focus:outline-transparent

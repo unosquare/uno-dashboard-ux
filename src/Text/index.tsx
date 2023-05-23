@@ -17,6 +17,7 @@ const WrapperTitle = tw.div`
     text-gray-700
     tracking-wide
     uppercase
+    font-bold
     [&_h2]:text-4xl
     [&_h2]:m-0
     [&_h3]:text-3xl
@@ -35,38 +36,6 @@ const StyledTitle = styled.div<TitleSettings>`
     display: flex;
     flex-direction: column;
     ${({ center }) => center && 'text-align: center;'}
-    ul {
-        width: 100%;
-        margin: 0px;
-        padding: 0px;
-        font-size: 16px;
-        text-align: justify;
-        list-style-type: none;
-    }
-    li {
-        margin: 15px 3px;
-        line-height: 22px;
-    }
-    span {
-        margin: 0px;
-        font-size: 16px;
-        width: 100%;
-        text-align: start;
-        margin-bottom: auto;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-    }
-    strong {
-        justify-content: space-between;
-        display: flex;
-        div {
-            display: flex;
-            align-items: center;
-            width: 50px;
-            justify-content: space-between;
-        }
-    }
 `;
 
 const StyledLabelWithImage = styled.div`
@@ -130,7 +99,7 @@ const StyledLeftSpan = tw.div`
     items-start
 `;
 
-const StyledSubTitle = tw.p<SubtitleSettings>`
+const StyledSubTitle = tw.div<SubtitleSettings>`
     m-0
     mb-10
     ${({ margin }) => (margin ? 'mt-auto' : 'mt-0')};

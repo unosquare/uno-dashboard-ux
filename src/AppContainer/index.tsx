@@ -61,3 +61,19 @@ export const AppContainer = ({ rows, children, columns = 5, hasToolbar }: AppCon
         </StyledAppContainer>
     </StyledContainer>
 );
+
+const MainApp = tw.main`
+    w-full
+    h-[calc(100vh-185px)]
+    overflow-y-auto
+    p-2`;
+
+const InnerMain = tw.div`
+    max-w-unomax
+    m-auto`;
+
+export const TremorContainer = ({ children }: HasChildrenComponent) => (
+    <MainApp>
+        <InnerMain>{children}</InnerMain>
+    </MainApp>
+);
