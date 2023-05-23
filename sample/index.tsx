@@ -148,7 +148,7 @@ const Application = () => {
                     Never click here (it will destroy everything)
                 </Button>
             </BasicToolbar>
-            <TremorContainer>
+            <TremorContainer hasToolbar>
                 <Grid numCols={3} className='mt-6 gap-6'>
                     <TremorCard>
                         <Flex alignItems='start'>

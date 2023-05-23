@@ -9,6 +9,10 @@ export interface AppContainerSettings extends HasChildrenComponent {
     hasToolbar?: boolean;
 }
 
+export interface TremorContainerSettings extends HasChildrenComponent {
+    hasToolbar?: boolean;
+}
+
 const getTemplateRows = (rows: number) => {
     switch (rows) {
         case 5:
@@ -62,9 +66,10 @@ export const AppContainer = ({ rows, children, columns = 5, hasToolbar }: AppCon
     </StyledContainer>
 );
 
-const MainApp = tw.main`
+const MainApp = tw.main<any>`
     w-full
-    h-[calc(100vh-185px)]
+    h-[calc(100vh-145px)]
+    ${({ $hasToolbar }) => $hasToolbar && 'h-[calc(100vh-185px)]'}
     overflow-y-auto
     p-2`;
 
@@ -72,8 +77,8 @@ const InnerMain = tw.div`
     max-w-unomax
     m-auto`;
 
-export const TremorContainer = ({ children }: HasChildrenComponent) => (
-    <MainApp>
+export const TremorContainer = ({ children, hasToolbar }: TremorContainerSettings) => (
+    <MainApp $hasToolbar={hasToolbar}>
         <InnerMain>{children}</InnerMain>
     </MainApp>
 );
