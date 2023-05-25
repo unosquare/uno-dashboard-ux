@@ -19,7 +19,6 @@ import {
     PieChart,
     SortDirection,
     Table,
-    DropdownMenu,
     StyledMenuSearchBox,
     SearchBox,
     MenuSection,
@@ -27,6 +26,7 @@ import {
     StyledMenuActions,
     TremorContainer,
     Button,
+    ExchangeToggle,
 } from '../src';
 import '../src/resources/global.css';
 import {
@@ -37,11 +37,12 @@ import {
     Col,
     Flex,
     BadgeDelta,
-    AreaChart,
+    Dropdown,
     CategoryBar,
     Legend,
     LineChart,
     Title,
+    DropdownItem,
 } from '@tremor/react';
 
 export enum options {
@@ -89,7 +90,7 @@ const chartData = [
 const dataFormatter = (number: number) => Intl.NumberFormat('us').format(number).toString();
 
 const Application = () => {
-    const [currentOption, setCurrentOption] = React.useState(options.A);
+    const [currentOption, setCurrentOption] = React.useState<string>(options.A);
     const [value, setValue] = React.useState(false);
     const [openMenu, setOpenMenu] = React.useState(false);
     const [data, setData] = React.useState(defaultData);
@@ -122,12 +123,12 @@ const Application = () => {
                                 <ArrowSync24Regular />
                                 <Dismiss24Regular onClick={() => setOpenMenu(false)} />
                             </StyledMenuActions>
-                            <DropdownMenu
-                                options={options}
-                                value={currentOption}
-                                label='Options'
-                                onOptionClicked={setCurrentOption}
-                            />
+                            <Text>Options</Text>
+                            <Dropdown value={currentOption} onValueChange={setCurrentOption}>
+                                <DropdownItem value={options.A}>Apple</DropdownItem>
+                                <DropdownItem value={options.B}>Bolt</DropdownItem>
+                                <DropdownItem value={options.C}>Cactus</DropdownItem>
+                            </Dropdown>
                             <StyledMenuSearchBox>
                                 <SearchBox focus search={(v) => console.log(v)} />
                             </StyledMenuSearchBox>
@@ -208,19 +209,21 @@ const Application = () => {
                         />
                     </TremorCard>
                     <Col numColSpan={2}>
-                        <TremorCard>
+                        <TremorCard className='h-60'>
                             <Table
                                 columns={columns}
                                 rawData={data}
                                 dataCallback={identity}
-                                dataTitle='Data Table'
                                 searchable
                                 sortable
                                 exportCsv
-                                switchTbl={toggle}
-                                isExchange={value}
                                 calculateFooter={calculateFooter}
-                            />
+                            >
+                                <Flex flexDirection='row' justifyContent='between'>
+                                    <Title>Data Table</Title>
+                                    <ExchangeToggle isExchange={value} switchTbl={toggle} />
+                                </Flex>
+                            </Table>
                         </TremorCard>
                     </Col>
                 </Grid>

@@ -9,9 +9,9 @@ import {
     DocumentArrowDown16Filled,
     Link16Regular,
 } from '@fluentui/react-icons';
-import { Flex, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Table as TremorTable } from '@tremor/react';
+import { TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Table as TremorTable } from '@tremor/react';
 import objectHash from 'object-hash';
-import { CurrencyRate, DataTypes, SortDirection } from '../constants';
+import { DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
@@ -24,7 +24,6 @@ export * from './sortData';
 export interface TableSettings<TDataIn, TDataOut> {
     rawData: TDataIn;
     dataCallback: (data: TDataIn) => TDataOut[];
-    dataTitle?: string;
     columns: TableColumn[];
     loading?: boolean;
     noDataElement?: React.ReactNode;
@@ -33,9 +32,6 @@ export interface TableSettings<TDataIn, TDataOut> {
     sortable?: any;
     exportCsv?: boolean;
     render?: <TIn>(data: (string | number)[], definitions: TableColumn[], rawData: TIn) => React.ReactNode;
-    switchTbl?: (inputExchangeRates?: CurrencyRate[]) => void;
-    isExchange?: boolean;
-    useMinWidth?: boolean;
     children?: React.ReactNode;
 }
 
@@ -79,6 +75,7 @@ const StyledLinkButton = tw.button`
     cursor-pointer
     text-[10px]
     position-[horizontal]
+    p-2
 `;
 
 const StyledFile = tw.div`
@@ -150,15 +147,15 @@ const LongTextCell = ({ text }: any) => {
     const [showFullText, setShowFullText] = useState(false);
     const toggleDisplayText = () => setShowFullText(!showFullText);
 
-    if (text.length <= 45) return text;
+    if (text.length <= 100) return text;
 
     return (
-        <Flex>
-            <span>{showFullText ? text : `${text.substring(0, 45)}...`}</span>
+        <>
+            {showFullText ? text : `${text.substring(0, 100)}...`}
             <StyledLinkButton type='button' onClick={toggleDisplayText}>
                 {showFullText ? 'Show Less' : 'Show More'}
             </StyledLinkButton>
-        </Flex>
+        </>
     );
 };
 
@@ -205,17 +202,15 @@ interface TableHeadersProps {
     definitions: TableColumn[];
     sortable: boolean;
     setSortColumn: (index: number) => void;
-    useMinWidth: boolean | undefined;
 }
 
-const TableHeaders = ({ definitions, sortable, setSortColumn, useMinWidth }: TableHeadersProps) => (
+const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProps) => (
     <TableHead>
         <TableRow>
             {definitions.map((header, index) => (
                 <TableHeaderCell
                     key={objectHash(header)}
                     onClick={() => !header.excludeFromSort && setSortColumn(index)}
-                    className={`${useMinWidth && 'min-w-[100px]'}`}
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
                         <span>{header.label}</span>
@@ -244,7 +239,7 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
             {footer.map((foot, index) => (
                 <TableCell
                     key={objectHash(definition[index])}
-                    className={getAlignment(definition[index]?.dataType || undefined, index)}
+                    className={`p-2 whitespace-normal ${getAlignment(definition[index]?.dataType || undefined, index)}`}
                 >
                     <span className='font-semibold'>{foot}</span>
                 </TableCell>
@@ -261,7 +256,7 @@ const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
                 return (
                     <TableCell
                         key={objectHash({ a: definitions[index], c: cell })}
-                        className={`${
+                        className={`p-2 whitespace-normal ${
                             dataType === DataTypes.BOLD_STRING ? 'font-medium !text-black' : ''
                         } ${getAlignment(dataType, index)}`}
                     >
@@ -292,7 +287,6 @@ const searchFooter = (search: string, newRaw: any) =>
 
 export const Table = <TDataIn, TDataOut>({
     columns,
-    dataTitle,
     loading,
     noDataElement,
     searchable,
@@ -301,9 +295,6 @@ export const Table = <TDataIn, TDataOut>({
     sortable,
     exportCsv,
     render,
-    switchTbl,
-    isExchange = false,
-    useMinWidth,
     children,
     dataCallback,
 }: TableSettings<TDataIn, TDataOut>) => {
@@ -352,39 +343,29 @@ export const Table = <TDataIn, TDataOut>({
               createCsv(
                   dataStore,
                   definitions.map((x) => x.label),
-                  dataTitle || 'file',
+                  'file',
               );
 
     const renderFunc = render || getRows;
 
     return (
         <>
-            {(dataTitle || searchable) && (
-                <ToolBar
-                    dataTitle={dataTitle}
-                    isExchange={isExchange}
-                    switchTbl={switchTbl}
-                    onCsvClick={onCsvClick}
-                    onSearch={onSearch}
-                    exportCsvDisabled={dataStore.length <= 0}
-                >
+            {searchable && (
+                <ToolBar onCsvClick={onCsvClick} onSearch={onSearch} exportCsvDisabled={dataStore.length <= 0}>
                     {children}
                 </ToolBar>
             )}
             {loading && <CardLoading />}
             {searched.length > 0 && !loading && (
-                <TremorTable className='mt-5'>
-                    <TableHeaders
-                        definitions={definitions}
-                        sortable={sortable}
-                        setSortColumn={setSortHeader}
-                        useMinWidth={useMinWidth}
-                    />
-                    <TableBody>
-                        {renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
-                    </TableBody>
-                    <TableFooter footer={filteredFooter} definition={definitions} />
-                </TremorTable>
+                <div className='overflow-auto h-64 mt-5'>
+                    <TremorTable>
+                        <TableHeaders definitions={definitions} sortable={sortable} setSortColumn={setSortHeader} />
+                        <TableBody>
+                            {renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
+                        </TableBody>
+                        {filteredFooter && <TableFooter footer={filteredFooter} definition={definitions} />}
+                    </TremorTable>
+                </div>
             )}
             {searched.length <= 0 && !loading && <NoData>{noDataElement}</NoData>}
         </>

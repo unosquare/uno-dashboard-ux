@@ -29,13 +29,14 @@ export const MenuContainer = tw.div`
     pb-14
     flex-col
     animated-menu
+    p-4
 `;
 
 export const StyledMenuSearchBox = tw.div`
-    h-[5vh]
     m-0
     mr-auto
     ml-[58px]
+    p-4
 `;
 
 export const MenuSection = tw.div`
