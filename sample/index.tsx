@@ -19,7 +19,6 @@ import {
     PieChart,
     SortDirection,
     Table,
-    Title,
     DropdownMenu,
     StyledMenuSearchBox,
     SearchBox,
@@ -42,6 +41,7 @@ import {
     CategoryBar,
     Legend,
     LineChart,
+    Title,
 } from '@tremor/react';
 
 export enum options {
@@ -69,8 +69,8 @@ const defaultData = [
     ['Laura', 'Guadalajara', 45, true, 'https://www.google.com', 'Small text'],
     ['Laura', 'Mexico', 50, true, 'https://www.google.com', 'Small text'],
     [
-        'Brian',
-        'Guasave',
+        'Juan',
+        'Oaxaca',
         30,
         true,
         'https://www.google.com',
@@ -143,13 +143,11 @@ const Application = () => {
                 )}
             </NavBar>
             <BasicToolbar>
-                <span>This is a toolbar</span>
-                <Button onClick={() => console.log('destroying all...')}>
-                    Never click here (it will destroy everything)
-                </Button>
+                <Text>This is a toolbar</Text>
+                <Button>Click</Button>
             </BasicToolbar>
             <TremorContainer hasToolbar>
-                <Grid numCols={3} className='mt-6 gap-6'>
+                <Grid numCols={3} numColsSm={1} numColsMd={2} className='mt-6 gap-6'>
                     <TremorCard>
                         <Flex alignItems='start'>
                             <Text>Total Rows</Text>
@@ -188,10 +186,7 @@ const Application = () => {
                     </TremorCard>
                     <TremorCard className='flex flex-row'>
                         <Circle value={circleValue} onClick={CircleClicked} />
-                        <Title>
-                            <h2>TOTAL</h2>
-                            <h3>Rows</h3>
-                        </Title>
+                        <Title>Total </Title>
                     </TremorCard>
                     <TremorCard className='flex flex-col h-28'>
                         <DataChart rawData={chartData} dataCallback={identity} legend />

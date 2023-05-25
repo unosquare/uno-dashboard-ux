@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
-import { Directions, FlexValues, HasChildrenComponent, SizeValues } from '../constants';
+import { Directions, FlexValues, HasChildrenComponent } from '../constants';
 
 export interface CardSettings extends HasChildrenComponent {
     column: number;
@@ -18,28 +18,6 @@ export interface CardSettings extends HasChildrenComponent {
     isActive?: boolean;
     extraStyles?: string;
 }
-
-export interface CardContentSettings extends HasChildrenComponent {
-    direction: Directions;
-    size: SizeValues;
-    justify?: FlexValues;
-    align?: FlexValues;
-    show?: boolean;
-    smallHeight?: boolean;
-}
-
-const calculateSize = (size: SizeValues) => {
-    switch (size) {
-        case SizeValues.LARGE:
-            return '100%';
-        case SizeValues.MEDIUM_INTER:
-            return '66%';
-        case SizeValues.SMALL:
-            return '25%';
-        default:
-            return '50%';
-    }
-};
 
 const getHeight = (height: string | undefined, fit: boolean | undefined) => {
     if (height) return height;
@@ -76,16 +54,6 @@ const StyledCard = tw(CardBase)<CardSettings>`
     md:!col-span-1
 `;
 
-const StyledCardContent = styled.div<CardContentSettings>`
-    flex-direction: ${({ direction }) => direction};
-    display: ${({ show }) => (show ? 'flex' : 'none')};
-    align-items: ${({ align }) => align};
-    justify-content: ${({ justify }) => justify};
-    width: ${({ size }) => calculateSize(size)};
-    max-height: ${({ smallHeight }) => (smallHeight ? '20%' : '100%')};
-    height: 100%;
-`;
-
 export const Card = ({
     column,
     direction,
@@ -119,25 +87,4 @@ export const Card = ({
     >
         {children}
     </StyledCard>
-);
-
-export const CardContent = ({
-    direction,
-    size,
-    children,
-    justify = FlexValues.CENTER,
-    align = FlexValues.CENTER,
-    show = true,
-    smallHeight,
-}: CardContentSettings) => (
-    <StyledCardContent
-        direction={direction}
-        size={size}
-        justify={justify}
-        align={align}
-        show={show}
-        smallHeight={smallHeight}
-    >
-        {children}
-    </StyledCardContent>
 );

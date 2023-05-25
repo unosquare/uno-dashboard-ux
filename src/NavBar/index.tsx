@@ -2,11 +2,11 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 import { UnoLogo } from '../UnoLogo';
 
-export interface HeaderSettings {
+export interface NavBarSettings {
     transparent?: boolean;
 }
 
-export const StyledHeader = tw.header<HeaderSettings>`
+export const StyledHeader = tw.header<NavBarSettings>`
     w-full
     ${({ transparent }) => (transparent ? 'bg-transparent' : 'bg-unoblue')}
     flex
@@ -39,7 +39,7 @@ export const NavBarTitle = tw.div`
 export const NavBar = ({ transparent, children }: any) => (
     <StyledHeader transparent={transparent}>
         <StyledNavbar>
-            <UnoLogo width={150} height={48} />
+            <UnoLogo width={150} height={48} className='sm:hidden' />
             {children}
         </StyledNavbar>
     </StyledHeader>

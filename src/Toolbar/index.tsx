@@ -1,11 +1,8 @@
 import * as React from 'react';
-import tw from 'tailwind-styled-components';
-import { ActionButton, ActionButtonContainer } from '../ActionButton';
+import { Flex, Title, Toggle, ToggleItem } from '@tremor/react';
+import { Money16Regular, Table16Regular } from '@fluentui/react-icons';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { SearchBox } from '../SearchBox';
-import { SelectSettings, TableSelect } from '../TableSelect';
-import { ToggleButton } from '../ToggleButton';
-import { SubTitle } from '../Text';
 
 export interface ToolBarSettings {
     dataTitle?: string;
@@ -17,39 +14,6 @@ export interface ToolBarSettings {
     exportCsvDisabled?: boolean;
 }
 
-const StyledTableTitleContainer = tw.div`
-    flex 
-    flex-row 
-    justify-between 
-    w-full 
-    h-12
-`;
-
-const SearchboxContainer = tw.div`
-    mb-6 
-    mr-10 
-    w-64 
-    flex 
-    items-center
-    justify-end
-    min-w-[90px]
-`;
-
-export const ToolBarSelect = ({ label, options, handler, selected, styles }: SelectSettings) => (
-    <ActionButtonContainer>
-        <ActionButton width='max-content' ignoreFocus>
-            <TableSelect label={label} options={options} handler={handler} selected={selected} styles={styles} />
-        </ActionButton>
-    </ActionButtonContainer>
-);
-
-const containerStyle = {
-    width: '25%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'end',
-};
-
 export const ToolBar = ({
     dataTitle,
     switchTbl,
@@ -59,26 +23,20 @@ export const ToolBar = ({
     children,
     exportCsvDisabled,
 }: ToolBarSettings) => (
-    <StyledTableTitleContainer>
-        {dataTitle && <SubTitle>{dataTitle}</SubTitle>}
+    <Flex justifyContent='between' className='h-fit'>
+        {dataTitle && <Title>{dataTitle}</Title>}
         {(onSearch || onCsvClick || switchTbl || children) && (
-            <div style={containerStyle}>
+            <Flex className='w-2/4 gap-2'>
                 {children}
                 {switchTbl && (
-                    <ToggleButton
-                        value={isExchange}
-                        rightLabel='Back to Data'
-                        leftLabel='Exchange Rate'
-                        onClick={switchTbl}
-                    />
+                    <Toggle defaultValue={isExchange ? '1' : '0'} onValueChange={switchTbl}>
+                        <ToggleItem value='0' icon={Table16Regular} />
+                        <ToggleItem value='1' icon={Money16Regular} />
+                    </Toggle>
                 )}
                 {onCsvClick && <ExportCsvButton onClick={onCsvClick} disable={exportCsvDisabled} />}
-                {onSearch && (
-                    <SearchboxContainer>
-                        <SearchBox search={onSearch} />
-                    </SearchboxContainer>
-                )}
-            </div>
+                {onSearch && <SearchBox search={onSearch} />}
+            </Flex>
         )}
-    </StyledTableTitleContainer>
+    </Flex>
 );

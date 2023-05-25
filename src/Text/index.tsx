@@ -38,48 +38,9 @@ const StyledTitle = styled.div<TitleSettings>`
     ${({ center }) => center && 'text-align: center;'}
 `;
 
-const StyledLabelWithImage = styled.div`
-    margin-bottom: 10px;
-    display: flex;
-    span {
-        font-size: 16px;
-        letter-spacing: 0.8px;
-        line-height: 21px;
-    }
-    strong {
-        font-size: 18px;
-        letter-spacing: 0.8px;
-        line-height: 21px;
-    }
-    img {
-        margin-right: 10px;
-        height: 20px;
-        object-fit: contain;
-        width: 22px;
-    }
-`;
-
 const StyledCenteredSpan = tw.span`
     flex 
     items-center
-`;
-
-const StyledLabelWithIcon = styled.div`
-    width: 130px;
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 15px;
-    span {
-        font-size: 14px;
-        letter-spacing: 0.8px;
-        line-height: 21px;
-    }
-    strong {
-        font-size: 18px;
-        letter-spacing: 0.8px;
-        line-height: 21px;
-    }
 `;
 
 const StyledCenteredBoldSpan = tw.div`
@@ -127,14 +88,6 @@ export const Title = ({ children, width, center }: TitleSettings) => (
     <StyledTitle width={width} center={center}>
         <WrapperTitle>{children}</WrapperTitle>
     </StyledTitle>
-);
-
-export const LabelWithImage = ({ children }: HasChildrenComponent) => (
-    <StyledLabelWithImage>{children}</StyledLabelWithImage>
-);
-
-export const LabelWithIcon = ({ children }: HasChildrenComponent) => (
-    <StyledLabelWithIcon>{children}</StyledLabelWithIcon>
 );
 
 export const SubTitle = ({ children, ...props }: SubtitleSettings) => (

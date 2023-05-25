@@ -1,5 +1,4 @@
 import React, { startTransition, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { createCsv, formatter, FormatTypes } from 'uno-js';
 import {
@@ -10,9 +9,9 @@ import {
     DocumentArrowDown16Filled,
     Link16Regular,
 } from '@fluentui/react-icons';
+import { Flex, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Table as TremorTable } from '@tremor/react';
 import objectHash from 'object-hash';
-import { CardContent } from '../Card';
-import { Colors, CurrencyRate, DataTypes, Directions, FlexValues, SizeValues, SortDirection } from '../constants';
+import { CurrencyRate, DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
@@ -22,17 +21,11 @@ import { sortData, TableColumn } from './sortData';
 
 export * from './sortData';
 
-export interface TableContainerSettings {
-    dataTitle?: string;
-    height?: SizeValues;
-    justify?: FlexValues;
-}
-
-export interface TableSettings<TDataIn, TDataOut> extends TableContainerSettings {
+export interface TableSettings<TDataIn, TDataOut> {
     rawData: TDataIn;
     dataCallback: (data: TDataIn) => TDataOut[];
+    dataTitle?: string;
     columns: TableColumn[];
-    size?: SizeValues;
     loading?: boolean;
     noDataElement?: React.ReactNode;
     searchable?: boolean;
@@ -44,14 +37,6 @@ export interface TableSettings<TDataIn, TDataOut> extends TableContainerSettings
     isExchange?: boolean;
     useMinWidth?: boolean;
     children?: React.ReactNode;
-}
-
-interface TdSettings {
-    color?: string;
-    background?: string;
-    border?: boolean;
-    type?: DataTypes;
-    index?: number;
 }
 
 interface HeaderSettings {
@@ -74,90 +59,6 @@ const leftAlign = [DataTypes.STRING, DataTypes.LINK_STRING, DataTypes.BULLET, un
 export const getAlignment = (dataType: DataTypes | undefined, index?: number) =>
     dataType === DataTypes.PARAGRAPH || (leftAlign.includes(dataType) && index === 0) ? 'text-left' : 'text-center';
 
-export const StyledTable = tw.table<any>`
-    w-full
-    border-collapse
-    [&_tr:first-child]:border-t-0
-    [&_th]:font-medium
-    [&_th]:text-gray-500
-    [&_th]:p-[0_10px_0_6px]
-    [&_tr]:border-table
-    [&_tr]:text-[13px]
-    [&_td]:text-unogray
-    [&_td]:border-table
-    [&_td]:p-[7px]
-    [&_tfoot]:bg-white
-    [&_tfoot]:sticky
-    [&>tfoot]:inset-y-0
-    md:[&_td]:text-[10px]
-    md:[&_th]:text-[11px]
-`;
-
-const getHeightStyle = (dataTitle: string | undefined, minValue: number, maxValue: number) => {
-    const value = dataTitle ? `${minValue}vmin` : `${maxValue}vmin`;
-
-    return `
-        max-height: ${value};
-        height: ${value};
-    `;
-};
-
-const calculateHeight = (height: SizeValues | undefined, dataTitle: string | undefined) => {
-    switch (height) {
-        case SizeValues.EXTRA_SMALL:
-            return getHeightStyle(dataTitle, 16, 18);
-        case SizeValues.SMALL:
-            return getHeightStyle(dataTitle, 24, 26);
-        case SizeValues.MEDIUM:
-            return getHeightStyle(dataTitle, 55, 58);
-        case SizeValues.LARGE:
-            return getHeightStyle(dataTitle, 75, 79);
-        default:
-            return getHeightStyle(dataTitle, 69, 73);
-    }
-};
-
-export const TableContainerBase = styled.div<TableContainerSettings>`
-    ${({ height, dataTitle }) => calculateHeight(height, dataTitle)};
-    justify-content: ${({ justify }) => justify};
-`;
-
-export const StyledTableContainer = tw(TableContainerBase)<TableContainerSettings>`
-    ${({ dataTitle }) => (dataTitle ? 'm-auto mt-0' : 'my-0 mx-auto py-[5px]')}
-    w-full
-    overflow-y-auto
-    pr-1
-`;
-
-export const TdBase = styled.td<TdSettings>`
-    ${({ color }) => color && `color: ${color} !important`};
-    ${({ background }) => background && `background-color: ${background}`};
-    ${({ border }) =>
-        border && `border-left: 2px solid ${Colors.BORDER_GRAY}; border-right: 2px solid ${Colors.BORDER_GRAY}`};
-`;
-
-export const StyledTd = tw(TdBase)<TdSettings>`
-    ${({ type }) => (type === DataTypes.BOLD_STRING ? 'font-medium !text-black' : 'font-normal')};
-    ${({ type, index }) => getAlignment(type, index)};
-`;
-
-export const StyledCellInput = tw.input`
-    inline-flex
-    items-center
-    text-sm
-    leading-normal
-    text-maingray
-    p-[0.35rem]
-    text-[13px]
-    h-2
-    w-[90px]
-    mr-0
-    rounded-sm
-    border-solid
-    border-[1px]
-    border-[#3e4f45]
-`;
-
 export const HeaderDiv = tw.div<HeaderSettings>`
     flex-1
     flex-row
@@ -168,10 +69,6 @@ export const HeaderDiv = tw.div<HeaderSettings>`
     [&_svg:hover]:opacity-100
     ${({ $sorted }) => ($sorted ? '[&_svg]:opacity-100' : '[&_svg]:opacity-30')}
     ${({ $sorted }) => ($sorted ? 'cursor-pointer' : '')}
-`;
-
-const BoldTd = tw.td`
-    font-medium
 `;
 
 const StyledLinkButton = tw.button`
@@ -249,28 +146,21 @@ const renderLinkString = (data: any) =>
         </>
     );
 
-const LongTextCell = ({ text }: { text: string }) => {
+const LongTextCell = ({ text }: any) => {
     const [showFullText, setShowFullText] = useState(false);
-    const toggleDisplayText = (display: boolean) => () => setShowFullText(display);
+    const toggleDisplayText = () => setShowFullText(!showFullText);
+
+    if (text.length <= 45) return text;
 
     return (
-        <>
-            {text.length <= 300 || showFullText ? text : `${text.substring(0, 300)}...`}
-            {text.length > 300 && showFullText && (
-                <StyledLinkButton type='button' onClick={toggleDisplayText(false)}>
-                    Show Less
-                </StyledLinkButton>
-            )}
-            {text.length > 300 && !showFullText && (
-                <StyledLinkButton type='button' onClick={toggleDisplayText(true)}>
-                    Continue Reading
-                </StyledLinkButton>
-            )}
-        </>
+        <Flex>
+            <span>{showFullText ? text : `${text.substring(0, 45)}...`}</span>
+            <StyledLinkButton type='button' onClick={toggleDisplayText}>
+                {showFullText ? 'Show Less' : 'Show More'}
+            </StyledLinkButton>
+        </Flex>
     );
 };
-
-const RenderLongTextCell = (data: any) => ((data as string[])[1] ? <LongTextCell text={data} /> : 'N/A');
 
 export const renderTableCell = (
     data: Record<string, unknown> | string | number | boolean | string[] | any,
@@ -301,7 +191,7 @@ export const renderTableCell = (
                 </CenteredSpan>
             );
         case DataTypes.PARAGRAPH:
-            return RenderLongTextCell(data);
+            return (data as string[])[1] ? <LongTextCell text={data} /> : 'N/A';
         case DataTypes.FILE:
             return renderFileCell(data);
         default: {
@@ -319,13 +209,13 @@ interface TableHeadersProps {
 }
 
 const TableHeaders = ({ definitions, sortable, setSortColumn, useMinWidth }: TableHeadersProps) => (
-    <thead>
-        <tr>
+    <TableHead>
+        <TableRow>
             {definitions.map((header, index) => (
-                <th
+                <TableHeaderCell
                     key={objectHash(header)}
                     onClick={() => !header.excludeFromSort && setSortColumn(index)}
-                    className={`${useMinWidth && 'min-w-[100px]'} ${getAlignment(header.dataType, index)}`}
+                    className={`${useMinWidth && 'min-w-[100px]'}`}
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
                         <span>{header.label}</span>
@@ -337,10 +227,10 @@ const TableHeaders = ({ definitions, sortable, setSortColumn, useMinWidth }: Tab
                                 <CaretUp12Regular />
                             ))}
                     </HeaderDiv>
-                </th>
+                </TableHeaderCell>
             ))}
-        </tr>
-    </thead>
+        </TableRow>
+    </TableHead>
 );
 
 interface TableFooterProps {
@@ -350,31 +240,36 @@ interface TableFooterProps {
 
 const TableFooter = ({ footer, definition }: TableFooterProps) => (
     <tfoot>
-        <tr>
+        <TableRow>
             {footer.map((foot, index) => (
-                <BoldTd
+                <TableCell
                     key={objectHash(definition[index])}
                     className={getAlignment(definition[index]?.dataType || undefined, index)}
                 >
-                    {foot}
-                </BoldTd>
+                    <span className='font-semibold'>{foot}</span>
+                </TableCell>
             ))}
-        </tr>
+        </TableRow>
     </tfoot>
 );
 
 const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
     data.map((row: any) => (
-        <tr key={objectHash(row)}>
+        <TableRow key={objectHash(row)}>
             {row.map((cell: any, index: number) => {
                 const dataType = definitions[index]?.dataType || undefined;
                 return (
-                    <StyledTd key={objectHash({ a: definitions[index], c: cell })} index={index} type={dataType}>
+                    <TableCell
+                        key={objectHash({ a: definitions[index], c: cell })}
+                        className={`${
+                            dataType === DataTypes.BOLD_STRING ? 'font-medium !text-black' : ''
+                        } ${getAlignment(dataType, index)}`}
+                    >
                         {renderTableCell(cell, dataType)}
-                    </StyledTd>
+                    </TableCell>
                 );
             })}
-        </tr>
+        </TableRow>
     ));
 
 const defaultFilter = (search: string) => (element: any) =>
@@ -398,9 +293,6 @@ const searchFooter = (search: string, newRaw: any) =>
 export const Table = <TDataIn, TDataOut>({
     columns,
     dataTitle,
-    size = SizeValues.LARGE,
-    justify = FlexValues.START,
-    height,
     loading,
     noDataElement,
     searchable,
@@ -466,7 +358,7 @@ export const Table = <TDataIn, TDataOut>({
     const renderFunc = render || getRows;
 
     return (
-        <CardContent direction={Directions.COLUMN} size={size} justify={justify}>
+        <>
             {(dataTitle || searchable) && (
                 <ToolBar
                     dataTitle={dataTitle}
@@ -479,24 +371,22 @@ export const Table = <TDataIn, TDataOut>({
                     {children}
                 </ToolBar>
             )}
-            <StyledTableContainer dataTitle={dataTitle} height={height} justify={justify}>
-                {loading && <CardLoading />}
-                {searched.length > 0 && !loading && (
-                    <StyledTable>
-                        <TableHeaders
-                            definitions={definitions}
-                            sortable={sortable}
-                            setSortColumn={setSortHeader}
-                            useMinWidth={useMinWidth}
-                        />
-                        <tbody>
-                            {renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
-                        </tbody>
-                        <TableFooter footer={filteredFooter} definition={definitions} />
-                    </StyledTable>
-                )}
-                {searched.length <= 0 && !loading && <NoData>{noDataElement}</NoData>}
-            </StyledTableContainer>
-        </CardContent>
+            {loading && <CardLoading />}
+            {searched.length > 0 && !loading && (
+                <TremorTable className='mt-5'>
+                    <TableHeaders
+                        definitions={definitions}
+                        sortable={sortable}
+                        setSortColumn={setSortHeader}
+                        useMinWidth={useMinWidth}
+                    />
+                    <TableBody>
+                        {renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
+                    </TableBody>
+                    <TableFooter footer={filteredFooter} definition={definitions} />
+                </TremorTable>
+            )}
+            {searched.length <= 0 && !loading && <NoData>{noDataElement}</NoData>}
+        </>
     );
 };
