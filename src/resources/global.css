@@ -14,7 +14,7 @@
 @layer components {
     body {
         overflow: hidden !important;
-        @apply bg-[#f1f2f3] p-0 m-0 text-gray-800;
+        @apply bg-[#f1f2f3] p-0 m-0;
     }
 
     a {
@@ -47,14 +47,6 @@
     svg,
     .__react_component_tooltip {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    td {
-        @apply py-0 px-[10px];
-    }
-
-    th {
-        @apply bg-white sticky top-0;
     }
 
     input::-webkit-outer-spin-button,

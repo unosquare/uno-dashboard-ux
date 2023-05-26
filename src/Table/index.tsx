@@ -212,6 +212,7 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
             {definitions.map((header, index) => (
                 <TableHeaderCell
                     key={objectHash(header)}
+                    className={`p-2 bg-white ${getAlignment(header.dataType || undefined, index)}`}
                     onClick={() => !header.excludeFromSort && setSortColumn(index)}
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
