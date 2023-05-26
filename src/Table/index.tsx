@@ -11,6 +11,7 @@ import {
 } from '@fluentui/react-icons';
 import { TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Table as TremorTable } from '@tremor/react';
 import objectHash from 'object-hash';
+import { twMerge } from 'tailwind-merge';
 import { DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { CardLoading } from '../CardLoading';
@@ -33,6 +34,7 @@ export interface TableSettings<TDataIn, TDataOut> {
     exportCsv?: boolean;
     render?: <TIn>(data: (string | number)[], definitions: TableColumn[], rawData: TIn) => React.ReactNode;
     children?: React.ReactNode;
+    className?: string;
 }
 
 interface HeaderSettings {
@@ -297,6 +299,7 @@ export const Table = <TDataIn, TDataOut>({
     render,
     children,
     dataCallback,
+    className = '',
 }: TableSettings<TDataIn, TDataOut>) => {
     const dataStore = (dataCallback && rawData && dataCallback(rawData)) || [];
 
@@ -350,22 +353,20 @@ export const Table = <TDataIn, TDataOut>({
 
     return (
         <>
-            {searchable && (
+            {(children || searchable || onCsvClick) && (
                 <ToolBar onCsvClick={onCsvClick} onSearch={onSearch} exportCsvDisabled={dataStore.length <= 0}>
                     {children}
                 </ToolBar>
             )}
             {loading && <CardLoading />}
             {searched.length > 0 && !loading && (
-                <div className='overflow-auto h-64 mt-5'>
-                    <TremorTable>
-                        <TableHeaders definitions={definitions} sortable={sortable} setSortColumn={setSortHeader} />
-                        <TableBody>
-                            {renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
-                        </TableBody>
-                        {filteredFooter && <TableFooter footer={filteredFooter} definition={definitions} />}
-                    </TremorTable>
-                </div>
+                <TremorTable className={twMerge('overflow-auto h-80 mt-5', className)}>
+                    <TableHeaders definitions={definitions} sortable={sortable} setSortColumn={setSortHeader} />
+                    <TableBody>
+                        {renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
+                    </TableBody>
+                    {filteredFooter && <TableFooter footer={filteredFooter} definition={definitions} />}
+                </TremorTable>
             )}
             {searched.length <= 0 && !loading && <NoData>{noDataElement}</NoData>}
         </>

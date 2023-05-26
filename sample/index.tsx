@@ -189,7 +189,7 @@ const Application = () => {
                         <Circle value={circleValue} onClick={CircleClicked} />
                         <Title>Total </Title>
                     </TremorCard>
-                    <TremorCard className='flex flex-col h-28'>
+                    <TremorCard className='flex flex-col'>
                         <DataChart rawData={chartData} dataCallback={identity} legend />
                         <Badge value={500} content='Goal' right={30} />
                     </TremorCard>
@@ -209,8 +209,9 @@ const Application = () => {
                         />
                     </TremorCard>
                     <Col numColSpan={2}>
-                        <TremorCard className='h-60'>
+                        <TremorCard>
                             <Table
+                                className='h-40'
                                 columns={columns}
                                 rawData={data}
                                 dataCallback={identity}

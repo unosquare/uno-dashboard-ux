@@ -2,6 +2,7 @@
 
 module.exports = {
     content: [
+        './sample/**/*.{js,ts,jsx,tsx}',
         './src/**/*.{js,ts,jsx,tsx}',
         './src/**/**/*.{js,ts,jsx,tsx}',
         './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
