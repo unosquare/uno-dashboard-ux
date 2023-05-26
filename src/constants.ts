@@ -79,13 +79,6 @@ export enum SortDirection {
     DESC = 'desc',
 }
 
-export interface CurrencyRate {
-    CurrencyRateId: number;
-    CurrencyCode: string;
-    RateToUsd: number;
-    DateModified: string;
-}
-
 export interface ChartComponent<TDataIn, TDataOut> {
     colors?: string[];
     legendFormatType?: LegendFormatTypes;
