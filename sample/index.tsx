@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { identity } from 'uno-js';
 import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
 import {
-    Badge,
     BasicToolbar,
     Blur,
     Burger,
@@ -25,7 +24,6 @@ import {
     MenuSubSection,
     StyledMenuActions,
     TremorContainer,
-    Button,
     ExchangeToggle,
 } from '../src';
 import '../src/resources/global.css';
@@ -43,6 +41,9 @@ import {
     LineChart,
     Title,
     DropdownItem,
+    Button,
+    Badge,
+    Divider,
 } from '@tremor/react';
 
 export enum options {
@@ -123,12 +124,14 @@ const Application = () => {
                                 <ArrowSync24Regular />
                                 <Dismiss24Regular onClick={() => setOpenMenu(false)} />
                             </StyledMenuActions>
-                            <Text>Options</Text>
-                            <Dropdown value={currentOption} onValueChange={setCurrentOption}>
-                                <DropdownItem value={options.A}>Apple</DropdownItem>
-                                <DropdownItem value={options.B}>Bolt</DropdownItem>
-                                <DropdownItem value={options.C}>Cactus</DropdownItem>
-                            </Dropdown>
+                            <Flex justifyContent='between' alignItems='center' className='gap-4'>
+                                <Text>Options</Text>
+                                <Dropdown value={currentOption} onValueChange={setCurrentOption}>
+                                    <DropdownItem value={options.A}>Apple</DropdownItem>
+                                    <DropdownItem value={options.B}>Bolt</DropdownItem>
+                                    <DropdownItem value={options.C}>Cactus</DropdownItem>
+                                </Dropdown>
+                            </Flex>
                             <StyledMenuSearchBox>
                                 <SearchBox focus search={(v) => console.log(v)} />
                             </StyledMenuSearchBox>
@@ -158,6 +161,7 @@ const Application = () => {
                             <Metric>1234</Metric>
                             <Text className='truncate'>from 2000</Text>
                         </Flex>
+                        <Divider />
                     </TremorCard>
                     <TremorCard>
                         <Text>Goal</Text>
@@ -191,7 +195,7 @@ const Application = () => {
                     </TremorCard>
                     <TremorCard className='flex flex-col'>
                         <DataChart rawData={chartData} dataCallback={identity} legend />
-                        <Badge value={500} content='Goal' right={30} />
+                        <Badge size='sm'>500 Goal</Badge>
                     </TremorCard>
                     <TremorCard>
                         <ChartBar
