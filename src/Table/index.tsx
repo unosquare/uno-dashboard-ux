@@ -83,8 +83,6 @@ const StyledFile = tw.div`
     cursor-pointer
 `;
 
-const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
-
 const translateType = (type: DataTypes | undefined) => {
     switch (type) {
         case DataTypes.DATE:
@@ -104,22 +102,6 @@ const translateType = (type: DataTypes | undefined) => {
         default:
             return undefined;
     }
-};
-
-const renderLinkCell = (data: any) => {
-    if (!(data as string[])[1]) return 'N/A';
-
-    return (
-        <>
-            <a href={(data as string[])[0].toString()} target='_blank' rel='noopener noreferrer'>
-                <Link16Regular />
-            </a>
-            <span>{`   ${new Date((data as string[])[1].toString()).toLocaleDateString(
-                'en-us',
-                dateOptions as any,
-            )}`}</span>
-        </>
-    );
 };
 
 const renderFileCell = (data: any) =>
@@ -168,8 +150,6 @@ export const renderTableCell = (
     if (data == null || data === ' ') return 'N/A';
 
     switch (type) {
-        case DataTypes.LINK:
-            return renderLinkCell(data);
         case DataTypes.LINK_ICON:
             if (!data) return '';
             return (
