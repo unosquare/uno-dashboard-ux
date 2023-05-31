@@ -9,14 +9,13 @@ import {
     DocumentArrowDown16Filled,
     Link16Regular,
 } from '@fluentui/react-icons';
-import { TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Table as TremorTable } from '@tremor/react';
+import { Flex, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Table as TremorTable } from '@tremor/react';
 import objectHash from 'object-hash';
 import { twMerge } from 'tailwind-merge';
 import { DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
-import { CenteredSpan } from '../Text';
 import { ToolBar } from '../Toolbar';
 import { sortData, TableColumn } from './sortData';
 
@@ -184,10 +183,10 @@ export const renderTableCell = (
             return data ? <CheckboxChecked16Regular /> : <CheckboxUnchecked16Regular />;
         case DataTypes.BULLET:
             return (
-                <CenteredSpan>
+                <Flex alignItems='center'>
                     <Ellipse small color={(data as string[])[1].toString()} />
                     {(data as string[])[0].toString()}
-                </CenteredSpan>
+                </Flex>
             );
         case DataTypes.PARAGRAPH:
             return (data as string[])[1] ? <LongTextCell text={data} /> : 'N/A';

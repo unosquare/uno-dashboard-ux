@@ -66,7 +66,6 @@ export interface ChartBarSettings<TDataIn> {
         secondary: XAxisSecondaryFormatter;
     };
     stacked?: boolean;
-    title?: string;
     onClick?: (e: any) => void;
     onBarClick?: (e: any, bar: number) => void;
     onLegendClick?: (e: any) => void;
@@ -81,13 +80,6 @@ export interface ChartBarSettings<TDataIn> {
 interface LegendSettings {
     $clickable: boolean;
 }
-
-export const StyledChartTitle = tw.h6`
-    m-0
-    text-base
-    font-medium
-`;
-
 const StyledChart = tw.div`
     flex
     flex-col
@@ -119,7 +111,6 @@ export const ChartBar = ({
     xAxis = true,
     multiXAxis,
     stacked,
-    title,
     onClick,
     onLegendClick,
     hasTitle,
@@ -138,21 +129,10 @@ export const ChartBar = ({
 
     return (
         <StyledChart>
-            {title && <StyledChartTitle>{title}</StyledChartTitle>}
             {isLoading && <CardLoading />}
             {!isLoading && dataStore.length > 0 ? (
                 <ResponsiveContainer>
-                    <BarChart
-                        data={dataStore}
-                        margin={{
-                            top: 5,
-                            right: 30,
-                            left: -10,
-                            bottom: 5,
-                        }}
-                        maxBarSize={barSize}
-                        onClick={onClick}
-                    >
+                    <BarChart data={dataStore} maxBarSize={barSize} onClick={onClick}>
                         {xAxis && !multiXAxis && <XAxis dataKey='name' />}
                         {xAxis && multiXAxis && <XAxis dataKey='name' tickFormatter={multiXAxis.primary} />}
                         {xAxis && multiXAxis && (
@@ -198,21 +178,13 @@ export const ChartBar = ({
                             }
                             offset={tooltipOffset}
                         />
-                        {onLegendClick ? (
+                        {legend && (
                             <Legend
                                 iconType='circle'
-                                onClick={onLegendClick}
+                                onClick={onLegendClick || null}
                                 formatter={(v: any) => renderLegendText(humanize(v), !!onLegendClick)}
                             />
-                        ) : (
-                            legend && (
-                                <Legend
-                                    iconType='circle'
-                                    formatter={(v: any) => renderLegendText(humanize(v), !!onLegendClick)}
-                                />
-                            )
                         )}
-                        {legend && <Legend iconType='circle' />}
                         {keys.map((property, index) =>
                             stacked ? (
                                 <Bar dataKey={property} fill={colors![index]} key={index} stackId='a' />

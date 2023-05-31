@@ -1,8 +1,3 @@
-export enum Directions {
-    COLUMN = 'column',
-    ROW = 'row',
-}
-
 export enum FlexValues {
     START = 'start',
     CENTER = 'center',

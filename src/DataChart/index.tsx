@@ -18,11 +18,10 @@ import { ChartComponent, ChartTypes } from '../constants';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
-import { formatTicks, StyledChartTitle } from '../ChartBar';
+import { formatTicks } from '../ChartBar';
 
 export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn, Dictionary[]> {
     legend?: boolean;
-    title?: string;
     onClick?: (e: any) => void;
     domain?: number;
     unit?: string;
@@ -81,7 +80,6 @@ export const DataChart = ({
     rawData,
     colors = defaultChartPalette,
     legend,
-    title,
     onClick,
     legendFormatType,
     domain,
@@ -95,7 +93,6 @@ export const DataChart = ({
 
     return (
         <StyledChart>
-            {title && <StyledChartTitle>{title}</StyledChartTitle>}
             {isLoading && <CardLoading />}
             {!isLoading && dataStore.length > 0 ? (
                 <ResponsiveContainer>

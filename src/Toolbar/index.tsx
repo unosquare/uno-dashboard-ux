@@ -28,7 +28,9 @@ export const ToolBar = ({ onCsvClick, onSearch, children, exportCsvDisabled }: T
         {children}
         {(onSearch || onCsvClick) && (
             <Flex className='w-2/4 gap-2'>
-                {onCsvClick && <ExportCsvButton onClick={onCsvClick} disable={exportCsvDisabled} />}
+                {onCsvClick && (
+                    <ExportCsvButton onClick={onCsvClick} disable={exportCsvDisabled} className='sm:hidden' />
+                )}
                 {onSearch && <SearchBox search={onSearch} />}
             </Flex>
         )}

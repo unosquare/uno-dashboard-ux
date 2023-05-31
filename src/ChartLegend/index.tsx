@@ -2,9 +2,31 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 import { formatter, FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
-import { ChartTypes, LegendFormatTypes } from '../constants';
+import { ChartTypes, HasChildrenComponent, LegendFormatTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
-import { LabelInfo, TooltipTitle } from '../Text';
+
+const StyledCenteredBoldSpan = tw.div`
+    flex 
+    items-center 
+    font-bold 
+    text-sm 
+    pl-1 
+    pb-1 
+    pt-1
+`;
+
+const StyledLeftSpan = tw.div`
+    flex 
+    pl-1 
+    text-xs
+    items-start
+`;
+
+const TooltipTitle = ({ children }: HasChildrenComponent) => (
+    <StyledCenteredBoldSpan>{children}</StyledCenteredBoldSpan>
+);
+
+const LabelInfo = ({ children }: HasChildrenComponent) => <StyledLeftSpan>{children}</StyledLeftSpan>;
 
 export interface ChartLegendSettings {
     legendFormatType?: LegendFormatTypes;

@@ -1,11 +1,10 @@
 export * from './theme';
 export * from './constants';
 
-export * from './AppContainer';
+export * from './TremorContainer';
 export * from './ChartBar';
 export * from './PieChart';
 export * from './ChartLegend';
-export * from './Circle';
 export * from './DataChart';
 export * from './CardLoading';
 export * from './Ellipse';
@@ -16,7 +15,6 @@ export * from './NoData';
 export * from './Table';
 export * from './PageToolbar';
 export * from './Toolbar';
-export * from './Text';
 export * from './SearchBox';
 export * from './Select';
 export * from './UnoLogo';

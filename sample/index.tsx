@@ -7,7 +7,6 @@ import {
     Blur,
     Burger,
     ChartBar,
-    Circle,
     DataChart,
     DataTypes,
     Footer,
@@ -44,6 +43,7 @@ import {
     Button,
     Badge,
     Divider,
+    Bold,
 } from '@tremor/react';
 
 export enum options {
@@ -189,15 +189,11 @@ const Application = () => {
                             className='mt-3'
                         />
                     </TremorCard>
-                    <TremorCard className='flex flex-row'>
-                        <Circle value={circleValue} onClick={CircleClicked} />
-                        <Title>Total </Title>
-                    </TremorCard>
                     <TremorCard className='flex flex-col'>
                         <DataChart rawData={chartData} dataCallback={identity} legend />
                         <Badge size='sm'>500 Goal</Badge>
                     </TremorCard>
-                    <TremorCard>
+                    <TremorCard className='h-96'>
                         <ChartBar
                             rawData={chartData}
                             dataCallback={identity}
@@ -205,14 +201,20 @@ const Application = () => {
                             legend
                         />
                     </TremorCard>
-                    <TremorCard>
+                    <TremorCard className='h-96'>
+                        <Bold>Pie Chart</Bold>
                         <PieChart
                             rawData={chartData}
                             dataCallback={identity}
                             legendFormatType={LegendFormatTypes.NUMBER}
                         />
+                        <Legend
+                            categories={chartData.map((x) => x.name)}
+                            className='mt-6'
+                            colors={['emerald', 'yellow', 'rose']}
+                        />
                     </TremorCard>
-                    <Col numColSpan={2}>
+                    <Col numColSpan={3}>
                         <TremorCard>
                             <Table
                                 className='h-40'
