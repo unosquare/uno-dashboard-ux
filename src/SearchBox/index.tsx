@@ -27,7 +27,7 @@ export const SearchBox = ({ search, placeholder = 'Search', focus = false }: Sea
 
     return (
         <TextInput
-            className='max-w-[50%]'
+            className='max-w-[220px]'
             icon={Search12Regular}
             ref={ref}
             value={value}

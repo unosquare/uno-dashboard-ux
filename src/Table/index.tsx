@@ -7,7 +7,6 @@ import {
     CheckboxChecked16Regular,
     CheckboxUnchecked16Regular,
     DocumentArrowDown16Filled,
-    Link16Regular,
 } from '@fluentui/react-icons';
 import { Flex, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Table as TremorTable } from '@tremor/react';
 import objectHash from 'object-hash';
@@ -51,7 +50,7 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
         sortDirection: i === index ? getSortDirection(field.sortDirection) : undefined,
     }));
 
-const leftAlign = [DataTypes.STRING, DataTypes.LINK_STRING, DataTypes.BULLET, undefined];
+const leftAlign = [DataTypes.STRING, DataTypes.LINK, DataTypes.BULLET, undefined];
 
 export const getAlignment = (dataType: DataTypes | undefined, index?: number) =>
     dataType === DataTypes.PARAGRAPH || (leftAlign.includes(dataType) && index === 0) ? 'text-left' : 'text-center';
@@ -111,20 +110,23 @@ const renderFileCell = (data: any) =>
         </StyledFile>
     ) : null;
 
-const renderLinkString = (data: any) =>
-    (data as string[])[0] ? (
-        <>
+const renderLinkString = (data: any) => {
+    if (data instanceof Array) {
+        return (data as string[])[0] ? (
             <a href={(data as string[])[0].toString()} target='_blank' rel='noopener noreferrer'>
-                <span>{`${(data as string[])[1].toString()}`}</span>
+                {`${(data as string[])[1].toString()}`}
             </a>
-            {data[2] && <span>{` ${(data as string[])[2].toString()}`}</span>}
-        </>
-    ) : (
-        <>
-            <span>{`${(data as string[])[1].toString()}`}</span>
-            {data[2] && <span>{` ${(data as string[])[2].toString()}`}</span>}
-        </>
+        ) : (
+            (data as string[])[1].toString()
+        );
+    }
+
+    return (
+        <a href={data} target='_blank' rel='noopener noreferrer'>
+            {data}
+        </a>
     );
+};
 
 const LongTextCell = ({ text }: any) => {
     const [showFullText, setShowFullText] = useState(false);
@@ -150,14 +152,7 @@ export const renderTableCell = (
     if (data == null || data === ' ') return 'N/A';
 
     switch (type) {
-        case DataTypes.LINK_ICON:
-            if (!data) return '';
-            return (
-                <a href={data.toString()} target='_blank' rel='noopener noreferrer'>
-                    <Link16Regular />
-                </a>
-            );
-        case DataTypes.LINK_STRING:
+        case DataTypes.LINK:
             return renderLinkString(data);
         case DataTypes.BOOLEAN:
             return data ? <CheckboxChecked16Regular /> : <CheckboxUnchecked16Regular />;
@@ -216,7 +211,7 @@ interface TableFooterProps {
 }
 
 const TableFooter = ({ footer, definition }: TableFooterProps) => (
-    <tfoot>
+    <tfoot className='sticky top-0 bottom-0 bg-white'>
         <TableRow>
             {footer.map((foot, index) => (
                 <TableCell
@@ -340,7 +335,7 @@ export const Table = <TDataIn, TDataOut>({
             )}
             {loading && <CardLoading />}
             {searched.length > 0 && !loading && (
-                <TremorTable className={twMerge('overflow-auto h-80 mt-5', className)}>
+                <TremorTable className={twMerge('overflow-auto h-60 mt-5', className)}>
                     <TableHeaders definitions={definitions} sortable={sortable} setSortColumn={setSortHeader} />
                     <TableBody>
                         {renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}

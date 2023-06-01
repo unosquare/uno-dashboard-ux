@@ -13,6 +13,8 @@ import {
 } from 'recharts';
 import tw from 'tailwind-styled-components';
 import { Dictionary, formatter, FormatTypes, humanize } from 'uno-js';
+import { Flex } from '@tremor/react';
+import { twMerge } from 'tailwind-merge';
 import { ChartLegend } from '../ChartLegend';
 import { ChartTypes, LegendFormatTypes } from '../constants';
 import { NoData } from '../NoData';
@@ -75,19 +77,12 @@ export interface ChartBarSettings<TDataIn> {
     scroll?: boolean;
     refLineY?: { value: number; label: string; color: string };
     isLoading?: boolean;
+    className?: string;
 }
 
 interface LegendSettings {
     $clickable: boolean;
 }
-const StyledChart = tw.div`
-    flex
-    flex-col
-    items-center
-    justify-center
-    w-full
-    h-full
-`;
 
 const StyledLegend = tw.span<LegendSettings>`
     text-[#333333]
@@ -121,6 +116,7 @@ export const ChartBar = ({
     scroll = false,
     isLoading = false,
     refLineY,
+    className,
 }: ChartBarSettings<any>) => {
     const dataStore: Dictionary[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const keys = dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : [];
@@ -128,7 +124,7 @@ export const ChartBar = ({
     if (!colors) colors = keys.length === 4 ? chart4Colors : defaultChartPalette;
 
     return (
-        <StyledChart>
+        <Flex className={twMerge('w-full h-60', className)}>
             {isLoading && <CardLoading />}
             {!isLoading && dataStore.length > 0 ? (
                 <ResponsiveContainer>
@@ -213,6 +209,6 @@ export const ChartBar = ({
             ) : (
                 !isLoading && <NoData />
             )}
-        </StyledChart>
+        </Flex>
     );
 };

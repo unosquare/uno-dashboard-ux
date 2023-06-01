@@ -28,21 +28,17 @@ import {
 import '../src/resources/global.css';
 import {
     Text,
-    Metric,
     Grid,
-    Card as TremorCard,
+    Card,
     Col,
     Flex,
-    BadgeDelta,
     Dropdown,
-    CategoryBar,
     Legend,
     LineChart,
     Title,
     DropdownItem,
     Button,
     Badge,
-    Divider,
     Bold,
 } from '@tremor/react';
 
@@ -58,7 +54,7 @@ const columns = [
     { label: 'City', disableSearch: true, excludeFromSort: true },
     { label: 'Age', dataType: DataTypes.DAYS, sortOrder: 2, sortDirection: SortDirection.DESC },
     { label: 'Like Ice cream', dataType: DataTypes.BOOLEAN },
-    { label: 'Profile', dataType: DataTypes.LINK_ICON },
+    { label: 'Profile', dataType: DataTypes.LINK },
     { label: 'Long text', dataType: DataTypes.PARAGRAPH },
 ];
 
@@ -95,7 +91,6 @@ const Application = () => {
     const [value, setValue] = React.useState(false);
     const [openMenu, setOpenMenu] = React.useState(false);
     const [data, setData] = React.useState(defaultData);
-    const [circleValue, setCircleValue] = React.useState(1234);
 
     const toggle = () => {
         setValue(!value);
@@ -107,8 +102,6 @@ const Application = () => {
         if (body) body.style.overflow = openMenu ? 'auto' : 'hidden';
         setOpenMenu(!openMenu);
     };
-
-    const CircleClicked = () => setCircleValue(circleValue + 1);
 
     return (
         <>
@@ -148,25 +141,14 @@ const Application = () => {
             </NavBar>
             <BasicToolbar>
                 <Text>This is a toolbar</Text>
-                <Button>Click</Button>
+                <Button size='xs'>Click</Button>
             </BasicToolbar>
             <TremorContainer hasToolbar>
-                <Grid numCols={3} numColsSm={1} numColsMd={2} className='mt-6 gap-6'>
-                    <TremorCard>
-                        <Flex alignItems='start'>
-                            <Text>Total Rows</Text>
-                            <BadgeDelta deltaType={'increase'}>{50}</BadgeDelta>
-                        </Flex>
-                        <Flex justifyContent='start' alignItems='baseline' className='truncate space-x-3'>
-                            <Metric>1234</Metric>
-                            <Text className='truncate'>from 2000</Text>
-                        </Flex>
-                        <Divider />
-                    </TremorCard>
-                    <TremorCard>
+                <Grid numCols={3} numColsSm={1} numColsMd={2} className='gap-6'>
+                    <Card>
                         <Text>Goal</Text>
                         <LineChart
-                            className='mt-6'
+                            className='mt-5'
                             data={chartData}
                             index='name'
                             categories={['value']}
@@ -174,34 +156,22 @@ const Application = () => {
                             valueFormatter={dataFormatter}
                             yAxisWidth={40}
                         />
-                    </TremorCard>
-                    <TremorCard>
-                        <Text>Value</Text>
-                        <Metric>100%</Metric>
-                        <CategoryBar
-                            categoryPercentageValues={chartData.map((y) => y.value)}
-                            colors={['emerald', 'yellow', 'rose']}
-                            className='mt-4'
-                        />
-                        <Legend
-                            categories={chartData.map((y) => y.name)}
-                            colors={['emerald', 'yellow', 'rose']}
-                            className='mt-3'
-                        />
-                    </TremorCard>
-                    <TremorCard className='flex flex-col'>
-                        <DataChart rawData={chartData} dataCallback={identity} legend />
+                    </Card>
+                    <Card>
+                        <DataChart rawData={chartData} dataCallback={identity} legend className='mt-5' />
                         <Badge size='sm'>500 Goal</Badge>
-                    </TremorCard>
-                    <TremorCard className='h-96'>
+                    </Card>
+                    <Card>
+                        <Bold>Bar Chart</Bold>
                         <ChartBar
+                            className='mt-5'
                             rawData={chartData}
                             dataCallback={identity}
                             legendFormatType={LegendFormatTypes.MONEY}
                             legend
                         />
-                    </TremorCard>
-                    <TremorCard className='h-96'>
+                    </Card>
+                    <Card className='h-96'>
                         <Bold>Pie Chart</Bold>
                         <PieChart
                             rawData={chartData}
@@ -213,11 +183,11 @@ const Application = () => {
                             className='mt-6'
                             colors={['emerald', 'yellow', 'rose']}
                         />
-                    </TremorCard>
-                    <Col numColSpan={3}>
-                        <TremorCard>
+                    </Card>
+                    <Col numColSpan={2}>
+                        <Card className='h-96'>
                             <Table
-                                className='h-40'
+                                className='h-72'
                                 columns={columns}
                                 rawData={data}
                                 dataCallback={identity}
@@ -226,12 +196,10 @@ const Application = () => {
                                 exportCsv
                                 calculateFooter={calculateFooter}
                             >
-                                <Flex flexDirection='row' justifyContent='between'>
-                                    <Title>Data Table</Title>
-                                    <ExchangeToggle isExchange={value} switchTbl={toggle} />
-                                </Flex>
+                                <Title className='w-full'>Data Table</Title>
+                                <ExchangeToggle isExchange={value} switchTbl={toggle} />
                             </Table>
-                        </TremorCard>
+                        </Card>
                     </Col>
                 </Grid>
             </TremorContainer>

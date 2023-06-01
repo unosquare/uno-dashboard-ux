@@ -13,6 +13,8 @@ import {
 } from 'recharts';
 import tw from 'tailwind-styled-components';
 import { Dictionary } from 'uno-js';
+import { Flex } from '@tremor/react';
+import { twMerge } from 'tailwind-merge';
 import { ChartLegend } from '../ChartLegend';
 import { ChartComponent, ChartTypes } from '../constants';
 import { CardLoading } from '../CardLoading';
@@ -28,21 +30,12 @@ export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn, Dict
     onLegendClick?: (e: any) => void;
     refLineY?: { value: number; label: string; color: string };
     isLoading?: boolean;
+    className?: string;
 }
 
 interface LegendSettings {
     $clickable?: boolean;
 }
-
-const StyledChart = tw.div`
-    flex
-    flex-col
-    items-center
-    justify-center
-    w-full
-    h-full
-    -ml-[30px]
-`;
 
 const StyledLegend = tw.span<LegendSettings>`
     text-maingray
@@ -87,12 +80,13 @@ export const DataChart = ({
     onLegendClick,
     refLineY,
     isLoading,
+    className,
 }: DataChartSettings<any>) => {
     const dataStore: Dictionary[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t);
 
     return (
-        <StyledChart>
+        <Flex className={twMerge('w-full h-60', className)}>
             {isLoading && <CardLoading />}
             {!isLoading && dataStore.length > 0 ? (
                 <ResponsiveContainer>
@@ -143,6 +137,6 @@ export const DataChart = ({
             ) : (
                 !isLoading && <NoData />
             )}
-        </StyledChart>
+        </Flex>
     );
 };

@@ -76,7 +76,7 @@ const sortOneColumn = <T extends TableColumn>(
     const a = sortDirection === SortDirection.DESC ? right : left;
     const b = sortDirection === SortDirection.DESC ? left : right;
 
-    if (dataType && dataType === DataTypes.LINK_STRING) {
+    if (dataType && dataType === DataTypes.LINK) {
         return sortComparer(a[sortColumn][1], b[sortColumn][1]);
     }
 

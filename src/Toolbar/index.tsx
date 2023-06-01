@@ -24,15 +24,9 @@ export const ExchangeToggle = ({ isExchange, switchTbl }: ExchangeToggleSettings
 );
 
 export const ToolBar = ({ onCsvClick, onSearch, children, exportCsvDisabled }: ToolBarSettings) => (
-    <Flex justifyContent='between'>
+    <Flex justifyContent='end' className='gap-4'>
         {children}
-        {(onSearch || onCsvClick) && (
-            <Flex className='w-2/4 gap-2'>
-                {onCsvClick && (
-                    <ExportCsvButton onClick={onCsvClick} disable={exportCsvDisabled} className='sm:hidden' />
-                )}
-                {onSearch && <SearchBox search={onSearch} />}
-            </Flex>
-        )}
+        {onCsvClick && <ExportCsvButton onClick={onCsvClick} disable={exportCsvDisabled} className='sm:hidden' />}
+        {onSearch && <SearchBox search={onSearch} />}
     </Flex>
 );
