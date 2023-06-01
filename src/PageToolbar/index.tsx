@@ -6,6 +6,7 @@ export const StyledToolbar = tw.div`
     flex
     items-center
     justify-between
+    whitespace-nowrap
     max-w-unomax
     m-auto
     px-[40px]
