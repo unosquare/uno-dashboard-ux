@@ -186,7 +186,7 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
             {definitions.map((header, index) => (
                 <TableHeaderCell
                     key={objectHash(header)}
-                    className={`p-2 bg-white ${getAlignment(header.dataType || undefined, index)}`}
+                    className={`p-2 text-xs/[13px] bg-white ${getAlignment(header.dataType || undefined, index)}`}
                     onClick={() => !header.excludeFromSort && setSortColumn(index)}
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
@@ -216,7 +216,10 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
             {footer.map((foot, index) => (
                 <TableCell
                     key={objectHash(definition[index])}
-                    className={`p-2 whitespace-normal ${getAlignment(definition[index]?.dataType || undefined, index)}`}
+                    className={`p-2 text-xs/[13px] whitespace-normal ${getAlignment(
+                        definition[index]?.dataType || undefined,
+                        index,
+                    )}`}
                 >
                     <span className='font-semibold'>{foot}</span>
                 </TableCell>
@@ -233,7 +236,7 @@ const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
                 return (
                     <TableCell
                         key={objectHash({ a: definitions[index], c: cell })}
-                        className={`p-2 whitespace-normal ${
+                        className={`p-2 whitespace-normal text-xs/[13px] ${
                             dataType === DataTypes.BOLD_STRING ? 'font-medium !text-black' : ''
                         } ${getAlignment(dataType, index)}`}
                     >
