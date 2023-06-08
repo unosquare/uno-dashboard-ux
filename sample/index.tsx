@@ -32,14 +32,14 @@ import {
     Card,
     Col,
     Flex,
-    Dropdown,
     Legend,
     LineChart,
     Title,
-    DropdownItem,
     Button,
     Badge,
     Bold,
+    SelectItem,
+    Select,
 } from '@tremor/react';
 
 export enum options {
@@ -119,14 +119,14 @@ const Application = () => {
                             </StyledMenuActions>
                             <Flex justifyContent='between' alignItems='center' className='gap-4'>
                                 <Text>Options</Text>
-                                <Dropdown value={currentOption} onValueChange={setCurrentOption}>
-                                    <DropdownItem value={options.A}>Apple</DropdownItem>
-                                    <DropdownItem value={options.B}>Bolt</DropdownItem>
-                                    <DropdownItem value={options.C}>Cactus</DropdownItem>
-                                </Dropdown>
+                                <Select value={currentOption} onValueChange={setCurrentOption}>
+                                    <SelectItem value={options.A}>Apple</SelectItem>
+                                    <SelectItem value={options.B}>Bolt</SelectItem>
+                                    <SelectItem value={options.C}>Cactus</SelectItem>
+                                </Select>
                             </Flex>
                             <StyledMenuSearchBox>
-                                <SearchBox focus search={(v) => console.log(v)} />
+                                <SearchBox focus search={console.log} />
                             </StyledMenuSearchBox>
                             <MenuSection>
                                 <h6>This is a Section</h6>
@@ -144,7 +144,7 @@ const Application = () => {
                 <Button size='xs'>Click</Button>
             </BasicToolbar>
             <TremorContainer hasToolbar>
-                <Grid numCols={3} numColsSm={1} numColsMd={2} className='gap-6'>
+                <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
                     <Card>
                         <Text>Goal</Text>
                         <LineChart

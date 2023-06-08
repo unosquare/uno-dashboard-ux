@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex, Toggle, ToggleItem } from '@tremor/react';
+import { Button, Flex } from '@tremor/react';
 import { Money16Regular, Table16Regular } from '@fluentui/react-icons';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { SearchBox } from '../SearchBox';
@@ -17,16 +17,21 @@ export interface ExchangeToggleSettings {
 }
 
 export const ExchangeToggle = ({ isExchange, switchTbl }: ExchangeToggleSettings) => (
-    <Toggle defaultValue={isExchange ? '1' : '0'} onValueChange={switchTbl} className='mx-3'>
-        <ToggleItem value='0' icon={Table16Regular} title='Data' />
-        <ToggleItem value='1' icon={Money16Regular} title='Exchange' />
-    </Toggle>
+    <Button onClick={switchTbl} className='mx-3' icon={isExchange ? Table16Regular : Money16Regular}>
+        {isExchange ? 'Data' : 'Exchange'}
+    </Button>
 );
 
 export const ToolBar = ({ onCsvClick, onSearch, children, exportCsvDisabled }: ToolBarSettings) => (
     <Flex justifyContent='end' className='gap-4'>
         {children}
-        {onCsvClick && <ExportCsvButton onClick={onCsvClick} disable={exportCsvDisabled} className='sm:hidden' />}
+        {onCsvClick && (
+            <ExportCsvButton
+                onClick={onCsvClick}
+                disable={exportCsvDisabled ? true : undefined}
+                className='sm:hidden'
+            />
+        )}
         {onSearch && <SearchBox search={onSearch} />}
     </Flex>
 );
