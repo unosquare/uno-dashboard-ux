@@ -39,7 +39,7 @@ export const NavBarTitle = tw.div`
 export const NavBar = ({ transparent, children }: any) => (
     <StyledHeader transparent={transparent}>
         <StyledNavbar>
-            <UnoLogo width={150} height={48} />
+            <UnoLogo width={150} height={48} className='sm:hidden' />
             {children}
         </StyledNavbar>
     </StyledHeader>

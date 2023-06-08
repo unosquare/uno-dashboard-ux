@@ -112,6 +112,14 @@ module.exports = {
             fontFamily: {
                 sans: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
             },
+            screens: {
+                xxs: { max: '375px' },
+                xs: { max: '480px' },
+                sm: { max: '768px' },
+                md: { max: '1024px' },
+                lg: { max: '1280px' },
+                xl: { max: '1366px' },
+            },
             maxWidth: {
                 unomax: '1460px',
             },
