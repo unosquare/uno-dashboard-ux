@@ -15,8 +15,9 @@ import { DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
-import { ToolBar } from '../Toolbar';
 import { sortData, TableColumn } from './sortData';
+import { ExportCsvButton } from '../ExportCsvButton';
+import { SearchBox } from '../SearchBox';
 
 export * from './sortData';
 
@@ -289,18 +290,16 @@ export const Table = <TDataIn, TDataOut>({
     const [lastSearch, setLastSearch] = useState('');
     const [searched, setSearched] = useState(dataStore);
 
-    const onSearch = !searchable
-        ? undefined
-        : (search: string, newData?: TDataOut[], newRaw?: any) =>
-              startTransition(() => {
-                  setLastSearch(search);
-                  const searchableRaw = newRaw || rawData;
-                  setSearched(searchData(search, newData || filteredData, definitions));
+    const onSearch = (search: string, newData?: TDataOut[], newRaw?: any) =>
+        startTransition(() => {
+            setLastSearch(search);
+            const searchableRaw = newRaw || rawData;
+            setSearched(searchData(search, newData || filteredData, definitions));
 
-                  if (calculateFooter && searchableRaw) {
-                      setFilteredFooter(calculateFooter(searchFooter(search, searchableRaw)));
-                  }
-              });
+            if (calculateFooter && searchableRaw) {
+                setFilteredFooter(calculateFooter(searchFooter(search, searchableRaw)));
+            }
+        });
 
     useEffect(() => {
         const subSet = (dataCallback && rawData && dataCallback(rawData)) || [];
@@ -318,23 +317,25 @@ export const Table = <TDataIn, TDataOut>({
 
     const setSortHeader = (index: number) => setDefinitions((prev: TableColumn[]) => getColumnSorting(prev, index));
 
-    const onCsvClick = !exportCsv
-        ? undefined
-        : () =>
-              createCsv(
-                  dataStore,
-                  definitions.map((x) => x.label),
-                  'file',
-              );
+    const onCsvClick = () =>
+        createCsv(
+            dataStore,
+            definitions.map((x) => x.label),
+            'file',
+        );
 
     const renderFunc = render || getRows;
 
     return (
         <>
-            {(children || searchable || onCsvClick) && (
-                <ToolBar onCsvClick={onCsvClick} onSearch={onSearch} exportCsvDisabled={dataStore.length <= 0}>
+            {(children || searchable || exportCsv) && (
+                <Flex justifyContent='end' className='gap-4'>
                     {children}
-                </ToolBar>
+                    {exportCsv && (
+                        <ExportCsvButton onClick={onCsvClick} disable={dataStore.length <= 0 ? true : undefined} />
+                    )}
+                    {searchable && <SearchBox search={onSearch} />}
+                </Flex>
             )}
             {loading && <CardLoading />}
             {searched.length > 0 && !loading && (
