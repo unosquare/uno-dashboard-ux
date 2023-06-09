@@ -23,7 +23,6 @@ import {
     MenuSubSection,
     StyledMenuActions,
     TremorContainer,
-    ExchangeToggle,
 } from '../src';
 import '../src/resources/global.css';
 import {
@@ -88,14 +87,7 @@ const dataFormatter = (number: number) => Intl.NumberFormat('us').format(number)
 
 const Application = () => {
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
-    const [value, setValue] = React.useState(false);
     const [openMenu, setOpenMenu] = React.useState(false);
-    const [data, setData] = React.useState(defaultData);
-
-    const toggle = () => {
-        setValue(!value);
-        setData(value ? defaultData : []);
-    };
 
     const onToggleMenu = () => {
         const body = document.getElementById('body');
@@ -185,11 +177,11 @@ const Application = () => {
                         />
                     </Card>
                     <Col numColSpan={2}>
-                        <Card className='h-96'>
+                        <Card>
                             <Table
                                 className='h-72'
                                 columns={columns}
-                                rawData={data}
+                                rawData={defaultData}
                                 dataCallback={identity}
                                 searchable
                                 sortable
@@ -197,7 +189,6 @@ const Application = () => {
                                 calculateFooter={calculateFooter}
                             >
                                 <Title className='w-full'>Data Table</Title>
-                                <ExchangeToggle isExchange={value} switchTbl={toggle} />
                             </Table>
                         </Card>
                     </Col>

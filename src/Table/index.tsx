@@ -187,11 +187,14 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
             {definitions.map((header, index) => (
                 <TableHeaderCell
                     key={objectHash(header)}
-                    className={`p-2 text-xs/[13px] bg-white ${getAlignment(header.dataType || undefined, index)}`}
+                    className={`p-2 text-xs/[13px] bg-white whitespace-normal ${getAlignment(
+                        header.dataType || undefined,
+                        index,
+                    )}`}
                     onClick={() => !header.excludeFromSort && setSortColumn(index)}
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
-                        <span>{header.label}</span>
+                        {header.label}
                         {sortable &&
                             !header.excludeFromSort &&
                             (header.sortDirection === SortDirection.DESC && Number(header.sortOrder) >= 1 ? (
