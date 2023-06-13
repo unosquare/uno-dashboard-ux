@@ -1,4 +1,5 @@
 import React, { startTransition, useEffect, useState } from 'react';
+import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
 import { createCsv, formatter, FormatTypes } from 'uno-js';
 import {
@@ -29,7 +30,7 @@ export interface TableSettings<TDataIn, TDataOut> {
     noDataElement?: React.ReactNode;
     searchable?: boolean;
     calculateFooter?: (data: TDataIn) => (string | number)[];
-    sortable?: any;
+    sortable?: boolean;
     exportCsv?: boolean;
     render?: <TIn>(data: (string | number)[], definitions: TableColumn[], rawData: TIn) => React.ReactNode;
     children?: React.ReactNode;
@@ -276,8 +277,8 @@ export const Table = <TDataIn, TDataOut>({
     searchable,
     calculateFooter,
     rawData,
-    sortable,
-    exportCsv,
+    sortable = true,
+    exportCsv = false,
     render,
     children,
     dataCallback,
@@ -320,12 +321,20 @@ export const Table = <TDataIn, TDataOut>({
 
     const setSortHeader = (index: number) => setDefinitions((prev: TableColumn[]) => getColumnSorting(prev, index));
 
-    const onCsvClick = () =>
-        createCsv(
+    const onCsvClick = () => {
+        const el = document.createElement('div');
+
+        el.innerHTML = renderToString(<>{children}</>);
+        const fileName = el.children.length > 0 ? el.children[0].textContent : undefined;
+
+        el.remove();
+
+        return createCsv(
             dataStore,
             definitions.map((x) => x.label),
-            'file',
+            fileName || 'file',
         );
+    };
 
     const renderFunc = render || getRows;
 

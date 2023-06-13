@@ -12,7 +12,7 @@
         "jest": true
     },
     "extends": "eslint-config-unosquare",
-    "plugins": ["eslint-plugin-prettier","unused-imports"],
+    "plugins": ["eslint-plugin-prettier", "unused-imports"],
     "rules": {
         "guard-for-in": "warn",
         "react/require-default-props": "off",
@@ -27,10 +27,10 @@
         ],
         "array-callback-return": ["error", { "checkForEach": true }],
         "unused-imports/no-unused-imports": "error",
-		"unused-imports/no-unused-vars": [
-			"warn",
-			{ "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
-		],
+        "unused-imports/no-unused-vars": [
+            "warn",
+            { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+        ],
         "sort-imports": [
             "warn",
             {
@@ -41,6 +41,7 @@
                 "allowSeparatedGroups": false
             }
         ],
-        "@typescript-eslint/no-explicit-any": 0
+        "@typescript-eslint/no-explicit-any": 0,
+        "react/jsx-no-useless-fragment": "warn"
     }
 }
