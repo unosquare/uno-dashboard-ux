@@ -15,7 +15,7 @@
         "jsx": "react",
         "declaration": true,
         "outDir": "./dist",
-        "types": ["react/next", "react-dom/next"]
+        "types": ["react/next"]
     },
     "include": ["src/**/*.ts*"],
     "exclude": ["sample/**/*.*", "node_modules"]

@@ -43,9 +43,6 @@
         "build": "tsc && npx ncp src/resources/ dist/resources",
         "lint": "tsc --noEmit && eslint ./src/**/*.{js,ts,tsx}",
         "lint:fix": "eslint ./src/**/*.{js,ts,tsx} --fix",
-        "prettier": "prettier --check src/**/*.ts*",
-        "prettier:fix": "prettier --write src/**/*.ts*",
-        "codestyle:fix": "npm run lint:fix && npm run prettier:fix",
         "test": "tsc --noEmit"
     },
     "prettier": {
@@ -67,8 +64,8 @@
         }
     },
     "lint-staged": {
-        "*.{js,json,css,scss,md,ts,html,tsx}": [
-            "npm run codestyle:fix"
+        "*.{css,ts,html,tsx}": [
+            "npm run lint:fix"
         ]
     },
     "author": "Unosquare",
