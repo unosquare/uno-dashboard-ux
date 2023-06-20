@@ -62,8 +62,8 @@ const columns = [
 const defaultData = [
     ['Pepe', 'Mexico', 20, 1000, true, 'https://www.google.com', 'Small text'],
     ['Pepe', 'LA', 25, null, true, '', 'Small text'],
-    ['Juan', 'Chicago', 30, 200, true, 'https://www.google.com', 'Small text'],
-    ['Juan', 'Oaxaca', 35, null, false, 'https://www.google.com', 'Small text'],
+    ['Juan', 'Chicago', 30, 200, true, ['https://www.google.com', 'Google', '(after)'], 'Small text'],
+    ['Juan', 'Oaxaca', 35, null, false, ['https://www.google.com', '(Google)', 'before', true], 'Small text'],
     ['Maria', 'NY', 40, 0, false, '', 'Small text'],
     ['Laura', 'Guadalajara', 45, 100, true, 'https://www.google.com', 'Small text'],
     ['Laura', 'Mexico', 50, 100, true, 'https://www.google.com', 'Small text'],

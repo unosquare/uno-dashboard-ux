@@ -115,9 +115,15 @@ const renderFileCell = (data: any) =>
 const renderLinkString = (data: any) => {
     if (data instanceof Array) {
         return (data as string[])[0] ? (
-            <a href={(data as string[])[0].toString()} target='_blank' rel='noopener noreferrer'>
-                {`${(data as string[])[1].toString()}`}
-            </a>
+            <>
+                {(data as string[])[3] && <span>{`${(data as string[])[2].toString()} `}</span>}
+                <a href={(data as string[])[0].toString()} target='_blank' rel='noopener noreferrer'>
+                    {`${(data as string[])[1].toString()}`}
+                </a>
+                {!(data as string[])[3] && (data as string[])[2] && (
+                    <span>{` ${(data as string[])[2].toString()}`}</span>
+                )}
+            </>
         ) : (
             (data as string[])[1].toString()
         );
