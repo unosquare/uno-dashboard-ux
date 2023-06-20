@@ -41,8 +41,8 @@
     "scripts": {
         "start": "rspack serve",
         "build": "tsc && npx ncp src/resources/ dist/resources",
-        "lint": "tsc --noEmit && eslint ./src/**/*.{js,ts,tsx}",
-        "lint:fix": "eslint ./src/**/*.{js,ts,tsx} --fix",
+        "lint": "tsc --noEmit && eslint ./{src,sample}/**/*.{js,ts,tsx}",
+        "lint:fix": "eslint ./{src,sample}/**/*.{js,ts,tsx} --fix",
         "test": "tsc --noEmit"
     },
     "prettier": {

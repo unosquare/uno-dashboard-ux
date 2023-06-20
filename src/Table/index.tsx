@@ -270,6 +270,19 @@ const searchFooter = (search: string, newRaw: any) =>
         ? newRaw.filter((section: any) => Object.values(section).some(defaultFilter(search)))
         : newRaw;
 
+const renderToRowString = (data: any[], definitions: TableColumn[]) =>
+    data.map((row: any) =>
+        row.map((cell: any, index: number) => {
+            const dataType = definitions[index]?.dataType || undefined;
+            if (dataType === DataTypes.BOOLEAN) return cell ? 'TRUE' : 'FALSE';
+            if (!cell && dataType === DataTypes.MONEY) return '$0.00';
+            if (cell == null || cell === ' ') return 'N/A';
+
+            const formatType = translateType(dataType);
+            return formatType ? formatter(cell.toString(), formatType) : cell;
+        }),
+    );
+
 export const Table = <TDataIn, TDataOut>({
     columns,
     loading,
@@ -329,8 +342,8 @@ export const Table = <TDataIn, TDataOut>({
 
         el.remove();
 
-        return createCsv(
-            dataStore,
+        createCsv(
+            renderToRowString(filteredData, definitions),
             definitions.map((x) => x.label),
             fileName || 'file',
         );

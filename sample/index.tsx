@@ -3,6 +3,22 @@ import { createRoot } from 'react-dom/client';
 import { identity } from 'uno-js';
 import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
 import {
+    Badge,
+    Bold,
+    Button,
+    Card,
+    Col,
+    Flex,
+    Grid,
+    Legend,
+    LineChart,
+    Select,
+    SelectItem,
+    Text,
+    Title,
+} from '@tremor/react';
+
+import {
     BasicToolbar,
     Blur,
     Burger,
@@ -12,34 +28,19 @@ import {
     Footer,
     LegendFormatTypes,
     MenuContainer,
+    MenuSection,
+    MenuSubSection,
     NavBar,
     NavBarTitle,
     PieChart,
-    SortDirection,
-    Table,
-    StyledMenuSearchBox,
     SearchBox,
-    MenuSection,
-    MenuSubSection,
+    SortDirection,
     StyledMenuActions,
+    StyledMenuSearchBox,
+    Table,
     TremorContainer,
 } from '../src';
 import '../src/resources/global.css';
-import {
-    Text,
-    Grid,
-    Card,
-    Col,
-    Flex,
-    Legend,
-    LineChart,
-    Title,
-    Button,
-    Badge,
-    Bold,
-    SelectItem,
-    Select,
-} from '@tremor/react';
 
 export enum options {
     A = 'Apple',
@@ -52,23 +53,25 @@ const columns = [
     { label: 'Name', sortOrder: 1, sortDirection: SortDirection.ASC },
     { label: 'City', disableSearch: true, excludeFromSort: true },
     { label: 'Age', dataType: DataTypes.DAYS, sortOrder: 2, sortDirection: SortDirection.DESC },
+    { label: 'Balance', dataType: DataTypes.MONEY },
     { label: 'Like Ice cream', dataType: DataTypes.BOOLEAN },
     { label: 'Profile', dataType: DataTypes.LINK },
     { label: 'Long text', dataType: DataTypes.PARAGRAPH },
 ];
 
 const defaultData = [
-    ['Pepe', 'Mexico', 20, true, 'https://www.google.com', 'Small text'],
-    ['Pepe', 'LA', 25, true, '', 'Small text'],
-    ['Juan', 'Chicago', 30, true, 'https://www.google.com', 'Small text'],
-    ['Juan', 'Oaxaca', 35, false, 'https://www.google.com', 'Small text'],
-    ['Maria', 'NY', 40, false, '', 'Small text'],
-    ['Laura', 'Guadalajara', 45, true, 'https://www.google.com', 'Small text'],
-    ['Laura', 'Mexico', 50, true, 'https://www.google.com', 'Small text'],
+    ['Pepe', 'Mexico', 20, 1000, true, 'https://www.google.com', 'Small text'],
+    ['Pepe', 'LA', 25, null, true, '', 'Small text'],
+    ['Juan', 'Chicago', 30, 200, true, 'https://www.google.com', 'Small text'],
+    ['Juan', 'Oaxaca', 35, null, false, 'https://www.google.com', 'Small text'],
+    ['Maria', 'NY', 40, 0, false, '', 'Small text'],
+    ['Laura', 'Guadalajara', 45, 100, true, 'https://www.google.com', 'Small text'],
+    ['Laura', 'Mexico', 50, 100, true, 'https://www.google.com', 'Small text'],
     [
         'Juan',
         'Oaxaca',
         30,
+        null,
         true,
         'https://www.google.com',
         'This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type',
