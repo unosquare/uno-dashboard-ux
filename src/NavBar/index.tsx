@@ -27,7 +27,6 @@ export const NavBarTitle = tw.div`
     flex-row
     items-center
     text-white
-    uppercase
     font-bold
     [&>h2]:tracking-[1.5px]
     [&>h2]:text-3xl
