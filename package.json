@@ -9,7 +9,7 @@
     ],
     "dependencies": {
         "@fluentui/react-icons": "^2.0.204",
-        "@tremor/react": "^3.3.0",
+        "@tremor/react": "^3.4.1",
         "dayjs": "^1.11.9",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -19,10 +19,10 @@
         "uno-js": "^3.12.0"
     },
     "devDependencies": {
-        "@rspack/cli": "^0.2.4",
+        "@rspack/cli": "^0.2.5",
         "@types/object-hash": "^3.0.2",
         "@types/react-dom": "^18.2.6",
-        "@typescript-eslint/eslint-plugin": "^5.60.1",
+        "@typescript-eslint/eslint-plugin": "^5.61.0",
         "autoprefixer": "^10.4.14",
         "eslint": "^8.44.0",
         "eslint-config-unosquare": "^0.1.4y",
