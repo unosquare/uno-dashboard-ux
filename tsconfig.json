@@ -14,8 +14,7 @@
         "isolatedModules": true,
         "jsx": "react",
         "declaration": true,
-        "outDir": "./dist",
-        "types": ["react/next"]
+        "outDir": "./dist"
     },
     "include": ["src/**/*.ts*"],
     "exclude": ["sample/**/*.*", "node_modules"]
