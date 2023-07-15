@@ -8,7 +8,7 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.206",
+        "@fluentui/react-icons": "^2.0.207",
         "@tremor/react": "^3.4.1",
         "dayjs": "^1.11.9",
         "react": "^18.2.0",
@@ -16,16 +16,16 @@
         "recharts": "^2.7.2",
         "tailwind-merge": "^1.13.2",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.13.0"
+        "uno-js": "^3.15.0"
     },
     "devDependencies": {
-        "@rspack/cli": "^0.2.6",
+        "@rspack/cli": "^0.2.7",
         "@types/object-hash": "^3.0.2",
-        "@types/react": "^18.2.14",
-        "@types/react-dom": "^18.2.6",
+        "@types/react": "^18.2.15",
+        "@types/react-dom": "^18.2.7",
         "@typescript-eslint/eslint-plugin": "^6.0.0",
         "autoprefixer": "^10.4.14",
-        "eslint": "^8.44.0",
+        "eslint": "^8.45.0",
         "eslint-config-unosquare": "0.3.2",
         "eslint-plugin-jsx-a11y": "^6.7.1",
         "eslint-plugin-prettier": "^5.0.0",
@@ -36,7 +36,7 @@
         "object-hash": "^3.0.0",
         "postcss-loader": "^7.3.3",
         "prettier": "^3.0.0",
-        "tailwindcss": "^3.3.2",
+        "tailwindcss": "^3.3.3",
         "typescript": "^5.1.6"
     },
     "scripts": {
