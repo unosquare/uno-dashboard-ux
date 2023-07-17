@@ -14,7 +14,7 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "recharts": "^2.7.2",
-        "tailwind-merge": "^1.13.2",
+        "tailwind-merge": "^1.14.0",
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.15.0"
     },
@@ -31,20 +31,21 @@
         "eslint-plugin-prettier": "^5.0.0",
         "eslint-plugin-react": "^7.32.2",
         "eslint-plugin-react-hooks": "^4.6.0",
-        "husky": "^4.3.8",
         "lint-staged": "^13.2.3",
         "object-hash": "^3.0.0",
         "postcss-loader": "^7.3.3",
         "prettier": "^3.0.0",
         "tailwindcss": "^3.3.3",
-        "typescript": "^5.1.6"
+        "typescript": "^5.1.6",
+        "husky": "^8.0.0"
     },
     "scripts": {
         "start": "rspack serve",
         "build": "tsc && npx ncp src/resources/ dist/resources",
         "lint": "tsc --noEmit && eslint ./{src,sample}/**/*.{js,ts,tsx}",
         "lint:fix": "eslint ./{src,sample}/**/*.{js,ts,tsx} --fix",
-        "test": "tsc --noEmit"
+        "test": "tsc --noEmit",
+        "prepare": "husky install"
     },
     "prettier": {
         "endOfLine": "auto",
@@ -58,11 +59,6 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/unosquare/uno-dashboard-ux.git"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
     },
     "lint-staged": {
         "*.{css,ts,html,tsx}": [
