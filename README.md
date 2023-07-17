@@ -1,3 +1,3 @@
 # uno-dashboard-ux
 
-Unosquare Dashboard UX/UI Components.
+Unosquare Dashboard UX/UI Components based on Tremor.
