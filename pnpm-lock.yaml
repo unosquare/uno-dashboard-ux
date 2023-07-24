@@ -10,7 +10,7 @@ dependencies:
     version: 2.0.207(react@18.2.0)
   '@tremor/react':
     specifier: ^3.4.1
-    version: 3.4.1(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3)
+    version: 3.5.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3)
   dayjs:
     specifier: ^1.11.9
     version: 1.11.9
@@ -661,8 +661,8 @@ packages:
       tslib: 2.6.0
     dev: true
 
-  /@tremor/react@3.4.1(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3):
-    resolution: {integrity: sha512-o+jUN4GJYmjghEBGBEThM+STFrXD+7bze4AcZ4BA8p+s9LmkrDc/8SFItc6R/xkFsvj3jdE63bJWCD4f3FvsNA==}
+  /@tremor/react@3.5.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3):
+    resolution: {integrity: sha512-3wCddd5XHFcmXxL3qjiesRDQTY4coed4G4btmChVPfXLbkO5kHB4FuYpkjI4s3tj6myCupe1vfXWTAa40CddHQ==}
     peerDependencies:
       react: ^18.0.0
       react-dom: '>=16.6.0'
