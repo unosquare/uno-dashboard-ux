@@ -55,17 +55,9 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
 const leftAlign = [DataTypes.STRING, DataTypes.LINK, DataTypes.BULLET, undefined];
 
 export const getAlignment = (dataType: DataTypes | undefined, index?: number) => {
-    if (leftAlign.includes(dataType) && index === 0) return 'text-left';
+    if (dataType === DataTypes.PARAGRAPH || (leftAlign.includes(dataType) && index === 0)) return 'text-left';
 
-    switch (dataType) {
-        case DataTypes.DECIMAL_PERCENTAGE:
-        case DataTypes.PERCENTAGE:
-            return 'text-right';
-        case DataTypes.PARAGRAPH:
-            return 'text-left';
-        default:
-            return 'text-center';
-    }
+    return dataType === DataTypes.PERCENTAGE ? 'text-right' : 'text-center';
 };
 
 export const HeaderDiv = tw.div<HeaderSettings>`
@@ -99,18 +91,16 @@ const translateType = (type: DataTypes | undefined) => {
     switch (type) {
         case DataTypes.DATE:
             return FormatTypes.DATE;
-        case DataTypes.DATE_LOCAL:
-            return FormatTypes.DATE_LOCAL;
         case DataTypes.MONEY:
             return FormatTypes.MONEY;
         case DataTypes.PERCENTAGE:
             return FormatTypes.PERCENTAGE;
-        case DataTypes.DECIMAL_PERCENTAGE:
-            return FormatTypes.DECIMAL_PERCENTAGE;
         case DataTypes.DAYS:
             return FormatTypes.DAYS;
         case DataTypes.MONTHS:
             return FormatTypes.MONTHS;
+        case DataTypes.DECIMAL:
+            return FormatTypes.DECIMAL;
         default:
             return undefined;
     }

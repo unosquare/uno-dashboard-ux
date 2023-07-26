@@ -23,13 +23,10 @@ const compareDates = (date1: any, date2: any) => {
     return 0;
 };
 
-const dateType = [DataTypes.DATE, DataTypes.DATE_LOCAL];
-
 const numericTypes = [
     DataTypes.NUMBER,
     DataTypes.DECIMAL,
     DataTypes.PERCENTAGE,
-    DataTypes.DECIMAL_PERCENTAGE,
     DataTypes.MONEY,
     DataTypes.DAYS,
     DataTypes.MONTHS,
@@ -65,10 +62,9 @@ const sortOneColumn = <T extends TableColumn>(
     getSortIndex?: (order: any) => any,
 ) => {
     const { sortOrder, dataType, sortDirection } = sortColumns[index];
-
-    const baseSortColumn = definition.findIndex((x) => x.sortOrder === sortOrder);
-    const sortColumn = getSortIndex ? getSortIndex(sortOrder) : baseSortColumn;
     if (dataType === DataTypes.FILE) return 0;
+
+    const sortColumn = getSortIndex ? getSortIndex(sortOrder) : definition.findIndex((x) => x.sortOrder === sortOrder);
 
     if (left[sortColumn] === null) return 1;
     if (right[sortColumn] === null) return -1;
@@ -76,11 +72,9 @@ const sortOneColumn = <T extends TableColumn>(
     const a = sortDirection === SortDirection.DESC ? right : left;
     const b = sortDirection === SortDirection.DESC ? left : right;
 
-    if (dataType && dataType === DataTypes.LINK) {
-        return sortComparer(a[sortColumn][1], b[sortColumn][1]);
-    }
+    if (dataType === DataTypes.LINK) return sortComparer(a[sortColumn][1], b[sortColumn][1]);
 
-    if (dateType.includes(dataType || DataTypes.STRING)) {
+    if (dataType === DataTypes.DATE) {
         const result = compareDates(a[sortColumn], b[sortColumn]);
 
         if (result !== 0) return result;

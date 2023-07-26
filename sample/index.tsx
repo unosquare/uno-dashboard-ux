@@ -54,14 +54,14 @@ const columns = [
     { label: 'City', disableSearch: true, excludeFromSort: true },
     { label: 'Age', dataType: DataTypes.DAYS, sortOrder: 2, sortDirection: SortDirection.DESC },
     { label: 'Balance', dataType: DataTypes.MONEY },
-    { label: 'Margin', dataType: DataTypes.DECIMAL_PERCENTAGE },
+    { label: 'Margin', dataType: DataTypes.PERCENTAGE },
     { label: 'Like Ice cream', dataType: DataTypes.BOOLEAN },
     { label: 'Profile', dataType: DataTypes.LINK },
     { label: 'Long text', dataType: DataTypes.PARAGRAPH },
 ];
 
 const defaultData = [
-    ['Pepe', 'Mexico', 20, 1000, 10.25, true, 'https://www.google.com', 'Small text'],
+    ['Pepe', 'Mexico', 1, 1000, 10.25, true, 'https://www.google.com', 'Small text'],
     ['Pepe', 'LA', 25, null, 10 / 3, true, '', 'Small text'],
     ['Juan', 'Chicago', 30, 200, 55.25, true, ['https://www.google.com', 'Google', '(after)'], 'Small text'],
     [
