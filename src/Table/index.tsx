@@ -54,8 +54,18 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
 
 const leftAlign = [DataTypes.STRING, DataTypes.LINK, DataTypes.BULLET, undefined];
 
-export const getAlignment = (dataType: DataTypes | undefined, index?: number) =>
-    dataType === DataTypes.PARAGRAPH || (leftAlign.includes(dataType) && index === 0) ? 'text-left' : 'text-center';
+export const getAlignment = (dataType: DataTypes | undefined, index?: number) => {
+    if (leftAlign.includes(dataType) && index === 0) return 'text-left';
+
+    switch (dataType) {
+        case DataTypes.DECIMAL_PERCENTAGE:
+            return 'text-right';
+        case DataTypes.PARAGRAPH:
+            return 'text-left';
+        default:
+            return 'text-center';
+    }
+};
 
 export const HeaderDiv = tw.div<HeaderSettings>`
     flex-1
@@ -175,6 +185,8 @@ export const renderTableCell = (
             return (data as string[])[1] ? <LongTextCell text={data} /> : 'N/A';
         case DataTypes.FILE:
             return renderFileCell(data);
+        case DataTypes.DECIMAL_PERCENTAGE:
+            return formatter(data, FormatTypes.DECIMAL_PERCENTAGE);
         default: {
             const formatType = translateType(type);
             return formatType ? formatter(data.toString(), formatType) : data;
