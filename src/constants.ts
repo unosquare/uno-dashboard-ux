@@ -26,9 +26,7 @@ export enum DataTypes {
     NUMBER = 'number',
     STRING = 'string',
     PERCENTAGE = 'percentage',
-    DECIMAL_PERCENTAGE = 'decimalPpercentage',
     DATE = 'date',
-    DATE_LOCAL = 'dateLocal',
     LOCATION = 'location',
     DAYS = 'days',
     MONTHS = 'months',
@@ -53,5 +51,5 @@ export interface ChartComponent<TDataIn, TDataOut> {
 }
 
 export interface HasChildrenComponent {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
