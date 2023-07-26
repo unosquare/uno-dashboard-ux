@@ -59,6 +59,7 @@ export const getAlignment = (dataType: DataTypes | undefined, index?: number) =>
 
     switch (dataType) {
         case DataTypes.DECIMAL_PERCENTAGE:
+        case DataTypes.PERCENTAGE:
             return 'text-right';
         case DataTypes.PARAGRAPH:
             return 'text-left';
