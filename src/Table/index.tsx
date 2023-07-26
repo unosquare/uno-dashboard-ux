@@ -186,8 +186,6 @@ export const renderTableCell = (
             return (data as string[])[1] ? <LongTextCell text={data} /> : 'N/A';
         case DataTypes.FILE:
             return renderFileCell(data);
-        case DataTypes.DECIMAL_PERCENTAGE:
-            return formatter(data, FormatTypes.DECIMAL_PERCENTAGE);
         default: {
             const formatType = translateType(type);
             return formatType ? formatter(data.toString(), formatType) : data;
