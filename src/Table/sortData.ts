@@ -1,8 +1,4 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
 import { DataTypes, SortDirection } from '../constants';
-
-dayjs.extend(utc);
 
 export interface TableColumn {
     label: string;
@@ -11,17 +7,17 @@ export interface TableColumn {
     sortDirection?: SortDirection;
     disableSearch?: boolean;
     excludeFromSort?: boolean;
+    formatterOptions?: {
+        keepFormat?: boolean;
+        decimals?: number;
+        nullValue?: string;
+    };
 }
 
 const sanitizeNumericString = (str: any) =>
     Number(str.toString().replaceAll(',', '').replaceAll('$', '').replaceAll('%', '').trim());
 
-const compareDates = (date1: any, date2: any) => {
-    if (dayjs.utc(date1).isAfter(dayjs.utc(date2), 'day')) return 1;
-    if (dayjs.utc(date2).isAfter(dayjs.utc(date1), 'day')) return -1;
-
-    return 0;
-};
+const compareDates = (date1: any, date2: any) => new Date(date1).getTime() - new Date(date2).getTime();
 
 const numericTypes = [
     DataTypes.NUMBER,

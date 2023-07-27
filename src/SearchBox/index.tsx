@@ -6,9 +6,10 @@ export interface SearchBoxSettings {
     placeholder?: string;
     search: (value: string) => void;
     focus?: boolean;
+    disabled?: boolean;
 }
 
-export const SearchBox = ({ search, placeholder = 'Search', focus = false }: SearchBoxSettings) => {
+export const SearchBox = ({ search, placeholder = 'Search', focus = false, disabled = false }: SearchBoxSettings) => {
     const [value, setValue] = React.useState('');
     const ref = useRef<HTMLInputElement>(null);
 
@@ -32,6 +33,7 @@ export const SearchBox = ({ search, placeholder = 'Search', focus = false }: Sea
             ref={ref}
             value={value}
             onChange={onChange}
+            disabled={disabled}
             type='text'
             placeholder={placeholder}
         />

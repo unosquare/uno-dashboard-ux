@@ -1,4 +1,4 @@
-import React, { startTransition, useEffect, useState } from 'react';
+import React, { ReactNode, startTransition, useEffect, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
 import { createCsv, formatter, FormatTypes } from 'uno-js';
@@ -26,7 +26,7 @@ export interface TableSettings<TDataIn, TDataOut> {
     rawData: TDataIn;
     dataCallback: (data: TDataIn) => TDataOut[];
     columns: TableColumn[];
-    loading?: boolean;
+    isLoading?: boolean;
     noDataElement?: React.ReactNode;
     searchable?: boolean;
     calculateFooter?: (data: TDataIn) => (string | number)[];
@@ -156,6 +156,11 @@ const LongTextCell = ({ text }: any) => {
 export const renderTableCell = (
     data: Record<string, unknown> | string | number | boolean | string[] | any,
     type: DataTypes | undefined,
+    formatterOptions?: {
+        keepFormat?: boolean;
+        decimals?: number;
+        nullValue?: string;
+    },
 ) => {
     if (!data && type === DataTypes.MONEY) return '$0.00';
     if (data == null || data === ' ') return 'N/A';
@@ -178,7 +183,7 @@ export const renderTableCell = (
             return renderFileCell(data);
         default: {
             const formatType = translateType(type);
-            return formatType ? formatter(data.toString(), formatType) : data;
+            return formatType ? formatter(data.toString(), formatType, formatterOptions) : data;
         }
     }
 };
@@ -252,7 +257,7 @@ const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
                             dataType === DataTypes.BOLD_STRING ? 'font-medium !text-black' : ''
                         } ${getAlignment(dataType, index)}`}
                     >
-                        {renderTableCell(cell, dataType)}
+                        {renderTableCell(cell, dataType, definitions[index]?.formatterOptions)}
                     </TableCell>
                 );
             })}
@@ -290,9 +295,19 @@ const renderToRowString = (data: any[], definitions: TableColumn[]) =>
         }),
     );
 
+const SpanTable = ({ colSpan, children }: { colSpan: number; children: ReactNode }) => (
+    <TableRow>
+        <TableCell colSpan={colSpan} className='p-2'>
+            <Flex alignItems='center' className='w-full'>
+                {children}
+            </Flex>
+        </TableCell>
+    </TableRow>
+);
+
 export const Table = <TDataIn, TDataOut>({
     columns,
-    loading,
+    isLoading,
     noDataElement,
     searchable,
     calculateFooter,
@@ -366,20 +381,34 @@ export const Table = <TDataIn, TDataOut>({
                     {exportCsv && (
                         <ExportCsvButton onClick={onCsvClick} disable={dataStore.length <= 0 ? true : undefined} />
                     )}
-                    {searchable && <SearchBox search={onSearch} />}
+                    {searchable && <SearchBox search={onSearch} disabled={isLoading} />}
                 </Flex>
             )}
-            {loading && <CardLoading />}
-            {searched.length > 0 && !loading && (
-                <TremorTable className={twMerge('overflow-auto h-60 mt-5', className)}>
-                    <TableHeaders definitions={definitions} sortable={sortable} setSortColumn={setSortHeader} />
-                    <TableBody>
-                        {renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
-                    </TableBody>
-                    {filteredFooter && <TableFooter footer={filteredFooter} definition={definitions} />}
-                </TremorTable>
-            )}
-            {searched.length <= 0 && !loading && <NoData>{noDataElement}</NoData>}
+            <TremorTable className={twMerge('overflow-auto h-60 mt-5', className)}>
+                <TableHeaders
+                    definitions={definitions}
+                    sortable={isLoading ? false : sortable}
+                    setSortColumn={setSortHeader}
+                />
+                <TableBody>
+                    {isLoading && (
+                        <SpanTable colSpan={definitions.length}>
+                            <CardLoading />
+                        </SpanTable>
+                    )}
+                    {searched.length > 0 &&
+                        !isLoading &&
+                        renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
+                    {searched.length <= 0 && !isLoading && (
+                        <SpanTable colSpan={definitions.length}>
+                            <NoData>{noDataElement}</NoData>
+                        </SpanTable>
+                    )}
+                </TableBody>
+                {searched.length > 0 && !isLoading && filteredFooter && (
+                    <TableFooter footer={filteredFooter} definition={definitions} />
+                )}
+            </TremorTable>
         </>
     );
 };

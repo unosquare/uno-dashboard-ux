@@ -11,9 +11,6 @@ dependencies:
   '@tremor/react':
     specifier: ^3.5.0
     version: 3.5.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3)
-  dayjs:
-    specifier: ^1.11.9
-    version: 1.11.9
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -2000,10 +1997,6 @@ packages:
     engines: {node: '>=0.11'}
     dependencies:
       '@babel/runtime': 7.22.6
-    dev: false
-
-  /dayjs@1.11.9:
-    resolution: {integrity: sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA==}
     dev: false
 
   /debug@2.6.9:
