@@ -249,9 +249,7 @@ const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
                 return (
                     <TableCell
                         key={objectHash({ a: definitions[index], c: cell })}
-                        className={`p-2 whitespace-normal text-xs/[13px] ${
-                            dataType === DataTypes.BOLD_STRING ? 'font-medium !text-black' : ''
-                        } ${getAlignment(dataType, index)}`}
+                        className={`p-2 whitespace-normal text-xs/[13px] ${getAlignment(dataType, index)}`}
                     >
                         {renderTableCell(cell, dataType, definitions[index]?.formatterOptions)}
                     </TableCell>
