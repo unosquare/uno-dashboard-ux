@@ -11,7 +11,6 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-import tw from 'tailwind-styled-components';
 import { Dictionary, formatter, FormatTypes, humanize } from 'uno-js';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
@@ -20,20 +19,7 @@ import { ChartTypes, LegendFormatTypes } from '../constants';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 import { CardLoading } from '../CardLoading';
-
-const translateFormat = (format: LegendFormatTypes) => {
-    switch (format) {
-        case LegendFormatTypes.MONEY:
-            return FormatTypes.MONEY;
-        case LegendFormatTypes.PERCENTAGE:
-            return FormatTypes.PERCENTAGE;
-        case LegendFormatTypes.NUMBER:
-        case LegendFormatTypes.NEGATIVE:
-            return FormatTypes.NUMBER;
-        default:
-            return FormatTypes.DECIMAL;
-    }
-};
+import { translateFormat } from '../utils';
 
 export const formatTicks = (t: any, formatType: LegendFormatTypes) => {
     if (formatType === LegendFormatTypes.MONEY) {
@@ -80,17 +66,8 @@ export interface ChartBarSettings<TDataIn> {
     className?: string;
 }
 
-interface LegendSettings {
-    $clickable: boolean;
-}
-
-const StyledLegend = tw.span<LegendSettings>`
-    text-[#333333]
-    ${({ $clickable }) => $clickable && 'cursor-pointer'}
-`;
-
 const renderLegendText = (value: string, clickable: boolean) => (
-    <StyledLegend $clickable={clickable}>{value}</StyledLegend>
+    <span className={`text-[#333333] ${clickable && 'cursor-pointer'}`}>{value}</span>
 );
 
 const chart4Colors = ['#003de6', '#ea00a1', '#ff414f', '#ffa600'];

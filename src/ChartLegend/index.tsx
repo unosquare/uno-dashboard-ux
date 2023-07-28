@@ -4,6 +4,7 @@ import { formatter, FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
 import { ChartTypes, HasChildrenComponent, LegendFormatTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
+import { translateFormat } from '../utils';
 
 const StyledCenteredBoldSpan = tw.div`
     flex 
@@ -70,34 +71,23 @@ const getMaleFemaleLabel = ({ dataKey, payload }: any) =>
 
 const getLabel =
     (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined, ignoreValue: boolean) =>
-    (category: any, index: number, legendFormatType?: LegendFormatTypes, percentage = false, money = false) => {
-        if (legendFormatType === LegendFormatTypes.TENURE) {
-            return `Month ${category.payload.x}: ${category.value} DPs`;
-        }
+    (category: any, index: number, legendFormatType?: LegendFormatTypes) => {
+        if (legendFormatType === LegendFormatTypes.TENURE) return `Month ${category.payload.x}: ${category.value} DPs`;
 
-        if (category.payload.maleNumber || category.payload.femaleNumber) {
-            return getMaleFemaleLabel(category);
-        }
+        if (category.payload.maleNumber || category.payload.femaleNumber) return getMaleFemaleLabel(category);
 
         let { name, value } = category;
 
         if (ignoreValue && value === 0.001) value = 0;
 
-        if (customLabel && customLabel.values.length > 0) {
-            name = getCustomLabel(customLabel, index, category);
-        }
+        if (customLabel && customLabel.values.length > 0) name = getCustomLabel(customLabel, index, category);
 
-        if (customValue && customValue.values.length > 0) {
-            value = getCustomValue(customValue, index, category);
-        }
+        if (customValue && customValue.values.length > 0) value = getCustomValue(customValue, index, category);
 
-        if (money) {
-            return `${humanize(name)}: ${formatter(value, FormatTypes.MONEY)}`;
-        }
+        if (legendFormatType === LegendFormatTypes.MONEY || legendFormatType === LegendFormatTypes.PERCENTAGE)
+            return `${humanize(name)}: ${formatter(value, translateFormat(legendFormatType))}`;
 
-        value = legendFormatType === LegendFormatTypes.NEGATIVE ? value : Math.abs(value);
-
-        return `${humanize(name)}: ${value}${percentage ? '%' : ''}`;
+        return `${humanize(name)}: ${legendFormatType === LegendFormatTypes.NEGATIVE ? value : Math.abs(value)}`;
     };
 
 const StyledLegend = tw.div`
@@ -119,18 +109,17 @@ const StyledLegend = tw.div`
     [&_span]:m-0
 `;
 
+const getLegendFormatType = (formats: any, index: number, legendFormatType: LegendFormatTypes) => {
+    if (formats && formats[index] === FormatTypes.PERCENTAGE) return LegendFormatTypes.PERCENTAGE;
+    if (formats && formats[index] === FormatTypes.MONEY) return LegendFormatTypes.MONEY;
+
+    return legendFormatType;
+};
+
 const Component = ({ type, category, index, legendFormatType, formats, getLabelFunc }: any) => (
     <div>
         <Ellipse color={getColor(type, category)} />
-        <LabelInfo>
-            {getLabelFunc(
-                category,
-                index,
-                legendFormatType,
-                formats ? formats[index] === FormatTypes.PERCENTAGE : legendFormatType === LegendFormatTypes.PERCENTAGE,
-                formats ? formats[index] === FormatTypes.MONEY : legendFormatType === LegendFormatTypes.MONEY,
-            )}
-        </LabelInfo>
+        <LabelInfo>{getLabelFunc(category, index, getLegendFormatType(formats, index, legendFormatType))}</LabelInfo>
     </div>
 );
 

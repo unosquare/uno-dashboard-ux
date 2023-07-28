@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { identity } from 'uno-js';
 import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
-import { Badge, Bold, Button, Card, Col, Flex, Grid, Legend, Select, SelectItem, Text, Title } from '@tremor/react';
+import { Bold, Button, Card, Col, Flex, Grid, Legend, Select, SelectItem, Text, Title } from '@tremor/react';
 import {
     BasicToolbar,
     Blur,
@@ -91,9 +91,9 @@ const defaultData = [
 const calculateFooter = (data: any[]) => ['Total', '', data.length, '', '', ''];
 
 const chartData = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
+    { name: 'Group A', value: 10.15 },
+    { name: 'Group B', value: 20.1 },
+    { name: 'Group C', value: 30.25 },
 ];
 
 const Application = () => {
@@ -154,8 +154,13 @@ const Application = () => {
             <TremorContainer hasToolbar>
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
                     <Card>
-                        <DataChart rawData={chartData} dataCallback={identity} legend className='mt-5' />
-                        <Badge size='sm'>500 Goal</Badge>
+                        <DataChart
+                            rawData={chartData}
+                            dataCallback={identity}
+                            legend
+                            className='mt-5'
+                            legendFormatType={LegendFormatTypes.PERCENTAGE}
+                        />
                     </Card>
                     <Card>
                         <Bold>Bar Chart</Bold>
@@ -164,7 +169,7 @@ const Application = () => {
                             rawData={chartData}
                             dataCallback={identity}
                             isLoading={loading}
-                            legendFormatType={LegendFormatTypes.MONEY}
+                            legendFormatType={LegendFormatTypes.PERCENTAGE}
                             legend
                         />
                     </Card>
@@ -173,7 +178,7 @@ const Application = () => {
                         <PieChart
                             rawData={chartData}
                             dataCallback={identity}
-                            legendFormatType={LegendFormatTypes.NUMBER}
+                            legendFormatType={LegendFormatTypes.MONEY}
                         />
                         <Legend
                             categories={chartData.map((x) => x.name)}

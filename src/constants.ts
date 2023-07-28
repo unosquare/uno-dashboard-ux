@@ -12,7 +12,6 @@ export interface ChartData {
 }
 
 export enum LegendFormatTypes {
-    NORMAL = 'normal',
     PERCENTAGE = 'percentage',
     MONEY = 'money',
     TENURE = 'tenure',

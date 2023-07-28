@@ -83,10 +83,6 @@ const StyledLinkButton = tw.button`
     p-2
 `;
 
-const StyledFile = tw.div`
-    cursor-pointer
-`;
-
 const translateType = (type: DataTypes | undefined) => {
     switch (type) {
         case DataTypes.DATE:
@@ -107,11 +103,11 @@ const translateType = (type: DataTypes | undefined) => {
 };
 
 const renderFileCell = (data: any) =>
-    data[1] ? (
-        <StyledFile>
+    data[1] && (
+        <div className='cursor-pointer'>
             <DocumentArrowDown16Filled primaryFill='#304FF3' onClick={data[0]} />
-        </StyledFile>
-    ) : null;
+        </div>
+    );
 
 const renderLinkString = (data: any) => {
     if (data instanceof Array) {
