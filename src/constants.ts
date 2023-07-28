@@ -33,7 +33,6 @@ export enum DataTypes {
     LINK = 'link',
     BULLET = 'bullet',
     PARAGRAPH = 'paragraph',
-    BOLD_STRING = 'boldstring',
     FILE = 'file',
 }
 

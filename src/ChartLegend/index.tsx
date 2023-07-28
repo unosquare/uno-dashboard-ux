@@ -64,17 +64,10 @@ const getCustomLabel = ({ values, prefix }: CustomOptions, index: number, { name
 const getCustomValue = ({ values, prefix }: CustomOptions, index: number, { value }: any) =>
     prefix ? `${values[index]} ${value}` : `${value} ${values[index]}`;
 
-const getMaleFemaleLabel = ({ dataKey, payload }: any) =>
-    dataKey === 'female'
-        ? `${humanize(dataKey)}: ${payload.femaleNumber} - ${Math.abs(payload.female)}%`
-        : `${humanize(dataKey)}: ${payload.maleNumber} - ${payload.male}%`;
-
 const getLabel =
     (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined, ignoreValue: boolean) =>
     (category: any, index: number, legendFormatType?: LegendFormatTypes) => {
         if (legendFormatType === LegendFormatTypes.TENURE) return `Month ${category.payload.x}: ${category.value} DPs`;
-
-        if (category.payload.maleNumber || category.payload.femaleNumber) return getMaleFemaleLabel(category);
 
         let { name, value } = category;
 
