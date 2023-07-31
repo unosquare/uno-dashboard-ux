@@ -2,7 +2,7 @@ import objectHash from 'object-hash';
 import React from 'react';
 import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
 import { ChartLegend } from '../ChartLegend';
-import { ChartComponent, ChartData, ChartTypes } from '../constants';
+import { ChartComponent, ChartData } from '../constants';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 
@@ -23,7 +23,7 @@ export const PieChart = ({
                             <Cell key={objectHash(data)} fill={colors[index]} />
                         ))}
                     </Pie>
-                    <Tooltip content={<ChartLegend legendFormatType={legendFormatType} type={ChartTypes.PIE} />} />
+                    <Tooltip content={<ChartLegend legendFormatType={legendFormatType} type='pie' />} />
                 </PieChartRechart>
             </ResponsiveContainer>
         </div>

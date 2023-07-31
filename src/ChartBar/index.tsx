@@ -11,21 +11,21 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-import { Dictionary, formatter, FormatTypes, humanize } from 'uno-js';
+import { Dictionary, formatter, humanize } from 'uno-js';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import { ChartLegend } from '../ChartLegend';
-import { ChartTypes, LegendFormatTypes } from '../constants';
+import { LegendFormatTypes } from '../constants';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 import { CardLoading } from '../CardLoading';
 import { translateFormat } from '../utils';
 
 export const formatTicks = (t: any, formatType: LegendFormatTypes) => {
-    if (formatType === LegendFormatTypes.MONEY) {
+    if (formatType === 'money') {
         if (t >= 1000000) return `${t / 1000000}M`;
 
-        return t >= 1000 ? `${t / 1000}K` : formatter(t, FormatTypes.MONEY);
+        return t >= 1000 ? `${t / 1000}K` : formatter(t, 'money');
     }
 
     return formatter(t, translateFormat(formatType));
@@ -143,7 +143,7 @@ export const ChartBar = ({
                         <Tooltip
                             content={
                                 <ChartLegend
-                                    type={ChartTypes.BAR}
+                                    type='bar'
                                     legendFormatType={legendFormatType}
                                     title={hasTitle}
                                     accumulated={accumulated}

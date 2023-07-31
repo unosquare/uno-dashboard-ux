@@ -49,9 +49,9 @@ export interface CustomOptions {
 
 const getColor = (type: ChartTypes, category: any) => {
     switch (type) {
-        case ChartTypes.BAR:
+        case 'bar':
             return category.fill;
-        case ChartTypes.LINE:
+        case 'line':
             return category.stroke;
         default:
             return category.payload.fill;
@@ -67,7 +67,7 @@ const getCustomValue = ({ values, prefix }: CustomOptions, index: number, { valu
 const getLabel =
     (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined, ignoreValue: boolean) =>
     (category: any, index: number, legendFormatType?: LegendFormatTypes) => {
-        if (legendFormatType === LegendFormatTypes.TENURE) return `Month ${category.payload.x}: ${category.value} DPs`;
+        if (legendFormatType === 'tenure') return `Month ${category.payload.x}: ${category.value} DPs`;
 
         let { name, value } = category;
 
@@ -77,10 +77,10 @@ const getLabel =
 
         if (customValue && customValue.values.length > 0) value = getCustomValue(customValue, index, category);
 
-        if (legendFormatType === LegendFormatTypes.MONEY || legendFormatType === LegendFormatTypes.PERCENTAGE)
+        if (legendFormatType === 'money' || legendFormatType === 'percentage')
             return `${humanize(name)}: ${formatter(value, translateFormat(legendFormatType))}`;
 
-        return `${humanize(name)}: ${legendFormatType === LegendFormatTypes.NEGATIVE ? value : Math.abs(value)}`;
+        return `${humanize(name)}: ${legendFormatType === 'negative' ? value : Math.abs(value)}`;
     };
 
 const StyledLegend = tw.div`
@@ -103,9 +103,8 @@ const StyledLegend = tw.div`
 `;
 
 const getLegendFormatType = (formats: any, index: number, legendFormatType: LegendFormatTypes) => {
-    if (formats && formats[index] === FormatTypes.PERCENTAGE) return LegendFormatTypes.PERCENTAGE;
-    if (formats && formats[index] === FormatTypes.MONEY) return LegendFormatTypes.MONEY;
-
+    if (formats && formats[index] === 'percentage') return 'percentage';
+    if (formats && formats[index] === 'money') return 'money';
     return legendFormatType;
 };
 

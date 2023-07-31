@@ -19,15 +19,7 @@ const sanitizeNumericString = (str: any) =>
 
 const compareDates = (date1: any, date2: any) => new Date(date1).getTime() - new Date(date2).getTime();
 
-const numericTypes = [
-    DataTypes.NUMBER,
-    DataTypes.DECIMAL,
-    DataTypes.PERCENTAGE,
-    DataTypes.MONEY,
-    DataTypes.DAYS,
-    DataTypes.MONTHS,
-    DataTypes.BOOLEAN,
-];
+const numericTypes = ['number', 'decimal', 'percentage', 'money', 'days', 'months', 'boolean'];
 
 const checkNumericString = (a: any, b: any, sortColumn: number) => {
     if (
@@ -58,25 +50,25 @@ const sortOneColumn = <T extends TableColumn>(
     getSortIndex?: (order: any) => any,
 ) => {
     const { sortOrder, dataType, sortDirection } = sortColumns[index];
-    if (dataType === DataTypes.FILE) return 0;
+    if (dataType === 'file') return 0;
 
     const sortColumn = getSortIndex ? getSortIndex(sortOrder) : definition.findIndex((x) => x.sortOrder === sortOrder);
 
     if (left[sortColumn] === null) return 1;
     if (right[sortColumn] === null) return -1;
 
-    const a = sortDirection === SortDirection.DESC ? right : left;
-    const b = sortDirection === SortDirection.DESC ? left : right;
+    const a = sortDirection === 'desc' ? right : left;
+    const b = sortDirection === 'desc' ? left : right;
 
-    if (dataType === DataTypes.LINK) return sortComparer(a[sortColumn][1], b[sortColumn][1]);
+    if (dataType === 'link') return sortComparer(a[sortColumn][1], b[sortColumn][1]);
 
-    if (dataType === DataTypes.DATE) {
+    if (dataType === 'date') {
         const result = compareDates(a[sortColumn], b[sortColumn]);
 
         if (result !== 0) return result;
     }
 
-    if (numericTypes.includes(dataType || DataTypes.STRING)) {
+    if (numericTypes.includes(dataType || 'string')) {
         const result = a[sortColumn] - b[sortColumn];
 
         if (result !== 0) return result;

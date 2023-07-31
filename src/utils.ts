@@ -1,16 +1,15 @@
-import { FormatTypes } from 'uno-js';
 import { LegendFormatTypes } from './constants';
 
 export const translateFormat = (format?: LegendFormatTypes) => {
     switch (format) {
-        case LegendFormatTypes.MONEY:
-            return FormatTypes.MONEY;
-        case LegendFormatTypes.PERCENTAGE:
-            return FormatTypes.PERCENTAGE;
-        case LegendFormatTypes.NUMBER:
-        case LegendFormatTypes.NEGATIVE:
-            return FormatTypes.NUMBER;
+        case 'money':
+            return 'money';
+        case 'percentage':
+            return 'percentage';
+        case 'number':
+        case 'negative':
+            return 'number';
         default:
-            return FormatTypes.DECIMAL;
+            return 'decimal';
     }
 };

@@ -9,9 +9,7 @@ import {
     Burger,
     ChartBar,
     DataChart,
-    DataTypes,
     Footer,
-    LegendFormatTypes,
     MenuContainer,
     MenuSection,
     MenuSubSection,
@@ -19,7 +17,6 @@ import {
     NavBarTitle,
     PieChart,
     SearchBox,
-    SortDirection,
     StyledMenuActions,
     StyledMenuSearchBox,
     Table,
@@ -36,15 +33,15 @@ export enum options {
 }
 
 const columns = [
-    { label: 'Name', sortOrder: 1, sortDirection: SortDirection.ASC },
+    { label: 'Name', sortOrder: 1, sortDirection: 'asc' },
     { label: 'City', disableSearch: true, excludeFromSort: true },
-    { label: 'Date', dataType: DataTypes.DATE },
-    { label: 'Age', dataType: DataTypes.DAYS, sortOrder: 2, sortDirection: SortDirection.DESC },
-    { label: 'Balance', dataType: DataTypes.MONEY },
-    { label: 'Margin', dataType: DataTypes.PERCENTAGE, formatterOptions: { decimals: 1 } },
-    { label: 'Like Ice cream', dataType: DataTypes.BOOLEAN },
-    { label: 'Profile', dataType: DataTypes.LINK },
-    { label: 'Long text', dataType: DataTypes.PARAGRAPH },
+    { label: 'Date', dataType: 'date' },
+    { label: 'Age', dataType: 'days', sortOrder: 2, sortDirection: 'desc' },
+    { label: 'Balance', dataType: 'money' },
+    { label: 'Margin', dataType: 'percentage', formatterOptions: { decimals: 1 } },
+    { label: 'Like Ice cream', dataType: 'boolean' },
+    { label: 'Profile', dataType: 'link' },
+    { label: 'Long text', dataType: 'paragraph' },
 ] as TableColumn[];
 
 const defaultData = [
@@ -159,7 +156,7 @@ const Application = () => {
                             dataCallback={identity}
                             legend
                             className='mt-5'
-                            legendFormatType={LegendFormatTypes.PERCENTAGE}
+                            legendFormatType='percentage'
                         />
                     </Card>
                     <Card>
@@ -169,17 +166,13 @@ const Application = () => {
                             rawData={chartData}
                             dataCallback={identity}
                             isLoading={loading}
-                            legendFormatType={LegendFormatTypes.PERCENTAGE}
+                            legendFormatType='percentage'
                             legend
                         />
                     </Card>
                     <Card className='h-96'>
                         <Bold>Pie Chart</Bold>
-                        <PieChart
-                            rawData={chartData}
-                            dataCallback={identity}
-                            legendFormatType={LegendFormatTypes.MONEY}
-                        />
+                        <PieChart rawData={chartData} dataCallback={identity} legendFormatType='money' />
                         <Legend
                             categories={chartData.map((x) => x.name)}
                             className='mt-6'

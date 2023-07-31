@@ -1,7 +1,7 @@
 import React, { ReactNode, startTransition, useEffect, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
-import { createCsv, formatter, FormatTypes } from 'uno-js';
+import { createCsv, formatter } from 'uno-js';
 import {
     CaretDown12Regular,
     CaretUp12Regular,
@@ -52,8 +52,7 @@ interface HeaderSettings {
     $sorted: boolean;
 }
 
-const getSortDirection = (current?: SortDirection) =>
-    current === SortDirection.DESC ? SortDirection.ASC : SortDirection.DESC;
+const getSortDirection = (current?: SortDirection): SortDirection => (current === 'desc' ? 'asc' : 'desc');
 
 export const getColumnSorting = (prev: TableColumn[], index: number) =>
     prev.map((field, i) => ({
@@ -62,12 +61,12 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
         sortDirection: i === index ? getSortDirection(field.sortDirection) : undefined,
     }));
 
-const leftAlign = [DataTypes.STRING, DataTypes.LINK, DataTypes.BULLET, undefined];
+const leftAlign = ['string', 'link', 'bullet', undefined];
 
 export const getAlignment = (dataType: DataTypes | undefined, index?: number) => {
-    if (dataType === DataTypes.PARAGRAPH || (leftAlign.includes(dataType) && index === 0)) return 'text-left';
+    if (dataType === 'paragraph' || (leftAlign.includes(dataType) && index === 0)) return 'text-left';
 
-    return dataType === DataTypes.PERCENTAGE ? 'text-right' : 'text-center';
+    return dataType === 'percentage' ? 'text-right' : 'text-center';
 };
 
 export const HeaderDiv = tw.div<HeaderSettings>`
@@ -95,18 +94,18 @@ const StyledLinkButton = tw.button`
 
 const translateType = (type: DataTypes | undefined) => {
     switch (type) {
-        case DataTypes.DATE:
-            return FormatTypes.DATE;
-        case DataTypes.MONEY:
-            return FormatTypes.MONEY;
-        case DataTypes.PERCENTAGE:
-            return FormatTypes.PERCENTAGE;
-        case DataTypes.DAYS:
-            return FormatTypes.DAYS;
-        case DataTypes.MONTHS:
-            return FormatTypes.MONTHS;
-        case DataTypes.DECIMAL:
-            return FormatTypes.DECIMAL;
+        case 'date':
+            return 'date';
+        case 'money':
+            return 'money';
+        case 'percentage':
+            return 'percentage';
+        case 'days':
+            return 'days';
+        case 'months':
+            return 'months';
+        case 'decimal':
+            return 'decimal';
         default:
             return undefined;
     }
@@ -168,24 +167,24 @@ export const renderTableCell = (
         nullValue?: string;
     },
 ) => {
-    if (!data && type === DataTypes.MONEY) return '$0.00';
+    if (!data && type === 'money') return '$0.00';
     if (data == null || data === ' ') return 'N/A';
 
     switch (type) {
-        case DataTypes.LINK:
+        case 'link':
             return renderLinkString(data);
-        case DataTypes.BOOLEAN:
+        case 'boolean':
             return data ? <CheckboxChecked16Regular /> : <CheckboxUnchecked16Regular />;
-        case DataTypes.BULLET:
+        case 'bullet':
             return (
                 <Flex alignItems='center'>
                     <Ellipse small color={(data as string[])[1].toString()} />
                     {(data as string[])[0].toString()}
                 </Flex>
             );
-        case DataTypes.PARAGRAPH:
+        case 'paragraph':
             return (data as string[])[1] ? <LongTextCell text={data} /> : 'N/A';
-        case DataTypes.FILE:
+        case 'file':
             return renderFileCell(data);
         default: {
             const formatType = translateType(type);
@@ -216,7 +215,7 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
                         {header.label}
                         {sortable &&
                             !header.excludeFromSort &&
-                            (header.sortDirection === SortDirection.DESC && Number(header.sortOrder) >= 1 ? (
+                            (header.sortDirection === 'desc' && Number(header.sortOrder) >= 1 ? (
                                 <CaretDown12Regular />
                             ) : (
                                 <CaretUp12Regular />
@@ -287,8 +286,8 @@ const renderToRowString = (data: any[], definitions: TableColumn[]) =>
     data.map((row: any) =>
         row.map((cell: any, index: number) => {
             const dataType = definitions[index]?.dataType || undefined;
-            if (dataType === DataTypes.BOOLEAN) return cell ? 'TRUE' : 'FALSE';
-            if (!cell && dataType === DataTypes.MONEY) return '$0.00';
+            if (dataType === 'boolean') return cell ? 'TRUE' : 'FALSE';
+            if (!cell && dataType === 'money') return '$0.00';
             if (cell == null || cell === ' ') return 'N/A';
 
             const formatType = translateType(dataType);

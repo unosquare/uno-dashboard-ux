@@ -16,7 +16,7 @@ import { Dictionary } from 'uno-js';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import { ChartLegend } from '../ChartLegend';
-import { ChartComponent, ChartTypes } from '../constants';
+import { ChartComponent } from '../constants';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
@@ -114,7 +114,7 @@ export const DataChart = ({
                         )}
                         <Tooltip
                             offset={30}
-                            content={<ChartLegend type={ChartTypes.LINE} legendFormatType={legendFormatType} />}
+                            content={<ChartLegend type='line' legendFormatType={legendFormatType} />}
                             isAnimationActive={false}
                         />
                         {(onLegendClick || legend) && (
