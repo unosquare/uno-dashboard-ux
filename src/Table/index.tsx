@@ -193,11 +193,11 @@ export const renderTableCell = (
     }
 };
 
-interface TableHeadersProps {
+type TableHeadersProps = {
     definitions: TableColumn[];
     sortable: boolean;
     setSortColumn: (index: number) => void;
-}
+};
 
 const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProps) => (
     <TableHead>
@@ -227,10 +227,10 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
     </TableHead>
 );
 
-interface TableFooterProps {
+type TableFooterProps = {
     footer: (string | number)[];
     definition: TableColumn[];
-}
+};
 
 const TableFooter = ({ footer, definition }: TableFooterProps) => (
     <TableFoot className='sticky top-0 bottom-0 bg-white'>

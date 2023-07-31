@@ -3,10 +3,10 @@ export interface ReactSelectOption<T = number> {
     label: string;
 }
 
-export interface ReactSelectGroupOption {
+export type ReactSelectGroupOption = {
     label: string;
     options: ReactSelectOption[];
-}
+};
 
 const defaultFontFamily = '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif';
 

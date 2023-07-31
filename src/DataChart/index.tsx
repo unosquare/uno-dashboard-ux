@@ -33,11 +33,7 @@ export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn, Dict
     className?: string;
 }
 
-interface LegendSettings {
-    $clickable?: boolean;
-}
-
-const StyledLegend = tw.span<LegendSettings>`
+const StyledLegend = tw.span<{ $clickable?: boolean }>`
     text-maingray
     ${({ $clickable }) => $clickable && 'cursor-pointer'}
 `;

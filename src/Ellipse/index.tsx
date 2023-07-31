@@ -1,9 +1,9 @@
 import React from 'react';
 
-export interface EllipseSettings {
+type EllipseSettings = {
     color: string;
     small?: boolean;
-}
+};
 
 export const Ellipse = ({ color, small }: EllipseSettings) => (
     <svg height={small ? '15' : '20'} width={small ? '15' : '20'}>

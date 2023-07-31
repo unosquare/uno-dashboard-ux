@@ -1,10 +1,10 @@
 export type ChartTypes = 'pie' | 'funnel' | 'line' | 'bar';
 
-export interface ChartData {
+export type ChartData = {
     name: string;
     value: number;
     subValue?: string | number;
-}
+};
 
 export type LegendFormatTypes = 'percentage' | 'money' | 'tenure' | 'negative' | 'number';
 

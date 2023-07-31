@@ -31,13 +31,13 @@ export const formatTicks = (t: any, formatType: LegendFormatTypes) => {
     return formatter(t, translateFormat(formatType));
 };
 
-interface XAxisPrimaryFormatter {
+type XAxisPrimaryFormatter = {
     (input: string): string;
-}
+};
 
-interface XAxisSecondaryFormatter {
+type XAxisSecondaryFormatter = {
     (e: any): void;
-}
+};
 
 export interface ChartBarSettings<TDataIn> {
     rawData?: TDataIn;

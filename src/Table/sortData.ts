@@ -1,6 +1,6 @@
 import { DataTypes, SortDirection } from '../constants';
 
-export interface TableColumn {
+export type TableColumn = {
     label: string;
     dataType?: DataTypes;
     sortOrder?: number;
@@ -12,7 +12,7 @@ export interface TableColumn {
         decimals?: number;
         nullValue?: string;
     };
-}
+};
 
 const sanitizeNumericString = (str: any) =>
     Number(str.toString().replaceAll(',', '').replaceAll('$', '').replaceAll('%', '').trim());

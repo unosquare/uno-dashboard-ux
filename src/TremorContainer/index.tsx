@@ -2,9 +2,9 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 import { HasChildrenComponent } from '../constants';
 
-export interface TremorContainerSettings extends HasChildrenComponent {
+export type TremorContainerSettings = HasChildrenComponent & {
     hasToolbar?: boolean;
-}
+};
 
 const MainApp = tw.main<any>`
     w-full

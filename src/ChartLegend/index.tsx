@@ -29,7 +29,7 @@ const TooltipTitle = ({ children }: HasChildrenComponent) => (
 
 const LabelInfo = ({ children }: HasChildrenComponent) => <StyledLeftSpan>{children}</StyledLeftSpan>;
 
-export interface ChartLegendSettings {
+export type ChartLegendSettings = {
     legendFormatType?: LegendFormatTypes;
     active?: boolean;
     payload?: any;
@@ -40,12 +40,12 @@ export interface ChartLegendSettings {
     ignoreValue?: boolean;
     formats?: FormatTypes[];
     accumulated?: boolean;
-}
+};
 
-export interface CustomOptions {
+export type CustomOptions = {
     prefix: boolean;
     values: string[];
-}
+};
 
 const getColor = (type: ChartTypes, category: any) => {
     switch (type) {
