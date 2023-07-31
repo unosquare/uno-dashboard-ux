@@ -9,7 +9,17 @@ import {
     CheckboxUnchecked16Regular,
     DocumentArrowDown16Filled,
 } from '@fluentui/react-icons';
-import { Flex, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, Table as TremorTable } from '@tremor/react';
+import {
+    Flex,
+    TableBody,
+    TableCell,
+    TableFoot,
+    TableFooterCell,
+    TableHead,
+    TableHeaderCell,
+    TableRow,
+    Table as TremorTable,
+} from '@tremor/react';
 import objectHash from 'object-hash';
 import { twMerge } from 'tailwind-merge';
 import { DataTypes, SortDirection } from '../constants';
@@ -224,21 +234,18 @@ interface TableFooterProps {
 }
 
 const TableFooter = ({ footer, definition }: TableFooterProps) => (
-    <tfoot className='sticky top-0 bottom-0 bg-white'>
+    <TableFoot className='sticky top-0 bottom-0 bg-white'>
         <TableRow>
             {footer.map((foot, index) => (
-                <TableCell
+                <TableFooterCell
                     key={objectHash(definition[index])}
-                    className={`p-2 text-xs/[13px] whitespace-normal ${getAlignment(
-                        definition[index]?.dataType || undefined,
-                        index,
-                    )}`}
+                    className={`p-2 text-xs/[13px] ${getAlignment(definition[index]?.dataType || undefined, index)}`}
                 >
-                    <span className='font-semibold'>{foot}</span>
-                </TableCell>
+                    {foot}
+                </TableFooterCell>
             ))}
         </TableRow>
-    </tfoot>
+    </TableFoot>
 );
 
 const getRows = (data: (string | number)[], definitions: TableColumn[]) =>

@@ -88,7 +88,7 @@ const defaultData = [
     ],
 ];
 
-const calculateFooter = (data: any[]) => ['Total', '', data.length, '', '', ''];
+const calculateFooter = (data: any[]) => ['Total', '', data.length, '', '', '', '', '', ''];
 
 const chartData = [
     { name: 'Group A', value: 10.15 },
@@ -213,4 +213,8 @@ const Application = () => {
 const container = document.getElementById('root');
 const root = createRoot(container as any);
 
-root.render(<Application />);
+root.render(
+    <React.StrictMode>
+        <Application />
+    </React.StrictMode>,
+);
