@@ -26,12 +26,12 @@ export type DataTypes =
 
 export type SortDirection = 'asc' | 'desc';
 
-export interface ChartComponent<TDataIn, TDataOut> {
+export type ChartComponent<TDataIn, TDataOut> = {
     colors?: string[];
     legendFormatType?: LegendFormatTypes;
     rawData?: TDataIn;
     dataCallback?: (data: TDataIn) => TDataOut;
-}
+};
 
 export type HasChildrenComponent = {
     children?: React.ReactNode;

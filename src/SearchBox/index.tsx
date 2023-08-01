@@ -2,12 +2,12 @@ import { Search12Regular } from '@fluentui/react-icons';
 import { TextInput } from '@tremor/react';
 import React, { useEffect, useRef } from 'react';
 
-export interface SearchBoxSettings {
+export type SearchBoxSettings = {
     placeholder?: string;
     search: (value: string) => void;
     focus?: boolean;
     disabled?: boolean;
-}
+};
 
 export const SearchBox = ({ search, placeholder = 'Search', focus = false, disabled = false }: SearchBoxSettings) => {
     const [value, setValue] = React.useState('');

@@ -1,13 +1,13 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
 
-export interface SubSectionSettings {
+export type SubSectionSettings = {
     disabled?: boolean;
-}
+};
 
-export interface BurgerSettings {
+export type BurgerSettings = {
     onClick: () => void;
-}
+};
 
 export const StyledMenuActions = tw.div`
     flex

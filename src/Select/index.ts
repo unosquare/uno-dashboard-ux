@@ -1,7 +1,7 @@
-export interface ReactSelectOption<T = number> {
+export type ReactSelectOption<T = number> = {
     value: T;
     label: string;
-}
+};
 
 export type ReactSelectGroupOption = {
     label: string;

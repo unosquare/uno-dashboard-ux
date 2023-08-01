@@ -12,7 +12,6 @@ import {
     YAxis,
 } from 'recharts';
 import tw from 'tailwind-styled-components';
-import { Dictionary } from 'uno-js';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import { ChartLegend } from '../ChartLegend';
@@ -20,9 +19,9 @@ import { ChartComponent } from '../constants';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
-import { formatTicks } from '../ChartBar';
+import { formatTicks } from '../utils';
 
-export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn, Dictionary[]> {
+export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
     onClick?: (e: any) => void;
     domain?: number;
@@ -31,7 +30,7 @@ export interface DataChartSettings<TDataIn> extends ChartComponent<TDataIn, Dict
     refLineY?: { value: number; label: string; color: string };
     isLoading?: boolean;
     className?: string;
-}
+};
 
 const StyledLegend = tw.span<{ $clickable?: boolean }>`
     text-maingray
@@ -78,7 +77,7 @@ export const DataChart = ({
     isLoading,
     className,
 }: DataChartSettings<any>) => {
-    const dataStore: Dictionary[] = (dataCallback && rawData && dataCallback(rawData)) || [];
+    const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t);
 
     return (

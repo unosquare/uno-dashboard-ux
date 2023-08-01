@@ -1,10 +1,10 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
 
-export interface FooterSettings {
+export type FooterSettings = {
     transparent?: boolean;
     copyright?: string;
-}
+};
 
 const StyledFooter = tw.footer<FooterSettings>`
     w-full

@@ -32,7 +32,7 @@ import { SearchBox } from '../SearchBox';
 
 export * from './sortData';
 
-export interface TableSettings<TDataIn, TDataOut> {
+export type TableSettings<TDataIn, TDataOut> = {
     rawData: TDataIn;
     dataCallback: (data: TDataIn) => TDataOut[];
     columns: TableColumn[];
@@ -45,12 +45,12 @@ export interface TableSettings<TDataIn, TDataOut> {
     render?: <TIn>(data: (string | number)[], definitions: TableColumn[], rawData: TIn) => React.ReactNode;
     children?: React.ReactNode;
     className?: string;
-}
+};
 
-interface HeaderSettings {
+type HeaderSettings = {
     $sortable: boolean;
     $sorted: boolean;
-}
+};
 
 const getSortDirection = (current?: SortDirection): SortDirection => (current === 'desc' ? 'asc' : 'desc');
 

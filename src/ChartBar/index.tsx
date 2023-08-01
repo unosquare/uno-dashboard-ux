@@ -11,7 +11,7 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-import { Dictionary, formatter, humanize } from 'uno-js';
+import { humanize } from 'uno-js';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import { ChartLegend } from '../ChartLegend';
@@ -19,17 +19,7 @@ import { LegendFormatTypes } from '../constants';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 import { CardLoading } from '../CardLoading';
-import { translateFormat } from '../utils';
-
-export const formatTicks = (t: any, formatType: LegendFormatTypes) => {
-    if (formatType === 'money') {
-        if (t >= 1000000) return `${t / 1000000}M`;
-
-        return t >= 1000 ? `${t / 1000}K` : formatter(t, 'money');
-    }
-
-    return formatter(t, translateFormat(formatType));
-};
+import { formatTicks } from '../utils';
 
 type XAxisPrimaryFormatter = {
     (input: string): string;
@@ -39,11 +29,11 @@ type XAxisSecondaryFormatter = {
     (e: any): void;
 };
 
-export interface ChartBarSettings<TDataIn> {
+export type ChartBarSettings<TDataIn> = {
     rawData?: TDataIn;
     colors?: string[];
     legendFormatType?: LegendFormatTypes;
-    dataCallback?: (data: TDataIn) => Dictionary[];
+    dataCallback?: (data: TDataIn) => Record<string, unknown>[];
     legend?: boolean;
     domain?: number;
     unit?: string;
@@ -64,7 +54,7 @@ export interface ChartBarSettings<TDataIn> {
     refLineY?: { value: number; label: string; color: string };
     isLoading?: boolean;
     className?: string;
-}
+};
 
 const renderLegendText = (value: string, clickable: boolean) => (
     <span className={`text-[#333333] ${clickable && 'cursor-pointer'}`}>{value}</span>
@@ -95,7 +85,7 @@ export const ChartBar = ({
     refLineY,
     className,
 }: ChartBarSettings<any>) => {
-    const dataStore: Dictionary[] = (dataCallback && rawData && dataCallback(rawData)) || [];
+    const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const keys = dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : [];
 
     if (!colors) colors = keys.length === 4 ? chart4Colors : defaultChartPalette;

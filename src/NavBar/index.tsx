@@ -2,9 +2,9 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 import { UnoLogo } from '../UnoLogo';
 
-export interface NavBarSettings {
+export type NavBarSettings = {
     transparent?: boolean;
-}
+};
 
 export const StyledHeader = tw.header<NavBarSettings>`
     w-full
