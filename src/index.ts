@@ -1,5 +1,6 @@
 export * from './theme';
 export * from './constants';
+export * from './utils';
 
 export * from './TremorContainer';
 export * from './ChartBar';
