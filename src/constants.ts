@@ -1,4 +1,4 @@
-export type ChartTypes = 'pie' | 'funnel' | 'line' | 'bar';
+export type ChartTypes = 'pie' | 'line' | 'bar';
 
 export type ChartData = {
     name: string;
@@ -15,14 +15,12 @@ export type DataTypes =
     | 'string'
     | 'percentage'
     | 'date'
-    | 'location'
     | 'days'
     | 'months'
     | 'boolean'
     | 'link'
     | 'bullet'
-    | 'paragraph'
-    | 'file';
+    | 'paragraph';
 
 export type SortDirection = 'asc' | 'desc';
 

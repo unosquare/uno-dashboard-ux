@@ -7,7 +7,6 @@ import {
     CaretUp12Regular,
     CheckboxChecked16Regular,
     CheckboxUnchecked16Regular,
-    DocumentArrowDown16Filled,
 } from '@fluentui/react-icons';
 import {
     Flex,
@@ -26,23 +25,29 @@ import { DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
-import { sortData, TableColumn } from './sortData';
+import { searchData, sortData, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { SearchBox } from '../SearchBox';
 
 export * from './sortData';
 
-export type TableSettings<TDataIn, TDataOut> = {
+export type RenderTableFunc = <TDataIn, TDataOut extends Array<unknown>>(
+    data: TDataOut[],
+    definitions: TableColumn[],
+    rawData: TDataIn,
+) => React.ReactNode;
+
+export type TableSettings<TDataIn, TDataOut extends Array<any>> = {
     rawData: TDataIn;
     dataCallback: (data: TDataIn) => TDataOut[];
     columns: TableColumn[];
     isLoading?: boolean;
     noDataElement?: React.ReactNode;
     searchable?: boolean;
-    calculateFooter?: (data: TDataIn) => (string | number)[];
+    calculateFooter?: (data: TDataOut[], rawData: TDataIn) => (string | number)[];
     sortable?: boolean;
     exportCsv?: boolean;
-    render?: <TIn>(data: (string | number)[], definitions: TableColumn[], rawData: TIn) => React.ReactNode;
+    render?: RenderTableFunc;
     children?: React.ReactNode;
     className?: string;
 };
@@ -61,7 +66,7 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
         sortDirection: i === index ? getSortDirection(field.sortDirection) : undefined,
     }));
 
-const leftAlign = ['string', 'link', 'bullet', undefined];
+const leftAlign: Array<DataTypes | undefined> = ['string', 'link', 'bullet', undefined];
 
 export const getAlignment = (dataType: DataTypes | undefined, index?: number) => {
     if (dataType === 'paragraph' || (leftAlign.includes(dataType) && index === 0)) return 'text-left';
@@ -111,13 +116,6 @@ const translateType = (type: DataTypes | undefined) => {
     }
 };
 
-const renderFileCell = (data: any) =>
-    data[1] && (
-        <div className='cursor-pointer'>
-            <DocumentArrowDown16Filled primaryFill='#304FF3' onClick={data[0]} />
-        </div>
-    );
-
 const renderLinkString = (data: any) => {
     if (data instanceof Array) {
         return (data as string[])[0] ? (
@@ -142,7 +140,7 @@ const renderLinkString = (data: any) => {
     );
 };
 
-const LongTextCell = ({ text }: any) => {
+const LongTextCell = ({ text }: { text: string }) => {
     const [showFullText, setShowFullText] = useState(false);
     const toggleDisplayText = () => setShowFullText(!showFullText);
 
@@ -159,7 +157,7 @@ const LongTextCell = ({ text }: any) => {
 };
 
 export const renderTableCell = (
-    data: Record<string, unknown> | string | number | boolean | string[] | any,
+    data: unknown,
     type: DataTypes | undefined,
     formatterOptions?: {
         keepFormat?: boolean;
@@ -168,7 +166,7 @@ export const renderTableCell = (
     },
 ) => {
     if (!data && type === 'money') return '$0.00';
-    if (data == null || data === ' ') return 'N/A';
+    if (data == null || data === ' ') return formatterOptions?.nullValue ?? 'N/A';
 
     switch (type) {
         case 'link':
@@ -183,12 +181,10 @@ export const renderTableCell = (
                 </Flex>
             );
         case 'paragraph':
-            return (data as string[])[1] ? <LongTextCell text={data} /> : 'N/A';
-        case 'file':
-            return renderFileCell(data);
+            return <LongTextCell text={String(data)} />;
         default: {
             const formatType = translateType(type);
-            return formatType ? formatter(data.toString(), formatType, formatterOptions) : data;
+            return formatType ? formatter(data.toString(), formatType, formatterOptions) : `${data}`;
         }
     }
 };
@@ -247,8 +243,8 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
     </TableFoot>
 );
 
-const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
-    data.map((row: any) => (
+const getRows: RenderTableFunc = <_, TDataOut extends Array<unknown>>(data: TDataOut[], definitions: TableColumn[]) =>
+    data.map((row: TDataOut) => (
         <TableRow key={objectHash(row)}>
             {row.map((cell: any, index: number) => {
                 const dataType = definitions[index]?.dataType || undefined;
@@ -263,24 +259,6 @@ const getRows = (data: (string | number)[], definitions: TableColumn[]) =>
             })}
         </TableRow>
     ));
-
-const defaultFilter = (search: string) => (element: any) =>
-    element && element.toString().toLowerCase().match(search.toLowerCase());
-
-const searchData = (search: string, newData: any[], definitions: TableColumn[]) => {
-    const ignoreColumns = definitions
-        .filter((y) => y.disableSearch === true)
-        .map((x) => definitions.findIndex((z) => z.label === x.label));
-
-    return newData.filter((section: any[]) =>
-        section.filter((_, i) => !ignoreColumns.includes(i)).some(defaultFilter(search)),
-    );
-};
-
-const searchFooter = (search: string, newRaw: any) =>
-    Array.isArray(newRaw)
-        ? newRaw.filter((section: any) => Object.values(section).some(defaultFilter(search)))
-        : newRaw;
 
 const renderToRowString = (data: any[], definitions: TableColumn[]) =>
     data.map((row: any) =>
@@ -305,7 +283,7 @@ const SpanTable = ({ colSpan, children }: { colSpan: number; children: ReactNode
     </TableRow>
 );
 
-export const Table = <TDataIn, TDataOut>({
+export const Table = <TDataIn, TDataOut extends Array<unknown>>({
     columns,
     isLoading,
     noDataElement,
@@ -319,38 +297,23 @@ export const Table = <TDataIn, TDataOut>({
     dataCallback,
     className = '',
 }: TableSettings<TDataIn, TDataOut>) => {
-    const dataStore = (dataCallback && rawData && dataCallback(rawData)) || [];
-
     const [definitions, setDefinitions] = useState(columns);
-    const [filteredData, setFilteredData] = useState(dataStore);
-    const [filteredFooter, setFilteredFooter] = useState(
-        (calculateFooter && rawData && calculateFooter(rawData)) || [],
-    );
+    const [filteredData, setFilteredData] = useState<TDataOut[]>([]);
     const [lastSearch, setLastSearch] = useState('');
-    const [searched, setSearched] = useState(dataStore);
+    const [searched, setSearched] = useState<TDataOut[]>([]);
 
-    const onSearch = (search: string, newData?: TDataOut[], newRaw?: any) =>
+    const onSearch = (search: string) =>
         startTransition(() => {
             setLastSearch(search);
-            const searchableRaw = newRaw || rawData;
-            setSearched(searchData(search, newData || filteredData, definitions));
-
-            if (calculateFooter && searchableRaw) {
-                setFilteredFooter(calculateFooter(searchFooter(search, searchableRaw)));
-            }
+            setSearched(searchData(search, filteredData, definitions));
         });
 
     useEffect(() => {
-        const subSet = (dataCallback && rawData && dataCallback(rawData)) || [];
+        const subSet = dataCallback(rawData);
 
         setFilteredData(subSet);
         setSearched(lastSearch ? searchData(lastSearch, subSet, definitions) : subSet);
-
-        if (calculateFooter && rawData) {
-            setFilteredFooter(calculateFooter(lastSearch ? searchFooter(lastSearch, rawData) : rawData));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [calculateFooter, lastSearch, rawData, dataCallback]);
+    }, [rawData, dataCallback]);
 
     useEffect(() => setDefinitions(columns), [columns]);
 
@@ -379,7 +342,10 @@ export const Table = <TDataIn, TDataOut>({
                 <Flex justifyContent='end' className='gap-4'>
                     {children}
                     {exportCsv && (
-                        <ExportCsvButton onClick={onCsvClick} disable={dataStore.length <= 0 ? true : undefined} />
+                        <ExportCsvButton
+                            onClick={onCsvClick}
+                            disabled={isLoading || searched.length === 0 ? true : undefined}
+                        />
                     )}
                     {searchable && <SearchBox search={onSearch} disabled={isLoading} />}
                 </Flex>
@@ -405,8 +371,8 @@ export const Table = <TDataIn, TDataOut>({
                         </SpanTable>
                     )}
                 </TableBody>
-                {searched.length > 0 && !isLoading && filteredFooter && (
-                    <TableFooter footer={filteredFooter} definition={definitions} />
+                {searched.length > 0 && !isLoading && calculateFooter && (
+                    <TableFooter footer={calculateFooter(searched, rawData)} definition={definitions} />
                 )}
             </TremorTable>
         </>

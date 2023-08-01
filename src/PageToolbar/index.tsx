@@ -1,5 +1,7 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
+import { Flex } from '@tremor/react';
+import { twMerge } from 'tailwind-merge';
 import { HasChildrenComponent } from '../constants';
 
 export const StyledToolbar = tw.div`
@@ -13,24 +15,6 @@ export const StyledToolbar = tw.div`
     h-14
 `;
 
-export const StyledToolbarSelectorContainer = tw.div`
-    flex
-    items-center
-    gap-6
-    w-7/12
-    justify-start
-`;
-
-export const StyledToolbarActionContainer = tw.div`
-    flex
-    items-center
-    gap-6
-    ml-auto
-    w-5/12
-    justify-end
-    [&>svg]:cursor-pointer
-`;
-
 export const StyledToolbarContainer = tw.aside`
     h-14
     relative
@@ -40,18 +24,14 @@ export const StyledToolbarContainer = tw.aside`
     z-10
 `;
 
-export const StyledSelectContainer = tw.div`
-    flex
-    items-center
-    gap-2
-`;
-
-export const BasicToolbar = ({ children }: HasChildrenComponent) => (
+export const BasicToolbar = ({ children, className }: HasChildrenComponent & { className?: string }) => (
     <StyledToolbarContainer>
         <StyledToolbar>
-            <StyledToolbarSelectorContainer>
-                <StyledSelectContainer>{children}</StyledSelectContainer>
-            </StyledToolbarSelectorContainer>
+            <Flex className={twMerge('gap-6', className)}>
+                <Flex className='gap-2' justifyContent='start'>
+                    {children}
+                </Flex>
+            </Flex>
         </StyledToolbar>
     </StyledToolbarContainer>
 );

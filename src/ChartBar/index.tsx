@@ -14,6 +14,7 @@ import {
 import { humanize } from 'uno-js';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
+import objectHash from 'object-hash';
 import { ChartLegend } from '../ChartLegend';
 import { LegendFormatTypes } from '../constants';
 import { NoData } from '../NoData';
@@ -156,13 +157,13 @@ export const ChartBar = ({
                                     onClick={onBarClick ? (e: any) => onBarClick(e, index) : null}
                                     dataKey={property}
                                     fill={colors![index]}
-                                    key={index}
+                                    key={colors![index]}
                                 >
-                                    {dataStore.map((_, i) => (
+                                    {dataStore.map((item) => (
                                         <Cell
                                             cursor={onBarClick && 'pointer'}
                                             fill={colors![index]}
-                                            key={`cell-${i}`}
+                                            key={objectHash(item)}
                                         />
                                     ))}
                                 </Bar>
