@@ -88,8 +88,7 @@ export const ChartBar = ({
 }: ChartBarSettings<any>) => {
     const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const keys = dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : [];
-
-    if (!colors) colors = keys.length === 4 ? chart4Colors : defaultChartPalette;
+    const colorPalette = colors ?? (keys.length === 4 ? chart4Colors : defaultChartPalette);
 
     return (
         <Flex className={twMerge('w-full h-60', className)}>
@@ -151,18 +150,23 @@ export const ChartBar = ({
                         )}
                         {keys.map((property, index) =>
                             stacked ? (
-                                <Bar dataKey={property} fill={colors![index]} key={index} stackId='a' />
+                                <Bar
+                                    dataKey={property}
+                                    fill={colorPalette[index]}
+                                    key={colorPalette[index]}
+                                    stackId='a'
+                                />
                             ) : (
                                 <Bar
                                     onClick={onBarClick ? (e: any) => onBarClick(e, index) : null}
                                     dataKey={property}
-                                    fill={colors![index]}
-                                    key={colors![index]}
+                                    fill={colorPalette[index]}
+                                    key={colorPalette[index]}
                                 >
                                     {dataStore.map((item) => (
                                         <Cell
                                             cursor={onBarClick && 'pointer'}
-                                            fill={colors![index]}
+                                            fill={colorPalette[index]}
                                             key={objectHash(item)}
                                         />
                                     ))}

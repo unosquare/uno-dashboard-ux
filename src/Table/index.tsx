@@ -7,6 +7,7 @@ import {
     CaretUp12Regular,
     CheckboxChecked16Regular,
     CheckboxUnchecked16Regular,
+    Search12Regular,
 } from '@fluentui/react-icons';
 import {
     Flex,
@@ -17,6 +18,7 @@ import {
     TableHead,
     TableHeaderCell,
     TableRow,
+    TextInput,
     Table as TremorTable,
 } from '@tremor/react';
 import objectHash from 'object-hash';
@@ -25,9 +27,9 @@ import { DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
-import { searchData, sortData, TableColumn } from './sortData';
+import { defaultFilter, searchData, sortData, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
-import { SearchBox } from '../SearchBox';
+import { useDebounce } from '../hooks';
 
 export * from './sortData';
 
@@ -44,7 +46,7 @@ export type TableSettings<TDataIn, TDataOut extends Array<any>> = {
     isLoading?: boolean;
     noDataElement?: React.ReactNode;
     searchable?: boolean;
-    calculateFooter?: (data: TDataOut[], rawData: TDataIn) => (string | number)[];
+    calculateFooter?: (data: TDataIn) => unknown[];
     sortable?: boolean;
     exportCsv?: boolean;
     render?: RenderTableFunc;
@@ -224,7 +226,7 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
 );
 
 type TableFooterProps = {
-    footer: (string | number)[];
+    footer: unknown[];
     definition: TableColumn[];
 };
 
@@ -236,15 +238,15 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
                     key={objectHash(definition[index])}
                     className={`p-2 text-xs/[13px] ${getAlignment(definition[index]?.dataType || undefined, index)}`}
                 >
-                    {foot}
+                    {`${foot}`}
                 </TableFooterCell>
             ))}
         </TableRow>
     </TableFoot>
 );
 
-const getRows: RenderTableFunc = <_, TDataOut extends Array<unknown>>(data: TDataOut[], definitions: TableColumn[]) =>
-    data.map((row: TDataOut) => (
+const getRows: RenderTableFunc = (data: unknown[][], definitions: TableColumn[]) =>
+    data.map((row: unknown[]) => (
         <TableRow key={objectHash(row)}>
             {row.map((cell: any, index: number) => {
                 const dataType = definitions[index]?.dataType || undefined;
@@ -283,7 +285,10 @@ const SpanTable = ({ colSpan, children }: { colSpan: number; children: ReactNode
     </TableRow>
 );
 
-export const Table = <TDataIn, TDataOut extends Array<unknown>>({
+const searchFooter = <TDataIn extends Array<unknown>>(search: string, newRaw: TDataIn) =>
+    newRaw.filter((section: any) => Object.values(section).some(defaultFilter(search))) as TDataIn;
+
+export const Table = <TDataIn extends Array<unknown>, TDataOut extends Array<unknown>>({
     columns,
     isLoading,
     noDataElement,
@@ -298,22 +303,32 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
     className = '',
 }: TableSettings<TDataIn, TDataOut>) => {
     const [definitions, setDefinitions] = useState(columns);
-    const [filteredData, setFilteredData] = useState<TDataOut[]>([]);
-    const [lastSearch, setLastSearch] = useState('');
+    const [data, setData] = useState<TDataOut[]>([]);
     const [searched, setSearched] = useState<TDataOut[]>([]);
+    const [footerData, setFooterData] = useState<unknown[]>();
+    const [search, setSearch] = useState('');
 
-    const onSearch = (search: string) =>
+    const debouncedSearch = useDebounce(() => {
         startTransition(() => {
-            setLastSearch(search);
-            setSearched(searchData(search, filteredData, definitions));
+            setSearched(searchData(search, data, definitions));
+            if (calculateFooter) setFooterData(calculateFooter(searchFooter(search, rawData)));
         });
+    });
+
+    const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(target.value);
+        debouncedSearch();
+    };
 
     useEffect(() => {
-        const subSet = dataCallback(rawData);
-
-        setFilteredData(subSet);
-        setSearched(lastSearch ? searchData(lastSearch, subSet, definitions) : subSet);
-    }, [rawData, dataCallback]);
+        const raw = dataCallback(rawData);
+        startTransition(() => {
+            setData(raw);
+            setSearched(raw);
+            setSearch('');
+            if (calculateFooter) setFooterData(calculateFooter(rawData));
+        });
+    }, [rawData, dataCallback, calculateFooter]);
 
     useEffect(() => setDefinitions(columns), [columns]);
 
@@ -328,7 +343,7 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
         el.remove();
 
         createCsv(
-            renderToRowString(filteredData, definitions),
+            renderToRowString(data, definitions),
             definitions.map((x) => x.label),
             fileName || 'file',
         );
@@ -347,7 +362,17 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
                             disabled={isLoading || searched.length === 0 ? true : undefined}
                         />
                     )}
-                    {searchable && <SearchBox search={onSearch} disabled={isLoading} />}
+                    {searchable && (
+                        <TextInput
+                            className='max-w-[220px]'
+                            icon={Search12Regular}
+                            value={search}
+                            onChange={onSearchInternal}
+                            disabled={isLoading}
+                            type='text'
+                            placeholder='Search'
+                        />
+                    )}
                 </Flex>
             )}
             <TremorTable className={twMerge('overflow-auto h-60 mt-5', className)}>
@@ -371,8 +396,8 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
                         </SpanTable>
                     )}
                 </TableBody>
-                {searched.length > 0 && !isLoading && calculateFooter && (
-                    <TableFooter footer={calculateFooter(searched, rawData)} definition={definitions} />
+                {searched.length > 0 && !isLoading && footerData && (
+                    <TableFooter footer={footerData} definition={definitions} />
                 )}
             </TremorTable>
         </>

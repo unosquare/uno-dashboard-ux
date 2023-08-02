@@ -14,14 +14,16 @@ export type TableColumn = {
     };
 };
 
-const defaultFilter = (search: string) => (element: any) =>
+export const defaultFilter = (search: string) => (element: any) =>
     element && element.toString().toLowerCase().match(search.toLowerCase());
 
 export const searchData = <TDataOut extends Array<unknown>>(
-    search: string,
+    search: string | undefined,
     newData: TDataOut[],
     definitions: TableColumn[],
 ) => {
+    if (!search) return newData;
+
     const ignoreColumns = definitions
         .filter((y) => y.disableSearch === true)
         .map((x) => definitions.findIndex((z) => z.label === x.label));
@@ -37,7 +39,10 @@ const sanitizeNumericString = (str: string) =>
 const compareDates = (date1: unknown, date2: unknown) =>
     new Date(date1 as any).getTime() - new Date(date2 as any).getTime();
 
-const numericTypes = ['number', 'decimal', 'percentage', 'money', 'days', 'months', 'boolean'];
+const numericTypes: DataTypes[] = ['number', 'decimal', 'percentage', 'money', 'days', 'months', 'boolean'];
+
+const sortComparer = (left: string, right: string) =>
+    left.trim().localeCompare(right.trim(), undefined, { numeric: true, sensitivity: 'base' });
 
 const checkNumericString = (a: string, b: string) => {
     if ((a.includes('$') && b.includes('$')) || (a.includes('%') && b.includes('%'))) {
@@ -52,9 +57,6 @@ const checkNumericString = (a: string, b: string) => {
 
     return sortComparer(a, b);
 };
-
-const sortComparer = (left: string, right: string) =>
-    left.trim().localeCompare(right.trim(), undefined, { numeric: true, sensitivity: 'base' });
 
 const sortOneColumn = <T extends TableColumn, TDataOut extends Array<unknown>>(
     left: TDataOut,

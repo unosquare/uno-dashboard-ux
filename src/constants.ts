@@ -6,7 +6,7 @@ export type ChartData = {
     subValue?: string | number;
 };
 
-export type LegendFormatTypes = 'percentage' | 'money' | 'tenure' | 'negative' | 'number';
+export type LegendFormatTypes = 'percentage' | 'money' | 'negative' | 'number';
 
 export type DataTypes =
     | 'money'

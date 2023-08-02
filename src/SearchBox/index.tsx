@@ -1,6 +1,7 @@
 import { Search12Regular } from '@fluentui/react-icons';
 import { TextInput } from '@tremor/react';
 import React, { useEffect, useRef } from 'react';
+import { useDebounce } from '../hooks';
 
 export type SearchBoxSettings = {
     placeholder?: string;
@@ -12,6 +13,7 @@ export type SearchBoxSettings = {
 export const SearchBox = ({ search, placeholder = 'Search', focus = false, disabled = false }: SearchBoxSettings) => {
     const [value, setValue] = React.useState('');
     const ref = useRef<HTMLInputElement>(null);
+    const debounceCall = useDebounce(() => search(value));
 
     useEffect(() => {
         if (focus && ref.current) {
@@ -19,12 +21,10 @@ export const SearchBox = ({ search, placeholder = 'Search', focus = false, disab
         }
     }, [focus]);
 
-    const onSearch = (val: string) => {
-        setValue(val);
-        search(val);
+    const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(target.value);
+        debounceCall();
     };
-
-    const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => onSearch(target.value);
 
     return (
         <TextInput

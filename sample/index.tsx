@@ -85,7 +85,21 @@ const defaultData = [
     ],
 ];
 
-const calculateFooter = (data: any[]) => ['Total', '', data.length, '', '', '', '', '', ''];
+const anotherDataSet = [
+    [
+        'Juan',
+        'Oaxaca',
+        new Date('2022-01-08'),
+        30,
+        null,
+        0.75,
+        true,
+        'https://www.google.com',
+        'This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type',
+    ],
+];
+
+const calculateFooter = (data: unknown[][]) => ['Total', '', data.length, '', '', '', '', '', ''];
 
 const chartData = [
     { name: 'Group A', value: 10.15 },
@@ -97,6 +111,7 @@ const Application = () => {
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
     const [openMenu, setOpenMenu] = React.useState(false);
     const [loading, isLoading] = React.useState(true);
+    const [toggle, setToggle] = React.useState(true);
 
     React.useEffect(() => {
         setTimeout(() => isLoading(false), 2000);
@@ -146,7 +161,9 @@ const Application = () => {
             </NavBar>
             <BasicToolbar>
                 <Text>This is a toolbar</Text>
-                <Button size='xs'>Click</Button>
+                <Button size='xs' onClick={() => setToggle(!toggle)}>
+                    Click
+                </Button>
             </BasicToolbar>
             <TremorContainer hasToolbar>
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
@@ -179,7 +196,7 @@ const Application = () => {
                             <Table
                                 className='h-72'
                                 columns={columns}
-                                rawData={defaultData}
+                                rawData={toggle ? defaultData : anotherDataSet}
                                 dataCallback={identity}
                                 isLoading={loading}
                                 searchable

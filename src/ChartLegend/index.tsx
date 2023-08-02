@@ -67,8 +67,6 @@ const getCustomValue = ({ values, prefix }: CustomOptions, index: number, { valu
 const getLabel =
     (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined, ignoreValue: boolean) =>
     (category: any, index: number, legendFormatType?: LegendFormatTypes) => {
-        if (legendFormatType === 'tenure') return `Month ${category.payload.x}: ${category.value} DPs`;
-
         let { name, value } = category;
 
         if (ignoreValue && value === 0.001) value = 0;
