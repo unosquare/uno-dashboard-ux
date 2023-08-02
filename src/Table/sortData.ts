@@ -90,6 +90,11 @@ const sortOneColumn = <T extends TableColumn, TDataOut extends Array<unknown>>(
     return checkNumericString(String(a[sortColumn]), String(b[sortColumn]));
 };
 
+export const searchFooter = <TDataIn>(search: string, newRaw: TDataIn) =>
+    Array.isArray(newRaw)
+        ? (newRaw.filter((section: any) => Object.values(section).some(defaultFilter(search))) as TDataIn)
+        : newRaw;
+
 export const sortData = <TDataOut extends Array<unknown>, T extends TableColumn>(
     data: TDataOut[],
     definition: T[],

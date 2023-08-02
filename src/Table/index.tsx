@@ -27,7 +27,7 @@ import { DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
-import { defaultFilter, searchData, sortData, TableColumn } from './sortData';
+import { defaultFilter, searchData, searchFooter, sortData, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { useDebounce } from '../hooks';
 
@@ -285,10 +285,7 @@ const SpanTable = ({ colSpan, children }: { colSpan: number; children: ReactNode
     </TableRow>
 );
 
-const searchFooter = <TDataIn extends Array<unknown>>(search: string, newRaw: TDataIn) =>
-    newRaw.filter((section: any) => Object.values(section).some(defaultFilter(search))) as TDataIn;
-
-export const Table = <TDataIn extends Array<unknown>, TDataOut extends Array<unknown>>({
+export const Table = <TDataIn, TDataOut extends Array<unknown>>({
     columns,
     isLoading,
     noDataElement,
