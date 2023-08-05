@@ -15,7 +15,7 @@
         "recharts": "^2.7.2",
         "tailwind-merge": "^1.14.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.21.0"
+        "uno-js": "^3.22.0"
     },
     "devDependencies": {
         "@rspack/cli": "^0.2.10",
@@ -33,7 +33,7 @@
         "lint-staged": "^13.2.3",
         "object-hash": "^3.0.0",
         "postcss-loader": "^7.3.3",
-        "prettier": "^3.0.0",
+        "prettier": "^3.0.1",
         "tailwindcss": "^3.3.3",
         "typescript": "^5.1.6",
         "husky": "^8.0.3"
