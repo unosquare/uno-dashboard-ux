@@ -57,7 +57,7 @@ const renderLegendText = (value: string, clickable: boolean) => (
     <StyledLegend $clickable={clickable}>{value}</StyledLegend>
 );
 
-export default ({
+export const ComposedLineChart = ({
     dataCallback,
     rawData,
     legend,
