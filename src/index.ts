@@ -9,6 +9,7 @@ export * from './PieChart';
 export * from './ChartLegend';
 export * from './DataChart';
 export * from './CardLoading';
+export * from './ComposedLineChart';
 export * from './Ellipse';
 export * from './ExportCsvButton';
 export * from './Footer';

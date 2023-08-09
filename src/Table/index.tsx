@@ -27,7 +27,7 @@ import { DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
-import { defaultFilter, searchData, searchFooter, sortData, TableColumn } from './sortData';
+import { searchData, searchFooter, sortData, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { useDebounce } from '../hooks';
 
