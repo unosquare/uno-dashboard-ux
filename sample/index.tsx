@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { identity } from 'uno-js';
 import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
-import { Bold, Button, Card, Col, Flex, Grid, Select, SelectItem, Text, Title } from '@tremor/react';
+import { Button, Card, Col, Flex, Grid, Select, SelectItem, Text, Title } from '@tremor/react';
 import {
     BasicToolbar,
     Blur,
@@ -177,7 +177,7 @@ const Application = () => {
                         />
                     </Card>
                     <Card>
-                        <Bold>Bar Chart</Bold>
+                        <Text className='font-medium'>Bar Chart</Text>
                         <ChartBar
                             className='mt-5'
                             rawData={chartData}
@@ -188,7 +188,7 @@ const Application = () => {
                         />
                     </Card>
                     <Card className='h-96'>
-                        <Bold>Pie Chart</Bold>
+                        <Text className='font-medium'>Pie Chart</Text>
                         <PieChart rawData={chartData} dataCallback={identity} legendFormatType='money' />
                     </Card>
                     <Col numColSpan={3}>

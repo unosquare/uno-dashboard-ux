@@ -10,7 +10,6 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-import tw from 'tailwind-styled-components';
 import { FormatTypes } from 'uno-js';
 import { Flex } from '@tremor/react';
 import { CardLoading } from '../CardLoading';
@@ -18,7 +17,7 @@ import { ChartLegend } from '../ChartLegend';
 import { NoData } from '../NoData';
 import { ChartComponent, LegendFormatTypes } from '../constants';
 import { defaultChartPalette } from '../theme';
-import { formatTicks } from '../utils';
+import { formatTicks, renderLegendText } from '../utils';
 
 export type legendXAxis = { left: LegendFormatTypes; right: LegendFormatTypes };
 export type lineChart = { dataKey: string; yAxisId: string };
@@ -36,11 +35,6 @@ interface ComposedLineChartSettings<TDataIn> extends ChartComponent<TDataIn, Rec
     lines: lineChart[];
 }
 
-const StyledLegend = tw.span<{ $clickable?: boolean }>`
-    text-maingray
-    ${({ $clickable }) => $clickable && 'cursor-pointer'}
-`;
-
 const margin = {
     top: 5,
     right: 5,
@@ -52,10 +46,6 @@ const xPadding = {
     left: 20,
     right: 20,
 };
-
-const renderLegendText = (value: string, clickable: boolean) => (
-    <StyledLegend $clickable={clickable}>{value}</StyledLegend>
-);
 
 export const ComposedLineChart = ({
     dataCallback,

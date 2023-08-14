@@ -13,12 +13,8 @@ const MainApp = tw.main<any>`
     overflow-y-auto
     p-2`;
 
-const InnerMain = tw.div`
-    max-w-unomax
-    m-auto`;
-
 export const TremorContainer = ({ children, hasToolbar }: TremorContainerSettings) => (
     <MainApp $hasToolbar={hasToolbar}>
-        <InnerMain>{children}</InnerMain>
+        <div className='max-w-unomax m-auto'>{children}</div>
     </MainApp>
 );

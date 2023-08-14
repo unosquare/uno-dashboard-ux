@@ -15,17 +15,8 @@ export const StyledToolbar = tw.div`
     h-14
 `;
 
-export const StyledToolbarContainer = tw.aside`
-    h-14
-    relative
-    w-full
-    bg-white
-    shadow-card
-    z-10
-`;
-
 export const BasicToolbar = ({ children, className }: HasChildrenComponent & { className?: string }) => (
-    <StyledToolbarContainer>
+    <aside className='h-14 relative w-full bg-white shadow-card z-10'>
         <StyledToolbar>
             <Flex className={twMerge('gap-6', className)}>
                 <Flex className='gap-2' justifyContent='start'>
@@ -33,5 +24,5 @@ export const BasicToolbar = ({ children, className }: HasChildrenComponent & { c
                 </Flex>
             </Flex>
         </StyledToolbar>
-    </StyledToolbarContainer>
+    </aside>
 );

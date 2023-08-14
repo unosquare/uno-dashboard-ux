@@ -2,32 +2,22 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 import { formatter, FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
+import { Flex } from '@tremor/react';
 import { ChartTypes, HasChildrenComponent, LegendFormatTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { translateFormat } from '../utils';
 
-const StyledCenteredBoldSpan = tw.div`
-    flex 
-    items-center 
-    font-bold 
-    text-sm 
-    pl-1 
-    pb-1 
-    pt-1
-`;
-
-const StyledLeftSpan = tw.div`
-    flex 
-    pl-1 
-    text-xs
-    items-start
-`;
-
 const TooltipTitle = ({ children }: HasChildrenComponent) => (
-    <StyledCenteredBoldSpan>{children}</StyledCenteredBoldSpan>
+    <Flex alignItems='center' className='text-sm pl-1 pb-1 pt-1'>
+        {children}
+    </Flex>
 );
 
-const LabelInfo = ({ children }: HasChildrenComponent) => <StyledLeftSpan>{children}</StyledLeftSpan>;
+const LabelInfo = ({ children }: HasChildrenComponent) => (
+    <Flex alignItems='start' className='pl-1 text-xs'>
+        {children}
+    </Flex>
+);
 
 export type ChartLegendSettings = {
     legendFormatType?: LegendFormatTypes;

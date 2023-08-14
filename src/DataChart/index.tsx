@@ -11,7 +11,6 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-import tw from 'tailwind-styled-components';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import { ChartLegend } from '../ChartLegend';
@@ -19,7 +18,7 @@ import { ChartComponent } from '../constants';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
-import { formatTicks } from '../utils';
+import { formatTicks, renderLegendText } from '../utils';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
@@ -31,11 +30,6 @@ export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, 
     isLoading?: boolean;
     className?: string;
 };
-
-const StyledLegend = tw.span<{ $clickable?: boolean }>`
-    text-maingray
-    ${({ $clickable }) => $clickable && 'cursor-pointer'}
-`;
 
 const margin = {
     top: 5,
@@ -58,10 +52,6 @@ export const getChartSeries = (data: any) =>
             });
         return current;
     }, []);
-
-const renderLegendText = (value: string, clickable: boolean) => (
-    <StyledLegend $clickable={clickable}>{value}</StyledLegend>
-);
 
 export const DataChart = ({
     dataCallback,

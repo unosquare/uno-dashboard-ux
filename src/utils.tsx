@@ -1,3 +1,4 @@
+import React from 'react';
 import { formatter } from 'uno-js';
 import { LegendFormatTypes } from './constants';
 
@@ -24,3 +25,7 @@ export const formatTicks = (t: any, formatType: LegendFormatTypes) => {
 
     return formatter(t, translateFormat(formatType));
 };
+
+export const renderLegendText = (value: string, clickable: boolean) => (
+    <span className={`text-maingray ${clickable ? 'cursor-pointer' : ''}`}>{value}</span>
+);

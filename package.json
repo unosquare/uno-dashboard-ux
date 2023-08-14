@@ -15,14 +15,14 @@
         "recharts": "^2.7.3",
         "tailwind-merge": "^1.14.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.23.0"
+        "uno-js": "^3.24.0"
     },
     "devDependencies": {
         "@rspack/cli": "^0.2.11",
         "@types/object-hash": "^3.0.3",
         "@types/react": "^18.2.20",
         "@types/react-dom": "^18.2.7",
-        "@typescript-eslint/eslint-plugin": "^6.3.0",
+        "@typescript-eslint/eslint-plugin": "^6.4.0",
         "autoprefixer": "^10.4.15",
         "eslint": "^8.47.0",
         "eslint-config-unosquare": "0.3.2",
@@ -42,8 +42,8 @@
         "start": "rspack serve",
         "watch": "tsc --watch",
         "build": "tsc && npx ncp src/resources/ dist/resources",
-        "lint": "tsc --noEmit && eslint ./{src,sample}/**/*.{js,ts,tsx}",
-        "lint:fix": "eslint ./{src,sample}/**/*.{js,ts,tsx} --fix",
+        "lint": "tsc --noEmit && eslint ./{src,sample}/**/*.{ts,tsx}",
+        "lint:fix": "eslint ./{src,sample}/**/*.{ts,tsx} --fix",
         "test": "tsc --noEmit",
         "prepare": "husky install"
     },

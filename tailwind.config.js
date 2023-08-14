@@ -2,9 +2,9 @@
 
 module.exports = {
     content: [
-        './sample/**/*.{js,ts,jsx,tsx}',
-        './src/**/*.{js,ts,jsx,tsx}',
-        './src/**/**/*.{js,ts,jsx,tsx}',
+        './sample/**/*.{ts,tsx}',
+        './src/**/*.{ts,tsx}',
+        './src/**/**/*.{ts,tsx}',
         './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
     ],
     media: false, // or 'media' or 'class'
