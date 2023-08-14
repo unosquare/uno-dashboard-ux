@@ -113,7 +113,7 @@ export const ChartBar = ({
                         <YAxis
                             tickFormatter={(t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t)}
                             type='number'
-                            domain={[0, domain || 'auto']}
+                            domain={[0, domain ?? 'auto']}
                             unit={unit}
                             allowDecimals={false}
                             width={70}
@@ -144,7 +144,7 @@ export const ChartBar = ({
                         {legend && (
                             <Legend
                                 iconType='circle'
-                                onClick={onLegendClick || null}
+                                onClick={onLegendClick ?? null}
                                 formatter={(v: any) => renderLegendText(humanize(v), !!onLegendClick)}
                             />
                         )}

@@ -81,7 +81,7 @@ export const DataChart = ({
                         <YAxis
                             tickFormatter={tickFormatter}
                             type='number'
-                            domain={[0, domain || 'auto']}
+                            domain={[0, domain ?? 'auto']}
                             unit={unit}
                             allowDecimals={false}
                         />

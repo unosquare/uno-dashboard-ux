@@ -86,7 +86,7 @@ export const ComposedLineChart = ({
                             yAxisId='left'
                             tickFormatter={(t: any) => tickFormatter(t, 'left')}
                             type='number'
-                            domain={[0, domain || 'auto']}
+                            domain={[0, domain ?? 'auto']}
                             unit={unit}
                             allowDecimals={false}
                         />

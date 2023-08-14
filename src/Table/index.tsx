@@ -203,10 +203,7 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
             {definitions.map((header, index) => (
                 <TableHeaderCell
                     key={objectHash(header)}
-                    className={`p-2 text-xs/[13px] bg-white whitespace-normal ${getAlignment(
-                        header.dataType || undefined,
-                        index,
-                    )}`}
+                    className={`p-2 text-xs/[13px] bg-white whitespace-normal ${getAlignment(header.dataType, index)}`}
                     onClick={() => !header.excludeFromSort && setSortColumn(index)}
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
@@ -236,7 +233,7 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
             {footer.map((foot, index) => (
                 <TableFooterCell
                     key={objectHash(definition[index])}
-                    className={`p-2 text-xs/[13px] ${getAlignment(definition[index]?.dataType || undefined, index)}`}
+                    className={`p-2 text-xs/[13px] ${getAlignment(definition[index]?.dataType, index)}`}
                 >
                     {`${foot}`}
                 </TableFooterCell>
@@ -249,7 +246,7 @@ const getRows: RenderTableFunc = (data: unknown[][], definitions: TableColumn[])
     data.map((row: unknown[]) => (
         <TableRow key={objectHash(row)}>
             {row.map((cell: any, index: number) => {
-                const dataType = definitions[index]?.dataType || undefined;
+                const dataType = definitions[index]?.dataType;
                 return (
                     <TableCell
                         key={objectHash({ a: definitions[index], c: cell })}
@@ -265,7 +262,7 @@ const getRows: RenderTableFunc = (data: unknown[][], definitions: TableColumn[])
 const renderToRowString = (data: any[], definitions: TableColumn[]) =>
     data.map((row: any) =>
         row.map((cell: any, index: number) => {
-            const dataType = definitions[index]?.dataType || undefined;
+            const dataType = definitions[index]?.dataType;
             if (dataType === 'boolean') return cell ? 'TRUE' : 'FALSE';
             if (!cell && dataType === 'money') return '$0.00';
             if (cell == null || cell === ' ') return 'N/A';
@@ -342,11 +339,11 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
         createCsv(
             renderToRowString(data, definitions),
             definitions.map((x) => x.label),
-            fileName || 'file',
+            fileName ?? 'file',
         );
     };
 
-    const renderFunc = render || getRows;
+    const renderFunc = render ?? getRows;
 
     return (
         <>

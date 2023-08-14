@@ -15,7 +15,7 @@ export type TableColumn = {
 };
 
 export const defaultFilter = (search: string) => (element: any) =>
-    element && element.toString().toLowerCase().match(search.toLowerCase());
+    element?.toString().toLowerCase().match(search.toLowerCase());
 
 export const searchData = <TDataOut extends Array<unknown>>(
     search: string | undefined,
@@ -105,10 +105,10 @@ export const sortData = <TDataOut extends Array<unknown>, T extends TableColumn>
             .filter((x) => x.sortOrder && x.sortOrder >= 1)
             .sort((x, y) => Number(x.sortOrder) - Number(y.sortOrder));
 
-        const sorter = getSortIndex || ((sortOrder: number) => definition.findIndex((x) => x.sortOrder === sortOrder));
+        const sorter = getSortIndex ?? ((sortOrder: number) => definition.findIndex((x) => x.sortOrder === sortOrder));
 
-        for (let i = 0; i < sortColumns.length; i++) {
-            const result = sortOneColumn(left, right, sortColumns[i], sorter);
+        for (const i of sortColumns) {
+            const result = sortOneColumn(left, right, i, sorter);
             if (result !== 0) return result;
         }
 
