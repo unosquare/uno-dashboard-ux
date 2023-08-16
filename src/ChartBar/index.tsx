@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
     Bar,
     BarChart,
@@ -26,10 +26,6 @@ type XAxisPrimaryFormatter = {
     (input: string): string;
 };
 
-type XAxisSecondaryFormatter = {
-    (e: any): void;
-};
-
 export type ChartBarSettings<TDataIn> = {
     rawData?: TDataIn;
     colors?: string[];
@@ -42,7 +38,7 @@ export type ChartBarSettings<TDataIn> = {
     xAxis?: boolean;
     multiXAxis?: {
         primary: XAxisPrimaryFormatter;
-        secondary: XAxisSecondaryFormatter;
+        secondary: (props: any) => ReactElement<SVGElement>;
     };
     stacked?: boolean;
     onClick?: (e: any) => void;
@@ -140,7 +136,7 @@ export const ChartBar = ({
                         {legend && (
                             <Legend
                                 iconType='circle'
-                                onClick={onLegendClick ?? null}
+                                onClick={(onLegendClick as any) ?? null}
                                 formatter={(v: any) => renderLegendText(humanize(v), !!onLegendClick)}
                             />
                         )}
@@ -154,7 +150,7 @@ export const ChartBar = ({
                                 />
                             ) : (
                                 <Bar
-                                    onClick={onBarClick ? (e: any) => onBarClick(e, index) : null}
+                                    onClick={onBarClick ? (e: any) => onBarClick(e, index) : undefined}
                                     dataKey={property}
                                     fill={colorPalette[index]}
                                     key={colorPalette[index]}

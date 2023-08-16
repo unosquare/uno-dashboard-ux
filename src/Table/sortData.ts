@@ -14,8 +14,8 @@ export type TableColumn = {
     };
 };
 
-export const defaultFilter = (search: string) => (element: any) =>
-    element?.toString().toLowerCase().match(search.toLowerCase());
+export const defaultFilter = (search: string) => (element: unknown) =>
+    element && String(element).toLocaleLowerCase().includes(search.toLocaleLowerCase());
 
 export const searchData = <TDataOut extends Array<unknown>>(
     search: string | undefined,
@@ -33,8 +33,7 @@ export const searchData = <TDataOut extends Array<unknown>>(
     );
 };
 
-const sanitizeNumericString = (str: string) =>
-    Number(str.replaceAll(',', '').replaceAll('$', '').replaceAll('%', '').trim());
+const sanitizeNumericString = (str: string) => Number(str.replace(/[^0-9.-]+/g, ''));
 
 const compareDates = (date1: unknown, date2: unknown) =>
     new Date(date1 as any).getTime() - new Date(date2 as any).getTime();
