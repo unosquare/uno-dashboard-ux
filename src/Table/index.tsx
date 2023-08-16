@@ -91,7 +91,6 @@ export const HeaderDiv = tw.div<HeaderSettings>`
 const StyledLinkButton = tw.button`
     bg-transparent
     border-0
-    text-gray-800
     underline
     cursor-pointer
     text-[10px]
@@ -203,7 +202,10 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
             {definitions.map((header, index) => (
                 <TableHeaderCell
                     key={objectHash(header)}
-                    className={`p-2 text-xs/[13px] bg-white whitespace-normal ${getAlignment(header.dataType, index)}`}
+                    className={`p-2 text-xs/[13px] bg-tremor-background dark:bg-dark-tremor-background whitespace-normal ${getAlignment(
+                        header.dataType,
+                        index,
+                    )}`}
                     onClick={() => !header.excludeFromSort && setSortColumn(index)}
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
@@ -228,7 +230,7 @@ type TableFooterProps = {
 };
 
 const TableFooter = ({ footer, definition }: TableFooterProps) => (
-    <TableFoot className='sticky top-0 bottom-0 bg-white'>
+    <TableFoot className='sticky top-0 bottom-0 bg-tremor-background dark:bg-dark-tremor-background'>
         <TableRow>
             {footer.map((foot, index) => (
                 <TableFooterCell

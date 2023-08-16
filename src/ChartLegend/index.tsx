@@ -72,8 +72,10 @@ const getLabel =
     };
 
 const StyledLegend = tw.div`
-    text-maingray
-    bg-white
+    text-tremor-content 
+    dark:text-dark-tremor-content
+    bg-tremor-background 
+    dark:bg-dark-tremor-background
     shadow-legend
     flex
     flex-col
@@ -86,7 +88,6 @@ const StyledLegend = tw.div`
     [&_div]:w-full
     [&_span]:!font-medium
     [&_span]:!text-xs
-    [&_span]:!text-gray-800
     [&_span]:m-0
 `;
 

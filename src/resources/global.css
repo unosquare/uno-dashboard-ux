@@ -14,15 +14,7 @@
 @layer components {
     body {
         overflow: hidden !important;
-        @apply bg-[#f1f2f3] p-0 m-0;
-    }
-
-    a {
-        @apply text-gray-800;
-    }
-
-    a:hover {
-        @apply text-gray-600 underline;
+        @apply p-0 m-0;
     }
 
     #root {
@@ -130,6 +122,11 @@
     *::-webkit-scrollbar-track {
         border-radius: 100vh;
         background: #f1f2f3;
+    }
+
+    dark *::-webkit-scrollbar-track {
+        border-radius: 100vh;
+        background: #111827;
     }
 
     *::-webkit-scrollbar-thumb {

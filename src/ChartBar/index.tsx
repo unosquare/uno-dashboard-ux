@@ -20,7 +20,7 @@ import { LegendFormatTypes } from '../constants';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 import { CardLoading } from '../CardLoading';
-import { formatTicks } from '../utils';
+import { formatTicks, renderLegendText } from '../utils';
 
 type XAxisPrimaryFormatter = {
     (input: string): string;
@@ -56,10 +56,6 @@ export type ChartBarSettings<TDataIn> = {
     isLoading?: boolean;
     className?: string;
 };
-
-const renderLegendText = (value: string, clickable: boolean) => (
-    <span className={`text-[#333333] ${clickable && 'cursor-pointer'}`}>{value}</span>
-);
 
 const chart4Colors = ['#003de6', '#ea00a1', '#ff414f', '#ffa600'];
 

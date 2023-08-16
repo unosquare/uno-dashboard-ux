@@ -1,7 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { identity } from 'uno-js';
-import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
+import {
+    ArrowSync24Regular,
+    Dismiss24Regular,
+    WeatherMoon24Regular,
+    WeatherSunny24Regular,
+} from '@fluentui/react-icons';
 import { Button, Card, Col, Flex, Grid, Select, SelectItem, Text, Title } from '@tremor/react';
 import {
     BasicToolbar,
@@ -112,8 +117,12 @@ const Application = () => {
     const [openMenu, setOpenMenu] = React.useState(false);
     const [loading, isLoading] = React.useState(true);
     const [toggle, setToggle] = React.useState(true);
+    const [theme, setTheme] = React.useState(localStorage.getItem('theme') ?? 'light');
 
     React.useEffect(() => {
+        const body = document.getElementById('body');
+        if (body && theme === 'dark') body.classList.add('dark');
+
         setTimeout(() => isLoading(false), 2000);
     }, []);
 
@@ -121,6 +130,16 @@ const Application = () => {
         const body = document.getElementById('body');
         if (body) body.style.overflow = openMenu ? 'auto' : 'hidden';
         setOpenMenu(!openMenu);
+    };
+
+    const updateTheme = () => {
+        const body = document.getElementById('body');
+        if (body) {
+            const themeToggle = body.classList.toggle('dark');
+            const value = themeToggle ? 'dark' : 'light';
+            setTheme(value);
+            localStorage.setItem('theme', value);
+        }
     };
 
     return (
@@ -134,8 +153,22 @@ const Application = () => {
                     <>
                         <MenuContainer>
                             <StyledMenuActions>
-                                <ArrowSync24Regular />
-                                <Dismiss24Regular onClick={() => setOpenMenu(false)} />
+                                <ArrowSync24Regular className='text-tremor-content dark:text-dark-tremor-content' />
+                                {theme === 'light' ? (
+                                    <WeatherMoon24Regular
+                                        onClick={updateTheme}
+                                        className='text-tremor-content dark:text-dark-tremor-content'
+                                    />
+                                ) : (
+                                    <WeatherSunny24Regular
+                                        onClick={updateTheme}
+                                        className='text-tremor-content dark:text-dark-tremor-content'
+                                    />
+                                )}
+                                <Dismiss24Regular
+                                    onClick={() => setOpenMenu(false)}
+                                    className='text-tremor-content dark:text-dark-tremor-content'
+                                />
                             </StyledMenuActions>
                             <Flex justifyContent='between' alignItems='center' className='gap-4'>
                                 <Text>Options</Text>

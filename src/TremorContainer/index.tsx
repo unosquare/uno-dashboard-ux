@@ -8,8 +8,9 @@ export type TremorContainerSettings = HasChildrenComponent & {
 
 const MainApp = tw.main<any>`
     w-full
-    h-[calc(100vh-110px)]
-    ${({ $hasToolbar }) => $hasToolbar && 'h-[calc(100vh-165px)]'}
+    bg-[#f1f2f3]
+    dark:bg-[#3D4A66]
+    ${({ $hasToolbar }) => ($hasToolbar ? 'h-[calc(100vh-165px)]' : 'h-[calc(100vh-110px)]')}
     overflow-y-auto
     p-2`;
 

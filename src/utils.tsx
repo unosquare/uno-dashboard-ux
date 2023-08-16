@@ -27,5 +27,7 @@ export const formatTicks = (t: any, formatType: LegendFormatTypes) => {
 };
 
 export const renderLegendText = (value: string, clickable: boolean) => (
-    <span className={`text-maingray ${clickable ? 'cursor-pointer' : ''}`}>{value}</span>
+    <span className={`text-tremor-content dark:text-dark-tremor-content ${clickable ? 'cursor-pointer' : ''}`}>
+        {value}
+    </span>
 );

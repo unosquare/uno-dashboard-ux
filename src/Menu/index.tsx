@@ -1,10 +1,6 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
 
-export type SubSectionSettings = {
-    disabled?: boolean;
-};
-
 export type BurgerSettings = {
     onClick: () => void;
 };
@@ -21,7 +17,8 @@ export const MenuContainer = tw.div`
     absolute
     top-0
     right-0
-    bg-white
+    bg-tremor-background 
+    dark:bg-dark-tremor-background
     min-w-[350px]
     max-w-[350px]
     z-40
@@ -43,7 +40,8 @@ export const MenuSection = tw.div`
     flex
     justify-between
     cursor-pointer
-    text-maingray
+    text-tremor-content 
+    dark:text-dark-tremor-content
     mt-[18px]
     px-6
     [&_h6]:font-medium
@@ -52,24 +50,20 @@ export const MenuSection = tw.div`
     [&_h6]:leading-6
 `;
 
-export const MenuSubSection = tw.div<SubSectionSettings>`
+export const MenuSubSection = tw.div`
     flex
     flex-col
     py-0
     px-6
     cursor-pointer
-    text-maingray
+    text-tremor-content 
+    dark:text-dark-tremor-content
     [&_span]:text-sm
     [&_span]:leading-6
     [&_span]:mb-[5px]
     [&_span]:pl-[10px]
-    [&_span]:hover:bg-unolightgray
-    ${({ disabled }) =>
-        disabled &&
-        `
-        cursor-default
-        text-[#00000080]
-    `}
+    [&_span]:hover:bg-tremor-emphasis
+    [&_span]:dark:hover:bg-dark-tremor-emphasis
 `;
 
 export const Burger = ({ onClick }: BurgerSettings) => (

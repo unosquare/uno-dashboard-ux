@@ -16,7 +16,7 @@ export const StyledToolbar = tw.div`
 `;
 
 export const BasicToolbar = ({ children, className }: HasChildrenComponent & { className?: string }) => (
-    <aside className='h-14 relative w-full bg-white shadow-card z-10'>
+    <aside className='h-14 relative w-full bg-tremor-background dark:bg-dark-tremor-background shadow-card z-10'>
         <StyledToolbar>
             <Flex className={twMerge('gap-6', className)}>
                 <Flex className='gap-2' justifyContent='start'>
