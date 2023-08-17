@@ -71,10 +71,10 @@ const StyledLegend = tw.div`
     p-2
     rounded-tremor-default
     text-white 
-    bg-tremor-background-emphasis
+    border-tremor-border
+    bg-tremor-background-subtle
     dark:text 
     dark:bg-dark-tremor-background-subtle
-    border-tremor-border
     dark:border-dark-tremor-border
 `;
 
@@ -91,7 +91,7 @@ const Component = ({ type, category, index, legendFormatType, formats, getLabelF
         <Flex className='gap-2'>
             <Ellipse color={getColor(type, category)} />
             <Text>{label}</Text>
-            <Text className='font-medium'>{value}</Text>
+            <Text className='font-medium tabular-nums'>{value}</Text>
         </Flex>
     );
 };
