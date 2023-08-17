@@ -1,7 +1,7 @@
 import React, { ReactNode, startTransition, useEffect, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
-import { createCsv, formatter } from 'uno-js';
+import { createCsv, formatter, FormatTypes } from 'uno-js';
 import {
     CaretDown12Regular,
     CaretUp12Regular,
@@ -25,7 +25,6 @@ import objectHash from 'object-hash';
 import { twMerge } from 'tailwind-merge';
 import { DataTypes, SortDirection } from '../constants';
 import { Ellipse } from '../Ellipse';
-import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { searchData, searchFooter, sortData, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
@@ -98,7 +97,7 @@ const StyledLinkButton = tw.button`
     p-2
 `;
 
-const translateType = (type: DataTypes | undefined) => {
+const translateType = (type: DataTypes | undefined): FormatTypes | undefined => {
     switch (type) {
         case 'date':
             return 'date';
@@ -274,6 +273,17 @@ const renderToRowString = (data: any[], definitions: TableColumn[]) =>
         }),
     );
 
+const ShimmerTable = ({ colSpan }: { colSpan: number }) =>
+    Array.from({ length: 5 }).map(() => (
+        <TableRow>
+            {Array.from({ length: colSpan }).map(() => (
+                <TableCell className='p-2'>
+                    <div className='loading-shimmer rounded'>&nbsp;</div>
+                </TableCell>
+            ))}
+        </TableRow>
+    ));
+
 const SpanTable = ({ colSpan, children }: { colSpan: number; children: ReactNode }) => (
     <TableRow>
         <TableCell colSpan={colSpan} className='p-2'>
@@ -378,11 +388,7 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
                     setSortColumn={setSortHeader}
                 />
                 <TableBody>
-                    {isLoading && (
-                        <SpanTable colSpan={definitions.length}>
-                            <CardLoading />
-                        </SpanTable>
-                    )}
+                    {isLoading && <ShimmerTable colSpan={definitions.length} />}
                     {searched.length > 0 &&
                         !isLoading &&
                         renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}

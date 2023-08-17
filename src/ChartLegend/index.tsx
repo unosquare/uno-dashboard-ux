@@ -2,19 +2,13 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 import { formatter, FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
-import { Flex } from '@tremor/react';
+import { Flex, Text } from '@tremor/react';
 import { ChartTypes, HasChildrenComponent, LegendFormatTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
 import { translateFormat } from '../utils';
 
 const TooltipTitle = ({ children }: HasChildrenComponent) => (
     <Flex alignItems='center' className='text-sm pl-1 pb-1 pt-1'>
-        {children}
-    </Flex>
-);
-
-const LabelInfo = ({ children }: HasChildrenComponent) => (
-    <Flex alignItems='start' className='pl-1 text-xs'>
         {children}
     </Flex>
 );
@@ -66,43 +60,41 @@ const getLabel =
         if (customValue && customValue.values.length > 0) value = getCustomValue(customValue, index, category);
 
         if (legendFormatType === 'money' || legendFormatType === 'percentage')
-            return `${humanize(name)}: ${formatter(value, translateFormat(legendFormatType))}`;
+            return [humanize(name), formatter(value, translateFormat(legendFormatType))];
 
-        return `${humanize(name)}: ${legendFormatType === 'negative' ? value : Math.abs(value)}`;
+        return [humanize(name), `${legendFormatType === 'negative' ? value : Math.abs(value)}`];
     };
 
 const StyledLegend = tw.div`
-    text-tremor-content 
-    dark:text-dark-tremor-content
-    bg-tremor-background 
-    dark:bg-dark-tremor-background
-    shadow-legend
-    flex
-    flex-col
-    justify-center
-    items-center
-    p-[5px]
-    [&_div]:flex
-    [&_div]:flex-row
-    [&_div]:justify-between
-    [&_div]:w-full
-    [&_span]:!font-medium
-    [&_span]:!text-xs
-    [&_span]:m-0
+    max-w-xs 
+    z-20
+    p-2
+    rounded-tremor-default
+    text-white 
+    bg-tremor-background-emphasis
+    dark:text 
+    dark:bg-dark-tremor-background-subtle
+    border-tremor-border
+    dark:border-dark-tremor-border
 `;
 
-const getLegendFormatType = (formats: any, index: number, legendFormatType: LegendFormatTypes) => {
+const getLegendFormatType = (formats: any[], index: number, legendFormatType: LegendFormatTypes) => {
     if (formats && formats[index] === 'percentage') return 'percentage';
     if (formats && formats[index] === 'money') return 'money';
     return legendFormatType;
 };
 
-const Component = ({ type, category, index, legendFormatType, formats, getLabelFunc }: any) => (
-    <div>
-        <Ellipse color={getColor(type, category)} />
-        <LabelInfo>{getLabelFunc(category, index, getLegendFormatType(formats, index, legendFormatType))}</LabelInfo>
-    </div>
-);
+const Component = ({ type, category, index, legendFormatType, formats, getLabelFunc }: any) => {
+    const [label, value] = getLabelFunc(category, index, getLegendFormatType(formats, index, legendFormatType));
+
+    return (
+        <Flex className='gap-2'>
+            <Ellipse color={getColor(type, category)} />
+            <Text>{label}</Text>
+            <Text className='font-medium'>{value}</Text>
+        </Flex>
+    );
+};
 
 export const ChartLegend = ({
     active,
@@ -132,7 +124,7 @@ export const ChartLegend = ({
                           .map((category: any, index: number) => {
                               localPayload[index].value = Object.values(category.payload)
                                   .filter((x: any) => x !== category.payload.name)
-                                  .map((y: any, j: any, arr: any[]) =>
+                                  .map((_: any, j: any, arr: any[]) =>
                                       arr
                                           .filter((__: any, k: any) => k <= j)
                                           .reduce((prev: any, curr: any) => prev + curr, 0),

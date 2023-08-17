@@ -43,8 +43,8 @@ const xPadding = {
     right: 20,
 };
 
-export const getChartSeries = (data: any) =>
-    data.reduce((current: any[], serie: any) => {
+export const getChartSeries = (data: Record<string, unknown>[]) =>
+    data.reduce((current: string[], serie: any) => {
         Object.keys(serie)
             .filter((property) => property !== 'name')
             .forEach((entry) => {
@@ -112,6 +112,7 @@ export const DataChart = ({
                         {getChartSeries(dataStore).map((property: any, index: number) => (
                             <Line
                                 type='monotone'
+                                name={property}
                                 dataKey={property}
                                 stroke={colors[index]}
                                 key={objectHash(property)}

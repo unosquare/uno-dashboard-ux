@@ -1,22 +1,26 @@
-import { Flex } from '@tremor/react';
 import React from 'react';
 
 export const CardLoading = () => (
-    <Flex className='w-full h-full max-h-[200px] max-w-[200px]' alignItems='center'>
-        <svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-            <circle
-                cx='50'
-                cy='50'
-                r='25'
-                fill='none'
-                stroke='#304FF3'
-                strokeWidth='2'
-                strokeDasharray='100'
-                strokeDashoffset='50'
-                fillOpacity='0.5'
-            >
-                <animate attributeName='stroke-dashoffset' dur='2s' values='50;0' fill='freeze' />
-            </circle>
-        </svg>
-    </Flex>
+    <svg
+        version='1.1'
+        id='L3'
+        xmlns='http://www.w3.org/2000/svg'
+        x='0px'
+        y='0px'
+        viewBox='0 0 100 100'
+        enableBackground='new 0 0 0 0'
+        className='block w-full h-full p-4'
+    >
+        <circle fill='none' stroke='#304FF3' strokeWidth={4} cx={50} cy={50} r={44} style={{ opacity: 0.5 }} />
+        <circle fill='#304FF3' stroke='none' strokeWidth='3' cx='8' cy='54' r='6'>
+            <animateTransform
+                attributeName='transform'
+                dur='2s'
+                type='rotate'
+                from='0 50 48'
+                to='360 50 52'
+                repeatCount='indefinite'
+            />
+        </circle>
+    </svg>
 );
