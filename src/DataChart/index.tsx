@@ -13,15 +13,19 @@ import {
 } from 'recharts';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
+import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
+import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
+import { themeColorRange } from '@tremor/react/dist/lib/theme';
 import { ChartLegend } from '../ChartLegend';
-import { ChartComponent } from '../constants';
+import { ChartComponent, ChartTooltipType } from '../constants';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
-import { formatTicks, renderLegendText } from '../utils';
+import { formatTicks, getValueFormatted, renderLegendText } from '../utils';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
+    tooltip?: ChartTooltipType;
     onClick?: (e: any) => void;
     domain?: number;
     unit?: string;
@@ -66,9 +70,11 @@ export const DataChart = ({
     refLineY,
     isLoading,
     className,
+    tooltip = 'classic',
 }: DataChartSettings<any>) => {
     const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t);
+    const categoryColors = constructCategoryColors([], themeColorRange);
 
     return (
         <Flex className={twMerge('w-full h-60', className)}>
@@ -98,9 +104,27 @@ export const DataChart = ({
                             />
                         )}
                         <Tooltip
-                            offset={30}
-                            content={<ChartLegend type='line' legendFormatType={legendFormatType} />}
+                            wrapperStyle={{ outline: 'none' }}
                             isAnimationActive={false}
+                            cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
+                            content={
+                                tooltip === 'classic' ? (
+                                    <ChartLegend type='line' legendFormatType={legendFormatType} />
+                                ) : (
+                                    ({ active, payload, label }) => (
+                                        <ChartTooltip
+                                            active={active}
+                                            payload={payload}
+                                            label={label}
+                                            valueFormatter={(value: number) =>
+                                                getValueFormatted(value, legendFormatType)
+                                            }
+                                            categoryColors={categoryColors}
+                                        />
+                                    )
+                                )
+                            }
+                            position={{ y: 0 }}
                         />
                         {(onLegendClick || legend) && (
                             <Legend

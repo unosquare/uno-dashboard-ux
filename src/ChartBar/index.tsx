@@ -15,12 +15,15 @@ import { humanize } from 'uno-js';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import objectHash from 'object-hash';
+import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
+import { themeColorRange } from '@tremor/react/dist/lib/theme';
+import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
 import { ChartLegend } from '../ChartLegend';
-import { LegendFormatTypes } from '../constants';
+import { ChartTooltipType, LegendFormatTypes } from '../constants';
 import { NoData } from '../NoData';
 import { defaultChartPalette } from '../theme';
 import { CardLoading } from '../CardLoading';
-import { formatTicks, renderLegendText } from '../utils';
+import { formatTicks, getValueFormatted, renderLegendText } from '../utils';
 
 type XAxisPrimaryFormatter = {
     (input: string): string;
@@ -28,6 +31,7 @@ type XAxisPrimaryFormatter = {
 
 export type ChartBarSettings<TDataIn> = {
     rawData?: TDataIn;
+    tooltip?: ChartTooltipType;
     colors?: string[];
     legendFormatType?: LegendFormatTypes;
     dataCallback?: (data: TDataIn) => Record<string, unknown>[];
@@ -45,7 +49,6 @@ export type ChartBarSettings<TDataIn> = {
     onBarClick?: (e: any, bar: number) => void;
     onLegendClick?: (e: any) => void;
     hasTitle?: boolean;
-    tooltipOffset?: number;
     accumulated?: boolean;
     scroll?: boolean;
     refLineY?: { value: number; label: string; color: string };
@@ -69,9 +72,9 @@ export const ChartBar = ({
     onClick,
     onLegendClick,
     hasTitle,
+    tooltip = 'classic',
     legendFormatType,
     onBarClick,
-    tooltipOffset = 10,
     accumulated = false,
     scroll = false,
     isLoading = false,
@@ -81,6 +84,7 @@ export const ChartBar = ({
     const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const keys = dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : [];
     const colorPalette = colors ?? (keys.length === 4 ? chart4Colors : defaultChartPalette);
+    const categoryColors = constructCategoryColors([], themeColorRange);
 
     return (
         <Flex className={twMerge('w-full h-60', className)}>
@@ -123,15 +127,31 @@ export const ChartBar = ({
                             />
                         )}
                         <Tooltip
+                            wrapperStyle={{ outline: 'none' }}
+                            isAnimationActive={false}
+                            cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
                             content={
-                                <ChartLegend
-                                    type='bar'
-                                    legendFormatType={legendFormatType}
-                                    title={hasTitle}
-                                    accumulated={accumulated}
-                                />
+                                tooltip === 'classic' ? (
+                                    <ChartLegend
+                                        type='bar'
+                                        legendFormatType={legendFormatType}
+                                        title={hasTitle}
+                                        accumulated={accumulated}
+                                    />
+                                ) : (
+                                    ({ active, payload, label }) => (
+                                        <ChartTooltip
+                                            active={active}
+                                            payload={payload}
+                                            label={label}
+                                            valueFormatter={(value: number) =>
+                                                getValueFormatted(value, legendFormatType)
+                                            }
+                                            categoryColors={categoryColors}
+                                        />
+                                    )
+                                )
                             }
-                            offset={tooltipOffset}
                         />
                         {legend && (
                             <Legend

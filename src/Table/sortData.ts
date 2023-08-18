@@ -1,4 +1,4 @@
-import { DataTypes, SortDirection } from '../constants';
+import { DataTypes, SortDirection, TextAlign } from '../constants';
 
 export type TableColumn = {
     label: string;
@@ -7,6 +7,7 @@ export type TableColumn = {
     sortDirection?: SortDirection;
     disableSearch?: boolean;
     excludeFromSort?: boolean;
+    textAlign?: TextAlign;
     formatterOptions?: {
         keepFormat?: boolean;
         decimals?: number;

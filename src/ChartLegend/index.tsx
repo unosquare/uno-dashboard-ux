@@ -1,11 +1,11 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
-import { formatter, FormatTypes, humanize } from 'uno-js';
+import { FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
 import { Flex, Text } from '@tremor/react';
 import { ChartTypes, HasChildrenComponent, LegendFormatTypes } from '../constants';
 import { Ellipse } from '../Ellipse';
-import { translateFormat } from '../utils';
+import { getValueFormatted } from '../utils';
 
 const TooltipTitle = ({ children }: HasChildrenComponent) => (
     <Flex alignItems='center' className='text-sm pl-1 pb-1 pt-1'>
@@ -59,10 +59,7 @@ const getLabel =
 
         if (customValue && customValue.values.length > 0) value = getCustomValue(customValue, index, category);
 
-        if (legendFormatType === 'money' || legendFormatType === 'percentage')
-            return [humanize(name), formatter(value, translateFormat(legendFormatType))];
-
-        return [humanize(name), `${legendFormatType === 'negative' ? value : Math.abs(value)}`];
+        return [humanize(name), getValueFormatted(value, legendFormatType)];
     };
 
 const StyledLegend = tw.div`

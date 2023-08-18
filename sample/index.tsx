@@ -27,6 +27,8 @@ import {
     Table,
     TableColumn,
     TremorContainer,
+    useTheme,
+    useToggle,
 } from '../src';
 import '../src/resources/global.css';
 
@@ -37,25 +39,27 @@ export enum options {
     D = 'Dragon',
 }
 
-const columns = [
+const columns: TableColumn[] = [
     { label: 'Name', sortOrder: 1, sortDirection: 'asc' },
-    { label: 'City', disableSearch: true, excludeFromSort: true },
+    { label: 'City', disableSearch: true, excludeFromSort: true, textAlign: 'left' },
     { label: 'Date', dataType: 'date' },
     { label: 'Age', dataType: 'days', sortOrder: 2, sortDirection: 'desc' },
+    { label: 'Units', dataType: 'number', textAlign: 'center' },
     { label: 'Balance', dataType: 'money' },
     { label: 'Margin', dataType: 'percentage', formatterOptions: { decimals: 1 } },
     { label: 'Like Ice cream', dataType: 'boolean' },
     { label: 'Profile', dataType: 'link' },
     { label: 'Long text', dataType: 'paragraph' },
-] as TableColumn[];
+];
 
 const defaultData = [
-    ['Pepe', 'Mexico', new Date('2022-01-01'), 1, 1000, 10.25, true, 'https://www.google.com', 'Small text'],
-    ['Pepe', 'LA', new Date('2022-01-02'), 25, null, 10 / 3, true, '', 'Small text'],
+    ['Pepe', 'Mexico', new Date('2022-01-01'), 50, 1, 1000, 10.25, true, 'https://www.google.com', 'Small text'],
+    ['Pepe', 'LA', new Date('2022-01-02'), 30, 25, null, 10 / 3, true, '', 'Small text'],
     [
         'Juan',
         'Chicago',
         new Date('2022-01-03'),
+        30,
         30,
         200,
         55.25,
@@ -68,19 +72,21 @@ const defaultData = [
         'Oaxaca',
         new Date('2022-01-04'),
         35,
+        50,
         null,
         0.05,
         false,
         ['https://www.google.com', '(Google)', 'before', 0.25, true],
         'Small text',
     ],
-    ['Maria', 'NY', new Date('2022-01-05'), 40, 0, 0.55, false, '', 'Small text'],
-    ['Laura', 'Guadalajara', new Date('2022-01-06'), 45, 100, 25, true, 'https://www.google.com', 'Small text'],
-    ['Laura', 'Mexico', new Date('2022-01-07'), 50, 100, 0.125, true, 'https://www.google.com', 'Small text'],
+    ['Maria', 'NY', new Date('2022-01-05'), 60, 40, 0, 0.55, false, '', 'Small text'],
+    ['Laura', 'Guadalajara', new Date('2022-01-06'), 25, 45, 100, 25, true, 'https://www.google.com', 'Small text'],
+    ['Laura', 'Mexico', new Date('2022-01-07'), 25, 50, 100, 0.125, true, 'https://www.google.com', 'Small text'],
     [
         'Juan',
         'Oaxaca',
         new Date('2022-01-08'),
+        25,
         30,
         null,
         0.75,
@@ -95,6 +101,7 @@ const anotherDataSet = [
         'Juan',
         'Oaxaca',
         new Date('2022-01-08'),
+        20,
         30,
         null,
         0.75,
@@ -107,39 +114,31 @@ const anotherDataSet = [
 const calculateFooter = (data: unknown[][]) => ['Total', '', data.length, '', '', '', '', '', ''];
 
 const chartData = [
-    { name: 'Group A', value: 10.15 },
-    { name: 'Group B', value: 20.1 },
-    { name: 'Group C', value: 30.25 },
+    { name: 'Group A', Value: 10.15 },
+    { name: 'Group B', Value: 20.1 },
+    { name: 'Group C', Value: 30.25 },
 ];
 
 const Application = () => {
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
-    const [openMenu, setOpenMenu] = React.useState(false);
+    const [openMenu, setOpenMenu] = useToggle();
     const [loading, isLoading] = React.useState(true);
-    const [toggle, setToggle] = React.useState(true);
-    const [theme, setTheme] = React.useState(localStorage.getItem('theme') ?? 'light');
+    const [toggle, setToggle] = useToggle(true);
+    const [theme, setTheme] = useTheme();
 
     React.useEffect(() => {
-        const body = document.getElementById('body');
-        if (body && theme === 'dark') body.classList.add('dark');
-
         setTimeout(() => isLoading(false), 2000);
     }, []);
 
     const onToggleMenu = () => {
         const body = document.getElementById('body');
         if (body) body.style.overflow = openMenu ? 'auto' : 'hidden';
-        setOpenMenu(!openMenu);
+        setOpenMenu();
     };
 
     const updateTheme = () => {
-        const body = document.getElementById('body');
-        if (body) {
-            const themeToggle = body.classList.toggle('dark');
-            const value = themeToggle ? 'dark' : 'light';
-            setTheme(value);
-            localStorage.setItem('theme', value);
-        }
+        setTheme();
+        onToggleMenu();
     };
 
     return (
@@ -166,7 +165,7 @@ const Application = () => {
                                     />
                                 )}
                                 <Dismiss24Regular
-                                    onClick={() => setOpenMenu(false)}
+                                    onClick={setOpenMenu}
                                     className='text-tremor-content dark:text-dark-tremor-content'
                                 />
                             </StyledMenuActions>
@@ -194,8 +193,8 @@ const Application = () => {
             </NavBar>
             <BasicToolbar>
                 <Text>This is a toolbar</Text>
-                <Button size='xs' onClick={() => setToggle(!toggle)}>
-                    Click
+                <Button size='xs' onClick={setToggle}>
+                    Toggle Data
                 </Button>
             </BasicToolbar>
             <TremorContainer hasToolbar>
@@ -218,11 +217,16 @@ const Application = () => {
                             isLoading={loading}
                             legendFormatType='percentage'
                             legend
+                            tooltip='tremor'
                         />
                     </Card>
                     <Card className='h-96'>
                         <Text className='font-medium'>Pie Chart</Text>
-                        <PieChart rawData={chartData} dataCallback={identity} legendFormatType='money' />
+                        <PieChart
+                            rawData={chartData}
+                            dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
+                            legendFormatType='money'
+                        />
                     </Card>
                     <Col numColSpan={3}>
                         <Card>

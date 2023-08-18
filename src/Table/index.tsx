@@ -68,11 +68,15 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
     }));
 
 const leftAlign: Array<DataTypes | undefined> = ['string', 'link', 'bullet', undefined];
+const rightAlign: Array<DataTypes | undefined> = ['decimal', 'number', 'money'];
 
-export const getAlignment = (dataType: DataTypes | undefined, index?: number) => {
+export const getAlignment = (tableColumn: TableColumn, index?: number) => {
+    if (tableColumn.textAlign) return `text-${tableColumn.textAlign.toLowerCase()}`;
+
+    const { dataType } = tableColumn;
     if (dataType === 'paragraph' || (leftAlign.includes(dataType) && index === 0)) return 'text-left';
 
-    return dataType === 'percentage' ? 'text-right' : 'text-center';
+    return rightAlign.includes(dataType) ? 'text-right' : 'text-center';
 };
 
 export const HeaderDiv = tw.div<HeaderSettings>`
@@ -156,19 +160,11 @@ const LongTextCell = ({ text }: { text: string }) => {
     );
 };
 
-export const renderTableCell = (
-    data: unknown,
-    type: DataTypes | undefined,
-    formatterOptions?: {
-        keepFormat?: boolean;
-        decimals?: number;
-        nullValue?: string;
-    },
-) => {
-    if (!data && type === 'money') return '$0.00';
-    if (data == null || data === ' ') return formatterOptions?.nullValue ?? 'N/A';
+export const renderTableCell = (data: unknown, definition: TableColumn | undefined) => {
+    if (!data && definition?.dataType === 'money') return '$0.00';
+    if (data == null || data === ' ') return definition?.formatterOptions?.nullValue ?? 'N/A';
 
-    switch (type) {
+    switch (definition?.dataType) {
         case 'link':
             return renderLinkString(data);
         case 'boolean':
@@ -183,8 +179,8 @@ export const renderTableCell = (
         case 'paragraph':
             return <LongTextCell text={String(data)} />;
         default: {
-            const formatType = translateType(type);
-            return formatType ? formatter(data.toString(), formatType, formatterOptions) : `${data}`;
+            const formatType = translateType(definition?.dataType);
+            return formatType ? formatter(data.toString(), formatType, definition?.formatterOptions) : `${data}`;
         }
     }
 };
@@ -202,7 +198,7 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
                 <TableHeaderCell
                     key={objectHash(header)}
                     className={`p-2 text-xs/[13px] bg-tremor-background dark:bg-dark-tremor-background whitespace-normal ${getAlignment(
-                        header.dataType,
+                        header,
                         index,
                     )}`}
                     onClick={() => !header.excludeFromSort && setSortColumn(index)}
@@ -234,7 +230,7 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
             {footer.map((foot, index) => (
                 <TableFooterCell
                     key={objectHash(definition[index])}
-                    className={`p-2 text-xs/[13px] ${getAlignment(definition[index]?.dataType, index)}`}
+                    className={`p-2 text-xs/[13px] ${getAlignment(definition[index], index)}`}
                 >
                     {`${foot}`}
                 </TableFooterCell>
@@ -246,17 +242,14 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
 const getRows: RenderTableFunc = (data: unknown[][], definitions: TableColumn[]) =>
     data.map((row: unknown[]) => (
         <TableRow key={objectHash(row)}>
-            {row.map((cell: any, index: number) => {
-                const dataType = definitions[index]?.dataType;
-                return (
-                    <TableCell
-                        key={objectHash({ a: definitions[index], c: cell })}
-                        className={`p-2 whitespace-normal text-xs/[13px] ${getAlignment(dataType, index)}`}
-                    >
-                        {renderTableCell(cell, dataType, definitions[index]?.formatterOptions)}
-                    </TableCell>
-                );
-            })}
+            {row.map((cell: any, index: number) => (
+                <TableCell
+                    key={objectHash({ a: definitions[index], c: cell })}
+                    className={`p-2 whitespace-normal text-xs/[13px] ${getAlignment(definitions[index], index)}`}
+                >
+                    {renderTableCell(cell, definitions[index])}
+                </TableCell>
+            ))}
         </TableRow>
     ));
 
@@ -274,10 +267,10 @@ const renderToRowString = (data: any[], definitions: TableColumn[]) =>
     );
 
 const ShimmerTable = ({ colSpan }: { colSpan: number }) =>
-    Array.from({ length: 5 }).map(() => (
-        <TableRow>
-            {Array.from({ length: colSpan }).map(() => (
-                <TableCell className='p-2'>
+    Array.from({ length: 4 }).map((_, i) => (
+        <TableRow key={i}>
+            {Array.from({ length: colSpan }).map((o, k) => (
+                <TableCell className='p-2' key={k}>
                     <div className='loading-shimmer rounded'>&nbsp;</div>
                 </TableCell>
             ))}
@@ -384,23 +377,21 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
             <TremorTable className={twMerge('overflow-auto h-60 mt-5', className)}>
                 <TableHeaders
                     definitions={definitions}
-                    sortable={isLoading ? false : sortable}
+                    sortable={!isLoading && sortable}
                     setSortColumn={setSortHeader}
                 />
                 <TableBody>
                     {isLoading && <ShimmerTable colSpan={definitions.length} />}
-                    {searched.length > 0 &&
-                        !isLoading &&
-                        renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)}
-                    {searched.length <= 0 && !isLoading && (
-                        <SpanTable colSpan={definitions.length}>
-                            <NoData>{noDataElement}</NoData>
-                        </SpanTable>
-                    )}
+                    {!isLoading &&
+                        (searched.length > 0 ? (
+                            renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)
+                        ) : (
+                            <SpanTable colSpan={definitions.length}>
+                                <NoData>{noDataElement}</NoData>
+                            </SpanTable>
+                        ))}
                 </TableBody>
-                {searched.length > 0 && !isLoading && footerData && (
-                    <TableFooter footer={footerData} definition={definitions} />
-                )}
+                {searched.length > 0 && footerData && <TableFooter footer={footerData} definition={definitions} />}
             </TremorTable>
         </>
     );

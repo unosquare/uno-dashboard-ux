@@ -37,6 +37,7 @@
             }
         ],
         "@typescript-eslint/no-explicit-any": 0,
-        "react/jsx-no-useless-fragment": "warn"
+        "react/jsx-no-useless-fragment": "warn",
+        "react/no-unstable-nested-components": "warn"
     }
 }

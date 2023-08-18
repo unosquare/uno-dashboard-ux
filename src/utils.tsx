@@ -31,3 +31,10 @@ export const renderLegendText = (value: string, clickable: boolean) => (
         {value}
     </span>
 );
+
+export const getValueFormatted = (value: any, legendFormatType?: LegendFormatTypes) => {
+    if (legendFormatType === 'money' || legendFormatType === 'percentage')
+        return formatter(value, translateFormat(legendFormatType));
+
+    return `${legendFormatType === 'negative' ? value : Math.abs(value)}`;
+};

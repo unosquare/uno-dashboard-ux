@@ -8,6 +8,10 @@ export type ChartData = {
 
 export type LegendFormatTypes = 'percentage' | 'money' | 'negative' | 'number';
 
+export type ChartTooltipType = 'classic' | 'tremor';
+
+export type TextAlign = 'left' | 'center' | 'right';
+
 export type DataTypes =
     | 'money'
     | 'decimal'
