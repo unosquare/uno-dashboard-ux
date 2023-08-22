@@ -11,7 +11,6 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-import { humanize } from 'uno-js';
 import { Color, Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import objectHash from 'object-hash';
@@ -48,7 +47,6 @@ export type ChartBarSettings<TDataIn> = {
     };
     stacked?: boolean;
     onClick?: (e: any) => void;
-    onLegendClick?: (e: any) => void;
     hasTitle?: boolean;
     accumulated?: boolean;
     scroll?: boolean;
@@ -69,7 +67,6 @@ export const ChartBar = ({
     multiXAxis,
     stacked,
     onClick,
-    onLegendClick,
     hasTitle,
     tooltip = 'classic',
     legendFormatType,
@@ -154,8 +151,7 @@ export const ChartBar = ({
                         {legend && (
                             <Legend
                                 iconType='circle'
-                                onClick={(onLegendClick as any) ?? null}
-                                formatter={(v: any) => renderLegendText(humanize(v), !!onLegendClick)}
+                                formatter={renderLegendText}
                                 height={legendHeight}
                                 content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
                             />

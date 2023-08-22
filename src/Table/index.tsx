@@ -126,16 +126,14 @@ const renderLinkString = (data: any) => {
     if (data instanceof Array) {
         return (data as string[])[0] ? (
             <>
-                {(data as string[])[3] && <span>{`${(data as string[])[2].toString()} `}</span>}
-                <a href={(data as string[])[0].toString()} target='_blank' rel='noopener noreferrer'>
-                    {(data as string[])[1].toString()}
+                {(data as string[])[3] && <span>{`${(data as string[])[2]} `}</span>}
+                <a href={(data as string[])[0]} target='_blank' rel='noopener noreferrer'>
+                    {(data as string[])[1]}
                 </a>
-                {!(data as string[])[3] && (data as string[])[2] && (
-                    <span>{` ${(data as string[])[2].toString()}`}</span>
-                )}
+                {!(data as string[])[3] && (data as string[])[2] && <span>{` ${(data as string[])[2]}`}</span>}
             </>
         ) : (
-            (data as string[])[1].toString()
+            (data as string[])[1]
         );
     }
 
@@ -195,7 +193,7 @@ export const renderTableCell = (data: unknown, definition: TableColumn | undefin
             return <LongTextCell text={String(data)} />;
         default: {
             const formatType = translateType(definition?.dataType);
-            return formatType ? formatter(data.toString(), formatType, definition?.formatterOptions) : `${data}`;
+            return formatType ? formatter(String(data), formatType, definition?.formatterOptions) : `${data}`;
         }
     }
 };

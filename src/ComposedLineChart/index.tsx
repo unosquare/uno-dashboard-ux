@@ -32,7 +32,6 @@ interface ComposedLineChartSettings<TDataIn> extends ChartComponent<TDataIn, Rec
     onClick?: (e: any) => void;
     domain?: number;
     unit?: string;
-    onLegendClick?: (e: any) => void;
     refLineY?: { value: number; label: string; color: string };
     isLoading?: boolean;
     formats?: FormatTypes[];
@@ -60,7 +59,6 @@ export const ComposedLineChart = ({
     legendFormatTypes,
     domain,
     unit,
-    onLegendClick,
     refLineY,
     isLoading,
     formats,
@@ -145,13 +143,12 @@ export const ComposedLineChart = ({
                             content={<UnoChartTooltip formats={formats} categoryColors={categoryColors} />}
                             isAnimationActive={false}
                         />
-                        {(onLegendClick || legend) && (
+                        {legend && (
                             <Legend
                                 iconType='circle'
                                 height={legendHeight}
                                 content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
-                                onClick={onLegendClick}
-                                formatter={(v: any) => renderLegendText(v, !!onLegendClick)}
+                                formatter={renderLegendText}
                             />
                         )}
                     </ComposedChart>

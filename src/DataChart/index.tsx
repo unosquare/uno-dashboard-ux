@@ -31,7 +31,6 @@ export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, 
     onClick?: (e: any) => void;
     domain?: number;
     unit?: string;
-    onLegendClick?: (e: any) => void;
     refLineY?: { value: number; label: string; color: string };
     isLoading?: boolean;
     className?: string;
@@ -68,7 +67,6 @@ export const DataChart = ({
     legendFormatType,
     domain,
     unit,
-    onLegendClick,
     refLineY,
     isLoading,
     className,
@@ -143,10 +141,9 @@ export const DataChart = ({
                             }
                             position={{ y: 0 }}
                         />
-                        {(onLegendClick || legend) && (
+                        {legend && (
                             <Legend
                                 iconType='circle'
-                                onClick={onLegendClick}
                                 verticalAlign='top'
                                 height={legendHeight}
                                 content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}

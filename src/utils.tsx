@@ -26,10 +26,8 @@ export const formatTicks = (t: any, formatType: LegendFormatType) => {
     return formatter(t, translateFormat(formatType));
 };
 
-export const renderLegendText = (value: string, clickable: boolean) => (
-    <span className={`text-tremor-content dark:text-dark-tremor-content ${clickable ? 'cursor-pointer' : ''}`}>
-        {value}
-    </span>
+export const renderLegendText = (value: string) => (
+    <span className='text-tremor-content dark:text-dark-tremor-content'>{value}</span>
 );
 
 export const getValueFormatted = (value: any, legendFormatType?: LegendFormatType) => {

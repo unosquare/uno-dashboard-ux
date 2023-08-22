@@ -14,6 +14,7 @@ export * from './Footer';
 export * from './NavBar';
 export * from './NoData';
 export * from './Table';
+export * from './ErrorBoundary';
 export * from './PageToolbar';
 export * from './SearchBox';
 export * from './Select';

@@ -98,7 +98,7 @@
         background: #f1f2f3;
     }
 
-    dark *::-webkit-scrollbar-track {
+    .dark *::-webkit-scrollbar-track {
         border-radius: 100vh;
         background: #111827;
     }
