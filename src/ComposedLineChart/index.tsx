@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     CartesianGrid,
     ComposedChart,
@@ -16,6 +16,8 @@ import { constructCategoryColors } from '@tremor/react/dist/components/chart-ele
 import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
+import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
+import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
 import { CardLoading } from '../CardLoading';
 import { UnoChartTooltip } from '../ChartLegend';
 import { NoData } from '../NoData';
@@ -64,6 +66,7 @@ export const ComposedLineChart = ({
     formats,
     lines,
 }: ComposedLineChartSettings<any>) => {
+    const [legendHeight, setLegendHeight] = useState(60);
     const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const tickFormatter = (t: any, orientation: 'left' | 'right') =>
         legendFormatTypes ? formatTicks(t, (legendFormatTypes as any)[orientation]) : t;
@@ -86,7 +89,17 @@ export const ComposedLineChart = ({
                                         colorPalette.text,
                                     ).strokeColor
                                 }
+                                activeDot={{
+                                    className: tremorTwMerge(
+                                        'stroke-tremor-background dark:stroke-dark-tremor-background',
+                                        getColorClassNames(
+                                            categoryColors.get(property.dataKey) ?? BaseColors.Gray,
+                                            colorPalette.text,
+                                        ).fillColor,
+                                    ),
+                                }}
                                 type='monotone'
+                                dot={false}
                                 dataKey={property.dataKey}
                                 stroke=''
                                 strokeWidth={2}
@@ -135,6 +148,8 @@ export const ComposedLineChart = ({
                         {(onLegendClick || legend) && (
                             <Legend
                                 iconType='circle'
+                                height={legendHeight}
+                                content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
                                 onClick={onLegendClick}
                                 formatter={(v: any) => renderLegendText(v, !!onLegendClick)}
                             />
