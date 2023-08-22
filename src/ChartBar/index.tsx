@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import {
     Bar,
     BarChart,
@@ -12,16 +12,18 @@ import {
     YAxis,
 } from 'recharts';
 import { humanize } from 'uno-js';
-import { Flex } from '@tremor/react';
+import { Color, Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import objectHash from 'object-hash';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
-import { themeColorRange } from '@tremor/react/dist/lib/theme';
+import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
 import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
-import { ChartLegend } from '../ChartLegend';
-import { ChartTooltipType, LegendFormatTypes } from '../constants';
+import { getColorClassNames } from '@tremor/react/dist/lib/utils';
+import { BaseColors } from '@tremor/react/dist/lib/constants';
+import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
+import { UnoChartTooltip } from '../ChartLegend';
+import { ChartTooltipType, LegendFormatType } from '../constants';
 import { NoData } from '../NoData';
-import { defaultChartPalette } from '../theme';
 import { CardLoading } from '../CardLoading';
 import { formatTicks, getValueFormatted, renderLegendText } from '../utils';
 
@@ -32,8 +34,8 @@ type XAxisPrimaryFormatter = {
 export type ChartBarSettings<TDataIn> = {
     rawData?: TDataIn;
     tooltip?: ChartTooltipType;
-    colors?: string[];
-    legendFormatType?: LegendFormatTypes;
+    colors?: Color[];
+    legendFormatType?: LegendFormatType;
     dataCallback?: (data: TDataIn) => Record<string, unknown>[];
     legend?: boolean;
     domain?: number;
@@ -46,7 +48,6 @@ export type ChartBarSettings<TDataIn> = {
     };
     stacked?: boolean;
     onClick?: (e: any) => void;
-    onBarClick?: (e: any, bar: number) => void;
     onLegendClick?: (e: any) => void;
     hasTitle?: boolean;
     accumulated?: boolean;
@@ -56,12 +57,10 @@ export type ChartBarSettings<TDataIn> = {
     className?: string;
 };
 
-const chart4Colors = ['#003de6', '#ea00a1', '#ff414f', '#ffa600'];
-
 export const ChartBar = ({
     rawData,
     dataCallback,
-    colors = undefined,
+    colors,
     legend,
     domain,
     unit = '',
@@ -74,17 +73,16 @@ export const ChartBar = ({
     hasTitle,
     tooltip = 'classic',
     legendFormatType,
-    onBarClick,
     accumulated = false,
     scroll = false,
     isLoading = false,
     refLineY,
     className,
 }: ChartBarSettings<any>) => {
+    const [legendHeight, setLegendHeight] = useState(60);
     const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const keys = dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : [];
-    const colorPalette = colors ?? (keys.length === 4 ? chart4Colors : defaultChartPalette);
-    const categoryColors = constructCategoryColors([], themeColorRange);
+    const categoryColors = constructCategoryColors(keys, colors ?? themeColorRange);
 
     return (
         <Flex className={twMerge('w-full h-60', className)}>
@@ -132,11 +130,12 @@ export const ChartBar = ({
                             cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
                             content={
                                 tooltip === 'classic' ? (
-                                    <ChartLegend
+                                    <UnoChartTooltip
                                         type='bar'
                                         legendFormatType={legendFormatType}
                                         title={hasTitle}
                                         accumulated={accumulated}
+                                        categoryColors={categoryColors}
                                     />
                                 ) : (
                                     ({ active, payload, label }) => (
@@ -158,29 +157,38 @@ export const ChartBar = ({
                                 iconType='circle'
                                 onClick={(onLegendClick as any) ?? null}
                                 formatter={(v: any) => renderLegendText(humanize(v), !!onLegendClick)}
+                                height={legendHeight}
+                                content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
                             />
                         )}
                         {keys.map((property, index) =>
                             stacked ? (
                                 <Bar
                                     dataKey={property}
-                                    fill={colorPalette[index]}
-                                    key={colorPalette[index]}
+                                    className={
+                                        getColorClassNames(
+                                            categoryColors.get(property) ?? BaseColors.Gray,
+                                            colorPalette.background,
+                                        ).fillColor
+                                    }
+                                    fill=''
+                                    key={property}
                                     stackId='a'
                                 />
                             ) : (
                                 <Bar
-                                    onClick={onBarClick ? (e: any) => onBarClick(e, index) : undefined}
                                     dataKey={property}
-                                    fill={colorPalette[index]}
-                                    key={colorPalette[index]}
+                                    fill=''
+                                    className={
+                                        getColorClassNames(
+                                            categoryColors.get(property) ?? BaseColors.Gray,
+                                            colorPalette.background,
+                                        ).fillColor
+                                    }
+                                    key={property}
                                 >
                                     {dataStore.map((item) => (
-                                        <Cell
-                                            cursor={onBarClick && 'pointer'}
-                                            fill={colorPalette[index]}
-                                            key={objectHash(item)}
-                                        />
+                                        <Cell key={objectHash(item)} />
                                     ))}
                                 </Bar>
                             ),

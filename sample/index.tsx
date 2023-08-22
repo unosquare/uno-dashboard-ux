@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { identity } from 'uno-js';
 import {
@@ -125,6 +125,7 @@ const Application = () => {
     const [loading, isLoading] = React.useState(true);
     const [toggle, setToggle] = useToggle(true);
     const [theme, setTheme] = useTheme();
+    const [counter, setCounter] = useState(0);
 
     React.useEffect(() => {
         setTimeout(() => isLoading(false), 2000);
@@ -139,6 +140,11 @@ const Application = () => {
     const updateTheme = () => {
         setTheme();
         onToggleMenu();
+    };
+
+    const barClick = (ev) => {
+        console.log(ev);
+        setCounter((x) => x + 1);
     };
 
     return (
@@ -192,7 +198,7 @@ const Application = () => {
                 )}
             </NavBar>
             <BasicToolbar>
-                <Text>This is a toolbar</Text>
+                <Text>This is a toolbar: {counter}</Text>
                 <Button size='xs' onClick={setToggle}>
                     Toggle Data
                 </Button>
@@ -206,6 +212,8 @@ const Application = () => {
                             legend
                             className='mt-5'
                             legendFormatType='percentage'
+                            tooltip='tremor'
+                            onClick={barClick}
                         />
                     </Card>
                     <Card>
@@ -218,6 +226,7 @@ const Application = () => {
                             legendFormatType='percentage'
                             legend
                             tooltip='tremor'
+                            onClick={barClick}
                         />
                     </Card>
                     <Card className='h-96'>

@@ -1,5 +1,5 @@
 import objectHash from 'object-hash';
-import React from 'react';
+import React, { useState } from 'react';
 import {
     CartesianGrid,
     Legend,
@@ -15,13 +15,15 @@ import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
-import { themeColorRange } from '@tremor/react/dist/lib/theme';
-import { ChartLegend } from '../ChartLegend';
+import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
+import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
+import { getColorClassNames } from '@tremor/react/dist/lib/utils';
+import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
+import { UnoChartTooltip } from '../ChartLegend';
 import { ChartComponent, ChartTooltipType } from '../constants';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
-import { defaultChartPalette } from '../theme';
-import { formatTicks, getValueFormatted, renderLegendText } from '../utils';
+import { formatTicks, getValueFormatted } from '../utils';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
@@ -60,7 +62,7 @@ export const getChartSeries = (data: Record<string, unknown>[]) =>
 export const DataChart = ({
     dataCallback,
     rawData,
-    colors = defaultChartPalette,
+    colors = themeColorRange,
     legend,
     onClick,
     legendFormatType,
@@ -72,9 +74,10 @@ export const DataChart = ({
     className,
     tooltip = 'classic',
 }: DataChartSettings<any>) => {
+    const [legendHeight, setLegendHeight] = useState(60);
     const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t);
-    const categoryColors = constructCategoryColors([], themeColorRange);
+    const categoryColors = constructCategoryColors(getChartSeries(dataStore), colors);
 
     return (
         <Flex className={twMerge('w-full h-60', className)}>
@@ -90,6 +93,17 @@ export const DataChart = ({
                             domain={[0, domain ?? 'auto']}
                             unit={unit}
                             allowDecimals={false}
+                            tick={{ transform: 'translate(-3, 0)' }}
+                            fill=''
+                            stroke=''
+                            className={tremorTwMerge(
+                                // common
+                                'text-tremor-label',
+                                // light
+                                'fill-tremor-content',
+                                // dark
+                                'dark:fill-dark-tremor-content',
+                            )}
                         />
                         {refLineY && (
                             <ReferenceLine
@@ -109,7 +123,11 @@ export const DataChart = ({
                             cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
                             content={
                                 tooltip === 'classic' ? (
-                                    <ChartLegend type='line' legendFormatType={legendFormatType} />
+                                    <UnoChartTooltip
+                                        type='line'
+                                        legendFormatType={legendFormatType}
+                                        categoryColors={categoryColors}
+                                    />
                                 ) : (
                                     ({ active, payload, label }) => (
                                         <ChartTooltip
@@ -130,15 +148,28 @@ export const DataChart = ({
                             <Legend
                                 iconType='circle'
                                 onClick={onLegendClick}
-                                formatter={(v: any) => renderLegendText(v, !!onLegendClick)}
+                                verticalAlign='top'
+                                height={legendHeight}
+                                content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
                             />
                         )}
                         {getChartSeries(dataStore).map((property: any, index: number) => (
                             <Line
+                                className={getColorClassNames(colors[index], colorPalette.text).strokeColor}
+                                activeDot={{
+                                    className: tremorTwMerge(
+                                        'stroke-tremor-background dark:stroke-dark-tremor-background',
+                                        getColorClassNames(colors[index], colorPalette.text).fillColor,
+                                    ),
+                                }}
                                 type='monotone'
                                 name={property}
                                 dataKey={property}
-                                stroke={colors[index]}
+                                dot={false}
+                                stroke=''
+                                strokeWidth={2}
+                                strokeLinejoin='round'
+                                strokeLinecap='round'
                                 key={objectHash(property)}
                             />
                         ))}

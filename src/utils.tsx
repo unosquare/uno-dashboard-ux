@@ -1,8 +1,8 @@
 import React from 'react';
 import { formatter } from 'uno-js';
-import { LegendFormatTypes } from './constants';
+import { LegendFormatType } from './constants';
 
-export const translateFormat = (format?: LegendFormatTypes) => {
+export const translateFormat = (format?: LegendFormatType) => {
     switch (format) {
         case 'money':
             return 'money';
@@ -16,7 +16,7 @@ export const translateFormat = (format?: LegendFormatTypes) => {
     }
 };
 
-export const formatTicks = (t: any, formatType: LegendFormatTypes) => {
+export const formatTicks = (t: any, formatType: LegendFormatType) => {
     if (formatType === 'money') {
         if (t >= 1000000) return `${t / 1000000}M`;
 
@@ -32,7 +32,7 @@ export const renderLegendText = (value: string, clickable: boolean) => (
     </span>
 );
 
-export const getValueFormatted = (value: any, legendFormatType?: LegendFormatTypes) => {
+export const getValueFormatted = (value: any, legendFormatType?: LegendFormatType) => {
     if (legendFormatType === 'money' || legendFormatType === 'percentage')
         return formatter(value, translateFormat(legendFormatType));
 

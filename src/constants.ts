@@ -1,4 +1,6 @@
-export type ChartTypes = 'pie' | 'line' | 'bar';
+import { Color } from '@tremor/react';
+
+export type ChartType = 'pie' | 'line' | 'bar';
 
 export type ChartData = {
     name: string;
@@ -6,7 +8,7 @@ export type ChartData = {
     subValue?: string | number;
 };
 
-export type LegendFormatTypes = 'percentage' | 'money' | 'negative' | 'number';
+export type LegendFormatType = 'percentage' | 'money' | 'negative' | 'number';
 
 export type ChartTooltipType = 'classic' | 'tremor';
 
@@ -29,8 +31,8 @@ export type DataTypes =
 export type SortDirection = 'asc' | 'desc';
 
 export type ChartComponent<TDataIn, TDataOut> = {
-    colors?: string[];
-    legendFormatType?: LegendFormatTypes;
+    colors?: Color[];
+    legendFormatType?: LegendFormatType;
     rawData?: TDataIn;
     dataCallback?: (data: TDataIn) => TDataOut;
 };

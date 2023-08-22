@@ -1,4 +1,3 @@
-export * from './theme';
 export * from './constants';
 export * from './hooks';
 export * from './utils';
@@ -10,7 +9,6 @@ export * from './ChartLegend';
 export * from './DataChart';
 export * from './CardLoading';
 export * from './ComposedLineChart';
-export * from './Ellipse';
 export * from './ExportCsvButton';
 export * from './Footer';
 export * from './NavBar';

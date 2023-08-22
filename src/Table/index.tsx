@@ -23,8 +23,10 @@ import {
 } from '@tremor/react';
 import objectHash from 'object-hash';
 import { twMerge } from 'tailwind-merge';
+import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
+import { sizing } from '@tremor/react/dist/lib/sizing';
+import { border } from '@tremor/react/dist/lib/shape';
 import { DataTypes, SortDirection } from '../constants';
-import { Ellipse } from '../Ellipse';
 import { NoData } from '../NoData';
 import { searchData, searchFooter, sortData, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
@@ -172,8 +174,21 @@ export const renderTableCell = (data: unknown, definition: TableColumn | undefin
         case 'bullet':
             return (
                 <Flex alignItems='center'>
-                    <Ellipse small color={(data as string[])[1].toString()} />
-                    {(data as string[])[0].toString()}
+                    <span
+                        className={tremorTwMerge(
+                            // common
+                            'shrink-0 rounded-tremor-full',
+                            // light
+                            'border-tremor-background shadow-tremor-card',
+                            // dark
+                            'dark:border-dark-tremor-background dark:shadow-dark-tremor-card',
+                            (data as string[])[1],
+                            sizing.sm.height,
+                            sizing.sm.width,
+                            border.md.all,
+                        )}
+                    />
+                    {(data as string[])[0]}
                 </Flex>
             );
         case 'paragraph':

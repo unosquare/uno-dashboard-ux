@@ -2,10 +2,14 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 import { FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
-import { Flex, Text } from '@tremor/react';
-import { ChartTypes, HasChildrenComponent, LegendFormatTypes } from '../constants';
-import { Ellipse } from '../Ellipse';
+import { Color, Flex, Text } from '@tremor/react';
+import { getColorClassNames } from '@tremor/react/dist/lib/utils';
+import { colorPalette } from '@tremor/react/dist/lib/theme';
+import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
+import { sizing } from '@tremor/react/dist/lib/sizing';
+import { border } from '@tremor/react/dist/lib/shape';
 import { getValueFormatted } from '../utils';
+import { ChartType, HasChildrenComponent, LegendFormatType } from '../constants';
 
 const TooltipTitle = ({ children }: HasChildrenComponent) => (
     <Flex alignItems='center' className='text-sm pl-1 pb-1 pt-1'>
@@ -14,32 +18,22 @@ const TooltipTitle = ({ children }: HasChildrenComponent) => (
 );
 
 export type ChartLegendSettings = {
-    legendFormatType?: LegendFormatTypes;
+    legendFormatType?: LegendFormatType;
     active?: boolean;
     payload?: any;
-    type: ChartTypes;
+    type: ChartType;
     customValue?: CustomOptions;
     customLabel?: CustomOptions;
     title?: boolean;
     ignoreValue?: boolean;
     formats?: FormatTypes[];
     accumulated?: boolean;
+    categoryColors?: Map<string, Color>;
 };
 
 export type CustomOptions = {
     prefix: boolean;
     values: string[];
-};
-
-const getColor = (type: ChartTypes, category: any) => {
-    switch (type) {
-        case 'bar':
-            return category.fill;
-        case 'line':
-            return category.stroke;
-        default:
-            return category.payload.fill;
-    }
 };
 
 const getCustomLabel = ({ values, prefix }: CustomOptions, index: number, { name }: any) =>
@@ -50,7 +44,7 @@ const getCustomValue = ({ values, prefix }: CustomOptions, index: number, { valu
 
 const getLabel =
     (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined, ignoreValue: boolean) =>
-    (category: any, index: number, legendFormatType?: LegendFormatTypes) => {
+    (category: any, index: number, legendFormatType?: LegendFormatType) => {
         let { name, value } = category;
 
         if (ignoreValue && value === 0.001) value = 0;
@@ -75,25 +69,38 @@ const StyledLegend = tw.div`
     dark:border-dark-tremor-border
 `;
 
-const getLegendFormatType = (formats: any[], index: number, legendFormatType: LegendFormatTypes) => {
+const getLegendFormatType = (formats: any[], index: number, legendFormatType: LegendFormatType) => {
     if (formats && formats[index] === 'percentage') return 'percentage';
     if (formats && formats[index] === 'money') return 'money';
     return legendFormatType;
 };
 
-const Component = ({ type, category, index, legendFormatType, formats, getLabelFunc }: any) => {
+const Component = ({ type, category, index, legendFormatType, formats, getLabelFunc, categoryColors }: any) => {
     const [label, value] = getLabelFunc(category, index, getLegendFormatType(formats, index, legendFormatType));
 
     return (
         <Flex className='gap-2'>
-            <Ellipse color={getColor(type, category)} />
+            <span
+                className={tremorTwMerge(
+                    // common
+                    'shrink-0 rounded-tremor-full',
+                    // light
+                    'border-tremor-background shadow-tremor-card',
+                    // dark
+                    'dark:border-dark-tremor-background dark:shadow-dark-tremor-card',
+                    getColorClassNames(categoryColors.get(category.name), colorPalette.background).bgColor,
+                    sizing.sm.height,
+                    sizing.sm.width,
+                    border.md.all,
+                )}
+            />
             <Text>{label}</Text>
             <Text className='font-medium tabular-nums'>{value}</Text>
         </Flex>
     );
 };
 
-export const ChartLegend = ({
+export const UnoChartTooltip = ({
     active,
     payload,
     type,
@@ -104,6 +111,7 @@ export const ChartLegend = ({
     accumulated,
     legendFormatType,
     title = false,
+    categoryColors,
 }: ChartLegendSettings) => {
     const localPayload = payload || [];
     const legendTitle = localPayload.length > 0 ? localPayload[0].payload.name : '0';
@@ -134,6 +142,7 @@ export const ChartLegend = ({
                                   legendFormatType,
                                   formats,
                                   getLabelFunc,
+                                  categoryColors,
                               };
                               return <Component key={objectHash(options)} {...options} />;
                           })
@@ -146,6 +155,7 @@ export const ChartLegend = ({
                               legendFormatType,
                               formats,
                               getLabelFunc,
+                              categoryColors,
                           };
                           return <Component key={objectHash(options)} {...options} />;
                       }))}

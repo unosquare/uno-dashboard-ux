@@ -12,14 +12,17 @@ import {
 } from 'recharts';
 import { FormatTypes } from 'uno-js';
 import { Flex } from '@tremor/react';
+import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
+import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
+import { getColorClassNames } from '@tremor/react/dist/lib/utils';
+import { BaseColors } from '@tremor/react/dist/lib/constants';
 import { CardLoading } from '../CardLoading';
-import { ChartLegend } from '../ChartLegend';
+import { UnoChartTooltip } from '../ChartLegend';
 import { NoData } from '../NoData';
-import { ChartComponent, LegendFormatTypes } from '../constants';
-import { defaultChartPalette } from '../theme';
+import { ChartComponent, LegendFormatType } from '../constants';
 import { formatTicks, renderLegendText } from '../utils';
 
-export type legendXAxis = { left: LegendFormatTypes; right: LegendFormatTypes };
+export type legendXAxis = { left: LegendFormatType; right: LegendFormatType };
 export type lineChart = { dataKey: string; yAxisId: string };
 
 interface ComposedLineChartSettings<TDataIn> extends ChartComponent<TDataIn, Record<string, unknown>[]> {
@@ -64,6 +67,10 @@ export const ComposedLineChart = ({
     const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const tickFormatter = (t: any, orientation: 'left' | 'right') =>
         legendFormatTypes ? formatTicks(t, (legendFormatTypes as any)[orientation]) : t;
+    const categoryColors = constructCategoryColors(
+        lines.map((x) => x.dataKey),
+        themeColorRange,
+    );
 
     return (
         <Flex className='w-full h-48'>
@@ -71,11 +78,20 @@ export const ComposedLineChart = ({
             {!isLoading && dataStore.length > 0 ? (
                 <ResponsiveContainer>
                     <ComposedChart data={dataStore} margin={margin} onClick={onClick}>
-                        {lines.map((property: lineChart, index: number) => (
+                        {lines.map((property: lineChart) => (
                             <Line
+                                className={
+                                    getColorClassNames(
+                                        categoryColors.get(property.dataKey) ?? BaseColors.Gray,
+                                        colorPalette.text,
+                                    ).strokeColor
+                                }
                                 type='monotone'
                                 dataKey={property.dataKey}
-                                stroke={defaultChartPalette[index]}
+                                stroke=''
+                                strokeWidth={2}
+                                strokeLinejoin='round'
+                                strokeLinecap='round'
                                 key={property.dataKey}
                                 yAxisId={property.yAxisId}
                             />
@@ -113,7 +129,7 @@ export const ComposedLineChart = ({
                         )}
                         <Tooltip
                             offset={30}
-                            content={<ChartLegend type='line' formats={formats} />}
+                            content={<UnoChartTooltip type='line' formats={formats} />}
                             isAnimationActive={false}
                         />
                         {(onLegendClick || legend) && (
