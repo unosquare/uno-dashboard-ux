@@ -41,11 +41,7 @@ export const PieChart = ({
                     </Pie>
                     <Tooltip
                         content={
-                            <UnoChartTooltip
-                                categoryColors={categoryColors}
-                                legendFormatType={legendFormatType}
-                                type='pie'
-                            />
+                            <UnoChartTooltip categoryColors={categoryColors} legendFormatType={legendFormatType} />
                         }
                     />
                 </PieChartRechart>

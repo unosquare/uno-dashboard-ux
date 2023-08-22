@@ -131,7 +131,6 @@ export const ChartBar = ({
                             content={
                                 tooltip === 'classic' ? (
                                     <UnoChartTooltip
-                                        type='bar'
                                         legendFormatType={legendFormatType}
                                         title={hasTitle}
                                         accumulated={accumulated}
@@ -161,7 +160,7 @@ export const ChartBar = ({
                                 content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
                             />
                         )}
-                        {keys.map((property, index) =>
+                        {keys.map((property) =>
                             stacked ? (
                                 <Bar
                                     dataKey={property}

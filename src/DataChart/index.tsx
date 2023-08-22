@@ -124,7 +124,6 @@ export const DataChart = ({
                             content={
                                 tooltip === 'classic' ? (
                                     <UnoChartTooltip
-                                        type='line'
                                         legendFormatType={legendFormatType}
                                         categoryColors={categoryColors}
                                     />

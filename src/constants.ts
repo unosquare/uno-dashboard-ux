@@ -1,7 +1,5 @@
 import { Color } from '@tremor/react';
 
-export type ChartType = 'pie' | 'line' | 'bar';
-
 export type ChartData = {
     name: string;
     value: number;

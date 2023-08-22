@@ -129,7 +129,7 @@ export const ComposedLineChart = ({
                         )}
                         <Tooltip
                             offset={30}
-                            content={<UnoChartTooltip type='line' formats={formats} />}
+                            content={<UnoChartTooltip formats={formats} categoryColors={categoryColors} />}
                             isAnimationActive={false}
                         />
                         {(onLegendClick || legend) && (

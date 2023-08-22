@@ -9,7 +9,7 @@ import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { sizing } from '@tremor/react/dist/lib/sizing';
 import { border } from '@tremor/react/dist/lib/shape';
 import { getValueFormatted } from '../utils';
-import { ChartType, HasChildrenComponent, LegendFormatType } from '../constants';
+import { HasChildrenComponent, LegendFormatType } from '../constants';
 
 const TooltipTitle = ({ children }: HasChildrenComponent) => (
     <Flex alignItems='center' className='text-sm pl-1 pb-1 pt-1'>
@@ -21,14 +21,13 @@ export type ChartLegendSettings = {
     legendFormatType?: LegendFormatType;
     active?: boolean;
     payload?: any;
-    type: ChartType;
     customValue?: CustomOptions;
     customLabel?: CustomOptions;
     title?: boolean;
     ignoreValue?: boolean;
     formats?: FormatTypes[];
     accumulated?: boolean;
-    categoryColors?: Map<string, Color>;
+    categoryColors: Map<string, Color>;
 };
 
 export type CustomOptions = {
@@ -75,7 +74,7 @@ const getLegendFormatType = (formats: any[], index: number, legendFormatType: Le
     return legendFormatType;
 };
 
-const Component = ({ type, category, index, legendFormatType, formats, getLabelFunc, categoryColors }: any) => {
+const Component = ({ category, index, legendFormatType, formats, getLabelFunc, categoryColors }: any) => {
     const [label, value] = getLabelFunc(category, index, getLegendFormatType(formats, index, legendFormatType));
 
     return (
@@ -103,7 +102,6 @@ const Component = ({ type, category, index, legendFormatType, formats, getLabelF
 export const UnoChartTooltip = ({
     active,
     payload,
-    type,
     customLabel,
     customValue,
     ignoreValue = false,
@@ -136,7 +134,6 @@ export const UnoChartTooltip = ({
                                   )[index];
 
                               const options = {
-                                  type,
                                   category,
                                   index,
                                   legendFormatType,
@@ -149,7 +146,6 @@ export const UnoChartTooltip = ({
                           .reverse()
                     : localPayload.map((category: any, index: number) => {
                           const options = {
-                              type,
                               category,
                               index,
                               legendFormatType,
