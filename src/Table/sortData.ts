@@ -1,3 +1,4 @@
+import { compareDates, defaultStringFilter, sortComparer, sortNumericString } from 'uno-js';
 import { DataTypes, SortDirection, TextAlign } from '../constants';
 
 export type TableColumn = {
@@ -15,9 +16,6 @@ export type TableColumn = {
     };
 };
 
-export const defaultFilter = (search: string) => (element: unknown) =>
-    element && String(element).toLocaleLowerCase().includes(search.toLocaleLowerCase());
-
 export const searchData = <TDataOut extends Array<unknown>>(
     search: string | undefined,
     newData: TDataOut[],
@@ -30,33 +28,11 @@ export const searchData = <TDataOut extends Array<unknown>>(
         .map((x) => definitions.findIndex((z) => z.label === x.label));
 
     return newData.filter((section: any[]) =>
-        section.filter((_, i) => !ignoreColumns.includes(i)).some(defaultFilter(search)),
+        section.filter((_, i) => !ignoreColumns.includes(i)).some(defaultStringFilter(search)),
     );
 };
 
-const sanitizeNumericString = (str: string) => Number(str.replace(/[^0-9.-]+/g, ''));
-
-const compareDates = (date1: unknown, date2: unknown) =>
-    new Date(date1 as any).getTime() - new Date(date2 as any).getTime();
-
 const numericTypes: DataTypes[] = ['number', 'decimal', 'percentage', 'money', 'days', 'months', 'boolean'];
-
-const sortComparer = (left: string, right: string) =>
-    left.trim().localeCompare(right.trim(), undefined, { numeric: true, sensitivity: 'base' });
-
-const checkNumericString = (a: string, b: string) => {
-    if ((a.includes('$') && b.includes('$')) || (a.includes('%') && b.includes('%'))) {
-        const numStrA = sanitizeNumericString(a);
-        const numStrB = sanitizeNumericString(b);
-
-        if (typeof numStrA === 'number' && typeof numStrB === 'number') {
-            const result = numStrA - numStrB;
-            if (result !== 0) return result;
-        }
-    }
-
-    return sortComparer(a, b);
-};
 
 const sortOneColumn = <T extends TableColumn, TDataOut extends Array<unknown>>(
     left: TDataOut,
@@ -76,7 +52,7 @@ const sortOneColumn = <T extends TableColumn, TDataOut extends Array<unknown>>(
         return sortComparer((a[sortColumn] as Array<string>)[1], (b[sortColumn] as Array<string>)[1]);
 
     if (dataType === 'date') {
-        const result = compareDates(a[sortColumn], b[sortColumn]);
+        const result = compareDates(String(a[sortColumn]), String(b[sortColumn]));
 
         if (result !== 0) return result;
     }
@@ -87,12 +63,12 @@ const sortOneColumn = <T extends TableColumn, TDataOut extends Array<unknown>>(
         if (result !== 0) return result;
     }
 
-    return checkNumericString(String(a[sortColumn]), String(b[sortColumn]));
+    return sortNumericString(String(a[sortColumn]), String(b[sortColumn]));
 };
 
 export const searchFooter = <TDataIn>(search: string, newRaw: TDataIn) =>
     Array.isArray(newRaw)
-        ? (newRaw.filter((section: any) => Object.values(section).some(defaultFilter(search))) as TDataIn)
+        ? (newRaw.filter((section: any) => Object.values(section).some(defaultStringFilter(search))) as TDataIn)
         : newRaw;
 
 export const sortData = <TDataOut extends Array<unknown>, T extends TableColumn>(
