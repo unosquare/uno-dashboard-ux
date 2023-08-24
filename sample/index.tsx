@@ -155,6 +155,7 @@ const Application = () => {
                             legend
                             className='mt-5'
                             legendFormatType='percentage'
+                            isLoading={loading}
                             tooltip='tremor'
                             onClick={barClick}
                         />

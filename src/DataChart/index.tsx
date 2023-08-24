@@ -1,5 +1,5 @@
 import objectHash from 'object-hash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     CartesianGrid,
     Legend,
@@ -21,9 +21,9 @@ import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { UnoChartTooltip } from '../ChartLegend';
 import { ChartComponent, ChartTooltipType } from '../constants';
-import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
 import { formatTicks, getValueFormatted } from '../utils';
+import { ChartLineShimmer } from '../ChartShimmers';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
@@ -73,14 +73,20 @@ export const DataChart = ({
     tooltip = 'classic',
 }: DataChartSettings<any>) => {
     const [legendHeight, setLegendHeight] = useState(60);
-    const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
+    const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
+
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t);
     const categoryColors = constructCategoryColors(getChartSeries(dataStore), colors);
 
+    useEffect(() => {
+        setDataStore((dataCallback && rawData && dataCallback(rawData)) || []);
+    }, [rawData, dataCallback]);
+
+    if (isLoading) return <ChartLineShimmer className={className} />;
+
     return (
         <Flex className={twMerge('w-full h-60', className)}>
-            {isLoading && <CardLoading />}
-            {!isLoading && dataStore.length > 0 ? (
+            {dataStore.length > 0 ? (
                 <ResponsiveContainer>
                     <LineChart data={dataStore} margin={margin} onClick={onClick}>
                         <CartesianGrid strokeDasharray='2 2' />
@@ -172,7 +178,7 @@ export const DataChart = ({
                     </LineChart>
                 </ResponsiveContainer>
             ) : (
-                !isLoading && <NoData />
+                <NoData />
             )}
         </Flex>
     );

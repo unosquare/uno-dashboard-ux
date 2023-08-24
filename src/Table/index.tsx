@@ -314,6 +314,7 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
     dataCallback,
     className = '',
 }: TableSettings<TDataIn, TDataOut>) => {
+    const [rawDataState, setRawDataState] = useState<TDataIn>();
     const [definitions, setDefinitions] = useState(columns);
     const [data, setData] = useState<TDataOut[]>([]);
     const [searched, setSearched] = useState<TDataOut[]>([]);
@@ -323,7 +324,7 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
     const debouncedSearch = useDebounce(() => {
         startTransition(() => {
             setSearched(searchData(search, data, definitions));
-            if (calculateFooter) setFooterData(calculateFooter(searchFooter(search, rawData)));
+            if (calculateFooter && rawDataState) setFooterData(calculateFooter(searchFooter(search, rawDataState)));
         });
     });
 
@@ -333,8 +334,10 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
     };
 
     useEffect(() => {
-        const raw = dataCallback(rawData);
         startTransition(() => {
+            setRawDataState(rawData);
+
+            const raw = dataCallback(rawData);
             setData(raw);
             setSearched(raw);
             setSearch('');
@@ -397,7 +400,7 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
                     {isLoading && <ShimmerTable colSpan={definitions.length} />}
                     {!isLoading &&
                         (searched.length > 0 ? (
-                            renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawData)
+                            renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawDataState)
                         ) : (
                             <SpanTable colSpan={definitions.length}>
                                 <NoData>{noDataElement}</NoData>

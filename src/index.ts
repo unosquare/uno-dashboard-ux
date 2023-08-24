@@ -5,6 +5,7 @@ export * from './utils';
 export * from './AwaitableMetric';
 export * from './TremorContainer';
 export * from './ChartBar';
+export * from './ChartShimmers';
 export * from './PieChart';
 export * from './ChartLegend';
 export * from './DataChart';

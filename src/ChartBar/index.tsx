@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import {
     Bar,
     BarChart,
@@ -23,8 +23,8 @@ import ChartLegend from '@tremor/react/dist/components/chart-elements/common/Cha
 import { UnoChartTooltip } from '../ChartLegend';
 import { ChartTooltipType, LegendFormatType } from '../constants';
 import { NoData } from '../NoData';
-import { CardLoading } from '../CardLoading';
 import { formatTicks, getValueFormatted, renderLegendText } from '../utils';
+import { ChartBarShimmer } from '../ChartShimmers';
 
 type XAxisPrimaryFormatter = {
     (input: string): string;
@@ -77,14 +77,27 @@ export const ChartBar = ({
     className,
 }: ChartBarSettings<any>) => {
     const [legendHeight, setLegendHeight] = useState(60);
-    const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
-    const keys = dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : [];
-    const categoryColors = constructCategoryColors(keys, colors ?? themeColorRange);
+    const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
+    const [categoryColors, setCategoryColors] = useState<Map<string, Color>>(new Map());
+    const [keys, setKeys] = useState<string[]>([]);
+
+    useEffect(() => {
+        setKeys(dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : []);
+    }, [dataStore]);
+
+    useEffect(() => {
+        setCategoryColors(constructCategoryColors(keys, colors ?? themeColorRange));
+    }, [keys, colors]);
+
+    useEffect(() => {
+        setDataStore((dataCallback && rawData && dataCallback(rawData)) || []);
+    }, [rawData, dataCallback]);
+
+    if (isLoading) return <ChartBarShimmer className={className} />;
 
     return (
         <Flex className={twMerge('w-full h-60', className)}>
-            {isLoading && <CardLoading />}
-            {!isLoading && dataStore.length > 0 ? (
+            {dataStore.length > 0 ? (
                 <ResponsiveContainer>
                     <BarChart data={dataStore} maxBarSize={barSize} onClick={onClick}>
                         {xAxis && !multiXAxis && <XAxis dataKey='name' />}
@@ -194,7 +207,7 @@ export const ChartBar = ({
                     </BarChart>
                 </ResponsiveContainer>
             ) : (
-                !isLoading && <NoData />
+                <NoData />
             )}
         </Flex>
     );

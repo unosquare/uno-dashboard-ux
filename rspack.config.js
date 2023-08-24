@@ -18,10 +18,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(gif|svg)$/,
-                type: 'asset/resource',
-            },
-            {
                 test: /\.css$/,
                 use: ['postcss-loader'],
             },
