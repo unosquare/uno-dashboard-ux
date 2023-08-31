@@ -19,6 +19,7 @@ import {
     MenuContainer,
     MenuSection,
     MenuSubSection,
+    Modal,
     NavBar,
     NavBarTitle,
     PieChart,
@@ -69,6 +70,7 @@ const Application = () => {
     const [toggle, setToggle] = useToggle(true);
     const [theme, setTheme] = useTheme();
     const [counter, setCounter] = useState(0);
+    const [showModal, SetShowModal] = useToggle(false);
 
     React.useEffect(() => {
         setTimeout(() => isLoading(false), 2000);
@@ -145,6 +147,9 @@ const Application = () => {
                 <Button size='xs' onClick={setToggle}>
                     Toggle Data
                 </Button>
+                <Button size='xs' onClick={SetShowModal}>
+                    Show Modal
+                </Button>
             </BasicToolbar>
             <TremorContainer hasToolbar>
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
@@ -200,6 +205,20 @@ const Application = () => {
                     </Col>
                 </Grid>
             </TremorContainer>
+            {showModal && (
+                <Modal onClose={SetShowModal}>
+                    <Table
+                        className='h-72'
+                        columns={columns}
+                        rawData={defaultData}
+                        dataCallback={identity}
+                        isLoading={loading}
+                        searchable
+                    >
+                        <Title className='w-full'>Modal Table</Title>
+                    </Table>
+                </Modal>
+            )}
             <Footer />
         </ErrorBoundary>
     );

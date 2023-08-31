@@ -23,3 +23,4 @@ export * from './Select';
 export * from './UnoLogo';
 export * from './Blur';
 export * from './Menu';
+export * from './Modal';
