@@ -15,15 +15,15 @@
         "recharts": "^2.8.0",
         "tailwind-merge": "^1.14.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.31.0"
+        "uno-js": "^3.32.0"
     },
     "devDependencies": {
-        "@rspack/cli": "^0.3.0",
+        "@rspack/cli": "^0.3.1",
         "@types/recharts": "1.8.24",
         "@types/object-hash": "^3.0.3",
         "@types/react": "^18.2.21",
         "@types/react-dom": "^18.2.7",
-        "@typescript-eslint/eslint-plugin": "^6.4.1",
+        "@typescript-eslint/eslint-plugin": "^6.5.0",
         "autoprefixer": "^10.4.15",
         "eslint": "^8.48.0",
         "eslint-config-unosquare": "0.3.3",
@@ -34,7 +34,7 @@
         "lint-staged": "^14.0.1",
         "object-hash": "^3.0.0",
         "postcss-loader": "^7.3.3",
-        "prettier": "^3.0.2",
+        "prettier": "^3.0.3",
         "tailwindcss": "^3.3.3",
         "typescript": "^5.2.2",
         "husky": "^8.0.3"

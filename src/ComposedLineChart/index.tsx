@@ -18,11 +18,11 @@ import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
-import { CardLoading } from '../CardLoading';
 import { UnoChartTooltip } from '../ChartLegend';
 import { NoData } from '../NoData';
 import { ChartComponent, LegendFormatType } from '../constants';
 import { formatTicks, renderLegendText } from '../utils';
+import { ChartLineShimmer } from '../ChartShimmers';
 
 export type legendXAxis = { left: LegendFormatType; right: LegendFormatType };
 export type lineChart = { dataKey: string; yAxisId: string };
@@ -73,10 +73,11 @@ export const ComposedLineChart = ({
         themeColorRange,
     );
 
+    if (isLoading) return <ChartLineShimmer />;
+
     return (
         <Flex className='w-full h-48'>
-            {isLoading && <CardLoading />}
-            {!isLoading && dataStore.length > 0 ? (
+            {dataStore.length > 0 ? (
                 <ResponsiveContainer>
                     <ComposedChart data={dataStore} margin={margin} onClick={onClick}>
                         {lines.map((property: lineChart) => (
@@ -154,7 +155,7 @@ export const ComposedLineChart = ({
                     </ComposedChart>
                 </ResponsiveContainer>
             ) : (
-                !isLoading && <NoData />
+                <NoData />
             )}
         </Flex>
     );
