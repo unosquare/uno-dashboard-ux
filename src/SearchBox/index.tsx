@@ -16,9 +16,7 @@ export const SearchBox = ({ search, placeholder = 'Search', focus = false, disab
     const debounceCall = useDebounce(() => search(value));
 
     useEffect(() => {
-        if (focus && ref.current) {
-            setTimeout(() => ref.current?.focus(), 2000);
-        }
+        if (focus && ref.current) setTimeout(() => ref.current?.focus(), 2000);
     }, [focus]);
 
     const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {

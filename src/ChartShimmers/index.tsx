@@ -7,7 +7,6 @@ import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { colorPalette } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
-import { renderLegendText } from '../utils';
 
 const defaultShimmerColors = new Map<string, Color>();
 defaultShimmerColors.set('Loading', 'gray');
@@ -34,7 +33,6 @@ export const ChartBarShimmer = ({ className }: any) => {
                 <BarChart data={dataStore}>
                     <Legend
                         iconType='circle'
-                        formatter={renderLegendText}
                         height={legendHeight}
                         content={({ payload }) => ChartLegend({ payload }, defaultShimmerColors, setLegendHeight)}
                     />
@@ -70,7 +68,6 @@ export const ChartLineShimmer = ({ className }: any) => {
                     <CartesianGrid strokeDasharray='2 2' />
                     <Legend
                         iconType='circle'
-                        formatter={renderLegendText}
                         height={legendHeight}
                         content={({ payload }) => ChartLegend({ payload }, defaultShimmerColors, setLegendHeight)}
                     />

@@ -21,7 +21,7 @@ import ChartLegend from '@tremor/react/dist/components/chart-elements/common/Cha
 import { UnoChartTooltip } from '../ChartLegend';
 import { NoData } from '../NoData';
 import { ChartComponent, LegendFormatType } from '../constants';
-import { formatTicks, renderLegendText } from '../utils';
+import { formatTicks } from '../utils';
 import { ChartLineShimmer } from '../ChartShimmers';
 
 export type legendXAxis = { left: LegendFormatType; right: LegendFormatType };
@@ -149,7 +149,6 @@ export const ComposedLineChart = ({
                                 iconType='circle'
                                 height={legendHeight}
                                 content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
-                                formatter={renderLegendText}
                             />
                         )}
                     </ComposedChart>

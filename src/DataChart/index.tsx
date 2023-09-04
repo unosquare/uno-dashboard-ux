@@ -33,7 +33,6 @@ export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, 
     unit?: string;
     refLineY?: { value: number; label: string; color: string };
     isLoading?: boolean;
-    className?: string;
 };
 
 const margin = {

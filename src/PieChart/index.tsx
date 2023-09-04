@@ -5,6 +5,7 @@ import { constructCategoryColors } from '@tremor/react/dist/components/chart-ele
 import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
+import { twMerge } from 'tailwind-merge';
 import { UnoChartTooltip } from '../ChartLegend';
 import { ChartComponent, ChartData } from '../constants';
 import { NoData } from '../NoData';
@@ -13,6 +14,7 @@ export const PieChart = ({
     rawData,
     dataCallback,
     legendFormatType,
+    className,
     colors = themeColorRange,
 }: ChartComponent<any, ChartData[]>) => {
     const dataStore: ChartData[] = (dataCallback && rawData && dataCallback(rawData)) || [];
@@ -22,7 +24,7 @@ export const PieChart = ({
     );
 
     return dataStore.length > 0 ? (
-        <div className='h-60'>
+        <div className={twMerge('h-60', className)}>
             <ResponsiveContainer>
                 <PieChartRechart>
                     <Pie data={dataStore} dataKey='value' fill='#f1f2f3' startAngle={90} endAngle={-360}>

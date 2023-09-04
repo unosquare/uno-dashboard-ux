@@ -33,6 +33,7 @@ export type ChartComponent<TDataIn, TDataOut> = {
     legendFormatType?: LegendFormatType;
     rawData?: TDataIn;
     dataCallback?: (data: TDataIn) => TDataOut;
+    className?: string;
 };
 
 export type HasChildrenComponent = {

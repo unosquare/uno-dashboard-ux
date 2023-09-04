@@ -23,7 +23,7 @@ import ChartLegend from '@tremor/react/dist/components/chart-elements/common/Cha
 import { UnoChartTooltip } from '../ChartLegend';
 import { ChartTooltipType, LegendFormatType } from '../constants';
 import { NoData } from '../NoData';
-import { formatTicks, getValueFormatted, renderLegendText } from '../utils';
+import { formatTicks, getValueFormatted } from '../utils';
 import { ChartBarShimmer } from '../ChartShimmers';
 
 type XAxisPrimaryFormatter = {
@@ -164,7 +164,6 @@ export const ChartBar = ({
                         {legend && (
                             <Legend
                                 iconType='circle'
-                                formatter={renderLegendText}
                                 height={legendHeight}
                                 content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
                             />
