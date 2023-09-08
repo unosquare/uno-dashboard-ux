@@ -35,7 +35,3 @@ export type ChartComponent<TDataIn, TDataOut> = {
     dataCallback?: (data: TDataIn) => TDataOut;
     className?: string;
 };
-
-export type HasChildrenComponent = {
-    children?: React.ReactNode;
-};

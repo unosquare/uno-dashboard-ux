@@ -1,10 +1,5 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import tw from 'tailwind-styled-components';
-import { HasChildrenComponent } from '../constants';
-
-export type TremorContainerSettings = HasChildrenComponent & {
-    hasToolbar?: boolean;
-};
 
 const MainApp = tw.main<any>`
     w-full
@@ -14,7 +9,7 @@ const MainApp = tw.main<any>`
     overflow-y-auto
     p-2`;
 
-export const TremorContainer = ({ children, hasToolbar }: TremorContainerSettings) => (
+export const TremorContainer = ({ children, hasToolbar }: PropsWithChildren<{ hasToolbar?: boolean }>) => (
     <MainApp $hasToolbar={hasToolbar}>
         <div className='max-w-unomax m-auto'>{children}</div>
     </MainApp>

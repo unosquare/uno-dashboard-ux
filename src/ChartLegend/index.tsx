@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import tw from 'tailwind-styled-components';
 import { FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
@@ -9,9 +9,9 @@ import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { sizing } from '@tremor/react/dist/lib/sizing';
 import { border } from '@tremor/react/dist/lib/shape';
 import { getValueFormatted } from '../utils';
-import { HasChildrenComponent, LegendFormatType } from '../constants';
+import { LegendFormatType } from '../constants';
 
-const TooltipTitle = ({ children }: HasChildrenComponent) => (
+const TooltipTitle = ({ children }: PropsWithChildren) => (
     <Flex alignItems='center' className='text-sm pl-1 pb-1 pt-1'>
         {children}
     </Flex>

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Flex, Text, Title } from '@tremor/react';
-import { HasChildrenComponent } from '../constants';
 
 export const ErrorImage = (props: any) => (
     <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' {...props}>
@@ -88,7 +87,7 @@ export const ErrorImage = (props: any) => (
     </svg>
 );
 
-export class ErrorBoundary extends React.Component<HasChildrenComponent, { errorInfo: React.ErrorInfo | null }> {
+export class ErrorBoundary extends React.Component<React.PropsWithChildren, { errorInfo: React.ErrorInfo | null }> {
     constructor(props: any) {
         super(props);
         this.state = {

@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import tw from 'tailwind-styled-components';
 import { UnoLogo } from '../UnoLogo';
-import { HasChildrenComponent } from '../constants';
 
 export type NavBarSettings = {
     transparent?: boolean;
@@ -36,7 +35,7 @@ export const NavBarTitle = tw.div`
     [&>h2]:mx-[15px]
 `;
 
-export const NavBar = ({ transparent, children }: HasChildrenComponent & NavBarSettings) => (
+export const NavBar = ({ transparent, children }: PropsWithChildren<NavBarSettings>) => (
     <StyledHeader transparent={transparent}>
         <StyledNavbar>
             <UnoLogo width={150} height={48} className='sm:hidden' />

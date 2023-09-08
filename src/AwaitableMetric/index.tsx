@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Metric } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
-import { HasChildrenComponent } from '../constants';
 
 export type MetricSettings = {
-    loading: boolean;
+    isLoading: boolean;
     className?: string;
 };
 
-export const AwaitableMetric = ({ loading = false, className, children }: HasChildrenComponent & MetricSettings) =>
-    loading ? (
+export const AwaitableMetric = ({ isLoading = false, className, children }: PropsWithChildren<MetricSettings>) =>
+    isLoading ? (
         <Metric className={twMerge(className, 'loading-shimmer')}>&nbsp;</Metric>
     ) : (
         <Metric className={className}>{children}</Metric>
