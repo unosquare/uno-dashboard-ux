@@ -8,14 +8,14 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.212",
+        "@fluentui/react-icons": "^2.0.214",
         "@tremor/react": "^3.7.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "recharts": "^2.8.0",
         "tailwind-merge": "^1.14.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.36.0"
+        "uno-js": "^3.37.0"
     },
     "devDependencies": {
         "@rspack/cli": "^0.3.2",
@@ -25,7 +25,7 @@
         "@types/react-dom": "^18.2.7",
         "@typescript-eslint/eslint-plugin": "^6.6.0",
         "autoprefixer": "^10.4.15",
-        "eslint": "^8.48.0",
+        "eslint": "^8.49.0",
         "eslint-config-unosquare": "0.3.4",
         "eslint-plugin-jsx-a11y": "^6.7.1",
         "eslint-plugin-prettier": "^5.0.0",
