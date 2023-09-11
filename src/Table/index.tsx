@@ -1,4 +1,4 @@
-import React, { ReactNode, startTransition, useEffect, useState } from 'react';
+import React, { PropsWithChildren, startTransition, useEffect, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
 import { createCsv, formatter, FormatTypes } from 'uno-js';
@@ -28,21 +28,15 @@ import { sizing } from '@tremor/react/dist/lib/sizing';
 import { border } from '@tremor/react/dist/lib/shape';
 import { DataTypes, SortDirection } from '../constants';
 import { NoData } from '../NoData';
-import { searchData, searchFooter, sortData, TableColumn } from './sortData';
+import { searchData, searchFooter, sortData, TableCellTypes, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { useDebounce } from '../hooks';
 
 export * from './sortData';
 
-export type RenderTableFunc = <TDataIn, TDataOut extends Array<unknown>>(
-    data: TDataOut[],
-    definitions: TableColumn[],
-    rawData: TDataIn,
-) => React.ReactNode;
-
-export type TableSettings<TDataIn, TDataOut extends Array<unknown>> = {
+export type TableSettings<TDataIn> = {
     rawData: TDataIn;
-    dataCallback: (data: TDataIn) => TDataOut[];
+    dataCallback: (data: TDataIn) => TableCellTypes[][];
     columns: TableColumn[];
     isLoading?: boolean;
     noDataElement?: React.ReactNode;
@@ -50,8 +44,7 @@ export type TableSettings<TDataIn, TDataOut extends Array<unknown>> = {
     calculateFooter?: (data: TDataIn) => unknown[];
     sortable?: boolean;
     exportCsv?: boolean;
-    render?: RenderTableFunc;
-    children?: React.ReactNode;
+    render?: (data: TableCellTypes[][], definitions: TableColumn[], rawData: TDataIn | undefined) => React.ReactNode;
     className?: string;
 };
 
@@ -122,25 +115,25 @@ const translateType = (type: DataTypes | undefined): FormatTypes | undefined => 
     }
 };
 
-const renderLinkString = (data: unknown) => {
+const renderLinkString = (data: TableCellTypes) => {
     if (data instanceof Array) {
-        return (data as string[])[0] ? (
+        return data[0] ? (
             <>
-                {(data as string[])[3] && <span>{`${(data as string[])[2]} `}</span>}
-                <a href={(data as string[])[0]} target='_blank' rel='noopener noreferrer'>
-                    {(data as string[])[1]}
+                {data[3] && <span>{`${data[2]} `}</span>}
+                <a href={data[0]} target='_blank' rel='noopener noreferrer' className='underline'>
+                    {data[1]}
                 </a>
-                {!(data as string[])[3] && (data as string[])[2] && <span>{` ${(data as string[])[2]}`}</span>}
+                {!data[3] && data[2] && <span>{` ${data[2]}`}</span>}
             </>
         ) : (
-            (data as string[])[1]
+            data[1]
         );
     }
 
     if (typeof data !== 'string') return null;
 
     return (
-        <a href={data} target='_blank' rel='noopener noreferrer'>
+        <a href={data} target='_blank' rel='noopener noreferrer' className='underline'>
             {data}
         </a>
     );
@@ -162,7 +155,7 @@ const LongTextCell = ({ text }: { text: string }) => {
     );
 };
 
-export const renderTableCell = (data: unknown, definition: TableColumn | undefined) => {
+export const renderTableCell = (data: TableCellTypes, definition: TableColumn | undefined) => {
     if (!data && definition?.dataType === 'money') return '$0.00';
     if (data == null || data === ' ') return definition?.formatterOptions?.nullValue ?? 'N/A';
 
@@ -254,10 +247,10 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
     </TableFoot>
 );
 
-const getRows: RenderTableFunc = (data: unknown[][], definitions: TableColumn[]) =>
-    data.map((row: unknown[]) => (
+const getRows = (data: TableCellTypes[][], definitions: TableColumn[]) =>
+    data.map((row: TableCellTypes[]) => (
         <TableRow key={objectHash(row)}>
-            {row.map((cell: unknown, index: number) => (
+            {row.map((cell: TableCellTypes, index: number) => (
                 <TableCell
                     key={objectHash({ a: definitions[index], c: cell })}
                     className={`p-2 whitespace-normal text-xs/[13px] ${getAlignment(definitions[index], index)}`}
@@ -268,9 +261,9 @@ const getRows: RenderTableFunc = (data: unknown[][], definitions: TableColumn[])
         </TableRow>
     ));
 
-const renderToRowString = <TDataOut extends Array<unknown>>(data: TDataOut[], definitions: TableColumn[]) =>
-    data.map((row: TDataOut) =>
-        row.map((cell: unknown, index: number) => {
+const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[]) =>
+    data.map((row: TableCellTypes[]) =>
+        row.map((cell: TableCellTypes, index: number) => {
             const dataType = definitions[index]?.dataType;
             if (dataType === 'boolean') return cell ? 'TRUE' : 'FALSE';
             if (!cell && dataType === 'money') return '$0.00';
@@ -294,7 +287,7 @@ const ShimmerTable = ({ colSpan }: { colSpan: number }) =>
         </TableRow>
     ));
 
-const SpanTable = ({ colSpan, children }: { colSpan: number; children: ReactNode }) => (
+const SpanTable = ({ colSpan, children }: PropsWithChildren<{ colSpan: number }>) => (
     <TableRow>
         <TableCell colSpan={colSpan} className='p-2'>
             <Flex alignItems='center' className='w-full'>
@@ -304,7 +297,7 @@ const SpanTable = ({ colSpan, children }: { colSpan: number; children: ReactNode
     </TableRow>
 );
 
-export const Table = <TDataIn, TDataOut extends Array<unknown>>({
+export const Table = <TDataIn,>({
     columns,
     isLoading,
     noDataElement,
@@ -317,11 +310,11 @@ export const Table = <TDataIn, TDataOut extends Array<unknown>>({
     children,
     dataCallback,
     className = '',
-}: TableSettings<TDataIn, TDataOut>) => {
+}: PropsWithChildren<TableSettings<TDataIn>>) => {
     const [rawDataState, setRawDataState] = useState<TDataIn>();
     const [definitions, setDefinitions] = useState(columns);
-    const [data, setData] = useState<TDataOut[]>([]);
-    const [searched, setSearched] = useState<TDataOut[]>([]);
+    const [data, setData] = useState<TableCellTypes[][]>([]);
+    const [searched, setSearched] = useState<TableCellTypes[][]>([]);
     const [footerData, setFooterData] = useState<unknown[]>();
     const [search, setSearch] = useState('');
 

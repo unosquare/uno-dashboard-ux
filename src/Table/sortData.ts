@@ -1,6 +1,8 @@
 import { compareDates, defaultStringFilter, sortComparer, sortNumericString } from 'uno-js';
 import { DataTypes, SortDirection, TextAlign } from '../constants';
 
+export type TableCellTypes = string | number | Array<string> | Date | boolean | null;
+
 export type TableColumn = {
     label: string;
     dataType?: DataTypes;
@@ -16,27 +18,23 @@ export type TableColumn = {
     };
 };
 
-export const searchData = <TDataOut extends Array<unknown>>(
-    search: string | undefined,
-    newData: TDataOut[],
-    definitions: TableColumn[],
-) => {
+export const searchData = (search: string | undefined, newData: TableCellTypes[][], definitions: TableColumn[]) => {
     if (!search) return newData;
 
     const ignoreColumns = definitions
         .filter((y) => y.disableSearch === true)
         .map((x) => definitions.findIndex((z) => z.label === x.label));
 
-    return newData.filter((section: TDataOut) =>
-        section.filter((_, i) => !ignoreColumns.includes(i)).some(defaultStringFilter(search)),
+    return newData.filter((section: TableCellTypes[]) =>
+        section.filter((_: unknown, i: number) => !ignoreColumns.includes(i)).some(defaultStringFilter(search)),
     );
 };
 
 const numericTypes: DataTypes[] = ['number', 'decimal', 'percentage', 'money', 'days', 'months', 'boolean'];
 
-const sortOneColumn = <T extends TableColumn, TDataOut extends Array<unknown>>(
-    left: TDataOut,
-    right: TDataOut,
+const sortOneColumn = <T extends TableColumn>(
+    left: TableCellTypes[],
+    right: TableCellTypes[],
     { sortOrder, dataType, sortDirection }: T,
     getSortIndex: (order: number) => number,
 ) => {
@@ -76,12 +74,12 @@ export const searchFooter = <TDataIn extends Array<Record<string, unknown>> | Re
           ) as TDataIn)
         : newRaw;
 
-export const sortData = <TDataOut extends Array<unknown>, T extends TableColumn>(
-    data: TDataOut[],
+export const sortData = <T extends TableColumn>(
+    data: TableCellTypes[][],
     definition: T[],
     getSortIndex?: (order: number) => number,
 ) => {
-    data.sort((left: TDataOut, right: TDataOut) => {
+    data.sort((left: TableCellTypes[], right: TableCellTypes[]) => {
         const sortColumns = definition
             .filter((x) => x.sortOrder && x.sortOrder >= 1)
             .sort((x, y) => Number(x.sortOrder) - Number(y.sortOrder));
