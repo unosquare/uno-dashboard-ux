@@ -57,7 +57,7 @@ export const getChartSeries = (data: Record<string, unknown>[]) =>
         return current;
     }, new Array<string>());
 
-export const DataChart = ({
+export const DataChart = <T,>({
     dataCallback,
     rawData,
     colors = themeColorRange,
@@ -70,7 +70,7 @@ export const DataChart = ({
     isLoading,
     className,
     tooltip = 'classic',
-}: DataChartSettings<Record<string, unknown>[]>) => {
+}: DataChartSettings<T>) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
 

@@ -51,7 +51,7 @@ const xPadding = {
     right: 20,
 };
 
-export const ComposedLineChart = ({
+export const ComposedLineChart = <T,>({
     dataCallback,
     rawData,
     legend,
@@ -63,7 +63,7 @@ export const ComposedLineChart = ({
     isLoading,
     formats,
     lines,
-}: ComposedLineChartSettings<Record<string, unknown>[]>) => {
+}: ComposedLineChartSettings<T>) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
 

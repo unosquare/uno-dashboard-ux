@@ -54,7 +54,7 @@ export type ChartBarSettings<TDataIn> = {
     className?: string;
 };
 
-export const ChartBar = ({
+export const ChartBar = <T,>({
     rawData,
     dataCallback,
     colors,
@@ -73,7 +73,7 @@ export const ChartBar = ({
     isLoading = false,
     refLineY,
     className,
-}: ChartBarSettings<Record<string, unknown>[]>) => {
+}: ChartBarSettings<T>) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
     const [categoryColors, setCategoryColors] = useState<Map<string, Color>>(new Map());

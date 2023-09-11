@@ -10,13 +10,13 @@ import { UnoChartTooltip } from '../ChartLegend';
 import { ChartComponent, ChartData } from '../constants';
 import { NoData } from '../NoData';
 
-export const PieChart = ({
+export const PieChart = <T,>({
     rawData,
     dataCallback,
     legendFormatType,
     className,
     colors = themeColorRange,
-}: ChartComponent<Record<string, unknown>[], ChartData[]>) => {
+}: ChartComponent<T, ChartData[]>) => {
     const dataStore: ChartData[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const categoryColors = constructCategoryColors(
         dataStore.map((x) => x.name),
