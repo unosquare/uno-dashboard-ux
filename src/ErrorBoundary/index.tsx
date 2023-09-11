@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Flex, Text, Title } from '@tremor/react';
 
-export const ErrorImage = (props: any) => (
+export const ErrorImage = (props: React.ComponentPropsWithRef<'svg'>) => (
     <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' {...props}>
         <defs>
             <path id='a' d='M0 0h386v189.5H0z' />
@@ -88,7 +88,7 @@ export const ErrorImage = (props: any) => (
 );
 
 export class ErrorBoundary extends React.Component<React.PropsWithChildren, { errorInfo: React.ErrorInfo | null }> {
-    constructor(props: any) {
+    constructor(props: React.PropsWithChildren) {
         super(props);
         this.state = {
             errorInfo: null,

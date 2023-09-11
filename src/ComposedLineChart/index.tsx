@@ -29,7 +29,7 @@ export type lineChart = { dataKey: string; yAxisId: string };
 
 interface ComposedLineChartSettings<TDataIn> extends ChartComponent<TDataIn, Record<string, unknown>[]> {
     legend?: boolean;
-    onClick?: (e: any) => void;
+    onClick?: (e: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
     domain?: number;
     unit?: string;
     refLineY?: { value: number; label: string; color: string };
@@ -63,11 +63,18 @@ export const ComposedLineChart = ({
     isLoading,
     formats,
     lines,
-}: ComposedLineChartSettings<any>) => {
+}: ComposedLineChartSettings<Record<string, unknown>[]>) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tickFormatter = (t: any, orientation: 'left' | 'right') =>
-        legendFormatTypes ? formatTicks(t, (legendFormatTypes as any)[orientation]) : t;
+        legendFormatTypes ? formatTicks(Number(t), legendFormatTypes[orientation]) : String(t);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const leftTickFormatter = (t: any) => tickFormatter(t, 'left');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rightTickFormatter = (t: any) => tickFormatter(t, 'right');
+
     const categoryColors = constructCategoryColors(
         lines.map((x) => x.dataKey),
         themeColorRange,
@@ -112,7 +119,7 @@ export const ComposedLineChart = ({
                         <XAxis dataKey='name' padding={xPadding} />
                         <YAxis
                             yAxisId='left'
-                            tickFormatter={(t: any) => tickFormatter(t, 'left')}
+                            tickFormatter={leftTickFormatter}
                             type='number'
                             domain={[0, domain ?? 'auto']}
                             unit={unit}
@@ -120,7 +127,7 @@ export const ComposedLineChart = ({
                         />
                         <YAxis
                             yAxisId='right'
-                            tickFormatter={(t: any) => tickFormatter(t, 'right')}
+                            tickFormatter={rightTickFormatter}
                             type='number'
                             domain={[0, 'auto']}
                             unit={unit}

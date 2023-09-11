@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import tw from 'tailwind-styled-components';
 import { FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
@@ -11,20 +11,17 @@ import { border } from '@tremor/react/dist/lib/shape';
 import { getValueFormatted } from '../utils';
 import { LegendFormatType } from '../constants';
 
-const TooltipTitle = ({ children }: PropsWithChildren) => (
-    <Flex alignItems='center' className='text-sm pl-1 pb-1 pt-1'>
-        {children}
-    </Flex>
-);
+export type DefaultPayload = {
+    value?: number | (string | number)[];
+    name?: string;
+    payload?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+};
 
 export type ChartLegendSettings = {
     legendFormatType?: LegendFormatType;
     active?: boolean;
-    payload?: any;
-    customValue?: CustomOptions;
+    payload?: Array<DefaultPayload>;
     customLabel?: CustomOptions;
-    title?: boolean;
-    ignoreValue?: boolean;
     formats?: FormatTypes[];
     accumulated?: boolean;
     categoryColors: Map<string, Color>;
@@ -35,24 +32,18 @@ export type CustomOptions = {
     values: string[];
 };
 
-const getCustomLabel = ({ values, prefix }: CustomOptions, index: number, { name }: any) =>
+const getCustomLabel = ({ values, prefix }: CustomOptions, index: number, { name }: DefaultPayload) =>
     prefix ? `${values[index]} ${name}` : `${name} ${values[index]}`;
 
-const getCustomValue = ({ values, prefix }: CustomOptions, index: number, { value }: any) =>
-    prefix ? `${values[index]} ${value}` : `${value} ${values[index]}`;
-
 const getLabel =
-    (customLabel: CustomOptions | undefined, customValue: CustomOptions | undefined, ignoreValue: boolean) =>
-    (category: any, index: number, legendFormatType?: LegendFormatType) => {
-        let { name, value } = category;
+    (customLabel: CustomOptions | undefined) =>
+    (category: DefaultPayload, index: number, legendFormatType?: LegendFormatType) => {
+        const { name, value } = category;
+        let stringName = String(name);
 
-        if (ignoreValue && value === 0.001) value = 0;
+        if (customLabel && customLabel.values.length > 0) stringName = getCustomLabel(customLabel, index, category);
 
-        if (customLabel && customLabel.values.length > 0) name = getCustomLabel(customLabel, index, category);
-
-        if (customValue && customValue.values.length > 0) value = getCustomValue(customValue, index, category);
-
-        return [humanize(name), getValueFormatted(value, legendFormatType)];
+        return [humanize(stringName), getValueFormatted(Number(value), legendFormatType)];
     };
 
 const StyledLegend = tw.div`
@@ -68,14 +59,29 @@ const StyledLegend = tw.div`
     dark:border-dark-tremor-border
 `;
 
-const getLegendFormatType = (formats: any[], index: number, legendFormatType: LegendFormatType) => {
+const getLegendFormatType = (index: number, formats?: string[], legendFormatType?: LegendFormatType) => {
     if (formats && formats[index] === 'percentage') return 'percentage';
     if (formats && formats[index] === 'money') return 'money';
     return legendFormatType;
 };
 
-const Component = ({ category, index, legendFormatType, formats, getLabelFunc, categoryColors }: any) => {
-    const [label, value] = getLabelFunc(category, index, getLegendFormatType(formats, index, legendFormatType));
+const Component = ({
+    category,
+    index,
+    legendFormatType,
+    formats,
+    getLabelFunc,
+    categoryColors,
+}: {
+    category: DefaultPayload;
+    index: number;
+    legendFormatType?: LegendFormatType;
+    formats?: string[];
+    getLabelFunc: (category: DefaultPayload, index: number, x?: LegendFormatType) => string[];
+    categoryColors: Map<string, Color>;
+}) => {
+    const [label, value] = getLabelFunc(category, index, getLegendFormatType(index, formats, legendFormatType));
+    const bgColor = categoryColors.get(category.name || '') || 'transparent';
 
     return (
         <Flex className='gap-2'>
@@ -87,7 +93,7 @@ const Component = ({ category, index, legendFormatType, formats, getLabelFunc, c
                     'border-tremor-background shadow-tremor-card',
                     // dark
                     'dark:border-dark-tremor-background dark:shadow-dark-tremor-card',
-                    getColorClassNames(categoryColors.get(category.name), colorPalette.background).bgColor,
+                    getColorClassNames(bgColor, colorPalette.background).bgColor,
                     sizing.sm.height,
                     sizing.sm.width,
                     border.md.all,
@@ -103,34 +109,27 @@ export const UnoChartTooltip = ({
     active,
     payload,
     customLabel,
-    customValue,
-    ignoreValue = false,
     formats,
     accumulated,
     legendFormatType,
-    title = false,
     categoryColors,
 }: ChartLegendSettings) => {
     const localPayload = payload || [];
-    const legendTitle = localPayload.length > 0 ? localPayload[0].payload.name : '0';
-    const getLabelFunc = getLabel(customLabel, customValue, ignoreValue);
-
-    if (localPayload.some((c: any) => c.payload.name === 'IgnoreToolTip')) return payload[0].payload.label;
+    const getLabelFunc = getLabel(customLabel);
 
     return (
         <StyledLegend>
-            {title && <TooltipTitle>{legendTitle}</TooltipTitle>}
             {active &&
                 localPayload.length > 0 &&
                 (accumulated
                     ? localPayload
-                          .map((category: any, index: number) => {
-                              localPayload[index].value = Object.values(category.payload)
-                                  .filter((x: any) => x !== category.payload.name)
-                                  .map((_: any, j: any, arr: any[]) =>
+                          .map((category: DefaultPayload, index: number) => {
+                              localPayload[index].value = Object.values(category.payload) // eslint-disable-line @typescript-eslint/no-unsafe-argument
+                                  .filter((x: unknown) => x !== category.payload.name) // eslint-disable-line @typescript-eslint/no-unsafe-member-access
+                                  .map((_: unknown, j: number, arr: unknown[]) =>
                                       arr
-                                          .filter((__: any, k: any) => k <= j)
-                                          .reduce((prev: any, curr: any) => prev + curr, 0),
+                                          .filter((__: unknown, k: number) => k <= j)
+                                          .reduce((prev: number, curr: unknown) => prev + Number(curr), 0),
                                   )[index];
 
                               const options = {
@@ -144,7 +143,7 @@ export const UnoChartTooltip = ({
                               return <Component key={objectHash(options)} {...options} />;
                           })
                           .reverse()
-                    : localPayload.map((category: any, index: number) => {
+                    : localPayload.map((category: DefaultPayload, index: number) => {
                           const options = {
                               category,
                               index,

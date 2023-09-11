@@ -27,7 +27,7 @@ export const searchData = <TDataOut extends Array<unknown>>(
         .filter((y) => y.disableSearch === true)
         .map((x) => definitions.findIndex((z) => z.label === x.label));
 
-    return newData.filter((section: any[]) =>
+    return newData.filter((section: TDataOut) =>
         section.filter((_, i) => !ignoreColumns.includes(i)).some(defaultStringFilter(search)),
     );
 };
@@ -66,9 +66,14 @@ const sortOneColumn = <T extends TableColumn, TDataOut extends Array<unknown>>(
     return sortNumericString(String(a[sortColumn]), String(b[sortColumn]));
 };
 
-export const searchFooter = <TDataIn>(search: string, newRaw: TDataIn) =>
+export const searchFooter = <TDataIn extends Array<Record<string, unknown>> | Record<string, unknown>>(
+    search: string,
+    newRaw: TDataIn,
+) =>
     Array.isArray(newRaw)
-        ? (newRaw.filter((section: any) => Object.values(section).some(defaultStringFilter(search))) as TDataIn)
+        ? (newRaw.filter((section: Record<string, unknown>) =>
+              Object.values(section).some(defaultStringFilter(search)),
+          ) as TDataIn)
         : newRaw;
 
 export const sortData = <TDataOut extends Array<unknown>, T extends TableColumn>(

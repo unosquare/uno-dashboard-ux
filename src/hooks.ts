@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { debounce } from 'uno-js';
 
-export const useDebounce = (callback: any) => {
-    const ref = useRef<any>();
+export const useDebounce = (callback: () => unknown) => {
+    const ref = useRef<() => unknown>();
 
     useEffect(() => {
         ref.current = callback;

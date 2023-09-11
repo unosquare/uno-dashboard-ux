@@ -28,7 +28,7 @@ import { ChartLineShimmer } from '../ChartShimmers';
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
     tooltip?: ChartTooltipType;
-    onClick?: (e: any) => void;
+    onClick?: (ev: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
     domain?: number;
     unit?: string;
     refLineY?: { value: number; label: string; color: string };
@@ -48,14 +48,14 @@ const xPadding = {
 };
 
 export const getChartSeries = (data: Record<string, unknown>[]) =>
-    data.reduce((current: string[], serie: any) => {
+    data.reduce((current: string[], serie: Record<string, unknown>) => {
         Object.keys(serie)
             .filter((property) => property !== 'name')
             .forEach((entry) => {
                 if (!current.includes(entry)) current.push(entry);
             });
         return current;
-    }, []);
+    }, new Array<string>());
 
 export const DataChart = ({
     dataCallback,
@@ -70,11 +70,12 @@ export const DataChart = ({
     isLoading,
     className,
     tooltip = 'classic',
-}: DataChartSettings<any>) => {
+}: DataChartSettings<Record<string, unknown>[]>) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
 
-    const tickFormatter = (t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const tickFormatter = (t: any) => (legendFormatType ? formatTicks(Number(t), legendFormatType) : t) as string;
     const categoryColors = constructCategoryColors(getChartSeries(dataStore), colors);
 
     useEffect(() => {
@@ -135,7 +136,7 @@ export const DataChart = ({
                                         <ChartTooltip
                                             active={active}
                                             payload={payload}
-                                            label={label}
+                                            label={label as string}
                                             valueFormatter={(value: number) =>
                                                 getValueFormatted(value, legendFormatType)
                                             }
@@ -154,7 +155,7 @@ export const DataChart = ({
                                 content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
                             />
                         )}
-                        {getChartSeries(dataStore).map((property: any, index: number) => (
+                        {getChartSeries(dataStore).map((property: string, index: number) => (
                             <Line
                                 className={getColorClassNames(colors[index], colorPalette.text).strokeColor}
                                 activeDot={{

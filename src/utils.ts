@@ -15,7 +15,7 @@ export const translateFormat = (format?: LegendFormatType) => {
     }
 };
 
-export const formatTicks = (t: any, formatType: LegendFormatType) => {
+export const formatTicks = (t: number, formatType: LegendFormatType) => {
     if (formatType === 'money') {
         if (t >= 1000000) return `${t / 1000000}M`;
 
@@ -25,7 +25,7 @@ export const formatTicks = (t: any, formatType: LegendFormatType) => {
     return formatter(t, translateFormat(formatType));
 };
 
-export const getValueFormatted = (value: any, legendFormatType?: LegendFormatType) => {
+export const getValueFormatted = (value: number, legendFormatType?: LegendFormatType) => {
     if (legendFormatType === 'money' || legendFormatType === 'percentage')
         return formatter(value, translateFormat(legendFormatType));
 

@@ -11,7 +11,7 @@ export type ReactSelectGroupOption = {
 const defaultFontFamily = '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif';
 
 export const selectStyles = {
-    container: (styles: any) => ({
+    container: (styles: Record<string, unknown>) => ({
         ...styles,
         minWidth: '200px',
         width: '90%',
@@ -20,7 +20,7 @@ export const selectStyles = {
         fontSize: '12px',
         fontFamily: defaultFontFamily,
     }),
-    control: (styles: any) => ({
+    control: (styles: Record<string, unknown>) => ({
         ...styles,
         width: '100%',
         marginLeft: 'auto',
@@ -28,14 +28,14 @@ export const selectStyles = {
         fontSize: '12px',
         fontFamily: defaultFontFamily,
     }),
-    option: (styles: any, { isDisabled }: any) => ({
+    option: (styles: Record<string, unknown>, { isDisabled }: Record<string, unknown>) => ({
         ...styles,
         color: 'black',
         cursor: isDisabled ? 'not-allowed' : 'default',
         fontSize: '12px',
         fontFamily: defaultFontFamily,
         ':active': {
-            ...styles[':active'],
+            ...(typeof styles[':active'] === 'object' && styles[':active']),
         },
     }),
 };

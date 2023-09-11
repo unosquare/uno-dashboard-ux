@@ -8,16 +8,23 @@ import { colorPalette } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
 
+type ClassNameProps = { className?: string };
+
 const defaultShimmerColors = new Map<string, Color>();
 defaultShimmerColors.set('Loading', 'gray');
 
 const generateFakeData = () =>
-    [...Array(6)].map((_, i) => ({
-        name: `Loading ${i + 1}`,
-        Loading: Math.floor(Math.random() * 100),
-    }));
+    Array.from(
+        {
+            length: 6,
+        },
+        (_, i) => ({
+            name: `Loading ${i + 1}`,
+            Loading: Math.floor(Math.random() * 100),
+        }),
+    );
 
-export const ChartBarShimmer = ({ className }: any) => {
+export const ChartBarShimmer = ({ className }: ClassNameProps) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>(generateFakeData());
 
@@ -51,7 +58,7 @@ export const ChartBarShimmer = ({ className }: any) => {
     );
 };
 
-export const ChartLineShimmer = ({ className }: any) => {
+export const ChartLineShimmer = ({ className }: ClassNameProps) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>(generateFakeData());
 

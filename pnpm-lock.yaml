@@ -9,8 +9,8 @@ dependencies:
     specifier: ^2.0.214
     version: 2.0.214(react@18.2.0)
   '@tremor/react':
-    specifier: ^3.7.3
-    version: 3.7.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3)
+    specifier: ^3.7.4
+    version: 3.7.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -27,8 +27,8 @@ dependencies:
     specifier: ^2.2.0
     version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
   uno-js:
-    specifier: ^3.37.0
-    version: 3.37.0
+    specifier: ^3.38.0
+    version: 3.38.0
 
 devDependencies:
   '@rspack/cli':
@@ -56,8 +56,8 @@ devDependencies:
     specifier: ^8.49.0
     version: 8.49.0
   eslint-config-unosquare:
-    specifier: 0.3.4
-    version: 0.3.4(eslint@8.49.0)(prettier@3.0.3)(typescript@5.2.2)
+    specifier: 0.5.0
+    version: 0.5.0(eslint@8.49.0)(prettier@3.0.3)(typescript@5.2.2)
   eslint-plugin-jsx-a11y:
     specifier: ^6.7.1
     version: 6.7.1(eslint@8.49.0)
@@ -663,8 +663,8 @@ packages:
       tslib: 2.6.0
     dev: true
 
-  /@tremor/react@3.7.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3):
-    resolution: {integrity: sha512-SnLobbTk809KITki/VpNNS5eOLX4vCNe4LCGK+9KcYSWMYodwRcA1HaCYH9/fNmdvWWO8P2ntJyiJP2H3KXDQQ==}
+  /@tremor/react@3.7.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3):
+    resolution: {integrity: sha512-tg42pkSgBK/VZwzp9gHTXexntXEgcakN3/8KcMC08ySzErf6FDtFnBGOLFu3WfJ9aNQNguo8mXLz0cmMZQR7Gw==}
     peerDependencies:
       react: ^18.0.0
       react-dom: '>=16.6.0'
@@ -2353,8 +2353,8 @@ packages:
       eslint: 8.49.0
     dev: true
 
-  /eslint-config-unosquare@0.3.4(eslint@8.49.0)(prettier@3.0.3)(typescript@5.2.2):
-    resolution: {integrity: sha512-ZrkHKsRqNbpuXL3YDlCXR74LSD0We1WLRezAAQNm3s15L2z931+TPzRPbQjftYnXwUjHfOwCOB4mH0+Wd59xhg==}
+  /eslint-config-unosquare@0.5.0(eslint@8.49.0)(prettier@3.0.3)(typescript@5.2.2):
+    resolution: {integrity: sha512-6w965ufVPWjNNld224wvvdQX1uCBWBKwN7rJXL4IXTYjBBQGliAWE3+rFlW37LmbJIBYBxPMJKPlGB4r/sI4Jg==}
     peerDependencies:
       eslint: ^8.44.0
       prettier: ^3.0.0
@@ -5138,8 +5138,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /uno-js@3.37.0:
-    resolution: {integrity: sha512-Eq2B8s8gkf8H2NPv5aGMAphxP9nfh/I5A19qNImAdpLvvy8c7m9Cozzt8tSAsg+9lcje76auLDqIaAcLIJLqNQ==}
+  /uno-js@3.38.0:
+    resolution: {integrity: sha512-LAVP8EX0EowdQhiSHDA3h6JCd9TPhVNJSgxJ79AeG7IOjpy6CsX94YuIiwsPNzV3Lyp8aFFJ+RFLT7086fd/Dg==}
     dev: false
 
   /unpipe@1.0.0:

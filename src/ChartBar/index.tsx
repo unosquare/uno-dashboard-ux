@@ -43,11 +43,10 @@ export type ChartBarSettings<TDataIn> = {
     xAxis?: boolean;
     multiXAxis?: {
         primary: XAxisPrimaryFormatter;
-        secondary: (props: any) => ReactElement<SVGElement>;
+        secondary: (props: React.ComponentPropsWithRef<'svg'>) => ReactElement<SVGElement>;
     };
     stacked?: boolean;
-    onClick?: (e: any) => void;
-    hasTitle?: boolean;
+    onClick?: (ev: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
     accumulated?: boolean;
     scroll?: boolean;
     refLineY?: { value: number; label: string; color: string };
@@ -67,7 +66,6 @@ export const ChartBar = ({
     multiXAxis,
     stacked,
     onClick,
-    hasTitle,
     tooltip = 'classic',
     legendFormatType,
     accumulated = false,
@@ -75,11 +73,14 @@ export const ChartBar = ({
     isLoading = false,
     refLineY,
     className,
-}: ChartBarSettings<any>) => {
+}: ChartBarSettings<Record<string, unknown>[]>) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
     const [categoryColors, setCategoryColors] = useState<Map<string, Color>>(new Map());
     const [keys, setKeys] = useState<string[]>([]);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const tickFormatter = (t: any) => (legendFormatType ? formatTicks(Number(t), legendFormatType) : t) as string;
 
     useEffect(() => {
         setKeys(dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : []);
@@ -115,7 +116,7 @@ export const ChartBar = ({
                             />
                         )}
                         <YAxis
-                            tickFormatter={(t: any) => (legendFormatType ? formatTicks(t, legendFormatType) : t)}
+                            tickFormatter={tickFormatter}
                             type='number'
                             domain={[0, domain ?? 'auto']}
                             unit={unit}
@@ -142,7 +143,6 @@ export const ChartBar = ({
                                 tooltip === 'classic' ? (
                                     <UnoChartTooltip
                                         legendFormatType={legendFormatType}
-                                        title={hasTitle}
                                         accumulated={accumulated}
                                         categoryColors={categoryColors}
                                     />
@@ -151,7 +151,7 @@ export const ChartBar = ({
                                         <ChartTooltip
                                             active={active}
                                             payload={payload}
-                                            label={label}
+                                            label={label as string}
                                             valueFormatter={(value: number) =>
                                                 getValueFormatted(value, legendFormatType)
                                             }

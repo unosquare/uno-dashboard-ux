@@ -16,7 +16,7 @@ export const PieChart = ({
     legendFormatType,
     className,
     colors = themeColorRange,
-}: ChartComponent<any, ChartData[]>) => {
+}: ChartComponent<Record<string, unknown>[], ChartData[]>) => {
     const dataStore: ChartData[] = (dataCallback && rawData && dataCallback(rawData)) || [];
     const categoryColors = constructCategoryColors(
         dataStore.map((x) => x.name),

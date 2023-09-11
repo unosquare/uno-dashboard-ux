@@ -40,7 +40,7 @@ export type RenderTableFunc = <TDataIn, TDataOut extends Array<unknown>>(
     rawData: TDataIn,
 ) => React.ReactNode;
 
-export type TableSettings<TDataIn, TDataOut extends Array<any>> = {
+export type TableSettings<TDataIn, TDataOut extends Array<unknown>> = {
     rawData: TDataIn;
     dataCallback: (data: TDataIn) => TDataOut[];
     columns: TableColumn[];
@@ -122,7 +122,7 @@ const translateType = (type: DataTypes | undefined): FormatTypes | undefined => 
     }
 };
 
-const renderLinkString = (data: any) => {
+const renderLinkString = (data: unknown) => {
     if (data instanceof Array) {
         return (data as string[])[0] ? (
             <>
@@ -136,6 +136,8 @@ const renderLinkString = (data: any) => {
             (data as string[])[1]
         );
     }
+
+    if (typeof data !== 'string') return null;
 
     return (
         <a href={data} target='_blank' rel='noopener noreferrer'>
@@ -193,7 +195,7 @@ export const renderTableCell = (data: unknown, definition: TableColumn | undefin
             return <LongTextCell text={String(data)} />;
         default: {
             const formatType = translateType(definition?.dataType);
-            return formatType ? formatter(String(data), formatType, definition?.formatterOptions) : `${data}`;
+            return formatType ? formatter(String(data), formatType, definition?.formatterOptions) : String(data);
         }
     }
 };
@@ -245,7 +247,7 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
                     key={objectHash(definition[index])}
                     className={`p-2 text-xs/[13px] ${getAlignment(definition[index], index)}`}
                 >
-                    {`${foot}`}
+                    {String(foot)}
                 </TableFooterCell>
             ))}
         </TableRow>
@@ -255,7 +257,7 @@ const TableFooter = ({ footer, definition }: TableFooterProps) => (
 const getRows: RenderTableFunc = (data: unknown[][], definitions: TableColumn[]) =>
     data.map((row: unknown[]) => (
         <TableRow key={objectHash(row)}>
-            {row.map((cell: any, index: number) => (
+            {row.map((cell: unknown, index: number) => (
                 <TableCell
                     key={objectHash({ a: definitions[index], c: cell })}
                     className={`p-2 whitespace-normal text-xs/[13px] ${getAlignment(definitions[index], index)}`}
@@ -266,16 +268,18 @@ const getRows: RenderTableFunc = (data: unknown[][], definitions: TableColumn[])
         </TableRow>
     ));
 
-const renderToRowString = (data: any[], definitions: TableColumn[]) =>
-    data.map((row: any) =>
-        row.map((cell: any, index: number) => {
+const renderToRowString = <TDataOut extends Array<unknown>>(data: TDataOut[], definitions: TableColumn[]) =>
+    data.map((row: TDataOut) =>
+        row.map((cell: unknown, index: number) => {
             const dataType = definitions[index]?.dataType;
             if (dataType === 'boolean') return cell ? 'TRUE' : 'FALSE';
             if (!cell && dataType === 'money') return '$0.00';
-            if (cell == null || cell === ' ') return 'N/A';
+
+            const cellString = String(cell);
+            if (cellString == null || cellString === ' ') return 'N/A';
 
             const formatType = translateType(dataType);
-            return formatType ? formatter(cell.toString(), formatType) : cell;
+            return formatType ? formatter(cellString, formatType) : cellString;
         }),
     );
 

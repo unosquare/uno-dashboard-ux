@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import tw from 'tailwind-styled-components';
 
-const MainApp = tw.main<any>`
+const MainApp = tw.main<{ $hasToolbar?: boolean }>`
     w-full
     bg-[#f1f2f3]
     dark:bg-[#3D4A66]
