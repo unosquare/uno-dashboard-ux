@@ -1,7 +1,7 @@
 import { compareDates, defaultStringFilter, sortComparer, sortNumericString } from 'uno-js';
 import { DataTypes, SortDirection, TextAlign } from '../constants';
 
-export type TableCellTypes = string | number | Array<string> | Date | boolean | null;
+export type TableCellTypes = string | number | Array<string> | Date | boolean | null | undefined;
 
 export type TableColumn = {
     label: string;

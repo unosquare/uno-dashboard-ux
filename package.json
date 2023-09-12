@@ -8,7 +8,7 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.214",
+        "@fluentui/react-icons": "^2.0.215",
         "@tremor/react": "^3.7.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -23,7 +23,7 @@
         "@types/object-hash": "^3.0.4",
         "@types/react": "^18.2.21",
         "@types/react-dom": "^18.2.7",
-        "@typescript-eslint/eslint-plugin": "^6.6.0",
+        "@typescript-eslint/eslint-plugin": "^6.7.0",
         "autoprefixer": "^10.4.15",
         "eslint": "^8.49.0",
         "eslint-config-unosquare": "0.5.0",
