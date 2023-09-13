@@ -40,7 +40,6 @@ module.exports = {
                 allowSeparatedGroups: false,
             },
         ],
-        'react/jsx-no-useless-fragment': 'warn',
         'react/no-unstable-nested-components': 'warn',
     },
 };
