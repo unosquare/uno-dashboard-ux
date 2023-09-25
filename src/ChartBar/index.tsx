@@ -165,7 +165,9 @@ export const ChartBar = <T,>({
                             <Legend
                                 iconType='circle'
                                 height={legendHeight}
-                                content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
+                                content={({ payload }) =>
+                                    ChartLegend({ payload }, categoryColors, setLegendHeight, undefined, undefined)
+                                }
                             />
                         )}
                         {keys.map((property) =>

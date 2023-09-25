@@ -152,7 +152,9 @@ export const DataChart = <T,>({
                                 iconType='circle'
                                 verticalAlign='top'
                                 height={legendHeight}
-                                content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight)}
+                                content={({ payload }) =>
+                                    ChartLegend({ payload }, categoryColors, setLegendHeight, undefined, undefined)
+                                }
                             />
                         )}
                         {getChartSeries(dataStore).map((property: string, index: number) => (

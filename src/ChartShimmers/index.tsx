@@ -41,7 +41,9 @@ export const ChartBarShimmer = ({ className }: ClassNameProps) => {
                     <Legend
                         iconType='circle'
                         height={legendHeight}
-                        content={({ payload }) => ChartLegend({ payload }, defaultShimmerColors, setLegendHeight)}
+                        content={({ payload }) =>
+                            ChartLegend({ payload }, defaultShimmerColors, setLegendHeight, undefined, undefined)
+                        }
                     />
                     <Bar
                         dataKey='Loading'
@@ -76,7 +78,9 @@ export const ChartLineShimmer = ({ className }: ClassNameProps) => {
                     <Legend
                         iconType='circle'
                         height={legendHeight}
-                        content={({ payload }) => ChartLegend({ payload }, defaultShimmerColors, setLegendHeight)}
+                        content={({ payload }) =>
+                            ChartLegend({ payload }, defaultShimmerColors, setLegendHeight, undefined, undefined)
+                        }
                     />
                     <Line
                         className={getColorClassNames('gray', colorPalette.text).strokeColor}
