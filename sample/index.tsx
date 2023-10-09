@@ -87,7 +87,7 @@ const Application = () => {
         onToggleMenu();
     };
 
-    const barClick = (ev) => {
+    const barClick = (ev: string) => {
         console.log(ev);
         setCounter((x) => x + 1);
     };
@@ -162,7 +162,7 @@ const Application = () => {
                             legendFormatType='percentage'
                             isLoading={loading}
                             tooltip='tremor'
-                            onClick={barClick}
+                            onClick={console.log}
                         />
                     </Card>
                     <Card>

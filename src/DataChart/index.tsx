@@ -28,7 +28,7 @@ import { ChartLineShimmer } from '../ChartShimmers';
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
     tooltip?: ChartTooltipType;
-    onClick?: (ev: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
+    onClick?: (activeTooltipIndex: number) => void;
     domain?: number;
     unit?: string;
     refLineY?: { value: number; label: string; color: string };
@@ -78,6 +78,12 @@ export const DataChart = <T,>({
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(Number(t), legendFormatType) : t) as string;
     const categoryColors = constructCategoryColors(getChartSeries(dataStore), colors);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onClickEvent = (event: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        if (event && event.activeTooltipIndex !== null && onClick) onClick(Number(event.activeTooltipIndex));
+    };
+
     useEffect(() => {
         setDataStore((dataCallback && rawData && dataCallback(rawData)) || []);
     }, [rawData, dataCallback]);
@@ -88,7 +94,7 @@ export const DataChart = <T,>({
         <Flex className={twMerge('w-full h-60', className)}>
             {dataStore.length > 0 ? (
                 <ResponsiveContainer>
-                    <LineChart data={dataStore} margin={margin} onClick={onClick}>
+                    <LineChart data={dataStore} margin={margin} onClick={onClickEvent}>
                         <CartesianGrid strokeDasharray='2 2' />
                         <XAxis dataKey='name' padding={xPadding} />
                         <YAxis

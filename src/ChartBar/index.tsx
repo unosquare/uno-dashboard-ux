@@ -46,7 +46,7 @@ export type ChartBarSettings<TDataIn> = {
         secondary: (props: React.ComponentPropsWithRef<'svg'>) => ReactElement<SVGElement>;
     };
     stacked?: boolean;
-    onClick?: (ev: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
+    onClick?: (activeLabel: string) => void;
     accumulated?: boolean;
     scroll?: boolean;
     refLineY?: { value: number; label: string; color: string };
@@ -82,6 +82,12 @@ export const ChartBar = <T,>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(Number(t), legendFormatType) : t) as string;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onClickEvent = (event: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        if (event && event.activeLabel && onClick) onClick(String(event.activeLabel));
+    };
+
     useEffect(() => {
         setKeys(dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : []);
     }, [dataStore]);
@@ -100,7 +106,7 @@ export const ChartBar = <T,>({
         <Flex className={twMerge('w-full h-60', className)}>
             {dataStore.length > 0 ? (
                 <ResponsiveContainer>
-                    <BarChart data={dataStore} maxBarSize={barSize} onClick={onClick}>
+                    <BarChart data={dataStore} maxBarSize={barSize} onClick={onClickEvent}>
                         {xAxis && !multiXAxis && <XAxis dataKey='name' />}
                         {xAxis && multiXAxis && <XAxis dataKey='name' tickFormatter={multiXAxis.primary} />}
                         {xAxis && multiXAxis && (
