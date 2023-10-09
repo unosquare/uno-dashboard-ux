@@ -28,7 +28,7 @@ import { ChartLineShimmer } from '../ChartShimmers';
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
     tooltip?: ChartTooltipType;
-    onClick?: (activeTooltipIndex: number) => void;
+    onClick?: (activeTooltipIndex: number, activeLabel: string) => void;
     domain?: number;
     unit?: string;
     refLineY?: { value: number; label: string; color: string };
@@ -81,7 +81,9 @@ export const DataChart = <T,>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onClickEvent = (event: any) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (event && event.activeTooltipIndex !== null && onClick) onClick(Number(event.activeTooltipIndex));
+        if (event && event.activeTooltipIndex !== null && onClick)
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            onClick(Number(event.activeTooltipIndex), String(event.activeLabel));
     };
 
     useEffect(() => {
