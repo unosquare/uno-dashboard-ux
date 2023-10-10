@@ -46,7 +46,7 @@ export type ChartBarSettings<TDataIn> = {
         secondary: (props: React.ComponentPropsWithRef<'svg'>) => ReactElement<SVGElement>;
     };
     stacked?: boolean;
-    onClick?: (activeLabel: string) => void;
+    onClick?: (activeLabel: string, activeTooltipIndex: number) => void;
     accumulated?: boolean;
     scroll?: boolean;
     refLineY?: { value: number; label: string; color: string };
@@ -85,7 +85,7 @@ export const ChartBar = <T,>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onClickEvent = (event: any) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (event && event.activeLabel && onClick) onClick(String(event.activeLabel));
+        if (event && event.activeLabel && onClick) onClick(String(event.activeLabel), Number(event.activeTooltipIndex));
     };
 
     useEffect(() => {
