@@ -35,7 +35,7 @@ import { useDebounce } from '../hooks';
 export * from './sortData';
 
 export type TableSettings<TDataIn> = {
-    rawData: TDataIn;
+    rawData: TDataIn | undefined;
     dataCallback: (data: TDataIn) => TableCellTypes[][];
     columns: TableColumn[];
     isLoading?: boolean;
@@ -331,6 +331,8 @@ export const Table = <TDataIn,>({
     };
 
     useEffect(() => {
+        if (!rawData) return;
+
         startTransition(() => {
             setRawDataState(rawData);
 

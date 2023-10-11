@@ -55,6 +55,12 @@ const columns: TableColumn[] = [
     { label: 'Long text', dataType: 'paragraph' },
 ];
 
+const onlineColumns: TableColumn[] = [
+    { label: 'Id', sortOrder: 1, sortDirection: 'asc', dataType: 'number' },
+    { label: 'Title' },
+    { label: 'Body' },
+];
+
 const calculateFooter = (data: unknown[][]) => ['Total', '', data.length, '', '', '', '', '', ''];
 
 const chartData = [
@@ -63,6 +69,15 @@ const chartData = [
     { name: 'Group C', Value: 30.25 },
 ];
 
+type onlineDto = {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+};
+
+const processOnlineData = (data: onlineDto[]) => data ? data.map((x) => [x.id, x.title, x.body]) : [];
+
 const Application = () => {
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
     const [openMenu, setOpenMenu] = useToggle();
@@ -70,10 +85,14 @@ const Application = () => {
     const [toggle, setToggle] = useToggle(true);
     const [theme, setTheme] = useTheme();
     const [counter, setCounter] = useState(0);
-    const [showModal, SetShowModal] = useToggle(false);
+    const [showModal, setShowModal] = useToggle(false);
+    const [onlineData, setOnlineData] = useState<onlineDto[]>();
 
     React.useEffect(() => {
-        setTimeout(() => isLoading(false), 2000);
+        setTimeout(() => {
+            isLoading(false);
+            fetch('https://jsonplaceholder.typicode.com/posts').then(r => r.json()).then(setOnlineData);
+        }, 2000);
     }, []);
 
     const onToggleMenu = () => {
@@ -147,7 +166,7 @@ const Application = () => {
                 <Button size='xs' onClick={setToggle}>
                     Toggle Data
                 </Button>
-                <Button size='xs' onClick={SetShowModal}>
+                <Button size='xs' onClick={setShowModal}>
                     Show Modal
                 </Button>
             </BasicToolbar>
@@ -203,10 +222,21 @@ const Application = () => {
                             </Table>
                         </Card>
                     </Col>
+                    <Col numColSpan={3}>
+                        <Card>
+                            <Table
+                                columns={onlineColumns}
+                                rawData={onlineData}
+                                dataCallback={processOnlineData}
+                            >
+                                <Title className='w-full'>Online Data</Title>
+                            </Table>
+                        </Card>
+                    </Col>
                 </Grid>
             </TremorContainer>
             {showModal && (
-                <Modal onClose={SetShowModal}>
+                <Modal onClose={setShowModal}>
                     <Table
                         className='h-72'
                         columns={columns}
