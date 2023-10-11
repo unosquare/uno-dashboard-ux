@@ -212,7 +212,6 @@ const Application = () => {
                                 columns={columns}
                                 rawData={toggle ? defaultData : anotherDataSet}
                                 dataCallback={identity}
-                                isLoading={loading}
                                 searchable
                                 sortable
                                 exportCsv
@@ -242,7 +241,6 @@ const Application = () => {
                         columns={columns}
                         rawData={defaultData}
                         dataCallback={identity}
-                        isLoading={loading}
                         searchable
                     >
                         <Title className='w-full'>Modal Table</Title>

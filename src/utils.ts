@@ -1,6 +1,11 @@
 import { formatter } from 'uno-js';
 import { LegendFormatType } from './constants';
 
+export type DataComponent<TDataIn, TDataOut> = {
+    rawData: TDataIn | undefined;
+    dataCallback: (data: TDataIn) => TDataOut;
+};
+
 export const translateFormat = (format?: LegendFormatType) => {
     switch (format) {
         case 'money':
