@@ -1,3 +1,5 @@
+import { ReactSelectOption } from '../src/Select';
+
 export const defaultData = [
     ['Pepe', 'Mexico', new Date('2022-01-01'), 50, 1, 1000, 10.25, true, 'https://www.google.com', 'Small text'],
     ['Pepe', 'LA', new Date('2022-01-02'), 30, 25, null, 10 / 3, true, '', 'Small text'],
@@ -54,3 +56,11 @@ export const anotherDataSet = [
         new Date('2022-01-01'),
     ]
 ];
+
+export const getLargeSelectOptions = () => {
+    const options: ReactSelectOption[] = [];
+    for (let i = 0; i < 1000; i++) {
+        options.push({ label: `Option ${i}`, value: i });
+    }
+    return options;
+}
