@@ -9,6 +9,7 @@ import {
 } from '@fluentui/react-icons';
 import { Button, Card, Col, Flex, Grid, Select, SelectItem, Text, Title } from '@tremor/react';
 import {
+    AwaitableMetric,
     BasicToolbar,
     Blur,
     Burger,
@@ -56,6 +57,12 @@ const columns: TableColumn[] = [
     { label: 'Long text', dataType: 'paragraph' },
 ];
 
+const onlineColumns: TableColumn[] = [
+    { label: 'Id', sortOrder: 1, sortDirection: 'asc', dataType: 'number' },
+    { label: 'Title' },
+    { label: 'Body' },
+];
+
 const calculateFooter = (data: unknown[][]) => ['Total', '', data.length, '', '', '', '', '', ''];
 
 const chartData = [
@@ -63,6 +70,15 @@ const chartData = [
     { name: 'Group B', Value: 20.1 },
     { name: 'Group C', Value: 30.25 },
 ];
+
+type onlineDto = {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+};
+
+const processOnlineData = (data: onlineDto[]) => data ? data.map((x) => [x.id, x.title, x.body]) : [];
 
 const Application = () => {
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
@@ -72,10 +88,14 @@ const Application = () => {
     const [toggle, setToggle] = useToggle(true);
     const [theme, setTheme] = useTheme();
     const [counter, setCounter] = useState(0);
-    const [showModal, SetShowModal] = useToggle(false);
+    const [showModal, setShowModal] = useToggle(false);
+    const [onlineData, setOnlineData] = useState<onlineDto[]>();
 
     React.useEffect(() => {
-        setTimeout(() => isLoading(false), 2000);
+        setTimeout(() => {
+            isLoading(false);
+            fetch('https://jsonplaceholder.typicode.com/posts').then(r => r.json()).then(setOnlineData);
+        }, 2000);
     }, []);
 
     const onToggleMenu = () => {
@@ -124,7 +144,7 @@ const Application = () => {
                             </StyledMenuActions>
                             <Flex justifyContent='between' alignItems='center' className='gap-4'>
                                 <Text>Options</Text>
-                                <Select value={currentOption} onValueChange={setCurrentOption}>
+                                <Select enableClear={false} value={currentOption} onValueChange={setCurrentOption}>
                                     <SelectItem value={options.A}>Apple</SelectItem>
                                     <SelectItem value={options.B}>Bolt</SelectItem>
                                     <SelectItem value={options.C}>Cactus</SelectItem>
@@ -149,7 +169,7 @@ const Application = () => {
                 <Button size='xs' onClick={setToggle}>
                     Toggle Data
                 </Button>
-                <Button size='xs' onClick={SetShowModal}>
+                <Button size='xs' onClick={setShowModal}>
                     Show Modal
                 </Button>
                 <VirtualSelect
@@ -162,13 +182,24 @@ const Application = () => {
             <TremorContainer hasToolbar>
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
                     <Card>
+                        <Text>Metric 1</Text>
+                        <AwaitableMetric>{!loading && '100%'}</AwaitableMetric>
+                    </Card>
+                    <Card>
+                        <Text>Metric 2</Text>
+                        <AwaitableMetric>{!loading && '100%'}</AwaitableMetric>
+                    </Card>
+                    <Card>
+                        <Text>Metric 3</Text>
+                        <AwaitableMetric>{!loading && '100%'}</AwaitableMetric>
+                    </Card>
+                    <Card>
                         <DataChart
-                            rawData={chartData}
+                            rawData={loading ? undefined : chartData}
                             dataCallback={identity}
                             legend
                             className='mt-5'
                             legendFormatType='percentage'
-                            isLoading={loading}
                             tooltip='tremor'
                             onClick={console.log}
                         />
@@ -177,9 +208,8 @@ const Application = () => {
                         <Text className='font-medium'>Bar Chart</Text>
                         <ChartBar
                             className='mt-5'
-                            rawData={chartData}
+                            rawData={loading ? undefined : chartData}
                             dataCallback={identity}
-                            isLoading={loading}
                             legendFormatType='percentage'
                             legend
                             tooltip='tremor'
@@ -189,7 +219,7 @@ const Application = () => {
                     <Card className='h-96'>
                         <Text className='font-medium'>Pie Chart</Text>
                         <PieChart
-                            rawData={chartData}
+                            rawData={loading ? undefined : chartData}
                             dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
                             legendFormatType='money'
                         />
@@ -201,7 +231,6 @@ const Application = () => {
                                 columns={columns}
                                 rawData={toggle ? defaultData : anotherDataSet}
                                 dataCallback={identity}
-                                isLoading={loading}
                                 searchable
                                 sortable
                                 exportCsv
@@ -211,16 +240,26 @@ const Application = () => {
                             </Table>
                         </Card>
                     </Col>
+                    <Col numColSpan={3}>
+                        <Card>
+                            <Table
+                                columns={onlineColumns}
+                                rawData={onlineData}
+                                dataCallback={processOnlineData}
+                            >
+                                <Title className='w-full'>Online Data</Title>
+                            </Table>
+                        </Card>
+                    </Col>
                 </Grid>
             </TremorContainer>
             {showModal && (
-                <Modal onClose={SetShowModal}>
+                <Modal onClose={setShowModal}>
                     <Table
                         className='h-72'
                         columns={columns}
                         rawData={defaultData}
                         dataCallback={identity}
-                        isLoading={loading}
                         searchable
                     >
                         <Title className='w-full'>Modal Table</Title>

@@ -19,15 +19,17 @@ export const formatTicks = (t: number, formatType: LegendFormatType) => {
     if (formatType === 'money') {
         if (t >= 1000000) return `${t / 1000000}M`;
 
-        return t >= 1000 ? `${t / 1000}K` : formatter(t, 'money');
+        const result = t >= 1000 ? `${t / 1000}K` : formatter(t, 'money');
+
+        return result ?? String(t);
     }
 
-    return formatter(t, translateFormat(formatType));
+    return formatter(t, translateFormat(formatType)) ?? String(t);
 };
 
 export const getValueFormatted = (value: number, legendFormatType?: LegendFormatType) => {
     if (legendFormatType === 'money' || legendFormatType === 'percentage')
-        return formatter(value, translateFormat(legendFormatType));
+        return formatter(value, translateFormat(legendFormatType)) ?? String(value);
 
     return `${legendFormatType === 'negative' ? value : Math.abs(value)}`;
 };

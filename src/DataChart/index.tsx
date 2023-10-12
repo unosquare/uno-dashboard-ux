@@ -32,7 +32,6 @@ export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, 
     domain?: number;
     unit?: string;
     refLineY?: { value: number; label: string; color: string };
-    isLoading?: boolean;
 };
 
 const margin = {
@@ -67,7 +66,6 @@ export const DataChart = <T,>({
     domain,
     unit,
     refLineY,
-    isLoading,
     className,
     tooltip = 'classic',
 }: DataChartSettings<T>) => {
@@ -90,7 +88,7 @@ export const DataChart = <T,>({
         setDataStore((dataCallback && rawData && dataCallback(rawData)) || []);
     }, [rawData, dataCallback]);
 
-    if (isLoading) return <ChartLineShimmer className={className} />;
+    if (!rawData) return <ChartLineShimmer className={className} />;
 
     return (
         <Flex className={twMerge('w-full h-60', className)}>

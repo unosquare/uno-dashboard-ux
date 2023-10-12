@@ -21,7 +21,7 @@ import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
 import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
 import { UnoChartTooltip } from '../ChartLegend';
-import { ChartTooltipType, LegendFormatType } from '../constants';
+import { ChartComponent, ChartTooltipType, LegendFormatType } from '../constants';
 import { NoData } from '../NoData';
 import { formatTicks, getValueFormatted } from '../utils';
 import { ChartBarShimmer } from '../ChartShimmers';
@@ -30,12 +30,9 @@ type XAxisPrimaryFormatter = {
     (input: string): string;
 };
 
-export type ChartBarSettings<TDataIn> = {
-    rawData?: TDataIn;
+export type ChartBarSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     tooltip?: ChartTooltipType;
-    colors?: Color[];
     legendFormatType?: LegendFormatType;
-    dataCallback?: (data: TDataIn) => Record<string, unknown>[];
     legend?: boolean;
     domain?: number;
     unit?: string;
@@ -50,8 +47,6 @@ export type ChartBarSettings<TDataIn> = {
     accumulated?: boolean;
     scroll?: boolean;
     refLineY?: { value: number; label: string; color: string };
-    isLoading?: boolean;
-    className?: string;
 };
 
 export const ChartBar = <T,>({
@@ -70,7 +65,6 @@ export const ChartBar = <T,>({
     legendFormatType,
     accumulated = false,
     scroll = false,
-    isLoading = false,
     refLineY,
     className,
 }: ChartBarSettings<T>) => {
@@ -100,7 +94,7 @@ export const ChartBar = <T,>({
         setDataStore((dataCallback && rawData && dataCallback(rawData)) || []);
     }, [rawData, dataCallback]);
 
-    if (isLoading) return <ChartBarShimmer className={className} />;
+    if (!rawData) return <ChartBarShimmer className={className} />;
 
     return (
         <Flex className={twMerge('w-full h-60', className)}>

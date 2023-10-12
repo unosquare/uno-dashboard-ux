@@ -1,6 +1,6 @@
 {
     "name": "uno-dashboard-ux",
-    "version": "2.76.0",
+    "version": "2.80.0",
     "description": "Unosquare Dashboard UX/UI",
     "main": "dist/index.js",
     "files": [
@@ -8,28 +8,27 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.219",
-        "@headlessui/react": "0.0.0-insiders.1469b85",
-        "@tremor/react": "^3.9.1",
+        "@fluentui/react-icons": "^2.0.220",
+        "@tremor/react": "^3.9.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "recharts": "^2.8.0",
         "tailwind-merge": "^1.14.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.43.0"
+        "uno-js": "^3.44.0"
     },
     "devDependencies": {
         "@rspack/cli": "^0.3.6",
         "@types/recharts": "1.8.25",
         "@types/object-hash": "^3.0.4",
-        "@types/react": "^18.2.27",
-        "@types/react-dom": "^18.2.12",
+        "@types/react": "^18.2.28",
+        "@types/react-dom": "^18.2.13",
         "@typescript-eslint/eslint-plugin": "^6.7.5",
         "autoprefixer": "^10.4.16",
         "eslint": "^8.51.0",
         "eslint-config-unosquare": "0.8.1",
         "eslint-plugin-jsx-a11y": "^6.7.1",
-        "eslint-plugin-prettier": "^5.0.0",
+        "eslint-plugin-prettier": "^5.0.1",
         "eslint-plugin-react": "^7.33.2",
         "eslint-plugin-react-hooks": "^4.6.0",
         "lint-staged": "^14.0.1",

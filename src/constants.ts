@@ -28,10 +28,17 @@ export type DataTypes =
 
 export type SortDirection = 'asc' | 'desc';
 
-export type ChartComponent<TDataIn, TDataOut> = {
-    colors?: Color[];
-    legendFormatType?: LegendFormatType;
-    rawData?: TDataIn;
-    dataCallback?: (data: TDataIn) => TDataOut;
+export type ClassNameComponent = {
     className?: string;
 };
+
+export type DataComponent<TDataIn, TDataOut> = {
+    rawData: TDataIn | undefined;
+    dataCallback: (data: TDataIn) => TDataOut;
+};
+
+export type ChartComponent<TDataIn, TDataOut> = DataComponent<TDataIn, TDataOut> &
+    ClassNameComponent & {
+        colors?: Color[];
+        legendFormatType?: LegendFormatType;
+    };

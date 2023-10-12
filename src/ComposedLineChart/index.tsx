@@ -33,7 +33,6 @@ interface ComposedLineChartSettings<TDataIn> extends ChartComponent<TDataIn, Rec
     domain?: number;
     unit?: string;
     refLineY?: { value: number; label: string; color: string };
-    isLoading?: boolean;
     formats?: FormatTypes[];
     legendFormatTypes?: legendXAxis;
     lines: lineChart[];
@@ -60,7 +59,6 @@ export const ComposedLineChart = <T,>({
     domain,
     unit,
     refLineY,
-    isLoading,
     formats,
     lines,
 }: ComposedLineChartSettings<T>) => {
@@ -80,7 +78,7 @@ export const ComposedLineChart = <T,>({
         themeColorRange,
     );
 
-    if (isLoading) return <ChartLineShimmer />;
+    if (!rawData) return <ChartLineShimmer />;
 
     return (
         <Flex className='w-full h-48'>

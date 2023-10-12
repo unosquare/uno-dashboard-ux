@@ -26,7 +26,7 @@ import { twMerge } from 'tailwind-merge';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { sizing } from '@tremor/react/dist/lib/sizing';
 import { border } from '@tremor/react/dist/lib/shape';
-import { DataTypes, SortDirection } from '../constants';
+import { ClassNameComponent, DataComponent, DataTypes, SortDirection } from '../constants';
 import { NoData } from '../NoData';
 import { searchData, searchFooter, sortData, TableCellTypes, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
@@ -34,19 +34,20 @@ import { useDebounce } from '../hooks';
 
 export * from './sortData';
 
-export type TableSettings<TDataIn> = {
-    rawData: TDataIn;
-    dataCallback: (data: TDataIn) => TableCellTypes[][];
-    columns: TableColumn[];
-    isLoading?: boolean;
-    noDataElement?: React.ReactNode;
-    searchable?: boolean;
-    calculateFooter?: (data: TDataIn) => unknown[];
-    sortable?: boolean;
-    exportCsv?: boolean;
-    render?: (data: TableCellTypes[][], definitions: TableColumn[], rawData: TDataIn | undefined) => React.ReactNode;
-    className?: string;
-};
+export type TableSettings<TDataIn> = DataComponent<TDataIn, TableCellTypes[][]> &
+    ClassNameComponent & {
+        columns: TableColumn[];
+        noDataElement?: React.ReactNode;
+        searchable?: boolean;
+        calculateFooter?: (data: TDataIn) => unknown[];
+        sortable?: boolean;
+        exportCsv?: boolean;
+        render?: (
+            data: TableCellTypes[][],
+            definitions: TableColumn[],
+            rawData: TDataIn | undefined,
+        ) => React.ReactNode;
+    };
 
 type HeaderSettings = {
     $sortable: boolean;
@@ -262,8 +263,8 @@ const getRows = (data: TableCellTypes[][], definitions: TableColumn[]) =>
     ));
 
 const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[]) =>
-    data.map((row: TableCellTypes[]) =>
-        row.map((cell: TableCellTypes, index: number) => {
+    data.map((row) =>
+        row.map((cell, index) => {
             const dataType = definitions[index]?.dataType;
             if (dataType === 'boolean') return cell ? 'TRUE' : 'FALSE';
             if (!cell && dataType === 'money') return '$0.00';
@@ -272,14 +273,19 @@ const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[])
             if (cellString == null || cellString === ' ') return 'N/A';
 
             const formatType = translateType(dataType);
-            return formatType ? formatter(cellString, formatType) : cellString;
+
+            if (formatType) return formatter(cellString, formatType) ?? cellString;
+
+            return cellString;
         }),
     );
 
 const ShimmerTable = ({ colSpan }: { colSpan: number }) =>
     Array.from({ length: 4 }).map((_, i) => (
+        // eslint-disable-next-line react/no-array-index-key
         <TableRow key={i}>
-            {Array.from({ length: colSpan }).map((o, k) => (
+            {Array.from({ length: colSpan }).map((_o, k) => (
+                // eslint-disable-next-line react/no-array-index-key
                 <TableCell className='p-2' key={k}>
                     <div className='loading-shimmer rounded'>&nbsp;</div>
                 </TableCell>
@@ -299,7 +305,6 @@ const SpanTable = ({ colSpan, children }: PropsWithChildren<{ colSpan: number }>
 
 export const Table = <TDataIn,>({
     columns,
-    isLoading,
     noDataElement,
     searchable,
     calculateFooter,
@@ -331,6 +336,8 @@ export const Table = <TDataIn,>({
     };
 
     useEffect(() => {
+        if (!rawData) return;
+
         startTransition(() => {
             setRawDataState(rawData);
 
@@ -371,7 +378,7 @@ export const Table = <TDataIn,>({
                     {exportCsv && (
                         <ExportCsvButton
                             onClick={onCsvClick}
-                            disabled={isLoading || searched.length === 0 ? true : undefined}
+                            disabled={!rawData || searched.length === 0 ? true : undefined}
                         />
                     )}
                     {searchable && (
@@ -380,7 +387,7 @@ export const Table = <TDataIn,>({
                             icon={Search12Regular}
                             value={search}
                             onChange={onSearchInternal}
-                            disabled={isLoading}
+                            disabled={!rawData}
                             type='text'
                             placeholder='Search'
                         />
@@ -390,12 +397,12 @@ export const Table = <TDataIn,>({
             <TremorTable className={twMerge('overflow-auto h-60 mt-5', className)}>
                 <TableHeaders
                     definitions={definitions}
-                    sortable={!isLoading && sortable}
+                    sortable={rawData !== undefined && sortable}
                     setSortColumn={setSortHeader}
                 />
                 <TableBody>
-                    {isLoading && <ShimmerTable colSpan={definitions.length} />}
-                    {!isLoading &&
+                    {!rawData && <ShimmerTable colSpan={definitions.length} />}
+                    {rawData &&
                         (searched.length > 0 ? (
                             renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawDataState)
                         ) : (
