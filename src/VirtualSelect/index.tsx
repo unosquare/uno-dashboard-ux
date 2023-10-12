@@ -154,7 +154,6 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
         >
             <Combobox.Button className='w-full'>
                 {icon && <IconSearch icon={icon} />}
-
                 <Combobox.Input
                     className={comboBoxStyles(value, disabled, !!icon)}
                     placeholder={placeholder}
