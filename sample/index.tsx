@@ -56,13 +56,20 @@ const columns: TableColumn[] = [
     { label: 'Long text', dataType: 'paragraph' },
 ];
 
+const extraColumns: TableColumn[] = [
+    { label: 'Name', sortOrder: 1, sortDirection: 'asc' },
+    { label: 'City', disableSearch: true, excludeFromSort: true, textAlign: 'left' },
+    { label: 'Date', dataType: 'date' },
+];
+
+
 const onlineColumns: TableColumn[] = [
     { label: 'Id', sortOrder: 1, sortDirection: 'asc', dataType: 'number' },
     { label: 'Title' },
     { label: 'Body' },
 ];
 
-const calculateFooter = (data: unknown[][]) => ['Total', '', data.length, '', '', '', '', '', ''];
+const calculateFooter = (data: unknown[][]) => ['Total', '', data.length, '', '', '', '', '', '', ''];
 
 const chartData = [
     { name: 'Group A', Value: 10.15 },
@@ -220,7 +227,7 @@ const Application = () => {
                         <Card>
                             <Table
                                 className='h-72'
-                                columns={columns}
+                                columns={toggle ? columns : extraColumns}
                                 rawData={toggle ? defaultData : anotherDataSet}
                                 dataCallback={identity}
                                 searchable

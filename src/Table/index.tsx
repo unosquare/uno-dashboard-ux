@@ -30,7 +30,7 @@ import { ClassNameComponent, DataComponent, DataTypes, SortDirection } from '../
 import { NoData } from '../NoData';
 import { searchData, searchFooter, sortData, TableCellTypes, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
-import { useDebounce } from '../hooks';
+import { useDebounce, useToggle } from '../hooks';
 
 export * from './sortData';
 
@@ -141,8 +141,7 @@ const renderLinkString = (data: TableCellTypes) => {
 };
 
 const LongTextCell = ({ text }: { text: string }) => {
-    const [showFullText, setShowFullText] = useState(false);
-    const toggleDisplayText = () => setShowFullText(!showFullText);
+    const [showFullText, toggleDisplayText] = useToggle();
 
     if (text.length <= 100) return text;
 
@@ -230,33 +229,33 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
 
 type TableFooterProps = {
     footer: unknown[];
-    definition: TableColumn[];
+    columns: TableColumn[];
 };
 
-const TableFooter = ({ footer, definition }: TableFooterProps) => (
+const TableFooter = ({ footer, columns }: TableFooterProps) => (
     <TableFoot className='sticky top-0 bottom-0 bg-tremor-background dark:bg-dark-tremor-background'>
         <TableRow>
-            {footer.map((foot, index) => (
+            {columns.map((column, index) => (
                 <TableFooterCell
-                    key={objectHash(definition[index])}
-                    className={`p-2 text-xs/[13px] ${getAlignment(definition[index], index)}`}
+                    key={objectHash(column)}
+                    className={`p-2 text-xs/[13px] ${getAlignment(column, index)}`}
                 >
-                    {String(foot)}
+                    {String(footer[index])}
                 </TableFooterCell>
             ))}
         </TableRow>
     </TableFoot>
 );
 
-const getRows = (data: TableCellTypes[][], definitions: TableColumn[]) =>
-    data.map((row: TableCellTypes[]) => (
+const getRows = (data: TableCellTypes[][], columns: TableColumn[]) =>
+    data.map((row) => (
         <TableRow key={objectHash(row)}>
-            {row.map((cell: TableCellTypes, index: number) => (
+            {columns.map((column, index) => (
                 <TableCell
-                    key={objectHash({ a: definitions[index], c: cell })}
-                    className={`p-2 whitespace-normal text-xs/[13px] ${getAlignment(definitions[index], index)}`}
+                    key={objectHash(column)}
+                    className={`p-2 whitespace-normal text-xs/[13px] ${getAlignment(column, index)}`}
                 >
-                    {renderTableCell(cell, definitions[index])}
+                    {renderTableCell(row[index], column)}
                 </TableCell>
             ))}
         </TableRow>
@@ -411,7 +410,7 @@ export const Table = <TDataIn,>({
                             </SpanTable>
                         ))}
                 </TableBody>
-                {searched.length > 0 && footerData && <TableFooter footer={footerData} definition={definitions} />}
+                {searched.length > 0 && footerData && <TableFooter footer={footerData} columns={definitions} />}
             </TremorTable>
         </>
     );
