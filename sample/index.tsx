@@ -30,11 +30,12 @@ import {
     Table,
     TableColumn,
     TremorContainer,
+    VirtualSelect,
     useTheme,
     useToggle,
 } from '../src';
 import '../src/resources/global.css';
-import { anotherDataSet, defaultData } from './data';
+import { anotherDataSet, defaultData, getLargeSelectOptions } from './data';
 
 export enum options {
     A = 'Apple',
@@ -81,6 +82,7 @@ const processOnlineData = (data: onlineDto[]) => data ? data.map((x) => [x.id, x
 
 const Application = () => {
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
+    const [virtualSelectOption, setVirtualSelectOption] = React.useState<string>(0);
     const [openMenu, setOpenMenu] = useToggle();
     const [loading, isLoading] = React.useState(true);
     const [toggle, setToggle] = useToggle(true);
@@ -170,6 +172,12 @@ const Application = () => {
                 <Button size='xs' onClick={setShowModal}>
                     Show Modal
                 </Button>
+                <VirtualSelect
+                    value={virtualSelectOption}
+                    onValueChange={setVirtualSelectOption}
+                    options={getLargeSelectOptions()}
+                    className='w-60'
+                />
             </BasicToolbar>
             <TremorContainer hasToolbar>
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
