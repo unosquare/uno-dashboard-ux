@@ -273,7 +273,10 @@ const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[])
             if (cellString == null || cellString === ' ') return 'N/A';
 
             const formatType = translateType(dataType);
-            return formatType ? formatter(cellString, formatType) : cellString;
+
+            if (formatType) return formatter(cellString, formatType) ?? cellString;
+
+            return cellString;
         }),
     );
 
