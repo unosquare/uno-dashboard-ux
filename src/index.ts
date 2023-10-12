@@ -24,3 +24,4 @@ export * from './UnoLogo';
 export * from './Blur';
 export * from './Menu';
 export * from './Modal';
+export * from './VirtualSelect';
