@@ -26,25 +26,28 @@ import { twMerge } from 'tailwind-merge';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { sizing } from '@tremor/react/dist/lib/sizing';
 import { border } from '@tremor/react/dist/lib/shape';
-import { DataTypes, SortDirection } from '../constants';
+import { ClassNameComponent, DataComponent, DataTypes, SortDirection } from '../constants';
 import { NoData } from '../NoData';
 import { searchData, searchFooter, sortData, TableCellTypes, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { useDebounce } from '../hooks';
-import { DataComponent } from '../utils';
 
 export * from './sortData';
 
-export type TableSettings<TDataIn> = DataComponent<TDataIn, TableCellTypes[][]> & {
-    columns: TableColumn[];
-    noDataElement?: React.ReactNode;
-    searchable?: boolean;
-    calculateFooter?: (data: TDataIn) => unknown[];
-    sortable?: boolean;
-    exportCsv?: boolean;
-    render?: (data: TableCellTypes[][], definitions: TableColumn[], rawData: TDataIn | undefined) => React.ReactNode;
-    className?: string;
-};
+export type TableSettings<TDataIn> = DataComponent<TDataIn, TableCellTypes[][]> &
+    ClassNameComponent & {
+        columns: TableColumn[];
+        noDataElement?: React.ReactNode;
+        searchable?: boolean;
+        calculateFooter?: (data: TDataIn) => unknown[];
+        sortable?: boolean;
+        exportCsv?: boolean;
+        render?: (
+            data: TableCellTypes[][],
+            definitions: TableColumn[],
+            rawData: TDataIn | undefined,
+        ) => React.ReactNode;
+    };
 
 type HeaderSettings = {
     $sortable: boolean;
@@ -260,8 +263,8 @@ const getRows = (data: TableCellTypes[][], definitions: TableColumn[]) =>
     ));
 
 const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[]) =>
-    data.map((row: TableCellTypes[]) =>
-        row.map((cell: TableCellTypes, index: number) => {
+    data.map((row) =>
+        row.map((cell, index) => {
             const dataType = definitions[index]?.dataType;
             if (dataType === 'boolean') return cell ? 'TRUE' : 'FALSE';
             if (!cell && dataType === 'money') return '$0.00';

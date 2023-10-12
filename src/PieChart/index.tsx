@@ -23,6 +23,12 @@ export const PieChart = <T,>({
         colors,
     );
 
+    if (!rawData) {
+        return (
+            <div className={twMerge('h-60 w-60 content-center loading-shimmer rounded-full', className)}>&nbsp;</div>
+        );
+    }
+
     return dataStore.length > 0 ? (
         <div className={twMerge('h-60', className)}>
             <ResponsiveContainer>

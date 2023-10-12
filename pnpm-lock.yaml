@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   '@fluentui/react-icons':
-    specifier: ^2.0.219
-    version: 2.0.219(react@18.2.0)
+    specifier: ^2.0.220
+    version: 2.0.220(react@18.2.0)
   '@tremor/react':
-    specifier: ^3.9.1
-    version: 3.9.1(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3)
+    specifier: ^3.9.2
+    version: 3.9.2(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -210,8 +210,8 @@ packages:
       tabbable: 6.2.0
     dev: false
 
-  /@fluentui/react-icons@2.0.219(react@18.2.0):
-    resolution: {integrity: sha512-KYOtNfB7Zlk/zbs3LfFQWD1q2cUs62tTC2LulAsPjSEbWwzrDcAGrTxtSnFvohjkHqM4kiY1a10DC9QlLCLLZw==}
+  /@fluentui/react-icons@2.0.220(react@18.2.0):
+    resolution: {integrity: sha512-AIe0y3QuG2dATGVlszyt/xCzVhyBcDulQnDepSLZvDXkuu8zL/zqQaSuiOizwZUVxxuF0SvePyf4zgi86zgtjg==}
     peerDependencies:
       react: '>=16.8.0 <19.0.0'
     dependencies:
@@ -594,8 +594,8 @@ packages:
       tslib: 2.6.0
     dev: true
 
-  /@tremor/react@3.9.1(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3):
-    resolution: {integrity: sha512-WSo1MzXjjW+g4pIncfUsQZTISsEd+lBFwSn52SYTcH/4hH4VLqZIaUmVK7bzdvlYMN4sF7PRF4zfByYeeQ4ySg==}
+  /@tremor/react@3.9.2(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.3):
+    resolution: {integrity: sha512-JecMNPW3oPOqM+0essg6mYu4mef11uDl8qCWGvX4DVwQluS0H/DKonHIEOzLxMNuDUYSzztkwyObGEntVYO0Lg==}
     peerDependencies:
       react: ^18.0.0
       react-dom: '>=16.6.0'

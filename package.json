@@ -8,8 +8,8 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.219",
-        "@tremor/react": "^3.9.1",
+        "@fluentui/react-icons": "^2.0.220",
+        "@tremor/react": "^3.9.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "recharts": "^2.8.0",

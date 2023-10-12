@@ -9,6 +9,7 @@ import {
 } from '@fluentui/react-icons';
 import { Button, Card, Col, Flex, Grid, Select, SelectItem, Text, Title } from '@tremor/react';
 import {
+    AwaitableMetric,
     BasicToolbar,
     Blur,
     Burger,
@@ -141,7 +142,7 @@ const Application = () => {
                             </StyledMenuActions>
                             <Flex justifyContent='between' alignItems='center' className='gap-4'>
                                 <Text>Options</Text>
-                                <Select value={currentOption} onValueChange={setCurrentOption}>
+                                <Select enableClear={false} value={currentOption} onValueChange={setCurrentOption}>
                                     <SelectItem value={options.A}>Apple</SelectItem>
                                     <SelectItem value={options.B}>Bolt</SelectItem>
                                     <SelectItem value={options.C}>Cactus</SelectItem>
@@ -173,13 +174,24 @@ const Application = () => {
             <TremorContainer hasToolbar>
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
                     <Card>
+                        <Text>Metric 1</Text>
+                        <AwaitableMetric>{!loading && '100%'}</AwaitableMetric>
+                    </Card>
+                    <Card>
+                        <Text>Metric 2</Text>
+                        <AwaitableMetric>{!loading && '100%'}</AwaitableMetric>
+                    </Card>
+                    <Card>
+                        <Text>Metric 3</Text>
+                        <AwaitableMetric>{!loading && '100%'}</AwaitableMetric>
+                    </Card>
+                    <Card>
                         <DataChart
-                            rawData={chartData}
+                            rawData={loading ? undefined : chartData}
                             dataCallback={identity}
                             legend
                             className='mt-5'
                             legendFormatType='percentage'
-                            isLoading={loading}
                             tooltip='tremor'
                             onClick={console.log}
                         />
@@ -188,9 +200,8 @@ const Application = () => {
                         <Text className='font-medium'>Bar Chart</Text>
                         <ChartBar
                             className='mt-5'
-                            rawData={chartData}
+                            rawData={loading ? undefined : chartData}
                             dataCallback={identity}
-                            isLoading={loading}
                             legendFormatType='percentage'
                             legend
                             tooltip='tremor'
@@ -200,7 +211,7 @@ const Application = () => {
                     <Card className='h-96'>
                         <Text className='font-medium'>Pie Chart</Text>
                         <PieChart
-                            rawData={chartData}
+                            rawData={loading ? undefined : chartData}
                             dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
                             legendFormatType='money'
                         />
