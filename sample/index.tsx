@@ -184,6 +184,7 @@ const Application = () => {
                     onValueChange={setVirtualSelectOption}
                     options={getLargeSelectOptions()}
                     className='w-60'
+                    enableClear
                 />
             </BasicToolbar>
             <TremorContainer hasToolbar>
