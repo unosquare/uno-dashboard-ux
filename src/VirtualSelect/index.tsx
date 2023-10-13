@@ -3,10 +3,10 @@ import { Combobox } from '@headlessui/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { ReactSelectOption } from '../Select';
 import { spacing } from '@tremor/react/dist/lib/spacing';
-import { sizing } from '@tremor/react/dist/lib/sizing';
 import { border } from '@tremor/react/dist/lib/shape';
 import { makeClassName } from '@tremor/react/dist/lib/utils';
 import { getSelectButtonColors, hasValue } from '@tremor/react/dist/components/input-elements/selectUtils';
+import { ChevronDown16Filled, DismissCircle16Filled } from '@fluentui/react-icons';
 
 export interface SearchSelectProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;
@@ -14,8 +14,8 @@ export interface SearchSelectProps extends React.HTMLAttributes<HTMLDivElement> 
     onValueChange: (value: string) => void;
     placeholder?: string;
     disabled?: boolean;
-    icon?: React.ElementType | React.JSXElementConstructor<unknown>;
     options: ReactSelectOption<string | number>[];
+    enableClear?: boolean;
 }
 
 export interface IconSettings extends React.HTMLAttributes<HTMLDivElement> {
@@ -44,8 +44,8 @@ export const comboBoxStyles = <T,>(value: T, disabled: boolean, icon: boolean) =
         'w-full outline-none text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 text-tremor-default',
         'border-tremor-border shadow-tremor-input focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
         'dark:border-dark-tremor-border dark:shadow-dark-tremor-input dark:focus:border-dark-tremor-brand-subtle dark:focus:ring-dark-tremor-brand-muted',
-        icon ? 'p-10 -ml-0.5' : spacing.lg.paddingLeft,
-        spacing.fourXl.paddingRight,
+        spacing.lg.paddingLeft,
+        icon ? 'pl-3 pr-12' : spacing.fourXl.paddingRight,
         spacing.sm.paddingY,
         border.sm.all,
         disabled
@@ -72,53 +72,32 @@ export const comboBoxSingleOptionStyles = (className: string | undefined) =>
         spacing.md.paddingX,
         spacing.md.paddingY,
         className,
+        'my-0',
     );
-
-export const IconSearch = ({ icon }: IconSettings) => {
-    const Icon = icon;
-
-    return (
-        <span className={tremorTwMerge('absolute inset-y-0 left-0 flex items-center ml-px', spacing.md.paddingLeft)}>
-            <Icon
-                className={tremorTwMerge(
-                    makeSearchSelectClassName('Icon'),
-                    'flex-none',
-                    'text-tremor-content-subtle',
-                    'dark:text-dark-tremor-content-subtle',
-                    sizing.lg.height,
-                    sizing.lg.width,
-                )}
-            />
-        </span>
-    );
-};
-
-const ArrowDownHeadIcon = ({ ...props }) => (
-    <svg
-        {...props}
-        xmlns='http://www.w3.org/2000/svg'
-        fill='none'
-        viewBox='0 0 24 24'
-        stroke='currentColor'
-        strokeWidth='2.5'
-    >
-        <path strokeLinecap='round' strokeLinejoin='round' d='M19 9l-7 7-7-7' />
-    </svg>
-);
 
 export const ArrowDownHead = () => (
     <div className={tremorTwMerge('absolute inset-y-0 right-0 flex items-center', spacing.md.paddingRight)}>
-        <ArrowDownHeadIcon
+        <ChevronDown16Filled
             className={tremorTwMerge(
                 makeSearchSelectClassName('arrowDownIcon'),
                 'flex-none',
                 'text-tremor-content-subtle',
                 'dark:text-dark-tremor-content-subtle',
-                sizing.md.height,
-                sizing.md.width,
             )}
         />
     </div>
+);
+
+const SelectClearButton = ({ clearValue }: { clearValue: (e: string) => void }) => (
+    <button
+        type='button'
+        className={tremorTwMerge('absolute inset-y-0 right-0 flex items-center', spacing.fourXl.marginRight)}
+        onClick={() => clearValue('')}
+    >
+        <DismissCircle16Filled
+            className={tremorTwMerge('flex-none', 'text-tremor-content-subtle', 'dark:text-dark-tremor-content-subtle')}
+        />
+    </button>
 );
 
 export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>(function SearchSelect(props, ref) {
@@ -127,16 +106,21 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
         onValueChange,
         placeholder = 'Select...',
         disabled = false,
-        icon,
         className,
+        enableClear,
         options,
         ...other
     } = props;
 
     const [searchQuery, setSearchQuery] = useState('');
 
-    const valueToNameMapping = useMemo(() => constructValueToNameMapping(options), [options]);
     const filteredOptions = useMemo(() => getFilteredOptions(searchQuery, options), [searchQuery, options]);
+    const valueToNameMapping = useMemo(() => constructValueToNameMapping(filteredOptions), [filteredOptions]);
+
+    const onOptionClick = (option: string) => () => {
+        setSearchQuery('');
+        onValueChange(option);
+    };
 
     return (
         <Combobox
@@ -148,23 +132,28 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
             as='div'
             ref={ref}
             value={value}
-            onChange={onValueChange}
             disabled={disabled}
+            nullable
+            onChange={() => setSearchQuery('')}
             className={tremorTwMerge('w-full min-w-[10rem] relative text-tremor-default', className)}
         >
             <Combobox.Button className='w-full'>
-                {icon && <IconSearch icon={icon} />}
                 <Combobox.Input
-                    className={comboBoxStyles(value, disabled, !!icon)}
+                    className={comboBoxStyles(value, disabled, !!enableClear && !!value)}
                     placeholder={placeholder}
                     onChange={(event) => setSearchQuery(event.target.value)}
-                    displayValue={(selected: string) => valueToNameMapping.get(selected) ?? ''}
+                    displayValue={() => searchQuery || valueToNameMapping.get(value ?? '') || ''}
                 />
                 <ArrowDownHead />
+                {enableClear && value ? <SelectClearButton clearValue={onValueChange} /> : null}
             </Combobox.Button>
-            <Combobox.Options className={comboBoxOptionsStyles}>
+            <Combobox.Options className={comboBoxOptionsStyles} hold>
                 {({ option }) => (
-                    <Combobox.Option className={comboBoxSingleOptionStyles(className)} value={option as string}>
+                    <Combobox.Option
+                        className={comboBoxSingleOptionStyles(className)}
+                        value={option as string}
+                        onClick={onOptionClick(option as string)}
+                    >
                         <span className='whitespace-nowrap truncate'>{valueToNameMapping.get(option as string)}</span>
                     </Combobox.Option>
                 )}
