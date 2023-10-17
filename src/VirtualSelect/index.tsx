@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { startTransition, useEffect, useMemo, useState } from 'react';
 import { Combobox } from '@headlessui/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { ReactSelectOption } from '../Select';
@@ -7,6 +7,7 @@ import { border } from '@tremor/react/dist/lib/shape';
 import { makeClassName } from '@tremor/react/dist/lib/utils';
 import { getSelectButtonColors, hasValue } from '@tremor/react/dist/components/input-elements/selectUtils';
 import { ChevronDown16Filled, DismissCircle16Filled } from '@fluentui/react-icons';
+import { useDebounce } from '../hooks';
 
 export interface SearchSelectProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;
@@ -26,10 +27,14 @@ const makeSearchSelectClassName = makeClassName('SearchSelect');
 
 const makeSearchSelectItemClassName = makeClassName('SearchSelectItem');
 
-const getFilteredOptions = (searchQuery: string, options: ReactSelectOption<string | number>[]) =>
-    searchQuery === '' || searchQuery.length < 3
-        ? options
-        : options.filter(({ label }) => label.toLowerCase().includes(searchQuery.toLowerCase()));
+const getValues = (options: ReactSelectOption<string | number>[]) => options.map((x) => x.value.toString());
+
+const getFilteredOptions = (searchQuery: string | undefined, options: ReactSelectOption<string | number>[]) =>
+    getValues(
+        !searchQuery || searchQuery.length < 3
+            ? options
+            : options.filter(({ label }) => label.toLowerCase().includes(searchQuery.toLowerCase())),
+    );
 
 const constructValueToNameMapping = (options: ReactSelectOption<string | number>[]) => {
     const valueToNameMapping = new Map<string, string>();
@@ -39,7 +44,7 @@ const constructValueToNameMapping = (options: ReactSelectOption<string | number>
     return valueToNameMapping;
 };
 
-export const comboBoxStyles = <T,>(value: T, disabled: boolean, icon: boolean) =>
+export const comboBoxStyles = <T,>(value: T, disabled: boolean, icon: boolean, showAsValue: boolean) =>
     tremorTwMerge(
         'w-full outline-none text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 text-tremor-default',
         'border-tremor-border shadow-tremor-input focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
@@ -48,9 +53,10 @@ export const comboBoxStyles = <T,>(value: T, disabled: boolean, icon: boolean) =
         icon ? 'pl-3 pr-12' : spacing.fourXl.paddingRight,
         spacing.sm.paddingY,
         border.sm.all,
-        disabled
-            ? 'placeholder:text-tremor-content-subtle dark:placeholder:text-tremor-content-subtle'
+        showAsValue
+            ? 'placeholder:text-tremor-content-emphasis'
             : 'placeholder:text-tremor-content dark:placeholder:text-tremor-content',
+        disabled && 'placeholder:text-tremor-content-subtle dark:placeholder:text-tremor-content-subtle',
         getSelectButtonColors(hasValue(value), disabled),
     );
 
@@ -112,26 +118,40 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
         ...other
     } = props;
 
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState<string>();
+    const [filteredOptions, setFilteredOptions] = useState<string[]>(getValues(options));
 
-    const filteredOptions = useMemo(() => getFilteredOptions(searchQuery, options), [searchQuery, options]);
-    const valueToNameMapping = useMemo(() => constructValueToNameMapping(filteredOptions), [filteredOptions]);
+    const valueToNameMapping = useMemo(() => constructValueToNameMapping(options), [options]);
 
-    const onOptionClick = (option: string) => () => {
+    useEffect(() => setFilteredOptions(getValues(options)), [options]);
+
+    const debouncedSearch = useDebounce(() => {
+        startTransition(() => {
+            setFilteredOptions(getFilteredOptions(searchQuery, options));
+        });
+    }, 300);
+
+    const onOptionClick = (option: string) => () => onValueChange(option);
+
+    const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(target.value ?? '');
+        debouncedSearch();
+    };
+
+    const onClearSearch = () => {
         setSearchQuery('');
-        onValueChange(option);
+        debouncedSearch();
     };
 
     return (
         <Combobox
             {...other}
             virtual={{
-                options: filteredOptions.map((x) => x.value.toString()),
-                disabled: (option) => option === value,
+                options: filteredOptions ?? [],
             }}
             as='div'
             ref={ref}
-            value={value}
+            value={null}
             disabled={disabled}
             nullable
             onChange={() => setSearchQuery('')}
@@ -139,14 +159,15 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
         >
             <Combobox.Button className='w-full'>
                 <Combobox.Input
-                    className={comboBoxStyles(value, disabled, !!enableClear && !!value)}
-                    placeholder={placeholder}
-                    onChange={(event) => setSearchQuery(event.target.value)}
-                    displayValue={() => searchQuery || valueToNameMapping.get(value ?? '') || ''}
+                    className={comboBoxStyles(value, disabled, !!enableClear && !!value, !searchQuery && !!value)}
+                    placeholder={valueToNameMapping.get(value ?? '') ?? placeholder}
+                    onBlur={onClearSearch}
+                    onChange={onSearchInternal}
+                    displayValue={() => searchQuery ?? ''}
                 />
                 <ArrowDownHead />
-                {enableClear && value ? <SelectClearButton clearValue={onValueChange} /> : null}
             </Combobox.Button>
+            {enableClear && value ? <SelectClearButton clearValue={onValueChange} /> : null}
             <Combobox.Options className={comboBoxOptionsStyles} hold>
                 {({ option }) => (
                     <Combobox.Option
