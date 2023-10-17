@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { debounce } from 'uno-js';
 
-export const useDebounce = (callback: () => unknown) => {
+export const useDebounce = (callback: () => unknown, waitMilliseconds?: number) => {
     const ref = useRef<() => unknown>();
 
     useEffect(() => {
@@ -13,8 +13,8 @@ export const useDebounce = (callback: () => unknown) => {
             ref.current?.();
         };
 
-        return debounce(func, 700);
-    }, []);
+        return debounce(func, waitMilliseconds ?? 700);
+    }, [waitMilliseconds]);
 };
 
 export const useToggle = (defaultValue = false): [boolean, () => void] => {
