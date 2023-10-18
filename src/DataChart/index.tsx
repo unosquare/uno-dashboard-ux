@@ -180,7 +180,7 @@ export const DataChart = <T,>({
                                 strokeWidth={2}
                                 strokeLinejoin='round'
                                 strokeLinecap='round'
-                                key={objectHash(property)}
+                                key={property}
                             />
                         ))}
                     </LineChart>

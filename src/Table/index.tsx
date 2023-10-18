@@ -204,7 +204,7 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
         <TableRow>
             {definitions.map((header, index) => (
                 <TableHeaderCell
-                    key={objectHash(header)}
+                    key={header.label}
                     className={`p-2 text-xs/[13px] bg-tremor-background dark:bg-dark-tremor-background whitespace-normal ${getAlignment(
                         header,
                         index,
@@ -236,10 +236,7 @@ const TableFooter = ({ footer, columns }: TableFooterProps) => (
     <TableFoot className='sticky top-0 bottom-0 bg-tremor-background dark:bg-dark-tremor-background'>
         <TableRow>
             {columns.map((column, index) => (
-                <TableFooterCell
-                    key={objectHash(column)}
-                    className={`p-2 text-xs/[13px] ${getAlignment(column, index)}`}
-                >
+                <TableFooterCell key={column.label} className={`p-2 text-xs/[13px] ${getAlignment(column, index)}`}>
                     {String(footer[index])}
                 </TableFooterCell>
             ))}
@@ -252,7 +249,7 @@ const getRows = (data: TableCellTypes[][], columns: TableColumn[]) =>
         <TableRow key={objectHash(row)}>
             {columns.map((column, index) => (
                 <TableCell
-                    key={objectHash(column)}
+                    key={column.label}
                     className={`p-2 whitespace-normal text-xs/[13px] ${getAlignment(column, index)}`}
                 >
                     {renderTableCell(row[index], column)}
