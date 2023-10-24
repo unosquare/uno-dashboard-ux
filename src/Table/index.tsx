@@ -268,11 +268,7 @@ const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[])
             const cellString = String(cell);
             if (cellString == null || cellString === ' ') return 'N/A';
 
-            const formatType = translateType(dataType);
-
-            if (formatType) return formatter(cellString, formatType) ?? cellString;
-
-            return cellString;
+            return formatter(cellString, translateType(dataType)) ?? cellString;
         }),
     );
 
@@ -318,6 +314,7 @@ export const Table = <TDataIn,>({
     const [searched, setSearched] = useState<TableCellTypes[][]>([]);
     const [footerData, setFooterData] = useState<unknown[]>();
     const [search, setSearch] = useState('');
+    const [exporting, setExporting] = useState(false);
 
     const debouncedSearch = useDebounce(() => {
         startTransition(() => {
@@ -350,6 +347,7 @@ export const Table = <TDataIn,>({
     const setSortHeader = (index: number) => setDefinitions((prev: TableColumn[]) => getColumnSorting(prev, index));
 
     const onCsvClick = () => {
+        setExporting(true);
         const el = document.createElement('div');
 
         el.innerHTML = renderToString(<>{children}</>);
@@ -362,6 +360,8 @@ export const Table = <TDataIn,>({
             definitions.map((x) => x.label),
             fileName ?? 'file',
         );
+
+        setExporting(false);
     };
 
     const renderFunc = render ?? getRows;
@@ -374,6 +374,7 @@ export const Table = <TDataIn,>({
                     {exportCsv && (
                         <ExportCsvButton
                             onClick={onCsvClick}
+                            loading={exporting}
                             disabled={!rawData || searched.length === 0 ? true : undefined}
                         />
                     )}

@@ -10,21 +10,21 @@
     "dependencies": {
         "@fluentui/react-icons": "^2.0.221",
         "@headlessui/react": "0.0.0-insiders.1469b85",
-        "@tremor/react": "^3.9.2",
+        "@tremor/react": "^3.10.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "recharts": "^2.9.0",
         "tailwind-merge": "^1.14.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.50.0"
+        "uno-js": "^3.51.0"
     },
     "devDependencies": {
-        "@rspack/cli": "^0.3.7",
+        "@rspack/cli": "^0.3.8",
         "@types/object-hash": "^3.0.5",
         "@types/react": "^18.2.31",
         "@types/react-dom": "^18.2.14",
         "@types/recharts": "1.8.26",
-        "@typescript-eslint/eslint-plugin": "^6.8.0",
+        "@typescript-eslint/eslint-plugin": "^6.9.0",
         "autoprefixer": "^10.4.16",
         "eslint": "^8.52.0",
         "eslint-config-unosquare": "0.8.1",
