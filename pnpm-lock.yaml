@@ -30,8 +30,8 @@ dependencies:
     specifier: ^2.2.0
     version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
   uno-js:
-    specifier: ^3.51.0
-    version: 3.51.0
+    specifier: ^3.52.0
+    version: 3.52.0
 
 devDependencies:
   '@rspack/cli':
@@ -5051,8 +5051,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /uno-js@3.51.0:
-    resolution: {integrity: sha512-wX1qR5Iybqp6PlI6ST/fA9RbzSsRTUS+I8H5ZDqEI8bovpioXONGJezauk3BxZDQ9MZVRBz6SqakL1GdfXH5Hg==}
+  /uno-js@3.52.0:
+    resolution: {integrity: sha512-rIh0Uy+3weV3R8/QFCZr1u5a6yVd+jwUMo7Nj3VXcR57a/0d8v4lgNZqvJ3SoM1ouKoqigtRQL9iFubdtcqPQQ==}
     dev: false
 
   /unpipe@1.0.0:

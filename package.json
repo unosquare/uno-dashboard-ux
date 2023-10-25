@@ -16,7 +16,7 @@
         "recharts": "^2.9.0",
         "tailwind-merge": "^1.14.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.51.0"
+        "uno-js": "^3.52.0"
     },
     "devDependencies": {
         "@rspack/cli": "^0.3.8",
