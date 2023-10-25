@@ -187,8 +187,7 @@ export const renderTableCell = (data: TableCellTypes, definition: TableColumn | 
         case 'paragraph':
             return <LongTextCell text={String(data)} />;
         default: {
-            const formatType = translateType(definition?.dataType);
-            return formatType ? formatter(String(data), formatType, definition?.formatterOptions) : String(data);
+            return formatter(String(data), translateType(definition?.dataType), definition?.formatterOptions);
         }
     }
 };
