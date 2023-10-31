@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 import { ClassNameComponent } from '../constants';
 
 export const AwaitableMetric = ({ className, children }: PropsWithChildren<ClassNameComponent>) =>
-    !children ? (
+    children == null ? (
         <Metric className={twMerge(className, 'loading-shimmer')}>&nbsp;</Metric>
     ) : (
         <Metric className={className}>{children}</Metric>

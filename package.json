@@ -10,7 +10,7 @@
     "dependencies": {
         "@fluentui/react-icons": "^2.0.221",
         "@headlessui/react": "0.0.0-insiders.1469b85",
-        "@tremor/react": "^3.10.0",
+        "@tremor/react": "^3.10.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "recharts": "^2.9.1",
@@ -24,7 +24,7 @@
         "@types/react": "^18.2.33",
         "@types/react-dom": "^18.2.14",
         "@types/recharts": "1.8.26",
-        "@typescript-eslint/eslint-plugin": "^6.9.0",
+        "@typescript-eslint/eslint-plugin": "^6.9.1",
         "autoprefixer": "^10.4.16",
         "eslint": "^8.52.0",
         "eslint-config-unosquare": "0.8.1",
