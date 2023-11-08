@@ -1,4 +1,3 @@
-import objectHash from 'object-hash';
 import React, { useEffect, useState } from 'react';
 import {
     CartesianGrid,
@@ -79,7 +78,7 @@ export const DataChart = <T,>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onClickEvent = (event: any) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (event && event.activeTooltipIndex !== null && onClick)
+        if (event.activeTooltipIndex !== null && onClick)
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             onClick(Number(event.activeTooltipIndex), String(event.activeLabel));
     };

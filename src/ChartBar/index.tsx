@@ -79,7 +79,7 @@ export const ChartBar = <T,>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onClickEvent = (event: any) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (event && event.activeLabel && onClick) onClick(String(event.activeLabel), Number(event.activeTooltipIndex));
+        if (event?.activeLabel && onClick) onClick(String(event.activeLabel), Number(event.activeTooltipIndex));
     };
 
     useEffect(() => {

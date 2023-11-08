@@ -81,7 +81,7 @@ const Component = ({
     categoryColors: Map<string, Color>;
 }) => {
     const [label, value] = getLabelFunc(category, index, getLegendFormatType(index, formats, legendFormatType));
-    const bgColor = categoryColors.get(category.name || '') || 'transparent';
+    const bgColor = categoryColors.get(category.name ?? '') ?? 'transparent';
 
     return (
         <Flex className='gap-2'>

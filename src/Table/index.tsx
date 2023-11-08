@@ -364,6 +364,8 @@ export const Table = <TDataIn,>({
     };
 
     const renderFunc = render ?? getRows;
+    const renderRows = () =>
+        renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawDataState);
 
     return (
         <>
@@ -400,7 +402,7 @@ export const Table = <TDataIn,>({
                     {!rawData && <ShimmerTable colSpan={definitions.length} />}
                     {rawData &&
                         (searched.length > 0 ? (
-                            renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawDataState)
+                            renderRows()
                         ) : (
                             <SpanTable colSpan={definitions.length}>
                                 <NoData>{noDataElement}</NoData>

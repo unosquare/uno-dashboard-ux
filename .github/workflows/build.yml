@@ -1,9 +1,15 @@
-name: Build
+name: Build and Report Sonar
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
   build:    
-    uses: unosquare/bump-npm-version/.github/workflows/build-no-test.yml@master
+    uses: unosquare/bump-npm-version/.github/workflows/build-sonar.yml@master
+    secrets:
+      github-token: ${{ secrets.GPR_ACCESS_TOKEN }}
+      sonar-token: ${{ secrets.SONAR_TOKEN }}
