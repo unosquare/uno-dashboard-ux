@@ -46,6 +46,7 @@
         "typescript": "^5.2.2"
     },
     "jest": {
+        "testEnvironment": "jsdom",
         "coverageReporters": [
             "lcov",
             "text"
