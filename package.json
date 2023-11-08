@@ -45,41 +45,6 @@
         "ts-jest": "^29.1.1",
         "typescript": "^5.2.2"
     },
-    "jest": {
-        "testEnvironment": "jsdom",
-        "coverageReporters": [
-            "lcov",
-            "text"
-        ],
-        "moduleFileExtensions": [
-            "js",
-            "ts",
-            "tsx"
-        ],
-        "transform": {
-            "^.+\\.(ts|tsx)$": [
-                "ts-jest",
-                {
-                    "diagnostics": false,
-                    "tsconfig": "tsconfig.json"
-                }
-            ]
-        },
-        "testMatch": [
-            "<rootDir>/src/**/*.spec.tsx"
-        ],
-        "coverageThreshold": {
-            "global": {
-                "branches": 74,
-                "functions": 85,
-                "lines": 90,
-                "statements": -80
-            }
-        },
-        "setupFilesAfterEnv": [
-            "<rootDir>/jest-setup.ts"
-        ]
-    },
     "scripts": {
         "start": "rspack serve",
         "watch": "tsc --watch",
