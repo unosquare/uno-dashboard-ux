@@ -114,7 +114,7 @@ export const UnoChartTooltip = ({
     legendFormatType,
     categoryColors,
 }: ChartLegendSettings) => {
-    const localPayload = payload || [];
+    const localPayload = payload ?? [];
     const getLabelFunc = getLabel(customLabel);
 
     return (
