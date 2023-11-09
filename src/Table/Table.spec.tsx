@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAlignment, renderTableCell, Table, TableColumn } from './index';
+import { getAlignment, renderTableCell, Table, TableCellTypes, TableColumn } from './index';
 import { render } from '@testing-library/react';
 import { identity } from 'uno-js';
 
@@ -114,6 +114,14 @@ describe('Table', () => {
 
     it('renders without crashing', () => {
         render(<Table columns={tableColumns} rawData={tableData} dataCallback={identity} />);
+    });
+
+    it('renders with shimmer', () => {
+        const data: undefined | TableCellTypes[][] = undefined;
+        const { container } = render(<Table columns={tableColumns} rawData={data} dataCallback={(x: undefined | TableCellTypes[][]) => []} />);
+
+        const shimmer = container.querySelector('.loading-shimmer');
+        expect(shimmer).toBeInTheDocument();
     });
 
     it('renders the correct number of rows', () => {
