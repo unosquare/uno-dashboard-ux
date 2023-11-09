@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAlignment, renderTableCell, Table, TableCellTypes, TableColumn } from './index';
+import { getAlignment, getColumnSorting, renderTableCell, Table, TableCellTypes, TableColumn } from './index';
 import { render } from '@testing-library/react';
 import { identity } from 'uno-js';
 
@@ -27,6 +27,14 @@ describe('getAlignment', () => {
     it('returns custom text alignment class when provided', () => {
         const tableColumn: TableColumn = { label: 'column', dataType: 'number', textAlign: 'center' };
         expect(getAlignment(tableColumn)).toBe('text-center');
+    });
+});
+
+describe('getColumnSorting', () => {
+    it('returns 1 when the column is sortable', () => {
+        const tableColumn: TableColumn[] = [{ label: 'column', sortOrder: 1, sortDirection: 'asc' }];
+        expect(getColumnSorting(tableColumn, 0)[0].sortOrder).toBe(1);
+        expect(getColumnSorting(tableColumn, 0)[0].sortDirection).toBe('desc');
     });
 });
 
@@ -90,7 +98,7 @@ describe('renderTableCell', () => {
 
 describe('Table', () => {
     const tableColumns: TableColumn[] = [
-        { label: 'Column 1', dataType: 'string' },
+        { label: 'Column 1', dataType: 'string', sortOrder: 1, sortDirection: 'asc' },
         { label: 'Column 2', dataType: 'number' },
         { label: 'Column 3', dataType: 'money' },
         { label: 'Column 4', dataType: 'date' },
