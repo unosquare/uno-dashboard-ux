@@ -1,13 +1,22 @@
 import React, { startTransition, useEffect, useMemo, useState } from 'react';
 import { Combobox } from '@headlessui/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import { ReactSelectOption } from '../Select';
 import { spacing } from '@tremor/react/dist/lib/spacing';
 import { border } from '@tremor/react/dist/lib/shape';
 import { makeClassName } from '@tremor/react/dist/lib/utils';
 import { getSelectButtonColors, hasValue } from '@tremor/react/dist/components/input-elements/selectUtils';
 import { ChevronDown16Filled, DismissCircle16Filled } from '@fluentui/react-icons';
 import { useDebounce } from '../hooks';
+
+export type ReactSelectOption<T = number> = {
+    value: T;
+    label: string;
+};
+
+export type ReactSelectGroupOption = {
+    label: string;
+    options: ReactSelectOption[];
+};
 
 export interface SearchSelectProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;

@@ -19,7 +19,6 @@ export * from './Table';
 export * from './ErrorBoundary';
 export * from './PageToolbar';
 export * from './SearchBox';
-export * from './Select';
 export * from './UnoLogo';
 export * from './Blur';
 export * from './Menu';
