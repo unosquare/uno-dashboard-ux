@@ -7,7 +7,7 @@ describe('ErrorBoundary', () => {
         const { getByText } = render(
             <ErrorBoundary>
                 <div>My Component</div>
-            </ErrorBoundary>
+            </ErrorBoundary>,
         );
         expect(getByText('My Component')).toBeInTheDocument();
     });
@@ -19,7 +19,7 @@ describe('ErrorBoundary', () => {
         const { getByText } = render(
             <ErrorBoundary>
                 <ThrowError />
-            </ErrorBoundary>
+            </ErrorBoundary>,
         );
         expect(getByText('Oops, something went wrong')).toBeInTheDocument();
         expect(getByText('Please refresh the page and try again')).toBeInTheDocument();

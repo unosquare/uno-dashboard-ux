@@ -191,15 +191,15 @@ const Application = () => {
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
                     <Card>
                         <Text>Metric 1</Text>
-                        <AwaitableMetric>{!loading && '100%'}</AwaitableMetric>
+                        <AwaitableMetric>{!loading ? '100%' : undefined}</AwaitableMetric>
                     </Card>
                     <Card>
                         <Text>Metric 2</Text>
-                        <AwaitableMetric>{!loading && '100%'}</AwaitableMetric>
+                        <AwaitableMetric>{!loading ? '100%' : undefined}</AwaitableMetric>
                     </Card>
                     <Card>
                         <Text>Metric 3</Text>
-                        <AwaitableMetric>{!loading && '100%'}</AwaitableMetric>
+                        <AwaitableMetric>{!loading ? '100%' : undefined}</AwaitableMetric>
                     </Card>
                     <Card>
                         <DataChart

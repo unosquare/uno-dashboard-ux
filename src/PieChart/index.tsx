@@ -9,6 +9,7 @@ import { twMerge } from 'tailwind-merge';
 import { UnoChartTooltip } from '../ChartLegend';
 import { ChartComponent, ChartData } from '../constants';
 import { NoData } from '../NoData';
+import { Flex } from '@tremor/react';
 
 export const PieChart = <T,>({
     rawData,
@@ -25,7 +26,9 @@ export const PieChart = <T,>({
 
     if (!rawData) {
         return (
-            <div className={twMerge('h-60 w-60 content-center loading-shimmer rounded-full', className)}>&nbsp;</div>
+            <Flex alignItems='center' justifyContent='center' className={twMerge('h-60', className)}>
+                <div className='h-60 w-60 content-center loading-shimmer rounded-full'>&nbsp;</div>
+            </Flex>
         );
     }
 

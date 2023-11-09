@@ -52,7 +52,7 @@
         "build": "tsc && npx ncp src/resources/ dist/resources",
         "lint": "tsc --noEmit && eslint ./src/**/*.{ts,tsx}",
         "lint:fix": "eslint ./src/**/*.{ts,tsx} --fix",
-        "test": "jest",
+        "test": "jest --silent",
         "cest": "jest --collectCoverage",
         "prepare": "husky install"
     },
