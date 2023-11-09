@@ -16,17 +16,6 @@ module.exports = {
     testMatch: ['<rootDir>/src/**/*.spec.tsx', '<rootDir>/src/**/*.test.ts'],
     setupFilesAfterEnv: ['<rootDir>/jest-setup.tsx'],
     moduleNameMapper: {
-        '@tremor/react/dist/lib/utils': require.resolve('@tremor/react/dist/lib/utils.cjs'),
-        '@tremor/react/dist/lib/theme': require.resolve('@tremor/react/dist/lib/theme.cjs'),
-        '@tremor/react/dist/lib/tremorTwMerge': require.resolve('@tremor/react/dist/lib/tremorTwMerge.cjs'),
-        '@tremor/react/dist/lib/sizing': require.resolve('@tremor/react/dist/lib/sizing.cjs'),
-        '@tremor/react/dist/lib/shape': require.resolve('@tremor/react/dist/lib/shape.cjs'),
-        '@tremor/react/dist/components/chart-elements/common/ChartLegend': require.resolve(
-            '@tremor/react/dist/components/chart-elements/common/ChartLegend.cjs',
-        ),
-        '@tremor/react/dist/components/chart-elements/common/utils': require.resolve(
-            '@tremor/react/dist/components/chart-elements/common/utils.cjs',
-        ),
-        '@tremor/react/dist/lib/constants': require.resolve('@tremor/react/dist/lib/constants.cjs'),
+        '@tremor/react/dist/(.*)$': '<rootDir>/node_modules/@tremor/react/dist/$1.cjs',
     },
 };

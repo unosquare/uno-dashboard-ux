@@ -106,6 +106,7 @@ export const ArrowDownHead = () => (
 const SelectClearButton = ({ clearValue }: { clearValue: (e: string) => void }) => (
     <button
         type='button'
+        role='button'
         className={tremorTwMerge('absolute inset-y-0 right-0 flex items-center', spacing.fourXl.marginRight)}
         onClick={() => clearValue('')}
     >
