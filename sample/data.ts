@@ -1,4 +1,4 @@
-import { ReactSelectOption } from '../src/Select';
+import { ReactSelectOption } from '../src/VirtualSelect';
 
 export const defaultData = [
     ['Pepe', 'Mexico', new Date('2022-01-01'), 50, 1, 1000, 10.25, true, 'https://www.google.com', 'Small text'],

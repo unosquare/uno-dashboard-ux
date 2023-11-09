@@ -24,5 +24,9 @@ module.exports = {
         '@tremor/react/dist/components/chart-elements/common/ChartLegend': require.resolve(
             '@tremor/react/dist/components/chart-elements/common/ChartLegend.cjs',
         ),
+        '@tremor/react/dist/components/chart-elements/common/utils': require.resolve(
+            '@tremor/react/dist/components/chart-elements/common/utils.cjs',
+        ),
+        '@tremor/react/dist/lib/constants': require.resolve('@tremor/react/dist/lib/constants.cjs'),
     },
 };
