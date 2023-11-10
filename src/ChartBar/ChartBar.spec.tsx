@@ -47,4 +47,9 @@ describe('ChartBar', () => {
     const { getByText } = render(<ChartBar {...settings} />);
     expect(getByText('Ref Line')).toBeInTheDocument();
   });
+  
+  it('renders the no data legend', () => {
+    const { getByText } = render(<ChartBar rawData={[]} dataCallback={identity} />);
+    expect(getByText('No record found')).toBeInTheDocument();
+  });
 });

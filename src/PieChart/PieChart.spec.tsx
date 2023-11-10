@@ -24,4 +24,9 @@ describe('PieChart', () => {
         const slices = container.querySelectorAll('.recharts-pie-sector');
         expect(slices.length).toBe(dataStore.length);
     });
+    
+    it('renders the no data legend', () => {
+        const { getByText } = render(<PieChart rawData={[]} dataCallback={identity} />);
+        expect(getByText('No record found')).toBeInTheDocument();
+    });
 });

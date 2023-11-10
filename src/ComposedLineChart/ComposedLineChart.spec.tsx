@@ -13,4 +13,9 @@ describe('ComposedLineChart', () => {
     it('renders without crashing', () => {
         render(<ComposedLineChart rawData={data} dataCallback={identity} lines={[{ dataKey: 'name', yAxisId: 'left' }]} />);
     });
+
+    it('renders the no data legend', () => {
+        const { getByText } = render(<ComposedLineChart rawData={[]} dataCallback={identity} lines={[{ dataKey: 'name', yAxisId: 'left' }]} />);
+        expect(getByText('No record found')).toBeInTheDocument();
+    });
 });
