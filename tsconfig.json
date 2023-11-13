@@ -16,7 +16,7 @@
         "declaration": true,
         "outDir": "./dist"
     },
-    "include": ["src/**/*.ts*", "jest-setup.tsx"],
+    "include": ["src/**/*.ts*"],
     "exclude": ["sample/**/*.*", "node_modules", "src/**/*.test.ts", "src/**/*.spec.tsx"],
     "types": ["node"]
 }
