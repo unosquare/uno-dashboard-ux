@@ -104,20 +104,22 @@ describe('Table', () => {
         { label: 'Column 4', dataType: 'date' },
         { label: 'Column 5', dataType: 'link' },
         { label: 'Column 6', dataType: 'boolean' },
-        { label: 'Column 7', },
+        { label: 'Column 7', dataType: 'months' },
+        { label: 'Column 8', dataType: 'percentage' },
+        { label: 'Column 9', dataType: 'decimal' },
     ];
 
     const tableData = [
-        ['Row 1', 1, 1, new Date(2020, 0, 1), 'https://www.unosquare.com', true, true],
-        ['Row 2', 2, 2, new Date(2020, 0, 2), 'https://www.unosquare.com', false, false],
-        ['Row 3', 3, 3, new Date(2020, 0, 3), 'https://www.unosquare.com', true, true],
-        ['Row 4', 4, 4, new Date(2020, 0, 4), 'https://www.unosquare.com', false, false],
-        ['Row 5', 5, 5, new Date(2020, 0, 5), 'https://www.unosquare.com', true, true],
-        ['Row 6', 6, 6, new Date(2020, 0, 6), 'https://www.unosquare.com', false, false],
-        ['Row 7', 7, 7, new Date(2020, 0, 7), 'https://www.unosquare.com', true, true],
-        ['Row 8', 8, 8, new Date(2020, 0, 8), 'https://www.unosquare.com', false, false],
-        ['Row 9', 9, 9, new Date(2020, 0, 9), 'https://www.unosquare.com', true, true],
-        ['Row 10', 10, 10, new Date(2020, 0, 10), 'https://www.unosquare.com', false, false],
+        ['Row 1', 1, 1, new Date(2020, 0, 1), 'https://www.unosquare.com', true, 1, 100, 0.1],
+        ['Row 2', 2, 2, new Date(2020, 0, 2), ['https://www.unosquare.com','OK','Link'], false, 1, 100, 0.1],
+        ['Row 3', 3, 3, new Date(2020, 0, 3), 'https://www.unosquare.com', true, 1, 0, 0.1],
+        ['Row 4', 4, 4, new Date(2020, 0, 4), 'https://www.unosquare.com', false, 1, 0, 0.1],
+        ['Row 5', 5, 5, new Date(2020, 0, 5), 'https://www.unosquare.com', true, 2, 50, 0.1],
+        ['Row 6', 6, 6, new Date(2020, 0, 6), 'https://www.unosquare.com', false, 2, 30, 0.1],
+        ['Row 7', 7, 7, new Date(2020, 0, 7), 'https://www.unosquare.com', true, 2, 30, 0.1],
+        ['Row 8', 8, 8, new Date(2020, 0, 8), 'https://www.unosquare.com', false, 2, 10, 0.1],
+        ['Row 9', 9, 9, new Date(2020, 0, 9), 'https://www.unosquare.com', true, 3, 10, 0.1],
+        ['Row 10', 10, 10, new Date(2020, 0, 10), 'https://www.unosquare.com', false, 3, 10, 0.1],
     ];
 
     it('renders without crashing', () => {

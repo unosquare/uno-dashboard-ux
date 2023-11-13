@@ -7,8 +7,7 @@ import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { colorPalette } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
-
-type ClassNameProps = { className?: string };
+import { ClassNameComponent } from '../constants';
 
 const defaultShimmerColors = new Map<string, Color>();
 defaultShimmerColors.set('Loading', 'gray');
@@ -24,7 +23,7 @@ const generateFakeData = () =>
         }),
     );
 
-export const ChartBarShimmer = ({ className }: ClassNameProps) => {
+export const ChartBarShimmer = ({ className }: ClassNameComponent) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>(generateFakeData());
 
@@ -60,7 +59,7 @@ export const ChartBarShimmer = ({ className }: ClassNameProps) => {
     );
 };
 
-export const ChartLineShimmer = ({ className }: ClassNameProps) => {
+export const ChartLineShimmer = ({ className }: ClassNameComponent) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>(generateFakeData());
 

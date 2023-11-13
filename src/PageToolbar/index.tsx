@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import tw from 'tailwind-styled-components';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
+import { ClassNameComponent } from '../constants';
 
 export const StyledToolbar = tw.div`
     flex
@@ -14,7 +15,7 @@ export const StyledToolbar = tw.div`
     h-14
 `;
 
-export const BasicToolbar = ({ children, className }: PropsWithChildren<{ className?: string }>) => (
+export const BasicToolbar = ({ children, className }: PropsWithChildren<ClassNameComponent>) => (
     <aside className='h-14 relative w-full bg-tremor-background dark:bg-dark-tremor-background shadow-card z-10'>
         <StyledToolbar>
             <Flex className={twMerge('gap-6', className)}>
