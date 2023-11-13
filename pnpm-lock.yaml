@@ -30,8 +30,8 @@ dependencies:
     specifier: ^2.2.0
     version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
   uno-js:
-    specifier: ^3.56.0
-    version: 3.56.0
+    specifier: ^3.57.0
+    version: 3.57.0
 
 devDependencies:
   '@rspack/cli':
@@ -72,10 +72,10 @@ devDependencies:
     version: 8.53.0
   eslint-config-unosquare:
     specifier: 0.8.2
-    version: 0.8.2(eslint@8.53.0)(prettier@3.0.3)(typescript@5.2.2)
+    version: 0.8.2(eslint@8.53.0)(prettier@3.1.0)(typescript@5.2.2)
   eslint-plugin-prettier:
     specifier: ^5.0.1
-    version: 5.0.1(eslint@8.53.0)(prettier@3.0.3)
+    version: 5.0.1(eslint@8.53.0)(prettier@3.1.0)
   eslint-plugin-react:
     specifier: ^7.33.2
     version: 7.33.2(eslint@8.53.0)
@@ -92,8 +92,8 @@ devDependencies:
     specifier: ^29.7.0
     version: 29.7.0
   lint-staged:
-    specifier: ^15.0.2
-    version: 15.0.2
+    specifier: ^15.1.0
+    version: 15.1.0
   object-hash:
     specifier: ^3.0.0
     version: 3.0.0
@@ -101,8 +101,8 @@ devDependencies:
     specifier: ^7.3.3
     version: 7.3.3(postcss@8.4.31)(webpack@5.88.1)
   prettier:
-    specifier: ^3.0.3
-    version: 3.0.3
+    specifier: ^3.1.0
+    version: 3.1.0
   tailwindcss:
     specifier: ^3.3.5
     version: 3.3.5
@@ -3388,7 +3388,7 @@ packages:
       eslint: 8.53.0
     dev: true
 
-  /eslint-config-unosquare@0.8.2(eslint@8.53.0)(prettier@3.0.3)(typescript@5.2.2):
+  /eslint-config-unosquare@0.8.2(eslint@8.53.0)(prettier@3.1.0)(typescript@5.2.2):
     resolution: {integrity: sha512-BaH3n1jFjjV+Us2fYJrrfYxbP/D2QVQEIvVQYhjo7/+o0l/U/emn+y5ZAAVZBg55dpi6kRsR4FXFoZMrn1cYOw==}
     peerDependencies:
       eslint: ^8.44.0
@@ -3401,7 +3401,7 @@ packages:
       eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.9.1)(eslint@8.53.0)
       eslint-plugin-react: 7.33.2(eslint@8.53.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.53.0)
-      prettier: 3.0.3
+      prettier: 3.1.0
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -3483,7 +3483,7 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-prettier@5.0.1(eslint@8.53.0)(prettier@3.0.3):
+  /eslint-plugin-prettier@5.0.1(eslint@8.53.0)(prettier@3.1.0):
     resolution: {integrity: sha512-m3u5RnR56asrwV/lDC4GHorlW75DsFfmUcjfCYylTUs85dBRnB7VM6xG8eCMJdeDRnppzmxZVf1GEPJvl1JmNg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -3498,7 +3498,7 @@ packages:
         optional: true
     dependencies:
       eslint: 8.53.0
-      prettier: 3.0.3
+      prettier: 3.1.0
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.5
     dev: true
@@ -5259,8 +5259,8 @@ packages:
   /lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  /lint-staged@15.0.2:
-    resolution: {integrity: sha512-vnEy7pFTHyVuDmCAIFKR5QDO8XLVlPFQQyujQ/STOxe40ICWqJ6knS2wSJ/ffX/Lw0rz83luRDh+ET7toN+rOw==}
+  /lint-staged@15.1.0:
+    resolution: {integrity: sha512-ZPKXWHVlL7uwVpy8OZ7YQjYDAuO5X4kMh0XgZvPNxLcCCngd0PO5jKQyy3+s4TL2EnHoIXIzP1422f/l3nZKMw==}
     engines: {node: '>=18.12.0'}
     hasBin: true
     dependencies:
@@ -5273,7 +5273,7 @@ packages:
       micromatch: 4.0.5
       pidtree: 0.6.0
       string-argv: 0.3.2
-      yaml: 2.3.3
+      yaml: 2.3.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5937,8 +5937,8 @@ packages:
       fast-diff: 1.3.0
     dev: true
 
-  /prettier@3.0.3:
-    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+  /prettier@3.1.0:
+    resolution: {integrity: sha512-TQLvXjq5IAibjh8EpBIkNKxO749UEWABoiIZehEPiY4GNpVdhaFKqSTu+QrlU6D2dPAfubRmtJTi4K4YkQ5eXw==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -7190,8 +7190,8 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /uno-js@3.56.0:
-    resolution: {integrity: sha512-mRCe62jIR/h8nZCkT9VGzWHcghc5+pCRnSrvzOHS8sDtaM3Z6TKrtdOyYEztVLPbkbLzGHaTEfZZvZGAp4MIGg==}
+  /uno-js@3.57.0:
+    resolution: {integrity: sha512-gbk/4ptcEO0FKWDA1Dp0wYnrLh5jWTQDOKzabw6H4hEexqjAiLFndRR7AX+Eru7vIJFmIZiDPdZ2lbe6thJiMA==}
     dev: false
 
   /unpipe@1.0.0:
@@ -7676,6 +7676,11 @@ packages:
   /yaml@2.3.3:
     resolution: {integrity: sha512-zw0VAJxgeZ6+++/su5AFoqBbZbrEakwu+X0M5HmcwUiBL7AzcuPKjj5we4xfQLp78LkEMpD0cOnUhmgOVy3KdQ==}
     engines: {node: '>= 14'}
+
+  /yaml@2.3.4:
+    resolution: {integrity: sha512-8aAvwVUSHpfEqTQ4w/KMlf3HcRdt50E5ODIQJBw1fQ5RL34xabzxtUlzTXVqc4rkZsPbvrXKWnABCD7kWSmocA==}
+    engines: {node: '>= 14'}
+    dev: true
 
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
