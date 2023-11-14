@@ -20,7 +20,6 @@ describe('ChartBar', () => {
     barSize: 20,
     xAxis: true,
     stacked: true,
-    accumulated: true,
     scroll: true,
     refLineY: { value: 50, label: 'Ref Line', color: 'red' },
   };
