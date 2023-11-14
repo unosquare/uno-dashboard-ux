@@ -1,27 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import {
-    CartesianGrid,
-    Legend,
-    Line,
-    LineChart,
-    ReferenceLine,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis,
-} from 'recharts';
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
-import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
 import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
-import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { ChartComponent } from '../constants';
 import { NoData } from '../NoData';
-import { formatTicks, getValueFormatted } from '../utils';
+import { formatTicks } from '../utils';
 import { ChartLineShimmer } from '../ChartShimmers';
+import { ChartDecorators } from '../ChartCommon';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
@@ -111,43 +100,14 @@ export const DataChart = <T,>({
                                 'dark:fill-dark-tremor-content',
                             )}
                         />
-                        {refLineY && (
-                            <ReferenceLine
-                                y={refLineY.value}
-                                label={{
-                                    position: 'insideTopRight',
-                                    value: refLineY.label,
-                                    fontSize: 11,
-                                    offset: 7,
-                                }}
-                                stroke={refLineY.color}
-                            />
-                        )}
-                        <Tooltip
-                            wrapperStyle={{ outline: 'none' }}
-                            isAnimationActive={false}
-                            cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
-                            content={({ active, payload, label }) => (
-                                <ChartTooltip
-                                    active={active}
-                                    payload={payload}
-                                    label={label as string}
-                                    valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}
-                                    categoryColors={categoryColors}
-                                />
-                            )}
-                            position={{ y: 0 }}
-                        />
-                        {legend && (
-                            <Legend
-                                iconType='circle'
-                                verticalAlign='top'
-                                height={legendHeight}
-                                content={({ payload }) =>
-                                    ChartLegend({ payload }, categoryColors, setLegendHeight, undefined, undefined)
-                                }
-                            />
-                        )}
+                        {ChartDecorators({
+                            refLineY,
+                            legendFormatType,
+                            categoryColors,
+                            legend,
+                            legendHeight,
+                            setLegendHeight,
+                        })}
                         {getChartSeries(dataStore).map((property: string, index: number) => (
                             <Line
                                 className={getColorClassNames(colors[index], colorPalette.text).strokeColor}

@@ -1,29 +1,18 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import {
-    Bar,
-    BarChart,
-    Brush,
-    Cell,
-    Legend,
-    ReferenceLine,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis,
-} from 'recharts';
+import { Bar, BarChart, Brush, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Color, Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import objectHash from 'object-hash';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
 import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
-import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
-import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
 import { ChartComponent, LegendFormatType } from '../constants';
 import { NoData } from '../NoData';
-import { formatTicks, getValueFormatted } from '../utils';
+import { formatTicks } from '../utils';
 import { ChartBarShimmer } from '../ChartShimmers';
+import { ChartDecorators } from '../ChartCommon';
+import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 
 type XAxisPrimaryFormatter = {
     (input: string): string;
@@ -96,8 +85,7 @@ export const ChartBar = <T,>({
             {dataStore.length > 0 ? (
                 <ResponsiveContainer>
                     <BarChart data={dataStore} maxBarSize={barSize} onClick={onClickEvent}>
-                        {xAxis && !multiXAxis && <XAxis dataKey='name' />}
-                        {xAxis && multiXAxis && <XAxis dataKey='name' tickFormatter={multiXAxis.primary} />}
+                        {xAxis && <XAxis dataKey='name' tickFormatter={multiXAxis?.primary} />}
                         {xAxis && multiXAxis && (
                             <XAxis
                                 dataKey='name'
@@ -117,42 +105,23 @@ export const ChartBar = <T,>({
                             unit={unit}
                             allowDecimals={false}
                             width={70}
-                        />
-                        {refLineY && (
-                            <ReferenceLine
-                                y={refLineY.value}
-                                label={{
-                                    position: 'insideTopRight',
-                                    value: refLineY.label,
-                                    fontSize: 11,
-                                    offset: 7,
-                                }}
-                                stroke={refLineY.color}
-                            />
-                        )}
-                        <Tooltip
-                            wrapperStyle={{ outline: 'none' }}
-                            isAnimationActive={false}
-                            cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
-                            content={({ active, payload, label }) => (
-                                <ChartTooltip
-                                    active={active}
-                                    payload={payload}
-                                    label={label as string}
-                                    valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}
-                                    categoryColors={categoryColors}
-                                />
+                            className={tremorTwMerge(
+                                // common
+                                'text-tremor-label',
+                                // light
+                                'fill-tremor-content',
+                                // dark
+                                'dark:fill-dark-tremor-content',
                             )}
                         />
-                        {legend && (
-                            <Legend
-                                iconType='circle'
-                                height={legendHeight}
-                                content={({ payload }) =>
-                                    ChartLegend({ payload }, categoryColors, setLegendHeight, undefined, undefined)
-                                }
-                            />
-                        )}
+                        {ChartDecorators({
+                            refLineY,
+                            legendFormatType,
+                            categoryColors,
+                            legend,
+                            legendHeight,
+                            setLegendHeight,
+                        })}
                         {keys.map((property) =>
                             stacked ? (
                                 <Bar

@@ -14,6 +14,7 @@ import {
     Blur,
     Burger,
     ChartBar,
+    ComposedLineChart,
     DataChart,
     ErrorBoundary,
     Footer,
@@ -198,10 +199,14 @@ const Application = () => {
                         <AwaitableMetric>{!loading ? '100%' : undefined}</AwaitableMetric>
                     </Card>
                     <Card>
-                        <Text>Metric 3</Text>
-                        <AwaitableMetric>{!loading ? '100%' : undefined}</AwaitableMetric>
+                        <PieChart
+                            rawData={loading ? undefined : chartData}
+                            dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
+                            legendFormatType='money'
+                        />
                     </Card>
                     <Card>
+                        <Text className='font-medium'>Line Chart</Text>
                         <DataChart
                             rawData={loading ? undefined : chartData}
                             dataCallback={identity}
@@ -223,12 +228,9 @@ const Application = () => {
                         />
                     </Card>
                     <Card className='h-96'>
-                        <Text className='font-medium'>Pie Chart</Text>
-                        <PieChart
-                            rawData={loading ? undefined : chartData}
-                            dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
-                            legendFormatType='money'
-                        />
+                        <Text className='font-medium'>Composited Chart</Text>
+                        <ComposedLineChart rawData={loading ? undefined : chartData} dataCallback={identity}
+                            lines={[{ dataKey: 'name', yAxisId: 'left' }]} />
                     </Card>
                     <Col numColSpan={3}>
                         <Card>
