@@ -35,9 +35,16 @@ export type CustomOptions = {
 const getCustomLabel = ({ values, prefix }: CustomOptions, index: number, { name }: DefaultPayload) =>
     prefix ? `${values[index]} ${name}` : `${name} ${values[index]}`;
 
-const getLabel =
+const getLegendFormatType = (index: number, formats?: string[], legendFormatType?: LegendFormatType) => {
+    if (formats && formats[index] === 'percentage') return 'percentage';
+    if (formats && formats[index] === 'money') return 'money';
+    return legendFormatType;
+};
+
+export const getLabel =
     (customLabel: CustomOptions | undefined) =>
-    (category: DefaultPayload, index: number, legendFormatType?: LegendFormatType) => {
+    (category: DefaultPayload, index: number, formats?: string[], x?: LegendFormatType) => {
+        const legendFormatType = getLegendFormatType(index, formats, x);
         const { name, value } = category;
         let stringName = String(name);
 
@@ -59,13 +66,7 @@ const StyledLegend = tw.div`
     dark:border-dark-tremor-border
 `;
 
-const getLegendFormatType = (index: number, formats?: string[], legendFormatType?: LegendFormatType) => {
-    if (formats && formats[index] === 'percentage') return 'percentage';
-    if (formats && formats[index] === 'money') return 'money';
-    return legendFormatType;
-};
-
-const Component = ({
+export const ChartLegendLabel = ({
     category,
     index,
     legendFormatType,
@@ -77,10 +78,10 @@ const Component = ({
     index: number;
     legendFormatType?: LegendFormatType;
     formats?: string[];
-    getLabelFunc: (category: DefaultPayload, index: number, x?: LegendFormatType) => string[];
+    getLabelFunc: (category: DefaultPayload, index: number, formats?: string[], x?: LegendFormatType) => string[];
     categoryColors: Map<string, Color>;
 }) => {
-    const [label, value] = getLabelFunc(category, index, getLegendFormatType(index, formats, legendFormatType));
+    const [label, value] = getLabelFunc(category, index, formats, legendFormatType);
     const bgColor = categoryColors.get(category.name ?? '') ?? 'transparent';
 
     return (
@@ -123,7 +124,7 @@ export const UnoChartTooltip = ({
                 localPayload.length > 0 &&
                 (accumulated
                     ? localPayload
-                          .map((category: DefaultPayload, index: number) => {
+                          .map((category, index) => {
                               localPayload[index].value = Object.values(category.payload) // eslint-disable-line @typescript-eslint/no-unsafe-argument
                                   .filter((x: unknown) => x !== category.payload.name) // eslint-disable-line @typescript-eslint/no-unsafe-member-access
                                   .map((_: unknown, j: number, arr: unknown[]) =>
@@ -140,10 +141,10 @@ export const UnoChartTooltip = ({
                                   getLabelFunc,
                                   categoryColors,
                               };
-                              return <Component key={objectHash(options)} {...options} />;
+                              return <ChartLegendLabel key={objectHash(options)} {...options} />;
                           })
                           .reverse()
-                    : localPayload.map((category: DefaultPayload, index: number) => {
+                    : localPayload.map((category, index) => {
                           const options = {
                               category,
                               index,
@@ -152,7 +153,7 @@ export const UnoChartTooltip = ({
                               getLabelFunc,
                               categoryColors,
                           };
-                          return <Component key={objectHash(options)} {...options} />;
+                          return <ChartLegendLabel key={objectHash(options)} {...options} />;
                       }))}
         </StyledLegend>
     );
