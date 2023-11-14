@@ -93,7 +93,6 @@ const StyledLinkButton = tw.button`
     underline
     cursor-pointer
     text-[10px]
-    position-[horizontal]
     p-2
 `;
 
@@ -119,13 +118,9 @@ const translateType = (type: DataTypes | undefined): FormatTypes | undefined => 
 const renderLinkString = (data: TableCellTypes) => {
     if (data instanceof Array) {
         return data[0] ? (
-            <>
-                {data[3] && <span>{`${data[2]} `}</span>}
-                <a href={data[0]} target='_blank' rel='noopener noreferrer' className='underline'>
-                    {data[1]}
-                </a>
-                {!data[3] && data[2] && <span>{` ${data[2]}`}</span>}
-            </>
+            <a href={data[0]} target='_blank' rel='noopener noreferrer' className='underline'>
+                {data[1]}
+            </a>
         ) : (
             data[1]
         );

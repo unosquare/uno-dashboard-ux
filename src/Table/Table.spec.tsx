@@ -99,10 +99,10 @@ describe('renderTableCell', () => {
 describe('Table', () => {
     const tableColumns: TableColumn[] = [
         { label: 'Column 1', dataType: 'string', sortOrder: 1, sortDirection: 'asc' },
-        { label: 'Column 2', dataType: 'number' },
+        { label: 'Column 2', dataType: 'number', sortOrder: 2, sortDirection: 'desc' },
         { label: 'Column 3', dataType: 'money' },
         { label: 'Column 4', dataType: 'date' },
-        { label: 'Column 5', dataType: 'link' },
+        { label: 'Column 5', dataType: 'link', excludeFromSort: true },
         { label: 'Column 6', dataType: 'boolean' },
         { label: 'Column 7', dataType: 'months' },
         { label: 'Column 8', dataType: 'percentage' },
@@ -111,7 +111,7 @@ describe('Table', () => {
 
     const tableData = [
         ['Row 1', 1, 1, new Date(2020, 0, 1), 'https://www.unosquare.com', true, 1, 100, 0.1],
-        ['Row 2', 2, 2, new Date(2020, 0, 2), ['https://www.unosquare.com','OK','Link'], false, 1, 100, 0.1],
+        ['Row 2', 2, 2, new Date(2020, 0, 2), ['https://www.unosquare.com', 'OK', 'Link'], false, 1, 100, 0.1],
         ['Row 3', 3, 3, new Date(2020, 0, 3), 'https://www.unosquare.com', true, 1, 0, 0.1],
         ['Row 4', 4, 4, new Date(2020, 0, 4), 'https://www.unosquare.com', false, 1, 0, 0.1],
         ['Row 5', 5, 5, new Date(2020, 0, 5), 'https://www.unosquare.com', true, 2, 50, 0.1],
@@ -143,6 +143,13 @@ describe('Table', () => {
     it('renders the correct number of headers', () => {
         const { container } = render(<Table columns={tableColumns} rawData={tableData} dataCallback={identity} />);
         const headers = container.querySelectorAll('.tremor-TableHeaderCell-root');
+        expect(headers.length).toBe(tableColumns.length);
+    });
+
+
+    it('renders the correct number of footer', () => {
+        const { container } = render(<Table columns={tableColumns} rawData={tableData} dataCallback={identity} calculateFooter={() => Array.from({ length: tableColumns.length }).map(() => '')} />);
+        const headers = container.querySelectorAll('.tremor-TableFooterCell-root');
         expect(headers.length).toBe(tableColumns.length);
     });
 });

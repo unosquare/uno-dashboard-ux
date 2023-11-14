@@ -2,9 +2,9 @@ import { searchData, searchFooter, sortData, TableColumn } from './sortData';
 
 describe('searchData', () => {
     const definitions = [
-        { label: 'Name', disableSearch: false },
+        { label: 'Name'},
         { label: 'Age', disableSearch: true },
-        { label: 'Email', disableSearch: false },
+        { label: 'Email' },
     ];
 
     const data = [

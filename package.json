@@ -10,16 +10,16 @@
     "dependencies": {
         "@fluentui/react-icons": "^2.0.222",
         "@headlessui/react": "0.0.0-insiders.1469b85",
-        "@tremor/react": "^3.11.0",
+        "@tremor/react": "^3.11.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "recharts": "^2.9.3",
+        "recharts": "2.9.2",
         "tailwind-merge": "^2.0.0",
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.57.0"
     },
     "devDependencies": {
-        "@rspack/cli": "^0.3.11",
+        "@rspack/cli": "0.3.11",
         "@testing-library/jest-dom": "^6.1.4",
         "@testing-library/react": "^14.1.0",
         "@types/jest": "^29.5.8",
@@ -28,7 +28,7 @@
         "@types/react-dom": "^18.2.15",
         "@types/recharts": "1.8.27",
         "@types/node": "^20.9.0",
-        "@typescript-eslint/eslint-plugin": "^6.10.0",
+        "@typescript-eslint/eslint-plugin": "^6.11.0",
         "autoprefixer": "^10.4.16",
         "eslint": "^8.53.0",
         "eslint-config-unosquare": "0.8.2",

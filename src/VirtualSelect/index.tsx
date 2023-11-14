@@ -1,4 +1,4 @@
-import React, { startTransition, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Combobox } from '@headlessui/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { spacing } from '@tremor/react/dist/lib/spacing';
@@ -90,7 +90,7 @@ export const comboBoxSingleOptionStyles = (className: string | undefined) =>
         'my-0',
     );
 
-export const ArrowDownHead = () => (
+const ArrowDownHead = () => (
     <div className={tremorTwMerge('absolute inset-y-0 right-0 flex items-center', spacing.md.paddingRight)}>
         <ChevronDown16Filled
             className={tremorTwMerge(
@@ -136,22 +136,19 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
     useEffect(() => setFilteredOptions(getValues(options)), [options]);
 
     const debouncedSearch = useDebounce(() => {
-        startTransition(() => {
-            setFilteredOptions(getFilteredOptions(searchQuery, options));
-        });
+        setFilteredOptions(getFilteredOptions(searchQuery, options));
     }, 300);
 
     const onOptionClick = (option: string) => () => onValueChange(option);
 
-    const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(target.value ?? '');
+    const performSearch = (x: string) => {
+        setSearchQuery(x);
         debouncedSearch();
     };
 
-    const onClearSearch = () => {
-        setSearchQuery('');
-        debouncedSearch();
-    };
+    const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => performSearch(target.value ?? '');
+
+    const onClearSearch = () => performSearch('');
 
     return (
         <Combobox

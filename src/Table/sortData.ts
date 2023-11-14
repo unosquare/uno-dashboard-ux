@@ -1,4 +1,4 @@
-import { compareDates, defaultStringFilter, sortComparer, sortNumericString } from 'uno-js';
+import { compareDates, defaultStringFilter, sortNumericString } from 'uno-js';
 import { DataTypes, SortDirection, TextAlign } from '../constants';
 
 export type TableCellTypes = string | number | Array<string> | Date | boolean | null | undefined;
@@ -45,9 +45,6 @@ const sortOneColumn = <T extends TableColumn>(
 
     const a = sortDirection === 'desc' ? right : left;
     const b = sortDirection === 'desc' ? left : right;
-
-    if (dataType === 'link')
-        return sortComparer((a[sortColumn] as Array<string>)[1], (b[sortColumn] as Array<string>)[1]);
 
     if (dataType === 'date') {
         const result = compareDates(String(a[sortColumn]), String(b[sortColumn]));

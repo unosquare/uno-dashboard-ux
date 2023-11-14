@@ -12,7 +12,7 @@ export const defaultData = [
         200,
         55.25,
         true,
-        ['https://www.google.com', 'Google', '(after)'],
+        ['https://www.google.com', 'Google'],
         'Small text',
     ],
     [
@@ -24,7 +24,7 @@ export const defaultData = [
         null,
         0.05,
         false,
-        ['https://www.google.com', '(Google)', 'before'],
+        ['https://www.google.com', 'Google'],
         'Small text',
     ],
     ['Maria', 'NY', new Date('2022-01-05'), 60, 40, 0, 0.55, false, '', 'Small text'],
