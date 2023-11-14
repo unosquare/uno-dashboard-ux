@@ -208,7 +208,6 @@ const Application = () => {
                             legend
                             className='mt-5'
                             legendFormatType='percentage'
-                            tooltip='tremor'
                             onClick={console.log}
                         />
                     </Card>
@@ -220,7 +219,6 @@ const Application = () => {
                             dataCallback={identity}
                             legendFormatType='percentage'
                             legend
-                            tooltip='tremor'
                             onClick={barClick}
                         />
                     </Card>

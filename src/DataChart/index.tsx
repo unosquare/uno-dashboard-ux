@@ -18,15 +18,13 @@ import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
 import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import { UnoChartTooltip } from '../ChartLegend';
-import { ChartComponent, ChartTooltipType } from '../constants';
+import { ChartComponent } from '../constants';
 import { NoData } from '../NoData';
 import { formatTicks, getValueFormatted } from '../utils';
 import { ChartLineShimmer } from '../ChartShimmers';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
-    tooltip?: ChartTooltipType;
     onClick?: (activeTooltipIndex: number, activeLabel: string) => void;
     domain?: number;
     unit?: string;
@@ -66,7 +64,6 @@ export const DataChart = <T,>({
     unit,
     refLineY,
     className,
-    tooltip = 'classic',
 }: DataChartSettings<T>) => {
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
@@ -130,26 +127,15 @@ export const DataChart = <T,>({
                             wrapperStyle={{ outline: 'none' }}
                             isAnimationActive={false}
                             cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
-                            content={
-                                tooltip === 'classic' ? (
-                                    <UnoChartTooltip
-                                        legendFormatType={legendFormatType}
-                                        categoryColors={categoryColors}
-                                    />
-                                ) : (
-                                    ({ active, payload, label }) => (
-                                        <ChartTooltip
-                                            active={active}
-                                            payload={payload}
-                                            label={label as string}
-                                            valueFormatter={(value: number) =>
-                                                getValueFormatted(value, legendFormatType)
-                                            }
-                                            categoryColors={categoryColors}
-                                        />
-                                    )
-                                )
-                            }
+                            content={({ active, payload, label }) => (
+                                <ChartTooltip
+                                    active={active}
+                                    payload={payload}
+                                    label={label as string}
+                                    valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}
+                                    categoryColors={categoryColors}
+                                />
+                            )}
                             position={{ y: 0 }}
                         />
                         {legend && (
