@@ -13,7 +13,7 @@
         "@tremor/react": "^3.11.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "recharts": "2.9.3",
+        "recharts": "2.10.1",
         "tailwind-merge": "^2.0.0",
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.58.0"
