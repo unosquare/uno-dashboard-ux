@@ -220,6 +220,7 @@ const Application = () => {
                         <Text className='font-medium'>Bar Chart</Text>
                         <ChartBar
                             className='mt-5'
+                            refLineY={{ value: 20, label: 'Ref Line', color: 'red' }}
                             rawData={loading ? undefined : chartData}
                             dataCallback={identity}
                             legendFormatType='percentage'
