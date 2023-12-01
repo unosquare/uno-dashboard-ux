@@ -25,6 +25,7 @@ export const ChartDecorators = ({
 }: ChartDecoratorsSettings) => [
     refLineY ? (
         <ReferenceLine
+            key='refLineY'
             y={refLineY.value}
             label={{
                 position: 'insideTopRight',
@@ -34,9 +35,7 @@ export const ChartDecorators = ({
             }}
             stroke={refLineY.color}
         />
-    ) : (
-        <></>
-    ),
+    ) : null,
     <Tooltip
         key='tooltip'
         wrapperStyle={{ outline: 'none' }}
@@ -54,11 +53,10 @@ export const ChartDecorators = ({
     />,
     legend ? (
         <Legend
+            key='legend'
             iconType='circle'
             height={legendHeight}
             content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight, undefined, undefined)}
         />
-    ) : (
-        <> </>
-    ),
+    ) : null,
 ];

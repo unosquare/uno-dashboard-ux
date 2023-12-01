@@ -64,7 +64,7 @@ export const DataChart = <T,>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onClickEvent = (event: any) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (event !== null && event.activeTooltipIndex !== null && onClick)
+        if (event?.activeTooltipIndex !== null && onClick)
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             onClick(Number(event.activeTooltipIndex), String(event.activeLabel));
     };
