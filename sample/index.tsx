@@ -9,6 +9,7 @@ import {
 } from '@fluentui/react-icons';
 import { Button, Card, Col, Flex, Grid, Select, SelectItem, Text, Title } from '@tremor/react';
 import {
+    Alert,
     AwaitableMetric,
     BasicToolbar,
     Blur,
@@ -37,6 +38,7 @@ import {
 } from '../src';
 import '../src/resources/global.css';
 import { anotherDataSet, defaultData, getLargeSelectOptions } from './data';
+import useAlertStore from '../src/useAlertStore';
 
 export enum options {
     A = 'Apple',
@@ -89,6 +91,7 @@ type onlineDto = {
 const processOnlineData = (data: onlineDto[]) => data ? data.map((x) => [x.id, x.title, x.body]) : [];
 
 const Application = () => {
+    const setAlert = useAlertStore(st => st.setAlert);
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
     const [virtualSelectOption, setVirtualSelectOption] = React.useState<string>(0);
     const [openMenu, setOpenMenu] = useToggle();
@@ -124,6 +127,7 @@ const Application = () => {
 
     return (
         <ErrorBoundary>
+            <Alert />
             <NavBar>
                 <NavBarTitle>
                     <h2>Sample App</h2>
@@ -180,6 +184,8 @@ const Application = () => {
                 <Button size='xs' onClick={setShowModal}>
                     Show Modal
                 </Button>
+                <Button size='xs' onClick={() => setAlert(true)}>Success</Button>
+                <Button size='xs' onClick={() => setAlert(false)}>Error</Button>
                 <VirtualSelect
                     value={virtualSelectOption}
                     onValueChange={setVirtualSelectOption}
