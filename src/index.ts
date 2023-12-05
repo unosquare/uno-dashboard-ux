@@ -1,6 +1,7 @@
 export * from './constants';
 export * from './hooks';
 export * from './utils';
+export { default as useAlertStore } from './useAlertStore';
 
 export * from './Alert';
 export * from './AwaitableMetric';

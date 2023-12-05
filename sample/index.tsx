@@ -34,11 +34,11 @@ import {
     TremorContainer,
     VirtualSelect,
     useTheme,
+    useAlertStore,
     useToggle,
 } from '../src';
 import '../src/resources/global.css';
 import { anotherDataSet, defaultData, getLargeSelectOptions } from './data';
-import useAlertStore from '../src/useAlertStore';
 
 export enum options {
     A = 'Apple',
