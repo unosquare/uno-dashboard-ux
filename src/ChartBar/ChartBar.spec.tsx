@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ChartBar, ChartBarSettings } from './index';
-import { identity } from 'uno-js';
 
 describe('ChartBar', () => {
   const data = [
@@ -12,14 +11,13 @@ describe('ChartBar', () => {
 
   const settings: ChartBarSettings<{ name: string, value: number }[]> = {
     rawData: data,
-    dataCallback: identity,
     legendFormatType: 'number',
     legend: true,
     refLineY: { value: 50, label: 'Ref Line', color: 'red' },
   };
 
   it('renders without crashing', () => {
-    render(<ChartBar rawData={data} dataCallback={identity} />);
+    render(<ChartBar rawData={data} />);
   });
 
   it('renders the legend', () => {
@@ -44,7 +42,7 @@ describe('ChartBar', () => {
   });
 
   it('renders the no data legend', () => {
-    const { getByText } = render(<ChartBar rawData={[]} dataCallback={identity} />);
+    const { getByText } = render(<ChartBar rawData={[]} />);
     expect(getByText('No record found')).toBeInTheDocument();
   });
 });

@@ -1,5 +1,5 @@
 import objectHash from 'object-hash';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
 import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
@@ -18,7 +18,11 @@ export const PieChart = <T,>({
     className,
     colors = themeColorRange,
 }: ChartComponent<T, ChartData[]>) => {
-    const dataStore: ChartData[] = (dataCallback && rawData && dataCallback(rawData)) || [];
+    const dataTransformFn = useMemo(
+        () => dataCallback ?? ((data: T) => data as unknown as ChartData[]),
+        [dataCallback],
+    );
+    const dataStore: ChartData[] = (rawData && dataTransformFn(rawData)) || [];
     const categoryColors = constructCategoryColors(
         dataStore.map((x) => x.name),
         colors,

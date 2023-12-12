@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, startTransition, useEffect, useState } from 'react';
+import React, { PropsWithChildren, startTransition, useEffect, useMemo, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
 import { createCsv, formatter, FormatTypes } from 'uno-js';
@@ -289,6 +289,13 @@ const SpanTable = ({ colSpan, children }: PropsWithChildren<{ colSpan: number }>
     </TableRow>
 );
 
+const defaultTranform = <TDataIn,>(data: TDataIn) => {
+    if (data instanceof Array && data[0] instanceof Object)
+        return data.map((x) => Object.values(x as Record<string, unknown>) as unknown as TableCellTypes[]);
+
+    return data as unknown as TableCellTypes[][];
+};
+
 export const Table = <TDataIn,>({
     columns,
     noDataElement,
@@ -302,6 +309,7 @@ export const Table = <TDataIn,>({
     dataCallback,
     className = '',
 }: PropsWithChildren<TableSettings<TDataIn>>) => {
+    const dataTransformFn = useMemo(() => dataCallback ?? defaultTranform, [dataCallback]);
     const [rawDataState, setRawDataState] = useState<TDataIn>();
     const [definitions, setDefinitions] = useState(columns);
     const [data, setData] = useState<TableCellTypes[][]>([]);
@@ -328,13 +336,13 @@ export const Table = <TDataIn,>({
         startTransition(() => {
             setRawDataState(rawData);
 
-            const raw = dataCallback(rawData);
+            const raw = dataTransformFn(rawData);
             setData(raw);
             setSearched(raw);
             setSearch('');
             if (calculateFooter) setFooterData(calculateFooter(rawData));
         });
-    }, [rawData, dataCallback, calculateFooter]);
+    }, [rawData, dataTransformFn, calculateFooter]);
 
     useEffect(() => setDefinitions(columns), [columns]);
 

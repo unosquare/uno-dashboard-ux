@@ -1,7 +1,6 @@
 import React from 'react';
 import { getAlignment, getColumnSorting, renderTableCell, Table, TableCellTypes, TableColumn } from './index';
 import { render } from '@testing-library/react';
-import { identity } from 'uno-js';
 
 describe('getAlignment', () => {
     it('returns text-left for paragraph data type', () => {
@@ -123,7 +122,7 @@ describe('Table', () => {
     ];
 
     it('renders without crashing', () => {
-        render(<Table columns={tableColumns} rawData={tableData} dataCallback={identity} />);
+        render(<Table columns={tableColumns} rawData={tableData} />);
     });
 
     it('renders with shimmer', () => {
@@ -135,20 +134,20 @@ describe('Table', () => {
     });
 
     it('renders the correct number of rows', () => {
-        const { container } = render(<Table columns={tableColumns} rawData={tableData} dataCallback={identity} />);
+        const { container } = render(<Table columns={tableColumns} rawData={tableData} />);
         const rows = container.querySelectorAll('tbody .tremor-TableRow-row');
         expect(rows.length).toBe(tableData.length);
     });
 
     it('renders the correct number of headers', () => {
-        const { container } = render(<Table columns={tableColumns} rawData={tableData} dataCallback={identity} />);
+        const { container } = render(<Table columns={tableColumns} rawData={tableData} />);
         const headers = container.querySelectorAll('.tremor-TableHeaderCell-root');
         expect(headers.length).toBe(tableColumns.length);
     });
 
 
     it('renders the correct number of footer', () => {
-        const { container } = render(<Table columns={tableColumns} rawData={tableData} dataCallback={identity} calculateFooter={() => Array.from({ length: tableColumns.length }).map(() => '')} />);
+        const { container } = render(<Table columns={tableColumns} rawData={tableData} calculateFooter={() => Array.from({ length: tableColumns.length }).map(() => '')} />);
         const headers = container.querySelectorAll('.tremor-TableFooterCell-root');
         expect(headers.length).toBe(tableColumns.length);
     });

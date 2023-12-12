@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
@@ -54,6 +54,10 @@ export const DataChart = <T,>({
     refLineY,
     className,
 }: DataChartSettings<T>) => {
+    const dataTransformFn = useMemo(
+        () => dataCallback ?? ((data: T) => data as unknown as Record<string, unknown>[]),
+        [dataCallback],
+    );
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
 
@@ -70,8 +74,8 @@ export const DataChart = <T,>({
     };
 
     useEffect(() => {
-        setDataStore((dataCallback && rawData && dataCallback(rawData)) || []);
-    }, [rawData, dataCallback]);
+        setDataStore((rawData && dataTransformFn(rawData)) || []);
+    }, [rawData, dataTransformFn]);
 
     if (!rawData) return <ChartLineShimmer className={className} />;
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { PieChart } from './index';
-import { identity } from 'uno-js';
 
 describe('PieChart', () => {
     beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PieChart', () => {
     ];
 
     it('renders a pie chart with the correct number of slices', () => {
-        const { container } = render(<PieChart rawData={dataStore} dataCallback={identity} />);
+        const { container } = render(<PieChart rawData={dataStore} />);
 
         const slices = container.querySelectorAll('.recharts-pie-sector');
         expect(slices.length).toBe(dataStore.length);
@@ -35,7 +34,7 @@ describe('PieChart', () => {
     });
 
     it('renders the no data legend', () => {
-        const { getByText } = render(<PieChart rawData={[]} dataCallback={identity} />);
+        const { getByText } = render(<PieChart rawData={[]} />);
         expect(getByText('No record found')).toBeInTheDocument();
     });
 });

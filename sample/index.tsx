@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { identity } from 'uno-js';
 import {
     ArrowSync24Regular,
     Dismiss24Regular,
@@ -68,6 +67,7 @@ const extraColumns: TableColumn[] = [
 
 
 const onlineColumns: TableColumn[] = [
+    { label: 'User Id' },
     { label: 'Id', sortOrder: 1, sortDirection: 'asc', dataType: 'number' },
     { label: 'Title' },
     { label: 'Body' },
@@ -87,8 +87,6 @@ type onlineDto = {
     title: string;
     body: string;
 };
-
-const processOnlineData = (data: onlineDto[]) => data ? data.map((x) => [x.id, x.title, x.body]) : [];
 
 const Application = () => {
     const setAlert = useAlertStore(st => st.setAlert);
@@ -215,7 +213,6 @@ const Application = () => {
                         <Text className='font-medium'>Line Chart</Text>
                         <DataChart
                             rawData={loading ? undefined : chartData}
-                            dataCallback={identity}
                             legend
                             className='mt-5'
                             legendFormatType='percentage'
@@ -228,7 +225,6 @@ const Application = () => {
                             className='mt-5'
                             refLineY={{ value: 20, label: 'Ref Line', color: 'red' }}
                             rawData={loading ? undefined : chartData}
-                            dataCallback={identity}
                             legendFormatType='percentage'
                             legend
                             onClick={barClick}
@@ -236,7 +232,7 @@ const Application = () => {
                     </Card>
                     <Card className='h-96'>
                         <Text className='font-medium'>Composited Chart</Text>
-                        <ComposedLineChart rawData={loading ? undefined : chartData} dataCallback={identity}
+                        <ComposedLineChart rawData={loading ? undefined : chartData}
                             lines={[{ dataKey: 'name', yAxisId: 'left' }]} />
                     </Card>
                     <Col numColSpan={3}>
@@ -245,7 +241,6 @@ const Application = () => {
                                 className='h-72'
                                 columns={toggle ? columns : extraColumns}
                                 rawData={toggle ? defaultData : anotherDataSet}
-                                dataCallback={identity}
                                 searchable
                                 sortable
                                 exportCsv
@@ -260,7 +255,6 @@ const Application = () => {
                             <Table
                                 columns={onlineColumns}
                                 rawData={onlineData}
-                                dataCallback={processOnlineData}
                             >
                                 <Title className='w-full'>Online Data</Title>
                             </Table>
@@ -274,7 +268,6 @@ const Application = () => {
                         className='h-72'
                         columns={columns}
                         rawData={defaultData}
-                        dataCallback={identity}
                         searchable
                     >
                         <Title className='w-full'>Modal Table</Title>

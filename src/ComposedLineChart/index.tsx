@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
     CartesianGrid,
     ComposedChart,
@@ -62,8 +62,12 @@ export const ComposedLineChart = <T,>({
     formats,
     lines,
 }: ComposedLineChartSettings<T>) => {
+    const dataTransformFn = useMemo(
+        () => dataCallback ?? ((data: T) => data as unknown as Record<string, unknown>[]),
+        [dataCallback],
+    );
     const [legendHeight, setLegendHeight] = useState(60);
-    const dataStore: Record<string, unknown>[] = (dataCallback && rawData && dataCallback(rawData)) || [];
+    const dataStore: Record<string, unknown>[] = (rawData && dataTransformFn(rawData)) || [];
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tickFormatter = (t: any, orientation: 'left' | 'right') =>

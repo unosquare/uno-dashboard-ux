@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ComposedLineChart } from './index';
-import { identity } from 'uno-js';
 
 describe('ComposedLineChart', () => {
     const data = [
@@ -11,11 +10,11 @@ describe('ComposedLineChart', () => {
     ];
 
     it('renders without crashing', () => {
-        render(<ComposedLineChart rawData={data} dataCallback={identity} lines={[{ dataKey: 'name', yAxisId: 'left' }]} />);
+        render(<ComposedLineChart rawData={data} lines={[{ dataKey: 'name', yAxisId: 'left' }]} />);
     });
 
     it('renders the no data legend', () => {
-        const { getByText } = render(<ComposedLineChart rawData={[]} dataCallback={identity} lines={[{ dataKey: 'name', yAxisId: 'left' }]} />);
+        const { getByText } = render(<ComposedLineChart rawData={[]} lines={[{ dataKey: 'name', yAxisId: 'left' }]} />);
         expect(getByText('No record found')).toBeInTheDocument();
     });
 });

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import { Bar, BarChart, Brush, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Color, Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
@@ -52,6 +52,11 @@ export const ChartBar = <T,>({
     refLineY,
     className,
 }: ChartBarSettings<T>) => {
+    const dataTransformFn = useMemo(
+        () => dataCallback ?? ((data: T) => data as unknown as Record<string, unknown>[]),
+        [dataCallback],
+    );
+
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
     const [categoryColors, setCategoryColors] = useState<Map<string, Color>>(new Map());
@@ -75,8 +80,8 @@ export const ChartBar = <T,>({
     }, [keys, colors]);
 
     useEffect(() => {
-        setDataStore((dataCallback && rawData && dataCallback(rawData)) || []);
-    }, [rawData, dataCallback]);
+        if (rawData) setDataStore(dataTransformFn(rawData));
+    }, [rawData, dataTransformFn]);
 
     if (!rawData) return <ChartBarShimmer className={className} />;
 

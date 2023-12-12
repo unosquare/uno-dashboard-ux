@@ -32,7 +32,7 @@ export type ClassNameComponent = {
 
 export type DataComponent<TDataIn, TDataOut> = {
     rawData: TDataIn | undefined;
-    dataCallback: (data: TDataIn) => TDataOut;
+    dataCallback?: (data: TDataIn) => TDataOut;
 };
 
 export type ChartComponent<TDataIn, TDataOut> = DataComponent<TDataIn, TDataOut> &
