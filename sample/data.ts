@@ -40,7 +40,7 @@ export const defaultData = [
         0.75,
         true,
         'https://www.google.com',
-        'This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type',
+        'This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type.\r\n\r\nThis is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type.\r\nThis is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type',
     ],
 ];
 
