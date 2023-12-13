@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useMemo, useState } from 'react';
-import { Bar, BarChart, Brush, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Color, Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import objectHash from 'object-hash';
@@ -31,7 +31,6 @@ export type ChartBarSettings<TDataIn> = ChartComponent<TDataIn, Record<string, u
     };
     stacked?: boolean;
     onClick?: (activeLabel: string, activeTooltipIndex: number) => void;
-    scroll?: boolean;
     refLineY?: { value: number; label: string; color: string };
 };
 
@@ -48,7 +47,6 @@ export const ChartBar = <T,>({
     stacked,
     onClick,
     legendFormatType,
-    scroll = false,
     refLineY,
     className,
 }: ChartBarSettings<T>) => {
@@ -158,9 +156,6 @@ export const ChartBar = <T,>({
                                     ))}
                                 </Bar>
                             ),
-                        )}
-                        {scroll && (
-                            <Brush dataKey='name' height={15} stroke='#f1f2f3' endIndex={11} travellerWidth={10} />
                         )}
                     </BarChart>
                 </ResponsiveContainer>
