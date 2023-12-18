@@ -31,7 +31,7 @@ dependencies:
     version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
   uno-js:
     specifier: ^3.63.0
-    version: 3.63.0
+    version: 3.64.0
   zustand:
     specifier: ^4.4.7
     version: 4.4.7(@types/react@18.2.45)(react@18.2.0)
@@ -7058,8 +7058,8 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /uno-js@3.63.0:
-    resolution: {integrity: sha512-ZWvCSJSiTc7Oe63soonnkbkeRtrsOXDAfeA9Y7z397kiHY4LJIwXm3h6vK8oVXCl7YQdNu6HNTz8veHk26GF/Q==}
+  /uno-js@3.64.0:
+    resolution: {integrity: sha512-4xEqftBgAX2H4TL5sGzpFogLgd84kLwm59AgcRM96pG1SC5bUNY58qumm4RV0FyX3ayREEkd8Z8QFL2h6HI7+Q==}
     dev: false
 
   /unpipe@1.0.0:
