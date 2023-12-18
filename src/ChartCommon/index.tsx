@@ -9,11 +9,14 @@ import ChartLegend from '@tremor/react/dist/components/chart-elements/common/Cha
 export type ChartDecoratorsSettings = {
     legendFormatType?: LegendFormatType;
     refLineY?: { value: number; label: string; color: string };
-    categoryColors: Map<string, Color>;
+    categoryColors: Map<string, string>;
     legend?: boolean;
     legendHeight?: number;
     setLegendHeight?: React.Dispatch<React.SetStateAction<number>>;
 };
+
+const defaultMap = new Map<string, string>();
+defaultMap.set('Value', 'blue');
 
 export const ChartDecorators = ({
     refLineY,
@@ -56,7 +59,15 @@ export const ChartDecorators = ({
             key='legend'
             iconType='circle'
             height={legendHeight}
-            content={({ payload }) => ChartLegend({ payload }, categoryColors, setLegendHeight, undefined, undefined)}
+            content={({ payload }) =>
+                ChartLegend(
+                    { payload },
+                    categoryColors.size == 0 ? defaultMap : categoryColors,
+                    setLegendHeight,
+                    undefined,
+                    undefined,
+                )
+            }
         />
     ) : null,
 ];

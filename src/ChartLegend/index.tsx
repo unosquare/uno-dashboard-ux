@@ -2,7 +2,7 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 import { FormatTypes, humanize } from 'uno-js';
 import objectHash from 'object-hash';
-import { Color, Flex, Text } from '@tremor/react';
+import { Flex, Text } from '@tremor/react';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { colorPalette } from '@tremor/react/dist/lib/theme';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
@@ -24,7 +24,7 @@ export type ChartLegendSettings = {
     customLabel?: CustomOptions;
     formats?: FormatTypes[];
     accumulated?: boolean;
-    categoryColors: Map<string, Color>;
+    categoryColors: Map<string, string>;
 };
 
 export type CustomOptions = {
@@ -79,7 +79,7 @@ export const ChartLegendLabel = ({
     legendFormatType?: LegendFormatType;
     formats?: string[];
     getLabelFunc: (category: DefaultPayload, index: number, formats?: string[], x?: LegendFormatType) => string[];
-    categoryColors: Map<string, Color>;
+    categoryColors: Map<string, string>;
 }) => {
     const [label, value] = getLabelFunc(category, index, formats, legendFormatType);
     const bgColor = categoryColors.get(category.name ?? '') ?? 'transparent';

@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import { Color, Flex } from '@tremor/react';
+import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import objectHash from 'object-hash';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
@@ -57,7 +57,7 @@ export const ChartBar = <T,>({
 
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
-    const [categoryColors, setCategoryColors] = useState<Map<string, Color>>(new Map());
+    const [categoryColors, setCategoryColors] = useState<Map<string, string>>(new Map());
     const [keys, setKeys] = useState<string[]>([]);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

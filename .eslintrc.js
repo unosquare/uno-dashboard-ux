@@ -1,5 +1,5 @@
 module.exports = {
-    ignorePatterns: ['*.test.ts', '*.spec.tsx'],
+    ignorePatterns: ['*.test.ts', '*.spec.tsx','zustand.ts'],
     settings: {
         'import/resolver': {
             node: {
