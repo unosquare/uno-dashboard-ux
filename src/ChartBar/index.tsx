@@ -118,6 +118,7 @@ export const ChartBar = <T,>({
                             )}
                         />
                         {ChartDecorators({
+                            keys,
                             refLineY,
                             legendFormatType,
                             categoryColors,

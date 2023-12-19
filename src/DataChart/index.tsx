@@ -32,16 +32,6 @@ const xPadding = {
     right: 20,
 };
 
-export const getChartSeries = (data: Record<string, unknown>[]) =>
-    data.reduce((current: string[], serie: Record<string, unknown>) => {
-        Object.keys(serie)
-            .filter((property) => property !== 'name')
-            .forEach((entry) => {
-                if (!current.includes(entry)) current.push(entry);
-            });
-        return current;
-    }, new Array<string>());
-
 export const DataChart = <T,>({
     dataCallback,
     rawData,
@@ -60,10 +50,11 @@ export const DataChart = <T,>({
     );
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
+    const [categoryColors, setCategoryColors] = useState<Map<string, string>>(new Map());
+    const [keys, setKeys] = useState<string[]>([]);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(Number(t), legendFormatType) : t) as string;
-    const categoryColors = constructCategoryColors(getChartSeries(dataStore), colors);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onClickEvent = (event: any) => {
@@ -76,6 +67,14 @@ export const DataChart = <T,>({
     useEffect(() => {
         setDataStore((rawData && dataTransformFn(rawData)) || []);
     }, [rawData, dataTransformFn]);
+
+    useEffect(() => {
+        setKeys(dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : []);
+    }, [dataStore]);
+
+    useEffect(() => {
+        setCategoryColors(constructCategoryColors(keys, colors ?? themeColorRange));
+    }, [keys, colors]);
 
     if (!rawData) return <ChartLineShimmer className={className} />;
 
@@ -105,6 +104,7 @@ export const DataChart = <T,>({
                             )}
                         />
                         {ChartDecorators({
+                            keys,
                             refLineY,
                             legendFormatType,
                             categoryColors,
@@ -112,13 +112,19 @@ export const DataChart = <T,>({
                             legendHeight,
                             setLegendHeight,
                         })}
-                        {getChartSeries(dataStore).map((property: string, index: number) => (
+                        {keys.map((property) => (
                             <Line
-                                className={getColorClassNames(colors[index], colorPalette.text).strokeColor}
+                                className={
+                                    getColorClassNames(categoryColors.get(property) ?? 'blue', colorPalette.background)
+                                        .strokeColor
+                                }
                                 activeDot={{
                                     className: tremorTwMerge(
                                         'stroke-tremor-background dark:stroke-dark-tremor-background',
-                                        getColorClassNames(colors[index], colorPalette.text).fillColor,
+                                        getColorClassNames(
+                                            categoryColors.get(property) ?? 'blue',
+                                            colorPalette.background,
+                                        ).fillColor,
                                     ),
                                 }}
                                 type='monotone'

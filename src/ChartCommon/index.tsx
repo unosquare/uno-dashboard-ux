@@ -3,10 +3,10 @@ import { Legend, ReferenceLine, Tooltip } from 'recharts';
 import { getValueFormatted } from '../utils';
 import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
 import { LegendFormatType } from '../constants';
-import { Color } from '@tremor/react';
 import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
 
 export type ChartDecoratorsSettings = {
+    keys: string[];
     legendFormatType?: LegendFormatType;
     refLineY?: { value: number; label: string; color: string };
     categoryColors: Map<string, string>;
@@ -15,10 +15,18 @@ export type ChartDecoratorsSettings = {
     setLegendHeight?: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const defaultMap = new Map<string, string>();
-defaultMap.set('Value', 'blue');
+const colors = ['blue', 'slate', 'gray', 'zinc', 'neutral', 'stone', 'red', 'orange', 'amber'];
+
+const getMap = (keys: string[]) => {
+    const map = new Map<string, string>();
+    keys.forEach((key, index) => {
+        map.set(key, colors[index]);
+    });
+    return map;
+};
 
 export const ChartDecorators = ({
+    keys,
     refLineY,
     legendFormatType,
     categoryColors,
@@ -62,7 +70,7 @@ export const ChartDecorators = ({
             content={({ payload }) =>
                 ChartLegend(
                     { payload },
-                    categoryColors.size == 0 ? defaultMap : categoryColors,
+                    categoryColors.size == 0 ? getMap(keys) : categoryColors,
                     setLegendHeight,
                     undefined,
                     undefined,
