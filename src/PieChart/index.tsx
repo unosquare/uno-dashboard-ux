@@ -16,7 +16,6 @@ export const PieChart = <T,>({
     dataCallback,
     legendFormatType,
     className,
-    colors = themeColorRange,
 }: ChartComponent<T, ChartData[]>) => {
     const dataTransformFn = useMemo(
         () => dataCallback ?? ((data: T) => data as unknown as ChartData[]),
@@ -25,7 +24,7 @@ export const PieChart = <T,>({
     const dataStore: ChartData[] = (rawData && dataTransformFn(rawData)) || [];
     const categoryColors = constructCategoryColors(
         dataStore.map((x) => x.name),
-        colors,
+        themeColorRange,
     );
 
     if (!rawData) {

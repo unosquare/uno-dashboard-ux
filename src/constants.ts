@@ -1,5 +1,3 @@
-import { Color } from '@tremor/react';
-
 export type ChartData = {
     name: string;
     value: number;
@@ -37,6 +35,5 @@ export type DataComponent<TDataIn, TDataOut> = {
 
 export type ChartComponent<TDataIn, TDataOut> = DataComponent<TDataIn, TDataOut> &
     ClassNameComponent & {
-        colors?: Color[];
         legendFormatType?: LegendFormatType;
     };

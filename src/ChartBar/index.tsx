@@ -1,10 +1,9 @@
-import React, { ReactElement, useEffect, useMemo, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
 import objectHash from 'object-hash';
-import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
-import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
+import { colorPalette } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
 import { ChartComponent, LegendFormatType } from '../constants';
@@ -13,6 +12,7 @@ import { formatTicks } from '../utils';
 import { ChartBarShimmer } from '../ChartShimmers';
 import { ChartDecorators } from '../ChartCommon';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
+import { useChart } from '../hooks';
 
 type XAxisPrimaryFormatter = {
     (input: string): string;
@@ -37,7 +37,6 @@ export type ChartBarSettings<TDataIn> = ChartComponent<TDataIn, Record<string, u
 export const ChartBar = <T,>({
     rawData,
     dataCallback,
-    colors,
     legend,
     domain,
     unit = '',
@@ -50,15 +49,8 @@ export const ChartBar = <T,>({
     refLineY,
     className,
 }: ChartBarSettings<T>) => {
-    const dataTransformFn = useMemo(
-        () => dataCallback ?? ((data: T) => data as unknown as Record<string, unknown>[]),
-        [dataCallback],
-    );
-
     const [legendHeight, setLegendHeight] = useState(60);
-    const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
-    const [categoryColors, setCategoryColors] = useState<Map<string, string>>(new Map());
-    const [keys, setKeys] = useState<string[]>([]);
+    const [dataStore, categoryColors, keys] = useChart(rawData, dataCallback);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(Number(t), legendFormatType) : t) as string;
@@ -68,18 +60,6 @@ export const ChartBar = <T,>({
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         if (event?.activeLabel && onClick) onClick(String(event.activeLabel), Number(event.activeTooltipIndex));
     };
-
-    useEffect(() => {
-        setKeys(dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : []);
-    }, [dataStore]);
-
-    useEffect(() => {
-        setCategoryColors(constructCategoryColors(keys, colors ?? themeColorRange));
-    }, [keys, colors]);
-
-    useEffect(() => {
-        if (rawData) setDataStore(dataTransformFn(rawData));
-    }, [rawData, dataTransformFn]);
 
     if (!rawData) return <ChartBarShimmer className={className} />;
 

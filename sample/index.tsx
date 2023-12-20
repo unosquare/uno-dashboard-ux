@@ -82,9 +82,9 @@ const chartData = [
 ];
 
 const chartBarData = [
-    { name: 'Group A', Value: 10.15, Value2: 10.15, Value3: 10.15 },
-    { name: 'Group B', Value: 20.1, Value2: 20.1, Value3: 20.1 },
-    { name: 'Group C', Value: 30.25, Value2: 30.25, Value3: 30.25 },
+    { name: 'Group A', Value: 10.15, Value2: 5, Value3: 7 },
+    { name: 'Group B', Value: 20.1, Value2: 3, Value3: 15 },
+    { name: 'Group C', Value: 30.25, Value2: 6, Value3: 25 },
 ];
 
 type onlineDto = {
@@ -218,7 +218,7 @@ const Application = () => {
                     <Card>
                         <Text className='font-medium'>Line Chart</Text>
                         <DataChart
-                            rawData={loading ? undefined : chartData}
+                            rawData={loading ? undefined : (toggle ? chartData : [])}
                             legend
                             className='mt-5'
                             legendFormatType='percentage'
@@ -230,7 +230,7 @@ const Application = () => {
                         <ChartBar
                             className='mt-5'
                             refLineY={{ value: 20, label: 'Ref Line', color: 'red' }}
-                            rawData={loading ? undefined : chartBarData}
+                            rawData={loading ? undefined : (toggle ? chartData : chartBarData)}
                             legendFormatType='percentage'
                             legend
                             onClick={barClick}

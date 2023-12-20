@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
-import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
-import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
+import { colorPalette } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { ChartComponent } from '../constants';
@@ -11,6 +10,7 @@ import { NoData } from '../NoData';
 import { formatTicks } from '../utils';
 import { ChartLineShimmer } from '../ChartShimmers';
 import { ChartDecorators } from '../ChartCommon';
+import { useChart } from '../hooks';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;
@@ -35,7 +35,6 @@ const xPadding = {
 export const DataChart = <T,>({
     dataCallback,
     rawData,
-    colors = themeColorRange,
     legend,
     onClick,
     legendFormatType,
@@ -44,14 +43,8 @@ export const DataChart = <T,>({
     refLineY,
     className,
 }: DataChartSettings<T>) => {
-    const dataTransformFn = useMemo(
-        () => dataCallback ?? ((data: T) => data as unknown as Record<string, unknown>[]),
-        [dataCallback],
-    );
     const [legendHeight, setLegendHeight] = useState(60);
-    const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
-    const [categoryColors, setCategoryColors] = useState<Map<string, string>>(new Map());
-    const [keys, setKeys] = useState<string[]>([]);
+    const [dataStore, categoryColors, keys] = useChart(rawData, dataCallback);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(Number(t), legendFormatType) : t) as string;
@@ -63,18 +56,6 @@ export const DataChart = <T,>({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             onClick(Number(event.activeTooltipIndex), String(event.activeLabel));
     };
-
-    useEffect(() => {
-        setDataStore((rawData && dataTransformFn(rawData)) || []);
-    }, [rawData, dataTransformFn]);
-
-    useEffect(() => {
-        setKeys(dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : []);
-    }, [dataStore]);
-
-    useEffect(() => {
-        setCategoryColors(constructCategoryColors(keys, colors ?? themeColorRange));
-    }, [keys, colors]);
 
     if (!rawData) return <ChartLineShimmer className={className} />;
 
