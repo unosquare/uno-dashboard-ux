@@ -1,6 +1,6 @@
 {
     "name": "uno-dashboard-ux",
-    "version": "2.138.0",
+    "version": "2.139.0",
     "description": "Unosquare Dashboard UX/UI",
     "main": "dist/index.js",
     "files": [
