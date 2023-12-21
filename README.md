@@ -6,3 +6,4 @@ Components:
 
 * AwaitableMetric
 * Blur
+* Table
