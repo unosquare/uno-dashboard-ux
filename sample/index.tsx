@@ -30,6 +30,7 @@ import {
     StyledMenuSearchBox,
     Table,
     TableColumn,
+    TableCell,
     TremorContainer,
     VirtualSelect,
     useTheme,
@@ -65,15 +66,20 @@ const extraColumns: TableColumn[] = [
     { label: 'Date', dataType: 'date' },
 ];
 
-
 const onlineColumns: TableColumn[] = [
     { label: 'User Id' },
     { label: 'Id', sortOrder: 1, sortDirection: 'asc', dataType: 'number' },
-    { label: 'Title' },
+    {
+        label: 'Title', render: (column, index, data, rawData) =>
+        (<TableCell column={column} index={index} className='bg-gray-100'>
+            {rawData && <a href={`https://jsonplaceholder.typicode.com/posts/${rawData[index].id}`}>{String(data)}</a>}
+        </TableCell>
+        )
+    },
     { label: 'Body' },
 ];
 
-const calculateFooter = (data: unknown[][]) => ['Total', '', data.length, '', '', '', '', '', '', ''];
+const calculateFooter = (data: unknown[][]) => ['Total', '', String(data.length), '', '', '', '', '', '', ''];
 
 const chartData = [
     { name: 'Group A', Value: 10.15 },

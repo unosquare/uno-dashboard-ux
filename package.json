@@ -34,7 +34,7 @@
         "autoprefixer": "^10.4.16",
         "eslint": "^8.56.0",
         "eslint-config-unosquare": "0.8.3",
-        "eslint-plugin-prettier": "^5.1.0",
+        "eslint-plugin-prettier": "^5.1.1",
         "eslint-plugin-react": "^7.33.2",
         "eslint-plugin-react-hooks": "^4.6.0",
         "husky": "^8.0.3",

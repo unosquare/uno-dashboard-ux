@@ -80,8 +80,8 @@ devDependencies:
     specifier: 0.8.3
     version: 0.8.3(eslint@8.56.0)(prettier@3.1.1)(typescript@5.3.3)
   eslint-plugin-prettier:
-    specifier: ^5.1.0
-    version: 5.1.0(eslint@8.56.0)(prettier@3.1.1)
+    specifier: ^5.1.1
+    version: 5.1.1(eslint@8.56.0)(prettier@3.1.1)
   eslint-plugin-react:
     specifier: ^7.33.2
     version: 7.33.2(eslint@8.56.0)
@@ -3406,8 +3406,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-prettier@5.1.0(eslint@8.56.0)(prettier@3.1.1):
-    resolution: {integrity: sha512-hQc+2zbnMeXcIkg+pKZtVa+3Yqx4WY7SMkn1PLZ4VbBEU7jJIpVn9347P8BBhTbz6ne85aXvQf30kvexcqBeWw==}
+  /eslint-plugin-prettier@5.1.1(eslint@8.56.0)(prettier@3.1.1):
+    resolution: {integrity: sha512-WQpV3mSmIobb77s4qiCZu3dBrZZ0rj8ckSfBtRrgNK9Wnh2s3eiaxNTWloz1LJ1WtvqZES/PAI7PLvsrGt/CEA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       '@types/eslint': '>=8.0.0'

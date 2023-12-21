@@ -12,7 +12,6 @@ import {
 import {
     Flex,
     TableBody,
-    TableCell,
     TableFoot,
     TableFooterCell,
     TableHead,
@@ -20,6 +19,7 @@ import {
     TableRow,
     TextInput,
     Table as TremorTable,
+    TableCell as TremorTableCell,
 } from '@tremor/react';
 import objectHash from 'object-hash';
 import { twMerge } from 'tailwind-merge';
@@ -31,6 +31,7 @@ import { NoData } from '../NoData';
 import { searchData, searchFooter, sortData, TableCellTypes, TableColumn } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { useDebounce, useToggle } from '../hooks';
+import { ShimmerTable } from './TableShimmer';
 
 export * from './sortData';
 
@@ -39,7 +40,7 @@ export type TableSettings<TDataIn> = DataComponent<TDataIn, TableCellTypes[][]> 
         columns: TableColumn[];
         noDataElement?: React.ReactNode;
         searchable?: boolean;
-        calculateFooter?: (data: TDataIn) => unknown[];
+        calculateFooter?: (data: TDataIn) => string[];
         sortable?: boolean;
         exportCsv?: boolean;
         render?: (
@@ -238,17 +239,31 @@ const TableFooter = ({ footer, columns }: TableFooterProps) => (
     </TableFoot>
 );
 
-const getRows = (data: TableCellTypes[][], columns: TableColumn[]) =>
+export const TableCell = ({
+    column,
+    index,
+    children,
+    className,
+}: PropsWithChildren<{ column: TableColumn; index: number }> & ClassNameComponent) => (
+    <TremorTableCell
+        className={twMerge('p-2 whitespace-normal text-xs/[13px]', getAlignment(column, index), className)}
+    >
+        {children}
+    </TremorTableCell>
+);
+
+const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], rawData: TDataIn | undefined) =>
     data.map((row) => (
         <TableRow key={objectHash(row)}>
-            {columns.map((column, index) => (
-                <TableCell
-                    key={column.label}
-                    className={`p-2 whitespace-normal text-xs/[13px] ${getAlignment(column, index)}`}
-                >
-                    {renderTableCell(row[index], column)}
-                </TableCell>
-            ))}
+            {columns.map((column, index) =>
+                column.render ? (
+                    column.render(column, index, row[index], rawData)
+                ) : (
+                    <TableCell key={column.label} column={column} index={index}>
+                        {renderTableCell(row[index], column)}
+                    </TableCell>
+                ),
+            )}
         </TableRow>
     ));
 
@@ -266,26 +281,13 @@ const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[])
         }),
     );
 
-const ShimmerTable = ({ colSpan }: { colSpan: number }) =>
-    Array.from({ length: 4 }).map((_, i) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <TableRow key={i}>
-            {Array.from({ length: colSpan }).map((_o, k) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <TableCell className='p-2' key={k}>
-                    <div className='loading-shimmer rounded'>&nbsp;</div>
-                </TableCell>
-            ))}
-        </TableRow>
-    ));
-
 const SpanTable = ({ colSpan, children }: PropsWithChildren<{ colSpan: number }>) => (
     <TableRow>
-        <TableCell colSpan={colSpan} className='p-2'>
+        <TremorTableCell colSpan={colSpan} className='p-2'>
             <Flex alignItems='center' className='w-full'>
                 {children}
             </Flex>
-        </TableCell>
+        </TremorTableCell>
     </TableRow>
 );
 

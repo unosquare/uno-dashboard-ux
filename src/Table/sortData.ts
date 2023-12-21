@@ -11,6 +11,12 @@ export type TableColumn = {
     disableSearch?: boolean;
     excludeFromSort?: boolean;
     textAlign?: TextAlign;
+    render?: <TDataIn>(
+        column: TableColumn,
+        index: number,
+        cellValue: TableCellTypes,
+        rawData: TDataIn | undefined,
+    ) => JSX.Element;
     formatterOptions?: {
         keepFormat?: boolean;
         decimals?: number;
