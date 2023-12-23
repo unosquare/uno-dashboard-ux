@@ -24,14 +24,14 @@ dependencies:
     specifier: 2.10.3
     version: 2.10.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
   tailwind-merge:
-    specifier: ^2.1.0
-    version: 2.1.0
+    specifier: ^2.2.0
+    version: 2.2.0
   tailwind-styled-components:
     specifier: ^2.2.0
     version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
   uno-js:
-    specifier: ^3.65.0
-    version: 3.65.0
+    specifier: ^3.66.0
+    version: 3.66.0
   zustand:
     specifier: ^4.4.7
     version: 4.4.7(@types/react@18.2.45)(react@18.2.0)
@@ -6737,8 +6737,8 @@ packages:
     resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
     dev: false
 
-  /tailwind-merge@2.1.0:
-    resolution: {integrity: sha512-l11VvI4nSwW7MtLSLYT4ldidDEUwQAMWuSHk7l4zcXZDgnCRa0V3OdCwFfM7DCzakVXMNRwAeje9maFFXT71dQ==}
+  /tailwind-merge@2.2.0:
+    resolution: {integrity: sha512-SqqhhaL0T06SW59+JVNfAqKdqLs0497esifRrZ7jOaefP3o64fdFNDMrAQWZFMxTLJPiHVjRLUywT8uFz1xNWQ==}
     dependencies:
       '@babel/runtime': 7.23.5
     dev: false
@@ -7090,8 +7090,8 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /uno-js@3.65.0:
-    resolution: {integrity: sha512-Lq2SdRPA29qhNfRTFM9z1fduzNoseN2EG9GwmUr/tnWgMHYYaG2pJocKr25Sv2JcvPhMi1NNb4DwpweeCrA+pQ==}
+  /uno-js@3.66.0:
+    resolution: {integrity: sha512-7Vq8wcEJhcTH9UG2sXjGExlpYcLPhka7XaNZg21nfM+e2GoTMCv1MJBcBCeEqDZH2ce790PQcNAvVlxzWhM0JA==}
     dev: false
 
   /unpipe@1.0.0:
