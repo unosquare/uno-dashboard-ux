@@ -1,14 +1,8 @@
 import React, { PropsWithChildren, startTransition, useEffect, useMemo, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
-import { createCsv, formatter, FormatTypes } from 'uno-js';
-import {
-    CaretDown12Regular,
-    CaretUp12Regular,
-    CheckboxChecked16Regular,
-    CheckboxUnchecked16Regular,
-    Search12Regular,
-} from '@fluentui/react-icons';
+import { createCsv, formatter } from 'uno-js';
+import { CaretDown12Regular, CaretUp12Regular, Search12Regular } from '@fluentui/react-icons';
 import {
     Flex,
     TableBody,
@@ -23,15 +17,14 @@ import {
 } from '@tremor/react';
 import objectHash from 'object-hash';
 import { twMerge } from 'tailwind-merge';
-import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import { sizing } from '@tremor/react/dist/lib/sizing';
-import { border } from '@tremor/react/dist/lib/shape';
-import { ClassNameComponent, DataComponent, DataTypes, SortDirection } from '../constants';
+import { ClassNameComponent, DataComponent, SortDirection, TableCellTypes, TableColumn } from '../constants';
 import { NoData } from '../NoData';
-import { searchData, searchFooter, sortData, TableCellTypes, TableColumn } from './sortData';
+import { searchData, searchFooter, sortData } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
-import { useDebounce, useToggle } from '../hooks';
+import { useDebounce } from '../hooks';
 import { ShimmerTable } from './TableShimmer';
+import { getAlignment, translateType } from '../utils';
+import { TableCell, TableCellContent } from '../TableCell';
 
 export * from './sortData';
 
@@ -64,18 +57,6 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
         sortDirection: i === index ? getSortDirection(field.sortDirection) : undefined,
     }));
 
-const leftAlign: Array<DataTypes | undefined> = ['string', 'link', 'bullet', undefined];
-const rightAlign: Array<DataTypes | undefined> = ['decimal', 'number', 'money'];
-
-export const getAlignment = (tableColumn: TableColumn, index?: number) => {
-    if (tableColumn.textAlign) return `text-${tableColumn.textAlign.toLowerCase()}`;
-
-    const { dataType } = tableColumn;
-    if (dataType === 'paragraph' || (leftAlign.includes(dataType) && index === 0)) return 'text-left';
-
-    return rightAlign.includes(dataType) ? 'text-right' : 'text-center';
-};
-
 export const HeaderDiv = tw.div<HeaderSettings>`
     flex-1
     flex-row
@@ -87,106 +68,6 @@ export const HeaderDiv = tw.div<HeaderSettings>`
     ${({ $sorted }) => ($sorted ? '[&_svg]:opacity-100' : '[&_svg]:opacity-30')}
     ${({ $sorted }) => ($sorted ? 'cursor-pointer' : '')}
 `;
-
-const StyledLinkButton = tw.button`
-    bg-transparent
-    border-0
-    underline
-    cursor-pointer
-    text-[10px]
-    p-2
-`;
-
-const translateType = (type: DataTypes | undefined): FormatTypes | undefined => {
-    switch (type) {
-        case 'date':
-            return 'date';
-        case 'money':
-            return 'money';
-        case 'percentage':
-            return 'percentage';
-        case 'days':
-            return 'days';
-        case 'months':
-            return 'months';
-        case 'decimal':
-            return 'decimal';
-        default:
-            return undefined;
-    }
-};
-
-const renderLinkString = (data: TableCellTypes) => {
-    if (data instanceof Array) {
-        return data[0] ? (
-            <a href={data[0]} target='_blank' rel='noopener noreferrer' className='underline'>
-                {data[1]}
-            </a>
-        ) : (
-            data[1]
-        );
-    }
-
-    if (typeof data !== 'string') return null;
-
-    return (
-        <a href={data} target='_blank' rel='noopener noreferrer' className='underline'>
-            {data}
-        </a>
-    );
-};
-
-const LongTextCell = ({ text }: { text: string }) => {
-    const [showFullText, toggleDisplayText] = useToggle();
-
-    if (text.length <= 100) return text;
-
-    return (
-        <>
-            {showFullText ? text : `${text.substring(0, 100)}...`}
-            <StyledLinkButton type='button' onClick={toggleDisplayText}>
-                {showFullText ? 'Show Less' : 'Show More'}
-            </StyledLinkButton>
-        </>
-    );
-};
-
-export const renderTableCell = (data: TableCellTypes, definition: TableColumn | undefined) => {
-    if (!data && definition?.dataType === 'money') return '$0.00';
-    if (data == null || data === ' ') return definition?.formatterOptions?.nullValue ?? 'N/A';
-
-    switch (definition?.dataType) {
-        case 'link':
-            return renderLinkString(data);
-        case 'boolean':
-            return data ? <CheckboxChecked16Regular /> : <CheckboxUnchecked16Regular />;
-        case 'bullet':
-            return (
-                <Flex alignItems='center'>
-                    <span
-                        className={tremorTwMerge(
-                            // common
-                            'shrink-0 rounded-tremor-full',
-                            // light
-                            'border-tremor-background shadow-tremor-card',
-                            // dark
-                            'dark:border-dark-tremor-background dark:shadow-dark-tremor-card',
-                            (data as string[])[1],
-                            sizing.sm.height,
-                            sizing.sm.width,
-                            border.md.all,
-                        )}
-                    />
-                    {(data as string[])[0]}
-                </Flex>
-            );
-        case 'paragraph':
-            return <LongTextCell text={String(data)} />;
-        default: {
-            return formatter(String(data), translateType(definition?.dataType), definition?.formatterOptions);
-        }
-    }
-};
 
 type TableHeadersProps = {
     definitions: TableColumn[];
@@ -239,19 +120,6 @@ const TableFooter = ({ footer, columns }: TableFooterProps) => (
     </TableFoot>
 );
 
-export const TableCell = ({
-    column,
-    index,
-    children,
-    className,
-}: PropsWithChildren<{ column: TableColumn; index: number }> & ClassNameComponent) => (
-    <TremorTableCell
-        className={twMerge('p-2 whitespace-normal text-xs/[13px]', getAlignment(column, index), className)}
-    >
-        {children}
-    </TremorTableCell>
-);
-
 const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], rawData: TDataIn | undefined) =>
     data.map((row) => (
         <TableRow key={objectHash(row)}>
@@ -260,7 +128,7 @@ const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], raw
                     column.render(column, index, row[index], rawData)
                 ) : (
                     <TableCell key={column.label} column={column} index={index}>
-                        {renderTableCell(row[index], column)}
+                        <TableCellContent data={row[index]} column={column} />
                     </TableCell>
                 ),
             )}

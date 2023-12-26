@@ -1,5 +1,36 @@
-import { formatter } from 'uno-js';
-import { LegendFormatType } from './constants';
+import { formatter, FormatTypes } from 'uno-js';
+import { DataTypes, LegendFormatType, TableColumn } from './constants';
+
+const leftAlign: Array<DataTypes | undefined> = ['string', 'link', 'bullet', undefined];
+const rightAlign: Array<DataTypes | undefined> = ['decimal', 'number', 'money'];
+
+export const getAlignment = (tableColumn: TableColumn, index?: number) => {
+    if (tableColumn.textAlign) return `text-${tableColumn.textAlign.toLowerCase()}`;
+
+    const { dataType } = tableColumn;
+    if (dataType === 'paragraph' || (leftAlign.includes(dataType) && index === 0)) return 'text-left';
+
+    return rightAlign.includes(dataType) ? 'text-right' : 'text-center';
+};
+
+export const translateType = (type: DataTypes | undefined): FormatTypes | undefined => {
+    switch (type) {
+        case 'date':
+            return 'date';
+        case 'money':
+            return 'money';
+        case 'percentage':
+            return 'percentage';
+        case 'days':
+            return 'days';
+        case 'months':
+            return 'months';
+        case 'decimal':
+            return 'decimal';
+        default:
+            return undefined;
+    }
+};
 
 export const translateFormat = (format?: LegendFormatType) => {
     switch (format) {

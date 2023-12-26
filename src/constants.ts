@@ -37,3 +37,26 @@ export type ChartComponent<TDataIn, TDataOut> = DataComponent<TDataIn, TDataOut>
     ClassNameComponent & {
         legendFormatType?: LegendFormatType;
     };
+
+export type TableCellTypes = string | number | Array<string> | Date | boolean | null | undefined;
+
+export type TableColumn = {
+    label: string;
+    dataType?: DataTypes;
+    sortOrder?: number;
+    sortDirection?: SortDirection;
+    disableSearch?: boolean;
+    excludeFromSort?: boolean;
+    textAlign?: TextAlign;
+    render?: <TDataIn>(
+        column: TableColumn,
+        index: number,
+        cellValue: TableCellTypes,
+        rawData: TDataIn | undefined,
+    ) => JSX.Element;
+    formatterOptions?: {
+        keepFormat?: boolean;
+        decimals?: number;
+        nullValue?: string;
+    };
+};

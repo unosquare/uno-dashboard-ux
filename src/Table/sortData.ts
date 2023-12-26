@@ -1,28 +1,5 @@
 import { compareDates, defaultStringFilter, sortNumericString } from 'uno-js';
-import { DataTypes, SortDirection, TextAlign } from '../constants';
-
-export type TableCellTypes = string | number | Array<string> | Date | boolean | null | undefined;
-
-export type TableColumn = {
-    label: string;
-    dataType?: DataTypes;
-    sortOrder?: number;
-    sortDirection?: SortDirection;
-    disableSearch?: boolean;
-    excludeFromSort?: boolean;
-    textAlign?: TextAlign;
-    render?: <TDataIn>(
-        column: TableColumn,
-        index: number,
-        cellValue: TableCellTypes,
-        rawData: TDataIn | undefined,
-    ) => JSX.Element;
-    formatterOptions?: {
-        keepFormat?: boolean;
-        decimals?: number;
-        nullValue?: string;
-    };
-};
+import { DataTypes, TableCellTypes, TableColumn } from '../constants';
 
 export const searchData = (search: string | undefined, newData: TableCellTypes[][], definitions: TableColumn[]) => {
     if (!search) return newData;

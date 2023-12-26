@@ -18,6 +18,7 @@ export * from './Footer';
 export * from './NavBar';
 export * from './NoData';
 export * from './Table';
+export * from './TableCell';
 export * from './ErrorBoundary';
 export * from './PageToolbar';
 export * from './SearchBox';
