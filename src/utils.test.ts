@@ -1,4 +1,32 @@
-import { formatTicks, getValueFormatted, translateFormat } from './utils';
+import { TableColumn } from './constants';
+import { formatTicks, getAlignment, getValueFormatted, translateFormat } from './utils';
+
+describe('getAlignment', () => {
+    it('returns text-left for paragraph data type', () => {
+        const tableColumn: TableColumn = { label: 'column', dataType: 'paragraph' };
+        expect(getAlignment(tableColumn)).toBe('text-left');
+    });
+
+    it('returns text-left for first column of left-aligned data types', () => {
+        const tableColumn: TableColumn = { label: 'column', dataType: 'string' };
+        expect(getAlignment(tableColumn, 0)).toBe('text-left');
+    });
+
+    it('returns text-center for right-aligned data types', () => {
+        const tableColumn: TableColumn = { label: 'column', dataType: 'number' };
+        expect(getAlignment(tableColumn)).toBe('text-right');
+    });
+
+    it('returns text-right for right-aligned data types', () => {
+        const tableColumn: TableColumn = { label: 'column', dataType: 'money' };
+        expect(getAlignment(tableColumn)).toBe('text-right');
+    });
+
+    it('returns custom text alignment class when provided', () => {
+        const tableColumn: TableColumn = { label: 'column', dataType: 'number', textAlign: 'center' };
+        expect(getAlignment(tableColumn)).toBe('text-center');
+    });
+});
 
 describe('formatTicks', () => {
     it('should format ticks as money', () => {

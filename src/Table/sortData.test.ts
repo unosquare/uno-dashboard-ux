@@ -1,4 +1,5 @@
-import { searchData, searchFooter, sortData, TableColumn } from './sortData';
+import { TableColumn } from '../constants';
+import { searchData, searchFooter, sortData } from './sortData';
 
 describe('searchData', () => {
     const definitions = [
