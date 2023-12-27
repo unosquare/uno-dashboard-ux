@@ -3,11 +3,11 @@ import { Flex, TableCell as TremorTableCell } from '@tremor/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { sizing } from '@tremor/react/dist/lib/sizing';
 import { border } from '@tremor/react/dist/lib/shape';
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { formatter } from 'uno-js';
 import { useToggle } from '../hooks';
 import tw from 'tailwind-styled-components';
-import { ClassNameComponent, TableCellTypes, TableColumn } from '../constants';
+import { TableCellTypes, TableColumn } from '../constants';
 import { twMerge } from 'tailwind-merge';
 import { getAlignment, translateType } from '../utils';
 

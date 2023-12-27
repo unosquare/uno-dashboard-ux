@@ -52,7 +52,8 @@ export type TableColumn = {
         column: TableColumn,
         index: number,
         cellValue: TableCellTypes,
-        rawData: TDataIn | undefined,
+        rawData: TDataIn,
+        data: TableCellTypes[][],
     ) => JSX.Element;
     formatterOptions?: {
         keepFormat?: boolean;

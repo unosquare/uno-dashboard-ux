@@ -36,11 +36,7 @@ export type TableSettings<TDataIn> = DataComponent<TDataIn, TableCellTypes[][]> 
         calculateFooter?: (data: TDataIn) => string[];
         sortable?: boolean;
         exportCsv?: boolean;
-        render?: (
-            data: TableCellTypes[][],
-            definitions: TableColumn[],
-            rawData: TDataIn | undefined,
-        ) => React.ReactNode;
+        render?: (data: TableCellTypes[][], definitions: TableColumn[], rawData: TDataIn) => React.ReactNode;
     };
 
 type HeaderSettings = {
@@ -120,12 +116,12 @@ const TableFooter = ({ footer, columns }: TableFooterProps) => (
     </TableFoot>
 );
 
-const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], rawData: TDataIn | undefined) =>
+const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], rawData: TDataIn) =>
     data.map((row) => (
         <TableRow key={objectHash(row)}>
             {columns.map((column, index) =>
                 column.render ? (
-                    column.render(column, index, row[index], rawData)
+                    column.render(column, index, row[index], rawData, data)
                 ) : (
                     <TableCell key={column.label} column={column} index={index}>
                         <TableCellContent data={row[index]} column={column} />
@@ -238,7 +234,9 @@ export const Table = <TDataIn,>({
 
     const renderFunc = render ?? getRows;
     const renderRows = () =>
-        renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawDataState);
+        rawDataState
+            ? renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawDataState)
+            : [];
 
     return (
         <>
