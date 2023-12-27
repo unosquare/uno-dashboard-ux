@@ -70,9 +70,9 @@ const onlineColumns: TableColumn[] = [
     { label: 'User Id' },
     { label: 'Id', sortOrder: 1, sortDirection: 'asc', dataType: 'number' },
     {
-        label: 'Title', render: (column, index, data, rawData) =>
-        (<TableCell column={column} index={index} className='bg-gray-100'>
-            {rawData && <a href={`https://jsonplaceholder.typicode.com/posts/${rawData[index].id}`}>{String(data)}</a>}
+        label: 'Title', render: (column, { columnIndex, rowIndex }, data, rawData) =>
+        (<TableCell column={column} index={columnIndex} className='bg-gray-100'>
+            {rawData && <a href={`https://jsonplaceholder.typicode.com/posts/${rawData[rowIndex].id}`}>{String(data)}</a>}
         </TableCell>
         )
     },

@@ -117,14 +117,14 @@ const TableFooter = ({ footer, columns }: TableFooterProps) => (
 );
 
 const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], rawData: TDataIn) =>
-    data.map((row) => (
+    data.map((row, rowIndex) => (
         <TableRow key={objectHash(row)}>
-            {columns.map((column, index) =>
+            {columns.map((column, columnIndex) =>
                 column.render ? (
-                    column.render(column, index, row[index], rawData, data)
+                    column.render(column, { rowIndex, columnIndex }, row[columnIndex], rawData, data)
                 ) : (
-                    <TableCell key={column.label} column={column} index={index}>
-                        <TableCellContent data={row[index]} column={column} />
+                    <TableCell key={column.label} column={column} index={columnIndex}>
+                        <TableCellContent data={row[columnIndex]} column={column} />
                     </TableCell>
                 ),
             )}

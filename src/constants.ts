@@ -40,6 +40,11 @@ export type ChartComponent<TDataIn, TDataOut> = DataComponent<TDataIn, TDataOut>
 
 export type TableCellTypes = string | number | Array<string> | Date | boolean | null | undefined;
 
+export type TableCoordinate = {
+    rowIndex: number;
+    columnIndex: number;
+};
+
 export type TableColumn = {
     label: string;
     dataType?: DataTypes;
@@ -50,7 +55,7 @@ export type TableColumn = {
     textAlign?: TextAlign;
     render?: <TDataIn>(
         column: TableColumn,
-        index: number,
+        coordinate: TableCoordinate,
         cellValue: TableCellTypes,
         rawData: TDataIn,
         data: TableCellTypes[][],
