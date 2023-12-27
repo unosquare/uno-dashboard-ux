@@ -97,9 +97,11 @@ export const TableCell = ({
     index,
     children,
     className,
-}: PropsWithChildren<{ column: TableColumn; index: number }> & ClassNameComponent) => (
+    ...other
+}: { column: TableColumn; index: number } & React.TdHTMLAttributes<HTMLTableCellElement>) => (
     <TremorTableCell
         className={twMerge('p-2 whitespace-normal text-xs/[13px]', getAlignment(column, index), className)}
+        {...other}
     >
         {children}
     </TremorTableCell>
