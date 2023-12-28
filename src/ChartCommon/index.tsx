@@ -70,7 +70,7 @@ export const ChartDecorators = ({
             content={({ payload }) =>
                 ChartLegend(
                     { payload },
-                    categoryColors.size == 0 ? getMap(keys) : categoryColors,
+                    categoryColors.size === 0 ? getMap(keys) : categoryColors,
                     setLegendHeight,
                     undefined,
                     undefined,
