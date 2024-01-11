@@ -1,8 +1,6 @@
 import { CheckboxChecked16Regular, CheckboxUnchecked16Regular } from '@fluentui/react-icons';
 import { Flex, TableCell as TremorTableCell } from '@tremor/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import { sizing } from '@tremor/react/dist/lib/sizing';
-import { border } from '@tremor/react/dist/lib/shape';
 import React from 'react';
 import { formatter } from 'uno-js';
 import { useToggle } from '../hooks';
@@ -70,15 +68,12 @@ export const TableCellContent = ({ data, column }: { data: TableCellTypes; colum
                     <span
                         className={tremorTwMerge(
                             // common
-                            'shrink-0 rounded-tremor-full',
+                            'shrink-0 rounded-tremor-full border-2 h-3 w-3',
                             // light
                             'border-tremor-background shadow-tremor-card',
                             // dark
                             'dark:border-dark-tremor-background dark:shadow-dark-tremor-card',
                             (data as string[])[1],
-                            sizing.sm.height,
-                            sizing.sm.width,
-                            border.md.all,
                         )}
                     />
                     {(data as string[])[0]}

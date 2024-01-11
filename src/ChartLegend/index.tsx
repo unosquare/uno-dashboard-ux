@@ -6,8 +6,6 @@ import { Flex, Text } from '@tremor/react';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { colorPalette } from '@tremor/react/dist/lib/theme';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import { sizing } from '@tremor/react/dist/lib/sizing';
-import { border } from '@tremor/react/dist/lib/shape';
 import { getValueFormatted } from '../utils';
 import { LegendFormatType } from '../constants';
 
@@ -89,15 +87,12 @@ export const ChartLegendLabel = ({
             <span
                 className={tremorTwMerge(
                     // common
-                    'shrink-0 rounded-tremor-full',
+                    'shrink-0 rounded-tremor-full border-2 h-3 w-3',
                     // light
                     'border-tremor-background shadow-tremor-card',
                     // dark
                     'dark:border-dark-tremor-background dark:shadow-dark-tremor-card',
                     getColorClassNames(bgColor, colorPalette.background).bgColor,
-                    sizing.sm.height,
-                    sizing.sm.width,
-                    border.md.all,
                 )}
             />
             <Text>{label}</Text>

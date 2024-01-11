@@ -21,7 +21,6 @@ import {
     MenuContainer,
     MenuSection,
     MenuSubSection,
-    Modal,
     NavBar,
     NavBarTitle,
     PieChart,
@@ -109,7 +108,6 @@ const Application = () => {
     const [toggle, setToggle] = useToggle(true);
     const [theme, setTheme] = useTheme();
     const [counter, setCounter] = useState(0);
-    const [showModal, setShowModal] = useToggle(false);
     const [onlineData, setOnlineData] = useState<onlineDto[]>();
 
     React.useEffect(() => {
@@ -191,9 +189,6 @@ const Application = () => {
                 <Button size='xs' onClick={setToggle}>
                     Toggle Data
                 </Button>
-                <Button size='xs' onClick={setShowModal}>
-                    Show Modal
-                </Button>
                 <Button size='xs' onClick={() => setAlert(true)}>Success</Button>
                 <Button size='xs' onClick={() => setAlert(false)}>Error</Button>
                 <VirtualSelect
@@ -274,18 +269,6 @@ const Application = () => {
                     </Col>
                 </Grid>
             </TremorContainer>
-            {showModal && (
-                <Modal onClose={setShowModal}>
-                    <Table
-                        className='h-72'
-                        columns={columns}
-                        rawData={defaultData}
-                        searchable
-                    >
-                        <Title className='w-full'>Modal Table</Title>
-                    </Table>
-                </Modal>
-            )}
             <Footer />
         </ErrorBoundary>
     );
