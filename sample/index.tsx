@@ -274,9 +274,7 @@ const Application = () => {
     );
 };
 
-const container = document.getElementById('root');
-const root = createRoot(container as any);
-
+const root = createRoot(document.getElementById('root')!);
 root.render(
     <React.StrictMode>
         <Application />

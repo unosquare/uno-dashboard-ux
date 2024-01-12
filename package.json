@@ -20,8 +20,8 @@
         "zustand": "^4.4.7"
     },
     "devDependencies": {
-        "@rspack/cli": "0.4.5",
-        "@rspack/core": "0.4.5",
+        "@rsbuild/core": "^0.3.2",
+        "@rsbuild/plugin-react": "^0.3.2",
         "@testing-library/jest-dom": "^6.2.0",
         "@testing-library/react": "^14.1.2",
         "@types/jest": "^29.5.11",
@@ -49,7 +49,7 @@
         "typescript": "^5.3.3"
     },
     "scripts": {
-        "start": "rspack serve",
+        "start": "rsbuild dev --open",
         "watch": "tsc --watch",
         "build": "tsc && npx ncp src/resources/ dist/resources",
         "lint": "tsc --noEmit && eslint ./src/**/*.{ts,tsx}",
