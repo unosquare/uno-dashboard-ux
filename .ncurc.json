@@ -1,4 +1,4 @@
 {
     "upgrade": true,
-    "reject": ["@headlessui/react","@rspack/cli","@rspack/core"]
+    "reject": ["@headlessui/react"]
 }
