@@ -20,8 +20,8 @@
         "zustand": "^4.5.0"
     },
     "devDependencies": {
-        "@rsbuild/core": "^0.3.5",
-        "@rsbuild/plugin-react": "^0.3.5",
+        "@rsbuild/core": "^0.3.6",
+        "@rsbuild/plugin-react": "^0.3.6",
         "@testing-library/jest-dom": "^6.2.0",
         "@testing-library/react": "^14.1.2",
         "@types/jest": "^29.5.11",
@@ -45,7 +45,7 @@
         "postcss-loader": "^8.0.0",
         "prettier": "^3.2.4",
         "tailwindcss": "^3.4.1",
-        "ts-jest": "^29.1.1",
+        "ts-jest": "^29.1.2",
         "typescript": "^5.3.3"
     },
     "scripts": {
