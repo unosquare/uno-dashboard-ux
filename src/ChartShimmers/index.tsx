@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, ResponsiveContainer } from 'recharts';
 import { Color, Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
-import objectHash from 'object-hash';
+import { v4 as uuidv4 } from 'uuid';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { colorPalette } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
@@ -49,8 +49,8 @@ export const ChartBarShimmer = ({ className }: ClassNameComponent) => {
                         fill=''
                         className={getColorClassNames('gray', colorPalette.background).fillColor}
                     >
-                        {dataStore.map((item) => (
-                            <Cell key={objectHash(item)} />
+                        {dataStore.map(() => (
+                            <Cell key={uuidv4()} />
                         ))}
                     </Bar>
                 </BarChart>

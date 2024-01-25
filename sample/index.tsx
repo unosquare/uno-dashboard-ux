@@ -35,6 +35,7 @@ import {
     useTheme,
     useAlertStore,
     useToggle,
+    ChartFunnel,
 } from '../src';
 import '../src/resources/global.css';
 import { anotherDataSet, defaultData, getLargeSelectOptions } from './data';
@@ -206,8 +207,12 @@ const Application = () => {
                         <AwaitableMetric>{!loading ? '100%' : undefined}</AwaitableMetric>
                     </Card>
                     <Card>
-                        <Text>Metric 2</Text>
-                        <AwaitableMetric>{!loading ? '100%' : undefined}</AwaitableMetric>
+                        <ChartFunnel
+                            rawData={loading ? undefined : chartData}
+                            dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
+                            calculateSizes={{ sizes: ['w-[90%]', 'w-[80%]', 'w-[30%]'], orderedValues: [10.15, 20.1, 30.25] }}
+                            formatType='number'
+                        />
                     </Card>
                     <Card>
                         <PieChart

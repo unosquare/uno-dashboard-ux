@@ -1,7 +1,7 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
 import { FormatTypes, humanize } from 'uno-js';
-import objectHash from 'object-hash';
+import { v4 as uuidv4 } from 'uuid';
 import { Flex, Text } from '@tremor/react';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { colorPalette } from '@tremor/react/dist/lib/theme';
@@ -136,7 +136,7 @@ export const UnoChartTooltip = ({
                                   getLabelFunc,
                                   categoryColors,
                               };
-                              return <ChartLegendLabel key={objectHash(options)} {...options} />;
+                              return <ChartLegendLabel key={uuidv4()} {...options} />;
                           })
                           .reverse()
                     : localPayload.map((category, index) => {
@@ -148,7 +148,7 @@ export const UnoChartTooltip = ({
                               getLabelFunc,
                               categoryColors,
                           };
-                          return <ChartLegendLabel key={objectHash(options)} {...options} />;
+                          return <ChartLegendLabel key={uuidv4()} {...options} />;
                       }))}
         </StyledLegend>
     );

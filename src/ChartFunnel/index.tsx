@@ -1,5 +1,6 @@
 import React from 'react';
 import { Flex, Text } from '@tremor/react';
+import { v4 as uuidv4 } from 'uuid';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
@@ -16,7 +17,7 @@ export const ChartFunnel = <T,>({ rawData, dataCallback, formatType, calculateSi
             {dataStore && dataStore.length > 0 ? (
                 dataStore.map((entry, index) => (
                     <div
-                        key={index}
+                        key={uuidv4()}
                         title={humanize(entry.name.toString())}
                         className={tremorTwMerge(
                             'rounded h-[25px] mb-[5px] flex items-center justify-center',

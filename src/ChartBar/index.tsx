@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Flex } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
-import objectHash from 'object-hash';
+import { v4 as uuidv4 } from 'uuid';
 import { colorPalette } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
@@ -132,8 +132,8 @@ export const ChartBar = <T,>({
                                     }
                                     key={property}
                                 >
-                                    {dataStore.map((item) => (
-                                        <Cell key={objectHash(item)} />
+                                    {dataStore.map(() => (
+                                        <Cell key={uuidv4()} />
                                     ))}
                                 </Bar>
                             ),

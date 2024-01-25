@@ -1,4 +1,5 @@
 import React, { PropsWithChildren, startTransition, useEffect, useMemo, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
 import { createCsv, formatter } from 'uno-js';
@@ -15,7 +16,6 @@ import {
     Table as TremorTable,
     TableCell as TremorTableCell,
 } from '@tremor/react';
-import objectHash from 'object-hash';
 import { twMerge } from 'tailwind-merge';
 import { ClassNameComponent, DataComponent, SortDirection, TableCellTypes, TableColumn } from '../constants';
 import { NoData } from '../NoData';
@@ -118,7 +118,7 @@ const TableFooter = ({ footer, columns }: TableFooterProps) => (
 
 const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], rawData: TDataIn) =>
     data.map((row, rowIndex) => (
-        <TableRow key={objectHash(row)}>
+        <TableRow key={uuidv4()}>
             {columns.map((column, columnIndex) =>
                 column.render ? (
                     column.render(column, { rowIndex, columnIndex }, row[columnIndex], rawData, data)

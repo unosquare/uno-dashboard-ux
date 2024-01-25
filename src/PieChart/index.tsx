@@ -1,4 +1,3 @@
-import objectHash from 'object-hash';
 import React, { useMemo } from 'react';
 import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
@@ -42,7 +41,7 @@ export const PieChart = <T,>({
                     <Pie data={dataStore} dataKey='value' fill='#f1f2f3' startAngle={90} endAngle={-360}>
                         {dataStore.map((data) => (
                             <Cell
-                                key={objectHash(data)}
+                                key={data.name}
                                 fill=''
                                 className={
                                     getColorClassNames(
