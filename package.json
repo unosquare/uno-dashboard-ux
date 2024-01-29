@@ -9,7 +9,7 @@
     ],
     "dependencies": {
         "@fluentui/react-icons": "^2.0.226",
-        "@headlessui/react": "0.0.0-insiders.ce17c6d",
+        "@headlessui/react": "0.0.0-insiders.1469b85",
         "@tremor/react": "^3.13.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
