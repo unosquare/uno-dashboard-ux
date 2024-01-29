@@ -9,7 +9,6 @@ export * from './Blur';
 export * from './CardLoading';
 export * from './ChartBar';
 export * from './ChartFunnel';
-export * from './ChartLegend';
 export * from './ChartShimmers';
 export * from './ComposedLineChart';
 export * from './DataChart';

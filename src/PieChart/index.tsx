@@ -5,10 +5,11 @@ import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
 import { twMerge } from 'tailwind-merge';
-import { UnoChartTooltip } from '../ChartLegend';
+import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
 import { ChartComponent, ChartData } from '../constants';
 import { NoData } from '../NoData';
 import { Flex } from '@tremor/react';
+import { getValueFormatted } from '../utils';
 
 export const PieChart = <T,>({
     rawData,
@@ -34,7 +35,9 @@ export const PieChart = <T,>({
         );
     }
 
-    return dataStore.length > 0 ? (
+    if (dataStore.length === 0) return <NoData />;
+
+    return (
         <div className={twMerge('h-60', className)}>
             <ResponsiveContainer>
                 <PieChartRechart>
@@ -53,14 +56,21 @@ export const PieChart = <T,>({
                         ))}
                     </Pie>
                     <Tooltip
-                        content={
-                            <UnoChartTooltip categoryColors={categoryColors} legendFormatType={legendFormatType} />
-                        }
+                        wrapperStyle={{ outline: 'none' }}
+                        isAnimationActive={false}
+                        cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
+                        content={({ active, payload }) => (
+                            <ChartTooltip
+                                active={active}
+                                payload={payload}
+                                label='Data'
+                                valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}
+                                categoryColors={categoryColors}
+                            />
+                        )}
                     />
                 </PieChartRechart>
             </ResponsiveContainer>
         </div>
-    ) : (
-        <NoData />
     );
 };

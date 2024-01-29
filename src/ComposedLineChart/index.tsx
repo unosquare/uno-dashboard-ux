@@ -1,28 +1,16 @@
 import React, { useMemo, useState } from 'react';
-import {
-    CartesianGrid,
-    ComposedChart,
-    Legend,
-    Line,
-    ReferenceLine,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis,
-} from 'recharts';
-import { FormatTypes } from 'uno-js';
+import { Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Flex } from '@tremor/react';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
 import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
-import { UnoChartTooltip } from '../ChartLegend';
 import { NoData } from '../NoData';
 import { ChartComponent, LegendFormatType } from '../constants';
 import { formatTicks } from '../utils';
 import { ChartLineShimmer } from '../ChartShimmers';
+import { ChartDecorators } from '../ChartCommon';
 
 export type legendXAxis = { left: LegendFormatType; right: LegendFormatType };
 export type lineChart = { dataKey: string; yAxisId: string };
@@ -33,9 +21,9 @@ interface ComposedLineChartSettings<TDataIn> extends ChartComponent<TDataIn, Rec
     domain?: number;
     unit?: string;
     refLineY?: { value: number; label: string; color: string };
-    formats?: FormatTypes[];
     legendFormatTypes?: legendXAxis;
     lines: lineChart[];
+    bars?: lineChart[];
 }
 
 const margin = {
@@ -59,8 +47,8 @@ export const ComposedLineChart = <T,>({
     domain,
     unit,
     refLineY,
-    formats,
     lines,
+    bars,
 }: ComposedLineChartSettings<T>) => {
     const dataTransformFn = useMemo(
         () => dataCallback ?? ((data: T) => data as unknown as Record<string, unknown>[]),
@@ -78,17 +66,33 @@ export const ComposedLineChart = <T,>({
     const rightTickFormatter = (t: any) => tickFormatter(t, 'right');
 
     const categoryColors = constructCategoryColors(
-        lines.map((x) => x.dataKey),
+        [...lines, ...(bars ?? [])].map((x) => x.dataKey),
         themeColorRange,
     );
 
     if (!rawData) return <ChartLineShimmer />;
+
+    const keys = dataStore.length > 0 ? Object.keys(dataStore[0]).filter((property) => property !== 'name') : [];
 
     return (
         <Flex className='w-full h-48'>
             {dataStore.length > 0 ? (
                 <ResponsiveContainer>
                     <ComposedChart data={dataStore} margin={margin} onClick={onClick}>
+                        {bars?.map((property: lineChart) => (
+                            <Bar
+                                dataKey={property.dataKey}
+                                fill=''
+                                className={
+                                    getColorClassNames(
+                                        categoryColors.get(property.dataKey) ?? BaseColors.Gray,
+                                        colorPalette.background,
+                                    ).fillColor
+                                }
+                                key={property.dataKey}
+                                yAxisId={property.yAxisId}
+                            />
+                        ))}
                         {lines.map((property: lineChart) => (
                             <Line
                                 className={
@@ -136,32 +140,15 @@ export const ComposedLineChart = <T,>({
                             allowDecimals
                             orientation='right'
                         />
-                        {refLineY && (
-                            <ReferenceLine
-                                y={refLineY.value}
-                                label={{
-                                    position: 'insideTopRight',
-                                    value: refLineY.label,
-                                    fontSize: 11,
-                                    offset: 7,
-                                }}
-                                stroke={refLineY.color}
-                            />
-                        )}
-                        <Tooltip
-                            offset={30}
-                            content={<UnoChartTooltip formats={formats} categoryColors={categoryColors} />}
-                            isAnimationActive={false}
-                        />
-                        {legend && (
-                            <Legend
-                                iconType='circle'
-                                height={legendHeight}
-                                content={({ payload }) =>
-                                    ChartLegend({ payload }, categoryColors, setLegendHeight, undefined, undefined)
-                                }
-                            />
-                        )}
+                        {ChartDecorators({
+                            keys,
+                            refLineY,
+                            legendFormatType: 'number',
+                            categoryColors,
+                            legend,
+                            legendHeight,
+                            setLegendHeight,
+                        })}
                     </ComposedChart>
                 </ResponsiveContainer>
             ) : (

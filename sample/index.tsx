@@ -242,10 +242,14 @@ const Application = () => {
                             onClick={barClick}
                         />
                     </Card>
-                    <Card className='h-96'>
+                    <Card>
                         <Text className='font-medium'>Composited Chart</Text>
-                        <ComposedLineChart rawData={loading ? undefined : chartData}
-                            lines={[{ dataKey: 'name', yAxisId: 'left' }]} />
+                        <ComposedLineChart 
+                            rawData={loading ? undefined : chartBarData}
+                            legendFormatTypes={{ left: 'percentage', right: 'money' }}
+                            bars={[{ dataKey: 'Value3', yAxisId: 'left' }]}
+                            lines={[{ dataKey: 'Value', yAxisId: 'left' }, { dataKey: 'Value2', yAxisId: 'right' }]} 
+                        />
                     </Card>
                     <Col numColSpan={3}>
                         <Card>
