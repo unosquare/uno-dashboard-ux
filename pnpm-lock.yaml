@@ -42,10 +42,10 @@ dependencies:
 devDependencies:
   '@rsbuild/core':
     specifier: ^0.4.2
-    version: 0.4.2
+    version: 0.4.3
   '@rsbuild/plugin-react':
     specifier: ^0.4.2
-    version: 0.4.2(@rsbuild/core@0.4.2)
+    version: 0.4.2(@rsbuild/core@0.4.3)
   '@testing-library/jest-dom':
     specifier: ^6.4.2
     version: 6.4.2(@types/jest@29.5.12)(jest@29.7.0)
@@ -1092,12 +1092,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@rsbuild/core@0.4.2:
-    resolution: {integrity: sha512-QnMQJD7TBOr95sJcRvtpLYY+1ixz6L34btuoI1fH7b7tg5oLsgW78h5jKuZJBzWT3LhqVR12mvY3+W4jROzzLA==}
+  /@rsbuild/core@0.4.3:
+    resolution: {integrity: sha512-Kh6NtMhTX6TyHGRt1fKZpJlIIG7+C2r+SazcyYBjsryQ4/l2rLO/9l82x5xxwTv5IkaCz8wl0eFD1FCJXq137w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
-      '@rsbuild/shared': 0.4.2(@swc/helpers@0.5.3)
+      '@rsbuild/shared': 0.4.3(@swc/helpers@0.5.3)
       '@rspack/core': 0.5.4(@swc/helpers@0.5.3)
       '@swc/helpers': 0.5.3
       core-js: 3.32.2
@@ -1105,21 +1105,31 @@ packages:
       postcss: 8.4.33
     dev: true
 
-  /@rsbuild/plugin-react@0.4.2(@rsbuild/core@0.4.2):
+  /@rsbuild/plugin-react@0.4.2(@rsbuild/core@0.4.3):
     resolution: {integrity: sha512-X80hlPQmQ8FLd6cJN/+1hyyTHjPg/MzECl2kTjlx7psSl4ryHoRSlDjk/8/QncRJAbp42hA9xDUnqcBN33rgtQ==}
     peerDependencies:
       '@rsbuild/core': ^0.4.2
     dependencies:
-      '@rsbuild/core': 0.4.2
-      '@rsbuild/shared': 0.4.2(@swc/helpers@0.5.3)
+      '@rsbuild/core': 0.4.3
+      '@rsbuild/shared': 0.4.2
       '@rspack/plugin-react-refresh': 0.5.4(react-refresh@0.14.0)
       react-refresh: 0.14.0
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
 
-  /@rsbuild/shared@0.4.2(@swc/helpers@0.5.3):
+  /@rsbuild/shared@0.4.2:
     resolution: {integrity: sha512-zCn5xtrUy1Wvd69vN3hwzmWpBSKVbyVjEodM+Un6SlCrYwI24PQW2Yv3Ua2HpvFnAL9kXT2alqCfY8c9zQn8mg==}
+    dependencies:
+      '@rspack/core': 0.5.4(@swc/helpers@0.5.3)
+      caniuse-lite: 1.0.30001585
+      postcss: 8.4.33
+    transitivePeerDependencies:
+      - '@swc/helpers'
+    dev: true
+
+  /@rsbuild/shared@0.4.3(@swc/helpers@0.5.3):
+    resolution: {integrity: sha512-0BbYBexpyYUXucA2ML+NCtueMtyMTtU0lmVEBQS/Nagwc1j5mGVAg9H6WvBTADftDjBBQEFUrC4AsLY+s/slEQ==}
     dependencies:
       '@rspack/core': 0.5.4(@swc/helpers@0.5.3)
       caniuse-lite: 1.0.30001585
@@ -2255,7 +2265,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001579
+      caniuse-lite: 1.0.30001585
       electron-to-chromium: 1.4.640
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.22.2)
@@ -4727,16 +4737,10 @@ packages:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  /nanoid@3.3.6:
-    resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
-    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-
   /nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-    dev: true
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -5099,7 +5103,7 @@ packages:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
-      nanoid: 3.3.6
+      nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
