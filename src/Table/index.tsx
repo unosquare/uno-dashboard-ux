@@ -136,6 +136,7 @@ const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[])
         row.map((cell, index) => {
             const dataType = definitions[index]?.dataType;
             if (dataType === 'boolean') return cell ? 'TRUE' : 'FALSE';
+            if (dataType === 'link' && cell instanceof Array && cell.length > 1) return String(cell[1]);
             if (!cell && dataType === 'money') return '$0.00';
 
             const cellString = String(cell);
