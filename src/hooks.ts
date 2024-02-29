@@ -20,11 +20,11 @@ export const useDebounce = (callback: () => unknown, waitMilliseconds?: number) 
 };
 
 export const useToggle = (defaultValue = false): [boolean, () => void] => {
-    const [getField, setField] = useState(defaultValue);
+    const [field, setField] = useState(defaultValue);
 
-    const toggleField = (): void => setField(!getField);
+    const toggleField = (): void => setField(!field);
 
-    return [getField, toggleField];
+    return [field, toggleField];
 };
 
 export const useTheme = (): [string, () => void] => {

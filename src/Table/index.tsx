@@ -17,7 +17,7 @@ import {
     TableCell as TremorTableCell,
 } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
-import { ClassNameComponent, DataComponent, SortDirection, TableCellTypes, TableColumn } from '../constants';
+import { ClassNameComponent, DataComponent, DataTypes, SortDirection, TableCellTypes, TableColumn } from '../constants';
 import { NoData } from '../NoData';
 import { searchData, searchFooter, sortData } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
@@ -71,6 +71,9 @@ type TableHeadersProps = {
     setSortColumn: (index: number) => void;
 };
 
+const SortHeaderIcon = ({ direction, order }: { direction?: SortDirection; order?: number }) =>
+    direction === 'desc' && Number(order) >= 1 ? <CaretDown12Regular /> : <CaretUp12Regular />;
+
 const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProps) => (
     <TableHead>
         <TableRow>
@@ -85,13 +88,9 @@ const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProp
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
                         {header.label}
-                        {sortable &&
-                            !header.excludeFromSort &&
-                            (header.sortDirection === 'desc' && Number(header.sortOrder) >= 1 ? (
-                                <CaretDown12Regular />
-                            ) : (
-                                <CaretUp12Regular />
-                            ))}
+                        {sortable && !header.excludeFromSort && (
+                            <SortHeaderIcon direction={header.sortDirection} order={header.sortOrder} />
+                        )}
                     </HeaderDiv>
                 </TableHeaderCell>
             ))}
@@ -131,6 +130,13 @@ const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], raw
         </TableRow>
     ));
 
+const renderCellString = (cell: TableCellTypes, dataType?: DataTypes) => {
+    const cellString = String(cell);
+    if (cellString == null || cellString === ' ') return 'N/A';
+
+    return formatter(cellString, translateType(dataType)) ?? cellString;
+};
+
 const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[]) =>
     data.map((row) =>
         row.map((cell, index) => {
@@ -139,10 +145,7 @@ const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[])
             if (dataType === 'link' && cell instanceof Array && cell.length > 1) return String(cell[1]);
             if (!cell && dataType === 'money') return '$0.00';
 
-            const cellString = String(cell);
-            if (cellString == null || cellString === ' ') return 'N/A';
-
-            return formatter(cellString, translateType(dataType)) ?? cellString;
+            return renderCellString(cell, dataType);
         }),
     );
 
@@ -234,10 +237,12 @@ export const Table = <TDataIn,>({
     };
 
     const renderFunc = render ?? getRows;
-    const renderRows = () =>
-        rawDataState
-            ? renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawDataState)
-            : [];
+    const renderRows = () => {
+        if (rawDataState)
+            return renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawDataState);
+
+        return [];
+    };
 
     return (
         <>

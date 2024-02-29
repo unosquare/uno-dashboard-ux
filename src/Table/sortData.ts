@@ -26,8 +26,7 @@ const sortOneColumn = <T extends TableColumn>(
     if (left[sortColumn] === null) return 1;
     if (right[sortColumn] === null) return -1;
 
-    const a = sortDirection === 'desc' ? right : left;
-    const b = sortDirection === 'desc' ? left : right;
+    const [a, b] = sortDirection === 'desc' ? [right, left] : [left, right];
 
     if (dataType === 'date') {
         const result = compareDates(String(a[sortColumn]), String(b[sortColumn]));

@@ -14,9 +14,7 @@ import { ChartDecorators } from '../ChartCommon';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { useChart } from '../hooks';
 
-type XAxisPrimaryFormatter = {
-    (input: string): string;
-};
+type XAxisPrimaryFormatter = (input: string) => string;
 
 export type ChartBarSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legendFormatType?: LegendFormatType;

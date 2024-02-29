@@ -95,7 +95,7 @@ export class ErrorBoundary extends React.Component<React.PropsWithChildren, { er
         };
     }
 
-    public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    public componentDidCatch(_error: Error, errorInfo: React.ErrorInfo) {
         this.setState({
             errorInfo,
         });
