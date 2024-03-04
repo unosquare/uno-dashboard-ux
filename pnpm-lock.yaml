@@ -42,10 +42,10 @@ dependencies:
 devDependencies:
   '@rsbuild/core':
     specifier: ^0.4.9
-    version: 0.4.9
+    version: 0.4.10
   '@rsbuild/plugin-react':
     specifier: ^0.4.9
-    version: 0.4.9(@rsbuild/core@0.4.9)
+    version: 0.4.9(@rsbuild/core@0.4.10)
   '@testing-library/jest-dom':
     specifier: ^6.4.2
     version: 6.4.2(@types/jest@29.5.12)(jest@29.7.0)
@@ -194,7 +194,7 @@ packages:
     dependencies:
       '@babel/compat-data': 7.23.2
       '@babel/helper-validator-option': 7.22.15
-      browserslist: 4.22.2
+      browserslist: 4.23.0
       lru-cache: 5.1.1
       semver: 6.3.1
     dev: true
@@ -1092,12 +1092,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@rsbuild/core@0.4.9:
-    resolution: {integrity: sha512-H3PmAmqOBU7qfG/nC736oIHH6iPdyIcLsC03Ct5K/oGELPa014QShmQ6u5a0170zTUHcj8hn+nvjtEVYhKsndw==}
+  /@rsbuild/core@0.4.10:
+    resolution: {integrity: sha512-H8zCw8bNbfE3tkiwLglca/cj8kZ/SnDsB1wmvajMkEn07ZHuGF/oflCiFgZAxowQWkKRduNIJyNoV285ycF9TQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
-      '@rsbuild/shared': 0.4.9(@swc/helpers@0.5.3)
+      '@rsbuild/shared': 0.4.10(@swc/helpers@0.5.3)
       '@rspack/core': 0.5.5(@swc/helpers@0.5.3)
       '@swc/helpers': 0.5.3
       core-js: 3.32.2
@@ -1107,20 +1107,30 @@ packages:
       - webpack
     dev: true
 
-  /@rsbuild/plugin-react@0.4.9(@rsbuild/core@0.4.9):
+  /@rsbuild/plugin-react@0.4.9(@rsbuild/core@0.4.10):
     resolution: {integrity: sha512-EbQk4dObkO+fsNPqiUlttRGgUVSbEIjaJlFG2wVXrNmUvZoQID8PTXu/5erdsiLKGsMwspV3y0/F2r9hFkcN6Q==}
     peerDependencies:
       '@rsbuild/core': ^0.4.9
     dependencies:
-      '@rsbuild/core': 0.4.9
-      '@rsbuild/shared': 0.4.9(@swc/helpers@0.5.3)
+      '@rsbuild/core': 0.4.10
+      '@rsbuild/shared': 0.4.9
       '@rspack/plugin-react-refresh': 0.5.5(react-refresh@0.14.0)
       react-refresh: 0.14.0
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
 
-  /@rsbuild/shared@0.4.9(@swc/helpers@0.5.3):
+  /@rsbuild/shared@0.4.10(@swc/helpers@0.5.3):
+    resolution: {integrity: sha512-zDC3AdHD4SeHWIj4uFnWknjMgosPnU8Q113kro/sHMJdmEqWtQlF3xpjlfbhy/5+GBbFlsaujLxi9k4qwBszeA==}
+    dependencies:
+      '@rspack/core': 0.5.5(@swc/helpers@0.5.3)
+      caniuse-lite: 1.0.30001591
+      postcss: 8.4.33
+    transitivePeerDependencies:
+      - '@swc/helpers'
+    dev: true
+
+  /@rsbuild/shared@0.4.9:
     resolution: {integrity: sha512-253mGA7jPonmhOXKOS5yLODPsQFqAXxEseW4pcr/WPcnURYMaRkNOQjzZ9mhv/x7M7maWsyAAhfwYF5071Toeg==}
     dependencies:
       '@rspack/core': 0.5.5(@swc/helpers@0.5.3)
@@ -1228,7 +1238,7 @@ packages:
       '@module-federation/runtime-tools': 0.0.8
       '@rspack/binding': 0.5.5
       '@swc/helpers': 0.5.3
-      browserslist: 4.22.2
+      browserslist: 4.23.0
       enhanced-resolve: 5.12.0
       events: 3.3.0
       graceful-fs: 4.2.10
@@ -2077,17 +2087,6 @@ packages:
     dependencies:
       fill-range: 7.0.1
 
-  /browserslist@4.22.2:
-    resolution: {integrity: sha512-0UgcrvQmBDvZHFGdYUehrCNIazki7/lUP3kkoi/r3YB2amZbFM9J43ZRkJTXBUZK4gmx56+Sqk9+Vs9mwZx9+A==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001585
-      electron-to-chromium: 1.4.640
-      node-releases: 2.0.14
-      update-browserslist-db: 1.0.13(browserslist@4.22.2)
-    dev: true
-
   /browserslist@4.23.0:
     resolution: {integrity: sha512-QW8HiM1shhT2GuzkvklfjcKDiWFXHOeFCIA/huJPwHsslwcydgk7X+z2zXpEijP98UCY7HbubZt5J2Zgvf0CaQ==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
@@ -2608,10 +2607,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       webidl-conversions: 7.0.0
-    dev: true
-
-  /electron-to-chromium@1.4.640:
-    resolution: {integrity: sha512-z/6oZ/Muqk4BaE7P69bXhUhpJbUM9ZJeka43ZwxsDshKtePns4mhBlh8bU5+yrnOnz3fhG82XLzGUXazOmsWnA==}
     dev: true
 
   /electron-to-chromium@1.4.690:
@@ -4578,16 +4573,10 @@ packages:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  /nanoid@3.3.6:
-    resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
-    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-
   /nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-    dev: true
 
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -4950,7 +4939,7 @@ packages:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
-      nanoid: 3.3.6
+      nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
@@ -5852,17 +5841,6 @@ packages:
   /uno-js@3.85.0:
     resolution: {integrity: sha512-qKbH8YB/mP9KIKaThVNm32KiDI9F1RiPY3q5h6UL8Y6qXuCmhaGo1XItW6fDUFQEabpXJsn2+8CdvBLA7htfRw==}
     dev: false
-
-  /update-browserslist-db@1.0.13(browserslist@4.22.2):
-    resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.22.2
-      escalade: 3.1.1
-      picocolors: 1.0.0
-    dev: true
 
   /update-browserslist-db@1.0.13(browserslist@4.23.0):
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
