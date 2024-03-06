@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Checkmark28Regular, Dismiss28Regular } from '@fluentui/react-icons';
 import tw from 'tailwind-styled-components';
 import useAlertStore from '../useAlertStore';
+import { createPortal } from 'react-dom';
 
 const StyledContainer = tw.div`
     shadow-alert
@@ -50,11 +51,23 @@ const AlertError = ({ message = 'Something Went Wrong' }: AlertProps) => (
 
 export const Alert = () => {
     const [isSuccess, message] = useAlertStore((state) => [state.isSuccess, state.message]);
+    const [isSuccessLocal, setIsSuccess] = useState<boolean | undefined>(false);
+    const [messageLocal, setMessage] = useState<string | undefined>('');
+
+    useEffect(()  => {
+        setIsSuccess(isSuccess);
+        setMessage(message);
+    },[message, isSuccess]);
 
     return (
-        <>
-            {isSuccess && <AlertSuccess message={message} />}
-            {isSuccess === false && <AlertError message={message} />}
-        </>
+        // <>
+        //     {isSuccess && <AlertSuccess message={message} />}
+        //     {isSuccess === false && <AlertError message={message} />}
+        // </>
+        createPortal(isSuccessLocal 
+            ? <AlertSuccess message={messageLocal} /> 
+            : <AlertError message={messageLocal} />, document.body)
     );
+
+    
 };
