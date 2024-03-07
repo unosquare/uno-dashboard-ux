@@ -92,7 +92,6 @@ export const Alert = () => {
                     }
                 />
             ))}
-            <p></p>
         </div>,
         document.body,
     );
