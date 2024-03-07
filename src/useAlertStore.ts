@@ -10,13 +10,13 @@ interface Alert {
 
 interface AlertList {
     activeAlerts: Alert[];
-    setActiveAlerts: (isSuccess: boolean, message: string, isTimed?: boolean) => void;
+    setAlert: (isSuccess: boolean, message: string, isTimed?: boolean) => void;
     deleteAlerts: (alertId: number) => void;
 }
 
 export default create<AlertList>((set) => ({
     activeAlerts: [],
-    setActiveAlerts: (isSuccess: boolean, message: string, isTimed: boolean = true) =>
+    setAlert: (isSuccess: boolean, message: string, isTimed: boolean = true) =>
         set((state) => ({
             activeAlerts: [
                 ...state.activeAlerts,

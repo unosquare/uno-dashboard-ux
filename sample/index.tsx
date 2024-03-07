@@ -101,7 +101,7 @@ type onlineDto = {
 };
 
 const Application = () => {
-    const setAlert = useAlertStore(st => st.setActiveAlerts);
+    const setAlert = useAlertStore(st => st.setAlert);
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
     const [virtualSelectOption, setVirtualSelectOption] = React.useState<string>(0);
     const [openMenu, setOpenMenu] = useToggle();
