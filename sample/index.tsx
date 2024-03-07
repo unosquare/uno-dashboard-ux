@@ -101,7 +101,7 @@ type onlineDto = {
 };
 
 const Application = () => {
-    const setAlert = useAlertStore(st => st.setAlert);
+    const setAlert = useAlertStore(st => st.setActiveAlerts);
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
     const [virtualSelectOption, setVirtualSelectOption] = React.useState<string>(0);
     const [openMenu, setOpenMenu] = useToggle();
@@ -190,8 +190,8 @@ const Application = () => {
                 <Button size='xs' onClick={setToggle}>
                     Toggle Data
                 </Button>
-                <Button size='xs' onClick={() => setAlert(true)}>Success</Button>
-                <Button size='xs' onClick={() => setAlert(false)}>Error</Button>
+                <Button size='xs' onClick={() => setAlert(true, 'Success')}>Success</Button>
+                <Button size='xs' onClick={() => setAlert(false, 'Error', false)}>Error</Button>
                 <VirtualSelect
                     value={virtualSelectOption}
                     onValueChange={setVirtualSelectOption}

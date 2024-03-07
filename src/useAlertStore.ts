@@ -1,38 +1,28 @@
 import { create } from 'zustand';
 import { Alert } from './Alert';
 
-// interface AlertState {
-//     message?: string;
-//     isSuccess?: boolean;
-//     setAlert: (isSuccess: boolean, message?: string) => void;
-// }
-
-// export default create<AlertState>((set) => ({
-//     isSuccess: undefined,
-//     message: undefined,
-//     setAlert: (isSuccess: boolean, message?: string) => {
-//         set(() => {
-//             setTimeout(() => set({ isSuccess, message }), 200);
-
-//             return { message: undefined, isSuccess: undefined };
-//         });
-//     },
-// }));
-
 interface Alert {
     id: number;
     message: string;
     isSuccess: boolean;
+    isTimed: boolean;
 }
 
 interface AlertList {
     activeAlerts: Alert[];
-    setActiveAlerts: (id: number, message: string, isSuccess: boolean) => void;
+    setActiveAlerts: (isSuccess: boolean, message: string, isTimed?: boolean) => void;
+    deleteAlerts: (alertId: number) => void;
 }
 
 export default create<AlertList>((set) => ({
     activeAlerts: [],
-    setActiveAlerts: (id: number, message: string, isSuccess: boolean) => {
-        set((state) => [...state, { message: message, isSuccess: isSuccess, id: id }]);
-    },
+    setActiveAlerts: (isSuccess: boolean, message: string, isTimed: boolean = true) =>
+        set((state) => ({
+            activeAlerts: [
+                ...state.activeAlerts,
+                { isSuccess: isSuccess, isTimed: isTimed, message: message, id: Date.now() },
+            ],
+        })),
+    deleteAlerts: (alertId: number) =>
+        set((state) => ({ activeAlerts: state.activeAlerts.filter((alert) => alert.id !== alertId) })),
 }));
