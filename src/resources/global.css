@@ -74,6 +74,37 @@
         }
     }
 
+    
+    .alert-only-fade-in {
+        @keyframes fadeIn {
+            0% { 
+                transform: translateY(-40px);
+                visibility: visible;
+                opacity: 0;
+            }
+            100% { 
+                transform: translateY(0px);
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+
+    .alert-only-fade-out {
+        @keyframes fadeOut {
+            0% { 
+                transform: translateY(0px);
+                visibility: visible;
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(-40px);
+                visibility: hidden;
+                opacity: 0;
+            }
+        }
+    }
+
     .animated-menu {
         -webkit-animation-duration: 600ms;
         animation-duration: 600ms;
