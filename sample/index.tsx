@@ -190,7 +190,7 @@ const Application = () => {
                 <Button size='xs' onClick={setToggle}>
                     Toggle Data
                 </Button>
-                <Button size='xs' onClick={() => setAlert(true, 'Success')}>Success</Button>
+                <Button size='xs' onClick={() => setAlert(true)}>Success</Button>
                 <Button size='xs' onClick={() => setAlert(false, 'Error', false)}>Error</Button>
                 <VirtualSelect
                     value={virtualSelectOption}
