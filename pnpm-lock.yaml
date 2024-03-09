@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@fluentui/react-icons':
-    specifier: ^2.0.231
-    version: 2.0.231(react@18.2.0)
+    specifier: ^2.0.232
+    version: 2.0.232(react@18.2.0)
   '@headlessui/react':
     specifier: 0.0.0-insiders.ce17c6d
     version: 0.0.0-insiders.ce17c6d(react-dom@18.2.0)(react@18.2.0)
@@ -30,8 +30,8 @@ dependencies:
     specifier: ^2.2.0
     version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
   uno-js:
-    specifier: ^3.85.0
-    version: 3.85.0
+    specifier: ^3.86.0
+    version: 3.86.0
   uuid:
     specifier: ^9.0.1
     version: 9.0.1
@@ -583,8 +583,8 @@ packages:
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
     dev: false
 
-  /@fluentui/react-icons@2.0.231(react@18.2.0):
-    resolution: {integrity: sha512-sXc5WK5cfLZe64x4qm34WlCpHqIt1jS6pYdOa4RXokkt7m3SkfWeiVN57ik+NfIBgots8DmTy8wLSgUGTu2kow==}
+  /@fluentui/react-icons@2.0.232(react@18.2.0):
+    resolution: {integrity: sha512-v2KKdRx68Pkz8FPQsOxvD8X7u7cCZ9/dodP/KdycaGY2FKEjAdiSzPboHfTLqkKhvrLr8Zgfs3gSDWDOf7au3A==}
     peerDependencies:
       react: '>=16.8.0 <19.0.0'
     dependencies:
@@ -5898,8 +5898,8 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /uno-js@3.85.0:
-    resolution: {integrity: sha512-qKbH8YB/mP9KIKaThVNm32KiDI9F1RiPY3q5h6UL8Y6qXuCmhaGo1XItW6fDUFQEabpXJsn2+8CdvBLA7htfRw==}
+  /uno-js@3.86.0:
+    resolution: {integrity: sha512-jzyOZElQILGt3BP/NpzxkaObMAxsdG33d4ssxdtICvXMyryOsUAwEfxw+Nkd+6Rr0otNQTTUgyy7XYAmn5BbKw==}
     dev: false
 
   /update-browserslist-db@1.0.13(browserslist@4.23.0):
