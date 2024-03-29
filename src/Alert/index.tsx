@@ -65,11 +65,11 @@ const AlertComponent = ({ message, animation, deleteAlert, icon }: AlertProps) =
     );
 };
 
+const animationElection = (isTimed: boolean): string =>
+    isTimed ? AUTO_ANIMATE : ' animate-[fadeIn_0.5s_ease-out_forwards] hover:bg-gray-400 ';
+
 export const Alert = () => {
     const [activeAlerts, deleteAlerts] = useAlertStore((state) => [state.activeAlerts, state.deleteAlerts]);
-
-    const animationElection = (isTimed: boolean): string =>
-        isTimed ? AUTO_ANIMATE : ' animate-[fadeIn_0.5s_ease-out_forwards] hover:bg-gray-400 ';
 
     return createPortal(
         <div className='flex flex-col absolute top-6 right-7 gap-1'>

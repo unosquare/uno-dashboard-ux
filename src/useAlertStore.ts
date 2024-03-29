@@ -16,13 +16,13 @@ interface AlertList {
 
 export default create<AlertList>((set) => ({
     activeAlerts: [],
-    setAlert: (isSuccess: boolean, message?: string, isTimed: boolean = true) =>
+    setAlert: (isSuccess: boolean, message?: string, isTimed = true) =>
         set((state) => ({
             activeAlerts: [
                 ...state.activeAlerts,
                 {
-                    isSuccess: isSuccess,
-                    isTimed: isTimed,
+                    isSuccess,
+                    isTimed,
                     message: message ?? (isSuccess ? 'Changes Saved Successfully' : 'Something Went Wrong'),
                     id: Date.now(),
                 },
