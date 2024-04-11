@@ -2,7 +2,12 @@ import React from 'react';
 import { Info16Regular } from '@fluentui/react-icons';
 import { Button, Dialog, DialogPanel } from '@tremor/react';
 
-export const InfoDialog = ({ children }: { children?: React.ReactNode }) => {
+export type InfoDialogSettings = {
+    closeText?: string;
+    children?: React.ReactNode;
+};
+
+export const InfoDialog = ({ closeText = 'Got it!', children }: InfoDialogSettings) => {
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
@@ -14,7 +19,7 @@ export const InfoDialog = ({ children }: { children?: React.ReactNode }) => {
                         {children}
                     </p>
                     <Button className='mt-8 w-full' onClick={() => setIsOpen(false)}>
-                        Got it!
+                        {closeText}
                     </Button>
                 </DialogPanel>
             </Dialog>
