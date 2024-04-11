@@ -31,7 +31,7 @@ const StyledContainer = ({
     text-lg
     invisible
     ${animation}
-    z-40
+    z-[100]
     [&_svg]:mr-2
     [&_svg]:ml-[14px]
     [&_svg]:min-w-[28px]
