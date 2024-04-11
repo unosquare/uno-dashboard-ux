@@ -59,6 +59,7 @@ export const PieChart = <T,>({
                         wrapperStyle={{ outline: 'none' }}
                         isAnimationActive={false}
                         cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
+                        // eslint-disable-next-line react/no-unstable-nested-components
                         content={({ active, payload }) => (
                             <ChartTooltip
                                 active={active}

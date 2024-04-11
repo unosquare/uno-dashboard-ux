@@ -14,10 +14,12 @@ import {
     Blur,
     Burger,
     ChartBar,
+    ChartFunnel,
     ComposedLineChart,
     DataChart,
     ErrorBoundary,
     Footer,
+    InfoDialog,
     MenuContainer,
     MenuSection,
     MenuSubSection,
@@ -35,7 +37,6 @@ import {
     useTheme,
     useAlertStore,
     useToggle,
-    ChartFunnel,
 } from '../src';
 import '../src/resources/global.css';
 import { anotherDataSet, defaultData, getLargeSelectOptions } from './data';
@@ -70,11 +71,14 @@ const onlineColumns: TableColumn[] = [
     { label: 'User Id' },
     { label: 'Id', sortOrder: 1, sortDirection: 'asc', dataType: 'number' },
     {
-        label: 'Title', render: (column, { columnIndex, rowIndex }, data, rawData) =>
-        (<TableCell column={column} index={columnIndex} className='bg-gray-100'>
-            {rawData && <a href={`https://jsonplaceholder.typicode.com/posts/${rawData[rowIndex].id}`}>{String(data)}</a>}
-        </TableCell>
-        )
+        label: 'Title',
+        render: (column, { columnIndex, rowIndex }, data, rawData) => (
+            <TableCell column={column} index={columnIndex} className='bg-gray-100'>
+                {rawData && (
+                    <a href={`https://jsonplaceholder.typicode.com/posts/${rawData[rowIndex].id}`}>{String(data)}</a>
+                )}
+            </TableCell>
+        ),
     },
     { label: 'Body' },
 ];
@@ -101,7 +105,7 @@ type onlineDto = {
 };
 
 const Application = () => {
-    const setAlert = useAlertStore(st => st.setAlert);
+    const setAlert = useAlertStore((st) => st.setAlert);
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
     const [virtualSelectOption, setVirtualSelectOption] = React.useState<string>(0);
     const [openMenu, setOpenMenu] = useToggle();
@@ -114,7 +118,9 @@ const Application = () => {
     React.useEffect(() => {
         setTimeout(() => {
             isLoading(false);
-            fetch('https://jsonplaceholder.typicode.com/posts').then(r => r.json()).then(setOnlineData);
+            fetch('https://jsonplaceholder.typicode.com/posts')
+                .then((r) => r.json())
+                .then(setOnlineData);
         }, 2000);
     }, []);
 
@@ -190,8 +196,19 @@ const Application = () => {
                 <Button size='xs' onClick={setToggle}>
                     Toggle Data
                 </Button>
-                <Button size='xs' onClick={() => setAlert(true)}>Success</Button>
-                <Button size='xs' onClick={() => setAlert(false, 'Error', false)}>Error</Button>
+                <Button size='xs' onClick={() => setAlert(true)}>
+                    Success
+                </Button>
+                <Button size='xs' onClick={() => setAlert(false, 'Error', false)}>
+                    Error
+                </Button>
+                <InfoDialog>
+                    <h3 className='text-lg font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong'>
+                        What is this Report about
+                    </h3>
+                    <br />
+                    <p>Hi K, this is a reporting showing ONLY due APRs and APRs in the next 30 days.</p>
+                </InfoDialog>
                 <VirtualSelect
                     value={virtualSelectOption}
                     onValueChange={setVirtualSelectOption}
@@ -210,7 +227,10 @@ const Application = () => {
                         <ChartFunnel
                             rawData={loading ? undefined : chartData}
                             dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
-                            calculateSizes={{ sizes: ['w-[90%]', 'w-[80%]', 'w-[30%]'], orderedValues: [10.15, 20.1, 30.25] }}
+                            calculateSizes={{
+                                sizes: ['w-[90%]', 'w-[80%]', 'w-[30%]'],
+                                orderedValues: [10.15, 20.1, 30.25],
+                            }}
                             formatType='number'
                         />
                     </Card>
@@ -224,7 +244,7 @@ const Application = () => {
                     <Card>
                         <Text className='font-medium'>Line Chart</Text>
                         <DataChart
-                            rawData={loading ? undefined : (toggle ? chartData : [])}
+                            rawData={loading ? undefined : toggle ? chartData : []}
                             legend
                             className='mt-5'
                             legendFormatType='percentage'
@@ -236,7 +256,7 @@ const Application = () => {
                         <ChartBar
                             className='mt-5'
                             refLineY={{ value: 20, label: 'Ref Line', color: 'red' }}
-                            rawData={loading ? undefined : (toggle ? chartData : chartBarData)}
+                            rawData={loading ? undefined : toggle ? chartData : chartBarData}
                             legendFormatType='percentage'
                             legend
                             onClick={barClick}
@@ -244,11 +264,14 @@ const Application = () => {
                     </Card>
                     <Card>
                         <Text className='font-medium'>Composited Chart</Text>
-                        <ComposedLineChart 
+                        <ComposedLineChart
                             rawData={loading ? undefined : chartBarData}
                             legendFormatTypes={{ left: 'percentage', right: 'money' }}
                             bars={[{ dataKey: 'Value3', yAxisId: 'left' }]}
-                            lines={[{ dataKey: 'Value', yAxisId: 'left' }, { dataKey: 'Value2', yAxisId: 'right' }]} 
+                            lines={[
+                                { dataKey: 'Value', yAxisId: 'left' },
+                                { dataKey: 'Value2', yAxisId: 'right' },
+                            ]}
                         />
                     </Card>
                     <Col numColSpan={3}>
@@ -268,10 +291,7 @@ const Application = () => {
                     </Col>
                     <Col numColSpan={3}>
                         <Card>
-                            <Table
-                                columns={onlineColumns}
-                                rawData={onlineData}
-                            >
+                            <Table columns={onlineColumns} rawData={onlineData}>
                                 <Title className='w-full'>Online Data</Title>
                             </Table>
                         </Card>
