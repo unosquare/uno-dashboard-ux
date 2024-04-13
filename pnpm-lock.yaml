@@ -12,8 +12,8 @@ dependencies:
     specifier: 0.0.0-insiders.ce17c6d
     version: 0.0.0-insiders.ce17c6d(react-dom@18.2.0)(react@18.2.0)
   '@tremor/react':
-    specifier: ^3.15.0
-    version: 3.15.0(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.3)
+    specifier: ^3.15.1
+    version: 3.15.1(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.3)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -21,8 +21,8 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
   recharts:
-    specifier: 2.12.4
-    version: 2.12.4(react-dom@18.2.0)(react@18.2.0)
+    specifier: 2.12.5
+    version: 2.12.5(react-dom@18.2.0)(react@18.2.0)
   tailwind-merge:
     specifier: ^2.2.2
     version: 2.2.2
@@ -30,14 +30,14 @@ dependencies:
     specifier: ^2.2.0
     version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
   uno-js:
-    specifier: ^3.92.0
-    version: 3.92.0
+    specifier: ^3.93.0
+    version: 3.93.0
   uuid:
     specifier: ^9.0.1
     version: 9.0.1
   zustand:
     specifier: ^4.5.2
-    version: 4.5.2(@types/react@18.2.75)(react@18.2.0)
+    version: 4.5.2(@types/react@18.2.77)(react@18.2.0)
 
 devDependencies:
   '@rsbuild/core':
@@ -50,8 +50,8 @@ devDependencies:
     specifier: ^6.4.2
     version: 6.4.2(@types/jest@29.5.12)(jest@29.7.0)
   '@testing-library/react':
-    specifier: ^15.0.0
-    version: 15.0.0(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^15.0.1
+    version: 15.0.1(react-dom@18.2.0)(react@18.2.0)
   '@types/jest':
     specifier: ^29.5.12
     version: 29.5.12
@@ -59,11 +59,11 @@ devDependencies:
     specifier: ^20.12.7
     version: 20.12.7
   '@types/react':
-    specifier: ^18.2.75
-    version: 18.2.75
+    specifier: ^18.2.77
+    version: 18.2.77
   '@types/react-dom':
-    specifier: ^18.2.24
-    version: 18.2.24
+    specifier: ^18.2.25
+    version: 18.2.25
   '@types/recharts':
     specifier: 1.8.29
     version: 1.8.29
@@ -1356,8 +1356,8 @@ packages:
       redent: 3.0.0
     dev: true
 
-  /@testing-library/react@15.0.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Nb2Sq8MoSvGVdOGGppRqXeafLtvXCOwiOQtcbqCfkpVNZZNUqIjeSOwrfJ59zBfmZbAn8PitnWEzUKD1YwMrCg==}
+  /@testing-library/react@15.0.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-I8u4qqGAuBg7C1/kRB9n7Oz9Pc/UHEkmiQRbJziSG8B13eZfAcAUn8TSP26ZIvfSeb68CngmtZbKKcRqcQKa3g==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18.0.0
@@ -1365,7 +1365,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.0
       '@testing-library/dom': 10.0.0
-      '@types/react-dom': 18.2.24
+      '@types/react-dom': 18.2.25
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: true
@@ -1375,8 +1375,8 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /@tremor/react@3.15.0(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.3):
-    resolution: {integrity: sha512-TNhLzlGV9ph0Bzd7uTFHaE7Je9diIDuqt7Khnm5XkqO7y0jTE+9aGT/gcV6qTZV/9dfkcv8Aw1J/NpxH+hynGQ==}
+  /@tremor/react@3.15.1(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.4.3):
+    resolution: {integrity: sha512-vCUqgYo993VePn6yOs4102ibY2XYcDDp7I1ZV/+i5hdfp+XgsHyQvYeixQcETBMpcajwM8E8NOOO7k9ANLkrrw==}
     peerDependencies:
       react: ^18.0.0
       react-dom: '>=16.6.0'
@@ -1389,7 +1389,7 @@ packages:
       react-day-picker: 8.9.1(date-fns@2.30.0)(react@18.2.0)
       react-dom: 18.2.0(react@18.2.0)
       react-transition-state: 2.1.1(react-dom@18.2.0)(react@18.2.0)
-      recharts: 2.12.4(react-dom@18.2.0)(react@18.2.0)
+      recharts: 2.12.5(react-dom@18.2.0)(react@18.2.0)
       tailwind-merge: 1.14.0
     transitivePeerDependencies:
       - tailwindcss
@@ -1534,14 +1534,14 @@ packages:
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
-  /@types/react-dom@18.2.24:
-    resolution: {integrity: sha512-cN6upcKd8zkGy4HU9F1+/s98Hrp6D4MOcippK4PoE8OZRngohHZpbJn1GsaDLz87MqvHNoT13nHvNqM9ocRHZg==}
+  /@types/react-dom@18.2.25:
+    resolution: {integrity: sha512-o/V48vf4MQh7juIKZU2QGDfli6p1+OOi5oXx36Hffpc9adsHeXjVp8rHuPkjd8VT8sOJ2Zp05HR7CdpGTIUFUA==}
     dependencies:
-      '@types/react': 18.2.75
+      '@types/react': 18.2.77
     dev: true
 
-  /@types/react@18.2.75:
-    resolution: {integrity: sha512-+DNnF7yc5y0bHkBTiLKqXFe+L4B3nvOphiMY3tuA5X10esmjqk7smyBZzbGTy2vsiy/Bnzj8yFIBL8xhRacoOg==}
+  /@types/react@18.2.77:
+    resolution: {integrity: sha512-CUT9KUUF+HytDM7WiXKLF9qUSg4tGImwy4FXTlfEDPEkkNUzJ7rVFolYweJ9fS1ljoIaP7M7Rdjc5eUm/Yu5AA==}
     dependencies:
       '@types/prop-types': 15.7.5
       csstype: 3.1.2
@@ -1550,7 +1550,7 @@ packages:
     resolution: {integrity: sha512-ulKklaVsnFIIhTQsQw226TnOibrddW1qUQNFVhoQEyY1Z7FRQrNecFCGt7msRuJseudzE9czVawZb17dK/aPXw==}
     dependencies:
       '@types/d3-shape': 1.3.8
-      '@types/react': 18.2.75
+      '@types/react': 18.2.77
     dev: true
 
   /@types/semver@7.5.8:
@@ -5194,8 +5194,8 @@ packages:
       decimal.js-light: 2.5.1
     dev: false
 
-  /recharts@2.12.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-dM4skmk4fDKEDjL9MNunxv6zcTxePGVEzRnLDXALRpfJ85JoQ0P0APJ/CoJlmnQI0gPjBlOkjzrwrfQrRST3KA==}
+  /recharts@2.12.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Cy+BkqrFIYTHJCyKHJEPvbHE2kVQEP6PKbOHJ8ztRGTAhvHuUnCwDaKVb13OwRFZ0QNUk1QvGTDdgWSMbuMtKw==}
     engines: {node: '>=14'}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0
@@ -5947,8 +5947,8 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /uno-js@3.92.0:
-    resolution: {integrity: sha512-gNnXOrpLRvGzvEaKl35uKapuQU1qvHhMWGex0VhcyxTLK+6kduKOayChTIY0XUfgA4JMcTWmzSARPEQoeYBROQ==}
+  /uno-js@3.93.0:
+    resolution: {integrity: sha512-7eMUD9BRzSBuso8tWAIjBCNO1f0SDVxCnCuWl52UTH/qMIlt28+dnogJal30Z1sQQGnxZGG0Wg1NxMRIjBhKfA==}
     dev: false
 
   /update-browserslist-db@1.0.13(browserslist@4.23.0):
@@ -6230,7 +6230,7 @@ packages:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: true
 
-  /zustand@4.5.2(@types/react@18.2.75)(react@18.2.0):
+  /zustand@4.5.2(@types/react@18.2.77)(react@18.2.0):
     resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -6245,7 +6245,7 @@ packages:
       react:
         optional: true
     dependencies:
-      '@types/react': 18.2.75
+      '@types/react': 18.2.77
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
