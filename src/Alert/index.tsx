@@ -53,10 +53,8 @@ type AlertProps = {
 };
 
 const AlertComponent = ({ message, animation, deleteAlert, icon }: AlertProps) => {
-    if (animation === AUTO_ANIMATE)
-        setTimeout(() => {
-            deleteAlert();
-        }, 4500);
+    if (animation === AUTO_ANIMATE) setTimeout(() => deleteAlert(), 4500);
+
     return (
         <StyledContainer animation={animation} ereaseAlert={animation === AUTO_ANIMATE ? () => {} : deleteAlert}>
             {icon}

@@ -11,12 +11,17 @@ import { NoData } from '../NoData';
 import { Flex } from '@tremor/react';
 import { getValueFormatted } from '../utils';
 
+export type PieChartProps<T> = ChartComponent<T, ChartData[]> & {
+    serieName?: string;
+};
+
 export const PieChart = <T,>({
     rawData,
     dataCallback,
     legendFormatType,
     className,
-}: ChartComponent<T, ChartData[]>) => {
+    serieName = 'Data',
+}: PieChartProps<T>) => {
     const dataTransformFn = useMemo(
         () => dataCallback ?? ((data: T) => data as unknown as ChartData[]),
         [dataCallback],
@@ -64,7 +69,7 @@ export const PieChart = <T,>({
                             <ChartTooltip
                                 active={active}
                                 payload={payload}
-                                label='Data'
+                                label={serieName}
                                 valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}
                                 categoryColors={categoryColors}
                             />

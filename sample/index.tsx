@@ -239,6 +239,7 @@ const Application = () => {
                             rawData={loading ? undefined : chartData}
                             dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
                             legendFormatType='money'
+                            serieName='Moneys'
                         />
                     </Card>
                     <Card>
