@@ -219,7 +219,7 @@ const Application = () => {
             </BasicToolbar>
             <TremorContainer hasToolbar>
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
-                    <Card>
+                    <Card decoration='top' decorationColor='blue'>
                         <Text>Metric 1</Text>
                         <AwaitableMetric>{!loading ? '100%' : undefined}</AwaitableMetric>
                     </Card>
