@@ -24,11 +24,11 @@ export const defaultData = [
         null,
         0.05,
         false,
-        ['https://www.google.com', 'Google'],
+        ['https://www.unosquare.com', 'Unosquare'],
         'Small text',
     ],
     ['Maria', 'NY', new Date('2022-01-05'), 60, 40, 0, 0.55, false, '', 'Small text'],
-    ['Laura', 'Guadalajara', new Date('2022-01-06'), 25, 45, 100, 25, true, 'https://www.google.com', 'Small text'],
+    ['Laura', 'Guadalajara', new Date('2022-01-06'), 25, 45, 100, 25, true, 'https://www.unosquare.com', 'Small text'],
     ['Laura', 'Mexico', new Date('2022-01-07'), 25, 50, 100, 0.125, true, 'https://www.google.com', 'Small text'],
     [
         'Juan',
@@ -46,12 +46,17 @@ export const defaultData = [
 
 export const anotherDataSet = [
     [
-        'Juan',
+        ['https://www.google.com','Abasolo'],
         'Oaxaca',
         new Date('2022-01-08'),
     ],
     [
-        'Pepe',
+        ['https://www.google.com','Pepe'],
+        'Mexico',
+        new Date('2023-01-08'),
+    ],
+    [
+        'https://www.unosquare.com',
         'Mexico',
         new Date('2022-01-01'),
     ]
