@@ -62,7 +62,7 @@ const columns: TableColumn[] = [
 ];
 
 const extraColumns: TableColumn[] = [
-    { label: 'Name', sortOrder: 1, sortDirection: 'asc' },
+    { label: 'Name', dataType: 'link', sortOrder: 1, sortDirection: 'asc' },
     { label: 'City', disableSearch: true, excludeFromSort: true, textAlign: 'left' },
     { label: 'Date', dataType: 'date' },
 ];

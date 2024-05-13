@@ -15,6 +15,33 @@ export const searchData = (search: string | undefined, newData: TableCellTypes[]
 
 const numericTypes: DataTypes[] = ['number', 'decimal', 'percentage', 'money', 'days', 'months', 'boolean'];
 
+const getArrayValueOrDefault = (value: TableCellTypes) =>
+    value instanceof Array && value.length > 1 ? value[1] : String(value);
+
+const sortColumnValue = (a: TableCellTypes, b: TableCellTypes, dataType: DataTypes | undefined) => {
+    if (dataType === 'link') {
+        const leftLink = getArrayValueOrDefault(a);
+        const rightLink = getArrayValueOrDefault(b);
+
+        const result = sortNumericString(leftLink, rightLink);
+        if (result !== 0) return result;
+    }
+
+    if (dataType === 'date') {
+        const result = compareDates(String(a), String(b));
+
+        if (result !== 0) return result;
+    }
+
+    if (numericTypes.includes(dataType ?? 'string')) {
+        const result = Number(a) - Number(b);
+
+        if (result !== 0) return result;
+    }
+
+    return sortNumericString(String(a), String(b));
+};
+
 const sortOneColumn = <T extends TableColumn>(
     left: TableCellTypes[],
     right: TableCellTypes[],
@@ -28,19 +55,7 @@ const sortOneColumn = <T extends TableColumn>(
 
     const [a, b] = sortDirection === 'desc' ? [right, left] : [left, right];
 
-    if (dataType === 'date') {
-        const result = compareDates(String(a[sortColumn]), String(b[sortColumn]));
-
-        if (result !== 0) return result;
-    }
-
-    if (numericTypes.includes(dataType ?? 'string')) {
-        const result = Number(a[sortColumn]) - Number(b[sortColumn]);
-
-        if (result !== 0) return result;
-    }
-
-    return sortNumericString(String(a[sortColumn]), String(b[sortColumn]));
+    return sortColumnValue(a[sortColumn], b[sortColumn], dataType);
 };
 
 export const searchFooter = <TDataIn extends Array<Record<string, unknown>> | Record<string, unknown>>(
