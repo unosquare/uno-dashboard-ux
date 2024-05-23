@@ -8,10 +8,17 @@ export type SearchBoxSettings = {
     search: (value: string) => void;
     focus?: boolean;
     disabled?: boolean;
+    initialValue?: string;
 };
 
-export const SearchBox = ({ search, placeholder = 'Search', focus = false, disabled = false }: SearchBoxSettings) => {
-    const [value, setValue] = React.useState('');
+export const SearchBox = ({
+    search,
+    placeholder = 'Search',
+    focus = false,
+    disabled = false,
+    initialValue = '',
+}: SearchBoxSettings) => {
+    const [value, setValue] = React.useState(initialValue);
     const ref = useRef<HTMLInputElement>(null);
     const debounceCall = useDebounce(() => search(value));
 
