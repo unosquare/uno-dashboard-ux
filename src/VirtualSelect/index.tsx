@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Combobox } from '@headlessui/react';
+import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { makeClassName } from '@tremor/react/dist/lib/utils';
 import { getSelectButtonColors, hasValue } from '@tremor/react/dist/components/input-elements/selectUtils';
@@ -145,15 +145,14 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
                 options: filteredOptions ?? [],
             }}
             as='div'
+            value={searchQuery}
             ref={ref}
-            value={null}
             disabled={disabled}
-            nullable={true}
             onChange={() => setSearchQuery('')}
             className={tremorTwMerge('w-full min-w-[10rem] relative text-tremor-default', className)}
         >
-            <Combobox.Button className='w-full'>
-                <Combobox.Input
+            <ComboboxButton className='w-full'>
+                <ComboboxInput
                     className={comboBoxStyles(value, disabled, !!enableClear && !!value, !searchQuery && !!value)}
                     placeholder={valueToNameMapping.get(value ?? '') ?? placeholder}
                     onBlur={onClearSearch}
@@ -161,19 +160,19 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
                     displayValue={() => searchQuery ?? ''}
                 />
                 <ArrowDownHead />
-            </Combobox.Button>
-            {enableClear && value ? <SelectClearButton clearValue={onValueChange} /> : null}
-            <Combobox.Options className={comboBoxOptionsStyles} hold>
+            </ComboboxButton>
+            {enableClear && !!value && <SelectClearButton clearValue={onValueChange} />}
+            <ComboboxOptions className={comboBoxOptionsStyles} hold>
                 {({ option }) => (
-                    <Combobox.Option
+                    <ComboboxOption
                         className={comboBoxSingleOptionStyles(className)}
                         value={option as string}
                         onClick={onOptionClick(option as string)}
                     >
                         <span className='whitespace-nowrap truncate'>{valueToNameMapping.get(option as string)}</span>
-                    </Combobox.Option>
+                    </ComboboxOption>
                 )}
-            </Combobox.Options>
+            </ComboboxOptions>
         </Combobox>
     );
 });
