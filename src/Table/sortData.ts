@@ -1,4 +1,4 @@
-import { compareDates, defaultStringFilter, sortNumericString } from 'uno-js';
+import { compareDates, defaultStringFilter, sortNumericString, trimText } from 'uno-js';
 import { DataTypes, TableCellTypes, TableColumn } from '../constants';
 
 export const searchData = (search: string | undefined, newData: TableCellTypes[][], definitions: TableColumn[]) => {
@@ -8,8 +8,16 @@ export const searchData = (search: string | undefined, newData: TableCellTypes[]
         .filter((y) => y.disableSearch === true)
         .map((x) => definitions.findIndex((z) => z.label === x.label));
 
+    const multiSearch = search
+        .toLocaleLowerCase()
+        .split(' or ')
+        .map(trimText)
+        .filter((x) => x.length > 0);
+
     return newData.filter((section: TableCellTypes[]) =>
-        section.filter((_: unknown, i: number) => !ignoreColumns.includes(i)).some(defaultStringFilter(search)),
+        section
+            .filter((_: unknown, i: number) => !ignoreColumns.includes(i))
+            .some((x) => x !== null && multiSearch.some((y) => defaultStringFilter(y)(x))),
     );
 };
 
