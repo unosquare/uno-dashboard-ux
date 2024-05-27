@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
 import { createCsv, formatter } from 'uno-js';
-import { CaretDown12Regular, CaretUp12Regular, Search12Regular } from '@fluentui/react-icons';
+import { CaretDown12Regular, CaretUp12Regular } from '@fluentui/react-icons';
 import {
     Flex,
     TableBody,
@@ -25,6 +25,7 @@ import { useDebounce } from '../hooks';
 import { ShimmerTable } from './TableShimmer';
 import { getAlignment, translateType } from '../utils';
 import { TableCell, TableCellContent } from '../TableCell';
+import { SearchOrClearButton } from '../SearchBox';
 
 export * from './sortData';
 
@@ -195,10 +196,12 @@ export const Table = <TDataIn,>({
         });
     });
 
-    const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(target.value);
+    const setSearchValue = (x = '') => {
+        setSearch(x);
         debouncedSearch();
     };
+
+    const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => setSearchValue(target.value);
 
     useEffect(() => {
         if (!rawData) return;
@@ -244,6 +247,11 @@ export const Table = <TDataIn,>({
         return [];
     };
 
+    const icon = useMemo(
+        () => () => <SearchOrClearButton hasValue={search.length > 0} onClick={setSearchValue} />,
+        [search],
+    );
+
     return (
         <>
             {(children || searchable || exportCsv) && (
@@ -258,8 +266,8 @@ export const Table = <TDataIn,>({
                     )}
                     {searchable && (
                         <TextInput
-                            className='max-w-[220px]'
-                            icon={Search12Regular}
+                            className='max-w-[220px] [&_input]:px-[10px] [&_svg]:ml-2'
+                            icon={icon}
                             value={search}
                             onChange={onSearchInternal}
                             disabled={!rawData}
