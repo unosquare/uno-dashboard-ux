@@ -1,6 +1,6 @@
 {
     "name": "uno-dashboard-ux",
-    "version": "3.44.0",
+    "version": "3.46.0",
     "description": "Unosquare Dashboard UX/UI",
     "main": "dist/index.js",
     "files": [
@@ -16,7 +16,7 @@
         "recharts": "2.12.7",
         "tailwind-merge": "^2.3.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.99.0",
+        "uno-js": "^3.100.0",
         "uuid": "^9.0.1",
         "zustand": "^4.5.2"
     },
