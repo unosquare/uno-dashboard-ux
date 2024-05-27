@@ -1,5 +1,5 @@
 module.exports = {
-    ignorePatterns: ['*.test.ts', '*.spec.tsx','zustand.ts'],
+    ignorePatterns: ['*.test.ts', '*.spec.tsx', 'zustand.ts'],
     settings: {
         'import/resolver': {
             node: {
@@ -28,6 +28,7 @@ module.exports = {
             { unnamedComponents: 'arrow-function', namedComponents: 'arrow-function' },
         ],
         'array-callback-return': ['error', { checkForEach: true }],
-        'react/no-unstable-nested-components': 'warn',
+        'react/no-unstable-nested-components': ['warn', { allowAsProps: true }],
+        'react/display-name': 'off',
     },
 };

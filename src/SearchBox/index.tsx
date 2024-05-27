@@ -1,6 +1,6 @@
-import { Search12Regular } from '@fluentui/react-icons';
+import { Dismiss24Regular, Search24Regular } from '@fluentui/react-icons';
 import { TextInput } from '@tremor/react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useDebounce } from '../hooks';
 
 export type SearchBoxSettings = {
@@ -10,6 +10,9 @@ export type SearchBoxSettings = {
     disabled?: boolean;
     initialValue?: string;
 };
+
+export const SearchOrClearButton = ({ hasValue = false, onClick }: { hasValue: boolean; onClick: () => void }) =>
+    hasValue ? <Dismiss24Regular className='cursor-pointer' onClick={() => onClick()} /> : <Search24Regular />;
 
 export const SearchBox = ({
     search,
@@ -26,15 +29,22 @@ export const SearchBox = ({
         if (focus && ref.current) setTimeout(() => ref.current?.focus(), 2000);
     }, [focus]);
 
-    const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(target.value);
+    const setSearchValue = (x = '') => {
+        setValue(x);
         debounceCall();
     };
 
+    const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => setSearchValue(target.value);
+
+    const icon = useMemo(
+        () => () => <SearchOrClearButton hasValue={value.length > 0} onClick={setSearchValue} />,
+        [value],
+    );
+
     return (
         <TextInput
-            className='max-w-[220px]'
-            icon={Search12Regular}
+            className='max-w-[220px] [&_input]:px-[10px] [&_svg]:ml-2'
+            icon={icon}
             ref={ref}
             value={value}
             onChange={onChange}
