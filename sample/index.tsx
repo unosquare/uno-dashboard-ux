@@ -106,6 +106,12 @@ type onlineDto = {
     body: string;
 };
 
+const selectOptions = [
+    { label: 'USA', value: 'USA' },
+    { label: 'Canada', value: 'Canada' },
+    { label: 'Mexico', value: 'Mexico' },
+];
+
 const fields = [
     {
         label: 'Name',
@@ -120,11 +126,14 @@ const fields = [
         label: 'Country',
         name: 'country',
         type: FormFieldTypes.VirtualSelect,
-        options: [
-            { label: 'USA', value: 'USA' },
-            { label: 'Canada', value: 'Canada' },
-            { label: 'Mexico', value: 'Mexico' },
-        ]
+        options: selectOptions
+    },
+    {
+        label: 'Birth Country',
+        name: 'birthCountry',
+        type: FormFieldTypes.Select,
+        options: selectOptions,
+        notRequired: true,
     },
     {
         label: 'Can Drive?',
@@ -135,6 +144,8 @@ const fields = [
         label: 'License Date',
         name: 'licenseDate',
         type: FormFieldTypes.Date,
+        value: '2021-01-01',
+        notRequired: true,
     },
 ];
 

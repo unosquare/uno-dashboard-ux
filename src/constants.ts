@@ -92,7 +92,7 @@ export interface FormField<T> {
     label: string;
     value?: T;
     type?: FormFieldTypes;
-    options?: ReactSelectOption<string>[];
+    options?: ReactSelectOption<string | number>[] | undefined;
     onChange?: (e: string) => void;
     disabled?: boolean;
     notRequired?: boolean;

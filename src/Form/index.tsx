@@ -55,7 +55,7 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, columns = 3 }: F
                                             control={control}
                                             render={({ field }) => (
                                                 <DatePicker
-                                                    value={new Date(String(field.value))}
+                                                    value={new Date(field.value as string)}
                                                     onValueChange={field.onChange}
                                                     disabled={disable || updatedField.disabled}
                                                     enableClear={false}
@@ -73,11 +73,9 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, columns = 3 }: F
                                             control={control}
                                             render={({ field }) => (
                                                 <VirtualSelect
-                                                    value={
-                                                        initialData[index].options?.find(
-                                                            (c) => c.value.toString() === field.value,
-                                                        )?.value
-                                                    }
+                                                    value={initialData[index].options
+                                                        ?.find((c) => c.value.toString() === field.value)
+                                                        ?.value?.toString()}
                                                     onValueChange={(e) =>
                                                         onSelectChange(e, field.onChange, item.onChange)
                                                     }
@@ -98,11 +96,9 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, columns = 3 }: F
                                             render={({ field }) => (
                                                 <Select
                                                     enableClear={false}
-                                                    value={
-                                                        initialData[index].options?.find(
-                                                            (c) => c.value.toString() === field.value,
-                                                        )?.value
-                                                    }
+                                                    value={initialData[index].options
+                                                        ?.find((c) => c.value.toString() === field.value)
+                                                        ?.value?.toString()}
                                                     onValueChange={(e) =>
                                                         onSelectChange(e, field.onChange, item.onChange)
                                                     }
@@ -111,7 +107,7 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, columns = 3 }: F
                                                     ref={field.ref}
                                                 >
                                                     {(initialData[index].options ?? []).map((u) => (
-                                                        <SelectItem key={u.value} value={u.value}>
+                                                        <SelectItem key={u.value} value={u.value.toString()}>
                                                             {u.label}
                                                         </SelectItem>
                                                     ))}
