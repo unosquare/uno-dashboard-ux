@@ -55,8 +55,9 @@ export type TableCoordinate = {
     columnIndex: number;
 };
 
-export type TableColumn = {
-    label: string;
+export type HasLabel = { label: string };
+
+export type TableColumn = HasLabel & {
     dataType?: DataTypes;
     sortOrder?: number;
     sortDirection?: SortDirection;
@@ -77,24 +78,20 @@ export type TableColumn = {
     };
 };
 
-export type ReactSelectOption<T = number> = {
+export type ReactSelectOption<T = number> = HasLabel & {
     value: T;
-    label: string;
 };
 
-export type ReactSelectGroupOption = {
-    label: string;
+export type ReactSelectGroupOption = HasLabel & {
     options: ReactSelectOption[];
 };
-
-export interface FormField<T> {
+export type FormField<T> = HasLabel & {
     name: string;
-    label: string;
     value?: T;
     type?: FormFieldTypes;
-    options?: ReactSelectOption<string | number>[] | undefined;
+    options?: ReactSelectOption<string | number>[] | undefined | null;
     onChange?: (e: string) => void;
     disabled?: boolean;
     notRequired?: boolean;
     loading?: boolean;
-}
+};
