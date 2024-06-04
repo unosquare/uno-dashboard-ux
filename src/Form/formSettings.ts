@@ -1,10 +1,13 @@
 import { FormField } from '../constants';
 
-export interface FormSettings<T, TData> {
+export interface ReadOnlyFormSettings<T> {
     initialData: FormField<T>[];
+    columns?: number;
+}
+
+export interface FormSettings<T, TData> extends ReadOnlyFormSettings<T> {
     onSave: (data: TData) => Promise<unknown>;
     onCancel?: () => void;
-    columns?: number;
 }
 
 export interface FieldGroupSettings {

@@ -131,9 +131,11 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, columns = 3 }: F
                 ))}
             </StyledFormContainer>
             <Flex justifyContent='end' className='mt-4 gap-4'>
-                <Button className='w-[120px]' disabled={disable || !isValid} onClick={onSaveData}>
-                    Save
-                </Button>
+                {fields.filter((y) => y.disabled === true).length !== fields.length && (
+                    <Button className='w-[120px]' disabled={disable || !isValid} onClick={onSaveData}>
+                        Save
+                    </Button>
+                )}
                 {onCancel && (
                     <Button className='w-[120px]' variant='secondary' onClick={onCancel}>
                         Cancel
