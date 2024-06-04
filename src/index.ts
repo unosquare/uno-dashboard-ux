@@ -15,6 +15,7 @@ export * from './DataChart';
 export * from './ErrorBoundary';
 export * from './ExportCsvButton';
 export * from './Footer';
+export * from './Form';
 export * from './InfoDialog';
 export * from './Menu';
 export * from './NavBar';

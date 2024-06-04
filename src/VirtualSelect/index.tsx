@@ -5,16 +5,7 @@ import { makeClassName } from '@tremor/react/dist/lib/utils';
 import { getSelectButtonColors, hasValue } from '@tremor/react/dist/components/input-elements/selectUtils';
 import { ChevronDown16Filled, DismissCircle16Filled } from '@fluentui/react-icons';
 import { useDebounce } from '../hooks';
-
-export type ReactSelectOption<T = number> = {
-    value: T;
-    label: string;
-};
-
-export type ReactSelectGroupOption = {
-    label: string;
-    options: ReactSelectOption[];
-};
+import { ReactSelectOption } from '../constants';
 
 export interface SearchSelectProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;

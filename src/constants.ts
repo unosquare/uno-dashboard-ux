@@ -24,6 +24,16 @@ export type DataTypes =
 
 export type SortDirection = 'asc' | 'desc';
 
+export enum FormFieldTypes {
+    Text = 'text',
+    Number = 'number',
+    Date = 'date',
+    Select = 'select',
+    VirtualSelect = 'virtualselect',
+    Checkbox = 'checkbox',
+    TextArea = 'textarea',
+}
+
 export type ClassNameComponent = {
     className?: string;
 };
@@ -66,3 +76,25 @@ export type TableColumn = {
         nullValue?: string;
     };
 };
+
+export type ReactSelectOption<T = number> = {
+    value: T;
+    label: string;
+};
+
+export type ReactSelectGroupOption = {
+    label: string;
+    options: ReactSelectOption[];
+};
+
+export interface FormField<T> {
+    name: string;
+    label: string;
+    value?: T;
+    type?: FormFieldTypes;
+    options?: ReactSelectOption<string>[];
+    onChange?: (e: string) => void;
+    disabled?: boolean;
+    notRequired?: boolean;
+    loading?: boolean;
+}

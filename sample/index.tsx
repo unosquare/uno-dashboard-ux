@@ -19,6 +19,7 @@ import {
     DataChart,
     ErrorBoundary,
     Footer,
+    Form,
     InfoDialog,
     MenuContainer,
     MenuSection,
@@ -37,6 +38,7 @@ import {
     useTheme,
     useAlertStore,
     useToggle,
+    FormFieldTypes,
 } from '../src';
 import '../src/resources/global.css';
 import { anotherDataSet, defaultData, getLargeSelectOptions } from './data';
@@ -73,7 +75,7 @@ const onlineColumns: TableColumn[] = [
     {
         label: 'Title',
         render: (column, { columnIndex, rowIndex }, data, rawData) => (
-            <TableCell column={column} index={columnIndex} className='bg-gray-100'>
+            <TableCell key={column.label} column={column} index={columnIndex} className='bg-gray-100'>
                 {rawData && (
                     <a href={`https://jsonplaceholder.typicode.com/posts/${rawData[rowIndex].id}`}>{String(data)}</a>
                 )}
@@ -103,6 +105,38 @@ type onlineDto = {
     title: string;
     body: string;
 };
+
+const fields = [
+    {
+        label: 'Name',
+        name: 'name',
+    },
+    {
+        label: 'Age',
+        name: 'age',
+        type: FormFieldTypes.Number,
+    },
+    {
+        label: 'Country',
+        name: 'country',
+        type: FormFieldTypes.VirtualSelect,
+        options: [
+            { label: 'USA', value: 'USA' },
+            { label: 'Canada', value: 'Canada' },
+            { label: 'Mexico', value: 'Mexico' },
+        ]
+    },
+    {
+        label: 'Can Drive?',
+        name: 'canDrive',
+        type: FormFieldTypes.Checkbox,
+    },
+    {
+        label: 'License Date',
+        name: 'licenseDate',
+        type: FormFieldTypes.Date,
+    },
+];
 
 const Application = () => {
     const setAlert = useAlertStore((st) => st.setAlert);
@@ -138,6 +172,10 @@ const Application = () => {
     const barClick = (ev: string) => {
         console.log(ev);
         setCounter((x) => x + 1);
+    };
+
+    const onSave = async (data: unknown) => {
+        console.log(data);
     };
 
     return (
@@ -297,6 +335,12 @@ const Application = () => {
                             </Table>
                         </Card>
                     </Col>
+                    <Col numColSpan={3}>
+                        <Card>
+                            <Title className='w-full'>Form</Title>
+                            <Form initialData={fields} onSave={onSave} />
+                        </Card>
+                    </Col>
                 </Grid>
             </TremorContainer>
             <Footer />
@@ -304,8 +348,7 @@ const Application = () => {
     );
 };
 
-const root = createRoot(document.getElementById('root')!);
-root.render(
+createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Application />
     </React.StrictMode>,
