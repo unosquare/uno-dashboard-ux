@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
@@ -55,7 +57,7 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, columns = 3 }: F
                                             control={control}
                                             render={({ field }) => (
                                                 <DatePicker
-                                                    value={new Date(field.value as string)}
+                                                    value={field.value as any}
                                                     onValueChange={field.onChange}
                                                     disabled={disable || updatedField.disabled}
                                                     enableClear={false}
