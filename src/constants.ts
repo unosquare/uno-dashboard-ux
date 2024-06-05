@@ -85,9 +85,13 @@ export type ReactSelectOption<T = number> = HasLabel & {
 export type ReactSelectGroupOption = HasLabel & {
     options: ReactSelectOption[];
 };
-export type FormField<T> = HasLabel & {
-    name: string;
+
+export type ReadOnlyFormField<T> = HasLabel & {
     value?: T;
+};
+
+export type FormField<T> = ReadOnlyFormField<T> & {
+    name: string;
     type?: FormFieldTypes;
     options?: ReactSelectOption<string | number>[] | undefined | null;
     onChange?: (e: string) => void;
@@ -95,3 +99,8 @@ export type FormField<T> = HasLabel & {
     notRequired?: boolean;
     loading?: boolean;
 };
+
+export interface ReadOnlyFormSettings<T> {
+    initialData: ReadOnlyFormField<T>[];
+    columns?: number;
+}

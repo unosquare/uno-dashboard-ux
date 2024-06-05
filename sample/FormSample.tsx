@@ -50,7 +50,7 @@ export default () => {
     return (
         <>
             <Title className='w-full'>Form</Title>
-            <Form initialData={fields} onSave={onSave} />
+            <Form initialData={fields} onSave={onSave} saveLabel='Continue' />
         </>
     );
 };

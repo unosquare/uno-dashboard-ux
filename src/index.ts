@@ -22,6 +22,7 @@ export * from './NavBar';
 export * from './NoData';
 export * from './PageToolbar';
 export * from './PieChart';
+export * from './ReadOnlyForm';
 export * from './SearchBox';
 export * from './Table';
 export * from './TableCell';

@@ -42,6 +42,7 @@ import '../src/resources/global.css';
 import { anotherDataSet, defaultData, getLargeSelectOptions } from './data';
 import OnlineTable from './OnlineTable';
 import FormSample from './FormSample';
+import ReadOnlyFormSample from './ReadOnlyFormSample';
 
 export enum options {
     A = 'Apple',
@@ -272,6 +273,11 @@ const Application = () => {
                     <Col numColSpan={3}>
                         <Card>
                             <FormSample />
+                        </Card>
+                    </Col>
+                    <Col numColSpan={3}>
+                        <Card>
+                            <ReadOnlyFormSample />
                         </Card>
                     </Col>
                 </Grid>

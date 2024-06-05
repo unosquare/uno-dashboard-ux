@@ -5,12 +5,13 @@ import React, { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { Button, DatePicker, Flex, NumberInput, Select, SelectItem, Text, TextInput } from '@tremor/react';
 import { FormSettings } from './formSettings';
-import { StyledCheckbox, StyledFieldGroup, StyledFormContainer } from './styled';
+import { StyledCheckbox } from './styled';
 import { extractData, getFieldBaseProps, onSelectChange } from './utils';
 import { FormFieldTypes } from '../constants';
 import { VirtualSelect } from '../VirtualSelect';
+import { StyledFieldGroup, StyledFormContainer } from '../styled';
 
-export const Form = <T, TData>({ initialData, onSave, onCancel, columns = 3 }: FormSettings<T, TData>) => {
+export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, columns = 3 }: FormSettings<T, TData>) => {
     const {
         register,
         watch,
@@ -129,13 +130,11 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, columns = 3 }: F
                 ))}
             </StyledFormContainer>
             <Flex justifyContent='end' className='mt-4 gap-4'>
-                {fields.filter((y) => y.disabled === true).length !== fields.length && (
-                    <Button className='w-[120px]' disabled={disable || !isValid} onClick={onSaveData}>
-                        Save
-                    </Button>
-                )}
+                <Button className='w-28' disabled={disable || !isValid} onClick={onSaveData}>
+                    {saveLabel ?? 'Save'}
+                </Button>
                 {onCancel && (
-                    <Button className='w-[120px]' variant='secondary' onClick={onCancel}>
+                    <Button className='w-28' variant='secondary' onClick={onCancel}>
                         Cancel
                     </Button>
                 )}
