@@ -1,3 +1,5 @@
+import { Money } from "uno-js";
+
 export type ChartData = {
     name: string;
     value: number;
@@ -48,7 +50,7 @@ export type ChartComponent<TDataIn, TDataOut> = DataComponent<TDataIn, TDataOut>
         legendFormatType?: LegendFormatType;
     };
 
-export type TableCellTypes = string | number | Array<string> | Date | boolean | null | undefined;
+export type TableCellTypes = string | number | Array<string> | Date | boolean | null | Money | undefined;
 
 export type TableCoordinate = {
     rowIndex: number;
@@ -75,6 +77,9 @@ export type TableColumn = HasLabel & {
         keepFormat?: boolean;
         decimals?: number;
         nullValue?: string;
+        currency?: string;
+        showCurrency?: boolean;
+        locale?: string;
     };
 };
 

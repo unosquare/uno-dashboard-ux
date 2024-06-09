@@ -2,7 +2,7 @@ import React, { PropsWithChildren, startTransition, useEffect, useMemo, useState
 import { v4 as uuidv4 } from 'uuid';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
-import { createCsv, formatter } from 'uno-js';
+import { createCsv, formatter, isMoneyObject, toMoney } from 'uno-js';
 import { CaretDown12Regular, CaretUp12Regular } from '@fluentui/react-icons';
 import {
     Flex,
@@ -141,10 +141,11 @@ const renderCellString = (cell: TableCellTypes, dataType?: DataTypes) => {
 const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[]) =>
     data.map((row) =>
         row.map((cell, index) => {
-            const dataType = definitions[index]?.dataType;
+            const { dataType, formatterOptions } = definitions[index];
+            if (dataType === 'money' && !cell) return toMoney(0, { ...formatterOptions }) as string;
+            if (isMoneyObject(cell)) return toMoney(cell, { ...formatterOptions }) as string;
             if (dataType === 'boolean') return cell ? 'TRUE' : 'FALSE';
             if (dataType === 'link' && cell instanceof Array && cell.length > 1) return String(cell[1]);
-            if (!cell && dataType === 'money') return '$0.00';
 
             return renderCellString(cell, dataType);
         }),

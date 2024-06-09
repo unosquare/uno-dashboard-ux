@@ -2,7 +2,7 @@ import { CheckboxChecked16Regular, CheckboxUnchecked16Regular } from '@fluentui/
 import { Flex, TableCell as TremorTableCell } from '@tremor/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import React from 'react';
-import { formatter } from 'uno-js';
+import { formatter, toMoney } from 'uno-js';
 import { useToggle } from '../hooks';
 import tw from 'tailwind-styled-components';
 import { TableCellTypes, TableColumn } from '../constants';
@@ -53,11 +53,16 @@ const LongTextCell = ({ text }: { text: string }) => {
     );
 };
 
-export const TableCellContent = ({ data, column }: { data: TableCellTypes; column: TableColumn | undefined }) => {
-    if (!data && column?.dataType === 'money') return '$0.00';
-    if (data == null || data === ' ') return column?.formatterOptions?.nullValue ?? 'N/A';
+const defaultColumn: TableColumn = {
+    label: '',
+    dataType: 'string',
+};
 
-    switch (column?.dataType) {
+export const TableCellContent = ({ data, column }: { data: TableCellTypes; column: TableColumn | undefined }) => {
+    const { dataType, formatterOptions } = column ?? defaultColumn;
+    if (dataType !== 'money' && (data == null || data === ' ')) return formatterOptions?.nullValue ?? 'N/A';
+
+    switch (dataType) {
         case 'link':
             return renderLinkString(data);
         case 'boolean':
@@ -81,6 +86,8 @@ export const TableCellContent = ({ data, column }: { data: TableCellTypes; colum
             );
         case 'paragraph':
             return <LongTextCell text={String(data)} />;
+        case 'money':
+            return toMoney(data, { ...formatterOptions });
         default: {
             return formatter(String(data), translateType(column?.dataType), column?.formatterOptions);
         }
