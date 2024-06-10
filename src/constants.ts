@@ -1,3 +1,5 @@
+import { Money } from "uno-js";
+
 export type ChartData = {
     name: string;
     value: number;
@@ -24,6 +26,16 @@ export type DataTypes =
 
 export type SortDirection = 'asc' | 'desc';
 
+export enum FormFieldTypes {
+    Text = 'text',
+    Number = 'number',
+    Date = 'date',
+    Select = 'select',
+    VirtualSelect = 'virtualselect',
+    Checkbox = 'checkbox',
+    TextArea = 'textarea',
+}
+
 export type ClassNameComponent = {
     className?: string;
 };
@@ -38,15 +50,16 @@ export type ChartComponent<TDataIn, TDataOut> = DataComponent<TDataIn, TDataOut>
         legendFormatType?: LegendFormatType;
     };
 
-export type TableCellTypes = string | number | Array<string> | Date | boolean | null | undefined;
+export type TableCellTypes = string | number | Array<string> | Date | boolean | null | Money | undefined;
 
 export type TableCoordinate = {
     rowIndex: number;
     columnIndex: number;
 };
 
-export type TableColumn = {
-    label: string;
+export type HasLabel = { label: string };
+
+export type TableColumn = HasLabel & {
     dataType?: DataTypes;
     sortOrder?: number;
     sortDirection?: SortDirection;
@@ -64,5 +77,35 @@ export type TableColumn = {
         keepFormat?: boolean;
         decimals?: number;
         nullValue?: string;
+        currency?: string;
+        showCurrency?: boolean;
+        locale?: string;
     };
 };
+
+export type ReactSelectOption<T = number> = HasLabel & {
+    value: T;
+};
+
+export type ReactSelectGroupOption = HasLabel & {
+    options: ReactSelectOption[];
+};
+
+export type ReadOnlyFormField<T> = HasLabel & {
+    value?: T;
+};
+
+export type FormField<T> = ReadOnlyFormField<T> & {
+    name: string;
+    type?: FormFieldTypes;
+    options?: ReactSelectOption<string | number>[] | undefined | null;
+    onChange?: (e: string) => void;
+    disabled?: boolean;
+    notRequired?: boolean;
+    loading?: boolean;
+};
+
+export interface ReadOnlyFormSettings<T> {
+    initialData: ReadOnlyFormField<T>[];
+    columns?: number;
+}

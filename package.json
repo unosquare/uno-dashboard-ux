@@ -1,6 +1,6 @@
 {
     "name": "uno-dashboard-ux",
-    "version": "3.47.0",
+    "version": "4.8.0",
     "description": "Unosquare Dashboard UX/UI",
     "main": "dist/index.js",
     "files": [
@@ -8,33 +8,39 @@
         "tailwind.config.js"
     ],
     "dependencies": {
+<<<<<<< Feature/UpdateHeadlessUI
         "@fluentui/react-icons": "^2.0.240",
         "@headlessui/react": "0.0.0-insiders.b478189",
+=======
+        "@fluentui/react-icons": "^2.0.242",
+        "@headlessui/react": "0.0.0-insiders.ce17c6d",
+>>>>>>> master
         "@tremor/react": "^3.17.2",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
+        "react-hook-form": "7.51.5",
         "recharts": "2.12.7",
         "tailwind-merge": "^2.3.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.100.0",
-        "uuid": "^9.0.1",
+        "uno-js": "^3.104.0",
+        "uuid": "^10.0.0",
         "zustand": "^4.5.2"
     },
     "devDependencies": {
-        "@rsbuild/core": "^0.7.1",
-        "@rsbuild/plugin-react": "^0.7.1",
+        "@rsbuild/core": "^0.7.4",
+        "@rsbuild/plugin-react": "^0.7.4",
         "@testing-library/jest-dom": "^6.4.5",
-        "@testing-library/react": "^15.0.7",
+        "@testing-library/react": "^16.0.0",
         "@types/jest": "^29.5.12",
         "@types/react": "^18.3.3",
         "@types/uuid": "^9.0.8",
         "@types/react-dom": "^18.3.0",
         "@types/recharts": "1.8.29",
-        "@types/node": "^20.12.12",
-        "@typescript-eslint/eslint-plugin": "^7.11.0",
+        "@types/node": "^20.14.2",
+        "@typescript-eslint/eslint-plugin": "^7.12.0",
         "autoprefixer": "^10.4.19",
         "eslint": "^8.57.0",
-        "eslint-config-unosquare": "0.13.0",
+        "eslint-config-unosquare": "0.13.1",
         "eslint-plugin-prettier": "^5.1.3",
         "eslint-plugin-react": "^7.34.2",
         "eslint-plugin-react-hooks": "^4.6.2",
@@ -43,8 +49,8 @@
         "jest-environment-jsdom": "^29.7.0",
         "lint-staged": "^15.2.5",
         "postcss-loader": "^8.1.1",
-        "prettier": "^3.2.5",
-        "tailwindcss": "^3.4.3",
+        "prettier": "^3.3.1",
+        "tailwindcss": "^3.4.4",
         "ts-jest": "^29.1.4",
         "typescript": "^5.4.5"
     },

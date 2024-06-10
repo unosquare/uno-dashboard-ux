@@ -31,15 +31,18 @@ import {
     StyledMenuSearchBox,
     Table,
     TableColumn,
-    TableCell,
     TremorContainer,
     VirtualSelect,
     useTheme,
     useAlertStore,
     useToggle,
+    InfoDialogTitle,
 } from '../src';
 import '../src/resources/global.css';
 import { anotherDataSet, defaultData, getLargeSelectOptions } from './data';
+import OnlineTable from './OnlineTable';
+import FormSample from './FormSample';
+import ReadOnlyFormSample from './ReadOnlyFormSample';
 
 export enum options {
     A = 'Apple',
@@ -54,8 +57,9 @@ const columns: TableColumn[] = [
     { label: 'Date', dataType: 'date' },
     { label: 'Age', dataType: 'days', sortOrder: 2, sortDirection: 'desc' },
     { label: 'Units', dataType: 'number', textAlign: 'center' },
-    { label: 'Balance', dataType: 'money' },
+    { label: 'Income', dataType: 'money', formatterOptions: { currency: 'EUR' } },
     { label: 'Margin', dataType: 'percentage', formatterOptions: { decimals: 1 } },
+    { label: 'Expenses', dataType: 'money', formatterOptions: { showCurrency: true } },
     { label: 'Like Ice cream', dataType: 'boolean' },
     { label: 'Profile', dataType: 'link' },
     { label: 'Long text', dataType: 'paragraph' },
@@ -65,22 +69,6 @@ const extraColumns: TableColumn[] = [
     { label: 'Name', dataType: 'link', sortOrder: 1, sortDirection: 'asc' },
     { label: 'City', disableSearch: true, excludeFromSort: true, textAlign: 'left' },
     { label: 'Date', dataType: 'date' },
-];
-
-const onlineColumns: TableColumn[] = [
-    { label: 'User Id' },
-    { label: 'Id', sortOrder: 1, sortDirection: 'asc', dataType: 'number' },
-    {
-        label: 'Title',
-        render: (column, { columnIndex, rowIndex }, data, rawData) => (
-            <TableCell column={column} index={columnIndex} className='bg-gray-100'>
-                {rawData && (
-                    <a href={`https://jsonplaceholder.typicode.com/posts/${rawData[rowIndex].id}`}>{String(data)}</a>
-                )}
-            </TableCell>
-        ),
-    },
-    { label: 'Body' },
 ];
 
 const calculateFooter = (data: unknown[][]) => ['Total', '', String(data.length), '', '', '', '', '', '', ''];
@@ -97,13 +85,6 @@ const chartBarData = [
     { name: 'Group C', Value: 30.25, Value2: 6, Value3: 25 },
 ];
 
-type onlineDto = {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-};
-
 const Application = () => {
     const setAlert = useAlertStore((st) => st.setAlert);
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
@@ -113,14 +94,10 @@ const Application = () => {
     const [toggle, setToggle] = useToggle(true);
     const [theme, setTheme] = useTheme();
     const [counter, setCounter] = useState(0);
-    const [onlineData, setOnlineData] = useState<onlineDto[]>();
 
     React.useEffect(() => {
         setTimeout(() => {
             isLoading(false);
-            fetch('https://jsonplaceholder.typicode.com/posts')
-                .then((r) => r.json())
-                .then(setOnlineData);
         }, 2000);
     }, []);
 
@@ -203,11 +180,10 @@ const Application = () => {
                     Error
                 </Button>
                 <InfoDialog>
-                    <h3 className='text-lg font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong'>
+                    <InfoDialogTitle>
                         What is this Report about
-                    </h3>
-                    <br />
-                    <p>Hi K, this is a reporting showing ONLY due APRs and APRs in the next 30 days.</p>
+                    </InfoDialogTitle>
+                    <Text>About something</Text>
                 </InfoDialog>
                 <VirtualSelect
                     value={virtualSelectOption}
@@ -292,9 +268,17 @@ const Application = () => {
                     </Col>
                     <Col numColSpan={3}>
                         <Card>
-                            <Table columns={onlineColumns} rawData={onlineData}>
-                                <Title className='w-full'>Online Data</Title>
-                            </Table>
+                            <OnlineTable />
+                        </Card>
+                    </Col>
+                    <Col numColSpan={3}>
+                        <Card>
+                            <FormSample />
+                        </Card>
+                    </Col>
+                    <Col numColSpan={3}>
+                        <Card>
+                            <ReadOnlyFormSample />
                         </Card>
                     </Col>
                 </Grid>
@@ -304,8 +288,7 @@ const Application = () => {
     );
 };
 
-const root = createRoot(document.getElementById('root')!);
-root.render(
+createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Application />
     </React.StrictMode>,
