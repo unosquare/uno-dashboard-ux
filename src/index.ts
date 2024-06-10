@@ -28,4 +28,5 @@ export * from './Table';
 export * from './TableCell';
 export * from './TremorContainer';
 export * from './UnoLogo';
+export * from './Tooltip';
 export * from './VirtualSelect';

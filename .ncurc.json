@@ -1,4 +1,4 @@
 {
     "upgrade": true,
-    "reject": ["@headlessui/react", "eslint"]
+    "reject": ["@headlessui/react", "eslint", "react-tooltip"]
 }

@@ -1,13 +1,15 @@
+import React from 'react';
 import { CheckboxChecked16Regular, CheckboxUnchecked16Regular } from '@fluentui/react-icons';
 import { Flex, TableCell as TremorTableCell } from '@tremor/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { formatter, toMoney } from 'uno-js';
 import { useToggle } from '../hooks';
 import tw from 'tailwind-styled-components';
 import { TableCellTypes, TableColumn } from '../constants';
 import { twMerge } from 'tailwind-merge';
 import { getAlignment, translateType } from '../utils';
+import { BasicTooltip } from '../Tooltip';
 
 const renderLinkString = (data: TableCellTypes) => {
     if (data instanceof Array) {
@@ -58,6 +60,26 @@ const defaultColumn: TableColumn = {
     dataType: 'string',
 };
 
+const ListCount = ({ data }: { data: string[] }) => {
+    const id = uuidv4();
+    return (
+        <>
+            {data.length > 1 && (
+                <BasicTooltip id={`list-${id}`}>
+                    <ul>
+                        {data.map((x) => (
+                            <li key={uuidv4()}>{x}</li>
+                        ))}
+                    </ul>
+                </BasicTooltip>
+            )}
+            <span data-tooltip-id={`list-${id}`} className='cursor-pointer'>
+                {data.length}
+            </span>
+        </>
+    );
+};
+
 export const TableCellContent = ({ data, column }: { data: TableCellTypes; column: TableColumn | undefined }) => {
     const { dataType, formatterOptions } = column ?? defaultColumn;
     if (dataType !== 'money' && (data == null || data === ' ')) return formatterOptions?.nullValue ?? 'N/A';
@@ -88,9 +110,10 @@ export const TableCellContent = ({ data, column }: { data: TableCellTypes; colum
             return <LongTextCell text={String(data)} />;
         case 'money':
             return toMoney(data, { ...formatterOptions });
-        default: {
+        case 'list':
+            return <ListCount data={data as string[]} />;
+        default:
             return formatter(String(data), translateType(column?.dataType), column?.formatterOptions);
-        }
     }
 };
 

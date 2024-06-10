@@ -1,4 +1,4 @@
-import { Money } from "uno-js";
+import { Money } from 'uno-js';
 
 export type ChartData = {
     name: string;
@@ -22,7 +22,8 @@ export type DataTypes =
     | 'boolean'
     | 'link'
     | 'bullet'
-    | 'paragraph';
+    | 'paragraph'
+    | 'list';
 
 export type SortDirection = 'asc' | 'desc';
 

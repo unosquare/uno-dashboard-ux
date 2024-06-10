@@ -15,6 +15,7 @@ export const defaultData = [
         true,
         'https://www.google.com',
         'Small text',
+        ['Apple','Bananas','Oranges'],
     ],
     [
         'Pepe',
@@ -28,6 +29,7 @@ export const defaultData = [
         true,
         '',
         'Small text',
+        [],
     ],
     [
         'Juan',
@@ -41,6 +43,7 @@ export const defaultData = [
         true,
         ['https://www.google.com', 'Google'],
         'Small text',
+        ['Apple','Bananas','Oranges'],
     ],
     [
         'Juan',
@@ -54,6 +57,7 @@ export const defaultData = [
         false,
         ['https://www.unosquare.com', 'Unosquare'],
         'Small text',
+        ['Apple','Bananas','Oranges'],
     ],
     [
         'Maria',
@@ -67,6 +71,7 @@ export const defaultData = [
         false,
         '',
         'Small text',
+        ['Apple','Bananas','Oranges'],
     ],
     [
         'Laura',
@@ -80,6 +85,7 @@ export const defaultData = [
         true,
         'https://www.unosquare.com',
         'Small text',
+        ['Apple','Bananas','Oranges'],
     ],
     [
         'Laura',
@@ -93,6 +99,7 @@ export const defaultData = [
         true,
         'https://www.google.com',
         'Small text',
+        ['Apple','Bananas','Oranges'],
     ],
     [
         'Juan',
@@ -106,6 +113,7 @@ export const defaultData = [
         true,
         'https://www.google.com',
         'This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type.\r\n\r\nThis is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type.\r\nThis is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type. This is a very long text that is going to repeat itself until we get more than 500 characters just to test the new data type',
+        ['Apple','Oranges'],
     ],
 ];
 

@@ -6,7 +6,7 @@ import {
     WeatherMoon24Regular,
     WeatherSunny24Regular,
 } from '@fluentui/react-icons';
-import { Button, Card, Col, Flex, Grid, Select, SelectItem, Text, Title } from '@tremor/react';
+import { Button, Card, Col, Flex, Grid, Select, SelectItem, Text } from '@tremor/react';
 import {
     Alert,
     AwaitableMetric,
@@ -29,8 +29,6 @@ import {
     SearchBox,
     StyledMenuActions,
     StyledMenuSearchBox,
-    Table,
-    TableColumn,
     TremorContainer,
     VirtualSelect,
     useTheme,
@@ -39,10 +37,11 @@ import {
     InfoDialogTitle,
 } from '../src';
 import '../src/resources/global.css';
-import { anotherDataSet, defaultData, getLargeSelectOptions } from './data';
+import { getLargeSelectOptions } from './data';
 import OnlineTable from './OnlineTable';
 import FormSample from './FormSample';
 import ReadOnlyFormSample from './ReadOnlyFormSample';
+import RegularTable from './RegularTable';
 
 export enum options {
     A = 'Apple',
@@ -50,28 +49,6 @@ export enum options {
     C = 'Cactus',
     D = 'Dragon',
 }
-
-const columns: TableColumn[] = [
-    { label: 'Name', sortOrder: 1, sortDirection: 'asc' },
-    { label: 'City', disableSearch: true, excludeFromSort: true, textAlign: 'left' },
-    { label: 'Date', dataType: 'date' },
-    { label: 'Age', dataType: 'days', sortOrder: 2, sortDirection: 'desc' },
-    { label: 'Units', dataType: 'number', textAlign: 'center' },
-    { label: 'Income', dataType: 'money', formatterOptions: { currency: 'EUR' } },
-    { label: 'Margin', dataType: 'percentage', formatterOptions: { decimals: 1 } },
-    { label: 'Expenses', dataType: 'money', formatterOptions: { showCurrency: true } },
-    { label: 'Like Ice cream', dataType: 'boolean' },
-    { label: 'Profile', dataType: 'link' },
-    { label: 'Long text', dataType: 'paragraph' },
-];
-
-const extraColumns: TableColumn[] = [
-    { label: 'Name', dataType: 'link', sortOrder: 1, sortDirection: 'asc' },
-    { label: 'City', disableSearch: true, excludeFromSort: true, textAlign: 'left' },
-    { label: 'Date', dataType: 'date' },
-];
-
-const calculateFooter = (data: unknown[][]) => ['Total', '', String(data.length), '', '', '', '', '', '', ''];
 
 const chartData = [
     { name: 'Group A', Value: 10.15 },
@@ -253,17 +230,7 @@ const Application = () => {
                     </Card>
                     <Col numColSpan={3}>
                         <Card>
-                            <Table
-                                className='h-72'
-                                columns={toggle ? columns : extraColumns}
-                                rawData={toggle ? defaultData : anotherDataSet}
-                                searchable
-                                sortable
-                                exportCsv
-                                calculateFooter={calculateFooter}
-                            >
-                                <Title className='w-full'>Data Table</Title>
-                            </Table>
+                            <RegularTable toggle={toggle} />
                         </Card>
                     </Col>
                     <Col numColSpan={3}>
