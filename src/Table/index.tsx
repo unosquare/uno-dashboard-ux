@@ -2,7 +2,7 @@ import React, { PropsWithChildren, startTransition, useEffect, useMemo, useState
 import { v4 as uuidv4 } from 'uuid';
 import { renderToString } from 'react-dom/server';
 import tw from 'tailwind-styled-components';
-import { createCsv, formatter, isMoneyObject, toMoney } from 'uno-js';
+import { createCsv } from 'uno-js';
 import { CaretDown12Regular, CaretUp12Regular } from '@fluentui/react-icons';
 import {
     Flex,
@@ -17,15 +17,16 @@ import {
     TableCell as TremorTableCell,
 } from '@tremor/react';
 import { twMerge } from 'tailwind-merge';
-import { ClassNameComponent, DataComponent, DataTypes, SortDirection, TableCellTypes, TableColumn } from '../constants';
+import { ClassNameComponent, DataComponent, SortDirection, TableCellTypes, TableColumn } from '../constants';
 import { NoData } from '../NoData';
 import { searchData, searchFooter, sortData } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { useDebounce } from '../hooks';
 import { ShimmerTable } from './TableShimmer';
-import { getAlignment, translateType } from '../utils';
+import { getAlignment } from '../utils';
 import { TableCell, TableCellContent } from '../TableCell';
 import { SearchOrClearButton } from '../SearchBox';
+import { renderToRowString } from './exportCsv';
 
 export * from './sortData';
 
@@ -130,26 +131,6 @@ const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], raw
             )}
         </TableRow>
     ));
-
-const renderCellString = (cell: TableCellTypes, dataType?: DataTypes) => {
-    const cellString = String(cell);
-    if (cellString == null || cellString === ' ') return 'N/A';
-
-    return formatter(cellString, translateType(dataType)) ?? cellString;
-};
-
-const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[]) =>
-    data.map((row) =>
-        row.map((cell, index) => {
-            const { dataType, formatterOptions } = definitions[index];
-            if (dataType === 'money' && !cell) return toMoney(0, { ...formatterOptions }) as string;
-            if (isMoneyObject(cell)) return toMoney(cell, { ...formatterOptions }) as string;
-            if (dataType === 'boolean') return cell ? 'TRUE' : 'FALSE';
-            if (dataType === 'link' && cell instanceof Array && cell.length > 1) return String(cell[1]);
-
-            return renderCellString(cell, dataType);
-        }),
-    );
 
 const SpanTable = ({ colSpan, children }: PropsWithChildren<{ colSpan: number }>) => (
     <TableRow>

@@ -23,7 +23,8 @@ export type DataTypes =
     | 'link'
     | 'bullet'
     | 'paragraph'
-    | 'list';
+    | 'list'
+    | 'financial';
 
 export type SortDirection = 'asc' | 'desc';
 
@@ -51,7 +52,16 @@ export type ChartComponent<TDataIn, TDataOut> = DataComponent<TDataIn, TDataOut>
         legendFormatType?: LegendFormatType;
     };
 
-export type TableCellTypes = string | number | Array<string> | Date | boolean | null | Money | undefined;
+export type TableCellTypes =
+    | string
+    | number
+    | Array<string>
+    | Date
+    | boolean
+    | null
+    | Money
+    | FinancialMetric
+    | undefined;
 
 export type TableCoordinate = {
     rowIndex: number;
@@ -110,3 +120,10 @@ export interface ReadOnlyFormSettings<T> {
     initialData: ReadOnlyFormField<T>[];
     columns?: number;
 }
+
+export type FinancialMetric = {
+    Revenue: Money;
+    Cost: Money;
+    GrossProfit: Money;
+    GrossMargin: number;
+};

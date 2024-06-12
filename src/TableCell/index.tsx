@@ -1,12 +1,12 @@
 import React from 'react';
 import { CheckboxChecked16Regular, CheckboxUnchecked16Regular } from '@fluentui/react-icons';
-import { Flex, TableCell as TremorTableCell } from '@tremor/react';
+import { Flex, List, ListItem, TableCell as TremorTableCell } from '@tremor/react';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { v4 as uuidv4 } from 'uuid';
-import { formatter, toMoney } from 'uno-js';
+import { formatter, toMoney, toPercentage } from 'uno-js';
 import { useToggle } from '../hooks';
 import tw from 'tailwind-styled-components';
-import { TableCellTypes, TableColumn } from '../constants';
+import { FinancialMetric, TableCellTypes, TableColumn } from '../constants';
 import { twMerge } from 'tailwind-merge';
 import { getAlignment, translateType } from '../utils';
 import { BasicTooltip } from '../Tooltip';
@@ -66,7 +66,7 @@ const ListCount = ({ data }: { data: string[] }) => {
         <>
             {data.length > 1 && (
                 <BasicTooltip id={`list-${id}`}>
-                    <ul>
+                    <ul className='gap-2'>
                         {data.map((x) => (
                             <li key={uuidv4()}>{x}</li>
                         ))}
@@ -75,6 +75,30 @@ const ListCount = ({ data }: { data: string[] }) => {
             )}
             <span data-tooltip-id={`list-${id}`} className='cursor-pointer'>
                 {data.length}
+            </span>
+        </>
+    );
+};
+
+const FinancialMetricCell = ({ data }: { data: FinancialMetric }) => {
+    const id = uuidv4();
+    return (
+        <>
+            <BasicTooltip id={`financial-${id}`}>
+                <List>
+                    <ListItem className='text-xs/[13px]'>
+                        <span>Revenue:</span> <span>{toMoney(data.Revenue)}</span>
+                    </ListItem>
+                    <ListItem className='text-xs/[13px]'>
+                        <span>Cost:</span> <span>{toMoney(data.Cost)}</span>
+                    </ListItem>
+                    <ListItem className='text-xs/[13px] font-medium'>
+                        <span>Gross Profit:</span> <span>{toMoney(data.GrossProfit)}</span>
+                    </ListItem>
+                </List>
+            </BasicTooltip>
+            <span data-tooltip-id={`financial-${id}`} className='cursor-pointer'>
+                {toPercentage(data.GrossMargin)}
             </span>
         </>
     );
@@ -112,6 +136,8 @@ export const TableCellContent = ({ data, column }: { data: TableCellTypes; colum
             return toMoney(data, { ...formatterOptions });
         case 'list':
             return <ListCount data={data as string[]} />;
+        case 'financial':
+            return <FinancialMetricCell data={data as FinancialMetric} />;
         default:
             return formatter(String(data), translateType(column?.dataType), column?.formatterOptions);
     }
