@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@fluentui/react-icons':
-        specifier: ^2.0.242
-        version: 2.0.242(react@18.3.1)
+        specifier: ^2.0.244
+        version: 2.0.244(react@18.3.1)
       '@headlessui/react':
         specifier: 0.0.0-insiders.ce17c6d
         version: 0.0.0-insiders.ce17c6d(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -39,8 +39,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       uno-js:
-        specifier: ^3.104.0
-        version: 3.104.0
+        specifier: ^3.105.0
+        version: 3.105.0
       uuid:
         specifier: ^10.0.0
         version: 10.0.0
@@ -373,8 +373,8 @@ packages:
   '@floating-ui/utils@0.2.1':
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
 
-  '@fluentui/react-icons@2.0.242':
-    resolution: {integrity: sha512-OtVYVcXWuMrqTBRie4eNwPH56mJJq/pmdPhQCQcLFOnupUyXlnlCRnbJYXd+LDEWga6CCwfqZxI6NiPxpbg08Q==}
+  '@fluentui/react-icons@2.0.244':
+    resolution: {integrity: sha512-eskF11lvcMkiMs67oGwE0pe1uD+QDQvQhKavdPlrKnJ4nq7CWvhVEEW9ER3xLYt923v/gzl1hdeI+ME5SMpvrQ==}
     peerDependencies:
       react: '>=16.8.0 <19.0.0'
 
@@ -3182,8 +3182,8 @@ packages:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
 
-  uno-js@3.104.0:
-    resolution: {integrity: sha512-yWeaVKOg4FXlCDytmcLu9BG209F1H3GTW33KDbMLkjVoAjUHG3T/QTrpolYfSzZ/n8mXJxaXmgNK5/GQwhALVA==}
+  uno-js@3.105.0:
+    resolution: {integrity: sha512-RfD2N0I9/Ng5byQZcrasOnj4z8AZo+Vutd97S7o1X+7SHV/9QIdBEBAwhCAFPDu7QlYCtyoIeTKHRdcRDDCbKw==}
 
   update-browserslist-db@1.0.13:
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
@@ -3624,7 +3624,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.1': {}
 
-  '@fluentui/react-icons@2.0.242(react@18.3.1)':
+  '@fluentui/react-icons@2.0.244(react@18.3.1)':
     dependencies:
       '@griffel/react': 1.5.11(react@18.3.1)
       react: 18.3.1
@@ -7017,7 +7017,7 @@ snapshots:
 
   universalify@0.2.0: {}
 
-  uno-js@3.104.0: {}
+  uno-js@3.105.0: {}
 
   update-browserslist-db@1.0.13(browserslist@4.23.0):
     dependencies:

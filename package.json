@@ -8,7 +8,7 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.242",
+        "@fluentui/react-icons": "^2.0.244",
         "@headlessui/react": "0.0.0-insiders.ce17c6d",
         "@tremor/react": "^3.17.2",
         "react": "^18.3.1",
@@ -18,7 +18,7 @@
         "recharts": "2.12.7",
         "tailwind-merge": "^2.3.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.104.0",
+        "uno-js": "^3.105.0",
         "uuid": "^10.0.0",
         "zustand": "^4.5.2"
     },
