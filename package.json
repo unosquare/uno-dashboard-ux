@@ -13,7 +13,7 @@
         "@tremor/react": "^3.17.2",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "react-hook-form": "7.51.5",
+        "react-hook-form": "7.52.0",
         "react-tooltip": "5.21.6",
         "recharts": "2.12.7",
         "tailwind-merge": "^2.3.0",
@@ -23,8 +23,8 @@
         "zustand": "^4.5.2"
     },
     "devDependencies": {
-        "@rsbuild/core": "^0.7.7",
-        "@rsbuild/plugin-react": "^0.7.7",
+        "@rsbuild/core": "^0.7.8",
+        "@rsbuild/plugin-react": "^0.7.8",
         "@testing-library/jest-dom": "^6.4.6",
         "@testing-library/react": "^16.0.0",
         "@types/jest": "^29.5.12",
@@ -47,7 +47,7 @@
         "postcss-loader": "^8.1.1",
         "prettier": "^3.3.2",
         "tailwindcss": "^3.4.4",
-        "ts-jest": "^29.1.4",
+        "ts-jest": "^29.1.5",
         "typescript": "^5.4.5"
     },
     "scripts": {
