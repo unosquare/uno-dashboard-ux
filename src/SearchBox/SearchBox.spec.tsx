@@ -32,7 +32,7 @@ describe('SearchBox', () => {
         const input = getByPlaceholderText('Search');
         expect(input).toBeDisabled();
     });
-    
+
     it('show the initial value', () => {
         const { getByPlaceholderText } = render(<SearchBox search={() => {}} initialValue='test' />);
         const input = getByPlaceholderText('Search');
