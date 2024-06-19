@@ -11,6 +11,7 @@ const columns: TableColumn[] = [
     { label: 'Units', dataType: 'number', textAlign: 'center' },
     { label: 'Income', dataType: 'money', formatterOptions: { currency: 'EUR' } },
     { label: 'Gross Margin', dataType: 'financial' },
+    { label: 'Tenure', dataType: 'tenure' },
     { label: 'Expenses', dataType: 'money', formatterOptions: { showCurrency: true } },
     { label: 'Like Ice cream', dataType: 'boolean' },
     { label: 'Profile', dataType: 'link' },

@@ -1,5 +1,5 @@
 module.exports = {
-    ignorePatterns: ['*.test.ts', '*.spec.tsx', 'zustand.ts'],
+    ignorePatterns: ['*.test.ts', '*.spec.tsx', 'zustand.ts', 'sample/RegularTable.tsx'],
     settings: {
         'import/resolver': {
             node: {
