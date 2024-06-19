@@ -1,4 +1,4 @@
-import { Money } from "uno-js";
+import { Money } from 'uno-js';
 
 export type ChartData = {
     name: string;
@@ -22,7 +22,10 @@ export type DataTypes =
     | 'boolean'
     | 'link'
     | 'bullet'
-    | 'paragraph';
+    | 'paragraph'
+    | 'list'
+    | 'financial'
+    | 'tenure';
 
 export type SortDirection = 'asc' | 'desc';
 
@@ -50,7 +53,17 @@ export type ChartComponent<TDataIn, TDataOut> = DataComponent<TDataIn, TDataOut>
         legendFormatType?: LegendFormatType;
     };
 
-export type TableCellTypes = string | number | Array<string> | Date | boolean | null | Money | undefined;
+export type TableCellTypes =
+    | string
+    | number
+    | Array<string>
+    | Date
+    | boolean
+    | null
+    | Money
+    | FinancialMetric
+    | Tenure
+    | undefined;
 
 export type TableCoordinate = {
     rowIndex: number;
@@ -80,6 +93,7 @@ export type TableColumn = HasLabel & {
         currency?: string;
         showCurrency?: boolean;
         locale?: string;
+        selector?: string;
     };
 };
 
@@ -109,3 +123,21 @@ export interface ReadOnlyFormSettings<T> {
     initialData: ReadOnlyFormField<T>[];
     columns?: number;
 }
+
+export type FinancialMetric = {
+    Revenue: Money;
+    Cost: Money;
+    GrossProfit: Money;
+    GrossMargin: number;
+};
+
+export type Tenure = {
+    TotalDays: number;
+    TotalMonths: number;
+    TotalYears: number;
+    Days: number;
+    Months: number;
+    Years: number;
+    StartDate: Date;
+    EndDate?: Date | null;
+};
