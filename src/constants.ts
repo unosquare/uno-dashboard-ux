@@ -93,6 +93,7 @@ export type TableColumn = HasLabel & {
         currency?: string;
         showCurrency?: boolean;
         locale?: string;
+        selector?: string;
     };
 };
 
@@ -137,6 +138,6 @@ export type Tenure = {
     Days: number;
     Months: number;
     Years: number;
-    StartDate: string;
-    EndDate: string;
+    StartDate: Date;
+    EndDate?: Date | null;
 };

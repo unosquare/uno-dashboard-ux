@@ -12,6 +12,7 @@ export const TooltipContainer = tw.div`
     z-[1]
     [&>div]:p-[8px]
     [&>div]:border
+    [&>div]:rounded
     [&>div]:bg-tremor-background 
     [&>div]:dark:bg-dark-tremor-background
     [&>div]:opacity-95

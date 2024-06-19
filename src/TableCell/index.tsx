@@ -66,11 +66,13 @@ const ListCount = ({ data }: { data: string[] }) => {
         <>
             {data.length > 1 && (
                 <BasicTooltip id={`list-${id}`}>
-                    <ul className='gap-2'>
+                    <List className='gap-4'>
                         {data.map((x) => (
-                            <li key={uuidv4()}>{x}</li>
+                            <ListItem className='text-xs/[13px]' key={uuidv4()}>
+                                {x}
+                            </ListItem>
                         ))}
-                    </ul>
+                    </List>
                 </BasicTooltip>
             )}
             <span data-tooltip-id={`list-${id}`} className='cursor-pointer'>
@@ -85,14 +87,14 @@ const FinancialMetricCell = ({ data }: { data: FinancialMetric }) => {
     return (
         <>
             <BasicTooltip id={`financial-${id}`}>
-                <List>
-                    <ListItem className='text-xs/[13px]'>
+                <List className='gap-4'>
+                    <ListItem className='text-xs/[13px] gap-2'>
                         <span>Revenue:</span> <span>{toMoney(data.Revenue)}</span>
                     </ListItem>
-                    <ListItem className='text-xs/[13px]'>
+                    <ListItem className='text-xs/[13px] gap-2'>
                         <span>Cost:</span> <span>{toMoney(data.Cost)}</span>
                     </ListItem>
-                    <ListItem className='text-xs/[13px] font-medium'>
+                    <ListItem className='text-xs/[13px]  gap-2 font-medium'>
                         <span>Gross Profit:</span> <span>{toMoney(data.GrossProfit)}</span>
                     </ListItem>
                 </List>
@@ -104,40 +106,24 @@ const FinancialMetricCell = ({ data }: { data: FinancialMetric }) => {
     );
 };
 
-const TenureCell = ({ data }: { data: Tenure }) => {
+const TenureCell = ({ data, label }: { data: Tenure; label?: string }) => {
     const id = uuidv4();
     return (
         <>
             <BasicTooltip id={`tenure-${id}`}>
-                <List>
-                    <ListItem className='text-xs/[13px]'>
-                        <span>Total Days:</span>{' '}
-                        <span>{formatter(String(Math.floor(Number(data.TotalDays) * 100) / 100), 'days')}</span>
+                <List className='gap-4'>
+                    <ListItem className='text-xs/[13px] gap-2'>
+                        <span>Start Date:</span> <span>{formatter(data.StartDate, 'date')}</span>
                     </ListItem>
-                    <ListItem className='text-xs/[13px]'>
-                        <span>Total Months:</span>{' '}
-                        <span>{formatter(String(Math.floor(Number(data.TotalMonths) * 100) / 100), 'months')}</span>
-                    </ListItem>
-                    <ListItem className='text-xs/[13px]'>
-                        <span>Total Years:</span> <span>{Math.floor(Number(data.TotalYears) * 100) / 100}</span>
-                    </ListItem>
-                    <ListItem className='text-xs/[13px]'>
-                        <span>Days:</span>{' '}
-                        <span>{formatter(String(Math.floor(Number(data.Days) * 100) / 100), 'days')}</span>
-                    </ListItem>
-                    <ListItem className='text-xs/[13px]'>
-                        <span>Years:</span> <span>{data.Years}</span>
-                    </ListItem>
-                    <ListItem className='text-xs/[13px]'>
-                        <span>StartDate:</span> <span>{formatter(String(data.StartDate), 'date')}</span>
-                    </ListItem>
-                    <ListItem className='text-xs/[13px]'>
-                        <span>EndDate:</span> <span>{formatter(String(data.EndDate), 'date')}</span>
-                    </ListItem>
+                    {data.EndDate && (
+                        <ListItem className='text-xs/[13px] gap-2'>
+                            <span>End Date:</span> <span>{formatter(data.EndDate, 'date')}</span>
+                        </ListItem>
+                    )}
                 </List>
             </BasicTooltip>
             <span data-tooltip-id={`tenure-${id}`} className='cursor-pointer'>
-                {formatter(String(data.Months), 'months')}
+                {label ? String(data[label as keyof Tenure]) : formatter(data.Months, 'months')}
             </span>
         </>
     );
@@ -178,7 +164,7 @@ export const TableCellContent = ({ data, column }: { data: TableCellTypes; colum
         case 'financial':
             return <FinancialMetricCell data={data as FinancialMetric} />;
         case 'tenure':
-            return <TenureCell data={data as Tenure} />;
+            return <TenureCell data={data as Tenure} label={formatterOptions?.selector} />;
         default:
             return formatter(String(data), translateType(column?.dataType), column?.formatterOptions);
     }

@@ -10,7 +10,7 @@ const columns: TableColumn[] = [
     { label: 'Age', dataType: 'days', sortOrder: 2, sortDirection: 'desc' },
     { label: 'Units', dataType: 'number', textAlign: 'center' },
     { label: 'Income', dataType: 'money', formatterOptions: { currency: 'EUR' } },
-    { label: 'Gross Margin', dataType: 'financial' },
+    { label: 'Gross Margin', dataType: 'financial', formatterOptions: { selector: 'Years' } },
     { label: 'Tenure', dataType: 'tenure' },
     { label: 'Expenses', dataType: 'money', formatterOptions: { showCurrency: true } },
     { label: 'Like Ice cream', dataType: 'boolean' },
