@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { formatter, toMoney, toPercentage } from 'uno-js';
 import { useToggle } from '../hooks';
 import tw from 'tailwind-styled-components';
-import { FinancialMetric, TableCellTypes, TableColumn } from '../constants';
+import { FinancialMetric, TableCellTypes, TableColumn, Tenure } from '../constants';
 import { twMerge } from 'tailwind-merge';
 import { getAlignment, translateType } from '../utils';
 import { BasicTooltip } from '../Tooltip';
@@ -104,6 +104,45 @@ const FinancialMetricCell = ({ data }: { data: FinancialMetric }) => {
     );
 };
 
+const TenureCell = ({ data }: { data: Tenure }) => {
+    const id = uuidv4();
+    return (
+        <>
+            <BasicTooltip id={`tenure-${id}`}>
+                <List>
+                    <ListItem className='text-xs/[13px]'>
+                        <span>Total Days:</span>{' '}
+                        <span>{formatter(String(Math.floor(Number(data.TotalDays) * 100) / 100), 'days')}</span>
+                    </ListItem>
+                    <ListItem className='text-xs/[13px]'>
+                        <span>Total Months:</span>{' '}
+                        <span>{formatter(String(Math.floor(Number(data.TotalMonths) * 100) / 100), 'months')}</span>
+                    </ListItem>
+                    <ListItem className='text-xs/[13px]'>
+                        <span>Total Years:</span> <span>{Math.floor(Number(data.TotalYears) * 100) / 100}</span>
+                    </ListItem>
+                    <ListItem className='text-xs/[13px]'>
+                        <span>Days:</span>{' '}
+                        <span>{formatter(String(Math.floor(Number(data.Days) * 100) / 100), 'days')}</span>
+                    </ListItem>
+                    <ListItem className='text-xs/[13px]'>
+                        <span>Years:</span> <span>{data.Years}</span>
+                    </ListItem>
+                    <ListItem className='text-xs/[13px]'>
+                        <span>StartDate:</span> <span>{formatter(String(data.StartDate), 'date')}</span>
+                    </ListItem>
+                    <ListItem className='text-xs/[13px]'>
+                        <span>EndDate:</span> <span>{formatter(String(data.EndDate), 'date')}</span>
+                    </ListItem>
+                </List>
+            </BasicTooltip>
+            <span data-tooltip-id={`tenure-${id}`} className='cursor-pointer'>
+                {formatter(String(data.Months), 'months')}
+            </span>
+        </>
+    );
+};
+
 export const TableCellContent = ({ data, column }: { data: TableCellTypes; column: TableColumn | undefined }) => {
     const { dataType, formatterOptions } = column ?? defaultColumn;
     if (dataType !== 'money' && (data == null || data === ' ')) return formatterOptions?.nullValue ?? 'N/A';
@@ -138,6 +177,8 @@ export const TableCellContent = ({ data, column }: { data: TableCellTypes; colum
             return <ListCount data={data as string[]} />;
         case 'financial':
             return <FinancialMetricCell data={data as FinancialMetric} />;
+        case 'tenure':
+            return <TenureCell data={data as Tenure} />;
         default:
             return formatter(String(data), translateType(column?.dataType), column?.formatterOptions);
     }

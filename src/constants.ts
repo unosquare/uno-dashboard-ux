@@ -24,7 +24,8 @@ export type DataTypes =
     | 'bullet'
     | 'paragraph'
     | 'list'
-    | 'financial';
+    | 'financial'
+    | 'tenure';
 
 export type SortDirection = 'asc' | 'desc';
 
@@ -61,6 +62,7 @@ export type TableCellTypes =
     | null
     | Money
     | FinancialMetric
+    | Tenure
     | undefined;
 
 export type TableCoordinate = {
@@ -126,4 +128,15 @@ export type FinancialMetric = {
     Cost: Money;
     GrossProfit: Money;
     GrossMargin: number;
+};
+
+export type Tenure = {
+    TotalDays: number;
+    TotalMonths: number;
+    TotalYears: number;
+    Days: number;
+    Months: number;
+    Years: number;
+    StartDate: string;
+    EndDate: string;
 };

@@ -65,7 +65,7 @@ const chartBarData = [
 const Application = () => {
     const setAlert = useAlertStore((st) => st.setAlert);
     const [currentOption, setCurrentOption] = React.useState<string>(options.A);
-    const [virtualSelectOption, setVirtualSelectOption] = React.useState<string>(0);
+    const [virtualSelectOption, setVirtualSelectOption] = React.useState<string>('0');
     const [openMenu, setOpenMenu] = useToggle();
     const [loading, isLoading] = React.useState(true);
     const [toggle, setToggle] = useToggle(true);
