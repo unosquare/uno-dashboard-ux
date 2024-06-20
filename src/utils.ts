@@ -1,5 +1,5 @@
-import { formatter, FormatTypes } from 'uno-js';
-import { DataTypes, LegendFormatType, TableColumn } from './constants';
+import { formatter, FormatTypes, isMoneyObject } from 'uno-js';
+import { DataTypes, FinancialMetric, LegendFormatType, TableColumn, Tenure } from './constants';
 
 const leftAlign: Array<DataTypes | undefined> = ['string', 'link', 'bullet', undefined];
 const rightAlign: Array<DataTypes | undefined> = ['decimal', 'number', 'money'];
@@ -63,4 +63,24 @@ export const getValueFormatted = (value: number, legendFormatType?: LegendFormat
         return formatter(value, translateFormat(legendFormatType)) ?? String(value);
 
     return `${legendFormatType === 'negative' ? value : Math.abs(value)}`;
+};
+
+export const isTenureObject = (value: unknown): value is Tenure => {
+    if (typeof value !== 'object' || value === null) return false;
+
+    return 'Months' in value;
+};
+
+export const isFinancialMetric = (value: unknown): value is FinancialMetric => {
+    if (typeof value !== 'object' || value === null) return false;
+
+    return 'GrossMargin' in value;
+};
+
+export const moneyToNumber = (value: unknown) => {
+    if (typeof value === 'number') return value;
+
+    if (isMoneyObject(value)) return value.Amount;
+
+    return 0;
 };

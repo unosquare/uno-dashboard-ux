@@ -1,5 +1,13 @@
 import { TableColumn } from './constants';
-import { formatTicks, getAlignment, getValueFormatted, translateFormat } from './utils';
+import {
+    formatTicks,
+    getAlignment,
+    getValueFormatted,
+    translateFormat,
+    isFinancialMetric,
+    isTenureObject,
+    moneyToNumber,
+} from './utils';
 
 describe('getAlignment', () => {
     it('returns text-left for paragraph data type', () => {
@@ -66,5 +74,39 @@ describe('getValueFormatted', () => {
 
     it('should format values as negative', () => {
         expect(getValueFormatted(1000, 'negative')).toBe('1000');
+    });
+});
+
+describe('isFinancialMetric', () => {
+    it('should return true for financial metrics', () => {
+        expect(isFinancialMetric({ GrossMargin: 0.5 })).toBe(true);
+    });
+
+    it('should return false for non-financial metrics', () => {
+        expect(isFinancialMetric({})).toBe(false);
+    });
+});
+
+describe('isTenureObject', () => {
+    it('should return true for tenure objects', () => {
+        expect(isTenureObject({ Months: 12 })).toBe(true);
+    });
+
+    it('should return false for non-tenure objects', () => {
+        expect(isTenureObject({})).toBe(false);
+    });
+});
+
+describe('moneyToNumber', () => {
+    it('should return the amount for money objects', () => {
+        expect(moneyToNumber({ Amount: 10, Currency: 'USD' })).toBe(10);
+    });
+
+    it('should return 0 for non-money objects', () => {
+        expect(moneyToNumber({})).toBe(0);
+    });
+
+    it('should return numeric value', () => {
+        expect(moneyToNumber(100)).toBe(100);
     });
 });

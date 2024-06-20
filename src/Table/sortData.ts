@@ -1,5 +1,6 @@
 import { compareDates, defaultStringFilter, sortNumericString, trimText } from 'uno-js';
 import { DataTypes, TableCellTypes, TableColumn } from '../constants';
+import { isFinancialMetric, isTenureObject, moneyToNumber } from '../utils';
 
 export const searchData = (search: string | undefined, newData: TableCellTypes[][], definitions: TableColumn[]) => {
     if (!search) return newData;
@@ -26,24 +27,34 @@ const numericTypes: DataTypes[] = ['number', 'decimal', 'percentage', 'money', '
 const getArrayValueOrDefault = (value: TableCellTypes) =>
     value instanceof Array && value.length > 1 ? value[1] : String(value);
 
+const getMonthsOrDefault = (value: TableCellTypes) => (isTenureObject(value) ? value.Months : 0);
+const getGrossMaginOrDefault = (value: TableCellTypes) => (isFinancialMetric(value) ? value.GrossMargin : 0);
+
+const sortComplexTypes = (a: TableCellTypes, b: TableCellTypes, dataType: DataTypes | undefined) => {
+    switch (dataType) {
+        case 'tenure':
+            return getMonthsOrDefault(a) - getMonthsOrDefault(b);
+        case 'financial':
+            return getGrossMaginOrDefault(a) - getGrossMaginOrDefault(b);
+        case 'list':
+            return (a as string[]).length - (b as string[]).length;
+        case 'link':
+            return sortNumericString(getArrayValueOrDefault(a), getArrayValueOrDefault(b));
+        case 'date':
+            return compareDates(String(a), String(b));
+        case 'money':
+            return moneyToNumber(a) - moneyToNumber(b);
+        default:
+            return 0;
+    }
+};
+
 const sortColumnValue = (a: TableCellTypes, b: TableCellTypes, dataType: DataTypes | undefined) => {
-    if (dataType === 'link') {
-        const leftLink = getArrayValueOrDefault(a);
-        const rightLink = getArrayValueOrDefault(b);
-
-        const result = sortNumericString(leftLink, rightLink);
-        if (result !== 0) return result;
-    }
-
-    if (dataType === 'date') {
-        const result = compareDates(String(a), String(b));
-
-        if (result !== 0) return result;
-    }
+    const complexResult = sortComplexTypes(a, b, dataType);
+    if (complexResult !== 0) return complexResult;
 
     if (numericTypes.includes(dataType ?? 'string')) {
         const result = Number(a) - Number(b);
-
         if (result !== 0) return result;
     }
 
