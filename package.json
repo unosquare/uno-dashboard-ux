@@ -18,7 +18,7 @@
         "recharts": "2.12.7",
         "tailwind-merge": "^2.4.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.112.0",
+        "uno-js": "^3.113.0",
         "uuid": "^10.0.0",
         "zustand": "^4.5.4"
     },
