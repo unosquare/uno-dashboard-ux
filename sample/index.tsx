@@ -6,7 +6,7 @@ import {
     WeatherMoon24Regular,
     WeatherSunny24Regular,
 } from '@fluentui/react-icons';
-import { Button, Card, Col, Flex, Grid, Select, SelectItem, Text } from '@tremor/react';
+import { Button, Card, Col, Dialog, DialogPanel, Flex, Grid, Select, SelectItem, Text } from '@tremor/react';
 import {
     Alert,
     AwaitableMetric,
@@ -35,6 +35,8 @@ import {
     useAlertStore,
     useToggle,
     InfoDialogTitle,
+    ModalHeader,
+    DialogHeader,
 } from '../src';
 import '../src/resources/global.css';
 import { getLargeSelectOptions } from './data';
@@ -68,6 +70,7 @@ const Application = () => {
     const [virtualSelectOption, setVirtualSelectOption] = React.useState<string>('0');
     const [openMenu, setOpenMenu] = useToggle();
     const [loading, isLoading] = React.useState(true);
+    const [modalOpen, setModalOpen] = useToggle(false);
     const [toggle, setToggle] = useToggle(true);
     const [theme, setTheme] = useTheme();
     const [counter, setCounter] = useState(0);
@@ -156,6 +159,15 @@ const Application = () => {
                 <Button size='xs' onClick={() => setAlert(false, 'Error', false)}>
                     Error
                 </Button>
+                <Button size='xs' onClick={setModalOpen}>
+                    Modal
+                </Button>
+                <Dialog open={modalOpen} onClose={setModalOpen}>
+                    <DialogPanel className='max-w-3xl h-[600px]'>
+                        <DialogHeader closeModal={setModalOpen}>Notice me</DialogHeader>
+                        Hello
+                    </DialogPanel>
+                </Dialog>
                 <InfoDialog>
                     <InfoDialogTitle>
                         What is this Report about

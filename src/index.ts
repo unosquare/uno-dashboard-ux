@@ -18,6 +18,7 @@ export * from './Footer';
 export * from './Form';
 export * from './InfoDialog';
 export * from './Menu';
+export * from './DialogHeader';
 export * from './NavBar';
 export * from './NoData';
 export * from './PageToolbar';
