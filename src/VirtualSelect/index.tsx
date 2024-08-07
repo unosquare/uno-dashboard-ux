@@ -59,7 +59,7 @@ export const comboBoxStyles = <T,>(value: T, disabled: boolean, icon: boolean, s
     );
 
 export const comboBoxOptionsStyles = tremorTwMerge(
-    'absolute overflow-y-auto overflow-x-hidden block z-51 divide-y max-h-[228px] w-full left-0 outline-none rounded-tremor-default text-tremor-default',
+    'absolute overflow-y-auto overflow-x-hidden block z-100 divide-y max-h-[228px] w-full left-0 outline-none rounded-tremor-default text-tremor-default',
     'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
     'dark:bg-dark-tremor-background dark:border-dark-tremor-border dark:divide-dark-tremor-border dark:shadow-dark-tremor-dropdown',
     'mt-1 mb-1 border',
