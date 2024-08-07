@@ -122,6 +122,7 @@ module.exports = {
         extend: {},
     },
     safelist: [
+        { pattern: /z-(\d)/ },
         { pattern: /grid-rows-(\d)/ },
         { pattern: /grid-cols-(\d)/ },
         {
