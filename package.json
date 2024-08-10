@@ -8,7 +8,7 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.252",
+        "@fluentui/react-icons": "^2.0.253",
         "@headlessui/react": "0.0.0-insiders.ce17c6d",
         "@tremor/react": "^3.17.4",
         "react": "^18.3.1",
@@ -18,13 +18,13 @@
         "recharts": "2.12.7",
         "tailwind-merge": "^2.4.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.117.0",
+        "uno-js": "^3.118.0",
         "uuid": "^10.0.0",
         "zustand": "^4.5.4"
     },
     "devDependencies": {
-        "@rsbuild/core": "0.7.10",
-        "@rsbuild/plugin-react": "0.7.10",
+        "@rsbuild/core": "1.0.0",
+        "@rsbuild/plugin-react": "1.0.0",
         "@testing-library/jest-dom": "^6.4.8",
         "@testing-library/react": "^16.0.0",
         "@types/jest": "^29.5.12",
@@ -32,7 +32,7 @@
         "@types/uuid": "^10.0.0",
         "@types/react-dom": "^18.3.0",
         "@types/recharts": "1.8.29",
-        "@types/node": "^22.1.0",
+        "@types/node": "^22.2.0",
         "@typescript-eslint/eslint-plugin": "7.18.0",
         "autoprefixer": "^10.4.20",
         "eslint": "^8.57.0",
@@ -46,7 +46,7 @@
         "lint-staged": "^15.2.8",
         "postcss-loader": "^8.1.1",
         "prettier": "^3.3.3",
-        "tailwindcss": "^3.4.8",
+        "tailwindcss": "^3.4.9",
         "ts-jest": "^29.2.4",
         "typescript": "^5.5.4"
     },
