@@ -24,8 +24,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-hook-form:
-        specifier: 7.52.2
-        version: 7.52.2(react@18.3.1)
+        specifier: 7.53.0
+        version: 7.53.0(react@18.3.1)
       react-tooltip:
         specifier: 5.28.0
         version: 5.28.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -113,7 +113,7 @@ importers:
         version: 15.2.9
       postcss-loader:
         specifier: ^8.1.1
-        version: 8.1.1(@rspack/core@0.7.5(@swc/helpers@0.5.3))(postcss@8.4.38)(typescript@5.5.4)(webpack@5.93.0)
+        version: 8.1.1(@rspack/core@0.7.5)(postcss@8.4.38)(typescript@5.5.4)(webpack@5.93.0)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -2990,8 +2990,8 @@ packages:
     peerDependencies:
       react: ^18.3.1
 
-  react-hook-form@7.52.2:
-    resolution: {integrity: sha512-pqfPEbERnxxiNMPd0bzmt1tuaPcVccywFDpyk2uV5xCIBphHV5T8SVnX9/o3kplPE1zzKt77+YIoq+EMwJp56A==}
+  react-hook-form@7.53.0:
+    resolution: {integrity: sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
@@ -4483,15 +4483,13 @@ snapshots:
       zod: 3.23.8
       zod-validation-error: 1.2.0(zod@3.23.8)
 
-  '@rspack/core@0.7.5(@swc/helpers@0.5.3)':
+  '@rspack/core@0.7.5':
     dependencies:
       '@module-federation/runtime-tools': 0.1.6
       '@rspack/binding': 0.7.5
       caniuse-lite: 1.0.30001646
       tapable: 2.2.1
       webpack-sources: 3.2.3
-    optionalDependencies:
-      '@swc/helpers': 0.5.3
     optional: true
 
   '@rspack/plugin-react-refresh@0.4.0(react-refresh@0.14.2)(type-fest@0.21.3)(webpack@5.93.0)':
@@ -7017,14 +7015,14 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.38
 
-  postcss-loader@8.1.1(@rspack/core@0.7.5(@swc/helpers@0.5.3))(postcss@8.4.38)(typescript@5.5.4)(webpack@5.93.0):
+  postcss-loader@8.1.1(@rspack/core@0.7.5)(postcss@8.4.38)(typescript@5.5.4)(webpack@5.93.0):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.5.4)
       jiti: 1.21.0
       postcss: 8.4.38
       semver: 7.5.4
     optionalDependencies:
-      '@rspack/core': 0.7.5(@swc/helpers@0.5.3)
+      '@rspack/core': 0.7.5
       webpack: 5.93.0
     transitivePeerDependencies:
       - typescript
@@ -7109,7 +7107,7 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
-  react-hook-form@7.52.2(react@18.3.1):
+  react-hook-form@7.53.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
