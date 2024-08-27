@@ -8,12 +8,12 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.255",
+        "@fluentui/react-icons": "^2.0.256",
         "@headlessui/react": "0.0.0-insiders.ce17c6d",
         "@tremor/react": "^3.17.4",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "react-hook-form": "7.52.2",
+        "react-hook-form": "7.53.0",
         "react-tooltip": "5.28.0",
         "recharts": "2.12.7",
         "tailwind-merge": "^2.5.2",
@@ -23,8 +23,8 @@
         "zustand": "^4.5.5"
     },
     "devDependencies": {
-        "@rsbuild/core": "1.0.0",
-        "@rsbuild/plugin-react": "1.0.0",
+        "@rsbuild/core": "0.7.10",
+        "@rsbuild/plugin-react": "0.7.10",
         "@testing-library/jest-dom": "^6.5.0",
         "@testing-library/react": "^16.0.0",
         "@types/jest": "^29.5.12",
