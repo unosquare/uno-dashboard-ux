@@ -16,7 +16,7 @@ importers:
         version: 0.0.0-insiders.ce17c6d(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tremor/react':
         specifier: ^3.18.0
-        version: 3.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.10)
+        version: 3.18.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.10)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -113,7 +113,7 @@ importers:
         version: 15.2.10
       postcss-loader:
         specifier: ^8.1.1
-        version: 8.1.1(@rspack/core@0.7.5(@swc/helpers@0.5.3))(postcss@8.4.38)(typescript@5.5.4)(webpack@5.93.0)
+        version: 8.1.1(@rspack/core@0.7.5)(postcss@8.4.38)(typescript@5.5.4)(webpack@5.93.0)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -814,8 +814,8 @@ packages:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
 
-  '@tremor/react@3.18.0':
-    resolution: {integrity: sha512-fyzFbV9DPRbAdba2EXeELVK3oJhJB+/Q+Fv5iNEZ5A5K8WHYIMFCnOs+rrAl0ZnHBxdfKI+OCPZFtJilPrRMnw==}
+  '@tremor/react@3.18.1':
+    resolution: {integrity: sha512-Tyt6pDsPUyVr6cIDZIVgO2gIdLMG7R8oqhA/i/yBnAAAsljfIAIV6azP/jIVIqbvar6mczm5wwbSX8eOfc0yVQ==}
     peerDependencies:
       react: ^18.0.0
       react-dom: '>=16.6.0'
@@ -4479,15 +4479,13 @@ snapshots:
       zod: 3.23.8
       zod-validation-error: 1.2.0(zod@3.23.8)
 
-  '@rspack/core@0.7.5(@swc/helpers@0.5.3)':
+  '@rspack/core@0.7.5':
     dependencies:
       '@module-federation/runtime-tools': 0.1.6
       '@rspack/binding': 0.7.5
       caniuse-lite: 1.0.30001646
       tapable: 2.2.1
       webpack-sources: 3.2.3
-    optionalDependencies:
-      '@swc/helpers': 0.5.3
     optional: true
 
   '@rspack/plugin-react-refresh@0.4.0(react-refresh@0.14.2)(type-fest@0.21.3)(webpack@5.93.0)':
@@ -4569,7 +4567,7 @@ snapshots:
 
   '@tootallnate/once@2.0.0': {}
 
-  '@tremor/react@3.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.10)':
+  '@tremor/react@3.18.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.10)':
     dependencies:
       '@floating-ui/react': 0.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@headlessui/react': 1.7.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -7016,14 +7014,14 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.38
 
-  postcss-loader@8.1.1(@rspack/core@0.7.5(@swc/helpers@0.5.3))(postcss@8.4.38)(typescript@5.5.4)(webpack@5.93.0):
+  postcss-loader@8.1.1(@rspack/core@0.7.5)(postcss@8.4.38)(typescript@5.5.4)(webpack@5.93.0):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.5.4)
       jiti: 1.21.0
       postcss: 8.4.38
       semver: 7.5.4
     optionalDependencies:
-      '@rspack/core': 0.7.5(@swc/helpers@0.5.3)
+      '@rspack/core': 0.7.5
       webpack: 5.93.0
     transitivePeerDependencies:
       - typescript
