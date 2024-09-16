@@ -16,7 +16,7 @@ importers:
         version: 0.0.0-insiders.ce17c6d(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tremor/react':
         specifier: ^3.18.1
-        version: 3.18.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.11)
+        version: 3.18.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.11)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -739,8 +739,8 @@ packages:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
 
-  '@tremor/react@3.18.1':
-    resolution: {integrity: sha512-Tyt6pDsPUyVr6cIDZIVgO2gIdLMG7R8oqhA/i/yBnAAAsljfIAIV6azP/jIVIqbvar6mczm5wwbSX8eOfc0yVQ==}
+  '@tremor/react@3.18.2':
+    resolution: {integrity: sha512-TKwqPLpfNL3ipro99XO4H0H3jqL89LjCtjS+x6FYiSZ3Di/tVRioiq7rqBilaPBDLRSsEoGTTJkGAhMKAvsY+Q==}
     peerDependencies:
       react: ^18.0.0
       react-dom: '>=16.6.0'
@@ -4314,7 +4314,7 @@ snapshots:
 
   '@tootallnate/once@2.0.0': {}
 
-  '@tremor/react@3.18.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.11)':
+  '@tremor/react@3.18.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.11)':
     dependencies:
       '@floating-ui/react': 0.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@headlessui/react': 1.7.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
