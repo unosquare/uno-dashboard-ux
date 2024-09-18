@@ -10,7 +10,7 @@
     "dependencies": {
         "@fluentui/react-icons": "^2.0.258",
         "@headlessui/react": "0.0.0-insiders.ce17c6d",
-        "@tremor/react": "^3.18.1",
+        "@tremor/react": "^3.18.2",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-hook-form": "7.53.0",
@@ -28,7 +28,7 @@
         "@testing-library/jest-dom": "^6.5.0",
         "@testing-library/react": "^16.0.1",
         "@types/jest": "^29.5.13",
-        "@types/react": "^18.3.5",
+        "@types/react": "^18.3.7",
         "@types/uuid": "^10.0.0",
         "@types/react-dom": "^18.3.0",
         "@types/recharts": "1.8.29",
@@ -46,7 +46,7 @@
         "lint-staged": "^15.2.10",
         "postcss-loader": "^8.1.1",
         "prettier": "^3.3.3",
-        "tailwindcss": "^3.4.11",
+        "tailwindcss": "^3.4.12",
         "ts-jest": "^29.2.5",
         "typescript": "^5.6.2"
     },
