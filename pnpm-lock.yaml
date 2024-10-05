@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@fluentui/react-icons':
-        specifier: ^2.0.259
-        version: 2.0.259(react@18.3.1)
+        specifier: ^2.0.260
+        version: 2.0.260(react@18.3.1)
       '@headlessui/react':
         specifier: 0.0.0-insiders.ce17c6d
         version: 0.0.0-insiders.ce17c6d(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -33,14 +33,14 @@ importers:
         specifier: 2.12.7
         version: 2.12.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
-        specifier: ^2.5.2
-        version: 2.5.2
+        specifier: ^2.5.3
+        version: 2.5.3
       tailwind-styled-components:
         specifier: ^2.2.0
         version: 2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       uno-js:
-        specifier: ^3.126.0
-        version: 3.126.0
+        specifier: ^3.127.0
+        version: 3.127.0
       uuid:
         specifier: ^10.0.0
         version: 10.0.0
@@ -49,11 +49,11 @@ importers:
         version: 4.5.5(@types/react@18.3.11)(react@18.3.1)
     devDependencies:
       '@rsbuild/core':
-        specifier: 1.0.9
-        version: 1.0.9
+        specifier: 1.0.10
+        version: 1.0.10
       '@rsbuild/plugin-react':
         specifier: 1.0.3
-        version: 1.0.3(@rsbuild/core@1.0.9)
+        version: 1.0.3(@rsbuild/core@1.0.10)
       '@testing-library/jest-dom':
         specifier: ^6.5.0
         version: 6.5.0
@@ -373,8 +373,8 @@ packages:
   '@floating-ui/utils@0.2.1':
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
 
-  '@fluentui/react-icons@2.0.259':
-    resolution: {integrity: sha512-vVI0BMYi2S5uBpUxjkSRWj21MS3nbxJUE96F+9DV1laYkDWZxHS2RDni27dmbbAAgrMKKRTxlzyXa+eHUzaelw==}
+  '@fluentui/react-icons@2.0.260':
+    resolution: {integrity: sha512-5lmkXukfnkeFG3rWCCf5nX5Sn2jsqR0IDJJ7FUwWdx9C4Jd+zfbh9PdzWnFSR/kpQBFwvpkxyyau3w8tqQK77Q==}
     peerDependencies:
       react: '>=16.8.0 <19.0.0'
 
@@ -599,8 +599,8 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
 
-  '@rsbuild/core@1.0.9':
-    resolution: {integrity: sha512-gxD139pqPfsYe/U1i9UdXBaimsMJz8x9Vvg1ybSvJBDdfOqsq4aAGaxqlcHIOhgrorDei7TgmPvjP5ShrJDLEw==}
+  '@rsbuild/core@1.0.10':
+    resolution: {integrity: sha512-617N8YzDeH5vymeeOyCqK0toO9yt7s2yey49OIvW9jZqBo0IvgbkFNQf34LDLsxVzy+cpf1nGrcYWjPKhVuGfQ==}
     engines: {node: '>=16.7.0'}
     hasBin: true
 
@@ -1224,9 +1224,6 @@ packages:
 
   caniuse-lite@1.0.30001646:
     resolution: {integrity: sha512-dRg00gudiBDDTmUhClSdv3hqRfpbOnU28IpI1T6PBTLWa+kOj0681C8uML3PifYfREuBrVjDGhL3adYpBT6spw==}
-
-  caniuse-lite@1.0.30001660:
-    resolution: {integrity: sha512-GacvNTTuATm26qC74pt+ad1fW15mlQ/zuTzzY1ZoIzECTP8HURDfF43kNxPgf7H1jmelCBQTTbBNxdSXOA7Bqg==}
 
   caniuse-lite@1.0.30001664:
     resolution: {integrity: sha512-AmE7k4dXiNKQipgn7a2xg558IRqPN3jMQY/rOsbxDhrd0tyChwbITBfiwtnqz8bi2M5mIWbxAYBvk7W7QBUS2g==}
@@ -3203,8 +3200,8 @@ packages:
   tailwind-merge@1.14.0:
     resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
 
-  tailwind-merge@2.5.2:
-    resolution: {integrity: sha512-kjEBm+pvD+6eAwzJL2Bi+02/9LFLal1Gs61+QB7HvTfQQ0aXwC5LGT8PEt1gS0CWKktKe6ysPTAy3cBC5MeiIg==}
+  tailwind-merge@2.5.3:
+    resolution: {integrity: sha512-d9ZolCAIzom1nf/5p4LdD5zvjmgSxY0BGgdSvmXIoMYAiPdAW/dSpP7joCDYFY7r/HkEa2qmPtkgsu0xjQeQtw==}
 
   tailwind-styled-components@2.2.0:
     resolution: {integrity: sha512-Ogemwk0p69aU8WE/ooJZHjqstdJgT5R6HGU6TFz2uSnveSEtvW+C6aWOjGCvCr5H/bREv0IbbQ4yODknRrLBRQ==}
@@ -3364,8 +3361,8 @@ packages:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
 
-  uno-js@3.126.0:
-    resolution: {integrity: sha512-BONXoZ8G6EdM49xKLc/YaDhyUZYnwGvEHZXXW75LxVeevgfxEpcaAcL3KqsjHMlj21KzVtxb+lXQQwEDpBk/qw==}
+  uno-js@3.127.0:
+    resolution: {integrity: sha512-DtJI6OlxGRum7NNXg0v27mWIrdLEATWPX/wNn5/A+JZSSAcYrc3rJoaZNNR+1+QRwd9pwrGHJzd93XD7/Dd3mw==}
 
   update-browserslist-db@1.0.13:
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
@@ -3822,7 +3819,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.1': {}
 
-  '@fluentui/react-icons@2.0.259(react@18.3.1)':
+  '@fluentui/react-icons@2.0.260(react@18.3.1)':
     dependencies:
       '@griffel/react': 1.5.11(react@18.3.1)
       react: 18.3.1
@@ -4121,7 +4118,7 @@ snapshots:
       '@react-aria/ssr': 3.9.1(react@18.3.1)
       '@react-aria/utils': 3.23.0(react@18.3.1)
       '@react-types/shared': 3.22.0(react@18.3.1)
-      '@swc/helpers': 0.5.3
+      '@swc/helpers': 0.5.13
       react: 18.3.1
 
   '@react-aria/ssr@3.9.1(react@18.3.1)':
@@ -4131,7 +4128,7 @@ snapshots:
 
   '@react-aria/ssr@3.9.1-nightly.4295(react@18.3.1)':
     dependencies:
-      '@swc/helpers': 0.5.3
+      '@swc/helpers': 0.5.13
       react: 18.3.1
 
   '@react-aria/utils@3.0.0-nightly.2584(react@18.3.1)':
@@ -4139,7 +4136,7 @@ snapshots:
       '@react-aria/ssr': 3.9.1-nightly.4295(react@18.3.1)
       '@react-stately/utils': 3.0.0-nightly.2584(react@18.3.1)
       '@react-types/shared': 3.0.0-nightly.2584(react@18.3.1)
-      '@swc/helpers': 0.5.3
+      '@swc/helpers': 0.5.13
       clsx: 1.2.1
       react: 18.3.1
 
@@ -4148,7 +4145,7 @@ snapshots:
       '@react-aria/ssr': 3.9.1(react@18.3.1)
       '@react-stately/utils': 3.9.0(react@18.3.1)
       '@react-types/shared': 3.22.0(react@18.3.1)
-      '@swc/helpers': 0.5.3
+      '@swc/helpers': 0.5.13
       clsx: 2.0.0
       react: 18.3.1
 
@@ -4170,7 +4167,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@rsbuild/core@1.0.9':
+  '@rsbuild/core@1.0.10':
     dependencies:
       '@rspack/core': 1.0.8(@swc/helpers@0.5.13)
       '@rspack/lite-tapable': 1.0.1
@@ -4179,9 +4176,9 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  '@rsbuild/plugin-react@1.0.3(@rsbuild/core@1.0.9)':
+  '@rsbuild/plugin-react@1.0.3(@rsbuild/core@1.0.10)':
     dependencies:
-      '@rsbuild/core': 1.0.9
+      '@rsbuild/core': 1.0.10
       '@rspack/plugin-react-refresh': 1.0.0(react-refresh@0.14.2)
       react-refresh: 0.14.2
 
@@ -4320,7 +4317,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       react-transition-state: 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       recharts: 2.12.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      tailwind-merge: 2.5.2
+      tailwind-merge: 2.5.3
     transitivePeerDependencies:
       - tailwindcss
 
@@ -4904,7 +4901,7 @@ snapshots:
 
   browserslist@4.23.0:
     dependencies:
-      caniuse-lite: 1.0.30001660
+      caniuse-lite: 1.0.30001664
       electron-to-chromium: 1.4.690
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
@@ -4943,8 +4940,6 @@ snapshots:
   camelcase@6.3.0: {}
 
   caniuse-lite@1.0.30001646: {}
-
-  caniuse-lite@1.0.30001660: {}
 
   caniuse-lite@1.0.30001664: {}
 
@@ -7202,7 +7197,7 @@ snapshots:
 
   tailwind-merge@1.14.0: {}
 
-  tailwind-merge@2.5.2: {}
+  tailwind-merge@2.5.3: {}
 
   tailwind-styled-components@2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -7384,7 +7379,7 @@ snapshots:
 
   universalify@0.2.0: {}
 
-  uno-js@3.126.0: {}
+  uno-js@3.127.0: {}
 
   update-browserslist-db@1.0.13(browserslist@4.23.0):
     dependencies:
