@@ -52,8 +52,8 @@ importers:
         specifier: 1.0.13
         version: 1.0.13
       '@rsbuild/plugin-react':
-        specifier: 1.0.3
-        version: 1.0.3(@rsbuild/core@1.0.13)
+        specifier: 1.0.4
+        version: 1.0.4(@rsbuild/core@1.0.13)
       '@testing-library/jest-dom':
         specifier: ^6.5.0
         version: 6.5.0
@@ -604,8 +604,8 @@ packages:
     engines: {node: '>=16.7.0'}
     hasBin: true
 
-  '@rsbuild/plugin-react@1.0.3':
-    resolution: {integrity: sha512-HVfPiKINmDsIcLLs7YWAYQgzytVZOydBuPOFg5EoJiMHkFVjH0Rg3QViS3Hn6k3INqdc6ylpcYyOHHYItEIkWA==}
+  '@rsbuild/plugin-react@1.0.4':
+    resolution: {integrity: sha512-lZQPl2Ocw3mxdR8dGZNTx70iLILt/p1B4oAStDNnDCVK9mzeCzpG67IYP82KaAJ5KowXTPLRqEkF9fKr5lWPPA==}
     peerDependencies:
       '@rsbuild/core': 1.x || ^1.0.1-rc.0
 
@@ -1750,6 +1750,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -4185,7 +4186,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  '@rsbuild/plugin-react@1.0.3(@rsbuild/core@1.0.13)':
+  '@rsbuild/plugin-react@1.0.4(@rsbuild/core@1.0.13)':
     dependencies:
       '@rsbuild/core': 1.0.13
       '@rspack/plugin-react-refresh': 1.0.0(react-refresh@0.14.2)
