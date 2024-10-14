@@ -49,11 +49,11 @@ importers:
         version: 4.5.5(@types/react@18.3.11)(react@18.3.1)
     devDependencies:
       '@rsbuild/core':
-        specifier: 1.0.13
-        version: 1.0.13
+        specifier: 1.0.14
+        version: 1.0.14
       '@rsbuild/plugin-react':
         specifier: 1.0.3
-        version: 1.0.3(@rsbuild/core@1.0.13)
+        version: 1.0.3(@rsbuild/core@1.0.14)
       '@testing-library/jest-dom':
         specifier: ^6.5.0
         version: 6.5.0
@@ -599,8 +599,8 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
 
-  '@rsbuild/core@1.0.13':
-    resolution: {integrity: sha512-YPjd+Aal+lMqAYRt2DGEJc3dI9ZcP5j9kefobYszxs0NlgpoK+y+malXYXW4yVu3s84EqtHp+tSoJzaSK23Txw==}
+  '@rsbuild/core@1.0.14':
+    resolution: {integrity: sha512-00d0DzRUK2CncKK+dHGG8AZuiXzltVzt58BbTba2AKyLHIb2nwYW4ah33sNrDAbYzdz1kPNfsWrmQvY7z71LfA==}
     engines: {node: '>=16.7.0'}
     hasBin: true
 
@@ -692,9 +692,6 @@ packages:
 
   '@swc/helpers@0.5.13':
     resolution: {integrity: sha512-UoKGxQ3r5kYI9dALKJapMmuK+1zWM/H17Z1+iwnNmzcJRnfFuevZs375TA5rW31pu4BS4NoSy1fRsexDXfWn5w==}
-
-  '@swc/helpers@0.5.3':
-    resolution: {integrity: sha512-FaruWX6KdudYloq1AHD/4nU+UsMTdNE8CKyrseXWEcgjDAbvkwJg2QGPAnfIJLIWsjZOSPLOAykK6fuYp4vp4A==}
 
   '@tanstack/react-virtual@3.0.0-beta.60':
     resolution: {integrity: sha512-F0wL9+byp7lf/tH6U5LW0ZjBqs+hrMXJrj5xcIGcklI0pggvjzMNW9DdIBcyltPNr6hmHQ0wt8FDGe1n1ZAThA==}
@@ -1750,6 +1747,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -4110,7 +4108,7 @@ snapshots:
       '@react-aria/interactions': 3.20.1(react@18.3.1)
       '@react-aria/utils': 3.23.0(react@18.3.1)
       '@react-types/shared': 3.22.0(react@18.3.1)
-      '@swc/helpers': 0.5.3
+      '@swc/helpers': 0.5.13
       clsx: 2.0.0
       react: 18.3.1
 
@@ -4119,7 +4117,7 @@ snapshots:
       '@react-aria/ssr': 3.9.1-nightly.4295(react@18.3.1)
       '@react-aria/utils': 3.0.0-nightly.2584(react@18.3.1)
       '@react-types/shared': 3.0.0-nightly.2584(react@18.3.1)
-      '@swc/helpers': 0.5.3
+      '@swc/helpers': 0.5.13
       react: 18.3.1
 
   '@react-aria/interactions@3.20.1(react@18.3.1)':
@@ -4176,7 +4174,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@rsbuild/core@1.0.13':
+  '@rsbuild/core@1.0.14':
     dependencies:
       '@rspack/core': 1.0.10(@swc/helpers@0.5.13)
       '@rspack/lite-tapable': 1.0.1
@@ -4185,9 +4183,9 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  '@rsbuild/plugin-react@1.0.3(@rsbuild/core@1.0.13)':
+  '@rsbuild/plugin-react@1.0.3(@rsbuild/core@1.0.14)':
     dependencies:
-      '@rsbuild/core': 1.0.13
+      '@rsbuild/core': 1.0.14
       '@rspack/plugin-react-refresh': 1.0.0(react-refresh@0.14.2)
       react-refresh: 0.14.2
 
@@ -4261,10 +4259,6 @@ snapshots:
       '@sinonjs/commons': 3.0.0
 
   '@swc/helpers@0.5.13':
-    dependencies:
-      tslib: 2.6.2
-
-  '@swc/helpers@0.5.3':
     dependencies:
       tslib: 2.6.2
 
