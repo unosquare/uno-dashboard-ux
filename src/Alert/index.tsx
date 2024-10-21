@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
+import { createPortal } from 'react-dom';
+import { useShallow } from 'zustand/react/shallow';
 import { Checkmark28Regular, Dismiss28Regular } from '@fluentui/react-icons';
 import useAlertStore from '../useAlertStore';
-import { createPortal } from 'react-dom';
 
 const AUTO_ANIMATE = ' animate-[slideInTop_4s_ease-out_forwards] ';
 
@@ -67,7 +68,7 @@ const animationElection = (isTimed: boolean): string =>
     isTimed ? AUTO_ANIMATE : ' animate-[fadeIn_0.5s_ease-out_forwards] hover:bg-gray-400 ';
 
 export const Alert = () => {
-    const [activeAlerts, deleteAlerts] = useAlertStore((state) => [state.activeAlerts, state.deleteAlerts]);
+    const [activeAlerts, deleteAlerts] = useAlertStore(useShallow((state) => [state.activeAlerts, state.deleteAlerts]));
 
     return createPortal(
         <div className='flex flex-col absolute top-6 right-7 gap-1'>

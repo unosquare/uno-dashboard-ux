@@ -20,10 +20,10 @@
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.127.0",
         "uuid": "^10.0.0",
-        "zustand": "^5.0.0"
+        "zustand": "4.5.5"
     },
     "devDependencies": {
-        "@rsbuild/core": "1.0.15",
+        "@rsbuild/core": "1.0.16",
         "@rsbuild/plugin-react": "1.0.5",
         "@testing-library/jest-dom": "^6.6.2",
         "@testing-library/react": "^16.0.1",
@@ -32,7 +32,7 @@
         "@types/uuid": "^10.0.0",
         "@types/react-dom": "^18.3.1",
         "@types/recharts": "1.8.29",
-        "@types/node": "^22.7.6",
+        "@types/node": "^22.7.7",
         "@typescript-eslint/eslint-plugin": "7.18.0",
         "autoprefixer": "^10.4.20",
         "eslint": "^8.57.0",

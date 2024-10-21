@@ -1,4 +1,4 @@
 {
     "upgrade": true,
-    "reject": ["@headlessui/react", "eslint", "@typescript-eslint/eslint-plugin"]
+    "reject": ["@headlessui/react", "eslint", "@typescript-eslint/eslint-plugin","zustand"]
 }
