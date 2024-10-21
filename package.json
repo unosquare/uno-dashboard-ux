@@ -23,7 +23,7 @@
         "zustand": "^5.0.0"
     },
     "devDependencies": {
-        "@rsbuild/core": "1.0.15",
+        "@rsbuild/core": "1.0.16",
         "@rsbuild/plugin-react": "1.0.5",
         "@testing-library/jest-dom": "^6.6.2",
         "@testing-library/react": "^16.0.1",
