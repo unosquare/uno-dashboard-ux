@@ -34,7 +34,7 @@ export default () => {
             .then(setOnlineData);
     }, []);
 
-    return (<Table className='h-96' columns={onlineColumns} rawData={onlineData} searchable>
+    return (<Table columns={onlineColumns} rawData={onlineData}>
         <Title className='w-full'>Online Data</Title>
     </Table>);
 };

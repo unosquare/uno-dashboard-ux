@@ -19,8 +19,9 @@ import {
 import { twMerge } from 'tailwind-merge';
 import { ClassNameComponent, DataComponent, SortDirection, TableCellTypes, TableColumn } from '../constants';
 import { NoData } from '../NoData';
-import { searchFooter, sortData, useTableSearch } from './sortData';
+import { searchData, searchFooter, sortData } from './sortData';
 import { ExportCsvButton } from '../ExportCsvButton';
+import { useDebounce } from '../hooks';
 import { ShimmerTable } from './TableShimmer';
 import { getAlignment } from '../utils';
 import { TableCell, TableCellContent } from '../TableCell';
@@ -165,15 +166,21 @@ export const Table = <TDataIn,>({
     const [rawDataState, setRawDataState] = useState<TDataIn>();
     const [definitions, setDefinitions] = useState(columns);
     const [data, setData] = useState<TableCellTypes[][]>([]);
+    const [searched, setSearched] = useState<TableCellTypes[][]>([]);
     const [footerData, setFooterData] = useState<unknown[]>();
+    const [search, setSearch] = useState('');
     const [exporting, setExporting] = useState(false);
-    const { filteredData, search, setSearch } = useTableSearch(data, definitions);
+
+    const debouncedSearch = useDebounce(() => {
+        startTransition(() => {
+            setSearched(searchData(search, data, definitions));
+            if (calculateFooter && rawDataState) setFooterData(calculateFooter(searchFooter(search, rawDataState)));
+        });
+    });
 
     const setSearchValue = (x = '') => {
-        startTransition(() => {
-            setSearch(x);
-            if (calculateFooter && rawDataState) setFooterData(calculateFooter(searchFooter(x, rawDataState)));
-        });
+        setSearch(x);
+        debouncedSearch();
     };
 
     const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => setSearchValue(target.value);
@@ -186,6 +193,7 @@ export const Table = <TDataIn,>({
 
             const raw = dataTransformFn(rawData);
             setData(raw);
+            setSearched(raw);
             setSearch('');
             if (calculateFooter) setFooterData(calculateFooter(rawData));
         });
@@ -216,13 +224,13 @@ export const Table = <TDataIn,>({
     const renderFunc = render ?? getRows;
     const renderRows = () => {
         if (rawDataState)
-            return renderFunc(sortable ? sortData(filteredData, definitions) : filteredData, definitions, rawDataState);
+            return renderFunc(sortable ? sortData(searched, definitions) : searched, definitions, rawDataState);
 
         return [];
     };
 
     const icon = useMemo(
-        () => () => <SearchOrClearButton hasValue={filteredData.length > 0} onClick={setSearchValue} />,
+        () => () => <SearchOrClearButton hasValue={search.length > 0} onClick={setSearchValue} />,
         [search],
     );
 
@@ -235,7 +243,7 @@ export const Table = <TDataIn,>({
                         <ExportCsvButton
                             onClick={onCsvClick}
                             loading={exporting}
-                            disabled={!rawData || filteredData.length === 0 ? true : undefined}
+                            disabled={!rawData || searched.length === 0 ? true : undefined}
                         />
                     )}
                     {searchable && (
@@ -260,7 +268,7 @@ export const Table = <TDataIn,>({
                 <TableBody>
                     {!rawData && <ShimmerTable colSpan={definitions.length} />}
                     {rawData &&
-                        (filteredData.length > 0 ? (
+                        (searched.length > 0 ? (
                             renderRows()
                         ) : (
                             <SpanTable colSpan={definitions.length}>
@@ -268,7 +276,7 @@ export const Table = <TDataIn,>({
                             </SpanTable>
                         ))}
                 </TableBody>
-                {filteredData.length > 0 && footerData && <TableFooter footer={footerData} columns={definitions} />}
+                {searched.length > 0 && footerData && <TableFooter footer={footerData} columns={definitions} />}
             </TremorTable>
         </>
     );

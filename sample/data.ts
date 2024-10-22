@@ -58,7 +58,7 @@ export const defaultData = [
         [],
     ],
     [
-        'Juan Perez',
+        'Juan',
         'Chicago',
         new Date('2022-01-03'),
         30,
@@ -87,7 +87,7 @@ export const defaultData = [
         ['Apple', 'Bananas', 'Oranges'],
     ],
     [
-        'Juan Perez',
+        'Juan',
         'Oaxaca',
         new Date('2022-01-04'),
         35,
@@ -198,7 +198,7 @@ export const defaultData = [
         ['Apple', 'Bananas', 'Oranges'],
     ],
     [
-        'Juan Ramirez',
+        'Juan',
         'Oaxaca',
         new Date('2022-01-08'),
         25,
