@@ -20,7 +20,7 @@
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.127.0",
         "uuid": "^11.0.1",
-        "zustand": "4.5.5"
+        "zustand": "5.0.0"
     },
     "devDependencies": {
         "@rsbuild/core": "1.0.18",
