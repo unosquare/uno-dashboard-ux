@@ -223,7 +223,7 @@ const Application = () => {
                             className='mt-5'
                             refLineY={{ value: 20, label: 'Ref Line', color: 'red' }}
                             rawData={loading ? undefined : toggle ? chartData : chartBarData}
-                            legendFormatType='percentage'
+                            legendFormatType='decimal'
                             legend
                             onClick={barClick}
                         />

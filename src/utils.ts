@@ -1,4 +1,4 @@
-import { formatter, FormatTypes, isMoneyObject } from 'uno-js';
+import { formatter, FormatTypes, isMoneyObject, toMoney } from 'uno-js';
 import { DataTypes, FinancialMetric, LegendFormatType, TableColumn, Tenure } from './constants';
 
 const leftAlign: Array<DataTypes | undefined> = ['string', 'link', 'bullet', undefined];
@@ -8,54 +8,54 @@ export const getAlignment = (tableColumn: TableColumn, index?: number) => {
     if (tableColumn.textAlign) return `text-${tableColumn.textAlign.toLowerCase()}`;
 
     const { dataType } = tableColumn;
+
     if (dataType === 'paragraph' || (leftAlign.includes(dataType) && index === 0)) return 'text-left';
 
     return rightAlign.includes(dataType) ? 'text-right' : 'text-center';
 };
 
-export const translateType = (type: DataTypes | undefined): FormatTypes | undefined => {
-    switch (type) {
-        case 'date':
-            return 'date';
-        case 'money':
-            return 'money';
-        case 'percentage':
-            return 'percentage';
-        case 'days':
-            return 'days';
-        case 'months':
-            return 'months';
-        case 'decimal':
-            return 'decimal';
-        default:
-            return undefined;
-    }
+const typeToFormatMap: Record<DataTypes, FormatTypes | undefined> = {
+    date: 'date',
+    money: 'money',
+    percentage: 'percentage',
+    days: 'days',
+    months: 'months',
+    decimal: 'decimal',
+    number: 'number',
+    string: undefined,
+    link: undefined,
+    bullet: undefined,
+    paragraph: undefined,
+    list: undefined,
+    boolean: undefined,
+    financial: undefined,
+    tenure: undefined,
 };
 
-export const translateFormat = (format?: LegendFormatType) => {
-    switch (format) {
-        case 'money':
-            return 'money';
-        case 'percentage':
-            return 'percentage';
-        case 'number':
-        case 'negative':
-            return 'number';
-        default:
-            return 'decimal';
-    }
+export const translateType = (type: DataTypes | undefined): FormatTypes | undefined =>
+    type ? typeToFormatMap[type] : undefined;
+
+const legendFormatTypeToFormatMap: Record<LegendFormatType, FormatTypes> = {
+    money: 'money',
+    percentage: 'percentage',
+    number: 'number',
+    negative: 'number',
+    decimal: 'decimal',
 };
+
+export const translateFormat = (format?: LegendFormatType) =>
+    format ? legendFormatTypeToFormatMap[format] : 'decimal';
 
 export const formatTicks = (t: number, formatType: LegendFormatType) => {
     if (formatType === 'money') {
         if (t >= 1000000) return `${t / 1000000}M`;
 
-        const result = t >= 1000 ? `${t / 1000}K` : formatter(t, 'money');
+        const result = t >= 1000 ? `${t / 1000}K` : toMoney(t);
 
         return result ?? String(t);
     }
 
-    return formatter(t, translateFormat(formatType)) ?? String(t);
+    return formatter(t, translateFormat(formatType), { nullValue: '0' }) ?? String(t);
 };
 
 export const getValueFormatted = (value: number, legendFormatType?: LegendFormatType) => {
@@ -80,7 +80,5 @@ export const isFinancialMetric = (value: unknown): value is FinancialMetric => {
 export const moneyToNumber = (value: unknown) => {
     if (typeof value === 'number') return value;
 
-    if (isMoneyObject(value)) return value.Amount;
-
-    return 0;
+    return isMoneyObject(value) ? value.Amount : 0;
 };

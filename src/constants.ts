@@ -6,7 +6,7 @@ export type ChartData = {
     subValue?: string | number;
 };
 
-export type LegendFormatType = 'percentage' | 'money' | 'negative' | 'number';
+export type LegendFormatType = 'percentage' | 'money' | 'negative' | 'number' | 'decimal';
 
 export type TextAlign = 'left' | 'center' | 'right';
 
