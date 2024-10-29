@@ -150,6 +150,7 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
                     onBlur={onClearSearch}
                     onChange={onSearchInternal}
                     displayValue={() => searchQuery ?? ''}
+                    title={valueToNameMapping.get(value ?? '')}
                 />
                 <ArrowDownHead />
             </Combobox.Button>
