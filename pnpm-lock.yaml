@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@fluentui/react-icons':
-        specifier: ^2.0.263
-        version: 2.0.263(react@18.3.1)
+        specifier: ^2.0.264
+        version: 2.0.264(react@18.3.1)
       '@headlessui/react':
         specifier: 0.0.0-insiders.ce17c6d
         version: 0.0.0-insiders.ce17c6d(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -30,8 +30,8 @@ importers:
         specifier: 5.28.0
         version: 5.28.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       recharts:
-        specifier: 2.13.0
-        version: 2.13.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.13.3
+        version: 2.13.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
         specifier: ^2.5.4
         version: 2.5.4
@@ -45,8 +45,8 @@ importers:
         specifier: ^11.0.2
         version: 11.0.2
       zustand:
-        specifier: 5.0.0
-        version: 5.0.0(@types/react@18.3.12)(react@18.3.1)(use-sync-external-store@1.2.2(react@18.3.1))
+        specifier: 5.0.1
+        version: 5.0.1(@types/react@18.3.12)(react@18.3.1)(use-sync-external-store@1.2.2(react@18.3.1))
     devDependencies:
       '@rsbuild/core':
         specifier: 1.0.19
@@ -55,8 +55,8 @@ importers:
         specifier: 1.0.6
         version: 1.0.6(@rsbuild/core@1.0.19)
       '@testing-library/jest-dom':
-        specifier: ^6.6.2
-        version: 6.6.2
+        specifier: ^6.6.3
+        version: 6.6.3
       '@testing-library/react':
         specifier: ^16.0.1
         version: 16.0.1(@testing-library/dom@10.0.0)(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -64,8 +64,8 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/node':
-        specifier: ^22.8.4
-        version: 22.8.4
+        specifier: ^22.8.6
+        version: 22.8.6
       '@types/react':
         specifier: ^18.3.12
         version: 18.3.12
@@ -104,7 +104,7 @@ importers:
         version: 9.1.6
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@22.8.4)
+        version: 29.7.0(@types/node@22.8.6)
       jest-environment-jsdom:
         specifier: ^29.7.0
         version: 29.7.0
@@ -122,7 +122,7 @@ importers:
         version: 3.4.14
       ts-jest:
         specifier: ^29.2.5
-        version: 29.2.5(@babel/core@7.23.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.2))(jest@29.7.0(@types/node@22.8.4))(typescript@5.6.3)
+        version: 29.2.5(@babel/core@7.23.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.2))(jest@29.7.0(@types/node@22.8.6))(typescript@5.6.3)
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -373,8 +373,8 @@ packages:
   '@floating-ui/utils@0.2.1':
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
 
-  '@fluentui/react-icons@2.0.263':
-    resolution: {integrity: sha512-DZq/fPXS0AJoNcSC3S6LDm3vOG4n3lUMggyntqhz6qV7JfJcRXAG1froyOIV19KMHm81BCM/HS9eMQqAhUKqxw==}
+  '@fluentui/react-icons@2.0.264':
+    resolution: {integrity: sha512-Rhjx5vYmTzbe6q/50qBy9G4jpFwJQuBA4oAaluG2Pw9Cb50cz8O3ZQVRopNIi65xdAwuR0jTWPf869Iy1G6/sA==}
     peerDependencies:
       react: '>=16.8.0 <19.0.0'
 
@@ -713,8 +713,8 @@ packages:
     resolution: {integrity: sha512-PmJPnogldqoVFf+EwbHvbBJ98MmqASV8kLrBYgsDNxQcFMeIS7JFL48sfyXvuMtgmWO/wMhh25odr+8VhDmn4g==}
     engines: {node: '>=18'}
 
-  '@testing-library/jest-dom@6.6.2':
-    resolution: {integrity: sha512-P6GJD4yqc9jZLbe98j/EkyQDTPgqftohZF5FBkHY5BUERZmcf4HeO2k0XaefEg329ux2p21i1A1DmyQ1kKw2Jw==}
+  '@testing-library/jest-dom@6.6.3':
+    resolution: {integrity: sha512-IteBhl4XqYNkM54f4ejhLRJiZNqcSCoXUOG2CPK7qbD322KjQozM4kHQOfkG2oln9b9HTYqs+Sae8vBATubxxA==}
     engines: {node: '>=14', npm: '>=6', yarn: '>=1'}
 
   '@testing-library/react@16.0.1':
@@ -823,8 +823,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/node@22.8.4':
-    resolution: {integrity: sha512-SpNNxkftTJOPk0oN+y2bIqurEXHTA2AOZ3EJDDKeJ5VzkvvORSvmQXGQarcOzWV1ac7DCaPBEdMDxBsM+d8jWw==}
+  '@types/node@22.8.6':
+    resolution: {integrity: sha512-tosuJYKrIqjQIlVCM4PEGxOmyg3FCPa/fViuJChnGeEIhjA46oy8FMVoF9su1/v8PNs2a8Q0iFNyOx0uOF91nw==}
 
   '@types/prop-types@15.7.5':
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -2922,8 +2922,8 @@ packages:
   recharts-scale@0.4.5:
     resolution: {integrity: sha512-kivNFO+0OcUNu7jQquLXAxz1FIwZj8nrj+YkOKc5694NbjCvcT6aSZiIzNzd2Kul4o4rTto8QVR9lMNtxD4G1w==}
 
-  recharts@2.13.0:
-    resolution: {integrity: sha512-sbfxjWQ+oLWSZEWmvbq/DFVdeRLqqA6d0CDjKx2PkxVVdoXo16jvENCE+u/x7HxOO+/fwx//nYRwb8p8X6s/lQ==}
+  recharts@2.13.3:
+    resolution: {integrity: sha512-YDZ9dOfK9t3ycwxgKbrnDlRC4BHdjlY73fet3a0C1+qGMjXVZe6+VXmpOIIhzkje5MMEL8AN4hLIe4AMskBzlA==}
     engines: {node: '>=14'}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0
@@ -3530,8 +3530,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zustand@5.0.0:
-    resolution: {integrity: sha512-LE+VcmbartOPM+auOjCCLQOsQ05zUTp8RkgwRzefUk+2jISdMMFnxvyTjA4YNWr5ZGXYbVsEMZosttuxUBkojQ==}
+  zustand@5.0.1:
+    resolution: {integrity: sha512-pRET7Lao2z+n5R/HduXMio35TncTlSW68WsYBq2Lg1ASspsNGjpwLAsij3RpouyV6+kHMwwwzP0bZPD70/Jx/w==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=18.0.0'
@@ -3830,7 +3830,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.1': {}
 
-  '@fluentui/react-icons@2.0.263(react@18.3.1)':
+  '@fluentui/react-icons@2.0.264(react@18.3.1)':
     dependencies:
       '@griffel/react': 1.5.11(react@18.3.1)
       react: 18.3.1
@@ -3895,7 +3895,7 @@ snapshots:
   '@jest/console@29.7.0':
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       chalk: 4.1.2
       jest-message-util: 29.7.0
       jest-util: 29.7.0
@@ -3908,14 +3908,14 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       ci-info: 3.9.0
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
-      jest-config: 29.7.0(@types/node@22.8.4)
+      jest-config: 29.7.0(@types/node@22.8.6)
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -3940,7 +3940,7 @@ snapshots:
     dependencies:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       jest-mock: 29.7.0
 
   '@jest/expect-utils@29.7.0':
@@ -3958,7 +3958,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@sinonjs/fake-timers': 10.3.0
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
@@ -3980,7 +3980,7 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       '@jridgewell/trace-mapping': 0.3.25
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       chalk: 4.1.2
       collect-v8-coverage: 1.0.2
       exit: 0.1.2
@@ -4050,7 +4050,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       '@types/yargs': 17.0.31
       chalk: 4.1.2
 
@@ -4291,7 +4291,7 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/jest-dom@6.6.2':
+  '@testing-library/jest-dom@6.6.3':
     dependencies:
       '@adobe/css-tools': 4.4.0
       aria-query: 5.3.0
@@ -4323,7 +4323,7 @@ snapshots:
       react-day-picker: 8.10.1(date-fns@3.6.0)(react@18.3.1)
       react-dom: 18.3.1(react@18.3.1)
       react-transition-state: 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      recharts: 2.13.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      recharts: 2.13.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge: 2.5.4
     transitivePeerDependencies:
       - tailwindcss
@@ -4398,7 +4398,7 @@ snapshots:
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
 
   '@types/istanbul-lib-coverage@2.0.6': {}
 
@@ -4417,7 +4417,7 @@ snapshots:
 
   '@types/jsdom@20.0.1':
     dependencies:
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       '@types/tough-cookie': 4.0.5
       parse5: 7.1.2
 
@@ -4426,7 +4426,7 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/node@22.8.4':
+  '@types/node@22.8.6':
     dependencies:
       undici-types: 6.19.8
 
@@ -5056,13 +5056,13 @@ snapshots:
     optionalDependencies:
       typescript: 5.6.3
 
-  create-jest@29.7.0(@types/node@22.8.4):
+  create-jest@29.7.0(@types/node@22.8.6):
     dependencies:
       '@jest/types': 29.6.3
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.11
-      jest-config: 29.7.0(@types/node@22.8.4)
+      jest-config: 29.7.0(@types/node@22.8.6)
       jest-util: 29.7.0
       prompts: 2.4.2
     transitivePeerDependencies:
@@ -6054,7 +6054,7 @@ snapshots:
       '@jest/expect': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.5.1
@@ -6074,16 +6074,16 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  jest-cli@29.7.0(@types/node@22.8.4):
+  jest-cli@29.7.0(@types/node@22.8.6):
     dependencies:
       '@jest/core': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
       chalk: 4.1.2
-      create-jest: 29.7.0(@types/node@22.8.4)
+      create-jest: 29.7.0(@types/node@22.8.6)
       exit: 0.1.2
       import-local: 3.1.0
-      jest-config: 29.7.0(@types/node@22.8.4)
+      jest-config: 29.7.0(@types/node@22.8.6)
       jest-util: 29.7.0
       jest-validate: 29.7.0
       yargs: 17.6.2
@@ -6093,7 +6093,7 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-config@29.7.0(@types/node@22.8.4):
+  jest-config@29.7.0(@types/node@22.8.6):
     dependencies:
       '@babel/core': 7.23.2
       '@jest/test-sequencer': 29.7.0
@@ -6118,7 +6118,7 @@ snapshots:
       slash: 3.0.0
       strip-json-comments: 3.1.1
     optionalDependencies:
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -6148,7 +6148,7 @@ snapshots:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
       '@types/jsdom': 20.0.1
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       jest-mock: 29.7.0
       jest-util: 29.7.0
       jsdom: 20.0.3
@@ -6162,7 +6162,7 @@ snapshots:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       jest-mock: 29.7.0
       jest-util: 29.7.0
 
@@ -6172,7 +6172,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -6211,7 +6211,7 @@ snapshots:
   jest-mock@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       jest-util: 29.7.0
 
   jest-pnp-resolver@1.2.3(jest-resolve@29.7.0):
@@ -6246,7 +6246,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       chalk: 4.1.2
       emittery: 0.13.1
       graceful-fs: 4.2.11
@@ -6274,7 +6274,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       chalk: 4.1.2
       cjs-module-lexer: 1.2.3
       collect-v8-coverage: 1.0.2
@@ -6320,7 +6320,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -6339,7 +6339,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -6348,24 +6348,24 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       merge-stream: 2.0.0
       supports-color: 8.1.1
     optional: true
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 22.8.4
+      '@types/node': 22.8.6
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@29.7.0(@types/node@22.8.4):
+  jest@29.7.0(@types/node@22.8.6):
     dependencies:
       '@jest/core': 29.7.0
       '@jest/types': 29.6.3
       import-local: 3.1.0
-      jest-cli: 29.7.0(@types/node@22.8.4)
+      jest-cli: 29.7.0(@types/node@22.8.6)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -6896,7 +6896,7 @@ snapshots:
     dependencies:
       decimal.js-light: 2.5.1
 
-  recharts@2.13.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  recharts@2.13.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       clsx: 2.0.0
       eventemitter3: 4.0.7
@@ -7312,12 +7312,12 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-jest@29.2.5(@babel/core@7.23.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.2))(jest@29.7.0(@types/node@22.8.4))(typescript@5.6.3):
+  ts-jest@29.2.5(@babel/core@7.23.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.2))(jest@29.7.0(@types/node@22.8.6))(typescript@5.6.3):
     dependencies:
       bs-logger: 0.2.6
       ejs: 3.1.10
       fast-json-stable-stringify: 2.1.0
-      jest: 29.7.0(@types/node@22.8.4)
+      jest: 29.7.0(@types/node@22.8.6)
       jest-util: 29.7.0
       json5: 2.2.3
       lodash.memoize: 4.1.2
@@ -7601,7 +7601,7 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zustand@5.0.0(@types/react@18.3.12)(react@18.3.1)(use-sync-external-store@1.2.2(react@18.3.1)):
+  zustand@5.0.1(@types/react@18.3.12)(react@18.3.1)(use-sync-external-store@1.2.2(react@18.3.1)):
     optionalDependencies:
       '@types/react': 18.3.12
       react: 18.3.1
