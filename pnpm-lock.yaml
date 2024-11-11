@@ -16,7 +16,7 @@ importers:
         version: 0.0.0-insiders.ce17c6d(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tremor/react':
         specifier: ^3.18.3
-        version: 3.18.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.14)
+        version: 3.18.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.14)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -736,8 +736,8 @@ packages:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
 
-  '@tremor/react@3.18.3':
-    resolution: {integrity: sha512-7QyGE2W9f2FpwH24TKy3/mqBgLl4sHZeQcXP3rxXZ8W2AUq7AVaG1+vIT3xXxISrkh7zknjWlZsuhoF8NWNVDw==}
+  '@tremor/react@3.18.4':
+    resolution: {integrity: sha512-HDjYbuzxQIZvosGzB1j1nCSuLLRdKRHPfRmoGUyI57cesbThFzWuFHz07Sio9Vhk/ew3TKJUZPy+ljfZ3u1M4g==}
     peerDependencies:
       react: ^18.0.0
       react-dom: '>=16.6.0'
@@ -1747,6 +1747,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -4313,7 +4314,7 @@ snapshots:
 
   '@tootallnate/once@2.0.0': {}
 
-  '@tremor/react@3.18.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.14)':
+  '@tremor/react@3.18.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.14)':
     dependencies:
       '@floating-ui/react': 0.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@headlessui/react': 1.7.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
