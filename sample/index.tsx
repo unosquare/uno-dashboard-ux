@@ -3,8 +3,6 @@ import { createRoot } from 'react-dom/client';
 import {
     ArrowSync24Regular,
     Dismiss24Regular,
-    WeatherMoon24Regular,
-    WeatherSunny24Regular,
 } from '@fluentui/react-icons';
 import { Button, Card, Col, Dialog, DialogPanel, Flex, Grid, Select, SelectItem, Text } from '@tremor/react';
 import {
@@ -31,12 +29,11 @@ import {
     StyledMenuSearchBox,
     TremorContainer,
     VirtualSelect,
-    useTheme,
     useAlertStore,
     useToggle,
     InfoDialogTitle,
-    ModalHeader,
     DialogHeader,
+    ThemeSwitcher,
 } from '../src';
 import '../src/resources/global.css';
 import { getLargeSelectOptions } from './data';
@@ -72,7 +69,6 @@ const Application = () => {
     const [loading, isLoading] = React.useState(true);
     const [modalOpen, setModalOpen] = useToggle(false);
     const [toggle, setToggle] = useToggle(true);
-    const [theme, setTheme] = useTheme();
     const [counter, setCounter] = useState(0);
 
     React.useEffect(() => {
@@ -85,11 +81,6 @@ const Application = () => {
         const body = document.getElementById('body');
         if (body) body.style.overflow = openMenu ? 'auto' : 'hidden';
         setOpenMenu();
-    };
-
-    const updateTheme = () => {
-        setTheme();
-        onToggleMenu();
     };
 
     const barClick = (ev: string) => {
@@ -110,17 +101,7 @@ const Application = () => {
                         <MenuContainer>
                             <StyledMenuActions>
                                 <ArrowSync24Regular className='text-tremor-content dark:text-dark-tremor-content' />
-                                {theme === 'light' ? (
-                                    <WeatherMoon24Regular
-                                        onClick={updateTheme}
-                                        className='text-tremor-content dark:text-dark-tremor-content'
-                                    />
-                                ) : (
-                                    <WeatherSunny24Regular
-                                        onClick={updateTheme}
-                                        className='text-tremor-content dark:text-dark-tremor-content'
-                                    />
-                                )}
+                                <ThemeSwitcher />
                                 <Dismiss24Regular
                                     onClick={setOpenMenu}
                                     className='text-tremor-content dark:text-dark-tremor-content'

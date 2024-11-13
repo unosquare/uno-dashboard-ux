@@ -10,7 +10,7 @@
     "dependencies": {
         "@fluentui/react-icons": "^2.0.265",
         "@headlessui/react": "0.0.0-insiders.ce17c6d",
-        "@tremor/react": "^3.18.3",
+        "@tremor/react": "^3.18.4",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-hook-form": "7.53.2",
@@ -19,11 +19,11 @@
         "tailwind-merge": "^2.5.4",
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.127.0",
-        "uuid": "^11.0.2",
+        "uuid": "^11.0.3",
         "zustand": "5.0.1"
     },
     "devDependencies": {
-        "@rsbuild/core": "1.1.0",
+        "@rsbuild/core": "1.1.1",
         "@rsbuild/plugin-react": "1.0.7",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.0.1",
