@@ -1,5 +1,5 @@
-import { formatter, FormatTypes, isMoneyObject, toMoney } from 'uno-js';
-import { DataTypes, FinancialMetric, LegendFormatType, TableColumn, Tenure } from './constants';
+import { type FormatTypes, formatter, isMoneyObject, toMoney } from 'uno-js';
+import type { DataTypes, FinancialMetric, LegendFormatType, TableColumn, Tenure } from './constants';
 
 const leftAlign: Array<DataTypes | undefined> = ['string', 'link', 'bullet', undefined];
 const rightAlign: Array<DataTypes | undefined> = ['decimal', 'number', 'money'];

@@ -1,5 +1,5 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
 import { Form } from '../Form';
 import { FormFieldTypes } from '../constants';
 
@@ -26,10 +26,11 @@ describe('Form', () => {
 
         const saveMock = jest.fn();
 
-        const onSave = (data: any) =>{
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        const onSave = (data: any) => {
             saveMock(data);
             return Promise.resolve();
-        } 
+        };
 
         render(<Form initialData={formData} onSave={onSave} />);
 

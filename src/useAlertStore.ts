@@ -1,7 +1,6 @@
 import { create } from 'zustand';
-import { Alert } from './Alert';
 
-interface Alert {
+interface AlertObject {
     id: number;
     message: string;
     isSuccess: boolean;
@@ -9,7 +8,7 @@ interface Alert {
 }
 
 interface AlertList {
-    activeAlerts: Alert[];
+    activeAlerts: AlertObject[];
     setAlert: (isSuccess: boolean, message?: string, isTimed?: boolean) => void;
     deleteAlerts: (alertId: number) => void;
 }
@@ -29,5 +28,7 @@ export default create<AlertList>((set) => ({
             ],
         })),
     deleteAlerts: (alertId: number) =>
-        set((state) => ({ activeAlerts: state.activeAlerts.filter((alert) => alert.id !== alertId) })),
+        set((state) => ({
+            activeAlerts: state.activeAlerts.filter((alert) => alert.id !== alertId),
+        })),
 }));

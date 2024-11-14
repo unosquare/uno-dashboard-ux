@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import { Checkmark28Regular, Dismiss28Regular } from '@fluentui/react-icons';
+import React, { type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useShallow } from 'zustand/react/shallow';
-import { Checkmark28Regular, Dismiss28Regular } from '@fluentui/react-icons';
 import useAlertStore from '../useAlertStore';
 
 const AUTO_ANIMATE = ' animate-[slideInTop_4s_ease-out_forwards] ';

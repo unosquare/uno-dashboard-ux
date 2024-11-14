@@ -1,4 +1,4 @@
-import { FormatTypes } from 'uno-js';
+import type { FormatTypes } from 'uno-js';
 
 export interface ChartFunnelEntry {
     name: string;

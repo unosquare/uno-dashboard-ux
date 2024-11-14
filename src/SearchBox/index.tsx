@@ -1,6 +1,6 @@
 import { Dismiss24Regular, Search24Regular } from '@fluentui/react-icons';
 import { TextInput } from '@tremor/react';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDebounce } from '../hooks';
 
 export type SearchBoxSettings = {
@@ -29,16 +29,19 @@ export const SearchBox = ({
         if (focus && ref.current) setTimeout(() => ref.current?.focus(), 2000);
     }, [focus]);
 
-    const setSearchValue = (x = '') => {
-        setValue(x);
-        debounceCall();
-    };
+    const setSearchValue = useCallback(
+        (x = '') => {
+            setValue(x);
+            debounceCall();
+        },
+        [debounceCall],
+    );
 
     const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => setSearchValue(target.value);
 
     const icon = useMemo(
         () => () => <SearchOrClearButton hasValue={value.length > 0} onClick={setSearchValue} />,
-        [value],
+        [value, setSearchValue],
     );
 
     return (

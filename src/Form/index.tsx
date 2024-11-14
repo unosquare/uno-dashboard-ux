@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-misused-promises */
+import { Button, DatePicker, Flex, NumberInput, Select, SelectItem, Text, TextInput } from '@tremor/react';
 import React, { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
-import { Button, DatePicker, Flex, NumberInput, Select, SelectItem, Text, TextInput } from '@tremor/react';
-import { FormSettings } from './formSettings';
+import { VirtualSelect } from '../VirtualSelect';
+import { FormFieldTypes } from '../constants';
+import { StyledFieldGroup, StyledFormContainer } from '../styled';
+import type { FormSettings } from './formSettings';
 import { StyledCheckbox } from './styled';
 import { extractData, getFieldBaseProps, onSelectChange } from './utils';
-import { FormFieldTypes } from '../constants';
-import { VirtualSelect } from '../VirtualSelect';
-import { StyledFieldGroup, StyledFormContainer } from '../styled';
 
 export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, columns = 3 }: FormSettings<T, TData>) => {
     const {
@@ -54,10 +51,13 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, colum
                                     return (
                                         <Controller
                                             name={`table.${index}.value`}
-                                            rules={{ required: !updatedField.notRequired }}
+                                            rules={{
+                                                required: !updatedField.notRequired,
+                                            }}
                                             control={control}
                                             render={({ field }) => (
                                                 <DatePicker
+                                                    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                                                     value={field.value as any}
                                                     onValueChange={field.onChange}
                                                     disabled={disable || updatedField.disabled}
@@ -72,7 +72,9 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, colum
                                     return (
                                         <Controller
                                             name={`table.${index}.value`}
-                                            rules={{ required: !updatedField.notRequired }}
+                                            rules={{
+                                                required: !updatedField.notRequired,
+                                            }}
                                             control={control}
                                             render={({ field }) => (
                                                 <VirtualSelect
@@ -94,7 +96,9 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, colum
                                     return (
                                         <Controller
                                             name={`table.${index}.value`}
-                                            rules={{ required: !updatedField.notRequired }}
+                                            rules={{
+                                                required: !updatedField.notRequired,
+                                            }}
                                             control={control}
                                             render={({ field }) => (
                                                 <Select

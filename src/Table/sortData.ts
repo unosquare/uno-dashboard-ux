@@ -1,5 +1,5 @@
 import { compareDates, defaultStringFilter, sortNumericString, trimText } from 'uno-js';
-import { DataTypes, TableCellTypes, TableColumn } from '../constants';
+import type { DataTypes, TableCellTypes, TableColumn } from '../constants';
 import { isFinancialMetric, isTenureObject, moneyToNumber } from '../utils';
 
 export const searchData = (search: string | undefined, newData: TableCellTypes[][], definitions: TableColumn[]) => {
@@ -25,7 +25,7 @@ export const searchData = (search: string | undefined, newData: TableCellTypes[]
 const numericTypes: DataTypes[] = ['number', 'decimal', 'percentage', 'money', 'days', 'months', 'boolean'];
 
 const getArrayValueOrDefault = (value: TableCellTypes) =>
-    value instanceof Array && value.length > 1 ? value[1] : String(value);
+    Array.isArray(value) && value.length > 1 ? value[1] : String(value);
 
 const getMonthsOrDefault = (value: TableCellTypes) => (isTenureObject(value) ? value.Months : 0);
 const getGrossMaginOrDefault = (value: TableCellTypes) => (isFinancialMetric(value) ? value.GrossMargin : 0);

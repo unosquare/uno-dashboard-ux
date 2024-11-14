@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from 'react';
 import { Info16Regular } from '@fluentui/react-icons';
 import { Button, Dialog, DialogPanel } from '@tremor/react';
+import React, { type PropsWithChildren } from 'react';
 import { useToggle } from '../hooks';
 
 export type InfoDialogSettings = {

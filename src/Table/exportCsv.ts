@@ -1,5 +1,5 @@
 import { formatter, isMoneyObject, toPercentage } from 'uno-js';
-import { DataTypes, FinancialMetric, TableCellTypes, TableColumn } from '../constants';
+import type { DataTypes, FinancialMetric, TableCellTypes, TableColumn } from '../constants';
 import { translateType } from '../utils';
 
 const renderCellString = (cell: TableCellTypes, dataType?: DataTypes) => {
@@ -27,7 +27,7 @@ export const renderToRowString = (data: TableCellTypes[][], definitions: TableCo
                 case 'list':
                     return (cell as string[]).join(', ');
                 case 'link':
-                    if (cell instanceof Array && cell.length > 1) return String(cell[1]);
+                    if (Array.isArray(cell) && cell.length > 1) return String(cell[1]);
                     return String(cell);
                 case 'financial':
                     return toPercentage((cell as FinancialMetric).GrossMargin) as string;

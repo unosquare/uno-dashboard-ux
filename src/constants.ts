@@ -1,4 +1,4 @@
-import { Money } from 'uno-js';
+import type { Money } from 'uno-js';
 
 export type ChartData = {
     name: string;

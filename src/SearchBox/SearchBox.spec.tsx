@@ -1,5 +1,5 @@
-import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+import React from 'react';
 import { SearchBox } from './index';
 
 describe('SearchBox', () => {
@@ -32,7 +32,7 @@ describe('SearchBox', () => {
         const input = getByPlaceholderText('Search');
         expect(input).toBeDisabled();
     });
-    
+
     it('show the initial value', () => {
         const { getByPlaceholderText } = render(<SearchBox search={() => {}} initialValue='test' />);
         const input = getByPlaceholderText('Search');

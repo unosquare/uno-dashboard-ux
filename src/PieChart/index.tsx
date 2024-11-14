@@ -1,14 +1,14 @@
-import React, { useMemo } from 'react';
-import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
+import { Flex } from '@tremor/react';
+import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
+import { BaseColors } from '@tremor/react/dist/lib/constants';
 import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
-import { BaseColors } from '@tremor/react/dist/lib/constants';
+import React, { useMemo } from 'react';
+import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
 import { twMerge } from 'tailwind-merge';
-import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
-import { ChartComponent, ChartData } from '../constants';
 import { NoData } from '../NoData';
-import { Flex } from '@tremor/react';
+import type { ChartComponent, ChartData } from '../constants';
 import { getValueFormatted } from '../utils';
 
 export type PieChartProps<T> = ChartComponent<T, ChartData[]> & {
@@ -64,7 +64,6 @@ export const PieChart = <T,>({
                         wrapperStyle={{ outline: 'none' }}
                         isAnimationActive={false}
                         cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
-                        // eslint-disable-next-line react/no-unstable-nested-components
                         content={({ active, payload }) => (
                             <ChartTooltip
                                 active={active}

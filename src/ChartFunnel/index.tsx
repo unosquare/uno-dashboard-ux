@@ -1,13 +1,13 @@
-import React from 'react';
 import { Flex, Text } from '@tremor/react';
-import { v4 as uuidv4 } from 'uuid';
-import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
+import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { getColorClassNames } from '@tremor/react/dist/lib/utils';
+import React from 'react';
 import { formatter, humanize } from 'uno-js';
+import { v4 as uuidv4 } from 'uuid';
 import { CardLoading } from '../CardLoading';
 import { NoData } from '../NoData';
-import { ChartFunnelSettings } from './chartFunnelSettings';
+import type { ChartFunnelSettings } from './chartFunnelSettings';
 
 export const ChartFunnel = <T,>({ rawData, dataCallback, formatType, calculateSizes }: ChartFunnelSettings<T>) => {
     const dataStore = (dataCallback && rawData && dataCallback(rawData)) ?? [];

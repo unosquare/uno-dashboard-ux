@@ -1,18 +1,19 @@
-import React, { ReactElement, useState } from 'react';
-import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Flex } from '@tremor/react';
+import { BaseColors } from '@tremor/react/dist/lib/constants';
+import { colorPalette } from '@tremor/react/dist/lib/theme';
+import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
+import { getColorClassNames } from '@tremor/react/dist/lib/utils';
+import type React from 'react';
+import { type ReactElement, useState } from 'react';
+import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { twMerge } from 'tailwind-merge';
 import { v4 as uuidv4 } from 'uuid';
-import { colorPalette } from '@tremor/react/dist/lib/theme';
-import { getColorClassNames } from '@tremor/react/dist/lib/utils';
-import { BaseColors } from '@tremor/react/dist/lib/constants';
-import { ChartComponent, LegendFormatType } from '../constants';
-import { NoData } from '../NoData';
-import { formatTicks } from '../utils';
-import { ChartBarShimmer } from '../ChartShimmers';
 import { ChartDecorators } from '../ChartCommon';
-import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
+import { ChartBarShimmer } from '../ChartShimmers';
+import { NoData } from '../NoData';
+import type { ChartComponent, LegendFormatType } from '../constants';
 import { useChart } from '../hooks';
+import { formatTicks } from '../utils';
 
 type XAxisPrimaryFormatter = (input: string) => string;
 
@@ -50,12 +51,11 @@ export const ChartBar = <T,>({
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, categoryColors, keys] = useChart(rawData, dataCallback);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(Number(t), legendFormatType) : t) as string;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const onClickEvent = (event: any) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         if (event?.activeLabel && onClick) onClick(String(event.activeLabel), Number(event.activeTooltipIndex));
     };
 

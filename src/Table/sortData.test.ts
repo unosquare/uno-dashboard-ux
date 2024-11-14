@@ -1,12 +1,8 @@
-import { TableColumn } from '../constants';
+import type { TableColumn } from '../constants';
 import { searchData, searchFooter, sortData } from './sortData';
 
 describe('searchData', () => {
-    const definitions = [
-        { label: 'Name'},
-        { label: 'Age', disableSearch: true },
-        { label: 'Email' },
-    ];
+    const definitions = [{ label: 'Name' }, { label: 'Age', disableSearch: true }, { label: 'Email' }];
 
     const data = [
         ['John', 30, 'john@example.com'],
@@ -79,9 +75,24 @@ describe('searchFooter', () => {
 
 describe('sortData', () => {
     const definitions = [
-        { label: 'Name', dataType: 'string', sortOrder: 1, sortDirection: 'asc' },
-        { label: 'Age', dataType: 'number', sortOrder: 2, sortDirection: 'desc' },
-        { label: 'Email', dataType: 'string', sortOrder: 3, sortDirection: 'asc' },
+        {
+            label: 'Name',
+            dataType: 'string',
+            sortOrder: 1,
+            sortDirection: 'asc',
+        },
+        {
+            label: 'Age',
+            dataType: 'number',
+            sortOrder: 2,
+            sortDirection: 'desc',
+        },
+        {
+            label: 'Email',
+            dataType: 'string',
+            sortOrder: 3,
+            sortDirection: 'asc',
+        },
     ] as TableColumn[];
 
     const data = [
@@ -101,9 +112,24 @@ describe('sortData', () => {
 
     it('should sort data based on multiple columns', () => {
         const newDefinitions = [
-            { label: 'Name', dataType: 'string', sortOrder: 1, sortDirection: 'asc' },
-            { label: 'Age', dataType: 'number', sortOrder: 2, sortDirection: 'asc' },
-            { label: 'Email', dataType: 'string', sortOrder: 3, sortDirection: 'asc' },
+            {
+                label: 'Name',
+                dataType: 'string',
+                sortOrder: 1,
+                sortDirection: 'asc',
+            },
+            {
+                label: 'Age',
+                dataType: 'number',
+                sortOrder: 2,
+                sortDirection: 'asc',
+            },
+            {
+                label: 'Email',
+                dataType: 'string',
+                sortOrder: 3,
+                sortDirection: 'asc',
+            },
         ] as TableColumn[];
 
         const newData = [

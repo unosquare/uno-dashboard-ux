@@ -1,13 +1,12 @@
-import React from 'react';
 import { TableRow, TableCell as TremorTableCell } from '@tremor/react';
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export const ShimmerTable = ({ colSpan }: { colSpan: number }) =>
-    Array.from({ length: 4 }).map((_, i) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <TableRow key={i}>
-            {Array.from({ length: colSpan }).map((_o, k) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <TremorTableCell className='p-2' key={k}>
+    Array.from({ length: 4 }).map(() => (
+        <TableRow key={uuidv4()}>
+            {Array.from({ length: colSpan }).map(() => (
+                <TremorTableCell className='p-2' key={uuidv4()}>
                     <div className='loading-shimmer rounded'>&nbsp;</div>
                 </TremorTableCell>
             ))}

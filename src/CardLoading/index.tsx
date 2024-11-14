@@ -11,6 +11,7 @@ export const CardLoading = () => (
         enableBackground='new 0 0 0 0'
         className='block w-full h-full p-4'
     >
+        <title>Loading...</title>
         <circle fill='none' stroke='#304FF3' strokeWidth={4} cx={50} cy={50} r={44} style={{ opacity: 0.5 }} />
         <circle fill='#304FF3' stroke='none' strokeWidth='3' cx='8' cy='54' r='6'>
             <animateTransform

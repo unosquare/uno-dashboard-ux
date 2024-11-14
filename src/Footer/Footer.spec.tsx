@@ -1,6 +1,6 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import { Footer, FooterSettings } from './index';
+import React from 'react';
+import { Footer, type FooterSettings } from './index';
 
 describe('Footer', () => {
     const defaultProps: FooterSettings = {

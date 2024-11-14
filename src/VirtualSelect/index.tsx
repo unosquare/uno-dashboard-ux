@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { ChevronDown16Filled, DismissCircle16Filled } from '@fluentui/react-icons';
 import { Combobox } from '@headlessui/react';
+import { getSelectButtonColors, hasValue } from '@tremor/react/dist/components/input-elements/selectUtils';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
 import { makeClassName } from '@tremor/react/dist/lib/utils';
-import { getSelectButtonColors, hasValue } from '@tremor/react/dist/components/input-elements/selectUtils';
-import { ChevronDown16Filled, DismissCircle16Filled } from '@fluentui/react-icons';
+import React, { useEffect, useMemo, useState } from 'react';
+import type { ReactSelectOption } from '../constants';
 import { useDebounce } from '../hooks';
-import { ReactSelectOption } from '../constants';
 
 export interface SearchSelectProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;
@@ -36,9 +36,9 @@ const getFilteredOptions = (searchQuery: string | undefined, options: ReactSelec
 
 const constructValueToNameMapping = (options: ReactSelectOption<string | number>[]) => {
     const valueToNameMapping = new Map<string, string>();
-    options.forEach(({ value, label }) => {
+    for (const { value, label } of options) {
         valueToNameMapping.set(value.toString(), label);
-    });
+    }
     return valueToNameMapping;
 };
 

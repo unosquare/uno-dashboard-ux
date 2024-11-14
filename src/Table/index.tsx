@@ -1,8 +1,3 @@
-import React, { PropsWithChildren, startTransition, useEffect, useMemo, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { renderToString } from 'react-dom/server';
-import tw from 'tailwind-styled-components';
-import { createCsv } from 'uno-js';
 import { CaretDown12Regular, CaretUp12Regular } from '@fluentui/react-icons';
 import {
     Flex,
@@ -16,17 +11,24 @@ import {
     Table as TremorTable,
     TableCell as TremorTableCell,
 } from '@tremor/react';
+import type React from 'react';
+import { useCallback } from 'react';
+import { type PropsWithChildren, startTransition, useEffect, useMemo, useState } from 'react';
+import { renderToString } from 'react-dom/server';
 import { twMerge } from 'tailwind-merge';
-import { ClassNameComponent, DataComponent, SortDirection, TableCellTypes, TableColumn } from '../constants';
-import { NoData } from '../NoData';
-import { searchData, searchFooter, sortData } from './sortData';
+import tw from 'tailwind-styled-components';
+import { createCsv } from 'uno-js';
+import { v4 as uuidv4 } from 'uuid';
 import { ExportCsvButton } from '../ExportCsvButton';
-import { useDebounce } from '../hooks';
-import { ShimmerTable } from './TableShimmer';
-import { getAlignment } from '../utils';
-import { TableCell, TableCellContent } from '../TableCell';
+import { NoData } from '../NoData';
 import { SearchOrClearButton } from '../SearchBox';
+import { TableCell, TableCellContent } from '../TableCell';
+import type { ClassNameComponent, DataComponent, SortDirection, TableCellTypes, TableColumn } from '../constants';
+import { useDebounce } from '../hooks';
+import { getAlignment } from '../utils';
+import { ShimmerTable } from './TableShimmer';
 import { renderToRowString } from './exportCsv';
+import { searchData, searchFooter, sortData } from './sortData';
 
 export * from './sortData';
 
@@ -143,7 +145,7 @@ const SpanTable = ({ colSpan, children }: PropsWithChildren<{ colSpan: number }>
 );
 
 const defaultTranform = <TDataIn,>(data: TDataIn) => {
-    if (data instanceof Array && data[0] instanceof Object)
+    if (Array.isArray(data) && data[0] instanceof Object)
         return data.map((x) => Object.values(x as Record<string, unknown>) as unknown as TableCellTypes[]);
 
     return data as unknown as TableCellTypes[][];
@@ -178,10 +180,13 @@ export const Table = <TDataIn,>({
         });
     });
 
-    const setSearchValue = (x = '') => {
-        setSearch(x);
-        debouncedSearch();
-    };
+    const setSearchValue = useCallback(
+        (x = '') => {
+            setSearch(x);
+            debouncedSearch();
+        },
+        [debouncedSearch],
+    );
 
     const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => setSearchValue(target.value);
 
@@ -207,6 +212,7 @@ export const Table = <TDataIn,>({
         setExporting(true);
         const el = document.createElement('div');
 
+        // biome-ignore lint/complexity/noUselessFragments: You need it
         el.innerHTML = renderToString(<>{children}</>);
         const fileName = el.children.length > 0 ? el.children[0].textContent : undefined;
 
@@ -231,7 +237,7 @@ export const Table = <TDataIn,>({
 
     const icon = useMemo(
         () => () => <SearchOrClearButton hasValue={search.length > 0} onClick={setSearchValue} />,
-        [search],
+        [search, setSearchValue],
     );
 
     return (

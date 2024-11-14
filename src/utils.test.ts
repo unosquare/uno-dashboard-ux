@@ -1,27 +1,36 @@
-import { TableColumn } from './constants';
+import type { TableColumn } from './constants';
 import {
     formatTicks,
     getAlignment,
     getValueFormatted,
-    translateFormat,
     isFinancialMetric,
     isTenureObject,
     moneyToNumber,
+    translateFormat,
 } from './utils';
 
 describe('getAlignment', () => {
     it('returns text-left for paragraph data type', () => {
-        const tableColumn: TableColumn = { label: 'column', dataType: 'paragraph' };
+        const tableColumn: TableColumn = {
+            label: 'column',
+            dataType: 'paragraph',
+        };
         expect(getAlignment(tableColumn)).toBe('text-left');
     });
 
     it('returns text-left for first column of left-aligned data types', () => {
-        const tableColumn: TableColumn = { label: 'column', dataType: 'string' };
+        const tableColumn: TableColumn = {
+            label: 'column',
+            dataType: 'string',
+        };
         expect(getAlignment(tableColumn, 0)).toBe('text-left');
     });
 
     it('returns text-center for right-aligned data types', () => {
-        const tableColumn: TableColumn = { label: 'column', dataType: 'number' };
+        const tableColumn: TableColumn = {
+            label: 'column',
+            dataType: 'number',
+        };
         expect(getAlignment(tableColumn)).toBe('text-right');
     });
 
@@ -31,7 +40,11 @@ describe('getAlignment', () => {
     });
 
     it('returns custom text alignment class when provided', () => {
-        const tableColumn: TableColumn = { label: 'column', dataType: 'number', textAlign: 'center' };
+        const tableColumn: TableColumn = {
+            label: 'column',
+            dataType: 'number',
+            textAlign: 'center',
+        };
         expect(getAlignment(tableColumn)).toBe('text-center');
     });
 });

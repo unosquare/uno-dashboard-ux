@@ -1,5 +1,5 @@
-import * as zustand from 'zustand';
 import { act } from '@testing-library/react';
+import type * as zustand from 'zustand';
 
 const { create: actualCreate, createStore: actualCreateStore } = jest.requireActual<typeof zustand>('zustand');
 
@@ -43,8 +43,8 @@ export const createStore = (<T>(stateCreator: zustand.StateCreator<T>) => {
 // reset all stores after each test run
 afterEach(() => {
     act(() => {
-        storeResetFns.forEach((resetFn) => {
+        for (const resetFn of storeResetFns) {
             resetFn();
-        });
+        }
     });
 });

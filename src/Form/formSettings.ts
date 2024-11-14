@@ -1,4 +1,4 @@
-import { FormField } from '../constants';
+import type { FormField } from '../constants';
 
 export interface FormSettings<T, TData> {
     initialData: FormField<T>[];

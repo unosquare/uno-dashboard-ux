@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { type PropsWithChildren } from 'react';
 import tw from 'tailwind-styled-components';
 import { UnoLogo } from '../UnoLogo';
 

@@ -1,23 +1,24 @@
-import React, { useMemo, useState } from 'react';
-import { Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Flex } from '@tremor/react';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
-import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
-import { getColorClassNames } from '@tremor/react/dist/lib/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
+import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
 import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import { NoData } from '../NoData';
-import { ChartComponent, LegendFormatType } from '../constants';
-import { formatTicks } from '../utils';
-import { ChartLineShimmer } from '../ChartShimmers';
+import { getColorClassNames } from '@tremor/react/dist/lib/utils';
+import React, { useMemo, useState } from 'react';
+import { Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { ChartDecorators } from '../ChartCommon';
+import { ChartLineShimmer } from '../ChartShimmers';
+import { NoData } from '../NoData';
+import type { ChartComponent, LegendFormatType } from '../constants';
+import { formatTicks } from '../utils';
 
 export type legendXAxis = { left: LegendFormatType; right: LegendFormatType };
 export type lineChart = { dataKey: string; yAxisId: string };
 
 interface ComposedLineChartSettings<TDataIn> extends ChartComponent<TDataIn, Record<string, unknown>[]> {
     legend?: boolean;
-    onClick?: (e: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    onClick?: (e: any) => void;
     domain?: number;
     unit?: string;
     refLineY?: { value: number; label: string; color: string };
@@ -57,12 +58,12 @@ export const ComposedLineChart = <T,>({
     const [legendHeight, setLegendHeight] = useState(60);
     const dataStore: Record<string, unknown>[] = (rawData && dataTransformFn(rawData)) || [];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const tickFormatter = (t: any, orientation: 'left' | 'right') =>
         legendFormatTypes ? formatTicks(Number(t), legendFormatTypes[orientation]) : String(t);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const leftTickFormatter = (t: any) => tickFormatter(t, 'left');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const rightTickFormatter = (t: any) => tickFormatter(t, 'right');
 
     const categoryColors = constructCategoryColors(

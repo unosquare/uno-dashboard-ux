@@ -1,9 +1,9 @@
-import React from 'react';
-import { Legend, ReferenceLine, Tooltip } from 'recharts';
-import { getValueFormatted } from '../utils';
-import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
-import { LegendFormatType } from '../constants';
 import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
+import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
+import type React from 'react';
+import { Legend, ReferenceLine, Tooltip } from 'recharts';
+import type { LegendFormatType } from '../constants';
+import { getValueFormatted } from '../utils';
 
 export type ChartDecoratorsSettings = {
     keys: string[];

@@ -1,8 +1,9 @@
-import * as React from 'react';
 import { Flex, Text, Title } from '@tremor/react';
+import * as React from 'react';
 
 export const ErrorImage = (props: React.ComponentPropsWithRef<'svg'>) => (
     <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' {...props}>
+        <title>Error</title>
         <defs>
             <path id='a' d='M0 0h386v189.5H0z' />
             <path

@@ -75,6 +75,7 @@ export const Burger = ({ onClick }: BurgerSettings) => (
         onClick={onClick}
         cursor='pointer'
     >
+        <title>Burger Icon</title>
         <defs>
             <path id='a' d='M0 0h30v16.886H0z' />
             <mask id='b' maskContentUnits='userSpaceOnUse' maskUnits='userSpaceOnUse'>

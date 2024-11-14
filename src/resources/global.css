@@ -38,7 +38,7 @@
     text,
     svg,
     .__react_component_tooltip {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
     input::-webkit-outer-spin-button,
@@ -74,15 +74,14 @@
         }
     }
 
-    
     .alert-only-fade-in {
         @keyframes fadeIn {
-            0% { 
+            0% {
                 transform: translateY(-40px);
                 visibility: visible;
                 opacity: 0;
             }
-            100% { 
+            100% {
                 transform: translateY(0px);
                 visibility: visible;
                 opacity: 1;
@@ -92,12 +91,12 @@
 
     .alert-only-fade-out {
         @keyframes fadeOut {
-            0% { 
+            0% {
                 transform: translateY(0px);
                 visibility: visible;
                 opacity: 1;
             }
-            100% { 
+            100% {
                 transform: translateY(-40px);
                 visibility: hidden;
                 opacity: 0;

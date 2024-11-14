@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import { FieldGroupSettings, FormContainerSettings } from './Form/formSettings';
+import type { FieldGroupSettings, FormContainerSettings } from './Form/formSettings';
 
 export const StyledFormContainer = tw.div<FormContainerSettings>`
     grid

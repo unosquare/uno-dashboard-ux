@@ -1,8 +1,8 @@
-import React from 'react';
-import { getColumnSorting, Table } from './index';
 import { render } from '@testing-library/react';
-import { TableColumn, TableCellTypes } from '../constants';
+import React from 'react';
 import { TableCellContent } from '../TableCell';
+import type { TableCellTypes, TableColumn } from '../constants';
+import { Table, getColumnSorting } from './index';
 
 describe('getColumnSorting', () => {
     it('returns 1 when the column is sortable', () => {
@@ -14,21 +14,30 @@ describe('getColumnSorting', () => {
 
 describe('renderTableCell', () => {
     it('renders a paragraph when the data type is paragraph', () => {
-        const tableColumn: TableColumn = { label: 'column', dataType: 'paragraph' };
+        const tableColumn: TableColumn = {
+            label: 'column',
+            dataType: 'paragraph',
+        };
         const cellValue = 'This is a paragraph';
         const { container } = render(<TableCellContent data={cellValue} column={tableColumn} />);
         expect(container).toHaveTextContent(cellValue);
     });
 
     it('renders a string when the data type is string', () => {
-        const tableColumn: TableColumn = { label: 'column', dataType: 'string' };
+        const tableColumn: TableColumn = {
+            label: 'column',
+            dataType: 'string',
+        };
         const cellValue = 'This is a string';
         const { container } = render(<TableCellContent data={cellValue} column={tableColumn} />);
         expect(container).toHaveTextContent(cellValue);
     });
 
     it('renders a number when the data type is number', () => {
-        const tableColumn: TableColumn = { label: 'column', dataType: 'number' };
+        const tableColumn: TableColumn = {
+            label: 'column',
+            dataType: 'number',
+        };
         const cellValue = 123;
         const { container } = render(<TableCellContent data={cellValue} column={tableColumn} />);
         expect(container).toHaveTextContent(cellValue.toString());
@@ -56,14 +65,20 @@ describe('renderTableCell', () => {
     });
 
     it('renders a checkbox image when the data type is boolean', () => {
-        const tableColumn: TableColumn = { label: 'column', dataType: 'boolean' };
+        const tableColumn: TableColumn = {
+            label: 'column',
+            dataType: 'boolean',
+        };
         const cellValue = true;
         const { container } = render(<TableCellContent data={cellValue} column={tableColumn} />);
         expect(container.querySelector('svg')).toBeInTheDocument();
     });
 
     it('renders a bullet image when the data type is bullet', () => {
-        const tableColumn: TableColumn = { label: 'column', dataType: 'bullet' };
+        const tableColumn: TableColumn = {
+            label: 'column',
+            dataType: 'bullet',
+        };
         const cellValue = true;
         const { container } = render(<TableCellContent data={cellValue} column={tableColumn} />);
         expect(container.querySelector('span')).toBeInTheDocument();
@@ -72,8 +87,18 @@ describe('renderTableCell', () => {
 
 describe('Table', () => {
     const tableColumns: TableColumn[] = [
-        { label: 'Column 1', dataType: 'string', sortOrder: 1, sortDirection: 'asc' },
-        { label: 'Column 2', dataType: 'number', sortOrder: 2, sortDirection: 'desc' },
+        {
+            label: 'Column 1',
+            dataType: 'string',
+            sortOrder: 1,
+            sortDirection: 'asc',
+        },
+        {
+            label: 'Column 2',
+            dataType: 'number',
+            sortOrder: 2,
+            sortDirection: 'desc',
+        },
         { label: 'Column 3', dataType: 'money' },
         { label: 'Column 4', dataType: 'date' },
         { label: 'Column 5', dataType: 'link', excludeFromSort: true },
@@ -102,7 +127,9 @@ describe('Table', () => {
 
     it('renders with shimmer', () => {
         const data: undefined | TableCellTypes[][] = undefined;
-        const { container } = render(<Table columns={tableColumns} rawData={data} dataCallback={(x: undefined | TableCellTypes[][]) => []} />);
+        const { container } = render(
+            <Table columns={tableColumns} rawData={data} dataCallback={(x: undefined | TableCellTypes[][]) => []} />,
+        );
 
         const shimmer = container.querySelector('.loading-shimmer');
         expect(shimmer).toBeInTheDocument();
@@ -120,9 +147,14 @@ describe('Table', () => {
         expect(headers.length).toBe(tableColumns.length);
     });
 
-
     it('renders the correct number of footer', () => {
-        const { container } = render(<Table columns={tableColumns} rawData={tableData} calculateFooter={() => Array.from({ length: tableColumns.length }).map(() => '')} />);
+        const { container } = render(
+            <Table
+                columns={tableColumns}
+                rawData={tableData}
+                calculateFooter={() => Array.from({ length: tableColumns.length }).map(() => '')}
+            />,
+        );
         const headers = container.querySelectorAll('.tremor-TableFooterCell-root');
         expect(headers.length).toBe(tableColumns.length);
     });

@@ -1,7 +1,7 @@
-import { startTransition, useEffect, useMemo, useRef, useState } from 'react';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
-import { debounce } from 'uno-js';
 import { themeColorRange } from '@tremor/react/dist/lib/theme';
+import { startTransition, useEffect, useMemo, useRef, useState } from 'react';
+import { debounce } from 'uno-js';
 
 export const useDebounce = (callback: () => unknown, waitMilliseconds?: number) => {
     const ref = useRef<() => unknown>();
