@@ -18,7 +18,7 @@
         "recharts": "2.13.3",
         "tailwind-merge": "^2.5.4",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.127.0",
+        "uno-js": "^3.127.1",
         "uuid": "^11.0.3",
         "zustand": "5.0.1"
     },
@@ -40,7 +40,7 @@
         "jest-environment-jsdom": "^29.7.0",
         "lint-staged": "^15.2.10",
         "postcss-loader": "^8.1.1",
-        "tailwindcss": "^3.4.14",
+        "tailwindcss": "^3.4.15",
         "ts-jest": "^29.2.5",
         "typescript": "^5.6.3"
     },
