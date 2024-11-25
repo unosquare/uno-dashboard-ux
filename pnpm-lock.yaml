@@ -52,11 +52,11 @@ importers:
         specifier: 1.9.4
         version: 1.9.4
       '@rsbuild/core':
-        specifier: 1.1.4
-        version: 1.1.4
+        specifier: 1.1.5
+        version: 1.1.5
       '@rsbuild/plugin-react':
         specifier: 1.0.7
-        version: 1.0.7(@rsbuild/core@1.1.4)
+        version: 1.0.7(@rsbuild/core@1.1.5)
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.6.3
@@ -599,8 +599,8 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
 
-  '@rsbuild/core@1.1.4':
-    resolution: {integrity: sha512-fN13hH6Ag0WgCCDUJErNvGs39hSePr8MTaJu1TjUZbFAY3DtOsUHhEb2V5zCUiaeMLMz7ef+krj7+duAJkizog==}
+  '@rsbuild/core@1.1.5':
+    resolution: {integrity: sha512-hiczO0D2ipBt8TM8TZ0BP9kcuS6WdIq2eqLEOQuSTHQ1SDD4fg1u59Q9yaBq2Ku+tX5S2Ud+uRvDXz2GUN7SNQ==}
     engines: {node: '>=16.7.0'}
     hasBin: true
 
@@ -3504,16 +3504,16 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@rsbuild/core@1.1.4':
+  '@rsbuild/core@1.1.5':
     dependencies:
       '@rspack/core': 1.1.3(@swc/helpers@0.5.15)
       '@rspack/lite-tapable': 1.0.1
       '@swc/helpers': 0.5.15
       core-js: 3.39.0
 
-  '@rsbuild/plugin-react@1.0.7(@rsbuild/core@1.1.4)':
+  '@rsbuild/plugin-react@1.0.7(@rsbuild/core@1.1.5)':
     dependencies:
-      '@rsbuild/core': 1.1.4
+      '@rsbuild/core': 1.1.5
       '@rspack/plugin-react-refresh': 1.0.0(react-refresh@0.14.2)
       react-refresh: 0.14.2
 
