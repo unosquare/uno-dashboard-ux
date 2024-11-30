@@ -28,3 +28,12 @@ export const onSelectChange = (event: string, callback: (x: string) => void, def
     callback(event);
     if (defaultCallback) defaultCallback(event);
 };
+
+export const onMultiSelectChange = (
+    event: string[],
+    callback: (x: string[]) => void,
+    defaultCallback?: (x: string[]) => void,
+) => {
+    callback(event);
+    if (defaultCallback) defaultCallback(event);
+};
