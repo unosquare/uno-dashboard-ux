@@ -37,6 +37,8 @@ export enum FormFieldTypes {
     VirtualSelect = 'virtualselect',
     Checkbox = 'checkbox',
     TextArea = 'textarea',
+    MultiSelect = 'multiselect',
+    File = 'file',
 }
 
 export type ClassNameComponent = {

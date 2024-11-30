@@ -1,12 +1,24 @@
-import { Button, DatePicker, Flex, NumberInput, Select, SelectItem, Text, TextInput } from '@tremor/react';
-import React, { useState } from 'react';
+import {
+    Button,
+    DatePicker,
+    Flex,
+    MultiSelect,
+    MultiSelectItem,
+    NumberInput,
+    Select,
+    SelectItem,
+    Text,
+    TextInput,
+    Textarea,
+} from '@tremor/react';
+import { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { VirtualSelect } from '../VirtualSelect';
 import { FormFieldTypes } from '../constants';
 import { StyledFieldGroup, StyledFormContainer } from '../styled';
 import type { FormSettings } from './formSettings';
-import { StyledCheckbox } from './styled';
-import { extractData, getFieldBaseProps, onSelectChange } from './utils';
+import { StyledCheckbox, StyledFileInput } from './styled';
+import { extractData, getFieldBaseProps, onMultiSelectChange, onSelectChange } from './utils';
 
 export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, columns = 3 }: FormSettings<T, TData>) => {
     const {
@@ -122,10 +134,57 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, colum
                                             )}
                                         />
                                     );
+                                case FormFieldTypes.MultiSelect:
+                                    return (
+                                        <Controller
+                                            name={`table.${index}.value`}
+                                            rules={{
+                                                required: !updatedField.notRequired,
+                                            }}
+                                            control={control}
+                                            render={({ field }) => (
+                                                <MultiSelect
+                                                    value={
+                                                        initialData[index].options
+                                                            ?.filter((c) =>
+                                                                field.value && (field.value as string[]).length > 0
+                                                                    ? (field.value as string[]).includes(
+                                                                          c.value.toString(),
+                                                                      )
+                                                                    : undefined,
+                                                            )
+                                                            ?.map((c) => String(c.value)) ?? []
+                                                    }
+                                                    onValueChange={(e) => onMultiSelectChange(e, field.onChange)}
+                                                    disabled={disable || updatedField.disabled}
+                                                    className='my-1'
+                                                    ref={field.ref}
+                                                >
+                                                    {(initialData[index].options ?? []).map((u) => (
+                                                        <MultiSelectItem key={u.value} value={u.value.toString()}>
+                                                            {u.label}
+                                                        </MultiSelectItem>
+                                                    ))}
+                                                </MultiSelect>
+                                            )}
+                                        />
+                                    );
                                 case FormFieldTypes.Checkbox:
                                     return <StyledCheckbox {...fieldProps} />;
                                 case FormFieldTypes.Number:
                                     return <NumberInput {...fieldProps} />;
+                                case FormFieldTypes.TextArea:
+                                    return <Textarea {...fieldProps} className='max-w-full' />;
+                                case FormFieldTypes.File:
+                                    return (
+                                        <StyledFileInput
+                                            id='file'
+                                            name='file'
+                                            type='file'
+                                            className='mt-1'
+                                            accept='.pdf'
+                                        />
+                                    );
                                 default:
                                     return <TextInput {...fieldProps} type='text' />;
                             }
