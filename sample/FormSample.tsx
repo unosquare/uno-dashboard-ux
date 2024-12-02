@@ -1,6 +1,6 @@
 import { Title } from '@tremor/react';
 import React from 'react';
-import { FormFieldTypes, Form } from '../src';
+import { Form, FormFieldTypes } from '../src';
 
 const selectOptions = [
     { label: 'USA', value: 'USA' },
@@ -22,7 +22,7 @@ const fields = [
         label: 'Country',
         name: 'country',
         type: FormFieldTypes.VirtualSelect,
-        options: selectOptions
+        options: selectOptions,
     },
     {
         label: 'Birth Country',
@@ -40,6 +40,17 @@ const fields = [
         label: 'License Date',
         name: 'licenseDate',
         type: FormFieldTypes.Date,
+        notRequired: true,
+    },
+    {
+        label: 'Description',
+        name: 'description',
+        type: FormFieldTypes.TextArea,
+    },
+    {
+        label: 'Resume',
+        name: 'resume',
+        type: FormFieldTypes.File,
         notRequired: true,
     },
 ];
