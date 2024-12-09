@@ -24,7 +24,7 @@
     },
     "devDependencies": {
         "@biomejs/biome": "1.9.4",
-        "@rsbuild/core": "1.1.7",
+        "@rsbuild/core": "1.1.9",
         "@rsbuild/plugin-react": "1.0.7",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.0.1",
