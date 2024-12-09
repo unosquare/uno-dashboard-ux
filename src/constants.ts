@@ -87,7 +87,7 @@ export type TableColumn = HasLabel & {
         cellValue: TableCellTypes,
         rawData: TDataIn,
         data: TableCellTypes[][],
-    ) => JSX.Element;
+    ) => React.JSX.Element;
     formatterOptions?: {
         keepFormat?: boolean;
         decimals?: number;
