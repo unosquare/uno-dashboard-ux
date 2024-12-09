@@ -4,7 +4,7 @@ import { startTransition, useEffect, useMemo, useRef, useState } from 'react';
 import { debounce } from 'uno-js';
 
 export const useDebounce = (callback: () => unknown, waitMilliseconds?: number) => {
-    const ref = useRef<() => unknown>(null);
+    const ref = useRef<() => unknown>();
 
     useEffect(() => {
         ref.current = callback;
