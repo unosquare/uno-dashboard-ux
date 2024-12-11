@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#headlessui-portal-root > div[data-headlessui-portal] > div[role="listbox"] {
+    z-index: 41;
+}
+
 .recharts-legend-item-text,
 .recharts-cartesian-axis-tick-value {
     font-size: 13px;
