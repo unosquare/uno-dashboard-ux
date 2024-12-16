@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@fluentui/react-icons':
         specifier: ^2.0.267
-        version: 2.0.267(react@18.3.1)
+        version: 2.0.269(react@18.3.1)
       '@headlessui/react':
         specifier: 0.0.0-insiders.ce17c6d
         version: 0.0.0-insiders.ce17c6d(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -397,8 +397,8 @@ packages:
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
-  '@fluentui/react-icons@2.0.267':
-    resolution: {integrity: sha512-Hxz7PUhak14NKRRY7VKdP3x4gebQKezFYAzjNNJTQnFZGVTjLWzl5NiMEZZm1cX7xsjKwvs7YkxuHckdaLtWfQ==}
+  '@fluentui/react-icons@2.0.269':
+    resolution: {integrity: sha512-UBIqBg4fZYIT77TQpx4FnZGqpL4LoCc5vpqjBXWP2FUmMDgZp5yWHZwGq+sUWFRdqK8cU+bzYhHz4jqQpIRYlQ==}
     peerDependencies:
       react: '>=16.8.0 <19.0.0'
 
@@ -3227,7 +3227,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.8': {}
 
-  '@fluentui/react-icons@2.0.267(react@18.3.1)':
+  '@fluentui/react-icons@2.0.269(react@18.3.1)':
     dependencies:
       '@griffel/react': 1.5.11(react@18.3.1)
       react: 18.3.1
