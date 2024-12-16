@@ -15,7 +15,7 @@
         "react-dom": "^18.3.1",
         "react-hook-form": "7.54.0",
         "react-tooltip": "5.28.0",
-        "recharts": "2.14.1",
+        "recharts": "2.15.0",
         "tailwind-merge": "^2.5.5",
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.127.3",
