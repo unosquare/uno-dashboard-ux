@@ -32,3 +32,4 @@ export * from './UnoLogo';
 export * from './Tooltip';
 export * from './VirtualSelect';
 export * from './ThemeSwitcher';
+export * from './HorizontalSelector';
