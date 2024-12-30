@@ -1,15 +1,14 @@
 import { ChevronLeft20Regular, ChevronRight20Regular } from '@fluentui/react-icons';
 import { Flex, Text } from '@tremor/react';
-import type React from 'react';
+import React, { type PropsWithChildren } from 'react';
 import { StyledButtonContainer, StyledValueContainer } from './styled';
 
-interface HorizontalSelectorSettings {
-    children: React.ReactNode;
+export type HorizontalSelectorSettings = {
     label: string;
     onValueChange: (isNext: boolean) => void;
-}
+};
 
-export default ({ children, label, onValueChange }: HorizontalSelectorSettings) => (
+export default ({ children, label, onValueChange }: PropsWithChildren<HorizontalSelectorSettings>) => (
     <Flex justifyContent='between' alignItems='center' className='gap-4'>
         <Text>{label}</Text>
         <StyledButtonContainer>
