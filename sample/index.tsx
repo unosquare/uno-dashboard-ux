@@ -42,7 +42,6 @@ import FormSample from './FormSample';
 import ReadOnlyFormSample from './ReadOnlyFormSample';
 import RegularTable from './RegularTable';
 import YearSelectorSample from './YearSelectorSample';
-import QuarterSelectorSample from './QuarterSelectorSample';
 
 export enum options {
     A = 'Apple',
@@ -110,7 +109,6 @@ const Application = () => {
                                 />
                             </StyledMenuActions>
                             <YearSelectorSample />
-                            <QuarterSelectorSample />
                             <Flex justifyContent='between' alignItems='center' className='gap-4'>
                                 <Text>Options</Text>
                                 <Select enableClear={false} value={currentOption} onValueChange={setCurrentOption}>
