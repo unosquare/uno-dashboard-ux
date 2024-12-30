@@ -41,6 +41,7 @@ import OnlineTable from './OnlineTable';
 import FormSample from './FormSample';
 import ReadOnlyFormSample from './ReadOnlyFormSample';
 import RegularTable from './RegularTable';
+import YearSelectorSample from './YearSelectorSample';
 
 export enum options {
     A = 'Apple',
@@ -107,6 +108,7 @@ const Application = () => {
                                     className='text-tremor-content dark:text-dark-tremor-content'
                                 />
                             </StyledMenuActions>
+                            <YearSelectorSample />
                             <Flex justifyContent='between' alignItems='center' className='gap-4'>
                                 <Text>Options</Text>
                                 <Select enableClear={false} value={currentOption} onValueChange={setCurrentOption}>
