@@ -8,7 +8,11 @@ export type HorizontalSelectorSettings = {
     onValueChange: (isNext: boolean) => void;
 };
 
-export default ({ children, label, onValueChange }: PropsWithChildren<HorizontalSelectorSettings>) => (
+export const HorizontalSelector = ({
+    children,
+    label,
+    onValueChange,
+}: PropsWithChildren<HorizontalSelectorSettings>) => (
     <Flex justifyContent='between' alignItems='center' className='gap-4'>
         <Text>{label}</Text>
         <StyledButtonContainer>
