@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import HorizontalSelector from './index';
+import { HorizontalSelector } from './index';
 
 describe('HorizontalSelector Component', () => {
     const mockOnValueChange = jest.fn();

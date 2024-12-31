@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useShallow } from 'zustand/react/shallow';
 import { HorizontalSelector } from '../src';
 
 const thisYear = new Date().getFullYear();
