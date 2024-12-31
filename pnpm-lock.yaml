@@ -39,8 +39,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       uno-js:
-        specifier: ^3.127.3
-        version: 3.127.3
+        specifier: ^3.127.4
+        version: 3.127.4
       uuid:
         specifier: ^11.0.3
         version: 11.0.3
@@ -2735,8 +2735,8 @@ packages:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
 
-  uno-js@3.127.3:
-    resolution: {integrity: sha512-rE5RvRk+uDV+44C47ptwQzOSdCGUyNYBCFXsEwIfjTP3O57KWFIgv/Asz9ueMGJ9Bx8jFKH+mvCCE2nvOW3xUw==}
+  uno-js@3.127.4:
+    resolution: {integrity: sha512-OkaMOQMPmIUrdzpRmZF56eCVjn0M6z9Fx+v1BsyQXZ0cYhrwsozT6QEZAS/sAVoeQLYMmTZxyiTaprfRoOv6pQ==}
 
   update-browserslist-db@1.0.13:
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
@@ -5873,7 +5873,7 @@ snapshots:
 
   universalify@0.2.0: {}
 
-  uno-js@3.127.3: {}
+  uno-js@3.127.4: {}
 
   update-browserslist-db@1.0.13(browserslist@4.23.0):
     dependencies:
