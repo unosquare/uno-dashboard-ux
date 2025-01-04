@@ -18,7 +18,7 @@
         "recharts": "2.15.0",
         "tailwind-merge": "^2.6.0",
         "tailwind-styled-components": "^2.2.0",
-        "uno-js": "^3.127.4",
+        "uno-js": "^3.127.5",
         "uuid": "^11.0.3",
         "zustand": "5.0.2"
     },
@@ -29,7 +29,7 @@
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.1.0",
         "@types/jest": "^29.5.14",
-        "@types/node": "^22.10.2",
+        "@types/node": "^22.10.5",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.1",
         "@types/recharts": "1.8.29",
