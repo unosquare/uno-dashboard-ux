@@ -1,10 +1,7 @@
+import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
+import { Button, Card, Col, Dialog, DialogPanel, Flex, Grid, Select, SelectItem, Text } from '@tremor/react';
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import {
-    ArrowSync24Regular,
-    Dismiss24Regular,
-} from '@fluentui/react-icons';
-import { Button, Card, Col, Dialog, DialogPanel, Flex, Grid, Select, SelectItem, Text } from '@tremor/react';
 import {
     Alert,
     AwaitableMetric,
@@ -15,9 +12,11 @@ import {
     ChartFunnel,
     ComposedLineChart,
     DataChart,
+    DialogHeader,
     ErrorBoundary,
     Footer,
     InfoDialog,
+    InfoDialogTitle,
     MenuContainer,
     MenuSection,
     MenuSubSection,
@@ -27,21 +26,19 @@ import {
     SearchBox,
     StyledMenuActions,
     StyledMenuSearchBox,
+    ThemeSwitcher,
     TremorContainer,
     VirtualSelect,
     useAlertStore,
     useToggle,
-    InfoDialogTitle,
-    DialogHeader,
-    ThemeSwitcher,
 } from '../src';
 import '../src/resources/global.css';
-import { getLargeSelectOptions } from './data';
-import OnlineTable from './OnlineTable';
 import FormSample from './FormSample';
+import OnlineTable from './OnlineTable';
 import ReadOnlyFormSample from './ReadOnlyFormSample';
 import RegularTable from './RegularTable';
 import YearSelectorSample from './YearSelectorSample';
+import { getLargeSelectOptions } from './data';
 
 export enum options {
     A = 'Apple',
@@ -152,9 +149,7 @@ const Application = () => {
                     </DialogPanel>
                 </Dialog>
                 <InfoDialog>
-                    <InfoDialogTitle>
-                        What is this Report about
-                    </InfoDialogTitle>
+                    <InfoDialogTitle>What is this Report about</InfoDialogTitle>
                     <Text>About something</Text>
                 </InfoDialog>
                 <VirtualSelect

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Title } from '@tremor/react';
-import { Table, TableColumn, TableCell } from '../src';
+import React, { useState } from 'react';
+import { Table, TableCell, type TableColumn } from '../src';
 
 type onlineDto = {
     userId: number;
@@ -34,8 +34,9 @@ export default () => {
             .then(setOnlineData);
     }, []);
 
-    return (<Table columns={onlineColumns} rawData={onlineData}>
-        <Title className='w-full'>Online Data</Title>
-    </Table>);
+    return (
+        <Table columns={onlineColumns} rawData={onlineData}>
+            <Title className='w-full'>Online Data</Title>
+        </Table>
+    );
 };
-

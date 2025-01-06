@@ -19,7 +19,7 @@
         "tailwind-merge": "^2.6.0",
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.127.5",
-        "uuid": "^11.0.3",
+        "uuid": "^11.0.4",
         "zustand": "5.0.2"
     },
     "devDependencies": {

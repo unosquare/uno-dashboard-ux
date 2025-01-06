@@ -1,4 +1,4 @@
-import { ReactSelectOption } from '../src/constants';
+import type { ReactSelectOption } from '../src/constants';
 
 const USD = 'USD';
 

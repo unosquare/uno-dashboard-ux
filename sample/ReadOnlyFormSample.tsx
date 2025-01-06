@@ -11,7 +11,7 @@ const selectOptions = [
 const fields = [
     {
         label: 'Name',
-        value: 'John Doe'
+        value: 'John Doe',
     },
     {
         label: 'Age',
