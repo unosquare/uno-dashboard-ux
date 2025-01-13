@@ -10,7 +10,7 @@
     "dependencies": {
         "@fluentui/react-icons": "^2.0.270",
         "@headlessui/react": "0.0.0-insiders.ce17c6d",
-        "@tremor/react": "^3.18.6",
+        "@tremor/react": "^3.18.7",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-hook-form": "7.54.2",
