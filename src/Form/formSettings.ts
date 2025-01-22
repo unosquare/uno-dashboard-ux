@@ -5,6 +5,7 @@ export interface FormSettings<T, TData> {
     columns?: number;
     onSave: (data: TData) => Promise<unknown>;
     onCancel?: () => void;
+    onChange?: (name: string, value: string | number | Date | undefined) => void;
     saveLabel?: string;
 }
 

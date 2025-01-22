@@ -20,7 +20,14 @@ import type { FormSettings } from './formSettings';
 import { StyledCheckbox, StyledFileInput } from './styled';
 import { extractData, getFieldBaseProps, onMultiSelectChange, onSelectChange } from './utils';
 
-export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, columns = 3 }: FormSettings<T, TData>) => {
+export const Form = <T, TData>({
+    initialData,
+    onSave,
+    onCancel,
+    onChange,
+    saveLabel,
+    columns = 3,
+}: FormSettings<T, TData>) => {
     const {
         register,
         watch,
@@ -58,6 +65,10 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, colum
                         {(() => {
                             const updatedField = initialData[index] ?? item;
                             const fieldProps = getFieldBaseProps(updatedField, register, index, disable);
+
+                            const handleFieldChange = (value: string | number | Date | undefined) =>
+                                onChange?.(updatedField.name, value);
+
                             switch (item.type) {
                                 case FormFieldTypes.Date:
                                     return (
@@ -71,7 +82,10 @@ export const Form = <T, TData>({ initialData, onSave, onCancel, saveLabel, colum
                                                 <DatePicker
                                                     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                                                     value={field.value as any}
-                                                    onValueChange={field.onChange}
+                                                    onValueChange={(value) => {
+                                                        field.onChange(value);
+                                                        handleFieldChange(value);
+                                                    }}
                                                     disabled={disable || updatedField.disabled}
                                                     enableClear={false}
                                                     className='my-1'
