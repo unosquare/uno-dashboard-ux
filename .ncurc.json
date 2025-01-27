@@ -1,4 +1,4 @@
 {
     "upgrade": true,
-    "reject": ["@headlessui/react", "react", "react-dom", "@types/react", "@types/react-dom"]
+    "reject": ["@headlessui/react", "react", "react-dom", "@types/react", "@types/react-dom", "tailwindcss"]
 }
