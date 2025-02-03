@@ -1,9 +1,12 @@
 {
     "name": "uno-dashboard-ux",
-    "version": "4.51.21",
+    "version": "4.51.22",
     "description": "Unosquare Dashboard UX/UI",
     "main": "dist/index.js",
-    "files": ["dist", "tailwind.config.js"],
+    "files": [
+        "dist",
+        "tailwind.config.js"
+    ],
     "dependencies": {
         "@fluentui/react-icons": "^2.0.274",
         "@headlessui/react": "0.0.0-insiders.ce17c6d",
@@ -56,7 +59,9 @@
         "url": "git+https://github.com/unosquare/uno-dashboard-ux.git"
     },
     "lint-staged": {
-        "*.{ts,html,tsx}": ["pnpm lint:fix"]
+        "*.{ts,html,tsx}": [
+            "pnpm lint:fix"
+        ]
     },
     "author": "Unosquare",
     "license": "MIT",
