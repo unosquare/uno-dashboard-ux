@@ -33,8 +33,8 @@ importers:
         specifier: 2.15.1
         version: 2.15.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
-        specifier: ^3.0.1
-        version: 3.0.1
+        specifier: 2.6.0
+        version: 2.6.0
       tailwind-styled-components:
         specifier: ^2.2.0
         version: 2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2625,9 +2625,6 @@ packages:
 
   tailwind-merge@2.6.0:
     resolution: {integrity: sha512-P+Vu1qXfzediirmHOC3xKGAYeZtPcV9g76X+xg2FD4tYgR71ewMA35Y3sCz3zhiN/dwefRpJX0yBcgwi1fXNQA==}
-
-  tailwind-merge@3.0.1:
-    resolution: {integrity: sha512-AvzE8FmSoXC7nC+oU5GlQJbip2UO7tmOhOfQyOmPhrStOGXHU08j8mZEHZ4BmCqY5dWTCo4ClWkNyRNx1wpT0g==}
 
   tailwind-styled-components@2.2.0:
     resolution: {integrity: sha512-Ogemwk0p69aU8WE/ooJZHjqstdJgT5R6HGU6TFz2uSnveSEtvW+C6aWOjGCvCr5H/bREv0IbbQ4yODknRrLBRQ==}
@@ -5772,8 +5769,6 @@ snapshots:
   tailwind-merge@1.14.0: {}
 
   tailwind-merge@2.6.0: {}
-
-  tailwind-merge@3.0.1: {}
 
   tailwind-styled-components@2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
