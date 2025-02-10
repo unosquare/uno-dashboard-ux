@@ -24,7 +24,7 @@
     },
     "devDependencies": {
         "@biomejs/biome": "1.9.4",
-        "@rsbuild/core": "1.2.4",
+        "@rsbuild/core": "1.2.5",
         "@rsbuild/plugin-react": "1.1.0",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.2.0",
@@ -68,5 +68,11 @@
     "bugs": {
         "url": "https://github.com/unosquare/uno-dashboard-ux/issues"
     },
-    "homepage": "https://github.com/unosquare/uno-dashboard-ux#readme"
+    "homepage": "https://github.com/unosquare/uno-dashboard-ux#readme",
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "@biomejs/biome",
+            "core-js"
+        ]
+    }
 }
