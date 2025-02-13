@@ -1,7 +1,7 @@
 import { Dismiss24Regular, Search24Regular } from '@fluentui/react-icons';
-import { TextInput } from '@tremor/react';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDebounce } from '../hooks';
+import { TextInput } from '../TextInput';
 
 export type SearchBoxSettings = {
     placeholder?: string;

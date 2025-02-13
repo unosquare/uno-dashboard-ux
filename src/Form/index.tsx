@@ -5,7 +5,6 @@ import {
     NumberInput,
     Select,
     SelectItem,
-    TextInput,
     Textarea,
 } from '@tremor/react';
 import { useState } from 'react';
@@ -19,6 +18,7 @@ import { extractData, getFieldBaseProps, onMultiSelectChange, onSelectChange } f
 import { Text } from '../TextElements';
 import { Flex } from '../Flex';
 import { Button } from '../Button';
+import { TextInput } from '../TextInput';
 
 export const Form = <T, TData>({
     initialData,
