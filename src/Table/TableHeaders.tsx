@@ -1,10 +1,10 @@
 import { CaretDown12Regular, CaretUp12Regular } from '@fluentui/react-icons';
-import { TableRow } from './TableRow';
-import type { TableColumn, SortDirection } from '../constants';
-import { getAlignment } from '../utils';
 import tw from 'tailwind-styled-components';
+import type { SortDirection, TableColumn } from '../constants';
+import { getAlignment } from '../utils';
 import { TableHead } from './TableHead';
 import { TableHeaderCell } from './TableHeaderCell';
+import { TableRow } from './TableRow';
 
 type HeaderSettings = {
     $sortable: boolean;

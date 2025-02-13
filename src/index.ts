@@ -23,6 +23,7 @@ export * from './Flex';
 export * from './Grid';
 export * from './HorizontalSelector';
 export * from './InfoDialog';
+export * from './Dialog';
 export * from './Menu';
 export * from './Metric';
 export * from './List';

@@ -4,13 +4,13 @@ import tw from 'tailwind-styled-components';
 import { formatter, toMoney, toPercentage } from 'uno-js';
 import { v4 as uuidv4 } from 'uuid';
 import { Flex } from '../Flex';
+import { List, ListItem } from '../List';
 import { BasicTooltip } from '../Tooltip';
 import type { FinancialMetric, TableCellTypes, TableColumn, Tenure } from '../constants';
 import { useToggle } from '../hooks';
+import { makeClassName } from '../theme';
 import { tremorTwMerge } from '../tremorTwMerge';
 import { getAlignment, translateType } from '../utils';
-import { makeClassName } from '../theme';
-import { List, ListItem } from '../List';
 
 const renderLinkString = (data: TableCellTypes) => {
     if (Array.isArray(data)) {
@@ -186,7 +186,7 @@ export const TableCell = React.forwardRef<
             makeTableCellClassName('root'),
             'align-middle p-2 whitespace-normal text-xs/[13px]',
             getAlignment(column, index),
-            className
+            className,
         )}
         {...other}
     >

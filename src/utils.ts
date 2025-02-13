@@ -6,7 +6,7 @@ const rightAlign: Array<DataTypes | undefined> = ['decimal', 'number', 'money'];
 
 export const getAlignment = (tableColumn?: TableColumn, index?: number) => {
     if (!tableColumn) return '';
-    
+
     if (tableColumn.textAlign) return `text-${tableColumn.textAlign.toLowerCase()}`;
 
     const { dataType } = tableColumn;

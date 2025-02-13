@@ -30,8 +30,8 @@ importers:
         specifier: 5.28.0
         version: 5.28.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-transition-state:
-        specifier: ^2.1.2
-        version: 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^2.3.0
+        version: 2.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       recharts:
         specifier: 2.15.1
         version: 2.15.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2379,8 +2379,8 @@ packages:
       react: '>=16.6.0'
       react-dom: '>=16.6.0'
 
-  react-transition-state@2.1.2:
-    resolution: {integrity: sha512-RkDYBkj1V1ZqBA5AwQPrMt2Uagwsx6b//GVJdRDhs/t0o66w2nhQiyHyFGQEI60mgtbaIdLm8yhBRCvhA+FxEg==}
+  react-transition-state@2.3.0:
+    resolution: {integrity: sha512-OucQRyIpeq5g1/5qSBJH4p4U+SzYEoB3MsAXXz3ty116rPqG4jhwrzInImZ2gFi4XOffeLu6HNCZvkCM3DKaeg==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -3754,7 +3754,7 @@ snapshots:
       react: 18.3.1
       react-day-picker: 8.10.1(date-fns@3.6.0)(react@18.3.1)
       react-dom: 18.3.1(react@18.3.1)
-      react-transition-state: 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-transition-state: 2.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       recharts: 2.15.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge: 2.6.0
 
@@ -5536,7 +5536,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  react-transition-state@2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-transition-state@2.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
