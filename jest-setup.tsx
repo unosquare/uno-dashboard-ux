@@ -5,7 +5,6 @@ import { TextEncoder } from 'util';
 Object.assign(global, { TextEncoder });
 
 beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete window.ResizeObserver;
     window.ResizeObserver = jest.fn().mockImplementation(() => ({

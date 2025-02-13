@@ -171,6 +171,8 @@ export const colorValues = [
 
 export type Color = (typeof colorValues)[number];
 
+export type ButtonVariant = "primary" | "secondary" | "light";
+
 export type HorizontalPosition = 'left' | 'right';
 
 export type VerticalPosition = 'top' | 'bottom';
@@ -184,3 +186,16 @@ export const VerticalPositions: { [key: string]: VerticalPosition } = {
     Top: 'top',
     Bottom: 'bottom',
 };
+
+const sizeValues = ["xs", "sm", "md", "lg", "xl"] as const;
+
+export type Size = (typeof sizeValues)[number];
+
+export const Sizes: { [key: string]: Size } = {
+    XS: "xs",
+    SM: "sm",
+    MD: "md",
+    LG: "lg",
+    XL: "xl",
+  };
+  

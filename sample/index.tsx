@@ -1,5 +1,5 @@
 import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
-import { Button, Col, Dialog, DialogPanel, Grid, Select, SelectItem } from '@tremor/react';
+import { Dialog, DialogPanel, Select, SelectItem } from '@tremor/react';
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
@@ -8,7 +8,9 @@ import {
     BasicToolbar,
     Blur,
     Burger,
+    Button,
     Card,
+    Col,
     ChartBar,
     ChartFunnel,
     ComposedLineChart,
@@ -17,6 +19,7 @@ import {
     ErrorBoundary,
     Flex,
     Footer,
+    Grid,
     InfoDialog,
     InfoDialogTitle,
     MenuContainer,
@@ -133,7 +136,7 @@ const Application = () => {
             </NavBar>
             <BasicToolbar>
                 <Text>This is a toolbar: {counter}</Text>
-                <Button size='xs' onClick={setToggle}>
+                <Button size='xs' onClick={setToggle} variant='light'>
                     Toggle Data
                 </Button>
                 <Button size='xs' onClick={() => setAlert(true)}>
@@ -142,7 +145,7 @@ const Application = () => {
                 <Button size='xs' onClick={() => setAlert(false, 'Error', false)}>
                     Error
                 </Button>
-                <Button size='xs' onClick={setModalOpen}>
+                <Button size='xs' onClick={setModalOpen} variant='secondary'>
                     Modal
                 </Button>
                 <Dialog open={modalOpen} onClose={setModalOpen}>

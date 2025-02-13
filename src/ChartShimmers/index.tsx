@@ -1,4 +1,3 @@
-import ChartLegend from '@tremor/react/dist/components/chart-elements/common/ChartLegend';
 import { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, ResponsiveContainer } from 'recharts';
 import { twMerge } from 'tailwind-merge';
@@ -7,6 +6,7 @@ import type { ClassNameComponent, Color } from '../constants';
 import { tremorTwMerge } from '../tremorTwMerge';
 import { Flex } from '../Flex';
 import { colorPalette, getColorClassNames } from '../theme';
+import { ChartLegend } from '../ChartLegend';
 
 const defaultShimmerColors = new Map<string, Color>();
 defaultShimmerColors.set('Loading', 'gray');

@@ -1,4 +1,3 @@
-import ChartTooltip from '@tremor/react/dist/components/chart-elements/common/ChartTooltip';
 import { useMemo } from 'react';
 import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
 import { twMerge } from 'tailwind-merge';
@@ -7,6 +6,7 @@ import type { ChartComponent, ChartData } from '../constants';
 import { getValueFormatted } from '../utils';
 import { Flex } from '../Flex';
 import { BaseColors, colorPalette, constructCategoryColors, getColorClassNames, themeColorRange } from '../theme';
+import { ChartTooltip } from '../ChartTooltip';
 
 export type PieChartProps<T> = ChartComponent<T, ChartData[]> & {
     serieName?: string;

@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { Tooltip } from 'react-tooltip';
 import tw from 'tailwind-styled-components';
 

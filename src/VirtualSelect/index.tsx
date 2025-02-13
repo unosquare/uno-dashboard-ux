@@ -1,11 +1,10 @@
 import { ChevronDown16Filled, DismissCircle16Filled } from '@fluentui/react-icons';
 import { Combobox } from '@headlessui/react';
-import { getSelectButtonColors, hasValue } from '@tremor/react/dist/components/input-elements/selectUtils';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { ReactSelectOption } from '../constants';
 import { useDebounce } from '../hooks';
 import { tremorTwMerge } from '../tremorTwMerge';
-import { makeClassName } from '../theme';
+import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
 
 export interface SearchSelectProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;

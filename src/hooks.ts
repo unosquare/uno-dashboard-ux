@@ -71,3 +71,15 @@ export const useChart = <T>(
 
     return [dataStore, categoryColors, keys];
 };
+
+export const useOnWindowResize = (handler: () => void) => {
+    useEffect(() => {
+        const handleResize = () => {
+            handler();
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, [handler]);
+};

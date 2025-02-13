@@ -1,10 +1,11 @@
 import { colorValues, type Color } from './constants';
+import { tremorTwMerge } from './tremorTwMerge';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type ValueFormatter = (value: number) => string;
+  
 const justifyContentValues = ['start', 'end', 'center', 'between', 'around', 'evenly'] as const;
 export type JustifyContent = (typeof justifyContentValues)[number];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const alignItemsValues = ['start', 'end', 'center', 'baseline', 'stretch'] as const;
 export type AlignItems = (typeof alignItemsValues)[number];
 
@@ -150,4 +151,20 @@ export const themeColorRange: Color[] = [
     BaseColors.Teal,
     BaseColors.Pink,
     BaseColors.Rose,
-  ];
+];
+
+export const getSelectButtonColors = (hasSelection: boolean, isDisabled: boolean, hasError = false) =>
+    tremorTwMerge(
+        isDisabled
+            ? 'bg-tremor-background-subtle dark:bg-dark-tremor-background-subtle'
+            : 'bg-tremor-background dark:bg-dark-tremor-background',
+        !isDisabled && 'hover:bg-tremor-background-muted dark:hover:bg-dark-tremor-background-muted',
+        hasSelection
+            ? 'text-tremor-content-emphasis dark:text-dark-tremor-content-emphasis'
+            : 'text-tremor-content dark:text-dark-tremor-content',
+        isDisabled && 'text-tremor-content-subtle dark:text-dark-tremor-content-subtle',
+        hasError && 'text-red-500 placeholder:text-red-500 dark:text-red-500 dark:placeholder:text-red-500',
+        hasError ? 'border-red-500 dark:border-red-500' : 'border-tremor-border dark:border-dark-tremor-border',
+    );
+
+export const hasValue = <T>(value: T | null | undefined) => value !== null && value !== undefined && value !== '';
