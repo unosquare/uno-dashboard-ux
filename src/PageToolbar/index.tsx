@@ -1,8 +1,8 @@
 import type { PropsWithChildren } from 'react';
 import { twMerge } from 'tailwind-merge';
 import tw from 'tailwind-styled-components';
-import type { ClassNameComponent } from '../constants';
 import { Flex } from '../Flex';
+import type { ClassNameComponent } from '../constants';
 
 export const StyledToolbar = tw.div`
     flex

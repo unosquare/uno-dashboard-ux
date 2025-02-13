@@ -1,5 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
 import type { Color } from '../constants';
-import { getColorClassNames, colorPalette, type ValueFormatter, BaseColors } from '../theme';
+import { BaseColors, type ValueFormatter, colorPalette, getColorClassNames } from '../theme';
 import { tremorTwMerge } from '../tremorTwMerge';
 
 export const ChartTooltipFrame = ({ children }: { children: React.ReactNode }) => (
@@ -67,7 +68,8 @@ export const ChartTooltipRow = ({ value, name, color }: ChartTooltipRowProps) =>
 
 export interface ChartTooltipProps {
     active: boolean | undefined;
-    payload: any;
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    payload: any[];
     label: string;
     categoryColors: Map<string, Color | string>;
     valueFormatter: ValueFormatter;
@@ -103,9 +105,9 @@ export const ChartTooltip = ({ active, payload, label, categoryColors, valueForm
                 </div>
 
                 <div className={tremorTwMerge('px-4 py-2 space-y-1')}>
-                    {filteredPayload.map(({ value, name }: { value: number; name: string }, idx: number) => (
+                    {filteredPayload.map(({ value, name }: { value: number; name: string }) => (
                         <ChartTooltipRow
-                            key={`id-${idx}`}
+                            key={uuidv4()}
                             value={valueFormatter(value)}
                             name={name}
                             color={categoryColors.get(name) ?? BaseColors.Blue}

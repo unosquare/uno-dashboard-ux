@@ -1,24 +1,16 @@
-import {
-    DatePicker,
-    MultiSelect,
-    MultiSelectItem,
-    NumberInput,
-    Select,
-    SelectItem,
-    Textarea,
-} from '@tremor/react';
+import { DatePicker, MultiSelect, MultiSelectItem, NumberInput, Select, SelectItem, Textarea } from '@tremor/react';
 import { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import { Button } from '../Button';
+import { Flex } from '../Flex';
+import { Text } from '../TextElements';
+import { TextInput } from '../TextInput';
 import { VirtualSelect } from '../VirtualSelect';
 import { FormFieldTypes } from '../constants';
 import { StyledFieldGroup, StyledFormContainer } from '../styled';
 import type { FormSettings } from './formSettings';
 import { StyledCheckbox, StyledFileInput } from './styled';
 import { extractData, getFieldBaseProps, onMultiSelectChange, onSelectChange } from './utils';
-import { Text } from '../TextElements';
-import { Flex } from '../Flex';
-import { Button } from '../Button';
-import { TextInput } from '../TextInput';
 
 export const Form = <T, TData>({
     initialData,

@@ -3,8 +3,8 @@ import { Combobox } from '@headlessui/react';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { ReactSelectOption } from '../constants';
 import { useDebounce } from '../hooks';
-import { tremorTwMerge } from '../tremorTwMerge';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
+import { tremorTwMerge } from '../tremorTwMerge';
 
 export interface SearchSelectProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;

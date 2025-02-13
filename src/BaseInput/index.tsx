@@ -1,7 +1,7 @@
 import React, { type ReactNode, useState, useRef } from 'react';
-import { hasValue, getSelectButtonColors } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
 import { mergeRefs } from '../reactUtils';
+import { getSelectButtonColors, hasValue } from '../theme';
+import { tremorTwMerge } from '../tremorTwMerge';
 
 const ExclamationFilledIcon = ({ ...props }) => (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' {...props}>

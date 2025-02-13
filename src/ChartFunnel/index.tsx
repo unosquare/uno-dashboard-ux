@@ -1,16 +1,16 @@
 import { formatter, humanize } from 'uno-js';
 import { v4 as uuidv4 } from 'uuid';
 import { CardLoading } from '../CardLoading';
-import { NoData } from '../NoData';
-import type { ChartFunnelSettings } from './chartFunnelSettings';
-import { Text } from '../TextElements';
-import { tremorTwMerge } from '../tremorTwMerge';
-import { colorPalette, getColorClassNames, themeColorRange } from '../theme';
 import { Flex } from '../Flex';
+import { NoData } from '../NoData';
+import { Text } from '../TextElements';
+import { colorPalette, getColorClassNames, themeColorRange } from '../theme';
+import { tremorTwMerge } from '../tremorTwMerge';
+import type { ChartFunnelSettings } from './chartFunnelSettings';
 
 export const ChartFunnel = <T,>({ rawData, dataCallback, formatType, calculateSizes }: ChartFunnelSettings<T>) => {
     const dataStore = (dataCallback && rawData && dataCallback(rawData)) ?? [];
-    
+
     return (
         <Flex flexDirection='col' className='w-full min-h-[160px] max-h-[210px] mt-auto mb-auto' alignItems='center'>
             {!dataStore && <CardLoading />}

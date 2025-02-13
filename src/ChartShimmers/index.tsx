@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, ResponsiveContainer } from 'recharts';
 import { twMerge } from 'tailwind-merge';
 import { v4 as uuidv4 } from 'uuid';
-import type { ClassNameComponent, Color } from '../constants';
-import { tremorTwMerge } from '../tremorTwMerge';
-import { Flex } from '../Flex';
-import { colorPalette, getColorClassNames } from '../theme';
 import { ChartLegend } from '../ChartLegend';
+import { Flex } from '../Flex';
+import type { ClassNameComponent, Color } from '../constants';
+import { colorPalette, getColorClassNames } from '../theme';
+import { tremorTwMerge } from '../tremorTwMerge';
 
 const defaultShimmerColors = new Map<string, Color>();
 defaultShimmerColors.set('Loading', 'gray');

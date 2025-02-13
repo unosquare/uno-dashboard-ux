@@ -1,7 +1,7 @@
 import { CloudDismiss48Regular } from '@fluentui/react-icons';
 import type { PropsWithChildren } from 'react';
-import { Text } from '../TextElements';
 import { Flex } from '../Flex';
+import { Text } from '../TextElements';
 
 export const NoData = ({ children }: PropsWithChildren) => (
     <Flex className='mt-5 p-4' justifyContent='center' alignItems='center' flexDirection='col'>

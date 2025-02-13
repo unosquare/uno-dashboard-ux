@@ -2,12 +2,12 @@ import { useMemo, useState } from 'react';
 import { Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { ChartDecorators } from '../ChartCommon';
 import { ChartLineShimmer } from '../ChartShimmers';
+import { Flex } from '../Flex';
 import { NoData } from '../NoData';
 import type { ChartComponent, LegendFormatType } from '../constants';
-import { formatTicks } from '../utils';
-import { tremorTwMerge } from '../tremorTwMerge';
-import { Flex } from '../Flex';
 import { BaseColors, colorPalette, constructCategoryColors, getColorClassNames, themeColorRange } from '../theme';
+import { tremorTwMerge } from '../tremorTwMerge';
+import { formatTicks } from '../utils';
 
 export type legendXAxis = { left: LegendFormatType; right: LegendFormatType };
 export type lineChart = { dataKey: string; yAxisId: string };

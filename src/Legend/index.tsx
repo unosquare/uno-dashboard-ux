@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { v4 as uuidv4, v4 } from 'uuid';
 import type { Color } from '../constants';
-import { makeClassName, getColorClassNames, colorPalette, themeColorRange } from '../theme';
+import { colorPalette, getColorClassNames, makeClassName, themeColorRange } from '../theme';
 import { tremorTwMerge } from '../tremorTwMerge';
 
 const makeLegendClassName = makeClassName('Legend');

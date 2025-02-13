@@ -1,9 +1,9 @@
 import type React from 'react';
 import { Legend, ReferenceLine, Tooltip } from 'recharts';
+import { ChartLegend } from '../ChartLegend';
+import { ChartTooltip } from '../ChartTooltip';
 import type { LegendFormatType } from '../constants';
 import { getValueFormatted } from '../utils';
-import { ChartTooltip } from '../ChartTooltip';
-import { ChartLegend } from '../ChartLegend';
 
 export type ChartDecoratorsSettings = {
     keys: string[];

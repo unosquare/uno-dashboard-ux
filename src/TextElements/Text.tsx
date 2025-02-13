@@ -1,7 +1,7 @@
 import React from 'react';
-import { tremorTwMerge } from '../tremorTwMerge';
-import { colorPalette, getColorClassNames } from '../theme';
 import type { Color } from '../constants';
+import { colorPalette, getColorClassNames } from '../theme';
+import { tremorTwMerge } from '../tremorTwMerge';
 
 export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
     color?: Color;

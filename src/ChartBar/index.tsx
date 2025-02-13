@@ -5,13 +5,13 @@ import { twMerge } from 'tailwind-merge';
 import { v4 as uuidv4 } from 'uuid';
 import { ChartDecorators } from '../ChartCommon';
 import { ChartBarShimmer } from '../ChartShimmers';
+import { Flex } from '../Flex';
 import { NoData } from '../NoData';
 import type { ChartComponent, LegendFormatType } from '../constants';
 import { useChart } from '../hooks';
-import { formatTicks } from '../utils';
-import { tremorTwMerge } from '../tremorTwMerge';
-import { Flex } from '../Flex';
 import { BaseColors, colorPalette, getColorClassNames } from '../theme';
+import { tremorTwMerge } from '../tremorTwMerge';
+import { formatTicks } from '../utils';
 
 type XAxisPrimaryFormatter = (input: string) => string;
 

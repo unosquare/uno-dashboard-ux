@@ -1,5 +1,5 @@
 import React from 'react';
-import { type BaseInputProps, BaseInput } from '../BaseInput';
+import { BaseInput, type BaseInputProps } from '../BaseInput';
 import { makeClassName } from '../theme';
 
 export type TextInputProps = Omit<BaseInputProps, 'stepper' | 'makeInputClassName'> & {

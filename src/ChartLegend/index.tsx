@@ -1,7 +1,7 @@
-import { useRef } from "react";
-import type { Color } from "../constants";
-import { Legend } from "../Legend";
-import { useOnWindowResize } from "../hooks";
+import { useRef } from 'react';
+import { Legend } from '../Legend';
+import type { Color } from '../constants';
+import { useOnWindowResize } from '../hooks';
 
 export const ChartLegend = (
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -11,29 +11,31 @@ export const ChartLegend = (
     activeLegend: string | undefined,
     onClick?: (category: string, color: Color | string) => void,
     enableLegendSlider?: boolean,
-  ) => {
+) => {
     const legendRef = useRef<HTMLDivElement>(null);
-  
+
     useOnWindowResize(() => {
-      const calculateHeight = (height: number | undefined) =>
-        height
-          ? Number(height) + 20 // 20px extra padding
-          : 60; // default height
-      setLegendHeight(calculateHeight(legendRef.current?.clientHeight));
+        const calculateHeight = (height: number | undefined) =>
+            height
+                ? Number(height) + 20 // 20px extra padding
+                : 60; // default height
+        setLegendHeight(calculateHeight(legendRef.current?.clientHeight));
     });
-  
-    const filteredPayload = payload.filter((item: any) => item.type !== "none");
-  
+
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    const filteredPayload = payload.filter((item: any) => item.type !== 'none');
+
     return (
-      <div ref={legendRef} className="flex items-center justify-end">
-        <Legend
-          categories={filteredPayload.map((entry: any) => entry.value)}
-          colors={filteredPayload.map((entry: any) => categoryColors.get(entry.value))}
-          onClickLegendItem={onClick}
-          activeLegend={activeLegend}
-          enableLegendSlider={enableLegendSlider}
-        />
-      </div>
+        <div ref={legendRef} className='flex items-center justify-end'>
+            <Legend
+                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                categories={filteredPayload.map((entry: any) => entry.value)}
+                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                colors={filteredPayload.map((entry: any) => categoryColors.get(entry.value))}
+                onClickLegendItem={onClick}
+                activeLegend={activeLegend}
+                enableLegendSlider={enableLegendSlider}
+            />
+        </div>
     );
-  };
-  
+};

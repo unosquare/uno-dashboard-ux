@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
 import { twMerge } from 'tailwind-merge';
+import { ChartTooltip } from '../ChartTooltip';
+import { Flex } from '../Flex';
 import { NoData } from '../NoData';
 import type { ChartComponent, ChartData } from '../constants';
-import { getValueFormatted } from '../utils';
-import { Flex } from '../Flex';
 import { BaseColors, colorPalette, constructCategoryColors, getColorClassNames, themeColorRange } from '../theme';
-import { ChartTooltip } from '../ChartTooltip';
+import { getValueFormatted } from '../utils';
 
 export type PieChartProps<T> = ChartComponent<T, ChartData[]> & {
     serieName?: string;

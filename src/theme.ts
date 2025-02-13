@@ -1,8 +1,8 @@
-import { colorValues, type Color } from './constants';
+import { type Color, colorValues } from './constants';
 import { tremorTwMerge } from './tremorTwMerge';
 
 export type ValueFormatter = (value: number) => string;
-  
+
 const justifyContentValues = ['start', 'end', 'center', 'between', 'around', 'evenly'] as const;
 export type JustifyContent = (typeof justifyContentValues)[number];
 

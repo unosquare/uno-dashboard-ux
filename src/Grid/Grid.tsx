@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeClassName } from '../theme';
 import { tremorTwMerge } from '../tremorTwMerge';
-import { gridCols, gridColsLg, gridColsMd, gridColsSm, type GridClassesMapping } from './styles';
+import { type GridClassesMapping, gridCols, gridColsLg, gridColsMd, gridColsSm } from './styles';
 
 const makeGridClassName = makeClassName('Grid');
 

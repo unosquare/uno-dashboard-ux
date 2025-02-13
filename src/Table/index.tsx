@@ -19,6 +19,7 @@ import tw from 'tailwind-styled-components';
 import { createCsv } from 'uno-js';
 import { v4 as uuidv4 } from 'uuid';
 import { ExportCsvButton } from '../ExportCsvButton';
+import { Flex } from '../Flex';
 import { NoData } from '../NoData';
 import { SearchOrClearButton } from '../SearchBox';
 import { TableCell, TableCellContent } from '../TableCell';
@@ -28,7 +29,6 @@ import { getAlignment } from '../utils';
 import { ShimmerTable } from './TableShimmer';
 import { renderToRowString } from './exportCsv';
 import { searchData, searchFooter, sortData } from './sortData';
-import { Flex } from '../Flex';
 
 export * from './sortData';
 

@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { twMerge } from 'tailwind-merge';
-import type { ClassNameComponent } from '../constants';
 import { Metric } from '../Metric';
+import type { ClassNameComponent } from '../constants';
 
 export const AwaitableMetric = ({ className, children }: PropsWithChildren<ClassNameComponent>) =>
     children == null ? (

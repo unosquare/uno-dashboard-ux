@@ -3,13 +3,13 @@ import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } fro
 import { twMerge } from 'tailwind-merge';
 import { ChartDecorators } from '../ChartCommon';
 import { ChartLineShimmer } from '../ChartShimmers';
+import { Flex } from '../Flex';
 import { NoData } from '../NoData';
 import type { ChartComponent } from '../constants';
 import { useChart } from '../hooks';
-import { formatTicks } from '../utils';
-import { tremorTwMerge } from '../tremorTwMerge';
-import { Flex } from '../Flex';
 import { colorPalette, getColorClassNames } from '../theme';
+import { tremorTwMerge } from '../tremorTwMerge';
+import { formatTicks } from '../utils';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;

@@ -5,12 +5,12 @@ import { twMerge } from 'tailwind-merge';
 import tw from 'tailwind-styled-components';
 import { formatter, toMoney, toPercentage } from 'uno-js';
 import { v4 as uuidv4 } from 'uuid';
+import { Flex } from '../Flex';
 import { BasicTooltip } from '../Tooltip';
 import type { FinancialMetric, TableCellTypes, TableColumn, Tenure } from '../constants';
 import { useToggle } from '../hooks';
-import { getAlignment, translateType } from '../utils';
 import { tremorTwMerge } from '../tremorTwMerge';
-import { Flex } from '../Flex';
+import { getAlignment, translateType } from '../utils';
 
 const renderLinkString = (data: TableCellTypes) => {
     if (Array.isArray(data)) {

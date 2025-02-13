@@ -1,5 +1,4 @@
 import React from 'react';
-import { colorPalette, getColorClassNames, makeClassName } from '../theme';
 import {
     type Color,
     type HorizontalPosition,
@@ -7,6 +6,7 @@ import {
     type VerticalPosition,
     VerticalPositions,
 } from '../constants';
+import { colorPalette, getColorClassNames, makeClassName } from '../theme';
 import { tremorTwMerge } from '../tremorTwMerge';
 
 const makeCardClassName = makeClassName('Card');
