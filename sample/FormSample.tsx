@@ -25,6 +25,12 @@ const fields = [
         options: selectOptions,
     },
     {
+        label: 'Destinations',
+        name: 'destinations',
+        type: FormFieldTypes.MultiSelect,
+        options: selectOptions,
+    },
+    {
         label: 'Birth Country',
         name: 'birthCountry',
         type: FormFieldTypes.Select,

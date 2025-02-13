@@ -1,8 +1,12 @@
-import { DatePicker, MultiSelect, MultiSelectItem, NumberInput, Select, SelectItem, Textarea } from '@tremor/react';
+import { DatePicker } from '@tremor/react';
 import { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
+import { MultiSelect, MultiSelectItem } from '../MultiSelect';
+import { NumberInput } from '../NumberInput';
+import { Select, SelectItem } from '../Select';
+import { Textarea } from '../TextArea';
 import { Text } from '../TextElements';
 import { TextInput } from '../TextInput';
 import { VirtualSelect } from '../VirtualSelect';

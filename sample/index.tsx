@@ -1,5 +1,4 @@
 import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
-import { Select, SelectItem } from '@tremor/react';
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
@@ -35,6 +34,8 @@ import {
     StyledMenuSearchBox,
     ThemeSwitcher,
     TremorContainer,
+    Select,
+    SelectItem,
     VirtualSelect,
     useAlertStore,
     useToggle,
