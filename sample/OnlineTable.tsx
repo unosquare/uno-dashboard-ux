@@ -1,6 +1,6 @@
-import { Title } from '@tremor/react';
 import React, { useState } from 'react';
 import { Table, TableCell, type TableColumn } from '../src';
+import { Title } from '../src/TextElements';
 
 type onlineDto = {
     userId: number;

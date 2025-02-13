@@ -1,6 +1,5 @@
 import { CloudArrowDown16Regular } from '@fluentui/react-icons';
 import { Button } from '@tremor/react';
-import React from 'react';
 
 type ExportCsvButtonProps = {
     onClick: () => void;

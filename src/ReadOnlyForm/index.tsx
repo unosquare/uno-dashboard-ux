@@ -1,7 +1,6 @@
-import { Text } from '@tremor/react';
-import React from 'react';
 import type { ReadOnlyFormSettings } from '../constants';
 import { StyledFieldGroup, StyledFormContainer } from '../styled';
+import { Text } from '../TextElements';
 
 export const ReadOnlyForm = ({ initialData, columns = 3 }: ReadOnlyFormSettings<string | number>) => (
     <StyledFormContainer fields={initialData.length} columns={columns}>

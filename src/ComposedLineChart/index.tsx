@@ -1,16 +1,16 @@
-import { Flex } from '@tremor/react';
 import { constructCategoryColors } from '@tremor/react/dist/components/chart-elements/common/utils';
 import { BaseColors } from '@tremor/react/dist/lib/constants';
-import { colorPalette, themeColorRange } from '@tremor/react/dist/lib/theme';
-import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import { getColorClassNames } from '@tremor/react/dist/lib/utils';
-import React, { useMemo, useState } from 'react';
+import { themeColorRange } from '@tremor/react/dist/lib/theme';
+import { useMemo, useState } from 'react';
 import { Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { ChartDecorators } from '../ChartCommon';
 import { ChartLineShimmer } from '../ChartShimmers';
 import { NoData } from '../NoData';
 import type { ChartComponent, LegendFormatType } from '../constants';
 import { formatTicks } from '../utils';
+import { tremorTwMerge } from '../tremorTwMerge';
+import { Flex } from '../Flex';
+import { colorPalette, getColorClassNames } from '../theme';
 
 export type legendXAxis = { left: LegendFormatType; right: LegendFormatType };
 export type lineChart = { dataKey: string; yAxisId: string };

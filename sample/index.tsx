@@ -1,5 +1,5 @@
 import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
-import { Button, Card, Col, Dialog, DialogPanel, Flex, Grid, Select, SelectItem, Text } from '@tremor/react';
+import { Button, Card, Col, Dialog, DialogPanel, Grid, Select, SelectItem } from '@tremor/react';
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
@@ -14,6 +14,7 @@ import {
     DataChart,
     DialogHeader,
     ErrorBoundary,
+    Flex,
     Footer,
     InfoDialog,
     InfoDialogTitle,
@@ -31,6 +32,7 @@ import {
     VirtualSelect,
     useAlertStore,
     useToggle,
+    Text,
 } from '../src';
 import '../src/resources/global.css';
 import FormSample from './FormSample';
@@ -169,7 +171,7 @@ const Application = () => {
                     <Card>
                         <ChartFunnel
                             rawData={loading ? undefined : chartData}
-                            dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
+                            dataCallback={(d) => Object.values(d).map((x) => ({ name: x.name, value: x.Value }))}
                             calculateSizes={{
                                 sizes: ['w-[90%]', 'w-[80%]', 'w-[30%]'],
                                 orderedValues: [10.15, 20.1, 30.25],
@@ -180,7 +182,7 @@ const Application = () => {
                     <Card>
                         <PieChart
                             rawData={loading ? undefined : chartData}
-                            dataCallback={(d) => Object.values(d).map((x: any) => ({ name: x.name, value: x.Value }))}
+                            dataCallback={(d) => Object.values(d).map((x) => ({ name: x.name, value: x.Value }))}
                             legendFormatType='money'
                             serieName='Moneys'
                         />

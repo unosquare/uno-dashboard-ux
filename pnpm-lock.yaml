@@ -52,11 +52,11 @@ importers:
         specifier: 1.9.4
         version: 1.9.4
       '@rsbuild/core':
-        specifier: 1.2.5
-        version: 1.2.5
+        specifier: 1.2.7
+        version: 1.2.7
       '@rsbuild/plugin-react':
         specifier: 1.1.0
-        version: 1.1.0(@rsbuild/core@1.2.5)
+        version: 1.1.0(@rsbuild/core@1.2.7)
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.6.3
@@ -67,8 +67,8 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/node':
-        specifier: ^22.13.1
-        version: 22.13.1
+        specifier: ^22.13.2
+        version: 22.13.2
       '@types/react':
         specifier: ^18.3.12
         version: 18.3.14
@@ -89,7 +89,7 @@ importers:
         version: 9.1.7
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@22.13.1)
+        version: 29.7.0(@types/node@22.13.2)
       jest-environment-jsdom:
         specifier: ^29.7.0
         version: 29.7.0
@@ -98,13 +98,13 @@ importers:
         version: 15.4.3
       postcss-loader:
         specifier: ^8.1.1
-        version: 8.1.1(@rspack/core@1.2.2(@swc/helpers@0.5.15))(postcss@8.4.49)(typescript@5.7.3)(webpack@5.93.0)
+        version: 8.1.1(@rspack/core@1.2.3(@swc/helpers@0.5.15))(postcss@8.4.49)(typescript@5.7.3)(webpack@5.93.0)
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
       ts-jest:
         specifier: ^29.2.5
-        version: 29.2.5(@babel/core@7.23.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.2))(jest@29.7.0(@types/node@22.13.1))(typescript@5.7.3)
+        version: 29.2.5(@babel/core@7.23.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.2))(jest@29.7.0(@types/node@22.13.2))(typescript@5.7.3)
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -642,8 +642,8 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@rsbuild/core@1.2.5':
-    resolution: {integrity: sha512-k9JFE613b0X0WUaqfp6CIh2sS+jpzx30cCqe8wPIaQ/tVfUc1kr7gfR3dwcdiE68+WVnFHGm1JqMdeOZogjsJQ==}
+  '@rsbuild/core@1.2.7':
+    resolution: {integrity: sha512-Jf2Wqe0WN8gWNIf0TnujKmLKhfeC1y3qufKhznvgrOWb6XST5guS5nSwYvYc/S1VkK8IKMXBjWLdHKQZk6pe4g==}
     engines: {node: '>=16.7.0'}
     hasBin: true
 
@@ -652,56 +652,56 @@ packages:
     peerDependencies:
       '@rsbuild/core': 1.x
 
-  '@rspack/binding-darwin-arm64@1.2.2':
-    resolution: {integrity: sha512-h23F8zEkXWhwMeScm0ZnN78Zh7hCDalxIWsm7bBS0eKadnlegUDwwCF8WE+8NjWr7bRzv0p3QBWlS5ufkcL4eA==}
+  '@rspack/binding-darwin-arm64@1.2.3':
+    resolution: {integrity: sha512-xuwYzhPgNCr4BtKXCU3xe4249TFsXAZglIlbxv8Qs3PeIarrZMRddcqH2zUXi+nJavNw3yN12sCYEzk1f+O4FQ==}
     cpu: [arm64]
     os: [darwin]
 
-  '@rspack/binding-darwin-x64@1.2.2':
-    resolution: {integrity: sha512-vG5s7FkEvwrGLfksyDRHwKAHUkhZt1zHZZXJQn4gZKjTBonje8ezdc7IFlDiWpC4S+oBYp73nDWkUzkGRbSdcQ==}
+  '@rspack/binding-darwin-x64@1.2.3':
+    resolution: {integrity: sha512-afiIN8elcrO2EtO27UN0qyZqu5FXGUdclud56DrhvEfnWS3GGxJEdjA8XUYVXkfCYakdXHucIJKlkkgaAjEvHg==}
     cpu: [x64]
     os: [darwin]
 
-  '@rspack/binding-linux-arm64-gnu@1.2.2':
-    resolution: {integrity: sha512-VykY/kiYOzO8E1nYzfJ9+gQEHxb5B6lt5wa8M6xFi5B6jEGU+OsaGskmAZB9/GFImeFDHxDPvhUalI4R9p8O2Q==}
+  '@rspack/binding-linux-arm64-gnu@1.2.3':
+    resolution: {integrity: sha512-K2u/fPUmKujlKSWL3q2zaUu8/6ZK/bOGKcqJSib8jdanQQ/GFKwKtPAFOOa/vvqbzhDocqKOobFR10FhgJqCHg==}
     cpu: [arm64]
     os: [linux]
 
-  '@rspack/binding-linux-arm64-musl@1.2.2':
-    resolution: {integrity: sha512-Z5vAC4wGfXi8XXZ6hs8Q06TYjr3zHf819HB4DI5i4C1eQTeKdZSyoFD0NHFG23bP4NWJffp8KhmoObcy9jBT5Q==}
+  '@rspack/binding-linux-arm64-musl@1.2.3':
+    resolution: {integrity: sha512-mgovdzGb6cH9hQsjTyzDbfZWCPhTcoHcLro1P7UbiqcLPMDJp/k3Io9xV2/EJhaDA1aynIdq7XfY0fuk4+6Irw==}
     cpu: [arm64]
     os: [linux]
 
-  '@rspack/binding-linux-x64-gnu@1.2.2':
-    resolution: {integrity: sha512-o3pDaL+cH5EeRbDE9gZcdZpBgp5iXvYZBBhe8vZQllYgI4zN5MJEuleV7WplG3UwTXlgZg3Kht4RORSOPn96vg==}
+  '@rspack/binding-linux-x64-gnu@1.2.3':
+    resolution: {integrity: sha512-542lwJzB1RMGuVdBdA3cOWTlmL9okpOppHUBWcNCjmJM+9zTI+0jwjVe8HaqOqtuR8XzNsoCwT9QonU/GLcuhg==}
     cpu: [x64]
     os: [linux]
 
-  '@rspack/binding-linux-x64-musl@1.2.2':
-    resolution: {integrity: sha512-RE3e0xe4DdchHssttKzryDwjLkbrNk/4H59TkkWeGYJcLw41tmcOZVFQUOwKLUvXWVyif/vjvV/w1SMlqB4wQg==}
+  '@rspack/binding-linux-x64-musl@1.2.3':
+    resolution: {integrity: sha512-dJromiREDcTWqzfCOI5y1IVoYmUnCv7vCp63AEq0+13fJJdk7+pcNN3VV2jOKpk9VECSvjg1c01wl+UzXAXFMw==}
     cpu: [x64]
     os: [linux]
 
-  '@rspack/binding-win32-arm64-msvc@1.2.2':
-    resolution: {integrity: sha512-R+PKBYn6uzTaDdVqTHvjqiJPBr5ZHg1wg5UmFDLNH9OklzVFyQh1JInSdJRb7lzfzTRz6bEkkwUFBPQK/CGScw==}
+  '@rspack/binding-win32-arm64-msvc@1.2.3':
+    resolution: {integrity: sha512-S8ZKddMMQDGy8jx/R0i2m1XrmfY2CpI+t6lIEpsuZuKUR4MbOGKN2DuL4MDnT3m8JaYvC8ihsvQjBXQCy3SNxQ==}
     cpu: [arm64]
     os: [win32]
 
-  '@rspack/binding-win32-ia32-msvc@1.2.2':
-    resolution: {integrity: sha512-dBqz3sRAGZ2f31FgzKLDvIRfq2haRP3X3XVCT0PsiMcvt7QJng+26aYYMy2THatd/nM8IwExYeitHWeiMBoruw==}
+  '@rspack/binding-win32-ia32-msvc@1.2.3':
+    resolution: {integrity: sha512-74lqSMKQJcJcgfFaxm+G9YVJSl2KK9/v4fRoMsWApztNy2qNgee+UguNBCOU6JLa3rVSj8Z5OVVDtJkGFrSvVg==}
     cpu: [ia32]
     os: [win32]
 
-  '@rspack/binding-win32-x64-msvc@1.2.2':
-    resolution: {integrity: sha512-eeAvaN831KG553cMSHkVldyk6YQn4ujgRHov6r1wtREq7CD3/ka9LMkJUepCN85K7XtwYT0N4KpFIQyf5GTGoA==}
+  '@rspack/binding-win32-x64-msvc@1.2.3':
+    resolution: {integrity: sha512-fcU532PgFdd5Bil8jwQW0Dcb/80oM6V0qSstGIxZ4M77t4t8e/PcukXfORTL71FfNQ64Rd4Dp6XRl1NHNJVxeg==}
     cpu: [x64]
     os: [win32]
 
-  '@rspack/binding@1.2.2':
-    resolution: {integrity: sha512-GCZwpGFYlLTdJ2soPLwjw9z4LSZ+GdpbHNfBt3Cm/f/bAF8n6mZc7dHUqN893RFh7MPU17HNEL3fMw7XR+6pHg==}
+  '@rspack/binding@1.2.3':
+    resolution: {integrity: sha512-enpOXZPQOJO800wdWcR7H5Dx5UZfwkaT0D0xsHD53WbpI09Z2KJbLX7I/i1FLLy3K1KQTB+2FIHLVdRikasXZA==}
 
-  '@rspack/core@1.2.2':
-    resolution: {integrity: sha512-EeHAmY65Uj62hSbUKesbrcWGE7jfUI887RD03G++Gj8jS4WPHEu1TFODXNOXg6pa7zyIvs2BK0Bm16Kwz8AEaQ==}
+  '@rspack/core@1.2.3':
+    resolution: {integrity: sha512-BFgdUYf05/hjjY9Nlwq8DpWaRJN5w2kTl8ZJi20SRL60oAx+ZD2ABT+fsPhBiFSmfTZDdvGGIq5e3vfRzoIuqg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@rspack/tracing': ^1.x
@@ -864,8 +864,8 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
-  '@types/node@22.13.1':
-    resolution: {integrity: sha512-jK8uzQlrvXqEU91UxiK5J7pKHyzgnI1Qnl0QDHIgVGuolJhRb9EEl28Cj9b3rGR8B2lhFCtvIm5os8lFnO/1Ew==}
+  '@types/node@22.13.2':
+    resolution: {integrity: sha512-Z+r8y3XL9ZpI2EY52YYygAFmo2/oWfNSj4BCpAXE2McAexDk8VcnBMGC9Djn9gTKt4d2T/hhXqmPzo4hfIXtTg==}
 
   '@types/prop-types@15.7.14':
     resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
@@ -3280,7 +3280,7 @@ snapshots:
   '@jest/console@29.7.0':
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       chalk: 4.1.2
       jest-message-util: 29.7.0
       jest-util: 29.7.0
@@ -3293,14 +3293,14 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       ci-info: 3.9.0
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
-      jest-config: 29.7.0(@types/node@22.13.1)
+      jest-config: 29.7.0(@types/node@22.13.2)
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -3325,7 +3325,7 @@ snapshots:
     dependencies:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       jest-mock: 29.7.0
 
   '@jest/expect-utils@29.7.0':
@@ -3343,7 +3343,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@sinonjs/fake-timers': 10.3.0
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
@@ -3365,7 +3365,7 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       '@jridgewell/trace-mapping': 0.3.25
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       chalk: 4.1.2
       collect-v8-coverage: 1.0.2
       exit: 0.1.2
@@ -3435,7 +3435,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       '@types/yargs': 17.0.31
       chalk: 4.1.2
 
@@ -3609,64 +3609,64 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@rsbuild/core@1.2.5':
+  '@rsbuild/core@1.2.7':
     dependencies:
-      '@rspack/core': 1.2.2(@swc/helpers@0.5.15)
+      '@rspack/core': 1.2.3(@swc/helpers@0.5.15)
       '@rspack/lite-tapable': 1.0.1
       '@swc/helpers': 0.5.15
       core-js: 3.40.0
     transitivePeerDependencies:
       - '@rspack/tracing'
 
-  '@rsbuild/plugin-react@1.1.0(@rsbuild/core@1.2.5)':
+  '@rsbuild/plugin-react@1.1.0(@rsbuild/core@1.2.7)':
     dependencies:
-      '@rsbuild/core': 1.2.5
+      '@rsbuild/core': 1.2.7
       '@rspack/plugin-react-refresh': 1.0.0(react-refresh@0.16.0)
       react-refresh: 0.16.0
 
-  '@rspack/binding-darwin-arm64@1.2.2':
+  '@rspack/binding-darwin-arm64@1.2.3':
     optional: true
 
-  '@rspack/binding-darwin-x64@1.2.2':
+  '@rspack/binding-darwin-x64@1.2.3':
     optional: true
 
-  '@rspack/binding-linux-arm64-gnu@1.2.2':
+  '@rspack/binding-linux-arm64-gnu@1.2.3':
     optional: true
 
-  '@rspack/binding-linux-arm64-musl@1.2.2':
+  '@rspack/binding-linux-arm64-musl@1.2.3':
     optional: true
 
-  '@rspack/binding-linux-x64-gnu@1.2.2':
+  '@rspack/binding-linux-x64-gnu@1.2.3':
     optional: true
 
-  '@rspack/binding-linux-x64-musl@1.2.2':
+  '@rspack/binding-linux-x64-musl@1.2.3':
     optional: true
 
-  '@rspack/binding-win32-arm64-msvc@1.2.2':
+  '@rspack/binding-win32-arm64-msvc@1.2.3':
     optional: true
 
-  '@rspack/binding-win32-ia32-msvc@1.2.2':
+  '@rspack/binding-win32-ia32-msvc@1.2.3':
     optional: true
 
-  '@rspack/binding-win32-x64-msvc@1.2.2':
+  '@rspack/binding-win32-x64-msvc@1.2.3':
     optional: true
 
-  '@rspack/binding@1.2.2':
+  '@rspack/binding@1.2.3':
     optionalDependencies:
-      '@rspack/binding-darwin-arm64': 1.2.2
-      '@rspack/binding-darwin-x64': 1.2.2
-      '@rspack/binding-linux-arm64-gnu': 1.2.2
-      '@rspack/binding-linux-arm64-musl': 1.2.2
-      '@rspack/binding-linux-x64-gnu': 1.2.2
-      '@rspack/binding-linux-x64-musl': 1.2.2
-      '@rspack/binding-win32-arm64-msvc': 1.2.2
-      '@rspack/binding-win32-ia32-msvc': 1.2.2
-      '@rspack/binding-win32-x64-msvc': 1.2.2
+      '@rspack/binding-darwin-arm64': 1.2.3
+      '@rspack/binding-darwin-x64': 1.2.3
+      '@rspack/binding-linux-arm64-gnu': 1.2.3
+      '@rspack/binding-linux-arm64-musl': 1.2.3
+      '@rspack/binding-linux-x64-gnu': 1.2.3
+      '@rspack/binding-linux-x64-musl': 1.2.3
+      '@rspack/binding-win32-arm64-msvc': 1.2.3
+      '@rspack/binding-win32-ia32-msvc': 1.2.3
+      '@rspack/binding-win32-x64-msvc': 1.2.3
 
-  '@rspack/core@1.2.2(@swc/helpers@0.5.15)':
+  '@rspack/core@1.2.3(@swc/helpers@0.5.15)':
     dependencies:
       '@module-federation/runtime-tools': 0.8.4
-      '@rspack/binding': 1.2.2
+      '@rspack/binding': 1.2.3
       '@rspack/lite-tapable': 1.0.1
       caniuse-lite: 1.0.30001664
     optionalDependencies:
@@ -3825,7 +3825,7 @@ snapshots:
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
 
   '@types/istanbul-lib-coverage@2.0.6': {}
 
@@ -3844,14 +3844,14 @@ snapshots:
 
   '@types/jsdom@20.0.1':
     dependencies:
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       '@types/tough-cookie': 4.0.5
       parse5: 7.1.2
 
   '@types/json-schema@7.0.15':
     optional: true
 
-  '@types/node@22.13.1':
+  '@types/node@22.13.2':
     dependencies:
       undici-types: 6.20.0
 
@@ -4288,13 +4288,13 @@ snapshots:
     optionalDependencies:
       typescript: 5.7.3
 
-  create-jest@29.7.0(@types/node@22.13.1):
+  create-jest@29.7.0(@types/node@22.13.2):
     dependencies:
       '@jest/types': 29.6.3
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.11
-      jest-config: 29.7.0(@types/node@22.13.1)
+      jest-config: 29.7.0(@types/node@22.13.2)
       jest-util: 29.7.0
       prompts: 2.4.2
     transitivePeerDependencies:
@@ -4793,7 +4793,7 @@ snapshots:
       '@jest/expect': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.5.1
@@ -4813,16 +4813,16 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  jest-cli@29.7.0(@types/node@22.13.1):
+  jest-cli@29.7.0(@types/node@22.13.2):
     dependencies:
       '@jest/core': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
       chalk: 4.1.2
-      create-jest: 29.7.0(@types/node@22.13.1)
+      create-jest: 29.7.0(@types/node@22.13.2)
       exit: 0.1.2
       import-local: 3.1.0
-      jest-config: 29.7.0(@types/node@22.13.1)
+      jest-config: 29.7.0(@types/node@22.13.2)
       jest-util: 29.7.0
       jest-validate: 29.7.0
       yargs: 17.6.2
@@ -4832,7 +4832,7 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-config@29.7.0(@types/node@22.13.1):
+  jest-config@29.7.0(@types/node@22.13.2):
     dependencies:
       '@babel/core': 7.23.2
       '@jest/test-sequencer': 29.7.0
@@ -4857,7 +4857,7 @@ snapshots:
       slash: 3.0.0
       strip-json-comments: 3.1.1
     optionalDependencies:
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -4887,7 +4887,7 @@ snapshots:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
       '@types/jsdom': 20.0.1
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       jest-mock: 29.7.0
       jest-util: 29.7.0
       jsdom: 20.0.3
@@ -4901,7 +4901,7 @@ snapshots:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       jest-mock: 29.7.0
       jest-util: 29.7.0
 
@@ -4911,7 +4911,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -4950,7 +4950,7 @@ snapshots:
   jest-mock@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       jest-util: 29.7.0
 
   jest-pnp-resolver@1.2.3(jest-resolve@29.7.0):
@@ -4985,7 +4985,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       chalk: 4.1.2
       emittery: 0.13.1
       graceful-fs: 4.2.11
@@ -5013,7 +5013,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       chalk: 4.1.2
       cjs-module-lexer: 1.2.3
       collect-v8-coverage: 1.0.2
@@ -5059,7 +5059,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -5078,7 +5078,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -5087,24 +5087,24 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       merge-stream: 2.0.0
       supports-color: 8.1.1
     optional: true
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 22.13.1
+      '@types/node': 22.13.2
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@29.7.0(@types/node@22.13.1):
+  jest@29.7.0(@types/node@22.13.2):
     dependencies:
       '@jest/core': 29.7.0
       '@jest/types': 29.6.3
       import-local: 3.1.0
-      jest-cli: 29.7.0(@types/node@22.13.1)
+      jest-cli: 29.7.0(@types/node@22.13.2)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -5418,14 +5418,14 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.49
 
-  postcss-loader@8.1.1(@rspack/core@1.2.2(@swc/helpers@0.5.15))(postcss@8.4.49)(typescript@5.7.3)(webpack@5.93.0):
+  postcss-loader@8.1.1(@rspack/core@1.2.3(@swc/helpers@0.5.15))(postcss@8.4.49)(typescript@5.7.3)(webpack@5.93.0):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.7.3)
       jiti: 1.21.0
       postcss: 8.4.49
       semver: 7.5.4
     optionalDependencies:
-      '@rspack/core': 1.2.2(@swc/helpers@0.5.15)
+      '@rspack/core': 1.2.3(@swc/helpers@0.5.15)
       webpack: 5.93.0
     transitivePeerDependencies:
       - typescript
@@ -5861,12 +5861,12 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-jest@29.2.5(@babel/core@7.23.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.2))(jest@29.7.0(@types/node@22.13.1))(typescript@5.7.3):
+  ts-jest@29.2.5(@babel/core@7.23.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.2))(jest@29.7.0(@types/node@22.13.2))(typescript@5.7.3):
     dependencies:
       bs-logger: 0.2.6
       ejs: 3.1.10
       fast-json-stable-stringify: 2.1.0
-      jest: 29.7.0(@types/node@22.13.1)
+      jest: 29.7.0(@types/node@22.13.2)
       jest-util: 29.7.0
       json5: 2.2.3
       lodash.memoize: 4.1.2

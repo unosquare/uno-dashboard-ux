@@ -1,5 +1,4 @@
 import { WeatherMoon24Regular, WeatherSunny24Regular } from '@fluentui/react-icons';
-import React from 'react';
 import { useTheme } from '../hooks';
 
 export const ThemeSwitcher = () => {

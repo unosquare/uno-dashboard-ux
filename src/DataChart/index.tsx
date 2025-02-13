@@ -1,8 +1,4 @@
-import { Flex } from '@tremor/react';
-import { colorPalette } from '@tremor/react/dist/lib/theme';
-import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
-import { getColorClassNames } from '@tremor/react/dist/lib/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { twMerge } from 'tailwind-merge';
 import { ChartDecorators } from '../ChartCommon';
@@ -11,6 +7,9 @@ import { NoData } from '../NoData';
 import type { ChartComponent } from '../constants';
 import { useChart } from '../hooks';
 import { formatTicks } from '../utils';
+import { tremorTwMerge } from '../tremorTwMerge';
+import { Flex } from '../Flex';
+import { colorPalette, getColorClassNames } from '../theme';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     legend?: boolean;

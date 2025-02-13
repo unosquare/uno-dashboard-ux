@@ -7,7 +7,6 @@ import {
     NumberInput,
     Select,
     SelectItem,
-    Text,
     TextInput,
     Textarea,
 } from '@tremor/react';
@@ -19,6 +18,7 @@ import { StyledFieldGroup, StyledFormContainer } from '../styled';
 import type { FormSettings } from './formSettings';
 import { StyledCheckbox, StyledFileInput } from './styled';
 import { extractData, getFieldBaseProps, onMultiSelectChange, onSelectChange } from './utils';
+import { Text } from '../TextElements';
 
 export const Form = <T, TData>({
     initialData,

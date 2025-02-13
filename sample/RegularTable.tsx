@@ -1,7 +1,7 @@
-import { Title } from '@tremor/react';
 import React from 'react';
 import { Table, type TableColumn } from '../src';
 import { anotherDataSet, defaultData } from './data';
+import { Title } from '../src/TextElements';
 
 const columns: TableColumn[] = [
     { label: 'Name', sortOrder: 1, sortDirection: 'asc' },

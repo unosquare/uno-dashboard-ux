@@ -143,3 +143,30 @@ export type Tenure = {
     StartDate: Date;
     EndDate?: Date | null;
 };
+
+export const colorValues = [
+    'slate',
+    'gray',
+    'zinc',
+    'neutral',
+    'stone',
+    'red',
+    'orange',
+    'amber',
+    'yellow',
+    'lime',
+    'green',
+    'emerald',
+    'teal',
+    'cyan',
+    'sky',
+    'blue',
+    'indigo',
+    'violet',
+    'purple',
+    'fuchsia',
+    'pink',
+    'rose',
+] as const;
+
+export type Color = (typeof colorValues)[number];

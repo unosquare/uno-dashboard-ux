@@ -1,6 +1,5 @@
 import { CheckboxChecked16Regular, CheckboxUnchecked16Regular } from '@fluentui/react-icons';
-import { Flex, List, ListItem, TableCell as TremorTableCell } from '@tremor/react';
-import { tremorTwMerge } from '@tremor/react/dist/lib/tremorTwMerge';
+import { List, ListItem, TableCell as TremorTableCell } from '@tremor/react';
 import type React from 'react';
 import { twMerge } from 'tailwind-merge';
 import tw from 'tailwind-styled-components';
@@ -10,6 +9,8 @@ import { BasicTooltip } from '../Tooltip';
 import type { FinancialMetric, TableCellTypes, TableColumn, Tenure } from '../constants';
 import { useToggle } from '../hooks';
 import { getAlignment, translateType } from '../utils';
+import { tremorTwMerge } from '../tremorTwMerge';
+import { Flex } from '../Flex';
 
 const renderLinkString = (data: TableCellTypes) => {
     if (Array.isArray(data)) {

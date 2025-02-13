@@ -1,7 +1,7 @@
 import { Dismiss16Regular } from '@fluentui/react-icons';
-import { Flex } from '@tremor/react';
 import type React from 'react';
 import { InfoDialogTitle } from '../InfoDialog';
+import { Flex } from '../Flex';
 
 export const DialogHeader = ({ closeModal, children }: React.PropsWithChildren<{ closeModal: () => void }>) => (
     <Flex alignItems='center' justifyContent='between'>

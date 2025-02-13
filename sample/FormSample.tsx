@@ -1,6 +1,6 @@
-import { Title } from '@tremor/react';
 import React from 'react';
 import { Form, FormFieldTypes } from '../src';
+import { Title } from '../src/TextElements';
 
 const selectOptions = [
     { label: 'USA', value: 'USA' },

@@ -1,12 +1,6 @@
-import { Title } from '@tremor/react';
 import React from 'react';
-import { FormFieldTypes, ReadOnlyForm } from '../src';
-
-const selectOptions = [
-    { label: 'USA', value: 'USA' },
-    { label: 'Canada', value: 'Canada' },
-    { label: 'Mexico', value: 'Mexico' },
-];
+import { ReadOnlyForm } from '../src';
+import { Title } from '../src/TextElements';
 
 const fields = [
     {

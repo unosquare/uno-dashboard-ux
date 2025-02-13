@@ -1,7 +1,8 @@
 import { ChevronLeft20Regular, ChevronRight20Regular } from '@fluentui/react-icons';
-import { Flex, Text } from '@tremor/react';
-import React, { type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { StyledButtonContainer, StyledValueContainer } from './styled';
+import { Text } from '../TextElements';
+import { Flex } from '../Flex';
 
 export type HorizontalSelectorSettings = {
     label: string;
