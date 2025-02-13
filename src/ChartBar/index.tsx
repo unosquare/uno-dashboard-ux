@@ -1,4 +1,3 @@
-import { BaseColors } from '@tremor/react/dist/lib/constants';
 import type React from 'react';
 import { type ReactElement, useState } from 'react';
 import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
@@ -12,7 +11,7 @@ import { useChart } from '../hooks';
 import { formatTicks } from '../utils';
 import { tremorTwMerge } from '../tremorTwMerge';
 import { Flex } from '../Flex';
-import { colorPalette, getColorClassNames } from '../theme';
+import { BaseColors, colorPalette, getColorClassNames } from '../theme';
 
 type XAxisPrimaryFormatter = (input: string) => string;
 

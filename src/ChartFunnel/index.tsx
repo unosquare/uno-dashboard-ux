@@ -1,4 +1,3 @@
-import { themeColorRange } from '@tremor/react/dist/lib/theme';
 import { formatter, humanize } from 'uno-js';
 import { v4 as uuidv4 } from 'uuid';
 import { CardLoading } from '../CardLoading';
@@ -6,7 +5,7 @@ import { NoData } from '../NoData';
 import type { ChartFunnelSettings } from './chartFunnelSettings';
 import { Text } from '../TextElements';
 import { tremorTwMerge } from '../tremorTwMerge';
-import { colorPalette, getColorClassNames } from '../theme';
+import { colorPalette, getColorClassNames, themeColorRange } from '../theme';
 import { Flex } from '../Flex';
 
 export const ChartFunnel = <T,>({ rawData, dataCallback, formatType, calculateSizes }: ChartFunnelSettings<T>) => {

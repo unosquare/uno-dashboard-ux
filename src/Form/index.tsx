@@ -1,7 +1,6 @@
 import {
     Button,
     DatePicker,
-    Flex,
     MultiSelect,
     MultiSelectItem,
     NumberInput,
@@ -19,6 +18,7 @@ import type { FormSettings } from './formSettings';
 import { StyledCheckbox, StyledFileInput } from './styled';
 import { extractData, getFieldBaseProps, onMultiSelectChange, onSelectChange } from './utils';
 import { Text } from '../TextElements';
+import { Flex } from '../Flex';
 
 export const Form = <T, TData>({
     initialData,

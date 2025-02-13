@@ -1,14 +1,14 @@
 import { colorValues, type Color } from './constants';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const justifyContentValues = ["start", "end", "center", "between", "around", "evenly"] as const;
+const justifyContentValues = ['start', 'end', 'center', 'between', 'around', 'evenly'] as const;
 export type JustifyContent = (typeof justifyContentValues)[number];
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const alignItemsValues = ["start", "end", "center", "baseline", "stretch"] as const;
+const alignItemsValues = ['start', 'end', 'center', 'baseline', 'stretch'] as const;
 export type AlignItems = (typeof alignItemsValues)[number];
 
-export type FlexDirection = "row" | "col" | "row-reverse" | "col-reverse";
+export type FlexDirection = 'row' | 'col' | 'row-reverse' | 'col-reverse';
 
 interface ColorClassNames {
     bgColor: string;
@@ -90,3 +90,64 @@ export function makeClassName(componentName: string) {
         return `tremor-${componentName}-${className}`;
     };
 }
+
+export const constructCategoryColors = (
+    categories: string[],
+    colors: (Color | string)[],
+): Map<string, Color | string> => {
+    const categoryColors = new Map<string, Color | string>();
+    categories.forEach((category, idx) => {
+        categoryColors.set(category, colors[idx % colors.length]);
+    });
+    return categoryColors;
+};
+
+export const BaseColors: { [key: string]: Color } = {
+    Slate: 'slate',
+    Gray: 'gray',
+    Zinc: 'zinc',
+    Neutral: 'neutral',
+    Stone: 'stone',
+    Red: 'red',
+    Orange: 'orange',
+    Amber: 'amber',
+    Yellow: 'yellow',
+    Lime: 'lime',
+    Green: 'green',
+    Emerald: 'emerald',
+    Teal: 'teal',
+    Cyan: 'cyan',
+    Sky: 'sky',
+    Blue: 'blue',
+    Indigo: 'indigo',
+    Violet: 'violet',
+    Purple: 'purple',
+    Fuchsia: 'fuchsia',
+    Pink: 'pink',
+    Rose: 'rose',
+};
+
+export const themeColorRange: Color[] = [
+    BaseColors.Blue,
+    BaseColors.Cyan,
+    BaseColors.Sky,
+    BaseColors.Indigo,
+    BaseColors.Violet,
+    BaseColors.Purple,
+    BaseColors.Fuchsia,
+    BaseColors.Slate,
+    BaseColors.Gray,
+    BaseColors.Zinc,
+    BaseColors.Neutral,
+    BaseColors.Stone,
+    BaseColors.Red,
+    BaseColors.Orange,
+    BaseColors.Amber,
+    BaseColors.Yellow,
+    BaseColors.Lime,
+    BaseColors.Green,
+    BaseColors.Emerald,
+    BaseColors.Teal,
+    BaseColors.Pink,
+    BaseColors.Rose,
+  ];

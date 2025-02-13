@@ -170,3 +170,17 @@ export const colorValues = [
 ] as const;
 
 export type Color = (typeof colorValues)[number];
+
+export type HorizontalPosition = 'left' | 'right';
+
+export type VerticalPosition = 'top' | 'bottom';
+
+export const HorizontalPositions: { [key: string]: HorizontalPosition } = {
+    Left: 'left',
+    Right: 'right',
+};
+
+export const VerticalPositions: { [key: string]: VerticalPosition } = {
+    Top: 'top',
+    Bottom: 'bottom',
+};

@@ -1,5 +1,5 @@
 import { Metric } from '@tremor/react';
-import React, { type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { twMerge } from 'tailwind-merge';
 import type { ClassNameComponent } from '../constants';
 

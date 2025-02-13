@@ -1,5 +1,5 @@
 import { ArrowSync24Regular, Dismiss24Regular } from '@fluentui/react-icons';
-import { Button, Card, Col, Dialog, DialogPanel, Grid, Select, SelectItem } from '@tremor/react';
+import { Button, Col, Dialog, DialogPanel, Grid, Select, SelectItem } from '@tremor/react';
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
@@ -8,6 +8,7 @@ import {
     BasicToolbar,
     Blur,
     Burger,
+    Card,
     ChartBar,
     ChartFunnel,
     ComposedLineChart,

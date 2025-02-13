@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const CardLoading = () => (
     <svg
         version='1.1'

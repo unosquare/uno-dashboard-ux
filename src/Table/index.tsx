@@ -1,6 +1,5 @@
 import { CaretDown12Regular, CaretUp12Regular } from '@fluentui/react-icons';
 import {
-    Flex,
     TableBody,
     TableFoot,
     TableFooterCell,
@@ -29,6 +28,7 @@ import { getAlignment } from '../utils';
 import { ShimmerTable } from './TableShimmer';
 import { renderToRowString } from './exportCsv';
 import { searchData, searchFooter, sortData } from './sortData';
+import { Flex } from '../Flex';
 
 export * from './sortData';
 
