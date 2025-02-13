@@ -25,6 +25,7 @@ export * from './HorizontalSelector';
 export * from './InfoDialog';
 export * from './Menu';
 export * from './Metric';
+export * from './List';
 export * from './DialogHeader';
 export * from './NavBar';
 export * from './NoData';

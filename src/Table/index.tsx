@@ -1,21 +1,8 @@
-import { CaretDown12Regular, CaretUp12Regular } from '@fluentui/react-icons';
-import {
-    TableBody,
-    TableFoot,
-    TableFooterCell,
-    TableHead,
-    TableHeaderCell,
-    TableRow,
-    TextInput,
-    Table as TremorTable,
-    TableCell as TremorTableCell,
-} from '@tremor/react';
 import type React from 'react';
 import { useCallback } from 'react';
 import { type PropsWithChildren, startTransition, useEffect, useMemo, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { twMerge } from 'tailwind-merge';
-import tw from 'tailwind-styled-components';
 import { createCsv } from 'uno-js';
 import { v4 as uuidv4 } from 'uuid';
 import { ExportCsvButton } from '../ExportCsvButton';
@@ -29,8 +16,22 @@ import { getAlignment } from '../utils';
 import { ShimmerTable } from './TableShimmer';
 import { renderToRowString } from './exportCsv';
 import { searchData, searchFooter, sortData } from './sortData';
+import { TableHeaders } from './TableHeaders';
+import { TableRow } from './TableRow';
+import { TableBody } from './TableBody';
+import { TextInput } from '../TextInput';
+import { TableBase } from './TableBase';
+import { TableFoot } from './TableFoot';
+import { TableFooterCell } from './TableFooterCell';
 
 export * from './sortData';
+export * from './TableRow';
+export * from './TableBody';
+export * from './TableBase';
+export * from './TableFoot';
+export * from './TableFooterCell';
+export * from './TableHead';
+export * from './TableHeaderCell';
 
 export type TableSettings<TDataIn> = DataComponent<TDataIn, TableCellTypes[][]> &
     ClassNameComponent & {
@@ -43,11 +44,6 @@ export type TableSettings<TDataIn> = DataComponent<TDataIn, TableCellTypes[][]> 
         render?: (data: TableCellTypes[][], definitions: TableColumn[], rawData: TDataIn) => React.ReactNode;
     };
 
-type HeaderSettings = {
-    $sortable: boolean;
-    $sorted: boolean;
-};
-
 const getSortDirection = (current?: SortDirection): SortDirection => (current === 'desc' ? 'asc' : 'desc');
 
 export const getColumnSorting = (prev: TableColumn[], index: number) =>
@@ -56,51 +52,6 @@ export const getColumnSorting = (prev: TableColumn[], index: number) =>
         sortOrder: i === index ? 1 : undefined,
         sortDirection: i === index ? getSortDirection(field.sortDirection) : undefined,
     }));
-
-export const HeaderDiv = tw.div<HeaderSettings>`
-    flex-1
-    flex-row
-    inline-flex
-    [&_svg]:h-4
-    [&_svg]:w-4
-    [&_svg]:ml-1
-    [&_svg:hover]:opacity-100
-    ${({ $sorted }) => ($sorted ? '[&_svg]:opacity-100' : '[&_svg]:opacity-30')}
-    ${({ $sorted }) => ($sorted ? 'cursor-pointer' : '')}
-`;
-
-type TableHeadersProps = {
-    definitions: TableColumn[];
-    sortable: boolean;
-    setSortColumn: (index: number) => void;
-};
-
-const SortHeaderIcon = ({ direction, order }: { direction?: SortDirection; order?: number }) =>
-    direction === 'desc' && Number(order) >= 1 ? <CaretDown12Regular /> : <CaretUp12Regular />;
-
-const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHeadersProps) => (
-    <TableHead>
-        <TableRow>
-            {definitions.map((header, index) => (
-                <TableHeaderCell
-                    key={header.label}
-                    className={`p-2 text-xs/[13px] bg-tremor-background dark:bg-dark-tremor-background whitespace-normal ${getAlignment(
-                        header,
-                        index,
-                    )}`}
-                    onClick={() => !header.excludeFromSort && setSortColumn(index)}
-                >
-                    <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>
-                        {header.label}
-                        {sortable && !header.excludeFromSort && (
-                            <SortHeaderIcon direction={header.sortDirection} order={header.sortOrder} />
-                        )}
-                    </HeaderDiv>
-                </TableHeaderCell>
-            ))}
-        </TableRow>
-    </TableHead>
-);
 
 type TableFooterProps = {
     footer: unknown[];
@@ -136,11 +87,11 @@ const getRows = <TDataIn,>(data: TableCellTypes[][], columns: TableColumn[], raw
 
 const SpanTable = ({ colSpan, children }: PropsWithChildren<{ colSpan: number }>) => (
     <TableRow>
-        <TremorTableCell colSpan={colSpan} className='p-2'>
+        <TableCell colSpan={colSpan}>
             <Flex alignItems='center' className='w-full'>
                 {children}
             </Flex>
-        </TremorTableCell>
+        </TableCell>
     </TableRow>
 );
 
@@ -265,7 +216,7 @@ export const Table = <TDataIn,>({
                     )}
                 </Flex>
             )}
-            <TremorTable className={twMerge('overflow-auto h-60 mt-5', className)}>
+            <TableBase className={twMerge('overflow-auto h-60 mt-5', className)}>
                 <TableHeaders
                     definitions={definitions}
                     sortable={rawData !== undefined && sortable}
@@ -283,7 +234,7 @@ export const Table = <TDataIn,>({
                         ))}
                 </TableBody>
                 {searched.length > 0 && footerData && <TableFooter footer={footerData} columns={definitions} />}
-            </TremorTable>
+            </TableBase>
         </>
     );
 };

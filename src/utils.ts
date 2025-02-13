@@ -4,7 +4,9 @@ import type { DataTypes, FinancialMetric, LegendFormatType, TableColumn, Tenure 
 const leftAlign: Array<DataTypes | undefined> = ['string', 'link', 'bullet', undefined];
 const rightAlign: Array<DataTypes | undefined> = ['decimal', 'number', 'money'];
 
-export const getAlignment = (tableColumn: TableColumn, index?: number) => {
+export const getAlignment = (tableColumn?: TableColumn, index?: number) => {
+    if (!tableColumn) return '';
+    
     if (tableColumn.textAlign) return `text-${tableColumn.textAlign.toLowerCase()}`;
 
     const { dataType } = tableColumn;

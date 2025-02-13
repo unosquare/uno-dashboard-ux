@@ -1,7 +1,5 @@
 import { CheckboxChecked16Regular, CheckboxUnchecked16Regular } from '@fluentui/react-icons';
-import { List, ListItem, TableCell as TremorTableCell } from '@tremor/react';
-import type React from 'react';
-import { twMerge } from 'tailwind-merge';
+import React from 'react';
 import tw from 'tailwind-styled-components';
 import { formatter, toMoney, toPercentage } from 'uno-js';
 import { v4 as uuidv4 } from 'uuid';
@@ -11,6 +9,8 @@ import type { FinancialMetric, TableCellTypes, TableColumn, Tenure } from '../co
 import { useToggle } from '../hooks';
 import { tremorTwMerge } from '../tremorTwMerge';
 import { getAlignment, translateType } from '../utils';
+import { makeClassName } from '../theme';
+import { List, ListItem } from '../List';
 
 const renderLinkString = (data: TableCellTypes) => {
     if (Array.isArray(data)) {
@@ -171,20 +171,25 @@ export const TableCellContent = ({ data, column }: { data: TableCellTypes; colum
     }
 };
 
-export const TableCell = ({
-    column,
-    index,
-    children,
-    className,
-    ...other
-}: {
-    column: TableColumn;
-    index: number;
-} & React.TdHTMLAttributes<HTMLTableCellElement>) => (
-    <TremorTableCell
-        className={twMerge('p-2 whitespace-normal text-xs/[13px]', getAlignment(column, index), className)}
+const makeTableCellClassName = makeClassName('TableCell');
+
+export const TableCell = React.forwardRef<
+    HTMLTableCellElement,
+    {
+        column?: TableColumn;
+        index?: number;
+    } & React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ children, className, column, index, ...other }, ref) => (
+    <td
+        ref={ref}
+        className={tremorTwMerge(
+            makeTableCellClassName('root'),
+            'align-middle p-2 whitespace-normal text-xs/[13px]',
+            getAlignment(column, index),
+            className
+        )}
         {...other}
     >
         {children}
-    </TremorTableCell>
-);
+    </td>
+));

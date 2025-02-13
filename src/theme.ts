@@ -86,11 +86,7 @@ export function getColorClassNames(color: Color | string, shade?: number): Color
     };
 }
 
-export function makeClassName(componentName: string) {
-    return (className: string) => {
-        return `tremor-${componentName}-${className}`;
-    };
-}
+export const makeClassName = (componentName: string) => (className: string) => `tremor-${componentName}-${className}`;
 
 export const constructCategoryColors = (
     categories: string[],

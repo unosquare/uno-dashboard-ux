@@ -64,7 +64,8 @@ export const PieChart = <T,>({
                         content={({ active, payload }) => (
                             <ChartTooltip
                                 active={active}
-                                payload={payload}
+                                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                                payload={payload as any[]}
                                 label={serieName}
                                 valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}
                                 categoryColors={categoryColors}
