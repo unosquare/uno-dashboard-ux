@@ -44,6 +44,7 @@ export * from './NumberInput';
 export * from './PageToolbar';
 export * from './PieChart';
 export * from './ProgressCircle';
+export * from './ProgressBar';
 export * from './ReadOnlyForm';
 export * from './SearchBox';
 export * from './Tab';
