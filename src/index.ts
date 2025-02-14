@@ -32,6 +32,7 @@ export * from './InfoDialog';
 export * from './Dialog';
 export * from './Menu';
 export * from './Metric';
+export * from './MultiSelect';
 export * from './Legend';
 export * from './List';
 export * from './DialogHeader';
