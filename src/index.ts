@@ -2,8 +2,10 @@ export * from './constants';
 export * from './theme';
 export * from './hooks';
 export * from './utils';
+export * from './tremorTwMerge';
 export { default as useAlertStore } from './useAlertStore';
 
+export * from './Accordion';
 export * from './Alert';
 export * from './AwaitableMetric';
 export * from './Badge';
