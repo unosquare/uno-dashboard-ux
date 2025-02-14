@@ -1,7 +1,7 @@
-import { DatePicker } from '@tremor/react';
 import { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { Button } from '../Button';
+import { DatePicker } from '../DatePicker';
 import { Flex } from '../Flex';
 import { MultiSelect, MultiSelectItem } from '../MultiSelect';
 import { NumberInput } from '../NumberInput';

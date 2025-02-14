@@ -15,7 +15,4 @@ module.exports = {
     },
     testMatch: ['<rootDir>/src/**/*.spec.tsx', '<rootDir>/src/**/*.test.ts'],
     setupFilesAfterEnv: ['<rootDir>/jest-setup.tsx'],
-    moduleNameMapper: {
-        '@tremor/react/dist/(.*)$': '<rootDir>/node_modules/@tremor/react/dist/$1.cjs',
-    },
 };

@@ -5,7 +5,6 @@ module.exports = {
         './sample/**/*.{ts,tsx}',
         './src/**/*.{ts,tsx}',
         './src/**/**/*.{ts,tsx}',
-        './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
     ],
     darkMode: 'class',
     media: false, // or 'media' or 'class'

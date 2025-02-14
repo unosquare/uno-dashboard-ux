@@ -55,7 +55,8 @@ export const ChartDecorators = ({
         content={({ active, payload, label }) => (
             <ChartTooltip
                 active={active}
-                payload={payload}
+                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                payload={payload as any}
                 label={label as string}
                 valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}
                 categoryColors={categoryColors}
