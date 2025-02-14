@@ -9,6 +9,7 @@ export * from './Accordion';
 export * from './Alert';
 export * from './AwaitableMetric';
 export * from './Badge';
+export * from './BarList';
 export * from './BadgeDelta';
 export * from './Blur';
 export * from './Button';
