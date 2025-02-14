@@ -11,6 +11,7 @@
         "@fluentui/react-icons": "^2.0.274",
         "@headlessui/react": "2.2.0",
         "@tremor/react": "^3.18.7",
+        "combobox": "npm:@headlessui/react@0.0.0-insiders.ce17c6d",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-hook-form": "7.54.2",

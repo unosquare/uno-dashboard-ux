@@ -1,5 +1,5 @@
 import { ChevronDown16Filled, DismissCircle16Filled } from '@fluentui/react-icons';
-import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react';
+import { Combobox } from 'combobox';
 import React, { useEffect, useMemo, useState } from 'react';
 import type { ReactSelectOption } from '../constants';
 import { useDebounce } from '../hooks';
@@ -106,7 +106,6 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
         ...other
     } = props;
 
-    const [selectedValue, setSelectedValue] = useState('');
     const [searchQuery, setSearchQuery] = useState<string>();
     const [filteredOptions, setFilteredOptions] = useState<string[]>(getValues(options));
 
@@ -127,42 +126,45 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>
 
     const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => performSearch(target.value ?? '');
 
+    const onClearSearch = () => performSearch('');
+
     return (
         <Combobox
             {...other}
             virtual={{
-                options: filteredOptions,
+                options: filteredOptions ?? [],
             }}
             as='div'
             ref={ref}
-            value={selectedValue}
+            value={null}
             disabled={disabled}
-            onChange={(x) => setSelectedValue(x ?? '')}
-            onClose={() => setSearchQuery('')}
+            nullable={true}
+            onChange={() => setSearchQuery('')}
             className={tremorTwMerge('w-full min-w-[10rem] relative text-tremor-default', className)}
         >
-            <ComboboxButton className='w-full'>
-                <ComboboxInput
+            <Combobox.Button className='w-full'>
+                <Combobox.Input
                     className={comboBoxStyles(value, disabled, !!enableClear && !!value, !searchQuery && !!value)}
                     placeholder={valueToNameMapping.get(value ?? '') ?? placeholder}
+                    onBlur={onClearSearch}
                     onChange={onSearchInternal}
-                    displayValue={(x) => options.find((y) => y.value.toString() === x)?.label}
+                    displayValue={() => searchQuery ?? ''}
                     title={valueToNameMapping.get(value ?? '')}
                 />
                 <ArrowDownHead />
-            </ComboboxButton>
+            </Combobox.Button>
             {enableClear && value ? <SelectClearButton clearValue={onValueChange} /> : null}
-            <ComboboxOptions className={comboBoxOptionsStyles} hold>
+            <Combobox.Options className={comboBoxOptionsStyles} hold>
                 {({ option }) => (
-                    <ComboboxOption
+                    <Combobox.Option
                         className={comboBoxSingleOptionStyles(className)}
                         value={option as string}
                         onClick={onOptionClick(option as string)}
                     >
                         <span className='whitespace-nowrap truncate'>{valueToNameMapping.get(option as string)}</span>
-                    </ComboboxOption>
+                    </Combobox.Option>
                 )}
-            </ComboboxOptions>
+            </Combobox.Options>
         </Combobox>
     );
 });
