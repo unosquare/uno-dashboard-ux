@@ -6,7 +6,7 @@ import { useDebounce } from '../hooks';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
 import { tremorTwMerge } from '../tremorTwMerge';
 
-export interface SearchSelectProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface VirtualSelectProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;
     value?: string;
     onValueChange: (value: string) => void;
@@ -94,77 +94,82 @@ const SelectClearButton = ({ clearValue }: { clearValue: (e: string) => void }) 
     </button>
 );
 
-export const VirtualSelect = React.forwardRef<HTMLDivElement, SearchSelectProps>(function SearchSelect(props, ref) {
-    const {
-        value,
-        onValueChange,
-        placeholder = 'Select...',
-        disabled = false,
-        className,
-        enableClear,
-        options,
-        ...other
-    } = props;
+export const VirtualSelect = React.forwardRef<HTMLDivElement, VirtualSelectProps>(
+    (
+        {
+            value,
+            onValueChange,
+            placeholder = 'Select...',
+            disabled = false,
+            className,
+            enableClear,
+            options,
+            ...other
+        },
+        ref,
+    ) => {
+        const [searchQuery, setSearchQuery] = useState<string>();
+        const [filteredOptions, setFilteredOptions] = useState<string[]>(getValues(options));
 
-    const [searchQuery, setSearchQuery] = useState<string>();
-    const [filteredOptions, setFilteredOptions] = useState<string[]>(getValues(options));
+        const valueToNameMapping = useMemo(() => constructValueToNameMapping(options), [options]);
 
-    const valueToNameMapping = useMemo(() => constructValueToNameMapping(options), [options]);
+        useEffect(() => setFilteredOptions(getValues(options)), [options]);
 
-    useEffect(() => setFilteredOptions(getValues(options)), [options]);
+        const debouncedSearch = useDebounce(() => {
+            setFilteredOptions(getFilteredOptions(searchQuery, options));
+        }, 300);
 
-    const debouncedSearch = useDebounce(() => {
-        setFilteredOptions(getFilteredOptions(searchQuery, options));
-    }, 300);
+        const onOptionClick = (option: string) => () => onValueChange(option);
 
-    const onOptionClick = (option: string) => () => onValueChange(option);
+        const performSearch = (x: string) => {
+            setSearchQuery(x);
+            debouncedSearch();
+        };
 
-    const performSearch = (x: string) => {
-        setSearchQuery(x);
-        debouncedSearch();
-    };
+        const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => performSearch(target.value ?? '');
 
-    const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => performSearch(target.value ?? '');
+        const onClearSearch = () => performSearch('');
 
-    const onClearSearch = () => performSearch('');
-
-    return (
-        <Combobox
-            {...other}
-            virtual={{
-                options: filteredOptions ?? [],
-            }}
-            as='div'
-            ref={ref}
-            value={null}
-            disabled={disabled}
-            nullable={true}
-            onChange={() => setSearchQuery('')}
-            className={tremorTwMerge('w-full min-w-[10rem] relative text-tremor-default', className)}
-        >
-            <Combobox.Button className='w-full'>
-                <Combobox.Input
-                    className={comboBoxStyles(value, disabled, !!enableClear && !!value, !searchQuery && !!value)}
-                    placeholder={valueToNameMapping.get(value ?? '') ?? placeholder}
-                    onBlur={onClearSearch}
-                    onChange={onSearchInternal}
-                    displayValue={() => searchQuery ?? ''}
-                    title={valueToNameMapping.get(value ?? '')}
-                />
-                <ArrowDownHead />
-            </Combobox.Button>
-            {enableClear && value ? <SelectClearButton clearValue={onValueChange} /> : null}
-            <Combobox.Options className={comboBoxOptionsStyles} hold>
-                {({ option }) => (
-                    <Combobox.Option
-                        className={comboBoxSingleOptionStyles(className)}
-                        value={option as string}
-                        onClick={onOptionClick(option as string)}
-                    >
-                        <span className='whitespace-nowrap truncate'>{valueToNameMapping.get(option as string)}</span>
-                    </Combobox.Option>
-                )}
-            </Combobox.Options>
-        </Combobox>
-    );
-});
+        return (
+            <Combobox
+                {...other}
+                virtual={{
+                    options: filteredOptions ?? [],
+                }}
+                as='div'
+                ref={ref}
+                value={null}
+                disabled={disabled}
+                nullable={true}
+                onChange={() => setSearchQuery('')}
+                className={tremorTwMerge('w-full min-w-[10rem] relative text-tremor-default', className)}
+            >
+                <Combobox.Button className='w-full'>
+                    <Combobox.Input
+                        className={comboBoxStyles(value, disabled, !!enableClear && !!value, !searchQuery && !!value)}
+                        placeholder={valueToNameMapping.get(value ?? '') ?? placeholder}
+                        onBlur={onClearSearch}
+                        onChange={onSearchInternal}
+                        displayValue={() => searchQuery ?? ''}
+                        title={valueToNameMapping.get(value ?? '')}
+                    />
+                    <ArrowDownHead />
+                </Combobox.Button>
+                {enableClear && value ? <SelectClearButton clearValue={onValueChange} /> : null}
+                <Combobox.Options className={comboBoxOptionsStyles} hold>
+                    {({ option }) => (
+                        <Combobox.Option
+                            className={comboBoxSingleOptionStyles(className)}
+                            value={option as string}
+                            onClick={onOptionClick(option as string)}
+                        >
+                            <span className='whitespace-nowrap truncate'>
+                                {valueToNameMapping.get(option as string)}
+                            </span>
+                        </Combobox.Option>
+                    )}
+                </Combobox.Options>
+            </Combobox>
+        );
+    },
+);

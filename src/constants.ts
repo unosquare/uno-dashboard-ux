@@ -198,3 +198,21 @@ export const Sizes: { [key: string]: Size } = {
     LG: 'lg',
     XL: 'xl',
 };
+
+const deltaTypeValues = ['increase', 'moderateIncrease', 'decrease', 'moderateDecrease', 'unchanged'] as const;
+
+export type DeltaType = (typeof deltaTypeValues)[number];
+
+export const DeltaTypes: { [key: string]: DeltaType } = {
+    Increase: 'increase',
+    ModerateIncrease: 'moderateIncrease',
+    Decrease: 'decrease',
+    ModerateDecrease: 'moderateDecrease',
+    Unchanged: 'unchanged',
+};
+
+export type BadgeProportionTypes = {
+    paddingX: string;
+    paddingY: string;
+    fontSize: string;
+};

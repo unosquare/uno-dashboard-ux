@@ -1,15 +1,9 @@
 import React from 'react';
-import { type Color, type Size, Sizes } from '../constants';
+import { type BadgeProportionTypes, type Color, type Size, Sizes } from '../constants';
 import { colorPalette, getColorClassNames, makeClassName } from '../theme';
 import { tremorTwMerge } from '../tremorTwMerge';
 
 const makeBadgeClassName = makeClassName('Badge');
-
-export type BadgeProportionTypes = {
-    paddingX: string;
-    paddingY: string;
-    fontSize: string;
-};
 
 export const badgeProportions: { [char: string]: BadgeProportionTypes } = {
     xs: {

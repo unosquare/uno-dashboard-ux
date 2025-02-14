@@ -1,8 +1,8 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react';
-import React, { useRef, useMemo, isValidElement, useState, createContext, useContext } from 'react';
+import React, { useRef, useMemo, isValidElement, useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useInternalState } from '../hooks';
-import { ArrowDownHeadIcon, XCircleIcon, getFilteredOptions } from '../reactUtils';
+import { ArrowDownHeadIcon, SelectedValueContext, XCircleIcon, getFilteredOptions } from '../reactUtils';
 import { getSelectButtonColors, makeClassName } from '../theme';
 import { tremorTwMerge } from '../tremorTwMerge';
 import { isValueInArray } from '../utils';
@@ -56,18 +56,6 @@ export const MultiSelectItem = React.forwardRef<HTMLDivElement, MultiSelectItemP
 );
 
 const makeMultiSelectClassName = makeClassName('MultiSelect');
-
-interface SelectedValueContextValue {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    selectedValue: any;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    handleValueChange?: (value: any) => void;
-}
-
-const SelectedValueContext = createContext<SelectedValueContextValue>({
-    selectedValue: undefined,
-    handleValueChange: undefined,
-});
 
 const SearchIcon = ({ ...props }) => (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' {...props}>
