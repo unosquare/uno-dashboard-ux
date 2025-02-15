@@ -18,6 +18,7 @@ export * from './CategoryBar';
 export * from './Card';
 export * from './CardLoading';
 export * from './ChartBar';
+export * from './ChartLegend';
 export * from './ChartFunnel';
 export * from './ChartShimmers';
 export * from './ComposedLineChart';
