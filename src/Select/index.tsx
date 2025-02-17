@@ -117,7 +117,7 @@ export const Select = React.forwardRef<HTMLInputElement, SelectProps>((props, re
                                 ref={listboxButtonRef}
                                 className={tremorTwMerge(
                                     // common
-                                    'w-full outline-none text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 border pr-8 py-2',
+                                    'w-full outline-hidden text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 border pr-8 py-2',
                                     // light
                                     'border-tremor-border shadow-tremor-input focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
                                     // dark
@@ -196,7 +196,7 @@ export const Select = React.forwardRef<HTMLInputElement, SelectProps>((props, re
                                     anchor='bottom start'
                                     className={tremorTwMerge(
                                         // common
-                                        'z-10 w-[var(--button-width)] divide-y overflow-y-auto outline-none rounded-tremor-default max-h-[228px]  border [--anchor-gap:4px]',
+                                        'z-10 w-[var(--button-width)] divide-y overflow-y-auto outline-hidden rounded-tremor-default max-h-[228px]  border [--anchor-gap:4px]',
                                         // light
                                         'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
                                         // dark
@@ -235,9 +235,9 @@ export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
                     // common
                     'flex justify-start items-center cursor-default text-tremor-default px-2.5 py-2.5',
                     // light
-                    'data-[focus]:bg-tremor-background-muted  data-[focus]:text-tremor-content-strong data-[selected]:text-tremor-content-strong data-[selected]:bg-tremor-background-muted text-tremor-content-emphasis',
+                    'data-focus:bg-tremor-background-muted  data-focus:text-tremor-content-strong data-selected:text-tremor-content-strong data-selected:bg-tremor-background-muted text-tremor-content-emphasis',
                     // dark
-                    'dark:data-[focus]:bg-dark-tremor-background-muted  dark:data-[focus]:text-dark-tremor-content-strong dark:data-[selected]:text-dark-tremor-content-strong dark:data-[selected]:bg-dark-tremor-background-muted dark:text-dark-tremor-content-emphasis',
+                    'dark:data-focus:bg-dark-tremor-background-muted  dark:data-focus:text-dark-tremor-content-strong dark:data-selected:text-dark-tremor-content-strong dark:data-selected:bg-dark-tremor-background-muted dark:text-dark-tremor-content-emphasis',
                     className,
                 )}
                 ref={ref}

@@ -20,7 +20,7 @@ export const ChartFunnel = <T,>({ rawData, dataCallback, formatType, calculateSi
                         key={uuidv4()}
                         title={humanize(entry.name.toString())}
                         className={tremorTwMerge(
-                            'rounded h-[25px] mb-[5px] flex items-center justify-center',
+                            'rounded-sm h-[25px] mb-[5px] flex items-center justify-center',
                             entry.value
                                 ? calculateSizes.sizes[
                                       calculateSizes.orderedValues.findIndex((x) => x === entry.value) ?? 0
@@ -29,7 +29,7 @@ export const ChartFunnel = <T,>({ rawData, dataCallback, formatType, calculateSi
                             getColorClassNames(themeColorRange[index], colorPalette.text).bgColor,
                         )}
                     >
-                        <Text className='!text-white text-xs p-1'>
+                        <Text className='text-white! text-xs p-1'>
                             {entry.name} - {formatter(entry.value, formatType)}
                         </Text>
                     </div>

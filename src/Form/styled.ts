@@ -10,7 +10,7 @@ const InputBase = tw.input`
     hover:bg-gray-200
     focus:bg-gray-200
     disabled:text-[#999999]
-    focus:outline-none
+    focus:outline-hidden
     text-tremor-content
     dark:text-dark-tremor-content
     bg-tremor-background
@@ -39,22 +39,22 @@ export const StyledFileInput = tw(InputBase)`
     file:px-3
     file:py-1.5
     file:text-tremor-default
-    file:outline-none
+    file:outline-hidden
     file:border-solid
     file:border-tremor-border
     file:bg-tremor-background-muted
     file:text-tremor-content
     hover:file:bg-tremor-background-subtle/80
-    file:dark:border-dark-tremor-border
-    file:dark:bg-dark-tremor-background-muted
-    hover:file:dark:bg-dark-tremor-background-subtle/30
+    dark:file:border-dark-tremor-border
+    dark:file:bg-dark-tremor-background-muted
+    dark:hover:file:bg-dark-tremor-background-subtle/30
     file:[border-inline-end-width:1px]
     file:[margin-inline-end:0.75rem]
-    focus:outline-none
+    focus:outline-hidden
     disabled:pointer-events-none
     file:disabled:pointer-events-none
     file:disabled:bg-tremor-background-subtle
     file:disabled:text-tremor-content
-    file:disabled:dark:border-gray-700
-    file:disabled:dark:bg-dark-tremor-background-subtle
+    dark:file:disabled:border-gray-700
+    dark:file:disabled:bg-dark-tremor-background-subtle
 `;

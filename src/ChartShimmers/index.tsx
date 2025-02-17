@@ -33,7 +33,7 @@ export const ChartBarShimmer = ({ className }: ClassNameComponent) => {
     }, []);
 
     return (
-        <Flex className={twMerge('w-full h-60 loading-shimmer rounded p-2', className)}>
+        <Flex className={twMerge('w-full h-60 loading-shimmer rounded-sm p-2', className)}>
             <ResponsiveContainer>
                 <BarChart data={dataStore}>
                     <Legend
@@ -69,7 +69,7 @@ export const ChartLineShimmer = ({ className }: ClassNameComponent) => {
     }, []);
 
     return (
-        <Flex className={twMerge('w-full h-60 loading-shimmer rounded p-2', className)}>
+        <Flex className={twMerge('w-full h-60 loading-shimmer rounded-sm p-2', className)}>
             <ResponsiveContainer>
                 <LineChart data={dataStore}>
                     <CartesianGrid strokeDasharray='2 2' />

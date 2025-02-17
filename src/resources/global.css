@@ -1,18 +1,81 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-#headlessui-portal-root > div[data-headlessui-portal] > div[role="listbox"] {
-    z-index: 41;
+@config '../../tailwind.config.js';
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
 }
 
-.recharts-legend-item-text,
-.recharts-cartesian-axis-tick-value {
-    font-size: 13px;
-}
+@layer utilities {
+    *::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+        position: relative;
+    }
 
-.recharts-legend-item {
-    margin-right: 25px;
+    *::-webkit-scrollbar-track {
+        border-radius: 100vh;
+        background: #f1f2f3;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background: #304ff3;
+        border-radius: 100vh;
+        height: 20px;
+        border: 1px solid #304ff3;
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -500px 0;
+        }
+        100% {
+            background-position: 500px 0;
+        }
+    }
+
+    .__react_component_tooltip {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .dark {
+        & *::-webkit-scrollbar-track {
+            border-radius: 100vh;
+            background: #111827;
+        }
+    }
+
+    .loading-shimmer {
+        animation: shimmer 2s infinite linear;
+        background: linear-gradient(to right, rgba(200, 200, 200, 0) 0%, rgba(200, 200, 200, 0.4) 100%);
+        background-size: 500px 100%;
+    }
+    #headlessui-portal-root > div[data-headlessui-portal] > div[role="listbox"] {
+        z-index: 41;
+    }
+
+    .recharts-legend-item-text,
+    .recharts-cartesian-axis-tick-value {
+        font-size: 13px;
+    }
+
+    .recharts-legend-item {
+        margin-right: 25px;
+    }
 }
 
 @layer components {
@@ -26,158 +89,64 @@
         overflow: hidden !important;
     }
 
-    *,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    span,
-    p,
-    a,
-    strong,
-    td,
-    th,
-    text,
-    svg,
-    .__react_component_tooltip {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
-
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         @apply appearance-none m-0;
     }
 }
 
-@layer utilities {
-    .animated-alert {
-        @keyframes slideInTop {
-            0% {
-                transform: translateY(-40px);
-                visibility: visible;
-                opacity: 0;
-            }
+@theme {
+    --animate-slideInTop: slideInTop 4s ease-out forwards;
+    --animate-fadeIn: fadeIn 0.5s ease-out forwards;
+    --animate-slideInRight: slideInRight 0.5s ease-out forwards;
 
-            8% {
-                transform: translateY(0px);
-                opacity: 1;
-            }
-
-            90% {
-                transform: translateY(0px);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-40px);
-                visibility: hidden;
-                opacity: 0;
-            }
-        }
-    }
-
-    .alert-only-fade-in {
-        @keyframes fadeIn {
-            0% {
-                transform: translateY(-40px);
-                visibility: visible;
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0px);
-                visibility: visible;
-                opacity: 1;
-            }
-        }
-    }
-
-    .alert-only-fade-out {
-        @keyframes fadeOut {
-            0% {
-                transform: translateY(0px);
-                visibility: visible;
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-40px);
-                visibility: hidden;
-                opacity: 0;
-            }
-        }
-    }
-
-    .animated-menu {
-        -webkit-animation-duration: 600ms;
-        animation-duration: 600ms;
-        -webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
-        -webkit-animation-name: slideInRight;
-        animation-name: slideInRight;
-
-        @-webkit-keyframes slideInRight {
-            from {
-                -webkit-transform: translate3d(100%, 0, 0);
-                transform: translate3d(100%, 0, 0);
-                visibility: visible;
-            }
-
-            to {
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                -webkit-transform: translate3d(100%, 0, 0);
-                transform: translate3d(100%, 0, 0);
-                visibility: visible;
-            }
-
-            to {
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-            }
-        }
-    }
-
-    *::-webkit-scrollbar {
-        width: 7px;
-        height: 7px;
-        position: relative;
-    }
-
-    *::-webkit-scrollbar-track {
-        border-radius: 100vh;
-        background: #f1f2f3;
-    }
-
-    .dark *::-webkit-scrollbar-track {
-        border-radius: 100vh;
-        background: #111827;
-    }
-
-    *::-webkit-scrollbar-thumb {
-        background: #304ff3;
-        border-radius: 100vh;
-        height: 20px;
-        border: 1px solid #304ff3;
-    }
-
-    .loading-shimmer {
-        animation: shimmer 2s infinite linear;
-        background: linear-gradient(to right, rgba(200, 200, 200, 0) 0%, rgba(200, 200, 200, 0.4) 100%);
-        background-size: 500px 100%;
-    }
-
-    @keyframes shimmer {
+    @keyframes slideInTop {
         0% {
-            background-position: -500px 0;
+            transform: translateY(-40px);
+            visibility: visible;
+            opacity: 0;
+        }
+
+        8% {
+            transform: translateY(0px);
+            opacity: 1;
+        }
+
+        90% {
+            transform: translateY(0px);
+            opacity: 1;
+        }
+
+        100% {
+            transform: translateY(-40px);
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            transform: translateY(-40px);
+            visibility: visible;
+            opacity: 0;
         }
         100% {
-            background-position: 500px 0;
+            transform: translateY(0px);
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            -webkit-transform: translate3d(100%, 0, 0);
+            transform: translate3d(100%, 0, 0);
+            visibility: visible;
+        }
+
+        to {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
         }
     }
 }

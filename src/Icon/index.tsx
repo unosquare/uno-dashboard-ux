@@ -104,7 +104,7 @@ export const shape: { [style: string]: ShapeTypes } = {
 export const IconVariants: { [key: string]: IconVariant } = {
     Simple: 'simple',
     Light: 'light',
-    Shadow: 'shadow',
+    Shadow: 'shadow-sm',
     Solid: 'solid',
     Outlined: 'outlined',
 };

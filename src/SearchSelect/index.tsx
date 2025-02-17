@@ -30,9 +30,9 @@ export const SearchSelectItem = React.forwardRef<HTMLDivElement, SearchSelectIte
                     // common
                     'flex justify-start items-center cursor-default text-tremor-default p-2.5',
                     // light
-                    'data-[focus]:bg-tremor-background-muted  data-[focus]:text-tremor-content-strong data-[selected]:text-tremor-content-strong data-[selected]:bg-tremor-background-muted text-tremor-content-emphasis',
+                    'data-focus:bg-tremor-background-muted  data-focus:text-tremor-content-strong data-selected:text-tremor-content-strong data-selected:bg-tremor-background-muted text-tremor-content-emphasis',
                     // dark
-                    'dark:data-[focus]:bg-dark-tremor-background-muted  dark:data-[focus]:text-dark-tremor-content-strong dark:data-[selected]:text-dark-tremor-content-strong dark:data-[selected]:bg-dark-tremor-background-muted dark:text-dark-tremor-content-emphasis',
+                    'dark:data-focus:bg-dark-tremor-background-muted  dark:data-focus:text-dark-tremor-content-strong dark:data-selected:text-dark-tremor-content-strong dark:data-selected:bg-dark-tremor-background-muted dark:text-dark-tremor-content-emphasis',
                     className,
                 )}
                 ref={ref}
@@ -209,7 +209,7 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                                         ref={comboboxInputRef}
                                         className={tremorTwMerge(
                                             // common
-                                            'w-full outline-none text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 text-tremor-default pr-14 border py-2',
+                                            'w-full outline-hidden text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 text-tremor-default pr-14 border py-2',
                                             // light
                                             'border-tremor-border shadow-tremor-input focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
                                             // dark
@@ -237,7 +237,7 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                                                 // common
                                                 'flex-none h-5 w-5',
                                                 // light
-                                                '!text-tremor-content-subtle',
+                                                'text-tremor-content-subtle!',
                                                 // dark
                                                 '!dark:text-dark-tremor-content-subtle',
                                             )}
@@ -280,7 +280,7 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                                             anchor='bottom start'
                                             className={tremorTwMerge(
                                                 // common
-                                                'z-10 divide-y w-[var(--button-width)] overflow-y-auto outline-none rounded-tremor-default text-tremor-default max-h-[228px] border [--anchor-gap:4px]',
+                                                'z-10 divide-y w-[var(--button-width)] overflow-y-auto outline-hidden rounded-tremor-default text-tremor-default max-h-[228px] border [--anchor-gap:4px]',
                                                 // light
                                                 'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
                                                 // dark

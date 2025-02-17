@@ -7,7 +7,7 @@ export const ShimmerTable = ({ colSpan }: { colSpan: number }) =>
         <TableRow key={uuidv4()}>
             {Array.from({ length: colSpan }).map(() => (
                 <TableCell key={uuidv4()}>
-                    <div className='loading-shimmer rounded'>&nbsp;</div>
+                    <div className='loading-shimmer rounded-sm'>&nbsp;</div>
                 </TableCell>
             ))}
         </TableRow>

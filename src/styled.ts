@@ -1,10 +1,60 @@
 import tw from 'tailwind-styled-components';
 import type { FieldGroupSettings, FormContainerSettings } from './Form/formSettings';
 
+const getGridCols = (columns: number) => {
+    switch (columns) {
+        case 2:
+            return 'grid-cols-2';
+        case 3:
+            return 'grid-cols-3';
+        case 4:
+            return 'grid-cols-4';
+        case 5:
+            return 'grid-cols-5';
+        case 6:
+            return 'grid-cols-6';
+        case 7:
+            return 'grid-cols-7';
+        case 8:
+            return 'grid-cols-8';
+        case 9:
+            return 'grid-cols-9';
+        case 10:
+            return 'grid-cols-10';
+        default:
+            return 'grid-cols-1';
+    }
+};
+
+const getGridRows = (rows: number) => {
+    switch (rows) {
+        case 2:
+            return 'grid-rows-2';
+        case 3:
+            return 'grid-rows-3';
+        case 4:
+            return 'grid-rows-4';
+        case 5:
+            return 'grid-rows-5';
+        case 6:
+            return 'grid-rows-6';
+        case 7:
+            return 'grid-rows-7';
+        case 8:
+            return 'grid-rows-8';
+        case 9:
+            return 'grid-rows-9';
+        case 10:
+            return 'grid-rows-10';
+        default:
+            return 'grid-rows-1';
+    }
+};
+
 export const StyledFormContainer = tw.div<FormContainerSettings>`
     grid
-    ${({ columns }) => `grid-cols-${columns}`}
-    ${({ fields, columns }) => `grid-rows-${(fields / columns).toFixed()}`}
+    ${({ columns }) => getGridCols(columns)}
+    ${({ fields, columns }) => getGridRows(Math.trunc(fields / columns))}
     grid-flow-col
     gap-x-20
     gap-y-4

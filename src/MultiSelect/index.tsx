@@ -25,10 +25,10 @@ export const MultiSelectItem = React.forwardRef<HTMLDivElement, MultiSelectItemP
                     // common
                     'flex justify-start items-center cursor-default text-tremor-default p-2.5',
                     // light
-                    // "data-[focus]:bg-tremor-background-muted data-[focus]:text-tremor-content-strong data-[select]ed:text-tremor-content-strong data-[select]ed:bg-tremor-background-muted text-tremor-content-emphasis",
-                    'data-[focus]:bg-tremor-background-muted data-[focus]:text-tremor-content-strong data-[select]ed:text-tremor-content-strong text-tremor-content-emphasis',
+                    // "data-focus:bg-tremor-background-muted data-focus:text-tremor-content-strong data-[select]ed:text-tremor-content-strong data-[select]ed:bg-tremor-background-muted text-tremor-content-emphasis",
+                    'data-focus:bg-tremor-background-muted data-focus:text-tremor-content-strong data-[select]ed:text-tremor-content-strong text-tremor-content-emphasis',
                     // dark
-                    'dark:data-[focus]:bg-dark-tremor-background-muted dark:data-[focus]:text-dark-tremor-content-strong dark:data-[select]ed:text-dark-tremor-content-strong dark:data-[select]ed:bg-dark-tremor-background-muted dark:text-dark-tremor-content-emphasis',
+                    'dark:data-focus:bg-dark-tremor-background-muted dark:data-focus:text-dark-tremor-content-strong dark:data-[select]ed:text-dark-tremor-content-strong dark:data-[select]ed:bg-dark-tremor-background-muted dark:text-dark-tremor-content-emphasis',
                     className,
                 )}
                 ref={ref}
@@ -40,7 +40,7 @@ export const MultiSelectItem = React.forwardRef<HTMLDivElement, MultiSelectItemP
                     className={tremorTwMerge(
                         makeMultiSelectItemClassName('checkbox'),
                         // common
-                        'flex-none focus:ring-none focus:outline-none cursor-pointer mr-2.5',
+                        'flex-none focus:ring-none focus:outline-hidden cursor-pointer mr-2.5',
                         // light
                         'accent-tremor-brand',
                         // dark
@@ -212,7 +212,7 @@ export const MultiSelect = React.forwardRef<HTMLInputElement, MultiSelectProps>(
                             <ListboxButton
                                 className={tremorTwMerge(
                                     // common
-                                    'w-full outline-none text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 border pr-8 py-1.5',
+                                    'w-full outline-hidden text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 border pr-8 py-1.5',
                                     // light
                                     'border-tremor-border shadow-tremor-input focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
                                     // dark
@@ -341,7 +341,7 @@ export const MultiSelect = React.forwardRef<HTMLInputElement, MultiSelectProps>(
                                     anchor='bottom start'
                                     className={tremorTwMerge(
                                         // common
-                                        'z-10 divide-y w-[var(--button-width)] overflow-y-auto outline-none rounded-tremor-default max-h-[228px]  border [--anchor-gap:4px]',
+                                        'z-10 divide-y w-[var(--button-width)] overflow-y-auto outline-hidden rounded-tremor-default max-h-[228px]  border [--anchor-gap:4px]',
                                         // light
                                         'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
                                         // dark
@@ -377,7 +377,7 @@ export const MultiSelect = React.forwardRef<HTMLInputElement, MultiSelectProps>(
                                             placeholder={placeholderSearch}
                                             className={tremorTwMerge(
                                                 // common
-                                                'w-full focus:outline-none focus:ring-none bg-transparent text-tremor-default py-2',
+                                                'w-full focus:outline-hidden focus:ring-none bg-transparent text-tremor-default py-2',
                                                 // light
                                                 'text-tremor-content-emphasis',
                                                 // dark

@@ -9,15 +9,15 @@ export interface BasicTooltipProps {
 
 export const TooltipContainer = tw.div`
     absolute
-    z-[1]
+    z-1
     [&>div]:p-[8px]
     [&>div]:border
-    [&>div]:rounded
+    [&>div]:rounded-sm
     [&>div]:bg-tremor-background 
-    [&>div]:dark:bg-dark-tremor-background
+    dark:[&>div]:bg-dark-tremor-background
     [&>div]:opacity-95
     [&>div]:text-tremor-content 
-    [&>div]:dark:text-dark-tremor-content
+    dark:[&>div]:text-dark-tremor-content
     [&>div]:text-xs
     top-0
     left-0

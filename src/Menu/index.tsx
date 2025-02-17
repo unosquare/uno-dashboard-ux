@@ -1,4 +1,3 @@
-import React from 'react';
 import tw from 'tailwind-styled-components';
 
 export type BurgerSettings = {
@@ -25,7 +24,7 @@ export const MenuContainer = tw.div`
     flex
     pb-14
     flex-col
-    animated-menu
+    animated-slideInRight
     p-4
 `;
 
@@ -62,8 +61,8 @@ export const MenuSubSection = tw.div`
     [&_span]:leading-6
     [&_span]:mb-[5px]
     [&_span]:pl-[10px]
-    [&_span]:hover:bg-tremor-emphasis
-    [&_span]:dark:hover:bg-dark-tremor-emphasis
+    hover:[&_span]:bg-tremor-emphasis
+    dark:hover:[&_span]:bg-dark-tremor-emphasis
 `;
 
 export const Burger = ({ onClick }: BurgerSettings) => (

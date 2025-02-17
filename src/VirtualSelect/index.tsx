@@ -43,7 +43,7 @@ const constructValueToNameMapping = (options: ReactSelectOption<string | number>
 
 export const comboBoxStyles = <T,>(value: T, disabled: boolean, icon: boolean, showAsValue: boolean) =>
     tremorTwMerge(
-        'w-full outline-none text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 text-tremor-default',
+        'w-full outline-hidden text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 text-tremor-default',
         'border-tremor-border shadow-tremor-input focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
         'dark:border-dark-tremor-border dark:shadow-dark-tremor-input dark:focus:border-dark-tremor-brand-subtle dark:focus:ring-dark-tremor-brand-muted',
         'pl-3',
@@ -58,7 +58,7 @@ export const comboBoxStyles = <T,>(value: T, disabled: boolean, icon: boolean, s
     );
 
 export const comboBoxOptionsStyles = tremorTwMerge(
-    'absolute overflow-y-auto overflow-x-hidden block z-100 divide-y max-h-[228px] w-full left-0 outline-none rounded-tremor-default text-tremor-default',
+    'absolute overflow-y-auto overflow-x-hidden block z-100 divide-y max-h-[228px] w-full left-0 outline-hidden rounded-tremor-default text-tremor-default',
     'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
     'dark:bg-dark-tremor-background dark:border-dark-tremor-border dark:divide-dark-tremor-border dark:shadow-dark-tremor-dropdown',
     'mt-1 mb-1 border',

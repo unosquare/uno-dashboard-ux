@@ -1,4 +1,4 @@
-import { type Color, colorValues } from './constants';
+import { type Color, colorValues } from './colors';
 import { tremorTwMerge } from './tremorTwMerge';
 
 export type ValueFormatter = (value: number) => string;
@@ -53,6 +53,7 @@ const getIsBaseColor = (color: Color | string) => colorValues.includes(color as 
 
 export function getColorClassNames(color: Color | string, shade?: number): ColorClassNames {
     const isBaseColor = getIsBaseColor(color);
+
     if (color === 'white' || color === 'black' || color === 'transparent' || !shade || !isBaseColor) {
         const unshadedColor = !getIsArbitraryColor(color) ? color : `[${color}]`;
         return {
@@ -70,6 +71,7 @@ export function getColorClassNames(color: Color | string, shade?: number): Color
             fillColor: `fill-${unshadedColor} dark:fill-${unshadedColor}`,
         };
     }
+
     return {
         bgColor: `bg-${color}-${shade} dark:bg-${color}-${shade}`,
         selectBgColor: `data-[selected]:bg-${color}-${shade} dark:data-[selected]:bg-${color}-${shade}`,
@@ -166,7 +168,7 @@ export const getSelectButtonColors = (hasSelection: boolean, isDisabled: boolean
 export const hasValue = <T>(value: T | null | undefined) => value !== null && value !== undefined && value !== '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const iconVariantValues = ['simple', 'light', 'shadow', 'solid', 'outlined'] as const;
+const iconVariantValues = ['simple', 'light', 'shadow-sm', 'solid', 'outlined'] as const;
 
 export type IconVariant = (typeof iconVariantValues)[number];
 
@@ -192,7 +194,7 @@ export const getIconColors = (variant: IconVariant, color?: Color) => {
                 borderColor: '',
                 ringColor: '',
             };
-        case 'shadow':
+        case 'shadow-sm':
             return {
                 textColor: color
                     ? getColorClassNames(color, colorPalette.text).textColor

@@ -7,9 +7,8 @@ export interface MetricProps extends React.HTMLAttributes<HTMLParagraphElement> 
     color?: Color;
 }
 
-export const Metric = React.forwardRef<HTMLParagraphElement, MetricProps>((props, ref) => {
-    const { color, children, className, ...other } = props;
-    return (
+export const Metric = React.forwardRef<HTMLParagraphElement, MetricProps>(
+    ({ color, children, className, ...other }, ref) => (
         <p
             ref={ref}
             className={tremorTwMerge(
@@ -23,5 +22,5 @@ export const Metric = React.forwardRef<HTMLParagraphElement, MetricProps>((props
         >
             {children}
         </p>
-    );
-});
+    ),
+);

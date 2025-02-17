@@ -1,10 +1,10 @@
 import { Checkmark28Regular, Dismiss28Regular } from '@fluentui/react-icons';
-import React, { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useShallow } from 'zustand/react/shallow';
 import useAlertStore from '../useAlertStore';
 
-const AUTO_ANIMATE = ' animate-[slideInTop_4s_ease-out_forwards] ';
+const AUTO_ANIMATE = ' animate-slideInTop ';
 
 const StyledContainer = ({
     children,
@@ -32,7 +32,7 @@ const StyledContainer = ({
     text-lg
     invisible
     ${animation}
-    z-[100]
+    z-100
     [&_svg]:mr-2
     [&_svg]:ml-[14px]
     [&_svg]:min-w-[28px]
@@ -64,8 +64,7 @@ const AlertComponent = ({ message, animation, deleteAlert, icon }: AlertProps) =
     );
 };
 
-const animationElection = (isTimed: boolean): string =>
-    isTimed ? AUTO_ANIMATE : ' animate-[fadeIn_0.5s_ease-out_forwards] hover:bg-gray-400 ';
+const animationElection = (isTimed: boolean): string => (isTimed ? AUTO_ANIMATE : ' animate-fadeIn hover:bg-gray-400 ');
 
 export const Alert = () => {
     const [activeAlerts, deleteAlerts] = useAlertStore(useShallow((state) => [state.activeAlerts, state.deleteAlerts]));

@@ -5,7 +5,8 @@ export const Blur = tw.div`
     h-screen
     fixed
     z-30
-    bg-blackOpacity
+    bg-black
+    opacity-50
     dark:bg-slate-500
     dark:opacity-50
     top-0

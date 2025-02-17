@@ -1,21 +1,21 @@
-import { format, isEqual, max, min, startOfDay, startOfMonth, startOfToday, startOfYear, sub } from 'date-fns';
-import React, { type ReactElement, useMemo, useState } from 'react';
-import type { DateRange, DayPickerRangeProps } from 'react-day-picker';
-import { enUS } from 'date-fns/locale';
 import {
-    Popover,
-    PopoverButton,
-    Transition,
-    PopoverPanel,
     Listbox,
     ListboxButton,
     ListboxOptions,
+    Popover,
+    PopoverButton,
+    PopoverPanel,
+    Transition,
 } from '@headlessui/react';
+import { format, isEqual, max, min, startOfDay, startOfMonth, startOfToday, startOfYear, sub } from 'date-fns';
+import { enUS } from 'date-fns/locale';
+import React, { type ReactElement, useMemo, useState } from 'react';
+import type { DateRange, DayPickerRangeProps } from 'react-day-picker';
 import { Calendar } from '../Calendar';
+import { SelectItem } from '../Select';
 import type { Color } from '../constants';
 import { useInternalState } from '../hooks';
-import { getNodeText, constructValueToNameMapping, XCircleIcon, CalendarIcon } from '../reactUtils';
-import { SelectItem } from '../Select';
+import { CalendarIcon, XCircleIcon, constructValueToNameMapping, getNodeText } from '../reactUtils';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
 import { tremorTwMerge } from '../tremorTwMerge';
 
@@ -301,7 +301,7 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                         disabled={disabled}
                         className={tremorTwMerge(
                             // common
-                            'w-full outline-none text-left whitespace-nowrap truncate focus:ring-2 transition duration-100 rounded-l-tremor-default flex flex-nowrap border pl-3 py-2',
+                            'w-full outline-hidden text-left whitespace-nowrap truncate focus:ring-2 transition duration-100 rounded-l-tremor-default flex flex-nowrap border pl-3 py-2',
                             // light
                             'rounded-l-tremor-default border-tremor-border text-tremor-content-emphasis focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
                             // dark
@@ -328,7 +328,7 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                         <button
                             type='button'
                             className={tremorTwMerge(
-                                'absolute outline-none inset-y-0 right-0 flex items-center transition duration-100 mr-4',
+                                'absolute outline-hidden inset-y-0 right-0 flex items-center transition duration-100 mr-4',
                             )}
                             onClick={(e) => {
                                 e.preventDefault();
@@ -362,7 +362,7 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                         focus={true}
                         className={tremorTwMerge(
                             // common
-                            'min-w-min divide-y overflow-y-auto outline-none rounded-tremor-default p-3 border [--anchor-gap:4px]',
+                            'min-w-min divide-y overflow-y-auto outline-hidden rounded-tremor-default p-3 border [--anchor-gap:4px]',
                             // light
                             'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
                             // dark
@@ -389,7 +389,7 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                             enableYearNavigation={enableYearNavigation}
                             classNames={{
                                 day_range_middle: tremorTwMerge(
-                                    '!rounded-none aria-selected:!bg-tremor-background-subtle aria-selected:dark:!bg-dark-tremor-background-subtle aria-selected:!text-tremor-content aria-selected:dark:!bg-dark-tremor-background-subtle',
+                                    'rounded-none! aria-selected:bg-tremor-background-subtle! dark:aria-selected:bg-dark-tremor-background-subtle! aria-selected:text-tremor-content! dark:aria-selected:bg-dark-tremor-background-subtle!',
                                 ),
                                 day_range_start:
                                     'rounded-r-none rounded-l-tremor-small aria-selected:text-tremor-brand-inverted dark:aria-selected:text-dark-tremor-brand-inverted',
@@ -421,7 +421,7 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                                 onBlur={() => setIsSelectButtonFocused(false)}
                                 className={tremorTwMerge(
                                     // common
-                                    'w-full outline-none text-left whitespace-nowrap truncate rounded-r-tremor-default transition duration-100 border px-4 py-2',
+                                    'w-full outline-hidden text-left whitespace-nowrap truncate rounded-r-tremor-default transition duration-100 border px-4 py-2',
                                     // light
                                     'border-tremor-border text-tremor-content-emphasis focus:border-tremor-brand-subtle',
                                     // dark
@@ -443,7 +443,7 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                                     anchor='bottom end'
                                     className={tremorTwMerge(
                                         // common
-                                        '[--anchor-gap:4px] divide-y overflow-y-auto outline-none border min-w-44',
+                                        '[--anchor-gap:4px] divide-y overflow-y-auto outline-hidden border min-w-44',
                                         // light
                                         'shadow-tremor-dropdown bg-tremor-background border-tremor-border divide-tremor-border rounded-tremor-default',
                                         // dark

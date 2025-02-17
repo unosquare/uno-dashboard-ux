@@ -74,9 +74,6 @@ module.exports = {
                     },
                 },
             },
-            backgroundColor: {
-                blackOpacity: 'rgba(0, 0, 0, 0.5)',
-            },
             boxShadow: {
                 card: 'rgb(255,255,255) 0px 0px 0px 0px, rgb(229,231, 235) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 1px 3px 0px, rgba(0,0,0,0.1) 0px 1px 2px -1px',
                 alert: '0px 1px 7px 2px rgba(0, 0, 0, 0.5)',
@@ -117,39 +114,4 @@ module.exports = {
             },
         },
     },
-    variants: {
-        extend: {},
-    },
-    safelist: [
-        { pattern: /z-(\d)/ },
-        { pattern: /grid-rows-(\d)/ },
-        { pattern: /grid-cols-(\d)/ },
-        {
-            pattern:
-                /bg-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(50|100|200|300|400|500|600|700|800|900)/,
-            variants: ['hover', 'ui-selected'],
-        },
-        {
-            pattern:
-                /text-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(50|100|200|300|400|500|600|700|800|900)/,
-            variants: ['hover', 'ui-selected'],
-        },
-        {
-            pattern:
-                /border-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(50|100|200|300|400|500|600|700|800|900)/,
-            variants: ['hover', 'ui-selected'],
-        },
-        {
-            pattern:
-                /ring-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(50|100|200|300|400|500|600|700|800|900)/,
-        },
-        {
-            pattern:
-                /stroke-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(50|100|200|300|400|500|600|700|800|900|950)/,
-        },
-        {
-            pattern:
-                /fill-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(50|100|200|300|400|500|600|700|800|900|950)/,
-        },
-    ]
 };
