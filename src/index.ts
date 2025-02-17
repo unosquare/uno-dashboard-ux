@@ -24,6 +24,7 @@ export * from './ChartShimmers';
 export * from './ComposedLineChart';
 export * from './DataChart';
 export * from './DatePicker';
+export * from './DateRangePicker';
 export * from './ErrorBoundary';
 export * from './ExportCsvButton';
 export * from './Footer';

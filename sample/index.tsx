@@ -40,6 +40,7 @@ import {
     useAlertStore,
     useToggle,
     Text,
+    DateRangePicker,
 } from '../src';
 import '../src/resources/global.css';
 import FormSample from './FormSample';
@@ -168,6 +169,7 @@ const Application = () => {
                     className='w-60'
                     enableClear
                 />
+                <DateRangePicker />
             </BasicToolbar>
             <TremorContainer hasToolbar>
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
