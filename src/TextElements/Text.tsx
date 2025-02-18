@@ -1,32 +1,29 @@
 import React from 'react';
 import type { Color } from '../constants';
 import { colorPalette, getColorClassNames } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
     color?: Color;
 }
 
-export const Text = React.forwardRef<HTMLParagraphElement, TextProps>((props, ref) => {
-    const { color, className, children } = props;
-    return (
-        <p
-            ref={ref}
-            className={tremorTwMerge(
-                // common
-                'text-tremor-default',
-                color
-                    ? getColorClassNames(color, colorPalette.text).textColor
-                    : tremorTwMerge(
-                          // light
-                          'text-tremor-content',
-                          // dark
-                          'dark:text-dark-tremor-content',
-                      ),
-                className,
-            )}
-        >
-            {children}
-        </p>
-    );
-});
+export const Text = React.forwardRef<HTMLParagraphElement, TextProps>(({ color, className, children }, ref) => (
+    <p
+        ref={ref}
+        className={unoTwMerge(
+            // common
+            'text-unodashboard-default',
+            color
+                ? getColorClassNames(color, colorPalette.text).textColor
+                : unoTwMerge(
+                      // light
+                      'text-unodashboard-content',
+                      // dark
+                      'dark:text-dark-unodashboard-content',
+                  ),
+            className,
+        )}
+    >
+        {children}
+    </p>
+));

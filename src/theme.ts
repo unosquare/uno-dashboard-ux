@@ -1,5 +1,5 @@
 import { type Color, colorValues } from './colors';
-import { tremorTwMerge } from './tremorTwMerge';
+import { unoTwMerge } from './unoTwMerge';
 
 export type ValueFormatter = (value: number) => string;
 
@@ -88,7 +88,8 @@ export function getColorClassNames(color: Color | string, shade?: number): Color
     };
 }
 
-export const makeClassName = (componentName: string) => (className: string) => `tremor-${componentName}-${className}`;
+export const makeClassName = (componentName: string) => (className: string) =>
+    `unodashboard-${componentName}-${className}`;
 
 export const constructCategoryColors = (
     categories: string[],
@@ -152,17 +153,19 @@ export const themeColorRange: Color[] = [
 ];
 
 export const getSelectButtonColors = (hasSelection: boolean, isDisabled: boolean, hasError = false) =>
-    tremorTwMerge(
+    unoTwMerge(
         isDisabled
-            ? 'bg-tremor-background-subtle dark:bg-dark-tremor-background-subtle'
-            : 'bg-tremor-background dark:bg-dark-tremor-background',
-        !isDisabled && 'hover:bg-tremor-background-muted dark:hover:bg-dark-tremor-background-muted',
+            ? 'bg-unodashboard-background-subtle dark:bg-dark-unodashboard-background-subtle'
+            : 'bg-unodashboard-background dark:bg-dark-unodashboard-background',
+        !isDisabled && 'hover:bg-unodashboard-background-muted dark:hover:bg-dark-unodashboard-background-muted',
         hasSelection
-            ? 'text-tremor-content-emphasis dark:text-dark-tremor-content-emphasis'
-            : 'text-tremor-content dark:text-dark-tremor-content',
-        isDisabled && 'text-tremor-content-subtle dark:text-dark-tremor-content-subtle',
+            ? 'text-unodashboard-content-emphasis dark:text-dark-unodashboard-content-emphasis'
+            : 'text-unodashboard-content dark:text-dark-unodashboard-content',
+        isDisabled && 'text-unodashboard-content-subtle dark:text-dark-unodashboard-content-subtle',
         hasError && 'text-red-500 placeholder:text-red-500 dark:text-red-500 dark:placeholder:text-red-500',
-        hasError ? 'border-red-500 dark:border-red-500' : 'border-tremor-border dark:border-dark-tremor-border',
+        hasError
+            ? 'border-red-500 dark:border-red-500'
+            : 'border-unodashboard-border dark:border-dark-unodashboard-border',
     );
 
 export const hasValue = <T>(value: T | null | undefined) => value !== null && value !== undefined && value !== '';
@@ -178,7 +181,7 @@ export const getIconColors = (variant: IconVariant, color?: Color) => {
             return {
                 textColor: color
                     ? getColorClassNames(color, colorPalette.text).textColor
-                    : 'text-tremor-brand dark:text-dark-tremor-brand',
+                    : 'text-unodashboard-brand dark:text-dark-unodashboard-brand',
                 bgColor: '',
                 borderColor: '',
                 ringColor: '',
@@ -187,10 +190,10 @@ export const getIconColors = (variant: IconVariant, color?: Color) => {
             return {
                 textColor: color
                     ? getColorClassNames(color, colorPalette.text).textColor
-                    : 'text-tremor-brand dark:text-dark-tremor-brand',
+                    : 'text-unodashboard-brand dark:text-dark-unodashboard-brand',
                 bgColor: color
-                    ? tremorTwMerge(getColorClassNames(color, colorPalette.background).bgColor, 'bg-opacity-20')
-                    : 'bg-tremor-brand-muted dark:bg-dark-tremor-brand-muted',
+                    ? unoTwMerge(getColorClassNames(color, colorPalette.background).bgColor, 'bg-opacity-20')
+                    : 'bg-unodashboard-brand-muted dark:bg-dark-unodashboard-brand-muted',
                 borderColor: '',
                 ringColor: '',
             };
@@ -198,38 +201,38 @@ export const getIconColors = (variant: IconVariant, color?: Color) => {
             return {
                 textColor: color
                     ? getColorClassNames(color, colorPalette.text).textColor
-                    : 'text-tremor-brand dark:text-dark-tremor-brand',
+                    : 'text-unodashboard-brand dark:text-dark-unodashboard-brand',
                 bgColor: color
-                    ? tremorTwMerge(getColorClassNames(color, colorPalette.background).bgColor, 'bg-opacity-20')
-                    : 'bg-tremor-background dark:bg-dark-tremor-background',
-                borderColor: 'border-tremor-border dark:border-dark-tremor-border',
+                    ? unoTwMerge(getColorClassNames(color, colorPalette.background).bgColor, 'bg-opacity-20')
+                    : 'bg-unodashboard-background dark:bg-dark-unodashboard-background',
+                borderColor: 'border-unodashboard-border dark:border-dark-unodashboard-border',
                 ringColor: '',
             };
         case 'solid':
             return {
                 textColor: color
                     ? getColorClassNames(color, colorPalette.text).textColor
-                    : 'text-tremor-brand-inverted dark:text-dark-tremor-brand-inverted',
+                    : 'text-unodashboard-brand-inverted dark:text-dark-unodashboard-brand-inverted',
                 bgColor: color
-                    ? tremorTwMerge(getColorClassNames(color, colorPalette.background).bgColor, 'bg-opacity-20')
-                    : 'bg-tremor-brand dark:bg-dark-tremor-brand',
-                borderColor: 'border-tremor-brand-inverted dark:border-dark-tremor-brand-inverted',
-                ringColor: 'ring-tremor-ring dark:ring-dark-tremor-ring',
+                    ? unoTwMerge(getColorClassNames(color, colorPalette.background).bgColor, 'bg-opacity-20')
+                    : 'bg-unodashboard-brand dark:bg-dark-unodashboard-brand',
+                borderColor: 'border-unodashboard-brand-inverted dark:border-dark-unodashboard-brand-inverted',
+                ringColor: 'ring-unodashboard-ring dark:ring-dark-unodashboard-ring',
             };
         case 'outlined':
             return {
                 textColor: color
                     ? getColorClassNames(color, colorPalette.text).textColor
-                    : 'text-tremor-brand dark:text-dark-tremor-brand',
+                    : 'text-unodashboard-brand dark:text-dark-unodashboard-brand',
                 bgColor: color
-                    ? tremorTwMerge(getColorClassNames(color, colorPalette.background).bgColor, 'bg-opacity-20')
-                    : 'bg-tremor-background dark:bg-dark-tremor-background',
+                    ? unoTwMerge(getColorClassNames(color, colorPalette.background).bgColor, 'bg-opacity-20')
+                    : 'bg-unodashboard-background dark:bg-dark-unodashboard-background',
                 borderColor: color
                     ? getColorClassNames(color, colorPalette.ring).borderColor
-                    : 'border-tremor-brand-subtle dark:border-dark-tremor-brand-subtle',
+                    : 'border-unodashboard-brand-subtle dark:border-dark-unodashboard-brand-subtle',
                 ringColor: color
-                    ? tremorTwMerge(getColorClassNames(color, colorPalette.ring).ringColor, 'ring-opacity-40')
-                    : 'ring-tremor-brand-muted dark:ring-dark-tremor-brand-muted',
+                    ? unoTwMerge(getColorClassNames(color, colorPalette.ring).ringColor, 'ring-opacity-40')
+                    : 'ring-unodashboard-brand-muted dark:ring-dark-unodashboard-brand-muted',
             };
     }
 };

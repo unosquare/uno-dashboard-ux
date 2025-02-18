@@ -10,7 +10,7 @@ export type InfoDialogSettings = {
 };
 
 export const InfoDialogTitle = ({ children }: PropsWithChildren) => (
-    <h3 className='text-lg mb-2 font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong'>
+    <h3 className='text-lg mb-2 font-semibold text-unodashboard-content-strong dark:text-dark-unodashboard-content-strong'>
         {children}
     </h3>
 );
@@ -27,7 +27,7 @@ export const InfoDialog = ({
             <Button variant='light' onClick={setIsOpen} icon={Info16Regular} title={tooltip} />
             <Dialog open={isOpen} onClose={setIsOpen} static={true}>
                 <DialogPanel>
-                    <p className='mt-2 leading-6 text-tremor-default text-tremor-content dark:text-dark-tremor-content'>
+                    <p className='mt-2 leading-6 text-unodashboard-default text-unodashboard-content dark:text-dark-unodashboard-content'>
                         {children}
                     </p>
                     <Button className='mt-8 w-full' onClick={setIsOpen}>

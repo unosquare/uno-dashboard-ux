@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Color } from '../constants';
 import { colorPalette, getColorClassNames, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeProgressBarClassName = makeClassName('ProgressBar');
 
@@ -16,25 +16,25 @@ export const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
     ({ value, label, color, showAnimation = false, className, ...other }, ref) => (
         <div
             ref={ref}
-            className={tremorTwMerge(makeProgressBarClassName('root'), 'flex items-center w-full', className)}
+            className={unoTwMerge(makeProgressBarClassName('root'), 'flex items-center w-full', className)}
             {...other}
         >
             <div
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeProgressBarClassName('progressBarWrapper'),
-                    'relative flex items-center w-full rounded-tremor-full bg-opacity-20 h-2',
+                    'relative flex items-center w-full rounded-unodashboard-full bg-opacity-20 h-2',
                     color
                         ? getColorClassNames(color, colorPalette.background).bgColor
-                        : 'bg-tremor-brand-muted/50 dark:bg-dark-tremor-brand-muted',
+                        : 'bg-unodashboard-brand-muted/50 dark:bg-dark-unodashboard-brand-muted',
                 )}
             >
                 <div
-                    className={tremorTwMerge(
+                    className={unoTwMerge(
                         makeProgressBarClassName('progressBar'),
-                        'flex-col h-full rounded-tremor-full',
+                        'flex-col h-full rounded-unodashboard-full',
                         color
                             ? getColorClassNames(color, colorPalette.background).bgColor
-                            : 'bg-tremor-brand dark:bg-dark-tremor-brand',
+                            : 'bg-unodashboard-brand dark:bg-dark-unodashboard-brand',
                         showAnimation ? 'transition-all duration-300 ease-in-out' : '',
                     )}
                     style={{
@@ -44,17 +44,17 @@ export const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
             </div>
             {label ? (
                 <div
-                    className={tremorTwMerge(
+                    className={unoTwMerge(
                         makeProgressBarClassName('labelWrapper'),
                         'w-16 truncate text-right ml-2',
-                        'text-tremor-content-emphasis',
-                        'dark:text-dark-tremor-content-emphasis',
+                        'text-unodashboard-content-emphasis',
+                        'dark:text-dark-unodashboard-content-emphasis',
                     )}
                 >
                     <p
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             makeProgressBarClassName('label'),
-                            'shrink-0 whitespace-nowrap truncate text-tremor-default',
+                            'shrink-0 whitespace-nowrap truncate text-unodashboard-default',
                         )}
                     >
                         {label}

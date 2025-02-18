@@ -7,7 +7,7 @@ import {
     VerticalPositions,
 } from '../constants';
 import { colorPalette, getColorClassNames, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeCardClassName = makeClassName('Card');
 
@@ -37,18 +37,18 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>((props, ref) => 
     return (
         <div
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeCardClassName('root'),
                 // common
-                'relative w-full text-left ring-1 rounded-tremor-default p-6',
+                'relative w-full text-left ring-1 rounded-unodashboard-default p-6',
                 // light
-                'bg-tremor-background ring-tremor-ring shadow-tremor-card',
+                'bg-unodashboard-background ring-unodashboard-ring shadow-unodashboard-card',
                 // dark
-                'dark:bg-dark-tremor-background dark:ring-dark-tremor-ring dark:shadow-dark-tremor-card',
+                'dark:bg-dark-unodashboard-background dark:ring-dark-unodashboard-ring dark:shadow-dark-unodashboard-card',
                 // brand
                 decorationColor
                     ? getColorClassNames(decorationColor, colorPalette.border).borderColor
-                    : 'border-tremor-brand dark:border-dark-tremor-brand',
+                    : 'border-unodashboard-brand dark:border-dark-unodashboard-brand',
                 parseDecorationAlignment(decoration),
                 className,
             )}

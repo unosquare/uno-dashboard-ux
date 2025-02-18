@@ -9,14 +9,14 @@ export const StyledToolbar = tw.div`
     items-center
     justify-between
     whitespace-nowrap
-    max-w-unomax
+    max-w-[1460px]
     m-auto
     px-[40px]
     h-14
 `;
 
 export const BasicToolbar = ({ children, className }: PropsWithChildren<ClassNameComponent>) => (
-    <aside className='h-14 relative w-full bg-tremor-background dark:bg-dark-tremor-background shadow-card z-10'>
+    <aside className='h-14 relative w-full bg-unodashboard-background dark:bg-dark-unodashboard-background shadow-card z-10'>
         <StyledToolbar>
             <Flex className={twMerge('gap-6', className)}>
                 <Flex className='gap-2' justifyContent='start'>

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { BaseInput, type BaseInputProps } from '../BaseInput';
 import { mergeRefs } from '../reactUtils';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const MinusIcon = ({ ...props }) => (
     <svg
@@ -39,9 +39,9 @@ export interface NumberInputProps extends Omit<BaseInputProps, 'type' | 'stepper
     onValueChange?: (value: number) => void;
 }
 
-const baseArrowClasses = 'flex mx-auto text-tremor-content-subtle dark:text-dark-tremor-content-subtle';
+const baseArrowClasses = 'flex mx-auto text-unodashboard-content-subtle dark:text-dark-unodashboard-content-subtle';
 
-const enabledArrowClasses = 'cursor-pointer hover:text-tremor-content dark:hover:text-dark-tremor-content';
+const enabledArrowClasses = 'cursor-pointer hover:text-unodashboard-content dark:hover:text-dark-unodashboard-content';
 
 export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>((props, ref) => {
     const { onSubmit, enableStepper = true, disabled, onValueChange, onChange, ...other } = props;
@@ -98,7 +98,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             }}
             stepper={
                 enableStepper ? (
-                    <div className={tremorTwMerge('flex justify-center align-middle')}>
+                    <div className={unoTwMerge('flex justify-center align-middle')}>
                         <div
                             tabIndex={-1}
                             onClick={(e) => e.preventDefault()}
@@ -113,10 +113,10 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                                 inputRef.current?.stepDown();
                                 inputRef.current?.dispatchEvent(new Event('input', { bubbles: true }));
                             }}
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 !disabled && enabledArrowClasses,
                                 baseArrowClasses,
-                                'group py-[10px] px-2.5 border-l border-tremor-border dark:border-dark-tremor-border',
+                                'group py-[10px] px-2.5 border-l border-unodashboard-border dark:border-dark-unodashboard-border',
                             )}
                         >
                             <MinusIcon
@@ -140,10 +140,10 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                                 inputRef.current?.stepUp();
                                 inputRef.current?.dispatchEvent(new Event('input', { bubbles: true }));
                             }}
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 !disabled && enabledArrowClasses,
                                 baseArrowClasses,
-                                'group py-[10px] px-2.5 border-l border-tremor-border dark:border-dark-tremor-border',
+                                'group py-[10px] px-2.5 border-l border-unodashboard-border dark:border-dark-unodashboard-border',
                             )}
                         >
                             <PlusIcon

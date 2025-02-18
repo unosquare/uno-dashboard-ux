@@ -41,6 +41,7 @@ import {
     useToggle,
     Text,
     DateRangePicker,
+    Badge,
 } from '../src';
 import '../src/resources/global.css';
 import FormSample from './FormSample';
@@ -108,11 +109,11 @@ const Application = () => {
                     <>
                         <MenuContainer>
                             <StyledMenuActions>
-                                <ArrowSync24Regular className='text-tremor-content dark:text-dark-tremor-content' />
+                                <ArrowSync24Regular className='text-unodashboard-content dark:text-dark-unodashboard-content' />
                                 <ThemeSwitcher />
                                 <Dismiss24Regular
                                     onClick={setOpenMenu}
-                                    className='text-tremor-content dark:text-dark-tremor-content'
+                                    className='text-unodashboard-content dark:text-dark-unodashboard-content'
                                 />
                             </StyledMenuActions>
                             <YearSelectorSample />
@@ -176,6 +177,12 @@ const Application = () => {
                     <Card decoration='top' decorationColor='blue'>
                         <Text>Metric 1</Text>
                         <AwaitableMetric>{!loading ? '100%' : undefined}</AwaitableMetric>
+                        <Flex>
+                            <Text>Previous: </Text>
+                            <Badge color='blue' size='sm'>
+                                10%
+                            </Badge>
+                        </Flex>
                     </Card>
                     <Card>
                         <ChartFunnel

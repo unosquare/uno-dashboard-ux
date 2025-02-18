@@ -8,7 +8,7 @@ import { NoData } from '../NoData';
 import type { ChartComponent } from '../constants';
 import { useChart } from '../hooks';
 import { colorPalette, getColorClassNames } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 import { formatTicks } from '../utils';
 
 export type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
@@ -72,13 +72,13 @@ export const DataChart = <T,>({
                             tick={{ transform: 'translate(-3, 0)' }}
                             fill=''
                             stroke=''
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 // common
-                                'text-tremor-label',
+                                'text-unodashboard-label',
                                 // light
-                                'fill-tremor-content',
+                                'fill-unodashboard-content',
                                 // dark
-                                'dark:fill-dark-tremor-content',
+                                'dark:fill-dark-unodashboard-content',
                             )}
                         />
                         {ChartDecorators({
@@ -97,8 +97,8 @@ export const DataChart = <T,>({
                                         .strokeColor
                                 }
                                 activeDot={{
-                                    className: tremorTwMerge(
-                                        'stroke-tremor-background dark:stroke-dark-tremor-background',
+                                    className: unoTwMerge(
+                                        'stroke-unodashboard-background dark:stroke-dark-unodashboard-background',
                                         getColorClassNames(
                                             categoryColors.get(property) ?? 'blue',
                                             colorPalette.background,

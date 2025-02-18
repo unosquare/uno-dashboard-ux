@@ -137,13 +137,13 @@ describe('Table', () => {
 
     it('renders the correct number of rows', () => {
         const { container } = render(<Table columns={tableColumns} rawData={tableData} />);
-        const rows = container.querySelectorAll('tbody .tremor-TableRow-row');
+        const rows = container.querySelectorAll('tbody .unodashboard-TableRow-row');
         expect(rows.length).toBe(tableData.length);
     });
 
     it('renders the correct number of headers', () => {
         const { container } = render(<Table columns={tableColumns} rawData={tableData} />);
-        const headers = container.querySelectorAll('.tremor-TableHeaderCell-root');
+        const headers = container.querySelectorAll('.unodashboard-TableHeaderCell-root');
         expect(headers.length).toBe(tableColumns.length);
     });
 
@@ -155,7 +155,7 @@ describe('Table', () => {
                 calculateFooter={() => Array.from({ length: tableColumns.length }).map(() => '')}
             />,
         );
-        const headers = container.querySelectorAll('.tremor-TableFooterCell-root');
+        const headers = container.querySelectorAll('.unodashboard-TableFooterCell-root');
         expect(headers.length).toBe(tableColumns.length);
     });
 });

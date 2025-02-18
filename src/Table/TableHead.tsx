@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeTableHeadClassName = makeClassName('TableHead');
 
@@ -8,14 +8,14 @@ export const TableHead = React.forwardRef<HTMLTableSectionElement, React.HTMLAtt
     ({ children, className, ...other }, ref) => (
         <thead
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeTableHeadClassName('root'),
                 // common
                 'text-left',
                 // light
-                'text-tremor-content',
+                'text-unodashboard-content',
                 // dark
-                'dark:text-dark-tremor-content',
+                'dark:text-dark-unodashboard-content',
                 className,
             )}
             {...other}

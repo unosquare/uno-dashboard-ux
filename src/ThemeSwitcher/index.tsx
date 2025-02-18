@@ -8,13 +8,13 @@ export const ThemeSwitcher = () => {
         <WeatherMoon24Regular
             title='Change Theme'
             onClick={setTheme}
-            className='text-tremor-content dark:text-dark-tremor-content'
+            className='text-unodashboard-content dark:text-dark-unodashboard-content'
         />
     ) : (
         <WeatherSunny24Regular
             title='Change Theme'
             onClick={setTheme}
-            className='text-tremor-content dark:text-dark-tremor-content'
+            className='text-unodashboard-content dark:text-dark-unodashboard-content'
         />
     );
 };

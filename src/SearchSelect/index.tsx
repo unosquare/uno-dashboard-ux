@@ -10,7 +10,7 @@ import React, { useRef, useMemo, isValidElement } from 'react';
 import { useInternalState } from '../hooks';
 import { ArrowDownHeadIcon, XCircleIcon, constructValueToNameMapping, getFilteredOptions } from '../reactUtils';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeSearchSelectItemClassName = makeClassName('SearchSelectItem');
 
@@ -25,14 +25,14 @@ export const SearchSelectItem = React.forwardRef<HTMLDivElement, SearchSelectIte
 
         return (
             <ComboboxOption
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeSearchSelectItemClassName('root'),
                     // common
-                    'flex justify-start items-center cursor-default text-tremor-default p-2.5',
+                    'flex justify-start items-center cursor-default text-unodashboard-default p-2.5',
                     // light
-                    'data-focus:bg-tremor-background-muted  data-focus:text-tremor-content-strong data-selected:text-tremor-content-strong data-selected:bg-tremor-background-muted text-tremor-content-emphasis',
+                    'data-focus:bg-unodashboard-background-muted  data-focus:text-unodashboard-content-strong data-selected:text-unodashboard-content-strong data-selected:bg-unodashboard-background-muted text-unodashboard-content-emphasis',
                     // dark
-                    'dark:data-focus:bg-dark-tremor-background-muted  dark:data-focus:text-dark-tremor-content-strong dark:data-selected:text-dark-tremor-content-strong dark:data-selected:bg-dark-tremor-background-muted dark:text-dark-tremor-content-emphasis',
+                    'dark:data-focus:bg-dark-unodashboard-background-muted  dark:data-focus:text-dark-unodashboard-content-strong dark:data-selected:text-dark-unodashboard-content-strong dark:data-selected:bg-dark-unodashboard-background-muted dark:text-dark-unodashboard-content-emphasis',
                     className,
                 )}
                 ref={ref}
@@ -42,14 +42,14 @@ export const SearchSelectItem = React.forwardRef<HTMLDivElement, SearchSelectIte
             >
                 {Icon && (
                     <Icon
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             makeSearchSelectItemClassName('icon'),
                             // common
                             'flex-none h-5 w-5 mr-3',
                             // light
-                            'text-tremor-content-subtle',
+                            'text-unodashboard-content-subtle',
                             // dark
-                            'dark:text-dark-tremor-content-subtle',
+                            'dark:text-dark-unodashboard-content-subtle',
                         )}
                     />
                 )}
@@ -133,9 +133,9 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
 
         return (
             <div
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     // common
-                    'w-full min-w-[10rem] text-tremor-default',
+                    'w-full min-w-[10rem] text-unodashboard-default',
                     className,
                 )}
             >
@@ -143,7 +143,7 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                     <select
                         title='search-select-hidden'
                         required={required}
-                        className={tremorTwMerge('h-full w-full absolute left-0 top-0 -z-10 opacity-0')}
+                        className={unoTwMerge('h-full w-full absolute left-0 top-0 -z-10 opacity-0')}
                         value={selectedValue}
                         onChange={(e) => {
                             e.preventDefault();
@@ -187,19 +187,19 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                                 <ComboboxButton className='w-full'>
                                     {Icon && (
                                         <span
-                                            className={tremorTwMerge(
+                                            className={unoTwMerge(
                                                 'absolute inset-y-0 left-0 flex items-center ml-px pl-2.5',
                                             )}
                                         >
                                             <Icon
-                                                className={tremorTwMerge(
+                                                className={unoTwMerge(
                                                     makeSearchSelectClassName('Icon'),
                                                     // common
                                                     'flex-none h-5 w-5',
                                                     // light
-                                                    'text-tremor-content-subtle',
+                                                    'text-unodashboard-content-subtle',
                                                     // dark
-                                                    'dark:text-dark-tremor-content-subtle',
+                                                    'dark:text-dark-unodashboard-content-subtle',
                                                 )}
                                             />
                                         </span>
@@ -207,17 +207,17 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
 
                                     <ComboboxInput
                                         ref={comboboxInputRef}
-                                        className={tremorTwMerge(
+                                        className={unoTwMerge(
                                             // common
-                                            'w-full outline-hidden text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 text-tremor-default pr-14 border py-2',
+                                            'w-full outline-hidden text-left whitespace-nowrap truncate rounded-unodashboard-default focus:ring-2 transition duration-100 text-unodashboard-default pr-14 border py-2',
                                             // light
-                                            'border-tremor-border shadow-tremor-input focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
+                                            'border-unodashboard-border shadow-unodashboard-input focus:border-unodashboard-brand-subtle focus:ring-unodashboard-brand-muted',
                                             // dark
-                                            'dark:border-dark-tremor-border dark:shadow-dark-tremor-input dark:focus:border-dark-tremor-brand-subtle dark:focus:ring-dark-tremor-brand-muted',
+                                            'dark:border-dark-unodashboard-border dark:shadow-dark-unodashboard-input dark:focus:border-dark-unodashboard-brand-subtle dark:focus:ring-dark-unodashboard-brand-muted',
                                             Icon ? 'pl-10' : 'pl-3',
                                             disabled
-                                                ? 'placeholder:text-tremor-content-subtle dark:placeholder:text-tremor-content-subtle'
-                                                : 'placeholder:text-tremor-content dark:placeholder:text-tremor-content',
+                                                ? 'placeholder:text-unodashboard-content-subtle dark:placeholder:text-unodashboard-content-subtle'
+                                                : 'placeholder:text-unodashboard-content dark:placeholder:text-unodashboard-content',
                                             getSelectButtonColors(hasValue(value), disabled, error),
                                         )}
                                         placeholder={placeholder}
@@ -228,18 +228,16 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                                         displayValue={(value: string) => valueToNameMapping.get(value) ?? ''}
                                         autoComplete={autoComplete}
                                     />
-                                    <div
-                                        className={tremorTwMerge('absolute inset-y-0 right-0 flex items-center pr-2.5')}
-                                    >
+                                    <div className={unoTwMerge('absolute inset-y-0 right-0 flex items-center pr-2.5')}>
                                         <ArrowDownHeadIcon
-                                            className={tremorTwMerge(
+                                            className={unoTwMerge(
                                                 makeSearchSelectClassName('arrowDownIcon'),
                                                 // common
                                                 'flex-none h-5 w-5',
                                                 // light
-                                                'text-tremor-content-subtle!',
+                                                'text-unodashboard-content-subtle!',
                                                 // dark
-                                                '!dark:text-dark-tremor-content-subtle',
+                                                '!dark:text-dark-unodashboard-content-subtle',
                                             )}
                                         />
                                     </div>
@@ -248,21 +246,21 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                                 {enableClear && selectedValue ? (
                                     <button
                                         type='button'
-                                        className={tremorTwMerge('absolute inset-y-0 right-0 flex items-center mr-8')}
+                                        className={unoTwMerge('absolute inset-y-0 right-0 flex items-center mr-8')}
                                         onClick={(e) => {
                                             e.preventDefault();
                                             handleReset();
                                         }}
                                     >
                                         <XCircleIcon
-                                            className={tremorTwMerge(
+                                            className={unoTwMerge(
                                                 makeSelectClassName('clearIcon'),
                                                 // common
                                                 'flex-none h-4 w-4',
                                                 // light
-                                                'text-tremor-content-subtle',
+                                                'text-unodashboard-content-subtle',
                                                 // dark
-                                                'dark:text-dark-tremor-content-subtle',
+                                                'dark:text-dark-unodashboard-content-subtle',
                                             )}
                                         />
                                     </button>
@@ -278,13 +276,13 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                                     >
                                         <ComboboxOptions
                                             anchor='bottom start'
-                                            className={tremorTwMerge(
+                                            className={unoTwMerge(
                                                 // common
-                                                'z-10 divide-y w-[var(--button-width)] overflow-y-auto outline-hidden rounded-tremor-default text-tremor-default max-h-[228px] border [--anchor-gap:4px]',
+                                                'z-10 divide-y w-[var(--button-width)] overflow-y-auto outline-hidden rounded-unodashboard-default text-unodashboard-default max-h-[228px] border [--anchor-gap:4px]',
                                                 // light
-                                                'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
+                                                'bg-unodashboard-background border-unodashboard-border divide-unodashboard-border shadow-unodashboard-dropdown',
                                                 // dark
-                                                'dark:bg-dark-tremor-background dark:border-dark-tremor-border dark:divide-dark-tremor-border dark:shadow-dark-tremor-dropdown',
+                                                'dark:bg-dark-unodashboard-background dark:border-dark-unodashboard-border dark:divide-dark-unodashboard-border dark:shadow-dark-unodashboard-dropdown',
                                             )}
                                         >
                                             {filteredOptions}
@@ -296,7 +294,7 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                     </Combobox>
                 </div>
                 {error && errorMessage ? (
-                    <p className={tremorTwMerge('errorMessage', 'text-sm text-rose-500 mt-1')}>{errorMessage}</p>
+                    <p className={unoTwMerge('errorMessage', 'text-sm text-rose-500 mt-1')}>{errorMessage}</p>
                 ) : null}
             </div>
         );

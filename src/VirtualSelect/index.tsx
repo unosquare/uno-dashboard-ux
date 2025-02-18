@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import type { ReactSelectOption } from '../constants';
 import { useDebounce } from '../hooks';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 export interface VirtualSelectProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultValue?: string;
@@ -42,34 +42,34 @@ const constructValueToNameMapping = (options: ReactSelectOption<string | number>
 };
 
 export const comboBoxStyles = <T,>(value: T, disabled: boolean, icon: boolean, showAsValue: boolean) =>
-    tremorTwMerge(
-        'w-full outline-hidden text-left whitespace-nowrap truncate rounded-tremor-default focus:ring-2 transition duration-100 text-tremor-default',
-        'border-tremor-border shadow-tremor-input focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
-        'dark:border-dark-tremor-border dark:shadow-dark-tremor-input dark:focus:border-dark-tremor-brand-subtle dark:focus:ring-dark-tremor-brand-muted',
+    unoTwMerge(
+        'w-full outline-hidden text-left whitespace-nowrap truncate rounded-unodashboard-default focus:ring-2 transition duration-100 text-unodashboard-default',
+        'border-unodashboard-border shadow-unodashboard-input focus:border-unodashboard-brand-subtle focus:ring-unodashboard-brand-muted',
+        'dark:border-dark-unodashboard-border dark:shadow-dark-unodashboard-input dark:focus:border-dark-unodashboard-brand-subtle dark:focus:ring-dark-unodashboard-brand-muted',
         'pl-3',
         icon ? 'pl-3 pr-12' : 'pr-8',
         'py-2',
         'border',
         showAsValue
-            ? 'placeholder:text-tremor-content-emphasis'
-            : 'placeholder:text-tremor-content dark:placeholder:text-tremor-content',
-        disabled && 'placeholder:text-tremor-content-subtle dark:placeholder:text-tremor-content-subtle',
+            ? 'placeholder:text-unodashboard-content-emphasis'
+            : 'placeholder:text-unodashboard-content dark:placeholder:text-unodashboard-content',
+        disabled && 'placeholder:text-unodashboard-content-subtle dark:placeholder:text-unodashboard-content-subtle',
         getSelectButtonColors(hasValue(value), disabled),
     );
 
-export const comboBoxOptionsStyles = tremorTwMerge(
-    'absolute overflow-y-auto overflow-x-hidden block z-100 divide-y max-h-[228px] w-full left-0 outline-hidden rounded-tremor-default text-tremor-default',
-    'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
-    'dark:bg-dark-tremor-background dark:border-dark-tremor-border dark:divide-dark-tremor-border dark:shadow-dark-tremor-dropdown',
+export const comboBoxOptionsStyles = unoTwMerge(
+    'absolute overflow-y-auto overflow-x-hidden block z-100 divide-y max-h-[228px] w-full left-0 outline-hidden rounded-unodashboard-default text-unodashboard-default',
+    'bg-unodashboard-background border-unodashboard-border divide-unodashboard-border shadow-unodashboard-dropdown',
+    'dark:bg-dark-unodashboard-background dark:border-dark-unodashboard-border dark:divide-dark-unodashboard-border dark:shadow-dark-unodashboard-dropdown',
     'mt-1 mb-1 border',
 );
 
 export const comboBoxSingleOptionStyles = (className: string | undefined) =>
-    tremorTwMerge(
+    unoTwMerge(
         makeSearchSelectItemClassName('root'),
-        'flex justify-start items-center w-full cursor-default text-tremor-default border-t-[1px]',
-        'ui-active:bg-tremor-background-muted  ui-active:text-tremor-content-strong ui-selected:text-tremor-content-strong ui-selected:bg-tremor-background-muted text-tremor-content-emphasis border-t-gray-200',
-        'dark:ui-active:bg-dark-tremor-background-muted  dark:ui-active:text-dark-tremor-content-strong dark:ui-selected:text-dark-tremor-content-strong dark:ui-selected:bg-dark-tremor-background-muted dark:text-dark-tremor-content-emphasis dark:border-t-gray-800',
+        'flex justify-start items-center w-full cursor-default text-unodashboard-default border-t-[1px]',
+        'ui-active:bg-unodashboard-background-muted  ui-active:text-unodashboard-content-strong ui-selected:text-unodashboard-content-strong ui-selected:bg-unodashboard-background-muted text-unodashboard-content-emphasis border-t-gray-200',
+        'dark:ui-active:bg-dark-unodashboard-background-muted  dark:ui-active:text-dark-unodashboard-content-strong dark:ui-selected:text-dark-unodashboard-content-strong dark:ui-selected:bg-dark-unodashboard-background-muted dark:text-dark-unodashboard-content-emphasis dark:border-t-gray-800',
         'px-2.5 py-2.5',
         className,
         'my-0',
@@ -78,11 +78,11 @@ export const comboBoxSingleOptionStyles = (className: string | undefined) =>
 const ArrowDownHead = () => (
     <div className='absolute inset-y-0 right-0 flex items-center pr-2.5'>
         <ChevronDown16Filled
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeSearchSelectClassName('arrowDownIcon'),
                 'flex-none',
-                'text-tremor-content-subtle',
-                'dark:text-dark-tremor-content-subtle',
+                'text-unodashboard-content-subtle',
+                'dark:text-dark-unodashboard-content-subtle',
             )}
         />
     </div>
@@ -90,7 +90,7 @@ const ArrowDownHead = () => (
 
 const SelectClearButton = ({ clearValue }: { clearValue: (e: string) => void }) => (
     <button type='button' className='absolute inset-y-0 right-0 flex items-center mr-8' onClick={() => clearValue('')}>
-        <DismissCircle16Filled className='flex-none text-tremor-content-subtle dark:text-dark-tremor-content-subtle' />
+        <DismissCircle16Filled className='flex-none text-unodashboard-content-subtle dark:text-dark-unodashboard-content-subtle' />
     </button>
 );
 
@@ -142,7 +142,7 @@ export const VirtualSelect = React.forwardRef<HTMLDivElement, VirtualSelectProps
                 disabled={disabled}
                 nullable={true}
                 onChange={() => setSearchQuery('')}
-                className={tremorTwMerge('w-full min-w-[10rem] relative text-tremor-default', className)}
+                className={unoTwMerge('w-full min-w-[10rem] relative text-unodashboard-default', className)}
             >
                 <Combobox.Button className='w-full'>
                     <Combobox.Input

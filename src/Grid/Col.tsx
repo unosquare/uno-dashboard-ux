@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 import { type GridClassesMapping, colSpan, colSpanLg, colSpanMd, colSpanSm } from './styles';
 
 const makeColClassName = makeClassName('Col');
@@ -26,15 +26,11 @@ export const Col = React.forwardRef<HTMLDivElement, ColProps>((props, ref) => {
         const spanMd = getColSpan(numColSpanMd, colSpanMd);
         const spanLg = getColSpan(numColSpanLg, colSpanLg);
 
-        return tremorTwMerge(spanBase, spanSm, spanMd, spanLg);
+        return unoTwMerge(spanBase, spanSm, spanMd, spanLg);
     };
 
     return (
-        <div
-            ref={ref}
-            className={tremorTwMerge(makeColClassName('root'), getColSpanClassNames(), className)}
-            {...other}
-        >
+        <div ref={ref} className={unoTwMerge(makeColClassName('root'), getColSpanClassNames(), className)} {...other}>
             {children}
         </div>
     );

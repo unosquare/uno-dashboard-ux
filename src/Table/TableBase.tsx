@@ -1,22 +1,22 @@
 import React from 'react';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeTableClassName = makeClassName('Table');
 
 export const TableBase = React.forwardRef<HTMLTableElement, React.TableHTMLAttributes<HTMLTableElement>>(
     ({ children, className, ...other }, ref) => (
-        <div className={tremorTwMerge(makeTableClassName('root'), 'overflow-auto', className)}>
+        <div className={unoTwMerge(makeTableClassName('root'), 'overflow-auto', className)}>
             <table
                 ref={ref}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeTableClassName('table'),
                     // common
-                    'w-full text-tremor-default',
+                    'w-full text-unodashboard-default',
                     // light
-                    'text-tremor-content',
+                    'text-unodashboard-content',
                     // dark
-                    'dark:text-dark-tremor-content',
+                    'dark:text-dark-unodashboard-content',
                 )}
                 {...other}
             >

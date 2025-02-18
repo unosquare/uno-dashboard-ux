@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeTableFooterCellClassName = makeClassName('TableFooterCell');
 
@@ -8,14 +8,14 @@ export const TableFooterCell = React.forwardRef<HTMLTableCellElement, React.HTML
     ({ children, className, ...other }, ref) => (
         <th
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeTableFooterCellClassName('root'),
                 // common
                 'top-0 px-4 py-3.5',
                 // light
-                'text-tremor-content font-medium',
+                'text-unodashboard-content font-medium',
                 // dark
-                'dark:text-dark-tremor-content',
+                'dark:text-dark-unodashboard-content',
                 className,
             )}
             {...other}

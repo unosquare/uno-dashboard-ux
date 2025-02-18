@@ -7,7 +7,7 @@ import {
 } from '@headlessui/react';
 import React from 'react';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeDisplayClassName = makeClassName('dialog');
 
@@ -25,7 +25,7 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(({ children,
         <HeadlessuiDialog
             ref={ref}
             {...other}
-            className={tremorTwMerge(makeDisplayClassName('root'), 'relative z-50', className)}
+            className={unoTwMerge(makeDisplayClassName('root'), 'relative z-50', className)}
         >
             <DialogBackdrop className='fixed bg-slate-950/30  dark:bg-slate-950/50  inset-0  transition-opacity data-closed:opacity-0 data-enter:duration-300 data-leave:duration-200 data-enter:ease-out data-leave:ease-in' />
             <div className='fixed inset-0 overflow-y-auto w-screen'>
@@ -49,15 +49,15 @@ export const DialogPanel = React.forwardRef<HTMLDivElement, DialogPanelProps>(
         >
             <HeadlessuiDialogPanel
                 ref={ref}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeDisplayClassName('panel'),
                     // common
-                    'w-full max-w-lg overflow-visible text-left ring-1 shadow-tremor transition-all transform',
+                    'w-full max-w-lg overflow-visible text-left ring-1 shadow-unodashboard transition-all transform',
                     // light
-                    'bg-tremor-background  text-tremor-content ring-tremor-ring',
+                    'bg-unodashboard-background  text-unodashboard-content ring-unodashboard-ring',
                     // dark
-                    'dark:bg-dark-tremor-background dark:text-dark-tremor-content dark:ring-dark-tremor-ring',
-                    'rounded-tremor-default p-6',
+                    'dark:bg-dark-unodashboard-background dark:text-dark-unodashboard-content dark:ring-dark-unodashboard-ring',
+                    'rounded-unodashboard-default p-6',
                     className,
                 )}
                 {...other}

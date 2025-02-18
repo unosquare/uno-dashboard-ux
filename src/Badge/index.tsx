@@ -1,9 +1,9 @@
 import React from 'react';
 import { type BadgeProportionTypes, type Color, type Size, Sizes } from '../constants';
-import { colorPalette, getColorClassNames, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { colorPalette, makeClassName } from '../theme';
+import { unoTwMerge } from '../unoTwMerge';
 
-const makeBadgeClassName = makeClassName('Badge');
+const makeBadgeClassName = makeClassName('badge');
 
 export const badgeProportions: { [char: string]: BadgeProportionTypes } = {
     xs: {
@@ -69,30 +69,26 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     ({ color, icon, size = Sizes.SM, className, children, ...other }, ref) => {
-        const Icon = icon ? icon : null;
+        const Icon = icon || null;
 
         return (
             <span
                 ref={ref}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeBadgeClassName('root'),
                     // common
-                    'w-max shrink-0 inline-flex justify-center items-center cursor-default rounded-tremor-small ring-1 ring-inset',
+                    'w-max shrink-0 inline-flex justify-center items-center cursor-default rounded-unodashboard-small ring-1 ring-inset',
                     color
-                        ? tremorTwMerge(
-                              getColorClassNames(color, colorPalette.background).bgColor,
-                              getColorClassNames(color, colorPalette.iconText).textColor,
-                              getColorClassNames(color, colorPalette.iconRing).ringColor,
-                              // light
-                              'bg-opacity-10 ring-opacity-20',
-                              // dark
-                              'dark:bg-opacity-5 dark:ring-opacity-60',
+                        ? unoTwMerge(
+                              `bg-${color}-${colorPalette.lightBackground} dark:bg-${color}-${colorPalette.lightBackground}`,
+                              `text-${color}-${colorPalette.iconText} dark:text-${color}-${colorPalette.iconText}`,
+                              `ring-${color}-${colorPalette.iconRing} dark:ring-${color}-${colorPalette.iconRing}`,
                           )
-                        : tremorTwMerge(
+                        : unoTwMerge(
                               // light
-                              'bg-tremor-brand-faint text-tremor-brand-emphasis ring-tremor-brand/20',
+                              'bg-unodashboard-brand-faint text-unodashboard-brand-emphasis ring-unodashboard-brand/20',
                               // dark
-                              'dark:bg-dark-tremor-brand-muted/50 dark:text-dark-tremor-brand dark:ring-dark-tremor-subtle/20',
+                              'dark:bg-dark-unodashboard-brand-muted/50 dark:text-dark-unodashboard-brand dark:ring-dark-unodashboard-subtle/20',
                           ),
                     badgeProportions[size].paddingX,
                     badgeProportions[size].paddingY,
@@ -103,7 +99,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
             >
                 {Icon ? (
                     <Icon
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             makeBadgeClassName('icon'),
                             'shrink-0 -ml-1 mr-1.5',
                             iconSizes[size].height,
@@ -111,7 +107,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
                         )}
                     />
                 ) : null}
-                <span className={tremorTwMerge(makeBadgeClassName('text'), 'whitespace-nowrap')}>{children}</span>
+                <span className={unoTwMerge(makeBadgeClassName('text'), 'whitespace-nowrap')}>{children}</span>
             </span>
         );
     },

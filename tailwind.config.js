@@ -14,7 +14,7 @@ module.exports = {
         extend: {
             colors: {
                 // light mode
-                tremor: {
+                unodashboard: {
                     brand: {
                         faint: '#eff6ff', // blue-50
                         muted: '#bfdbfe', // blue-200
@@ -44,7 +44,7 @@ module.exports = {
                     },
                 },
                 // dark mode
-                'dark-tremor': {
+                'dark-unodashboard': {
                     brand: {
                         faint: '#0B1229', // custom
                         muted: '#172554', // blue-950
@@ -79,24 +79,24 @@ module.exports = {
                 alert: '0px 1px 7px 2px rgba(0, 0, 0, 0.5)',
                 legend: '0 0px 2px 0px rgba(0, 0, 0, 0.5)',
                 // light
-                'tremor-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-                'tremor-card': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-                'tremor-dropdown': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                'unodashboard-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+                'unodashboard-card': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+                'unodashboard-dropdown': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
                 // dark
-                'dark-tremor-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-                'dark-tremor-card': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-                'dark-tremor-dropdown': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                'dark-unodashboard-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+                'dark-unodashboard-card': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+                'dark-unodashboard-dropdown': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
             },
             borderRadius: {
-                'tremor-small': '0.375rem',
-                'tremor-default': '0.5rem',
-                'tremor-full': '9999px',
+                'unodashboard-small': '0.375rem',
+                'unodashboard-default': '0.5rem',
+                'unodashboard-full': '9999px',
             },
             fontSize: {
-                'tremor-label': ['0.75rem'],
-                'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
-                'tremor-title': ['1.125rem', { lineHeight: '1.75rem' }],
-                'tremor-metric': ['1.875rem', { lineHeight: '2.25rem' }],
+                'unodashboard-label': ['0.75rem'],
+                'unodashboard-default': ['0.875rem', { lineHeight: '1.25rem' }],
+                'unodashboard-title': ['1.125rem', { lineHeight: '1.75rem' }],
+                'unodashboard-metric': ['1.875rem', { lineHeight: '2.25rem' }],
             },
             fontFamily: {
                 sans: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
@@ -108,9 +108,6 @@ module.exports = {
                 md: { max: '1024px' },
                 lg: { max: '1280px' },
                 xl: { max: '1366px' },
-            },
-            maxWidth: {
-                unomax: '1460px',
             },
         },
     },

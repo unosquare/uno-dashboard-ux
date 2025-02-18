@@ -4,8 +4,8 @@ export const StyledValueContainer = tw.span`
     text-center
     font-semibold
     mx-auto
-    text-tremor-content 
-    dark:text-dark-tremor-content
+    text-unodashboard-content 
+    dark:text-dark-unodashboard-content
 `;
 
 export const StyledButtonContainer = tw.div`
@@ -16,6 +16,6 @@ export const StyledButtonContainer = tw.div`
     items-center
     m-0
     p-0
-    bg-tremor-background 
-    dark:bg-dark-tremor-background
+    bg-unodashboard-background 
+    dark:bg-dark-unodashboard-background
 `;

@@ -6,7 +6,7 @@ import { ChartLegend } from '../ChartLegend';
 import { Flex } from '../Flex';
 import type { ClassNameComponent, Color } from '../constants';
 import { colorPalette, getColorClassNames } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const defaultShimmerColors = new Map<string, Color>();
 defaultShimmerColors.set('Loading', 'gray');
@@ -83,8 +83,8 @@ export const ChartLineShimmer = ({ className }: ClassNameComponent) => {
                     <Line
                         className={getColorClassNames('gray', colorPalette.text).strokeColor}
                         activeDot={{
-                            className: tremorTwMerge(
-                                'stroke-tremor-background dark:stroke-dark-tremor-background',
+                            className: unoTwMerge(
+                                'stroke-unodashboard-background dark:stroke-dark-unodashboard-background',
                                 getColorClassNames('gray', colorPalette.text).fillColor,
                             ),
                         }}

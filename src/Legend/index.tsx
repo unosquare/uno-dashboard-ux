@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { v4 as uuidv4, v4 } from 'uuid';
 import type { Color } from '../constants';
 import { colorPalette, getColorClassNames, makeClassName, themeColorRange } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeLegendClassName = makeClassName('Legend');
 
@@ -32,17 +32,17 @@ const LegendItem = ({ name, color, onClick, activeLegend }: LegendItemProps) => 
 
     return (
         <li
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeLegendClassName('legendItem'),
                 // common
-                'group inline-flex items-center px-2 py-0.5 rounded-tremor-small transition whitespace-nowrap',
+                'group inline-flex items-center px-2 py-0.5 rounded-unodashboard-small transition whitespace-nowrap',
                 hasOnValueChange ? 'cursor-pointer' : 'cursor-default',
                 // light
-                'text-tremor-content',
-                hasOnValueChange ? 'hover:bg-tremor-background-subtle' : '',
+                'text-unodashboard-content',
+                hasOnValueChange ? 'hover:bg-unodashboard-background-subtle' : '',
                 // dark
-                'dark:text-dark-tremor-content',
-                hasOnValueChange ? 'dark:hover:bg-dark-tremor-background-subtle' : '',
+                'dark:text-dark-unodashboard-content',
+                hasOnValueChange ? 'dark:hover:bg-dark-unodashboard-background-subtle' : '',
             )}
             onClick={(e) => {
                 e.stopPropagation();
@@ -50,7 +50,7 @@ const LegendItem = ({ name, color, onClick, activeLegend }: LegendItemProps) => 
             }}
         >
             <svg
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     'flex-none h-2 w-2 mr-1.5',
                     getColorClassNames(color, colorPalette.text).textColor,
                     activeLegend && activeLegend !== name ? 'opacity-40' : 'opacity-100',
@@ -62,16 +62,16 @@ const LegendItem = ({ name, color, onClick, activeLegend }: LegendItemProps) => 
                 <circle cx={4} cy={4} r={4} />
             </svg>
             <p
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     // common
-                    'whitespace-nowrap truncate text-tremor-default',
+                    'whitespace-nowrap truncate text-unodashboard-default',
                     // light
-                    'text-tremor-content',
-                    hasOnValueChange ? 'group-hover:text-tremor-content-emphasis' : '',
+                    'text-unodashboard-content',
+                    hasOnValueChange ? 'group-hover:text-unodashboard-content-emphasis' : '',
                     // dark
-                    'dark:text-dark-tremor-content',
+                    'dark:text-dark-unodashboard-content',
                     activeLegend && activeLegend !== name ? 'opacity-40' : 'opacity-100',
-                    hasOnValueChange ? 'dark:group-hover:text-dark-tremor-content-emphasis' : '',
+                    hasOnValueChange ? 'dark:group-hover:text-dark-unodashboard-content-emphasis' : '',
                 )}
             >
                 {name}
@@ -112,19 +112,19 @@ const ScrollButton = ({ icon, onClick, disabled }: ScrollButtonProps) => {
     return (
         <button
             type='button'
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeLegendClassName('legendSliderButton'),
                 // common
-                'w-5 group inline-flex items-center truncate rounded-tremor-small transition',
+                'w-5 group inline-flex items-center truncate rounded-unodashboard-small transition',
                 disabled ? 'cursor-not-allowed' : 'cursor-pointer',
                 // light
                 disabled
-                    ? 'text-tremor-content-subtle'
-                    : 'text-tremor-content hover:text-tremor-content-emphasis hover:bg-tremor-background-subtle',
+                    ? 'text-unodashboard-content-subtle'
+                    : 'text-unodashboard-content hover:text-unodashboard-content-emphasis hover:bg-unodashboard-background-subtle',
                 // dark
                 disabled
-                    ? 'dark:text-dark-tremor-subtle'
-                    : 'dark:text-dark-tremor dark:hover:text-tremor-content-emphasis dark:hover:bg-dark-tremor-background-subtle',
+                    ? 'dark:text-dark-unodashboard-subtle'
+                    : 'dark:text-dark-unodashboard dark:hover:text-unodashboard-content-emphasis dark:hover:bg-dark-unodashboard-background-subtle',
             )}
             disabled={disabled}
             onClick={(e) => {
@@ -259,12 +259,12 @@ export const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, re
     return (
         <ol
             ref={ref}
-            className={tremorTwMerge(makeLegendClassName('root'), 'relative overflow-hidden', className)}
+            className={unoTwMerge(makeLegendClassName('root'), 'relative overflow-hidden', className)}
             {...other}
         >
             <div
                 ref={scrollableRef}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     //common
                     'h-full flex',
                     enableLegendSlider
@@ -286,11 +286,11 @@ export const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, re
             </div>
             {enableLegendSlider && (hasScroll?.right || hasScroll?.left) ? (
                 <div
-                    className={tremorTwMerge(
+                    className={unoTwMerge(
                         // light mode
-                        'bg-tremor-background',
+                        'bg-unodashboard-background',
                         // dark mode
-                        'dark:bg-dark-tremor-background',
+                        'dark:bg-dark-unodashboard-background',
                         // common
                         'absolute flex top-0 pr-1 bottom-0 right-0 items-center justify-center h-full',
                     )}

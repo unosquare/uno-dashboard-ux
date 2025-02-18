@@ -23,8 +23,8 @@ const StyledContainer = ({
     min-w-[288px]
     max-w-[320px]
     pr-1
-    bg-tremor-background 
-    dark:bg-dark-tremor-background
+    bg-unodashboard-background 
+    dark:bg-dark-unodashboard-background
     rounded
     flex
     justify-center

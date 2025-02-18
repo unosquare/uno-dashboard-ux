@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 import { type GridClassesMapping, gridCols, gridColsLg, gridColsMd, gridColsSm } from './styles';
 
 const makeGridClassName = makeClassName('Grid');
@@ -27,14 +27,10 @@ export const Grid = React.forwardRef<HTMLDivElement, GridProps>((props, ref) => 
     const colsMd = getGridCols(numItemsMd, gridColsMd);
     const colsLg = getGridCols(numItemsLg, gridColsLg);
 
-    const colClassNames = tremorTwMerge(colsBase, colsSm, colsMd, colsLg);
+    const colClassNames = unoTwMerge(colsBase, colsSm, colsMd, colsLg);
 
     return (
-        <div
-            ref={ref}
-            className={tremorTwMerge(makeGridClassName('root'), 'grid', colClassNames, className)}
-            {...other}
-        >
+        <div ref={ref} className={unoTwMerge(makeGridClassName('root'), 'grid', colClassNames, className)} {...other}>
             {children}
         </div>
     );

@@ -8,7 +8,7 @@ import type { Color } from '../constants';
 import { useInternalState } from '../hooks';
 import { CalendarIcon, XCircleIcon } from '../reactUtils';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const TODAY = startOfToday();
 
@@ -134,34 +134,34 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>((pro
         <Popover
             ref={ref}
             as='div'
-            className={tremorTwMerge(
-                'relative w-full min-w-[10rem] text-tremor-default',
-                'focus:ring-2 focus:ring-tremor-brand-muted dark:focus:ring-dark-tremor-brand-muted',
+            className={unoTwMerge(
+                'relative w-full min-w-[10rem] text-unodashboard-default',
+                'focus:ring-2 focus:ring-unodashboard-brand-muted dark:focus:ring-dark-unodashboard-brand-muted',
                 className,
             )}
             {...other}
         >
             <PopoverButton
                 disabled={disabled}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     // common
-                    'w-full outline-hidden text-left whitespace-nowrap truncate focus:ring-2 transition duration-100 rounded-tremor-default flex flex-nowrap border pl-3 py-2',
+                    'w-full outline-hidden text-left whitespace-nowrap truncate focus:ring-2 transition duration-100 rounded-unodashboard-default flex flex-nowrap border pl-3 py-2',
                     // light
-                    'border-tremor-border shadow-tremor-input text-tremor-content-emphasis focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
+                    'border-unodashboard-border shadow-unodashboard-input text-unodashboard-content-emphasis focus:border-unodashboard-brand-subtle focus:ring-unodashboard-brand-muted',
                     // dark
-                    'dark:border-dark-tremor-border dark:shadow-dark-tremor-input dark:text-dark-tremor-content-emphasis dark:focus:border-dark-tremor-brand-subtle dark:focus:ring-dark-tremor-brand-muted',
+                    'dark:border-dark-unodashboard-border dark:shadow-dark-unodashboard-input dark:text-dark-unodashboard-content-emphasis dark:focus:border-dark-unodashboard-brand-subtle dark:focus:ring-dark-unodashboard-brand-muted',
                     isClearEnabled ? 'pr-8' : 'pr-4',
                     getSelectButtonColors(hasValue<Date>(selectedValue), disabled),
                 )}
             >
                 <CalendarIcon
-                    className={tremorTwMerge(
+                    className={unoTwMerge(
                         makeDatePickerClassName('calendarIcon'),
                         'flex-none shrink-0 h-5 w-5 mr-2 -ml-0.5',
                         // light
-                        'text-tremor-content-subtle',
+                        'text-unodashboard-content-subtle',
                         // light
-                        'dark:text-dark-tremor-content-subtle',
+                        'dark:text-dark-unodashboard-content-subtle',
                     )}
                     aria-hidden='true'
                 />
@@ -170,7 +170,7 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>((pro
             {isClearEnabled && selectedValue ? (
                 <button
                     type='button'
-                    className={tremorTwMerge(
+                    className={unoTwMerge(
                         'absolute outline-hidden inset-y-0 right-0 flex items-center transition duration-100 mr-4',
                     )}
                     onClick={(e) => {
@@ -179,13 +179,13 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>((pro
                     }}
                 >
                     <XCircleIcon
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             // common
                             'flex-none h-4 w-4',
                             // light
-                            'text-tremor-content-subtle',
+                            'text-unodashboard-content-subtle',
                             // dark
-                            'dark:text-dark-tremor-content-subtle',
+                            'dark:text-dark-unodashboard-content-subtle',
                         )}
                     />
                 </button>
@@ -200,13 +200,13 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>((pro
             >
                 <PopoverPanel
                     anchor='bottom start'
-                    className={tremorTwMerge(
+                    className={unoTwMerge(
                         // common
-                        'z-10 min-w-min divide-y overflow-y-auto outline-hidden rounded-tremor-default p-3 border [--anchor-gap:4px]',
+                        'z-10 min-w-min divide-y overflow-y-auto outline-hidden rounded-unodashboard-default p-3 border [--anchor-gap:4px]',
                         // light
-                        'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
+                        'bg-unodashboard-background border-unodashboard-border divide-unodashboard-border shadow-unodashboard-dropdown',
                         // dark
-                        'dark:bg-dark-tremor-background dark:border-dark-tremor-border dark:divide-dark-tremor-border dark:shadow-dark-tremor-dropdown',
+                        'dark:bg-dark-unodashboard-background dark:border-dark-unodashboard-border dark:divide-dark-unodashboard-border dark:shadow-dark-unodashboard-dropdown',
                     )}
                 >
                     {({ close }) => (

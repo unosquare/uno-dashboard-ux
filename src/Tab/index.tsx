@@ -3,7 +3,7 @@ import React, { createContext, useContext } from 'react';
 import type { Color } from '../constants';
 import { SelectedValueContext } from '../reactUtils';
 import { BaseColors, colorPalette, getColorClassNames, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeTabPanelClassName = makeClassName('TabPanel');
 
@@ -16,7 +16,7 @@ export const TabPanels = React.forwardRef<HTMLDivElement, React.HTMLAttributes<H
         <HeadlessTab.Panels
             as='div'
             ref={ref}
-            className={tremorTwMerge(makeTabPanelsClassName('root'), 'w-full', className)}
+            className={unoTwMerge(makeTabPanelsClassName('root'), 'w-full', className)}
             {...other}
         >
             {({ selectedIndex }) => (
@@ -41,7 +41,7 @@ export const TabPanel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
             // Not using Tab.Panel because of https://github.com/tailwindlabs/headlessui/discussions/2366.
             <div
                 ref={ref}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeTabPanelClassName('root'),
                     'w-full mt-2',
                     isSelected ? '' : 'hidden',
@@ -74,7 +74,7 @@ export const TabGroup = React.forwardRef<HTMLDivElement, TabGroupProps>(
             selectedIndex={index}
             // biome-ignore lint/suspicious/noExplicitAny: <explanation>
             onChange={onIndexChange as any}
-            className={tremorTwMerge(makeTabGroupClassName('root'), 'w-full', className)}
+            className={unoTwMerge(makeTabGroupClassName('root'), 'w-full', className)}
             {...other}
         >
             {children}
@@ -91,21 +91,21 @@ export type TabVariant = 'line' | 'solid';
 export const TabVariantContext = createContext<TabVariant>('line');
 
 const variantStyles: { [key in TabVariant]: string } = {
-    line: tremorTwMerge(
+    line: unoTwMerge(
         // common
         'flex border-b space-x-4',
         // light
-        'border-tremor-border',
+        'border-unodashboard-border',
         // dark
-        'dark:border-dark-tremor-border',
+        'dark:border-dark-unodashboard-border',
     ),
-    solid: tremorTwMerge(
+    solid: unoTwMerge(
         // common
-        'inline-flex p-0.5 rounded-tremor-default space-x-1.5',
+        'inline-flex p-0.5 rounded-unodashboard-default space-x-1.5',
         // light
-        'bg-tremor-background-subtle',
+        'bg-unodashboard-background-subtle',
         // dark
-        'dark:bg-dark-tremor-background-subtle',
+        'dark:bg-dark-unodashboard-background-subtle',
     ),
 };
 
@@ -119,7 +119,7 @@ export const TabList = React.forwardRef<HTMLDivElement, TabListProps>(
     ({ color, variant = 'line', children, className, ...other }, ref) => (
         <HeadlessTab.List
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeTabListClassName('root'),
                 'justify-start overflow-x-clip',
                 variantStyles[variant],
@@ -139,33 +139,33 @@ const makeTabClassName = makeClassName('Tab');
 function getVariantStyles(tabVariant: TabVariant, color?: Color) {
     switch (tabVariant) {
         case 'line':
-            return tremorTwMerge(
+            return unoTwMerge(
                 // common
                 'data-selected:border-b-2 hover:border-b-2 border-transparent transition duration-100 -mb-px px-2 py-2',
                 // light
-                'hover:border-tremor-content hover:text-tremor-content-emphasis text-tremor-content',
+                'hover:border-unodashboard-content hover:text-unodashboard-content-emphasis text-unodashboard-content',
                 // dark
-                'dark:[&:not([data-selected])]:hover:border-dark-tremor-content-emphasis dark:[&:not([data-selected])]:hover:text-dark-tremor-content-emphasis dark:[&:not([data-selected])]:text-dark-tremor-content',
+                'dark:[&:not([data-selected])]:hover:border-dark-unodashboard-content-emphasis dark:[&:not([data-selected])]:hover:text-dark-unodashboard-content-emphasis dark:[&:not([data-selected])]:text-dark-unodashboard-content',
                 // brand
                 color
                     ? getColorClassNames(color, colorPalette.border).selectBorderColor
                     : [
-                          'data-selected:border-tremor-brand data-selected:text-tremor-brand',
-                          'dark:data-selected:border-dark-tremor-brand dark:data-selected:text-dark-tremor-brand',
+                          'data-selected:border-unodashboard-brand data-selected:text-unodashboard-brand',
+                          'dark:data-selected:border-dark-unodashboard-brand dark:data-selected:text-dark-unodashboard-brand',
                       ],
             );
         case 'solid':
-            return tremorTwMerge(
+            return unoTwMerge(
                 // common
-                'border-transparent border rounded-tremor-small px-2.5 py-1',
+                'border-transparent border rounded-unodashboard-small px-2.5 py-1',
                 // light
-                'data-selected:border-tremor-border data-selected:bg-tremor-background data-selected:shadow-tremor-input [&:not([data-selected])]:hover:text-tremor-content-emphasis data-selected:text-tremor-brand [&:not([data-selected])]:text-tremor-content',
+                'data-selected:border-unodashboard-border data-selected:bg-unodashboard-background data-selected:shadow-unodashboard-input [&:not([data-selected])]:hover:text-unodashboard-content-emphasis data-selected:text-unodashboard-brand [&:not([data-selected])]:text-unodashboard-content',
                 // dark
-                'dark:data-selected:border-dark-tremor-border dark:data-selected:bg-dark-tremor-background dark:data-selected:shadow-dark-tremor-input dark:[&:not([data-selected])]:hover:text-dark-tremor-content-emphasis dark:data-selected:text-dark-tremor-brand dark:[&:not([data-selected])]:text-dark-tremor-content',
+                'dark:data-selected:border-dark-unodashboard-border dark:data-selected:bg-dark-unodashboard-background dark:data-selected:shadow-dark-unodashboard-input dark:[&:not([data-selected])]:hover:text-dark-unodashboard-content-emphasis dark:data-selected:text-dark-unodashboard-brand dark:[&:not([data-selected])]:text-dark-unodashboard-content',
                 // brand
                 color
                     ? getColorClassNames(color, colorPalette.text).selectTextColor
-                    : 'text-tremor-content dark:text-dark-tremor-content',
+                    : 'text-unodashboard-content dark:text-dark-unodashboard-content',
             );
     }
 }
@@ -174,9 +174,7 @@ export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
     icon?: React.ElementType;
 }
 
-export const Tab = React.forwardRef<HTMLButtonElement, TabProps>((props, ref) => {
-    const { icon, className, children, ...other } = props;
-
+export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(({ icon, className, children, ...other }, ref) => {
     const variant = useContext(TabVariantContext);
     const color = useContext(BaseColorContext);
     const Icon = icon;
@@ -184,10 +182,10 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>((props, ref) =>
     return (
         <HeadlessTab
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeTabClassName('root'),
                 // common
-                'flex whitespace-nowrap truncate max-w-xs outline-hidden data-focus-visible:ring-3 text-tremor-default transition duration-100',
+                'flex whitespace-nowrap truncate max-w-xs outline-hidden data-focus-visible:ring-3 text-unodashboard-default transition duration-100',
                 getVariantStyles(variant, color),
                 className,
                 color && getColorClassNames(color, colorPalette.text).selectTextColor,
@@ -195,9 +193,7 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>((props, ref) =>
             {...other}
         >
             {Icon ? (
-                <Icon
-                    className={tremorTwMerge(makeTabClassName('icon'), 'flex-none h-5 w-5', children ? 'mr-2' : '')}
-                />
+                <Icon className={unoTwMerge(makeTabClassName('icon'), 'flex-none h-5 w-5', children ? 'mr-2' : '')} />
             ) : null}
             {children ? <span>{children}</span> : null}
         </HeadlessTab>

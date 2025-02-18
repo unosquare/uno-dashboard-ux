@@ -17,7 +17,7 @@ import type { Color } from '../constants';
 import { useInternalState } from '../hooks';
 import { CalendarIcon, XCircleIcon, constructValueToNameMapping, getNodeText } from '../reactUtils';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 export interface DateRangePickerItemProps extends React.HTMLAttributes<HTMLDivElement> {
     value: string;
@@ -280,18 +280,19 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
     return (
         <div
             ref={ref}
-            className={tremorTwMerge(
-                'w-full min-w-[10rem] relative flex justify-between text-tremor-default max-w-sm shadow-tremor-input dark:shadow-dark-tremor-input rounded-tremor-default',
+            className={unoTwMerge(
+                'w-full min-w-[10rem] relative flex justify-between text-unodashboard-default max-w-sm shadow-unodashboard-input dark:shadow-dark-unodashboard-input rounded-unodashboard-default',
                 className,
             )}
             {...other}
         >
             <Popover
                 as='div'
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     'w-full',
-                    enableSelect ? 'rounded-l-tremor-default' : 'rounded-tremor-default',
-                    isCalendarButtonFocused && 'ring-2 ring-tremor-brand-muted dark:ring-dark-tremor-brand-muted z-10',
+                    enableSelect ? 'rounded-l-unodashboard-default' : 'rounded-unodashboard-default',
+                    isCalendarButtonFocused &&
+                        'ring-2 ring-unodashboard-brand-muted dark:ring-dark-unodashboard-brand-muted z-10',
                 )}
             >
                 <div className='relative w-full'>
@@ -299,26 +300,26 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                         onFocus={() => setIsCalendarButtonFocused(true)}
                         onBlur={() => setIsCalendarButtonFocused(false)}
                         disabled={disabled}
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             // common
-                            'w-full outline-hidden text-left whitespace-nowrap truncate focus:ring-2 transition duration-100 rounded-l-tremor-default flex flex-nowrap border pl-3 py-2',
+                            'w-full outline-hidden text-left whitespace-nowrap truncate focus:ring-2 transition duration-100 rounded-l-unodashboard-default flex flex-nowrap border pl-3 py-2',
                             // light
-                            'rounded-l-tremor-default border-tremor-border text-tremor-content-emphasis focus:border-tremor-brand-subtle focus:ring-tremor-brand-muted',
+                            'rounded-l-unodashboard-default border-unodashboard-border text-unodashboard-content-emphasis focus:border-unodashboard-brand-subtle focus:ring-unodashboard-brand-muted',
                             // dark
-                            'dark:border-dark-tremor-border dark:text-dark-tremor-content-emphasis dark:focus:border-dark-tremor-brand-subtle dark:focus:ring-dark-tremor-brand-muted',
-                            enableSelect ? 'rounded-l-tremor-default' : 'rounded-tremor-default',
+                            'dark:border-dark-unodashboard-border dark:text-dark-unodashboard-content-emphasis dark:focus:border-dark-unodashboard-brand-subtle dark:focus:ring-dark-unodashboard-brand-muted',
+                            enableSelect ? 'rounded-l-unodashboard-default' : 'rounded-unodashboard-default',
                             isClearEnabled ? 'pr-8' : 'pr-4',
                             getSelectButtonColors(hasValue<Date>(selectedStartDate || selectedEndDate), disabled),
                         )}
                     >
                         <CalendarIcon
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 makeDateRangePickerClassName('calendarIcon'),
                                 'flex-none shrink-0 h-5 w-5 -ml-0.5 mr-2',
                                 // light
-                                'text-tremor-content-subtle',
+                                'text-unodashboard-content-subtle',
                                 // light
-                                'dark:text-dark-tremor-content-subtle',
+                                'dark:text-dark-unodashboard-content-subtle',
                             )}
                             aria-hidden='true'
                         />
@@ -327,7 +328,7 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                     {isClearEnabled && selectedStartDate ? (
                         <button
                             type='button'
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 'absolute outline-hidden inset-y-0 right-0 flex items-center transition duration-100 mr-4',
                             )}
                             onClick={(e) => {
@@ -336,14 +337,14 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                             }}
                         >
                             <XCircleIcon
-                                className={tremorTwMerge(
+                                className={unoTwMerge(
                                     makeDateRangePickerClassName('clearIcon'),
                                     // common
                                     'flex-none h-4 w-4',
                                     // light
-                                    'text-tremor-content-subtle',
+                                    'text-unodashboard-content-subtle',
                                     // dark
-                                    'dark:text-dark-tremor-content-subtle',
+                                    'dark:text-dark-unodashboard-content-subtle',
                                 )}
                             />
                         </button>
@@ -360,13 +361,13 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                     <PopoverPanel
                         anchor='bottom start'
                         focus={true}
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             // common
-                            'min-w-min divide-y overflow-y-auto outline-hidden rounded-tremor-default p-3 border [--anchor-gap:4px]',
+                            'min-w-min divide-y overflow-y-auto outline-hidden rounded-unodashboard-default p-3 border [--anchor-gap:4px]',
                             // light
-                            'bg-tremor-background border-tremor-border divide-tremor-border shadow-tremor-dropdown',
+                            'bg-unodashboard-background border-unodashboard-border divide-unodashboard-border shadow-unodashboard-dropdown',
                             // dark
-                            'dark:bg-dark-tremor-background dark:border-dark-tremor-border dark:divide-dark-tremor-border dark:shadow-dark-tremor-dropdown',
+                            'dark:bg-dark-unodashboard-background dark:border-dark-unodashboard-border dark:divide-dark-unodashboard-border dark:shadow-dark-unodashboard-dropdown',
                         )}
                     >
                         <Calendar<DayPickerRangeProps>
@@ -388,13 +389,13 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                             disabled={disabledDays}
                             enableYearNavigation={enableYearNavigation}
                             classNames={{
-                                day_range_middle: tremorTwMerge(
-                                    'rounded-none! aria-selected:bg-tremor-background-subtle! dark:aria-selected:bg-dark-tremor-background-subtle! aria-selected:text-tremor-content! dark:aria-selected:bg-dark-tremor-background-subtle!',
+                                day_range_middle: unoTwMerge(
+                                    'rounded-none! aria-selected:bg-unodashboard-background-subtle! dark:aria-selected:bg-dark-unodashboard-background-subtle! aria-selected:text-unodashboard-content! dark:aria-selected:bg-dark-unodashboard-background-subtle!',
                                 ),
                                 day_range_start:
-                                    'rounded-r-none rounded-l-tremor-small aria-selected:text-tremor-brand-inverted dark:aria-selected:text-dark-tremor-brand-inverted',
+                                    'rounded-r-none rounded-l-unodashboard-small aria-selected:text-unodashboard-brand-inverted dark:aria-selected:text-dark-unodashboard-brand-inverted',
                                 day_range_end:
-                                    'rounded-l-none rounded-r-tremor-small aria-selected:text-tremor-brand-inverted dark:aria-selected:text-dark-tremor-brand-inverted',
+                                    'rounded-l-none rounded-r-unodashboard-small aria-selected:text-unodashboard-brand-inverted dark:aria-selected:text-dark-unodashboard-brand-inverted',
                             }}
                             weekStartsOn={weekStartsOn}
                             {...props}
@@ -405,10 +406,10 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
             {enableSelect && (
                 <Listbox
                     as='div'
-                    className={tremorTwMerge(
-                        'w-48 -ml-px rounded-r-tremor-default',
+                    className={unoTwMerge(
+                        'w-48 -ml-px rounded-r-unodashboard-default',
                         isSelectButtonFocused &&
-                            'ring-2 ring-tremor-brand-muted dark:ring-dark-tremor-brand-muted z-10',
+                            'ring-2 ring-unodashboard-brand-muted dark:ring-dark-unodashboard-brand-muted z-10',
                     )}
                     value={selectedSelectValue}
                     onChange={handleSelectClick}
@@ -419,13 +420,13 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                             <ListboxButton
                                 onFocus={() => setIsSelectButtonFocused(true)}
                                 onBlur={() => setIsSelectButtonFocused(false)}
-                                className={tremorTwMerge(
+                                className={unoTwMerge(
                                     // common
-                                    'w-full outline-hidden text-left whitespace-nowrap truncate rounded-r-tremor-default transition duration-100 border px-4 py-2',
+                                    'w-full outline-hidden text-left whitespace-nowrap truncate rounded-r-unodashboard-default transition duration-100 border px-4 py-2',
                                     // light
-                                    'border-tremor-border text-tremor-content-emphasis focus:border-tremor-brand-subtle',
+                                    'border-unodashboard-border text-unodashboard-content-emphasis focus:border-unodashboard-brand-subtle',
                                     // dark
-                                    'dark:border-dark-tremor-border  dark:text-dark-tremor-content-emphasis dark:focus:border-dark-tremor-brand-subtle',
+                                    'dark:border-dark-unodashboard-border  dark:text-dark-unodashboard-content-emphasis dark:focus:border-dark-unodashboard-brand-subtle',
                                     getSelectButtonColors(hasValue<string>(x.value), disabled),
                                 )}
                             >
@@ -441,13 +442,13 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                             >
                                 <ListboxOptions
                                     anchor='bottom end'
-                                    className={tremorTwMerge(
+                                    className={unoTwMerge(
                                         // common
                                         '[--anchor-gap:4px] divide-y overflow-y-auto outline-hidden border min-w-44',
                                         // light
-                                        'shadow-tremor-dropdown bg-tremor-background border-tremor-border divide-tremor-border rounded-tremor-default',
+                                        'shadow-unodashboard-dropdown bg-unodashboard-background border-unodashboard-border divide-unodashboard-border rounded-unodashboard-default',
                                         // dark
-                                        'dark:shadow-dark-tremor-dropdown dark:bg-dark-tremor-background dark:border-dark-tremor-border dark:divide-dark-tremor-border',
+                                        'dark:shadow-dark-unodashboard-dropdown dark:bg-dark-unodashboard-background dark:border-dark-unodashboard-border dark:divide-dark-unodashboard-border',
                                     )}
                                 >
                                     {children ??

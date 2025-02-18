@@ -8,10 +8,10 @@ describe('TremorContainer', () => {
         expect(getByText('My TremorContainer')).toBeInTheDocument();
     });
 
-    it('renders children inside a div with max-w-unomax and m-auto classes', () => {
+    it('renders children inside a div with max-w-[1460px] and m-auto classes', () => {
         const { container } = render(<TremorContainer>My TremorContainer</TremorContainer>);
         const div = container.querySelector('div');
-        expect(div).toHaveClass('max-w-unomax');
+        expect(div).toHaveClass('max-w-[1460px');
         expect(div).toHaveClass('m-auto');
     });
 });

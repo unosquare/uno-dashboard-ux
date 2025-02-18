@@ -1,14 +1,14 @@
 import { extendTailwindMerge } from 'tailwind-merge';
 
-export const tremorTwMerge = extendTailwindMerge({
+export const unoTwMerge = extendTailwindMerge({
     extend: {
         classGroups: {
             shadow: [
                 {
                     shadow: [
                         {
-                            tremor: ['input', 'card', 'dropdown'],
-                            'dark-tremor': ['input', 'card', 'dropdown'],
+                            unodashboard: ['input', 'card', 'dropdown'],
+                            'dark-unodashboard': ['input', 'card', 'dropdown'],
                         },
                     ],
                 },
@@ -17,8 +17,8 @@ export const tremorTwMerge = extendTailwindMerge({
                 {
                     rounded: [
                         {
-                            tremor: ['small', 'default', 'full'],
-                            'dark-tremor': ['small', 'default', 'full'],
+                            unodashboard: ['small', 'default', 'full'],
+                            'dark-unodashboard': ['small', 'default', 'full'],
                         },
                     ],
                 },
@@ -27,8 +27,8 @@ export const tremorTwMerge = extendTailwindMerge({
                 {
                     text: [
                         {
-                            tremor: ['default', 'title', 'metric'],
-                            'dark-tremor': ['default', 'title', 'metric'],
+                            unodashboard: ['default', 'title', 'metric'],
+                            'dark-unodashboard': ['default', 'title', 'metric'],
                         },
                     ],
                 },

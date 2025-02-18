@@ -6,7 +6,7 @@ import { Flex } from '../Flex';
 import { NoData } from '../NoData';
 import type { ChartComponent, LegendFormatType } from '../constants';
 import { BaseColors, colorPalette, constructCategoryColors, getColorClassNames, themeColorRange } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 import { formatTicks } from '../utils';
 
 export type legendXAxis = { left: LegendFormatType; right: LegendFormatType };
@@ -100,8 +100,8 @@ export const ComposedLineChart = <T,>({
                                     ).strokeColor
                                 }
                                 activeDot={{
-                                    className: tremorTwMerge(
-                                        'stroke-tremor-background dark:stroke-dark-tremor-background',
+                                    className: unoTwMerge(
+                                        'stroke-unodashboard-background dark:stroke-dark-unodashboard-background',
                                         getColorClassNames(
                                             categoryColors.get(property.dataKey) ?? BaseColors.Gray,
                                             colorPalette.text,

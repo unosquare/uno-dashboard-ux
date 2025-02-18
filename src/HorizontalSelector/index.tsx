@@ -18,13 +18,13 @@ export const HorizontalSelector = ({
         <Text>{label}</Text>
         <StyledButtonContainer>
             <ChevronLeft20Regular
-                className='text-tremor-content dark:text-dark-tremor-content cursor-pointer'
+                className='text-unodashboard-content dark:text-dark-unodashboard-content cursor-pointer'
                 data-testid='left-chevron'
                 onClick={() => onValueChange(false)}
             />
             <StyledValueContainer>{children}</StyledValueContainer>
             <ChevronRight20Regular
-                className='text-tremor-content dark:text-dark-tremor-content cursor-pointer'
+                className='text-unodashboard-content dark:text-dark-unodashboard-content cursor-pointer'
                 data-testid='right-chevron'
                 onClick={() => onValueChange(true)}
             />

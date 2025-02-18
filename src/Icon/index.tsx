@@ -1,7 +1,7 @@
 import React from 'react';
 import { type Color, type Size, Sizes } from '../constants';
 import { type IconVariant, getIconColors, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeIconClassName = makeClassName('Icon');
 
@@ -76,25 +76,25 @@ export const shape: { [style: string]: ShapeTypes } = {
         shadow: '',
     },
     light: {
-        rounded: 'rounded-tremor-default',
+        rounded: 'rounded-unodashboard-default',
         border: '',
         ring: '',
         shadow: '',
     },
     shadow: {
-        rounded: 'rounded-tremor-default',
+        rounded: 'rounded-unodashboard-default',
         border: 'border',
         ring: '',
-        shadow: 'shadow-tremor-card dark:shadow-dark-tremor-card',
+        shadow: 'shadow-unodashboard-card dark:shadow-dark-unodashboard-card',
     },
     solid: {
-        rounded: 'rounded-tremor-default',
+        rounded: 'rounded-unodashboard-default',
         border: 'border-2',
         ring: 'ring-1',
         shadow: '',
     },
     outlined: {
-        rounded: 'rounded-tremor-default',
+        rounded: 'rounded-unodashboard-default',
         border: 'border',
         ring: 'ring-2',
         shadow: '',
@@ -124,7 +124,7 @@ export const Icon = React.forwardRef<HTMLSpanElement, IconProps>(
         return (
             <span
                 ref={ref}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeIconClassName('root'),
                     'inline-flex shrink-0 items-center justify-center',
                     iconColorStyles.bgColor,
@@ -142,7 +142,7 @@ export const Icon = React.forwardRef<HTMLSpanElement, IconProps>(
                 {...other}
             >
                 <Icon
-                    className={tremorTwMerge(
+                    className={unoTwMerge(
                         makeIconClassName('icon'),
                         'shrink-0',
                         iconSizes[size].height,

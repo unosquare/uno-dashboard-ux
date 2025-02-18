@@ -1,7 +1,7 @@
 import { Disclosure } from '@headlessui/react';
 import React, { createContext, useContext } from 'react';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const ArrowUpHeadIcon = ({ ...props }) => (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' {...props}>
@@ -25,14 +25,14 @@ export const AccordionList = React.forwardRef<HTMLDivElement, AccordionListProps
         return (
             <div
                 ref={ref}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeAccordionListClassName('root'),
                     // common
-                    'rounded-tremor-default',
+                    'rounded-unodashboard-default',
                     // light
-                    'shadow-tremor-card',
+                    'shadow-unodashboard-card',
                     // dark
-                    'dark:shadow-dark-tremor-card',
+                    'dark:shadow-dark-unodashboard-card',
                     className,
                 )}
                 {...other}
@@ -40,7 +40,7 @@ export const AccordionList = React.forwardRef<HTMLDivElement, AccordionListProps
                 {React.Children.map(children, (child, idx) => {
                     if (idx === 0) {
                         return (
-                            <RootStylesContext.Provider value={tremorTwMerge('rounded-t-tremor-default border')}>
+                            <RootStylesContext.Provider value={unoTwMerge('rounded-t-unodashboard-default border')}>
                                 {React.cloneElement(child)}
                             </RootStylesContext.Provider>
                         );
@@ -48,14 +48,14 @@ export const AccordionList = React.forwardRef<HTMLDivElement, AccordionListProps
                     if (idx === numChildren - 1) {
                         return (
                             <RootStylesContext.Provider
-                                value={tremorTwMerge('rounded-b-tremor-default border-l border-r border-b')}
+                                value={unoTwMerge('rounded-b-unodashboard-default border-l border-r border-b')}
                             >
                                 {React.cloneElement(child)}
                             </RootStylesContext.Provider>
                         );
                     }
                     return (
-                        <RootStylesContext.Provider value={tremorTwMerge('border-l border-r border-b')}>
+                        <RootStylesContext.Provider value={unoTwMerge('border-l border-r border-b')}>
                             {React.cloneElement(child)}
                         </RootStylesContext.Provider>
                     );
@@ -74,33 +74,31 @@ export const AccordionHeader = React.forwardRef<HTMLButtonElement, React.ButtonH
         return (
             <Disclosure.Button
                 ref={ref}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeAccordionHeaderClassName('root'),
                     // common
                     'w-full flex items-center justify-between px-4 py-3',
                     // light
-                    'text-tremor-content-emphasis',
+                    'text-unodashboard-content-emphasis',
                     // dark
-                    'dark:text-dark-tremor-content-emphasis',
+                    'dark:text-dark-unodashboard-content-emphasis',
                     className,
                 )}
                 {...other}
             >
-                <div
-                    className={tremorTwMerge(makeAccordionHeaderClassName('children'), 'flex flex-1 text-inherit mr-4')}
-                >
+                <div className={unoTwMerge(makeAccordionHeaderClassName('children'), 'flex flex-1 text-inherit mr-4')}>
                     {children}
                 </div>
                 <div>
                     <ArrowUpHeadIcon
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             makeAccordionHeaderClassName('arrowIcon'),
                             //common
                             'h-5 w-5 -mr-1',
                             // light
-                            'text-tremor-content-subtle',
+                            'text-unodashboard-content-subtle',
                             // dark
-                            'dark:text-dark-tremor-content-subtle',
+                            'dark:text-dark-unodashboard-content-subtle',
                             isOpen ? 'transition-all' : 'transition-all -rotate-180',
                         )}
                     />
@@ -116,14 +114,14 @@ export const AccordionBody = React.forwardRef<HTMLDivElement, React.HTMLAttribut
     ({ children, className, ...other }, ref) => (
         <Disclosure.Panel
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeAccordionBodyClassName('root'),
                 // common
-                'w-full text-tremor-default px-4 pb-3',
+                'w-full text-unodashboard-default px-4 pb-3',
                 // light
-                'text-tremor-content',
+                'text-unodashboard-content',
                 // dark
-                'dark:text-dark-tremor-content',
+                'dark:text-dark-unodashboard-content',
                 className,
             )}
             {...other}
@@ -148,20 +146,20 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     ({ defaultOpen = false, children, className, ...other }, ref) => {
-        const rootStyles = useContext(RootStylesContext) ?? tremorTwMerge('rounded-tremor-default border');
+        const rootStyles = useContext(RootStylesContext) ?? unoTwMerge('rounded-unodashboard-default border');
 
         return (
             <Disclosure
                 as='div'
                 ref={ref}
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeAccordionClassName('root'),
                     // common
                     'overflow-hidden',
                     // light
-                    'bg-tremor-background border-tremor-border',
+                    'bg-unodashboard-background border-unodashboard-border',
                     // dark
-                    'dark:bg-dark-tremor-background dark:border-dark-tremor-border',
+                    'dark:bg-dark-unodashboard-background dark:border-dark-unodashboard-border',
                     rootStyles,
                     className,
                 )}

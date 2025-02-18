@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import type { Color } from '../constants';
 import { colorPalette, getColorClassNames, makeClassName, themeColorRange } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeCategoryBarClassName = makeClassName('CategoryBar');
 
@@ -31,14 +31,14 @@ const BarLabels = ({ values }: { values: number[] }) => {
     let sumConsecutiveHiddenLabels = 0;
     return (
         <div
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeCategoryBarClassName('labels'),
                 // common
-                'relative flex w-full text-tremor-default h-5 mb-2',
+                'relative flex w-full text-unodashboard-default h-5 mb-2',
                 // light
-                'text-tremor-content',
+                'text-unodashboard-content',
                 // dark
-                'dark:text-dark-tremor-content',
+                'dark:text-dark-unodashboard-content',
             )}
         >
             {values.slice(0, values.length).map((widthPercentage) => {
@@ -60,14 +60,14 @@ const BarLabels = ({ values }: { values: number[] }) => {
                         className='flex items-center justify-end'
                         style={{ width: `${widthPositionLeft}%` }}
                     >
-                        <span className={tremorTwMerge(showLabel ? 'block' : 'hidden', 'left-1/2 translate-x-1/2')}>
+                        <span className={unoTwMerge(showLabel ? 'block' : 'hidden', 'left-1/2 translate-x-1/2')}>
                             {prefixSum}
                         </span>
                     </div>
                 );
             })}
-            <div className={tremorTwMerge('absolute bottom-0 flex items-center left-0')}>0</div>
-            <div className={tremorTwMerge('absolute bottom-0 flex items-center right-0')}>{sumValues}</div>
+            <div className={unoTwMerge('absolute bottom-0 flex items-center left-0')}>0</div>
+            <div className={unoTwMerge('absolute bottom-0 flex items-center right-0')}>{sumValues}</div>
         </div>
     );
 };
@@ -98,24 +98,21 @@ export const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>((p
     const markerPositionLeft: number = useMemo(() => getPositionLeft(markerValue, maxValue), [markerValue, maxValue]);
 
     return (
-        <div ref={ref} className={tremorTwMerge(makeCategoryBarClassName('root'), className)} {...other}>
+        <div ref={ref} className={unoTwMerge(makeCategoryBarClassName('root'), className)} {...other}>
             {showLabels ? <BarLabels values={values} /> : null}
             <div
-                className={tremorTwMerge(
-                    makeCategoryBarClassName('barWrapper'),
-                    'relative w-full flex items-center h-2',
-                )}
+                className={unoTwMerge(makeCategoryBarClassName('barWrapper'), 'relative w-full flex items-center h-2')}
             >
                 <div
-                    className={tremorTwMerge(
+                    className={unoTwMerge(
                         // common
-                        'flex-1 flex items-center h-full overflow-hidden rounded-tremor-full',
+                        'flex-1 flex items-center h-full overflow-hidden rounded-unodashboard-full',
                     )}
                 >
                     {values.map((value, idx) => (
                         <div
                             key={uuidv4()}
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 makeCategoryBarClassName('categoryBar'),
                                 'h-full',
                                 getColorClassNames(colors[idx] ?? 'gray', colorPalette.background).bgColor,
@@ -126,7 +123,7 @@ export const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>((p
                 </div>
                 {markerValue !== undefined ? (
                     <div
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             makeCategoryBarClassName('markerWrapper'),
                             'absolute right-1/2 -translate-x-1/2 w-5',
                         )}
@@ -136,14 +133,14 @@ export const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>((p
                         }}
                     >
                         <div
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 makeCategoryBarClassName('marker'),
                                 // common
-                                'ring-2 mx-auto rounded-tremor-full h-4 w-1',
+                                'ring-2 mx-auto rounded-unodashboard-full h-4 w-1',
                                 // light
-                                'ring-tremor-brand-inverted',
+                                'ring-unodashboard-brand-inverted',
                                 // dark
-                                'dark:ring-dark-tremor-brand-inverted',
+                                'dark:ring-dark-unodashboard-brand-inverted',
                                 markerBgColor,
                             )}
                         />

@@ -1,7 +1,7 @@
 import React, { type ReactNode, useState, useRef } from 'react';
 import { mergeRefs } from '../reactUtils';
 import { getSelectButtonColors, hasValue } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const ExclamationFilledIcon = ({ ...props }) => (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' {...props}>
@@ -26,139 +26,143 @@ export interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputEleme
     pattern?: string;
 }
 
-export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>((props, ref) => {
-    const {
-        value,
-        defaultValue,
-        type,
-        placeholder = 'Type...',
-        icon,
-        error = false,
-        errorMessage,
-        disabled = false,
-        stepper,
-        makeInputClassName,
-        className,
-        onChange,
-        onValueChange,
-        autoFocus,
-        pattern,
-        ...other
-    } = props;
-    const [isFocused, setIsFocused] = useState(autoFocus || false);
+export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>(
+    (
+        {
+            value,
+            defaultValue,
+            type,
+            placeholder = 'Type...',
+            icon,
+            error = false,
+            errorMessage,
+            disabled = false,
+            stepper,
+            makeInputClassName,
+            className,
+            onChange,
+            onValueChange,
+            autoFocus,
+            pattern,
+            ...other
+        },
+        ref,
+    ) => {
+        const [isFocused, setIsFocused] = useState(autoFocus || false);
 
-    const Icon = icon;
+        const Icon = icon;
 
-    const inputRef = useRef<HTMLInputElement>(null);
+        const inputRef = useRef<HTMLInputElement>(null);
 
-    const hasSelection = hasValue(value || defaultValue);
+        const hasSelection = hasValue(value || defaultValue);
 
-    React.useEffect(() => {
-        const handleFocus = () => setIsFocused(true);
-        const handleBlur = () => setIsFocused(false);
+        React.useEffect(() => {
+            const handleFocus = () => setIsFocused(true);
+            const handleBlur = () => setIsFocused(false);
 
-        const node = inputRef.current;
-        if (node) {
-            node.addEventListener('focus', handleFocus);
-            node.addEventListener('blur-sm', handleBlur);
-
-            // Autofocus logic
-            if (autoFocus) {
-                node.focus();
-            }
-        }
-
-        return () => {
+            const node = inputRef.current;
             if (node) {
-                node.removeEventListener('focus', handleFocus);
-                node.removeEventListener('blur-sm', handleBlur);
-            }
-        };
-    }, [autoFocus]);
+                node.addEventListener('focus', handleFocus);
+                node.addEventListener('blur-sm', handleBlur);
 
-    return (
-        <>
-            <div
-                className={tremorTwMerge(
-                    makeInputClassName('root'),
-                    // common
-                    'relative w-full flex items-center min-w-[10rem] outline-hidden rounded-tremor-default transition duration-100 border',
-                    // light
-                    'shadow-tremor-input',
-                    // dark
-                    'dark:shadow-dark-tremor-input',
-                    getSelectButtonColors(hasSelection, disabled, error),
-                    isFocused &&
-                        tremorTwMerge(
-                            // common
-                            'ring-2',
-                            // light
-                            'border-tremor-brand-subtle ring-tremor-brand-muted',
-                            // light
-                            'dark:border-dark-tremor-brand-subtle dark:ring-dark-tremor-brand-muted',
-                        ),
-                    className,
-                )}
-            >
-                {Icon ? (
-                    <Icon
-                        className={tremorTwMerge(
-                            makeInputClassName('icon'),
-                            // common
-                            'shrink-0 h-5 w-5 mx-2.5 absolute left-0 flex items-center',
-                            // light
-                            'text-tremor-content-subtle',
-                            // light
-                            'dark:text-dark-tremor-content-subtle',
-                        )}
-                    />
-                ) : null}
-                <input
-                    ref={mergeRefs([inputRef, ref])}
-                    defaultValue={defaultValue}
-                    value={value}
-                    type={type}
-                    className={tremorTwMerge(
-                        makeInputClassName('input'),
+                // Autofocus logic
+                if (autoFocus) {
+                    node.focus();
+                }
+            }
+
+            return () => {
+                if (node) {
+                    node.removeEventListener('focus', handleFocus);
+                    node.removeEventListener('blur-sm', handleBlur);
+                }
+            };
+        }, [autoFocus]);
+
+        return (
+            <>
+                <div
+                    className={unoTwMerge(
+                        makeInputClassName('root'),
                         // common
-                        'w-full bg-transparent focus:outline-hidden focus:ring-0 border-none text-tremor-default rounded-tremor-default transition duration-100 py-2',
+                        'relative w-full flex items-center min-w-[10rem] outline-hidden rounded-unodashboard-default transition duration-100 border',
                         // light
-                        'text-tremor-content-emphasis',
+                        'shadow-unodashboard-input',
                         // dark
-                        'dark:text-dark-tremor-content-emphasis',
-                        '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
-                        error ? 'pr-8' : 'pr-3',
-                        Icon ? 'pl-10' : 'pl-3',
-                        disabled
-                            ? 'placeholder:text-tremor-content-subtle dark:placeholder:text-dark-tremor-content-subtle'
-                            : 'placeholder:text-tremor-content dark:placeholder:text-dark-tremor-content',
+                        'dark:shadow-dark-unodashboard-input',
+                        getSelectButtonColors(hasSelection, disabled, error),
+                        isFocused &&
+                            unoTwMerge(
+                                // common
+                                'ring-2',
+                                // light
+                                'border-unodashboard-brand-subtle ring-unodashboard-brand-muted',
+                                // light
+                                'dark:border-dark-unodashboard-brand-subtle dark:ring-dark-unodashboard-brand-muted',
+                            ),
+                        className,
                     )}
-                    placeholder={placeholder}
-                    disabled={disabled}
-                    data-testid='base-input'
-                    onChange={(e) => {
-                        onChange?.(e);
-                        onValueChange?.(e.target.value);
-                    }}
-                    pattern={pattern}
-                    {...other}
-                />
-                {error ? (
-                    <ExclamationFilledIcon
-                        className={tremorTwMerge(
-                            makeInputClassName('errorIcon'),
-                            'text-red-500 shrink-0 h-5 w-5 absolute right-0 flex items-center',
-                            type === 'number' ? (stepper ? 'mr-20' : 'mr-3') : 'mx-2.5',
+                >
+                    {Icon ? (
+                        <Icon
+                            className={unoTwMerge(
+                                makeInputClassName('icon'),
+                                // common
+                                'shrink-0 h-5 w-5 mx-2.5 absolute left-0 flex items-center',
+                                // light
+                                'text-unodashboard-content-subtle',
+                                // light
+                                'dark:text-dark-unodashboard-content-subtle',
+                            )}
+                        />
+                    ) : null}
+                    <input
+                        ref={mergeRefs([inputRef, ref])}
+                        defaultValue={defaultValue}
+                        value={value}
+                        type={type}
+                        className={unoTwMerge(
+                            makeInputClassName('input'),
+                            // common
+                            'w-full bg-transparent focus:outline-hidden focus:ring-0 border-none text-unodashboard-default rounded-unodashboard-default transition duration-100 py-2',
+                            // light
+                            'text-unodashboard-content-emphasis',
+                            // dark
+                            'dark:text-dark-unodashboard-content-emphasis',
+                            '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
+                            error ? 'pr-8' : 'pr-3',
+                            Icon ? 'pl-10' : 'pl-3',
+                            disabled
+                                ? 'placeholder:text-unodashboard-content-subtle dark:placeholder:text-dark-unodashboard-content-subtle'
+                                : 'placeholder:text-unodashboard-content dark:placeholder:text-dark-unodashboard-content',
                         )}
+                        placeholder={placeholder}
+                        disabled={disabled}
+                        data-testid='base-input'
+                        onChange={(e) => {
+                            onChange?.(e);
+                            onValueChange?.(e.target.value);
+                        }}
+                        pattern={pattern}
+                        {...other}
                     />
+                    {error ? (
+                        <ExclamationFilledIcon
+                            className={unoTwMerge(
+                                makeInputClassName('errorIcon'),
+                                'text-red-500 shrink-0 h-5 w-5 absolute right-0 flex items-center',
+                                type === 'number' ? (stepper ? 'mr-20' : 'mr-3') : 'mx-2.5',
+                            )}
+                        />
+                    ) : null}
+                    {stepper ?? null}
+                </div>
+                {error && errorMessage ? (
+                    <p className={unoTwMerge(makeInputClassName('errorMessage'), 'text-sm text-red-500 mt-1')}>
+                        {errorMessage}
+                    </p>
                 ) : null}
-                {stepper ?? null}
-            </div>
-            {error && errorMessage ? (
-                <p className={tremorTwMerge(makeInputClassName('errorMessage'), 'text-sm text-red-500 mt-1')}>
-                    {errorMessage}
-                </p>
-            ) : null}
-        </>
-    );
-});
+            </>
+        );
+    },
+);

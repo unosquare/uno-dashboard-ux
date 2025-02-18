@@ -1,17 +1,17 @@
 import { v4 as uuidv4 } from 'uuid';
 import type { Color } from '../constants';
 import { BaseColors, type ValueFormatter, colorPalette, getColorClassNames } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 export const ChartTooltipFrame = ({ children }: { children: React.ReactNode }) => (
     <div
-        className={tremorTwMerge(
+        className={unoTwMerge(
             // common
-            'rounded-tremor-default text-tremor-default border',
+            'rounded-unodashboard-default text-unodashboard-default border',
             // light
-            'bg-tremor-background shadow-tremor-dropdown border-tremor-border',
+            'bg-unodashboard-background shadow-unodashboard-dropdown border-unodashboard-border',
             // dark
-            'dark:bg-dark-tremor-background dark:shadow-dark-tremor-dropdown dark:border-dark-tremor-border',
+            'dark:bg-dark-unodashboard-background dark:shadow-dark-unodashboard-dropdown dark:border-dark-unodashboard-border',
         )}
     >
         {children}
@@ -28,37 +28,37 @@ export const ChartTooltipRow = ({ value, name, color }: ChartTooltipRowProps) =>
     <div className='flex items-center justify-between space-x-8'>
         <div className='flex items-center space-x-2'>
             <span
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     // common
-                    'shrink-0 rounded-tremor-full border-2 h-3 w-3',
+                    'shrink-0 rounded-unodashboard-full border-2 h-3 w-3',
                     // light
-                    'border-tremor-background shadow-tremor-card',
+                    'border-unodashboard-background shadow-unodashboard-card',
                     // dark
-                    'dark:border-dark-tremor-background dark:shadow-dark-tremor-card',
+                    'dark:border-dark-unodashboard-background dark:shadow-dark-unodashboard-card',
                     getColorClassNames(color, colorPalette.background).bgColor,
                 )}
             />
             <p
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     // commmon
                     'text-right whitespace-nowrap',
                     // light
-                    'text-tremor-content',
+                    'text-unodashboard-content',
                     // dark
-                    'dark:text-dark-tremor-content',
+                    'dark:text-dark-unodashboard-content',
                 )}
             >
                 {name}
             </p>
         </div>
         <p
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 // common
                 'font-medium tabular-nums text-right whitespace-nowrap',
                 // light
-                'text-tremor-content-emphasis',
+                'text-unodashboard-content-emphasis',
                 // dark
-                'dark:text-dark-tremor-content-emphasis',
+                'dark:text-dark-unodashboard-content-emphasis',
             )}
         >
             {value}
@@ -83,28 +83,28 @@ export const ChartTooltip = ({ active, payload, label, categoryColors, valueForm
         return (
             <ChartTooltipFrame>
                 <div
-                    className={tremorTwMerge(
+                    className={unoTwMerge(
                         // light
-                        'border-tremor-border border-b px-4 py-2',
+                        'border-unodashboard-border border-b px-4 py-2',
                         // dark
-                        'dark:border-dark-tremor-border',
+                        'dark:border-dark-unodashboard-border',
                     )}
                 >
                     <p
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             // common
                             'font-medium',
                             // light
-                            'text-tremor-content-emphasis',
+                            'text-unodashboard-content-emphasis',
                             // dark
-                            'dark:text-dark-tremor-content-emphasis',
+                            'dark:text-dark-unodashboard-content-emphasis',
                         )}
                     >
                         {label}
                     </p>
                 </div>
 
-                <div className={tremorTwMerge('px-4 py-2 space-y-1')}>
+                <div className={unoTwMerge('px-4 py-2 space-y-1')}>
                     {filteredPayload.map(({ value, name }: { value: number; name: string }) => (
                         <ChartTooltipRow
                             key={uuidv4()}

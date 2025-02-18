@@ -11,6 +11,6 @@ const MainApp = tw.main<{ $hasToolbar?: boolean }>`
 
 export const TremorContainer = ({ children, hasToolbar }: PropsWithChildren<{ hasToolbar?: boolean }>) => (
     <MainApp $hasToolbar={hasToolbar}>
-        <div className='max-w-unomax m-auto'>{children}</div>
+        <div className='max-w-[1460px] m-auto'>{children}</div>
     </MainApp>
 );

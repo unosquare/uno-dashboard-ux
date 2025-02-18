@@ -5,7 +5,7 @@ import { Flex } from '../Flex';
 import { NoData } from '../NoData';
 import { Text } from '../TextElements';
 import { colorPalette, getColorClassNames, themeColorRange } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 import type { ChartFunnelSettings } from './chartFunnelSettings';
 
 export const ChartFunnel = <T,>({ rawData, dataCallback, formatType, calculateSizes }: ChartFunnelSettings<T>) => {
@@ -19,7 +19,7 @@ export const ChartFunnel = <T,>({ rawData, dataCallback, formatType, calculateSi
                     <div
                         key={uuidv4()}
                         title={humanize(entry.name.toString())}
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             'rounded-sm h-[25px] mb-[5px] flex items-center justify-center',
                             entry.value
                                 ? calculateSizes.sizes[

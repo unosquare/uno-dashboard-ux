@@ -1,7 +1,7 @@
 import React from 'react';
 import { type BadgeProportionTypes, type DeltaType, DeltaTypes, type Size, Sizes } from '../constants';
 import { BaseColors, colorPalette, getColorClassNames, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const ArrowRightIcon = ({ ...props }) => (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' {...props}>
@@ -212,10 +212,10 @@ export const BadgeDelta = React.forwardRef<HTMLSpanElement, BadgeDeltaProps>((pr
     return (
         <span
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeBadgeDeltaClassName('root'),
                 // common
-                'w-max shrink-0 inline-flex justify-center items-center cursor-default rounded-tremor-small ring-1 ring-inset',
+                'w-max shrink-0 inline-flex justify-center items-center cursor-default rounded-unodashboard-small ring-1 ring-inset',
                 colors[mappedDeltaType].bgColor,
                 colors[mappedDeltaType].textColor,
                 colors[mappedDeltaType].ringColor,
@@ -231,15 +231,15 @@ export const BadgeDelta = React.forwardRef<HTMLSpanElement, BadgeDeltaProps>((pr
             {...other}
         >
             <Icon
-                className={tremorTwMerge(
+                className={unoTwMerge(
                     makeBadgeDeltaClassName('icon'),
                     'shrink-0',
-                    children ? tremorTwMerge('-ml-1 mr-1.5') : iconSizes[size].height,
+                    children ? unoTwMerge('-ml-1 mr-1.5') : iconSizes[size].height,
                     iconSizes[size].width,
                 )}
             />
             {children ? (
-                <span className={tremorTwMerge(makeBadgeDeltaClassName('text'), 'whitespace-nowrap')}>{children}</span>
+                <span className={unoTwMerge(makeBadgeDeltaClassName('text'), 'whitespace-nowrap')}>{children}</span>
             ) : null}
         </span>
     );

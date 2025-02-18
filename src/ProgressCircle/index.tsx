@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Color } from '../constants';
 import { colorPalette, getColorClassNames, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeProgressCircleClassName = makeClassName('ProgressBar');
 
@@ -41,93 +41,92 @@ const size2config: Record<Size, { strokeWidth: number; radius: number }> = {
 };
 
 function getLimitedValue(input: number | undefined) {
-    if (input === undefined) {
-        return 0;
-    }
-    if (input > 100) {
-        return 100;
-    }
-    return input;
+    if (input === undefined) return 0;
+
+    return input > 100 ? 100 : input;
 }
 
-export const ProgressCircle = React.forwardRef<HTMLDivElement, ProgressCircleProps>((props, ref) => {
-    const {
-        value: inputValue,
-        size = 'md',
-        className,
-        showAnimation = true,
-        color,
-        radius: inputRadius,
-        strokeWidth: inputStrokeWidth,
-        children,
-        ...other
-    } = props;
+export const ProgressCircle = React.forwardRef<HTMLDivElement, ProgressCircleProps>(
+    (
+        {
+            value: inputValue,
+            size = 'md',
+            className,
+            showAnimation = true,
+            color,
+            radius: inputRadius,
+            strokeWidth: inputStrokeWidth,
+            children,
+            ...other
+        },
+        ref,
+    ) => {
+        // sanitize input
+        const value = getLimitedValue(inputValue);
+        const radius = inputRadius ?? size2config[size].radius;
+        const strokeWidth = inputStrokeWidth ?? size2config[size].strokeWidth;
+        const normalizedRadius = radius - strokeWidth / 2;
+        const circumference = normalizedRadius * 2 * Math.PI;
+        const strokeDashoffset = (value / 100) * circumference;
+        const offset = circumference - strokeDashoffset;
 
-    // sanitize input
-    const value = getLimitedValue(inputValue);
-    const radius = inputRadius ?? size2config[size].radius;
-    const strokeWidth = inputStrokeWidth ?? size2config[size].strokeWidth;
-    const normalizedRadius = radius - strokeWidth / 2;
-    const circumference = normalizedRadius * 2 * Math.PI;
-    const strokeDashoffset = (value / 100) * circumference;
-    const offset = circumference - strokeDashoffset;
-
-    return (
-        <div
-            ref={ref}
-            className={tremorTwMerge(
-                makeProgressCircleClassName('root'),
-                'flex flex-col items-center justify-center',
-                className,
-            )}
-            {...other}
-        >
-            <svg
-                width={radius * 2}
-                height={radius * 2}
-                viewBox={`0 0 ${radius * 2} ${radius * 2}`}
-                className='transform -rotate-90'
+        return (
+            <div
+                ref={ref}
+                className={unoTwMerge(
+                    makeProgressCircleClassName('root'),
+                    'flex flex-col items-center justify-center',
+                    className,
+                )}
+                {...other}
             >
-                <title>Progress</title>
-                <circle
-                    r={normalizedRadius}
-                    cx={radius}
-                    cy={radius}
-                    strokeWidth={strokeWidth}
-                    fill='transparent'
-                    stroke=''
-                    strokeLinecap='round'
-                    className={tremorTwMerge(
-                        'transition-colors ease-linear',
-                        color
-                            ? `${
-                                  getColorClassNames(color, colorPalette.background).strokeColor
-                              } opacity-20 dark:opacity-25`
-                            : 'stroke-tremor-brand-muted/50 dark:stroke-dark-tremor-brand-muted',
-                    )}
-                />
-                {value >= 0 ? (
+                <svg
+                    width={radius * 2}
+                    height={radius * 2}
+                    viewBox={`0 0 ${radius * 2} ${radius * 2}`}
+                    className='transform -rotate-90'
+                >
+                    <title>Progress</title>
                     <circle
                         r={normalizedRadius}
                         cx={radius}
                         cy={radius}
                         strokeWidth={strokeWidth}
-                        strokeDasharray={`${circumference} ${circumference}`}
-                        strokeDashoffset={offset}
                         fill='transparent'
                         stroke=''
                         strokeLinecap='round'
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             'transition-colors ease-linear',
                             color
-                                ? getColorClassNames(color, colorPalette.background).strokeColor
-                                : 'stroke-tremor-brand dark:stroke-dark-tremor-brand',
-                            showAnimation ? 'transition-all duration-300 ease-in-out' : '',
+                                ? `${
+                                      getColorClassNames(color, colorPalette.background).strokeColor
+                                  } opacity-20 dark:opacity-25`
+                                : 'stroke-unodashboard-brand-muted/50 dark:stroke-dark-unodashboard-brand-muted',
                         )}
                     />
-                ) : null}
-            </svg>
-            <div className={tremorTwMerge('absolute flex')}>{children}</div>
-        </div>
-    );
-});
+                    {value >= 0 ? (
+                        <circle
+                            r={normalizedRadius}
+                            cx={radius}
+                            cy={radius}
+                            strokeWidth={strokeWidth}
+                            strokeDasharray={`${circumference} ${circumference}`}
+                            strokeDashoffset={offset}
+                            fill='transparent'
+                            stroke=''
+                            strokeLinecap='round'
+                            className={unoTwMerge(
+                                'transition-colors ease-linear',
+                                color
+                                    ? getColorClassNames(color, colorPalette.background).strokeColor
+                                    : 'stroke-unodashboard-brand dark:stroke-dark-unodashboard-brand',
+                                showAnimation ? 'transition-all duration-300 ease-in-out' : '',
+                            )}
+                        />
+                    ) : null}
+                </svg>
+                <div className={unoTwMerge('absolute flex')}>{children}</div>
+            </div>
+        );
+    },
+);

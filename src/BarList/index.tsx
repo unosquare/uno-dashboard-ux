@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Color } from '../constants';
 import { type ValueFormatter, colorPalette, getColorClassNames, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeBarListClassName = makeClassName('BarList');
 
@@ -27,8 +27,8 @@ export interface BarListProps<T> extends React.HTMLAttributes<HTMLDivElement> {
 
 const defaultValueFormatter: ValueFormatter = (value: number) => value.toString();
 
-function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDivElement>) {
-    const {
+function BarListInner<T>(
+    {
         data = [],
         color,
         valueFormatter = defaultValueFormatter,
@@ -37,8 +37,9 @@ function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDiv
         sortOrder = 'descending',
         className,
         ...other
-    } = props;
-
+    }: BarListProps<T>,
+    ref: React.ForwardedRef<HTMLDivElement>,
+) {
     const Component = onValueChange ? 'button' : 'div';
     const sortedData = React.useMemo(() => {
         if (sortOrder === 'none') {
@@ -59,11 +60,11 @@ function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDiv
     return (
         <div
             ref={ref}
-            className={tremorTwMerge(makeBarListClassName('root'), 'flex justify-between space-x-6', className)}
+            className={unoTwMerge(makeBarListClassName('root'), 'flex justify-between space-x-6', className)}
             aria-sort={sortOrder}
             {...other}
         >
-            <div className={tremorTwMerge(makeBarListClassName('bars'), 'relative w-full space-y-1.5')}>
+            <div className={unoTwMerge(makeBarListClassName('bars'), 'relative w-full space-y-1.5')}>
                 {sortedData.map((item, index) => {
                     const Icon = item.icon;
 
@@ -73,21 +74,21 @@ function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDiv
                             onClick={() => {
                                 onValueChange?.(item);
                             }}
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 makeBarListClassName('bar'),
                                 // common
-                                'group w-full flex items-center rounded-tremor-small',
+                                'group w-full flex items-center rounded-unodashboard-small',
                                 onValueChange
                                     ? [
                                           'cursor-pointer',
                                           // hover
-                                          'hover:bg-tremor-background-muted dark:hover:bg-dark-tremor-background-subtle/40',
+                                          'hover:bg-unodashboard-background-muted dark:hover:bg-dark-unodashboard-background-subtle/40',
                                       ]
                                     : '',
                             )}
                         >
                             <div
-                                className={tremorTwMerge(
+                                className={unoTwMerge(
                                     'flex items-center rounded-sm transition-all bg-opacity-40',
                                     rowHeight,
                                     item.color || color
@@ -98,9 +99,9 @@ function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDiv
                                               ).bgColor,
                                               onValueChange ? 'group-hover:bg-opacity-30' : '',
                                           ]
-                                        : 'bg-tremor-brand-subtle dark:bg-dark-tremor-brand-subtle/60',
+                                        : 'bg-unodashboard-brand-subtle dark:bg-dark-unodashboard-brand-subtle/60',
                                     onValueChange && !(item.color || color)
-                                        ? 'group-hover:bg-tremor-brand-subtle/30 dark:group-hover:bg-dark-tremor-brand-subtle/70'
+                                        ? 'group-hover:bg-unodashboard-brand-subtle/30 dark:group-hover:bg-dark-unodashboard-brand-subtle/70'
                                         : '',
                                     // margin
                                     index === sortedData.length - 1 ? 'mb-0' : '',
@@ -109,17 +110,17 @@ function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDiv
                                 )}
                                 style={{ width: `${widths[index]}%`, transition: showAnimation ? 'all 1s' : '' }}
                             >
-                                <div className={tremorTwMerge('absolute left-2 pr-4 flex max-w-full')}>
+                                <div className={unoTwMerge('absolute left-2 pr-4 flex max-w-full')}>
                                     {Icon ? (
                                         <Icon
-                                            className={tremorTwMerge(
+                                            className={unoTwMerge(
                                                 makeBarListClassName('barIcon'),
                                                 // common
                                                 'flex-none h-5 w-5 mr-2',
                                                 // light
-                                                'text-tremor-content',
+                                                'text-unodashboard-content',
                                                 // dark
-                                                'dark:text-dark-tremor-content',
+                                                'dark:text-dark-unodashboard-content',
                                             )}
                                         />
                                     ) : null}
@@ -128,15 +129,15 @@ function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDiv
                                             href={item.href}
                                             target={item.target ?? '_blank'}
                                             rel='noreferrer'
-                                            className={tremorTwMerge(
+                                            className={unoTwMerge(
                                                 makeBarListClassName('barLink'),
                                                 // common
-                                                'whitespace-nowrap hover:underline truncate text-tremor-default',
+                                                'whitespace-nowrap hover:underline truncate text-unodashboard-default',
                                                 onValueChange ? 'cursor-pointer' : '',
                                                 // light
-                                                'text-tremor-content-emphasis',
+                                                'text-unodashboard-content-emphasis',
                                                 // dark
-                                                'dark:text-dark-tremor-content-emphasis',
+                                                'dark:text-dark-unodashboard-content-emphasis',
                                             )}
                                             onClick={(event) => event.stopPropagation()}
                                         >
@@ -144,14 +145,14 @@ function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDiv
                                         </a>
                                     ) : (
                                         <p
-                                            className={tremorTwMerge(
+                                            className={unoTwMerge(
                                                 makeBarListClassName('barText'),
                                                 // common
-                                                'whitespace-nowrap truncate text-tremor-default',
+                                                'whitespace-nowrap truncate text-unodashboard-default',
                                                 // light
-                                                'text-tremor-content-emphasis',
+                                                'text-unodashboard-content-emphasis',
                                                 // dark
-                                                'dark:text-dark-tremor-content-emphasis',
+                                                'dark:text-dark-unodashboard-content-emphasis',
                                             )}
                                         >
                                             {item.name}
@@ -167,7 +168,7 @@ function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDiv
                 {sortedData.map((item, index) => (
                     <div
                         key={item.key ?? index}
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             makeBarListClassName('labelWrapper'),
                             'flex justify-end items-center',
                             rowHeight,
@@ -175,14 +176,14 @@ function BarListInner<T>(props: BarListProps<T>, ref: React.ForwardedRef<HTMLDiv
                         )}
                     >
                         <p
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 makeBarListClassName('labelText'),
                                 // common
-                                'whitespace-nowrap leading-none truncate text-tremor-default',
+                                'whitespace-nowrap leading-none truncate text-unodashboard-default',
                                 // light
-                                'text-tremor-content-emphasis',
+                                'text-unodashboard-content-emphasis',
                                 // dark
-                                'dark:text-dark-tremor-content-emphasis',
+                                'dark:text-dark-unodashboard-content-emphasis',
                             )}
                         >
                             {valueFormatter(item.value)}

@@ -38,7 +38,7 @@ export const TableHeaders = ({ definitions, sortable, setSortColumn }: TableHead
             {definitions.map((header, index) => (
                 <TableHeaderCell
                     key={header.label}
-                    className={`bg-tremor-background dark:bg-dark-tremor-background ${getAlignment(header, index)}`}
+                    className={`bg-unodashboard-background dark:bg-dark-unodashboard-background ${getAlignment(header, index)}`}
                     onClick={() => !header.excludeFromSort && setSortColumn(index)}
                 >
                     <HeaderDiv $sortable={sortable} $sorted={Number(header.sortOrder) >= 1}>

@@ -18,7 +18,7 @@ export const getFieldBaseProps = <T>(
     disabled: disabled || field.disabled,
     id: field.label,
     type: field.type ?? FormFieldTypes.Text,
-    className: twMerge('my-1', disabled && '[&_input]:text-tremor-content-subtle'),
+    className: twMerge('my-1', disabled && '[&_input]:text-unodashboard-content-subtle'),
     ...register(`table.${index}.value`, {
         required: field.type !== FormFieldTypes.Checkbox && !field.notRequired,
     }),

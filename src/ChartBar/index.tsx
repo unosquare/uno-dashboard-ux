@@ -10,7 +10,7 @@ import { NoData } from '../NoData';
 import type { ChartComponent, LegendFormatType } from '../constants';
 import { useChart } from '../hooks';
 import { BaseColors, colorPalette, getColorClassNames } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 import { formatTicks } from '../utils';
 
 type XAxisPrimaryFormatter = (input: string) => string;
@@ -84,13 +84,13 @@ export const ChartBar = <T,>({
                             unit={unit}
                             allowDecimals={false}
                             width={70}
-                            className={tremorTwMerge(
+                            className={unoTwMerge(
                                 // common
-                                'text-tremor-label',
+                                'text-unodashboard-label',
                                 // light
-                                'fill-tremor-content',
+                                'fill-unodashboard-content',
                                 // dark
-                                'dark:fill-dark-tremor-content',
+                                'dark:fill-dark-unodashboard-content',
                             )}
                         />
                         {ChartDecorators({

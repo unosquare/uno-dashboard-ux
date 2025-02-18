@@ -16,8 +16,8 @@ export const MenuContainer = tw.div`
     absolute
     top-0
     right-0
-    bg-tremor-background 
-    dark:bg-dark-tremor-background
+    bg-unodashboard-background 
+    dark:bg-dark-unodashboard-background
     min-w-[350px]
     max-w-[350px]
     z-40
@@ -39,8 +39,8 @@ export const MenuSection = tw.div`
     flex
     justify-between
     cursor-pointer
-    text-tremor-content 
-    dark:text-dark-tremor-content
+    text-unodashboard-content 
+    dark:text-dark-unodashboard-content
     mt-[18px]
     px-6
     [&_h6]:font-medium
@@ -55,14 +55,14 @@ export const MenuSubSection = tw.div`
     py-0
     px-6
     cursor-pointer
-    text-tremor-content 
-    dark:text-dark-tremor-content
+    text-unodashboard-content 
+    dark:text-dark-unodashboard-content
     [&_span]:text-sm
     [&_span]:leading-6
     [&_span]:mb-[5px]
     [&_span]:pl-[10px]
-    hover:[&_span]:bg-tremor-emphasis
-    dark:hover:[&_span]:bg-dark-tremor-emphasis
+    hover:[&_span]:bg-unodashboard-emphasis
+    dark:hover:[&_span]:bg-dark-unodashboard-emphasis
 `;
 
 export const Burger = ({ onClick }: BurgerSettings) => (

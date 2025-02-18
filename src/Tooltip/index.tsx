@@ -13,11 +13,11 @@ export const TooltipContainer = tw.div`
     [&>div]:p-[8px]
     [&>div]:border
     [&>div]:rounded-sm
-    [&>div]:bg-tremor-background 
-    dark:[&>div]:bg-dark-tremor-background
+    [&>div]:bg-unodashboard-background 
+    dark:[&>div]:bg-dark-unodashboard-background
     [&>div]:opacity-95
-    [&>div]:text-tremor-content 
-    dark:[&>div]:text-dark-tremor-content
+    [&>div]:text-unodashboard-content 
+    dark:[&>div]:text-dark-unodashboard-content
     [&>div]:text-xs
     top-0
     left-0

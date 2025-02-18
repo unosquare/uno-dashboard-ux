@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeListClassName = makeClassName('List');
 
@@ -8,14 +8,14 @@ export const List = React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTML
     ({ children, className, ...other }, ref) => (
         <ul
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeListClassName('root'),
                 // common
                 'w-full divide-y',
                 // light
-                'divide-tremor-border text-tremor-content',
+                'divide-unodashboard-border text-unodashboard-content',
                 // dark
-                'dark:divide-dark-tremor-border dark:text-dark-tremor-content',
+                'dark:divide-dark-unodashboard-border dark:text-dark-unodashboard-content',
                 className,
             )}
             {...other}
@@ -31,10 +31,10 @@ export const ListItem = React.forwardRef<HTMLLIElement, React.HTMLAttributes<HTM
     ({ children, className, ...other }, ref) => (
         <li
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeListItemClassName('root'),
                 // common
-                'w-full flex justify-between items-center text-tremor-default py-2',
+                'w-full flex justify-between items-center text-unodashboard-default py-2',
                 className,
             )}
             {...other}

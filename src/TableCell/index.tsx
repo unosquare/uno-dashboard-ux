@@ -9,7 +9,7 @@ import { BasicTooltip } from '../Tooltip';
 import type { FinancialMetric, TableCellTypes, TableColumn, Tenure } from '../constants';
 import { useToggle } from '../hooks';
 import { makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 import { getAlignment, translateType } from '../utils';
 
 const renderLinkString = (data: TableCellTypes) => {
@@ -143,13 +143,13 @@ export const TableCellContent = ({ data, column }: { data: TableCellTypes; colum
             return (
                 <Flex alignItems='center'>
                     <span
-                        className={tremorTwMerge(
+                        className={unoTwMerge(
                             // common
-                            'shrink-0 rounded-tremor-full border-2 h-3 w-3',
+                            'shrink-0 rounded-unodashboard-full border-2 h-3 w-3',
                             // light
-                            'border-tremor-background shadow-tremor-card',
+                            'border-unodashboard-background shadow-unodashboard-card',
                             // dark
-                            'dark:border-dark-tremor-background dark:shadow-dark-tremor-card',
+                            'dark:border-dark-unodashboard-background dark:shadow-dark-unodashboard-card',
                             (data as string[])[1],
                         )}
                     />
@@ -182,7 +182,7 @@ export const TableCell = React.forwardRef<
 >(({ children, className, column, index, ...other }, ref) => (
     <td
         ref={ref}
-        className={tremorTwMerge(
+        className={unoTwMerge(
             makeTableCellClassName('root'),
             'align-middle p-2 whitespace-normal text-xs/[13px]',
             getAlignment(column, index),

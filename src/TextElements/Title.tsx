@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Color } from '../constants';
 import { colorPalette, getColorClassNames } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 export interface TitleProps extends React.HTMLAttributes<HTMLParagraphElement> {
     color?: Color;
@@ -12,12 +12,12 @@ export const Title = React.forwardRef<HTMLParagraphElement, TitleProps>((props, 
     return (
         <p
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 // common
-                'font-medium text-tremor-title',
+                'font-medium text-unodashboard-title',
                 color
                     ? getColorClassNames(color, colorPalette.darkText).textColor
-                    : 'text-tremor-content-strong dark:text-dark-tremor-content-strong',
+                    : 'text-unodashboard-content-strong dark:text-dark-unodashboard-content-strong',
                 className,
             )}
             {...other}

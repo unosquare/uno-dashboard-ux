@@ -2,7 +2,7 @@ export * from './constants';
 export * from './theme';
 export * from './hooks';
 export * from './utils';
-export * from './tremorTwMerge';
+export * from './unoTwMerge';
 export { default as useAlertStore } from './useAlertStore';
 
 export * from './Accordion';

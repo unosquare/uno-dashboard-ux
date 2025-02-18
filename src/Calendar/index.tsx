@@ -2,7 +2,7 @@ import { addYears, format } from 'date-fns';
 import { DayPicker, type DayPickerRangeProps, type DayPickerSingleProps, useNavigation } from 'react-day-picker';
 import { Icon as IconComponent } from '../Icon';
 import { Text } from '../TextElements';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 interface NavButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     onClick: () => void;
@@ -42,8 +42,8 @@ const NavButton = ({ onClick, icon, ...other }: NavButtonProps) => {
     return (
         <button
             type='button'
-            className={tremorTwMerge(
-                'flex items-center justify-center p-1 h-7 w-7 outline-hidden focus:ring-2 transition duration-100 border border-tremor-border dark:border-dark-tremor-border hover:bg-tremor-background-muted dark:hover:bg-dark-tremor-background-muted rounded-tremor-small focus:border-tremor-brand-subtle select-none dark:focus:border-dark-tremor-brand-subtle focus:ring-tremor-brand-muted dark:focus:ring-dark-tremor-brand-muted text-tremor-content-subtle dark:text-dark-tremor-content-subtle hover:text-tremor-content dark:hover:text-dark-tremor-content',
+            className={unoTwMerge(
+                'flex items-center justify-center p-1 h-7 w-7 outline-hidden focus:ring-2 transition duration-100 border border-unodashboard-border dark:border-dark-unodashboard-border hover:bg-unodashboard-background-muted dark:hover:bg-dark-unodashboard-background-muted rounded-unodashboard-small focus:border-unodashboard-brand-subtle select-none dark:focus:border-dark-unodashboard-brand-subtle focus:ring-unodashboard-brand-muted dark:focus:ring-dark-unodashboard-brand-muted text-unodashboard-content-subtle dark:text-dark-unodashboard-content-subtle hover:text-unodashboard-content dark:hover:text-dark-unodashboard-content',
             )}
             {...other}
         >
@@ -80,24 +80,25 @@ export const Calendar = <T extends DayPickerSingleProps | DayPickerRangeProps>({
             month: 'space-y-4',
             caption: 'flex justify-center pt-2 relative items-center',
             caption_label:
-                'text-tremor-default text-tremor-content-emphasis dark:text-dark-tremor-content-emphasis font-medium',
+                'text-unodashboard-default text-unodashboard-content-emphasis dark:text-dark-unodashboard-content-emphasis font-medium',
             nav: 'space-x-1 flex items-center',
             nav_button:
-                'flex items-center justify-center p-1 h-7 w-7 outline-hidden focus:ring-2 transition duration-100 border border-tremor-border dark:border-dark-tremor-border hover:bg-tremor-background-muted dark:hover:bg-dark-tremor-background-muted rounded-tremor-small focus:border-tremor-brand-subtle dark:focus:border-dark-tremor-brand-subtle focus:ring-tremor-brand-muted dark:focus:ring-dark-tremor-brand-muted text-tremor-content-subtle dark:text-dark-tremor-content-subtle hover:text-tremor-content dark:hover:text-dark-tremor-content',
+                'flex items-center justify-center p-1 h-7 w-7 outline-hidden focus:ring-2 transition duration-100 border border-unodashboard-border dark:border-dark-unodashboard-border hover:bg-unodashboard-background-muted dark:hover:bg-dark-unodashboard-background-muted rounded-unodashboard-small focus:border-unodashboard-brand-subtle dark:focus:border-dark-unodashboard-brand-subtle focus:ring-unodashboard-brand-muted dark:focus:ring-dark-unodashboard-brand-muted text-unodashboard-content-subtle dark:text-dark-unodashboard-content-subtle hover:text-unodashboard-content dark:hover:text-dark-unodashboard-content',
             nav_button_previous: 'absolute left-1',
             nav_button_next: 'absolute right-1',
             table: 'w-full border-collapse space-y-1',
             head_row: 'flex',
-            head_cell: 'w-9 font-normal text-center text-tremor-content-subtle dark:text-dark-tremor-content-subtle',
+            head_cell:
+                'w-9 font-normal text-center text-unodashboard-content-subtle dark:text-dark-unodashboard-content-subtle',
             row: 'flex w-full mt-0.5',
-            cell: 'text-center p-0 relative focus-within:relative text-tremor-default text-tremor-content-emphasis dark:text-dark-tremor-content-emphasis',
-            day: 'h-9 w-9 p-0 hover:bg-tremor-background-subtle dark:hover:bg-dark-tremor-background-subtle outline-tremor-brand dark:outline-dark-tremor-brand rounded-tremor-default',
+            cell: 'text-center p-0 relative focus-within:relative text-unodashboard-default text-unodashboard-content-emphasis dark:text-dark-unodashboard-content-emphasis',
+            day: 'h-9 w-9 p-0 hover:bg-unodashboard-background-subtle dark:hover:bg-dark-unodashboard-background-subtle outline-unodashboard-brand dark:outline-dark-unodashboard-brand rounded-unodashboard-default',
             day_today: 'font-bold',
             day_selected:
-                'aria-selected:bg-tremor-background-emphasis aria-selected:text-tremor-content-inverted dark:aria-selected:bg-dark-tremor-background-emphasis dark:aria-selected:text-dark-tremor-content-inverted ',
+                'aria-selected:bg-unodashboard-background-emphasis aria-selected:text-unodashboard-content-inverted dark:aria-selected:bg-dark-unodashboard-background-emphasis dark:aria-selected:text-dark-unodashboard-content-inverted ',
             day_disabled:
-                'text-tremor-content-subtle dark:text-dark-tremor-content-subtle disabled:hover:bg-transparent',
-            day_outside: 'text-tremor-content-subtle dark:text-dark-tremor-content-subtle',
+                'text-unodashboard-content-subtle dark:text-dark-unodashboard-content-subtle disabled:hover:bg-transparent',
+            day_outside: 'text-unodashboard-content-subtle dark:text-dark-unodashboard-content-subtle',
             ...classNames,
         }}
         components={{
@@ -121,7 +122,7 @@ export const Calendar = <T extends DayPickerSingleProps | DayPickerRangeProps>({
                             />
                         </div>
 
-                        <Text className='text-tremor-default tabular-nums capitalize text-tremor-content-emphasis dark:text-dark-tremor-content-emphasis font-medium'>
+                        <Text className='text-unodashboard-default tabular-nums capitalize text-unodashboard-content-emphasis dark:text-dark-unodashboard-content-emphasis font-medium'>
                             {format(props.displayMonth, 'LLLL yyy', { locale })}
                         </Text>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { type AlignItems, type FlexDirection, type JustifyContent, makeClassName } from '../theme';
-import { tremorTwMerge } from '../tremorTwMerge';
+import { unoTwMerge } from '../unoTwMerge';
 
 const makeFlexClassName = makeClassName('Flex');
 
@@ -48,7 +48,7 @@ export const Flex = React.forwardRef<HTMLDivElement, FlexProps>((props, ref) => 
     return (
         <div
             ref={ref}
-            className={tremorTwMerge(
+            className={unoTwMerge(
                 makeFlexClassName('root'),
                 'flex w-full',
                 flexDirectionClassNames[flexDirection],

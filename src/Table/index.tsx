@@ -59,7 +59,7 @@ type TableFooterProps = {
 };
 
 const TableFooter = ({ footer, columns }: TableFooterProps) => (
-    <TableFoot className='sticky top-0 bottom-0 bg-tremor-background dark:bg-dark-tremor-background'>
+    <TableFoot className='sticky top-0 bottom-0 bg-unodashboard-background dark:bg-dark-unodashboard-background'>
         <TableRow>
             {columns.map((column, index) => (
                 <TableFooterCell key={column.label} className={`p-2 text-xs/[13px] ${getAlignment(column, index)}`}>

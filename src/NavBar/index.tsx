@@ -8,13 +8,13 @@ export type NavBarSettings = {
 
 export const StyledHeader = tw.header<NavBarSettings>`
     w-full
-    ${({ transparent }) => (transparent ? 'bg-transparent' : 'bg-tremor-brand dark:bg-dark-tremor-brand')}
+    ${({ transparent }) => (transparent ? 'bg-transparent' : 'bg-unodashboard-brand dark:bg-dark-unodashboard-brand')}
     flex
 `;
 
 const StyledNavbar = tw.nav`
     w-full
-    max-w-unomax
+    max-w-[1460px]
     p-[11px_18px]
     m-auto
     flex
