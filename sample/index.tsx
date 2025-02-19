@@ -33,7 +33,7 @@ import {
     StyledMenuActions,
     StyledMenuSearchBox,
     ThemeSwitcher,
-    TremorContainer,
+    UnoContainer,
     Select,
     SelectItem,
     VirtualSelect,
@@ -172,7 +172,7 @@ const Application = () => {
                 />
                 <DateRangePicker />
             </BasicToolbar>
-            <TremorContainer hasToolbar>
+            <UnoContainer hasToolbar>
                 <Grid numItems={3} numItemsSm={1} numItemsMd={2} className='gap-6'>
                     <Card decoration='top' decorationColor='blue'>
                         <Text>Metric 1</Text>
@@ -257,7 +257,7 @@ const Application = () => {
                         </Card>
                     </Col>
                 </Grid>
-            </TremorContainer>
+            </UnoContainer>
             <Footer />
         </ErrorBoundary>
     );

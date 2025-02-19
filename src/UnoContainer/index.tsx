@@ -9,7 +9,7 @@ const MainApp = tw.main<{ $hasToolbar?: boolean }>`
     overflow-y-auto
     p-2`;
 
-export const TremorContainer = ({ children, hasToolbar }: PropsWithChildren<{ hasToolbar?: boolean }>) => (
+export const UnoContainer = ({ children, hasToolbar }: PropsWithChildren<{ hasToolbar?: boolean }>) => (
     <MainApp $hasToolbar={hasToolbar}>
         <div className='max-w-[1460px] m-auto'>{children}</div>
     </MainApp>

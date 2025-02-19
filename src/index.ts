@@ -54,7 +54,7 @@ export * from './Tab';
 export * from './Table';
 export * from './TableCell';
 export * from './TextInput';
-export * from './TremorContainer';
+export * from './UnoContainer';
 export * from './UnoLogo';
 export * from './Tooltip';
 export * from './VirtualSelect';
