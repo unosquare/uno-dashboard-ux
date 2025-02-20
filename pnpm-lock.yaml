@@ -51,8 +51,8 @@ importers:
         specifier: ^3.127.8
         version: 3.127.8
       uuid:
-        specifier: ^11.0.5
-        version: 11.0.5
+        specifier: ^11.1.0
+        version: 11.1.0
       zustand:
         specifier: 5.0.3
         version: 5.0.3(@types/react@18.3.14)(react@18.3.1)(use-sync-external-store@1.2.2(react@18.3.1))
@@ -61,11 +61,11 @@ importers:
         specifier: 1.9.4
         version: 1.9.4
       '@rsbuild/core':
-        specifier: 1.2.8
-        version: 1.2.8
+        specifier: 1.2.11
+        version: 1.2.11
       '@rsbuild/plugin-react':
-        specifier: 1.1.0
-        version: 1.1.0(@rsbuild/core@1.2.8)
+        specifier: 1.1.1
+        version: 1.1.1(@rsbuild/core@1.2.11)
       '@tailwindcss/postcss':
         specifier: ^4.0.7
         version: 4.0.7
@@ -576,13 +576,13 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@rsbuild/core@1.2.8':
-    resolution: {integrity: sha512-I5cPKnJxkc+K552x17s2BlSs2Ox8bauoWPpy8mPtW7xwT3h9pprPO6zsMPkj/TJhkGLmeJ1bcVxf6NcrP/jWSA==}
+  '@rsbuild/core@1.2.11':
+    resolution: {integrity: sha512-bsTtXlqJKoqnHwOZ05NePGpBf/neuwHTzJtQegQ9GA8YLyjow1wn8vPXFiRtYL0UqASEDtFtAm2bcaieg7r/TQ==}
     engines: {node: '>=16.7.0'}
     hasBin: true
 
-  '@rsbuild/plugin-react@1.1.0':
-    resolution: {integrity: sha512-uqdRoV2V91G1XIA14dAmxqYTlTDVf0ktpE7TgwG29oQ2j+DerF1kh29WPHK9HvGE34JTfaBrsme2Zmb6bGD0cw==}
+  '@rsbuild/plugin-react@1.1.1':
+    resolution: {integrity: sha512-gkATKrOQauXMMtrYA5jbTQkhmYTE0VXoknPLtVpiXtwDbBUwgX23LFf1XJ51YOwqYpP7g5SfPEMgD2FENtCq0A==}
     peerDependencies:
       '@rsbuild/core': 1.x
 
@@ -650,8 +650,8 @@ packages:
     resolution: {integrity: sha512-VynGOEsVw2s8TAlLf/uESfrgfrq2+rcXB1muPJYBWbsm1Oa6r5qVQhjA5ggM6z/coYPrsVMgovl3Ff7Q7OCp1w==}
     engines: {node: '>=16.0.0'}
 
-  '@rspack/plugin-react-refresh@1.0.0':
-    resolution: {integrity: sha512-WvXkLewW5G0Mlo5H1b251yDh5FFiH4NDAbYlFpvFjcuXX2AchZRf9zdw57BDE/ADyWsJgA8kixN/zZWBTN3iYA==}
+  '@rspack/plugin-react-refresh@1.0.1':
+    resolution: {integrity: sha512-KSBc3bsr3mrAPViv7w9MpE9KEWm6q87EyRXyHlRfJ9PpQ56NbX9KZ7AXo7jPeECb0q5sfpM2PSEf+syBiMgLSw==}
     peerDependencies:
       react-refresh: '>=0.10.0 <1.0.0'
     peerDependenciesMeta:
@@ -2635,8 +2635,8 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
-  uuid@11.0.5:
-    resolution: {integrity: sha512-508e6IcKLrhxKdBbcA2b4KQZlLVp2+J5UwQ6F7Drckkc5N9ZJwFa4TgWtsww9UG8fGHbm6gbV19TdM5pQ4GaIA==}
+  uuid@11.1.0:
+    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
 
   v8-to-istanbul@9.1.3:
@@ -3374,7 +3374,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@rsbuild/core@1.2.8':
+  '@rsbuild/core@1.2.11':
     dependencies:
       '@rspack/core': 1.2.3(@swc/helpers@0.5.15)
       '@rspack/lite-tapable': 1.0.1
@@ -3383,10 +3383,10 @@ snapshots:
     transitivePeerDependencies:
       - '@rspack/tracing'
 
-  '@rsbuild/plugin-react@1.1.0(@rsbuild/core@1.2.8)':
+  '@rsbuild/plugin-react@1.1.1(@rsbuild/core@1.2.11)':
     dependencies:
-      '@rsbuild/core': 1.2.8
-      '@rspack/plugin-react-refresh': 1.0.0(react-refresh@0.16.0)
+      '@rsbuild/core': 1.2.11
+      '@rspack/plugin-react-refresh': 1.0.1(react-refresh@0.16.0)
       react-refresh: 0.16.0
 
   '@rspack/binding-darwin-arm64@1.2.3':
@@ -3439,7 +3439,7 @@ snapshots:
 
   '@rspack/lite-tapable@1.0.1': {}
 
-  '@rspack/plugin-react-refresh@1.0.0(react-refresh@0.16.0)':
+  '@rspack/plugin-react-refresh@1.0.1(react-refresh@0.16.0)':
     dependencies:
       error-stack-parser: 2.1.4
       html-entities: 2.5.2
@@ -5557,7 +5557,7 @@ snapshots:
       react: 18.3.1
     optional: true
 
-  uuid@11.0.5: {}
+  uuid@11.1.0: {}
 
   v8-to-istanbul@9.1.3:
     dependencies:
