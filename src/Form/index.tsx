@@ -187,13 +187,7 @@ export const Form = <T, TData>({
                                     return <Textarea {...fieldProps} className='max-w-full' />;
                                 case FormFieldTypes.File:
                                     return (
-                                        <StyledFileInput
-                                            id='file'
-                                            name='file'
-                                            type='file'
-                                            className='mt-1'
-                                            accept='.pdf'
-                                        />
+                                        <StyledFileInput {...fieldProps} type='file' className='mt-1' accept='.pdf' />
                                     );
                                 default:
                                     return <TextInput {...fieldProps} type='text' />;
