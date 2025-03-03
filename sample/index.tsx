@@ -42,6 +42,7 @@ import {
     Text,
     DateRangePicker,
     Badge,
+    Legend,
 } from '../src';
 import '../src/resources/global.css';
 import FormSample from './FormSample';
@@ -196,6 +197,7 @@ const Application = () => {
                         />
                     </Card>
                     <Card>
+                        <Legend className='mb-6' categories={Object.values(chartData).map(x => x.name)} />
                         <PieChart
                             rawData={loading ? undefined : chartData}
                             dataCallback={(d) => Object.values(d).map((x) => ({ name: x.name, value: x.Value }))}
