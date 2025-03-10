@@ -43,6 +43,7 @@ import {
     DateRangePicker,
     Badge,
     Legend,
+    BadgeDelta,
 } from '../src';
 import '../src/resources/global.css';
 import FormSample from './FormSample';
@@ -183,6 +184,9 @@ const Application = () => {
                             <Badge color='blue' size='sm'>
                                 10%
                             </Badge>
+                            <BadgeDelta>
+                                +10%
+                            </BadgeDelta>
                         </Flex>
                     </Card>
                     <Card>

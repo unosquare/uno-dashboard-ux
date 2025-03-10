@@ -39,9 +39,7 @@ const ArrowDownRightIcon = ({ ...props }) => (
 );
 
 const mapInputsToDeltaType = (deltaType: string, isIncreasePositive: boolean): string => {
-    if (isIncreasePositive || deltaType === DeltaTypes.Unchanged) {
-        return deltaType;
-    }
+    if (isIncreasePositive || deltaType === DeltaTypes.Unchanged) return deltaType;
 
     switch (deltaType) {
         case DeltaTypes.Increase:
@@ -153,27 +151,27 @@ export type ColorTypes = {
 
 export const colors: { [key: string]: ColorTypes } = {
     [DeltaTypes.Increase]: {
-        bgColor: getColorClassNames(BaseColors.Emerald, colorPalette.background).bgColor,
+        bgColor: getColorClassNames(BaseColors.Emerald, colorPalette.lightBackground).bgColor,
         textColor: getColorClassNames(BaseColors.Emerald, colorPalette.iconText).textColor,
         ringColor: getColorClassNames(BaseColors.Emerald, colorPalette.iconRing).ringColor,
     },
     [DeltaTypes.ModerateIncrease]: {
-        bgColor: getColorClassNames(BaseColors.Emerald, colorPalette.background).bgColor,
+        bgColor: getColorClassNames(BaseColors.Emerald, colorPalette.lightBackground).bgColor,
         textColor: getColorClassNames(BaseColors.Emerald, colorPalette.iconText).textColor,
         ringColor: getColorClassNames(BaseColors.Emerald, colorPalette.iconRing).ringColor,
     },
     [DeltaTypes.Decrease]: {
-        bgColor: getColorClassNames(BaseColors.Red, colorPalette.background).bgColor,
+        bgColor: getColorClassNames(BaseColors.Red, colorPalette.lightBackground).bgColor,
         textColor: getColorClassNames(BaseColors.Red, colorPalette.iconText).textColor,
         ringColor: getColorClassNames(BaseColors.Red, colorPalette.iconRing).ringColor,
     },
     [DeltaTypes.ModerateDecrease]: {
-        bgColor: getColorClassNames(BaseColors.Red, colorPalette.background).bgColor,
+        bgColor: getColorClassNames(BaseColors.Red, colorPalette.lightBackground).bgColor,
         textColor: getColorClassNames(BaseColors.Red, colorPalette.iconText).textColor,
         ringColor: getColorClassNames(BaseColors.Red, colorPalette.iconRing).ringColor,
     },
     [DeltaTypes.Unchanged]: {
-        bgColor: getColorClassNames(BaseColors.Orange, colorPalette.background).bgColor,
+        bgColor: getColorClassNames(BaseColors.Orange, colorPalette.lightBackground).bgColor,
         textColor: getColorClassNames(BaseColors.Orange, colorPalette.iconText).textColor,
         ringColor: getColorClassNames(BaseColors.Orange, colorPalette.iconRing).ringColor,
     },
@@ -214,7 +212,6 @@ export const BadgeDelta = React.forwardRef<HTMLSpanElement, BadgeDeltaProps>((pr
             ref={ref}
             className={unoTwMerge(
                 makeBadgeDeltaClassName('root'),
-                // common
                 'w-max shrink-0 inline-flex justify-center items-center cursor-default rounded-unodashboard-small ring-1 ring-inset',
                 colors[mappedDeltaType].bgColor,
                 colors[mappedDeltaType].textColor,
@@ -222,10 +219,6 @@ export const BadgeDelta = React.forwardRef<HTMLSpanElement, BadgeDeltaProps>((pr
                 badgeProportions[size].paddingX,
                 badgeProportions[size].paddingY,
                 badgeProportions[size].fontSize,
-                // light
-                'bg-opacity-10 ring-opacity-20',
-                // dark
-                'dark:bg-opacity-5 dark:ring-opacity-60',
                 className,
             )}
             {...other}

@@ -8,7 +8,7 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.274",
+        "@fluentui/react-icons": "^2.0.279",
         "@headlessui/react": "2.2.0",
         "combobox": "npm:@headlessui/react@0.0.0-insiders.ce17c6d",
         "date-fns": "^3.6.0",
@@ -27,13 +27,13 @@
     },
     "devDependencies": {
         "@biomejs/biome": "1.9.4",
-        "@rsbuild/core": "1.2.14",
+        "@rsbuild/core": "1.2.16",
         "@rsbuild/plugin-react": "1.1.1",
-        "@tailwindcss/postcss": "^4.0.9",
+        "@tailwindcss/postcss": "^4.0.12",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.2.0",
         "@types/jest": "^29.5.14",
-        "@types/node": "^22.13.8",
+        "@types/node": "^22.13.10",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.1",
         "@types/recharts": "1.8.29",
@@ -43,7 +43,7 @@
         "jest-environment-jsdom": "^29.7.0",
         "lint-staged": "^15.4.3",
         "postcss-loader": "^8.1.1",
-        "tailwindcss": "^4.0.9",
+        "tailwindcss": "^4.0.12",
         "ts-jest": "^29.2.6",
         "typescript": "^5.8.2"
     },
