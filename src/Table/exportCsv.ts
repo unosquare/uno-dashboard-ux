@@ -38,7 +38,7 @@ export const renderToRowString = (data: TableCellTypes[][], definitions: TableCo
                     return toPercentage((cell as FinancialMetric).GrossMargin) as string;
                 case 'tenure': {
                     const tenureData = cell as Tenure;
-                    return formatter(tenureData.Months, 'months');
+                    return formatter(tenureData.Months, 'months') as string;
                 }
                 default:
                     return renderCellString(cell, dataType);
