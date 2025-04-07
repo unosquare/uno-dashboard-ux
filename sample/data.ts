@@ -9,7 +9,7 @@ export const defaultData = [
         new Date('2022-01-01'),
         50,
         1,
-        1000,
+        0,
         {
             Revenue: { Amount: 500, Currency: USD },
             Cost: { Amount: 250, Currency: USD },
@@ -22,7 +22,7 @@ export const defaultData = [
             StartDate: new Date('2021-08-09'),
             EndDate: new Date('2024-06-18'),
         },
-        { Amount: 100, Currency: USD },
+        { Amount: 0, Currency: USD },
         true,
         'https://www.google.com',
         'Small text',

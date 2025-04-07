@@ -1,6 +1,8 @@
 import { formatter, isMoneyObject, toPercentage } from 'uno-js';
-import type { DataTypes, FinancialMetric, TableCellTypes, TableColumn } from '../constants';
+import type { DataTypes, FinancialMetric, TableCellTypes, TableColumn, Tenure } from '../constants';
 import { translateType } from '../utils';
+
+const zeroString = '0.00';
 
 const renderCellString = (cell: TableCellTypes, dataType?: DataTypes) => {
     const cellString = String(cell);
@@ -10,8 +12,11 @@ const renderCellString = (cell: TableCellTypes, dataType?: DataTypes) => {
 };
 
 const renderMoneyString = (cell: TableCellTypes) => {
-    if (!cell) return formatter(0, 'decimal') as string;
-    return formatter(isMoneyObject(cell) ? cell.Amount : cell, 'decimal') as string;
+    if (!cell) return zeroString;
+
+    if (isMoneyObject(cell)) return cell.Amount === 0 ? zeroString : (formatter(cell.Amount, 'money') as string);
+
+    return formatter(cell, 'decimal') as string;
 };
 
 export const renderToRowString = (data: TableCellTypes[][], definitions: TableColumn[]) =>
@@ -31,6 +36,10 @@ export const renderToRowString = (data: TableCellTypes[][], definitions: TableCo
                     return String(cell);
                 case 'financial':
                     return toPercentage((cell as FinancialMetric).GrossMargin) as string;
+                case 'tenure': {
+                    const tenureData = cell as Tenure;
+                    return formatter(tenureData.Months, 'months');
+                }
                 default:
                     return renderCellString(cell, dataType);
             }
