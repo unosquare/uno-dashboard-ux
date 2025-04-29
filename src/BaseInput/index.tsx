@@ -63,7 +63,7 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>(
             const node = inputRef.current;
             if (node) {
                 node.addEventListener('focus', handleFocus);
-                node.addEventListener('blur-sm', handleBlur);
+                node.addEventListener('blur', handleBlur);
 
                 // Autofocus logic
                 if (autoFocus) {
@@ -74,7 +74,7 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>(
             return () => {
                 if (node) {
                     node.removeEventListener('focus', handleFocus);
-                    node.removeEventListener('blur-sm', handleBlur);
+                    node.removeEventListener('blur', handleBlur);
                 }
             };
         }, [autoFocus]);
