@@ -11,6 +11,7 @@ import {
     Card,
     Col,
     ChartBar,
+    ChartBarV2,
     ChartFunnel,
     ComposedLineChart,
     DataChart,
@@ -44,6 +45,8 @@ import {
     Badge,
     Legend,
     BadgeDelta,
+    PieChartV2,
+    DataChartV2,
 } from '../src';
 import '../src/resources/global.css';
 import FormSample from './FormSample';
@@ -210,10 +213,28 @@ const Application = () => {
                         />
                     </Card>
                     <Card>
+                        <Legend className='mb-6' categories={Object.values(chartData).map(x => x.name)} />
+                        <PieChartV2
+                            rawData={loading ? undefined : chartData}
+                            dataCallback={(d) => Object.values(d).map((x) => ({ name: x.name, value: x.Value }))}
+                            legendFormatType='money'
+                            serieName='Moneys'
+                        />
+                    </Card>
+                    <Card>
                         <Text className='font-medium'>Line Chart</Text>
                         <DataChart
                             rawData={loading ? undefined : toggle ? chartData : []}
                             legend
+                            className='mt-5'
+                            legendFormatType='percentage'
+                            onClick={console.log}
+                        />
+                    </Card>
+                    <Card>
+                        <Text className='font-medium'>Line Chart V2</Text>
+                        <DataChartV2
+                            rawData={loading ? undefined : toggle ? chartData : []}
                             className='mt-5'
                             legendFormatType='percentage'
                             onClick={console.log}
@@ -228,6 +249,16 @@ const Application = () => {
                             legendFormatType='decimal'
                             legend
                             onClick={barClick}
+                        />
+                    </Card>
+                    <Card>
+                        <Text className='font-medium'>Bar Chart V2</Text>
+                        <ChartBarV2
+                            className='mt-5'
+                            refLineY={{ value: 20, label: 'Ref Line', color: 'red' }}
+                            rawData={loading ? undefined : toggle ? chartData : chartBarData}
+                            onClick={barClick} 
+                            layout={'horizontal'}                       
                         />
                     </Card>
                     <Card>
@@ -269,6 +300,7 @@ const Application = () => {
     );
 };
 
+// biome-ignore lint/style/noNonNullAssertion: <explanation>
 createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Application />
