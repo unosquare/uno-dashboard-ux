@@ -12,6 +12,7 @@ import LineV2 from "../Recharts/LineV2";
 import { NoData } from "../NoData";
 import TooltipV2 from "../Recharts/TooltipV2";
 import LegendV2 from "../Recharts/LegendV2";
+import { ResponsiveContainer } from "recharts";
 
 export type DataChartSettingsV2<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     onClick?: (activeTooltipIndex: number, activeLabel: string) => void;
@@ -49,11 +50,11 @@ export const DataChartV2 = <T,>({
     if (!rawData) return <ChartLineShimmer className={className} />;
 
     return (
-        <Flex className={twMerge('w-full h-60', className)}>
+        <Flex className={twMerge('w-full h-50', className)}>
             {dataStore.length > 0 ? (
-                    <div className='bg-white'>
+                    <ResponsiveContainer>
                         <LineChartV2 width={width} height={height} data={dataStore} margin={margin}>
-                            <CartesianGridV2 strokeDasharray='2 2' />
+                            <CartesianGridV2 strokeDasharray='3 3' />
                             <XAxisV2 dataKey='name' />
                             <YAxisV2 />
                             <TooltipV2 />
@@ -71,7 +72,7 @@ export const DataChartV2 = <T,>({
                             ))}
                             {additionalComponents}
                         </LineChartV2>
-                    </div>
+                    </ResponsiveContainer>
             ) : (
                 <NoData />
             )}

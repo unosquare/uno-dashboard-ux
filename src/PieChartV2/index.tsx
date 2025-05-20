@@ -27,7 +27,6 @@ export interface PieData {
 export type PieChartV2Props<T> = ChartComponent<T, ChartData[]> & {
     initialPies?: PieData[];
     showPolarGrid?: boolean;
-    serieName?: string;
     width?: number;
     height?: number;
 };
@@ -38,9 +37,7 @@ export const PieChartV2 = <T,>({
     height = 240,
     rawData,
     dataCallback,
-    legendFormatType,
     className,
-    serieName = 'Data',
     showPolarGrid = false,
 }: PieChartV2Props<T>) => {
     const dataTransformFn = useMemo(
@@ -81,7 +78,7 @@ export const PieChartV2 = <T,>({
                             startAngle={pie.startAngle}
                             endAngle={pie.endAngle}
                             paddingAngle={pie.paddingAngle}
-                            fill={categoryColors.get(pie.id.toString()) ?? BaseColors.Gray}
+                            fill='blue'
                             label={pie.showLabels ? pie.label || undefined : undefined}
                             activeShape={pie.activeShape}
                         />
