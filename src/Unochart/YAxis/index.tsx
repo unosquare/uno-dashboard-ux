@@ -19,7 +19,7 @@ interface YAxisProps {
     enableSimpleTicks?: boolean;
 }
 
-const YAxisV2: React.FC<YAxisProps> = ({
+const YAxis: React.FC<YAxisProps> = ({
     data = [],
     height = 0,
     width = 0,
@@ -120,4 +120,4 @@ const YAxisV2: React.FC<YAxisProps> = ({
     );
 };
 
-export default YAxisV2;
+export default YAxis;

@@ -1,14 +1,14 @@
 import React, { type ReactElement, type ReactNode } from "react";
 import PolarGrid from "../PolarGrid";
-import PieV2 from "../PieV2";
+import PieV2 from "../Pie";
 
-interface PieChartRechartV2Props {
+interface PieChartRechartProps {
     width: number;
     height: number;
     children: ReactNode;
 }
 
-const PieChartRechartV2: React.FC<PieChartRechartV2Props> = ({ width, height, children }) => {
+const PieChartRechart: React.FC<PieChartRechartProps> = ({ width, height, children }) => {
     const cx = width / 2;
     const cy = height / 2;
     const maxRadius = Math.min(width, height) / 2;
@@ -51,4 +51,4 @@ const PieChartRechartV2: React.FC<PieChartRechartV2Props> = ({ width, height, ch
     );
 };
 
-export default PieChartRechartV2;
+export default PieChartRechart;

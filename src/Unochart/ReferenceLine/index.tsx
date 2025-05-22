@@ -1,6 +1,6 @@
 import type React from 'react';
 
-interface ReferenceLineV2Props {
+interface ReferenceLineProps {
     x?: string | number;
     y?: number;
     stroke?: string;
@@ -11,7 +11,7 @@ interface ReferenceLineV2Props {
     yScale?: (value: number) => number;
 }
 
-const ReferenceLineV2: React.FC<ReferenceLineV2Props> = ({
+const ReferenceLine: React.FC<ReferenceLineProps> = ({
     x,
     y,
     stroke = '#ef4444',
@@ -65,4 +65,4 @@ const ReferenceLineV2: React.FC<ReferenceLineV2Props> = ({
     );
 };
 
-export default ReferenceLineV2;
+export default ReferenceLine;

@@ -22,7 +22,7 @@ interface BarProps {
     onMouseOut?: () => void;
 }
 
-const BarV2: React.FC<BarProps> = ({
+const Bar: React.FC<BarProps> = ({
     data = [],
     dataKey,
     fill,
@@ -137,4 +137,4 @@ const BarV2: React.FC<BarProps> = ({
     </g>
 );
 
-export default BarV2;
+export default Bar;

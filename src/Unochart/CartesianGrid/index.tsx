@@ -10,7 +10,7 @@ interface CartesianGridProps {
     layout?: 'horizontal' | 'vertical';
 }
 
-const CartesianGridV2: React.FC<CartesianGridProps> = ({
+const CartesianGrid: React.FC<CartesianGridProps> = ({
     width = 0,
     height = 0,
     strokeDasharray = '3 3',
@@ -73,4 +73,4 @@ const CartesianGridV2: React.FC<CartesianGridProps> = ({
     );
 };
 
-export default CartesianGridV2;
+export default CartesianGrid;

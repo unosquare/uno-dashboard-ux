@@ -1,14 +1,14 @@
-import react, { useMemo } from "react";
+import React, { useMemo } from "react";
 import type { ChartComponent, ChartData } from "../constants";
 import { BaseColors, colorPalette, constructCategoryColors, getColorClassNames, themeColorRange } from "../theme";
 import { Flex } from "../Flex";
 import { NoData } from "../NoData";
-import { PolarGrid, ResponsiveContainer, Tooltip } from "recharts";
+import { PolarGrid, ResponsiveContainer } from "recharts";
 import { twMerge } from "tailwind-merge";
-import PieChartRechartV2 from "../Recharts/PieChartRechartV2";
-import PieV2 from "../Recharts/PieV2";
-import TooltipV2 from "../Recharts/TooltipV2";
-import LegendV2 from "../Recharts/LegendV2";
+import PieChartRechart from "../Unochart/PieChartRechart";
+import Pie from "../Unochart/Pie";
+import Tooltip from "../Unochart/Tooltip";
+import Legend from "../Unochart/Legend";
 
 export interface PieData {
     id: number;
@@ -24,7 +24,7 @@ export interface PieData {
     label?: string | ((data: any) => string);
 }
 
-export type PieChartV2Props<T> = ChartComponent<T, ChartData[]> & {
+type PieChartProps<T> = ChartComponent<T, ChartData[]> & {
     initialPies?: PieData[];
     showPolarGrid?: boolean;
     width?: number;
@@ -39,7 +39,7 @@ export const PieChartV2 = <T,>({
     dataCallback,
     className,
     showPolarGrid = false,
-}: PieChartV2Props<T>) => {
+}: PieChartProps<T>) => {
     const dataTransformFn = useMemo(
         () => dataCallback ?? ((data: T) => data as unknown as ChartData[]),
         [dataCallback],
@@ -63,10 +63,10 @@ export const PieChartV2 = <T,>({
     return (
         <div className={twMerge('h-60', className)}>
             <ResponsiveContainer>
-                <PieChartRechartV2 width={width} height={height}>
+                <PieChartRechart width={width} height={height}>
                     {showPolarGrid && <PolarGrid />}
                     {initialPies.map((pie, index) => (
-                        <PieV2
+                        <Pie
                             key={pie.id}
                             data={dataStore}
                             dataKey='value'
@@ -83,9 +83,9 @@ export const PieChartV2 = <T,>({
                             activeShape={pie.activeShape}
                         />
                     ))}
-                    <TooltipV2 />
-                    <LegendV2 />
-                </PieChartRechartV2>
+                    <Tooltip />
+                    <Legend />
+                </PieChartRechart>
             </ResponsiveContainer>
         </div>
     );

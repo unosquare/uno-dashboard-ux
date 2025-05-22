@@ -14,7 +14,7 @@ interface XAxisProps {
     type?: 'monotone' | 'number';
 }
 
-const XAxisV2: React.FC<XAxisProps> = ({
+const XAxis: React.FC<XAxisProps> = ({
     data = [],
     width = 0,
     height = 0,
@@ -81,4 +81,4 @@ const XAxisV2: React.FC<XAxisProps> = ({
     );
 };
 
-export default XAxisV2;
+export default XAxis;

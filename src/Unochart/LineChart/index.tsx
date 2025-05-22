@@ -1,14 +1,14 @@
 import React, { Children, cloneElement, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { roundMaxValue } from "../BarChartV2/utils";
-import XAxisV2 from "../XAxisV2";
-import YAxisV2 from "../YAxisV2";
-import CartesianGridV2 from "../CartesianGridV2";
-import TooltipV2 from "../TooltipV2";
-import LegendV2 from "../LegendV2";
-import LineV2 from "../LineV2";
-import ReferenceLineV2 from "../ReferenceLineV2";
+import { roundMaxValue } from "../BarChart/utils";
+import XAxisV2 from "../XAxis";
+import YAxisV2 from "../YAxis";
+import CartesianGridV2 from "../CartesianGrid";
+import TooltipV2 from "../Tooltip";
+import LegendV2 from "../Legend";
+import LineV2 from "../Line";
+import ReferenceLineV2 from "../ReferenceLine";
 
-interface LineChartV2Props {
+interface LineChartProps {
     width: number;
     height: number;
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -17,7 +17,7 @@ interface LineChartV2Props {
     children: ReactNode;
 }
 
-const LineChartV2: React.FC<LineChartV2Props> = ({
+const LineChart: React.FC<LineChartProps> = ({
     width,
     height,
     data,
@@ -164,4 +164,4 @@ const LineChartV2: React.FC<LineChartV2Props> = ({
     );
 };
 
-export default LineChartV2;
+export default LineChart;

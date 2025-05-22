@@ -1,7 +1,7 @@
 import react, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-interface PieV2Props {
+interface PieProps {
     data: Array<{ name: string; value: number }>;
     dataKey: keyof { name: string; value: number };
     nameKey: string;
@@ -17,7 +17,7 @@ interface PieV2Props {
     activeShape?: boolean;
 }
 
-const PieV2: React.FC<PieV2Props> = ({
+const Pie: React.FC<PieProps> = ({
     data,
     dataKey,
     nameKey,
@@ -106,5 +106,5 @@ const PieV2: React.FC<PieV2Props> = ({
     );
 };
 
-export default PieV2;
+export default Pie;
 

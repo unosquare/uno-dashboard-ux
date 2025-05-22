@@ -4,7 +4,7 @@ interface LegendProps {
     items?: Array<{ color: string; label: string }>;
 }
 
-const LegendV2: React.FC<LegendProps> = ({ items = [] }) => {
+const Legend: React.FC<LegendProps> = ({ items = [] }) => {
     const validItems = items.filter((item) => item.label && item.color);
 
     return (
@@ -28,4 +28,4 @@ index}`}
     );
 };
 
-export default LegendV2;
+export default Legend;

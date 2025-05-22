@@ -4,17 +4,17 @@ import { useChart } from "../hooks";
 import { ChartLineShimmer } from "../ChartShimmers";
 import { twMerge } from "tailwind-merge";
 import { Flex } from "../Flex";
-import LineChartV2 from "../Recharts/LineChartV2";
-import CartesianGridV2 from "../Recharts/CartesianGridV2";
-import XAxisV2 from "../Recharts/XAxisV2";
-import YAxisV2 from "../Recharts/YAxisV2";
-import LineV2 from "../Recharts/LineV2";
+import LineChart from "../Unochart/LineChart";
+import CartesianGrid from "../Unochart/CartesianGrid";
+import XAxis from "../Unochart/XAxis";
+import YAxis from "../Unochart/YAxis";
+import Line from "../Unochart/Line";
 import { NoData } from "../NoData";
-import TooltipV2 from "../Recharts/TooltipV2";
-import LegendV2 from "../Recharts/LegendV2";
+import Tooltip from "../Unochart/Tooltip";
+import Legend from "../Unochart/Legend";
 import { ResponsiveContainer } from "recharts";
 
-export type DataChartSettingsV2<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
+type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
     onClick?: (activeTooltipIndex: number, activeLabel: string) => void;
     additionalComponents?: ReactNode[];
     width?: number;
@@ -38,7 +38,7 @@ export const DataChartV2 = <T,>({
     height = 240,
     margin = {top: 5, right: 30, left: 20, bottom: 5},
     additionalComponents = [],
-}: DataChartSettingsV2<T>) => {
+}: DataChartSettings<T>) => {
     const [dataStore, categoryColors, keys] = useChart(rawData, dataCallback);
 
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -53,14 +53,14 @@ export const DataChartV2 = <T,>({
         <Flex className={twMerge('w-full h-50', className)}>
             {dataStore.length > 0 ? (
                     <ResponsiveContainer>
-                        <LineChartV2 width={width} height={height} data={dataStore} margin={margin}>
-                            <CartesianGridV2 strokeDasharray='3 3' />
-                            <XAxisV2 dataKey='name' />
-                            <YAxisV2 />
-                            <TooltipV2 />
-                            <LegendV2 />
+                        <LineChart width={width} height={height} data={dataStore} margin={margin}>
+                            <CartesianGrid strokeDasharray='3 3' />
+                            <XAxis dataKey='name' />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
                             {keys.map((property) => (
-                                <LineV2
+                                <Line
                                     key={property}
                                     type='monotone'
                                     dataKey={property}
@@ -71,7 +71,7 @@ export const DataChartV2 = <T,>({
                                 />
                             ))}
                             {additionalComponents}
-                        </LineChartV2>
+                        </LineChart>
                     </ResponsiveContainer>
             ) : (
                 <NoData />

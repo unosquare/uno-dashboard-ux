@@ -1,11 +1,11 @@
 import React, { cloneElement, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import BarV2 from '../BarV2';
-import CartesianGridV2 from '../CartesianGridV2';
-import LegendV2 from '../LegendV2';
-import TooltipV2 from '../TooltipV2';
-import XAxisV2 from '../XAxisV2';
-import YAxisV2 from '../YAxisV2';
+import BarV2 from '../Bar';
+import CartesianGridV2 from '../CartesianGrid';
+import LegendV2 from '../Legend';
+import TooltipV2 from '../Tooltip';
+import XAxisV2 from '../XAxis';
+import YAxisV2 from '../YAxis';
 import {
     type ChartDataV2,
     DEFAULT_BAR_CATEGORY_GAP,
@@ -16,7 +16,7 @@ import {
     DEFAULT_WIDTH,
 } from '../../constants';
 import { parseGap, roundMaxValue } from './utils';
-import ReferenceLineV2 from '../ReferenceLineV2';
+import ReferenceLineV2 from '../ReferenceLine';
 
 interface BarChartProps {
     data: ChartDataV2;
@@ -29,7 +29,7 @@ interface BarChartProps {
     layout?: 'horizontal' | 'vertical';
 }
 
-const BarChartV2: React.FC<BarChartProps> = ({
+const BarChart: React.FC<BarChartProps> = ({
     data,
     width = DEFAULT_WIDTH,
     height = DEFAULT_HEIGHT,
@@ -337,4 +337,4 @@ const BarChartV2: React.FC<BarChartProps> = ({
     );
 };
 
-export default BarChartV2;
+export default BarChart;

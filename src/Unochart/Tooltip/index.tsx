@@ -9,7 +9,7 @@ interface TooltipProps {
     position?: { x: number; y: number };
 }
 
-export default function TooltipV2({ tooltipData = null, position = { x: 0, y: 0 } }: TooltipProps) {
+export default function Tooltip({ tooltipData = null, position = { x: 0, y: 0 } }: TooltipProps) {
     if (!tooltipData) return null;
 
     return (

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { createLineGenerator, renderPathSegments } from "./utils";
 
-interface LineV2Props<T> {
+interface LineProps<T> {
     data: Array<T>;
     dataKey: keyof T;
     stroke: string;
@@ -30,7 +30,7 @@ interface LineV2Props<T> {
     label?: boolean;
 }
 
-const LineV2 = <T,>({
+const Line = <T,>({
     data = [],
     dataKey,
     stroke,
@@ -42,7 +42,7 @@ const LineV2 = <T,>({
     onMouseOver = () => {},
     onMouseOut = () => {},
     label = false,
-}: LineV2Props<T>) => {
+}: LineProps<T>) => {
     const processedData = useMemo(() => data.map((d, index) => ({ ...d, index })), [data]);
     const lineGenerator = useMemo(
         () => createLineGenerator(type, xScale, yScale, dataKey as string),
@@ -91,4 +91,4 @@ const LineV2 = <T,>({
     );
 };
 
-export default LineV2;
+export default Line;
