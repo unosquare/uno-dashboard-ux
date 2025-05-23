@@ -30,8 +30,7 @@ const PolarGrid: React.FC<PolarGridProps> = ({
             {/* Radial lines */}
             {radialAngles.map((angle, index) => (
                 <line
-                    key={`line-${// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-index}`}
+                    key={`line-${index}`}
                     x1={0}
                     y1={0}
                     x2={Math.cos((Math.PI / 180) * angle) * radius}
@@ -43,8 +42,7 @@ index}`}
             {/* Concentric circles */}
             {radiusSteps.map((r, index) => (
                 <circle
-                    key={`circle-${// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-index}`}
+                    key={`circle-${index}`}
                     cx={0}
                     cy={0}
                     r={r}
@@ -58,4 +56,3 @@ index}`}
 };
 
 export default PolarGrid;
-

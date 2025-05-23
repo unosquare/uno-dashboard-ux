@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { calculateAxisConfig, formatValue } from '../../utils';
 
 interface XAxisProps {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     data?: Array<{ [key: string]: any }>;
     width?: number;
     height?: number;

@@ -1,17 +1,16 @@
 import React, { Children, cloneElement, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { roundMaxValue } from "../BarChart/utils";
-import XAxisV2 from "../XAxis";
-import YAxisV2 from "../YAxis";
-import CartesianGridV2 from "../CartesianGrid";
-import TooltipV2 from "../Tooltip";
-import LegendV2 from "../Legend";
-import LineV2 from "../Line";
-import ReferenceLineV2 from "../ReferenceLine";
+import XAxis from "../XAxis";
+import YAxis from "../YAxis";
+import CartesianGrid from "../CartesianGrid";
+import Tooltip from "../Tooltip";
+import Legend from "../Legend";
+import Line from "../Line";
+import ReferenceLine from "../ReferenceLine";
 
 interface LineChartProps {
     width: number;
     height: number;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     data: Array<{ [key: string]: any }>;
     margin?: { top?: number; right?: number; bottom?: number; left?: number };
     children: ReactNode;
@@ -36,7 +35,6 @@ const LineChart: React.FC<LineChartProps> = ({
     } | null>(null);
     const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
         if (svgRef.current) {
             const yAxisLabels = svgRef.current.querySelectorAll('.y-axis text');
@@ -50,15 +48,15 @@ const LineChart: React.FC<LineChartProps> = ({
 
     const childrenArray = useMemo(() => Children.toArray(children), [children]);
 
-    const xAxis = childrenArray.find((child) => React.isValidElement(child) && child.type === XAxisV2);
-    const yAxis = childrenArray.find((child) => React.isValidElement(child) && child.type === YAxisV2);
-    const grid = childrenArray.find((child) => React.isValidElement(child) && child.type === CartesianGridV2);
-    const tooltip = childrenArray.find((child) => React.isValidElement(child) && child.type === TooltipV2);
-    const legend = childrenArray.find((child) => React.isValidElement(child) && child.type === LegendV2);
+    const xAxis = childrenArray.find((child) => React.isValidElement(child) && child.type === XAxis);
+    const yAxis = childrenArray.find((child) => React.isValidElement(child) && child.type === YAxis);
+    const grid = childrenArray.find((child) => React.isValidElement(child) && child.type === CartesianGrid);
+    const tooltip = childrenArray.find((child) => React.isValidElement(child) && child.type === Tooltip);
+    const legend = childrenArray.find((child) => React.isValidElement(child) && child.type === Legend);
 
-    const lineComponents = childrenArray.filter((child) => React.isValidElement(child) && child.type === LineV2);
+    const lineComponents = childrenArray.filter((child) => React.isValidElement(child) && child.type === Line);
 
-    const referenceLines = childrenArray.filter((child) => React.isValidElement(child) && child.type === ReferenceLineV2);
+    const referenceLines = childrenArray.filter((child) => React.isValidElement(child) && child.type === ReferenceLine);
 
     const legendItems = useMemo(
         () =>
@@ -118,8 +116,7 @@ const LineChart: React.FC<LineChartProps> = ({
 
     return (
         <div className='relative inline-block'>
-            {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-<svg
+            <svg
                 ref={svgRef}
                 width={width}
                 height={height}
@@ -134,8 +131,7 @@ const LineChart: React.FC<LineChartProps> = ({
                         cloneElement(xAxis as React.ReactElement, { data, width: chartWidth, height: chartHeight })}
                     {yAxis && cloneElement(yAxis as React.ReactElement, { height: chartHeight, minValue, maxValue })}
                     {Children.map(children, (child) =>
-                        React.isValidElement(child) && child.type === LineV2
-                            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                        React.isValidElement(child) && child.type === Line
                             ? cloneElement(child as React.ReactElement<any>, {
                                   data,
                                   chartWidth,
@@ -159,7 +155,7 @@ const LineChart: React.FC<LineChartProps> = ({
                 </g>
             </svg>
             {legend && cloneElement(legend as React.ReactElement, { items: legendItems })}
-            {tooltip && <TooltipV2 tooltipData={tooltipData} position={position} />}
+            {tooltip && <Tooltip tooltipData={tooltipData} position={position} />}
         </div>
     );
 };

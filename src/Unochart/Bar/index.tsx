@@ -1,8 +1,15 @@
 import type React from 'react';
-import { v4 as uuidv4 } from 'uuid';
+
+export interface BarPointClickEvent<T> {
+    event: React.MouseEvent<SVGRectElement>;
+    dataKey: keyof T;
+    index?: number;
+    value: number;
+    name: string;
+    entry: T;
+}
 
 interface BarProps {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     data?: Array<{ name: string; [key: string]: any }>;
     dataKey: string;
     fill: string;
@@ -17,9 +24,9 @@ interface BarProps {
     stackId?: string;
     accumulatedHeight?: number;
     stackIdPos?: number;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     onMouseOver?: (event: React.MouseEvent, entry: { name: string; [key: string]: any }) => void;
     onMouseOut?: () => void;
+    onClick?: (event: BarPointClickEvent<{ name: string; [key: string]: any }>) => void;
 }
 
 const Bar: React.FC<BarProps> = ({
@@ -39,6 +46,7 @@ const Bar: React.FC<BarProps> = ({
     stackIdPos = 0,
     onMouseOver = () => {},
     onMouseOut = () => {},
+    onClick = () => {},
 }) => (
     <g>
         {data.map((entry) => {
@@ -50,9 +58,8 @@ const Bar: React.FC<BarProps> = ({
                 if (layout === 'horizontal') {
                     const barHeight = ((maxValueRange - minValueRange) / (maxValue - minValue)) * height;
                     return (
-                        // biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
                         <rect
-                            key={uuidv4()}
+                            key={`${entry.name}-${dataKey}`}
                             x={stackIdPos * (width + barGap)}
                             y={
                                 height -
@@ -62,34 +69,40 @@ const Bar: React.FC<BarProps> = ({
                             width={width}
                             height={barHeight}
                             fill={fill}
-                            className='transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-105 hover:shadow-lg'
+                            className='transition-all duration-300 ease-in-out hover:opacity-80 hover:shadow-lg'
                             style={{ transformOrigin: 'bottom' }}
                             onMouseOver={(event) => {
                                 const { name, ...rest } = entry;
                                 onMouseOver(event, { name, ...rest });
                             }}
                             onMouseOut={onMouseOut}
+                            onClick={(event) => onClick({
+                                dataKey, value: Number(value), name: entry.name, entry,
+                                event: event, index: Number(stackId)
+                            })}
                         />
                     );
-                // biome-ignore lint/style/noUselessElse: <explanation>
                 } else {
                     const barWidth = ((maxValueRange - minValueRange) / (maxValue - minValue)) * width;
                     return (
-                        // biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
                         <rect
-                            key={uuidv4()}
+                            key={`${entry.name}-${dataKey}`}
                             x={((minValueRange - minValue) / (maxValue - minValue)) * width + accumulatedHeight}
                             y={stackIdPos * (height + barGap)}
                             width={barWidth}
                             height={height}
                             fill={fill}
-                            className='transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-105 hover:shadow-lg'
+                            className='transition-all duration-300 ease-in-out hover:opacity-80 hover:shadow-lg'
                             style={{ transformOrigin: 'left' }}
                             onMouseOver={(event) => {
                                 const { name, ...rest } = entry;
                                 onMouseOver(event, { name, ...rest });
                             }}
                             onMouseOut={onMouseOut}
+                            onClick={(event) => onClick({
+                                dataKey, value: Number(value), name: entry.name, entry,
+                                event: event, index: Number(stackId)
+                            })}
                         />
                     );
                 }
@@ -97,40 +110,45 @@ const Bar: React.FC<BarProps> = ({
 
             const barHeight = (value / maxValue) * height;
             const barWidth = (value / maxValue) * width;
-
             return layout === 'horizontal' ? (
-                // biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
                 <rect
-                    key={uuidv4()}
+                    key={`${entry.name}-${dataKey}`}
                     x={stackIdPos * (width + barGap)}
                     y={height - barHeight - accumulatedHeight}
                     width={width}
                     height={barHeight}
                     fill={fill}
-                    className='transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-105 hover:shadow-lg'
+                    className='transition-all duration-300 ease-in-out hover:opacity-80 hover:shadow-lg'
                     style={{ transformOrigin: 'bottom' }}
                     onMouseOver={(event) => {
                         const { name, ...rest } = entry;
                         onMouseOver(event, { name, ...rest });
                     }}
                     onMouseOut={onMouseOut}
+                    onClick={(event) => onClick({
+                        dataKey, value: Number(value), name: entry.name, entry,
+                        event: event, index: Number(stackId)
+                    })}
                 />
             ) : (
-                // biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
                 <rect
-                    key={uuidv4()}
+                    key={`${entry.name}-${dataKey}`}
                     x={accumulatedHeight}
                     y={stackIdPos * (height + barGap)}
                     width={barWidth}
                     height={height}
                     fill={fill}
-                    className='transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-105 hover:shadow-lg'
+                    className='transition-all duration-300 ease-in-out hover:opacity-80 hover:shadow-lg'
                     style={{ transformOrigin: 'left' }}
                     onMouseOver={(event) => {
                         const { name, ...rest } = entry;
                         onMouseOver(event, { name, ...rest });
                     }}
                     onMouseOut={onMouseOut}
+                    onClick={(event) => onClick({
+                        dataKey, value: Number(value), name: entry.name, entry,
+                        event: event, index: Number(stackId)
+                    })}
                 />
             );
         })}

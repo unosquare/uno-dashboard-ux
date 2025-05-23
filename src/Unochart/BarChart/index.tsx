@@ -1,11 +1,11 @@
 import React, { cloneElement, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import BarV2 from '../Bar';
-import CartesianGridV2 from '../CartesianGrid';
-import LegendV2 from '../Legend';
-import TooltipV2 from '../Tooltip';
-import XAxisV2 from '../XAxis';
-import YAxisV2 from '../YAxis';
+import Bar from '../Bar';
+import CartesianGrid from '../CartesianGrid';
+import Legend from '../Legend';
+import Tooltip from '../Tooltip';
+import XAxis from '../XAxis';
+import YAxis from '../YAxis';
 import {
     type ChartDataV2,
     DEFAULT_BAR_CATEGORY_GAP,
@@ -16,7 +16,7 @@ import {
     DEFAULT_WIDTH,
 } from '../../constants';
 import { parseGap, roundMaxValue } from './utils';
-import ReferenceLineV2 from '../ReferenceLine';
+import ReferenceLine from '../ReferenceLine';
 
 interface BarChartProps {
     data: ChartDataV2;
@@ -50,7 +50,6 @@ const BarChart: React.FC<BarChartProps> = ({
     const chartWidth = width - ((margin.left ?? 0) + (margin.right ?? 0) + 20);
     const chartHeight = height - ((margin.top ?? 0) + (margin.bottom ?? 0) + 20);
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
         if (svgRef.current) {
             const yAxisLabels = svgRef.current.querySelectorAll('.y-axis text');
@@ -71,7 +70,6 @@ const BarChart: React.FC<BarChartProps> = ({
         (child) => (child as React.ReactElement).props.stackId,
     );
     const { maxValue, minValue } = roundMaxValue(data, hasStackedBars);
-
     const xScale = (value: string | number) => {
         if (typeof value === 'string') {
             const index = data.findIndex((item) => item.name === value);
@@ -83,7 +81,7 @@ const BarChart: React.FC<BarChartProps> = ({
     const yScale = (value: number) => chartHeight - ((value - minValue) / (maxValue - minValue)) * chartHeight;
 
     const barComponents = React.Children.toArray(children).map((child) => {
-        if ((child as React.ReactElement).type === BarV2 && !(child as React.ReactElement).props.stackId) {
+        if ((child as React.ReactElement).type === Bar && !(child as React.ReactElement).props.stackId) {
             return React.cloneElement(child as React.ReactElement, { stackId: uuidv4() });
         }
         return child;
@@ -91,9 +89,8 @@ const BarChart: React.FC<BarChartProps> = ({
 
     const groupedBarComponents: { [key: string]: React.ReactElement[] } = {};
 
-    // biome-ignore lint/complexity/noForEach: <explanation>
     barComponents.forEach((child) => {
-        if ((child as React.ReactElement).type === BarV2) {
+        if ((child as React.ReactElement).type === Bar) {
             const stackId = (child as React.ReactElement).props.stackId;
             if (!groupedBarComponents[stackId]) {
                 groupedBarComponents[stackId] = [];
@@ -103,22 +100,22 @@ const BarChart: React.FC<BarChartProps> = ({
     });
 
     const xAxisComponent = React.Children.toArray(children).find(
-        (child) => (child as React.ReactElement).type === XAxisV2,
+        (child) => (child as React.ReactElement).type === XAxis,
     );
     const yAxisComponent = React.Children.toArray(children).find(
-        (child) => (child as React.ReactElement).type === YAxisV2,
+        (child) => (child as React.ReactElement).type === YAxis,
     );
     const cartesianGridComponent = React.Children.toArray(children).find(
-        (child) => (child as React.ReactElement).type === CartesianGridV2,
+        (child) => (child as React.ReactElement).type === CartesianGrid,
     );
     const legendComponent = React.Children.toArray(children).find(
-        (child) => (child as React.ReactElement).type === LegendV2,
+        (child) => (child as React.ReactElement).type === Legend,
     );
     const tooltipComponent = React.Children.toArray(children).find(
-        (child) => (child as React.ReactElement).type === TooltipV2,
+        (child) => (child as React.ReactElement).type === Tooltip,
     );
     const referenceLines = React.Children.toArray(children).filter(
-        (child) => React.isValidElement(child) && child.type === ReferenceLineV2
+        (child) => React.isValidElement(child) && child.type === ReferenceLine
     );
 
     const legendItems = barComponents.map((child) => {
@@ -174,11 +171,10 @@ const BarChart: React.FC<BarChartProps> = ({
     const stackIdPositions: { [key: string]: number } = {};
     let currentStackIdPos = 0;
 
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const renderBars = (stackComponents: React.ReactElement[], entry: any) => {
         let accumulatedHeight = 0;
 
-        return stackComponents.map((child, barIndex) => {
+        return stackComponents.map((child: React.ReactElement, barIndex) => {
             const stackId = child.props.stackId;
             const stackIdPos = stackIdPositions[stackId] ?? currentStackIdPos;
             if (!(stackId in stackIdPositions)) {
@@ -187,6 +183,7 @@ const BarChart: React.FC<BarChartProps> = ({
             }
 
             const barProps = {
+                ...child.props,
                 data: [entry],
                 width:
                     layout === 'horizontal'
@@ -206,6 +203,7 @@ const BarChart: React.FC<BarChartProps> = ({
                 stackIdPos,
                 onMouseOver: (event: React.MouseEvent) => handleMouseOver(event, { name: entry.name }),
                 onMouseOut: handleMouseOut,
+                onClick: child.props.onClick,
             };
 
             const renderedBar = React.cloneElement(child, barProps);
@@ -222,7 +220,6 @@ const BarChart: React.FC<BarChartProps> = ({
 
     return (
         <div className='bg-white'>
-            {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
             <svg
                 ref={svgRef}
                 width={width}
@@ -249,7 +246,7 @@ const BarChart: React.FC<BarChartProps> = ({
                     {layout === 'horizontal' && (
                         <>
                             {yAxisComponent && (
-                                <YAxisV2
+                                <YAxis
                                     height={height - (margin.top ?? DEFAULT_MARGIN) - (margin.bottom ?? DEFAULT_MARGIN)}
                                     maxValue={maxValue}
                                     minValue={minValue}
@@ -257,7 +254,7 @@ const BarChart: React.FC<BarChartProps> = ({
                                 />
                             )}
                             {cartesianGridComponent && (
-                                <CartesianGridV2
+                                <CartesianGrid
                                     width={width - (margin.left ?? DEFAULT_MARGIN) - rightMargin - leftMargin}
                                     height={height - (margin.top ?? DEFAULT_MARGIN) - (margin.bottom ?? DEFAULT_MARGIN)}
                                     minValue={minValue}
@@ -265,7 +262,7 @@ const BarChart: React.FC<BarChartProps> = ({
                                 />
                             )}
                             {xAxisComponent && (
-                                <XAxisV2
+                                <XAxis
                                     data={data}
                                     width={width - (margin.left ?? DEFAULT_MARGIN) - rightMargin - leftMargin}
                                     height={height - (margin.top ?? DEFAULT_MARGIN) - (margin.bottom ?? DEFAULT_MARGIN)}
@@ -280,7 +277,7 @@ const BarChart: React.FC<BarChartProps> = ({
                     {layout === 'vertical' && (
                         <>
                             {xAxisComponent && (
-                                <XAxisV2
+                                <XAxis
                                     data={data}
                                     width={width - (margin.left ?? DEFAULT_MARGIN) - rightMargin}
                                     height={height - (margin.top ?? DEFAULT_MARGIN) - (margin.bottom ?? DEFAULT_MARGIN)}
@@ -291,7 +288,7 @@ const BarChart: React.FC<BarChartProps> = ({
                                 />
                             )}
                             {cartesianGridComponent && (
-                                <CartesianGridV2
+                                <CartesianGrid
                                     width={width - (margin.left ?? DEFAULT_MARGIN) - rightMargin}
                                     height={height - (margin.top ?? DEFAULT_MARGIN) - (margin.bottom ?? DEFAULT_MARGIN)}
                                     minValue={minValue}
@@ -299,7 +296,7 @@ const BarChart: React.FC<BarChartProps> = ({
                                 />
                             )}
                             {yAxisComponent && (
-                                <YAxisV2
+                                <YAxis
                                     data={data}
                                     width={width - (margin.left ?? DEFAULT_MARGIN) - rightMargin}
                                     height={height - (margin.top ?? DEFAULT_MARGIN) - (margin.bottom ?? DEFAULT_MARGIN)}
@@ -310,10 +307,9 @@ const BarChart: React.FC<BarChartProps> = ({
                             )}
                         </>
                     )}
-                    {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
-                    {data.map((entry: any, index: number) => (
+                    {data.map((entry, index) => (
                         <g
-                            key={uuidv4()}
+                            key={entry.name || index}
                             transform={
                                 layout === 'horizontal'
                                     ? `translate(${index * barZoneSize + adjustedCategoryGap / 2}, 0)`
@@ -329,10 +325,10 @@ const BarChart: React.FC<BarChartProps> = ({
             </svg>
             {legendComponent && (
                 <div className='mt-4'>
-                    <LegendV2 items={legendItems} />
+                    <Legend items={legendItems} />
                 </div>
             )}
-            {tooltipComponent && <TooltipV2 tooltipData={tooltipData} position={position} />}
+            {tooltipComponent && <Tooltip tooltipData={tooltipData} position={position} />}
         </div>
     );
 };

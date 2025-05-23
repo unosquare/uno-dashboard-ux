@@ -1,6 +1,14 @@
 import { useMemo } from "react";
 import { createLineGenerator, renderPathSegments } from "./utils";
 
+export interface LinePointClickEvent<T> {
+    event: React.MouseEvent<SVGGElement>;
+    dataKey: keyof T;
+    value: number;
+    index: number;
+    entry: T;
+}
+
 interface LineProps<T> {
     data: Array<T>;
     dataKey: keyof T;
@@ -27,6 +35,7 @@ interface LineProps<T> {
     connectNulls?: boolean;
     onMouseOver?: (event: React.MouseEvent, entry: T) => void;
     onMouseOut?: () => void;
+    onClick?: (event: LinePointClickEvent<T>) => void;
     label?: boolean;
 }
 
@@ -41,6 +50,7 @@ const Line = <T,>({
     connectNulls = false,
     onMouseOver = () => {},
     onMouseOut = () => {},
+    onClick = () => {},
     label = false,
 }: LineProps<T>) => {
     const processedData = useMemo(() => data.map((d, index) => ({ ...d, index })), [data]);
@@ -62,14 +72,22 @@ const Line = <T,>({
                 if (y === null) return null;
                 return (
                     <g key={`point-${entry[dataKey]}`} className='transition-all duration-300 ease-in-out'>
-                        {/* biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation> */}
-<circle
+                        <circle
                             cx={x}
                             cy={y}
                             r={4}
                             fill={stroke}
                             onMouseOver={(event) => onMouseOver(event, entry)}
                             onMouseOut={onMouseOut}
+                            onClick={(event) =>
+                                onClick({
+                                    event: event,
+                                    dataKey: dataKey,
+                                    value: Number(value),
+                                    index: index,
+                                    entry: entry,
+                                })
+                            }
                             className='hover:r-5 focus:r-5 transition-all duration-300 ease-in-out'
                         />
                         {label && (

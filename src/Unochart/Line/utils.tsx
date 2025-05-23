@@ -8,22 +8,16 @@ export const createLineGenerator = (
 ) =>
     d3Shape
         .line()
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         .defined((d: any) => d[dataKey] !== null && d[dataKey] !== undefined)
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         .x((d: any) => xScale(d.index))
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         .y((d: any) => {
             const value = d[dataKey];
             return value !== null && value !== undefined ? yScale(value) : yScale(0);
         })
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         .curve((d3Shape as any)[`curve${type.charAt(0).toUpperCase() + type.slice(1)}`] || d3Shape.curveLinear);
 
 export const renderPathSegments = (
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     lineGenerator: any,
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     processedData: Array<{ [key: string]: any }>,
     stroke: string,
     strokeDasharray: string,

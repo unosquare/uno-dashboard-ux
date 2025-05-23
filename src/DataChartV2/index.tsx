@@ -8,14 +8,15 @@ import LineChart from "../Unochart/LineChart";
 import CartesianGrid from "../Unochart/CartesianGrid";
 import XAxis from "../Unochart/XAxis";
 import YAxis from "../Unochart/YAxis";
-import Line from "../Unochart/Line";
+import Line, { type LinePointClickEvent } from "../Unochart/Line";
 import { NoData } from "../NoData";
 import Tooltip from "../Unochart/Tooltip";
 import Legend from "../Unochart/Legend";
 import { ResponsiveContainer } from "recharts";
+import { BaseColors } from "../theme";
 
 type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>[]> & {
-    onClick?: (activeTooltipIndex: number, activeLabel: string) => void;
+    onClick?: (event: LinePointClickEvent<{ [key: string]: any }>) => void;
     additionalComponents?: ReactNode[];
     width?: number;
     height?: number;
@@ -36,19 +37,13 @@ export const DataChartV2 = <T,>({
     className,
     width = 406,
     height = 240,
-    margin = {top: 5, right: 30, left: 20, bottom: 5},
+    margin = {top: 0, right: 0, left: 0, bottom: 0},
     additionalComponents = [],
 }: DataChartSettings<T>) => {
     const [dataStore, categoryColors, keys] = useChart(rawData, dataCallback);
 
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    const onClickEvent = (event: any) => {
-        if (event?.activeTooltipIndex !== null && onClick)
-            onClick(Number(event.activeTooltipIndex), String(event.activeLabel));
-    };
-
     if (!rawData) return <ChartLineShimmer className={className} />;
-
+    console.log('keys', keys);
     return (
         <Flex className={twMerge('w-full h-50', className)}>
             {dataStore.length > 0 ? (
@@ -64,10 +59,11 @@ export const DataChartV2 = <T,>({
                                     key={property}
                                     type='monotone'
                                     dataKey={property}
-                                    stroke={categoryColors.get(property) ?? 'blue'}
-                                    strokeDasharray=''
+                                    stroke={categoryColors.get(property) ?? BaseColors.Gray}
+                                    strokeDasharray=' '
                                     connectNulls={false}
                                     label={true}
+                                    onClick={onClick ? (event => onClick(event as LinePointClickEvent<{ [key: string]: any }>)) : undefined}
                                 />
                             ))}
                             {additionalComponents}

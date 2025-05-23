@@ -6,7 +6,7 @@ import type { ChartComponent } from "../constants";
 import { Flex } from "../Flex";
 import { useChart } from "../hooks";
 import { NoData } from "../NoData";
-import Bar from "../Unochart/Bar";
+import Bar, { type BarPointClickEvent } from "../Unochart/Bar";
 import BarChart from "../Unochart/BarChart";
 import { BaseColors } from "../theme";
 import XAxis from "../Unochart/XAxis";
@@ -30,7 +30,7 @@ type ChartBarSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>
     barGap?: number;
     layout?: 'horizontal' | 'vertical';
     refLineY?: RefLineY;
-    onClick?: (activeLabel: string, activeTooltipIndex: number) => void;
+    onClick?: (event: BarPointClickEvent<{ name: string; [key: string]: any }>) => void;
 };
 
 export const ChartBarV2 = <T,>({
@@ -47,11 +47,6 @@ export const ChartBarV2 = <T,>({
     className,
 }: ChartBarSettings<T>) => {
     const [dataStore, categoryColors, keys] = useChart(rawData, dataCallback);
-
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    const onClickEvent = (event: any) => {
-        if (event?.activeLabel && onClick) onClick(String(event.activeLabel), Number(event.activeTooltipIndex));
-    };
 
     if (!rawData) return <ChartBarShimmer className={className} />;
 
@@ -77,13 +72,15 @@ export const ChartBarV2 = <T,>({
                                             dataKey={property}
                                             key={property}
                                             stackId='a' 
-                                            fill={categoryColors.get(property) ?? BaseColors.Gray} 
+                                            fill={categoryColors.get(property) ?? BaseColors.Gray}
+                                            onClick={onClick} 
                                         />
                                 ):(
                                     <Bar 
                                             dataKey={property}
                                             key={property}
                                             fill={categoryColors.get(property) ?? BaseColors.Gray} 
+                                            onClick={onClick}
                                         />
                                 ),
                             )}

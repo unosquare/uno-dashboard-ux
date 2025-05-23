@@ -11,9 +11,8 @@ const Legend: React.FC<LegendProps> = ({ items = [] }) => {
         <div className='flex flex-wrap justify-center items-center gap-4 mt-4'>
             {validItems.map((item, index) => (
                 <div 
-                    key={`legend-item-${// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-index}`} 
-                    className='flex items-center bg-white rounded-full px-3 py-1 shadow-sm transition-all duration-300 ease-in-out hover:shadow-md' 
+                    key={`legend-item-${index}`} 
+                    className='flex items-center bg-white rounded-full px-3 py-1 shadow-xs transition-all duration-300 ease-in-out hover:shadow-md' 
                     data-testid='legend-item'
                 >
                     <div

@@ -69,6 +69,12 @@ const chartData = [
     { name: 'Group C', Value: 30.25 },
 ];
 
+const chartDataV2 = [
+    { name: 'Group A', value: 10.15 },
+    { name: 'Group B', value: 20.1 },
+    { name: 'Group C', value: 30.25 },
+];
+
 const chartBarData = [
     { name: 'Group A', Value: 10.15, Value2: 5, Value3: 7 },
     { name: 'Group B', Value: 20.1, Value2: 3, Value3: 15 },
@@ -100,6 +106,20 @@ const Application = () => {
     const barClick = (ev: string) => {
         console.log(ev);
         setCounter((x) => x + 1);
+    };
+
+    const barClickV2 = (ev: {name: string}) => {
+        console.log(ev.name);
+        setCounter((x) => x + 1);
+    };
+
+    const pieClick = (ev: {label: string, percentage: string, value: number }) => {
+        console.log(ev.label, ev.percentage, ev.value);
+    };
+
+    const lineClick = (ev: any) => {
+        const { index, entry } = ev;
+        console.log(`${index} ${entry.name}`);
     };
 
     return (
@@ -217,6 +237,7 @@ const Application = () => {
                         <PieChartV2
                             rawData={loading ? undefined : chartData}
                             dataCallback={(d) => Object.values(d).map((x) => ({ name: x.name, value: x.Value }))}
+                            onClick={pieClick}
                         />
                     </Card>
                     <Card>
@@ -232,10 +253,10 @@ const Application = () => {
                     <Card>
                         <Text className='font-medium'>Line Chart V2</Text>
                         <DataChartV2
-                            rawData={loading ? undefined : toggle ? chartData : []}
+                            rawData={loading ? undefined : toggle ? chartDataV2 : []}
                             className='mt-5'
                             legendFormatType='percentage'
-                            onClick={console.log}
+                            onClick={lineClick}
                         />
                     </Card>
                     <Card>
@@ -255,7 +276,7 @@ const Application = () => {
                             className='mt-5'
                             refLineY={{ value: 20, label: 'Ref Line', color: 'red' }}
                             rawData={loading ? undefined : toggle ? chartData : chartBarData}
-                            onClick={barClick} 
+                            onClick={barClickV2} 
                             layout={'horizontal'}                       
                         />
                     </Card>

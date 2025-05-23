@@ -1,7 +1,6 @@
 import type { ChartDataV2 } from "../../constants";
 
 export const findMinValue = (data: ChartDataV2): number => {
-    // biome-ignore lint/style/useConst: <explanation>
     let minValue: number;
 
     minValue = Math.min(
@@ -10,7 +9,6 @@ export const findMinValue = (data: ChartDataV2): number => {
                 ...Object.values(d).map((v) => {
                     if (typeof v === 'number') {
                         return v;
-                    // biome-ignore lint/style/noUselessElse: <explanation>
                     } else if (Array.isArray(v)) {
                         return Math.min(...v); // Usar el valor mínimo del rango
                     }
@@ -32,7 +30,6 @@ export const roundMaxValue = (data: ChartDataV2, stacked = false): { maxValue: n
             Object.values(d).reduce((sum, value) => {
                 if (typeof value === 'number') {
                     return sum + value;
-                // biome-ignore lint/style/noUselessElse: <explanation>
                 } else if (Array.isArray(value)) {
                     return sum + Math.max(...value); // Sumar el valor máximo del rango
                 }
@@ -47,7 +44,6 @@ export const roundMaxValue = (data: ChartDataV2, stacked = false): { maxValue: n
                     ...Object.values(d).map((v) => {
                         if (typeof v === 'number') {
                             return v;
-                        // biome-ignore lint/style/noUselessElse: <explanation>
                         } else if (Array.isArray(v)) {
                             return Math.max(...v); // Usar el valor máximo del rango
                         }
@@ -58,7 +54,6 @@ export const roundMaxValue = (data: ChartDataV2, stacked = false): { maxValue: n
         );
     }
 
-    // biome-ignore lint/style/useExponentiationOperator: <explanation>
     const magnitude = Math.pow(10, Math.floor(Math.log10(maxValue)));
     const factor = maxValue / magnitude;
 

@@ -5,13 +5,13 @@ import { Flex } from "../Flex";
 import { NoData } from "../NoData";
 import { PolarGrid, ResponsiveContainer } from "recharts";
 import { twMerge } from "tailwind-merge";
-import PieChartRechart from "../Unochart/PieChartRechart";
-import Pie from "../Unochart/Pie";
+import PieChart from "../Unochart/PieChart";
+import Pie, { type PieClickEvent } from "../Unochart/Pie";
 import Tooltip from "../Unochart/Tooltip";
 import Legend from "../Unochart/Legend";
+import { v4 as uuidv4 } from "uuid";
 
-export interface PieData {
-    id: number;
+type PieChartProps<T> = ChartComponent<T, ChartData[]> & {
     innerRadius?: number;
     outerRadius?: number;
     cx?: string | number;
@@ -19,32 +19,38 @@ export interface PieData {
     showLabels?: boolean;
     startAngle?: number;
     endAngle?: number;
+    paddingAngle?: number;
     activeShape?: boolean;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    label?: string | ((data: any) => string);
-}
-
-type PieChartProps<T> = ChartComponent<T, ChartData[]> & {
-    initialPies?: PieData[];
     showPolarGrid?: boolean;
     width?: number;
     height?: number;
+    onClick?: (event: PieClickEvent) => void;
 };
 
 export const PieChartV2 = <T,>({
-    initialPies = [{ id: 1, innerRadius: 0, outerRadius: 80, cx: '50%', cy: '50%', showLabels: true }],
+    innerRadius = 0,
+    outerRadius = 80,
+    cx = '50%',
+    cy = '50%',
+    showLabels = false,
     width = 406,
     height = 240,
     rawData,
     dataCallback,
     className,
     showPolarGrid = false,
+    startAngle,
+    endAngle,
+    paddingAngle,
+    activeShape,
+    onClick,
 }: PieChartProps<T>) => {
     const dataTransformFn = useMemo(
         () => dataCallback ?? ((data: T) => data as unknown as ChartData[]),
         [dataCallback],
     );
     const dataStore: ChartData[] = (rawData && dataTransformFn(rawData)) || [];
+    const names = dataStore.map(item => item.name);
     const categoryColors = constructCategoryColors(
         dataStore.map((x) => x.name),
         themeColorRange,
@@ -63,29 +69,29 @@ export const PieChartV2 = <T,>({
     return (
         <div className={twMerge('h-60', className)}>
             <ResponsiveContainer>
-                <PieChartRechart width={width} height={height}>
+                <PieChart width={width} height={height}>
                     {showPolarGrid && <PolarGrid />}
-                    {initialPies.map((pie, index) => (
-                        <Pie
-                            key={pie.id}
-                            data={dataStore}
-                            dataKey='value'
-                            nameKey='name'
-                            cx={pie.cx}
-                            cy={pie.cy}
-                            innerRadius={pie.innerRadius}
-                            outerRadius={pie.outerRadius}
-                            startAngle={pie.startAngle}
-                            endAngle={pie.endAngle}
-                            paddingAngle={pie.paddingAngle}
-                            fill='blue'
-                            label={pie.showLabels ? pie.label || undefined : undefined}
-                            activeShape={pie.activeShape}
-                        />
-                    ))}
+                    <Pie
+                        key={uuidv4()}
+                        data={dataStore}
+                        dataKey='value'
+                        nameKey='name'
+                        cx={cx}
+                        cy={cy}
+                        innerRadius={innerRadius}
+                        outerRadius={outerRadius}
+                        startAngle={startAngle}
+                        endAngle={endAngle}
+                        paddingAngle={paddingAngle}
+                        fill={categoryColors.get(dataStore[0]?.name) ?? BaseColors.Gray}
+                        showLabels={showLabels}
+                        label={names}
+                        activeShape={activeShape}
+                        onClick={onClick}
+                    />
                     <Tooltip />
                     <Legend />
-                </PieChartRechart>
+                </PieChart>
             </ResponsiveContainer>
         </div>
     );
