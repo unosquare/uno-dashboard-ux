@@ -1,5 +1,5 @@
 import React, { Children, cloneElement, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { roundMaxValue } from "../BarChart/utils";
+import { roundMaxValue } from "./utils";
 import XAxis from "../XAxis";
 import YAxis from "../YAxis";
 import CartesianGrid from "../CartesianGrid";

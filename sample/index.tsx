@@ -69,12 +69,6 @@ const chartData = [
     { name: 'Group C', Value: 30.25 },
 ];
 
-const chartDataV2 = [
-    { name: 'Group A', value: 10.15 },
-    { name: 'Group B', value: 20.1 },
-    { name: 'Group C', value: 30.25 },
-];
-
 const chartBarData = [
     { name: 'Group A', Value: 10.15, Value2: 5, Value3: 7 },
     { name: 'Group B', Value: 20.1, Value2: 3, Value3: 15 },
@@ -253,7 +247,7 @@ const Application = () => {
                     <Card>
                         <Text className='font-medium'>Line Chart V2</Text>
                         <DataChartV2
-                            rawData={loading ? undefined : toggle ? chartDataV2 : []}
+                            rawData={loading ? undefined : toggle ? chartData : []}
                             className='mt-5'
                             legendFormatType='percentage'
                             onClick={lineClick}

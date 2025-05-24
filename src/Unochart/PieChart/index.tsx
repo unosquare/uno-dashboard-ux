@@ -6,7 +6,6 @@ interface PieChartProps {
     width: number;
     height: number;
     children: ReactNode;
-    margin?: { top: number, right: number, left: number, bottom: number };
 }
 
 const PieChart: React.FC<PieChartProps> = ({ width, height, children }) => {

@@ -21,6 +21,7 @@ type DataChartSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown
     width?: number;
     height?: number;
     margin?: margin;
+    showCartesianGrid?: boolean;
 };
 
 type margin = {
@@ -39,17 +40,17 @@ export const DataChartV2 = <T,>({
     height = 240,
     margin = {top: 0, right: 0, left: 0, bottom: 0},
     additionalComponents = [],
+    showCartesianGrid = true,
 }: DataChartSettings<T>) => {
     const [dataStore, categoryColors, keys] = useChart(rawData, dataCallback);
 
     if (!rawData) return <ChartLineShimmer className={className} />;
-    console.log('keys', keys);
     return (
         <Flex className={twMerge('w-full h-50', className)}>
             {dataStore.length > 0 ? (
                     <ResponsiveContainer>
                         <LineChart width={width} height={height} data={dataStore} margin={margin}>
-                            <CartesianGrid strokeDasharray='3 3' />
+                            {showCartesianGrid && <CartesianGrid strokeDasharray='3 3' />}
                             <XAxis dataKey='name' />
                             <YAxis />
                             <Tooltip />

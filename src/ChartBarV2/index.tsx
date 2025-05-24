@@ -14,6 +14,7 @@ import YAxis from "../Unochart/YAxis";
 import Tooltip from "../Unochart/Tooltip";
 import Legend from "../Unochart/Legend";
 import ReferenceLine from "../Unochart/ReferenceLine";
+import CartesianGrid from "../Unochart/CartesianGrid";
 
 type RefLineY = {
   value: number;
@@ -31,6 +32,7 @@ type ChartBarSettings<TDataIn> = ChartComponent<TDataIn, Record<string, unknown>
     layout?: 'horizontal' | 'vertical';
     refLineY?: RefLineY;
     onClick?: (event: BarPointClickEvent<{ name: string; [key: string]: any }>) => void;
+    showCartesianGrid?: boolean;
 };
 
 export const ChartBarV2 = <T,>({
@@ -41,10 +43,12 @@ export const ChartBarV2 = <T,>({
     barCategoryGap = '60%',
     barGap = 1,
     layout = 'horizontal',
+    margin,
     stacked,
     refLineY,
     onClick,
     className,
+    showCartesianGrid = false,
 }: ChartBarSettings<T>) => {
     const [dataStore, categoryColors, keys] = useChart(rawData, dataCallback);
 
@@ -61,7 +65,9 @@ export const ChartBarV2 = <T,>({
                             barCategoryGap={barCategoryGap}
                             barGap={barGap}
                             layout={layout}
+                            margin={margin}
                         >
+                            {showCartesianGrid && <CartesianGrid strokeDasharray='3 3' />}
                             <XAxis />
                             <YAxis />
                             <Tooltip />

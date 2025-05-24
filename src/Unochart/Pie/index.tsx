@@ -26,6 +26,8 @@ interface PieProps {
     paddingAngle?: number;
     activeShape?: boolean;
     onClick?: (event: PieClickEvent) => void;
+    onMouseMove?: (event: React.MouseEvent<SVGGElement>, entry: { name: string; value: number }, datakey: string) => void;
+    onMouseLeave?: () => void;
 }
 
 const Pie: React.FC<PieProps> = ({
@@ -42,6 +44,8 @@ const Pie: React.FC<PieProps> = ({
     activeShape = false,
     showLabels = false,
     onClick = () => {},
+    onMouseMove = () => {},
+    onMouseLeave = () => {},
 }) => {
     const totalValue = data.reduce((acc, item) => acc + (item[dataKey] as number), 0);
     const angleRange = endAngle - startAngle;
@@ -86,11 +90,17 @@ const Pie: React.FC<PieProps> = ({
                 const isActive = activeShape && activeIndex === index;
                 const adjustedOuterRadius = isActive ? outerRadius + 10 : outerRadius;
 
+                const handleMouseLeave = () => {
+                    setActiveIndex(null);
+                    onMouseLeave();
+                };
+
                 return (
                     <g
                         key={uuidv4()}
                         onMouseEnter={() => setActiveIndex(index)}
-                        onMouseLeave={() => setActiveIndex(null)}
+                        onMouseLeave={handleMouseLeave}
+                        onMouseMove={(event) => onMouseMove(event, entry, dataKey as string)}
                         className="transition-transform duration-300 ease-in-out"
                         onClick={(event) =>
                                 onClick({
