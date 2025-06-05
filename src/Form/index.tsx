@@ -38,9 +38,7 @@ export const Form = <T, TData>({
 
     useEffect(() => {
         if (!syncFieldName) return;
-
         const syncIndex = initialData.findIndex((f) => f.name === syncFieldName);
-
         if (syncIndex !== -1) {
             setValue(`table.${syncIndex}.value`, initialData[syncIndex].value);
         }
