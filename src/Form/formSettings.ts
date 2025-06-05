@@ -7,6 +7,7 @@ export interface FormSettings<T, TData> {
     onCancel?: () => void;
     onChange?: (name: string, value: string | number | Date | undefined) => void;
     saveLabel?: string;
+    syncFieldName?: string;
 }
 
 export interface FieldGroupSettings {
