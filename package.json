@@ -16,7 +16,7 @@
         "react-day-picker": "^8.10.1",
         "react-dom": "^18.3.1",
         "react-hook-form": "7.57.0",
-        "react-tooltip": "5.28.1",
+        "react-tooltip": "5.29.1",
         "react-transition-state": "^2.3.1",
         "recharts": "2.15.3",
         "tailwind-merge": "3.3.0",
