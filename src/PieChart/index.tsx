@@ -10,6 +10,7 @@ import { getValueFormatted } from '../utils';
 
 export type PieChartProps<T> = ChartComponent<T, ChartData[]> & {
     serieName?: string;
+    onSegmentClick?: (data: ChartData) => void;
 };
 
 export const PieChart = <T,>({
@@ -18,6 +19,7 @@ export const PieChart = <T,>({
     legendFormatType,
     className,
     serieName = 'Data',
+    onSegmentClick,
 }: PieChartProps<T>) => {
     const dataTransformFn = useMemo(
         () => dataCallback ?? ((data: T) => data as unknown as ChartData[]),
@@ -54,6 +56,7 @@ export const PieChart = <T,>({
                                         colorPalette.background,
                                     ).fillColor
                                 }
+                                onClick={onSegmentClick ? () => onSegmentClick(data) : undefined}
                             />
                         ))}
                     </Pie>
