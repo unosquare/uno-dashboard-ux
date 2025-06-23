@@ -18,7 +18,7 @@
         "react-hook-form": "7.58.1",
         "react-tooltip": "5.29.1",
         "react-transition-state": "^2.3.1",
-        "recharts": "3.0.0",
+        "recharts": "2.15.3",
         "tailwind-merge": "3.3.1",
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.127.17",
