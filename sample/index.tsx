@@ -4,25 +4,29 @@ import { createRoot } from 'react-dom/client';
 import {
     Alert,
     AwaitableMetric,
+    Badge,
+    BadgeDelta,
     BasicToolbar,
     Blur,
     Burger,
     Button,
     Card,
-    Col,
     ChartBar,
     ChartFunnel,
+    Col,
     ComposedLineChart,
     DataChart,
+    DateRangePicker,
     Dialog,
-    DialogPanel,
     DialogHeader,
+    DialogPanel,
     ErrorBoundary,
     Flex,
     Footer,
     Grid,
     InfoDialog,
     InfoDialogTitle,
+    Legend,
     MenuContainer,
     MenuSection,
     MenuSubSection,
@@ -30,20 +34,16 @@ import {
     NavBarTitle,
     PieChart,
     SearchBox,
-    StyledMenuActions,
-    StyledMenuSearchBox,
-    ThemeSwitcher,
-    UnoContainer,
     Select,
     SelectItem,
+    StyledMenuActions,
+    StyledMenuSearchBox,
+    Text,
+    ThemeSwitcher,
+    UnoContainer,
     VirtualSelect,
     useAlertStore,
     useToggle,
-    Text,
-    DateRangePicker,
-    Badge,
-    Legend,
-    BadgeDelta,
 } from '../src';
 import '../src/resources/global.css';
 import FormSample from './FormSample';
@@ -184,9 +184,7 @@ const Application = () => {
                             <Badge color='blue' size='sm'>
                                 10%
                             </Badge>
-                            <BadgeDelta>
-                                +10%
-                            </BadgeDelta>
+                            <BadgeDelta>+10%</BadgeDelta>
                         </Flex>
                     </Card>
                     <Card>
@@ -201,12 +199,13 @@ const Application = () => {
                         />
                     </Card>
                     <Card>
-                        <Legend className='mb-6' categories={Object.values(chartData).map(x => x.name)} />
+                        <Legend className='mb-6' categories={Object.values(chartData).map((x) => x.name)} />
                         <PieChart
                             rawData={loading ? undefined : chartData}
                             dataCallback={(d) => Object.values(d).map((x) => ({ name: x.name, value: x.Value }))}
                             legendFormatType='money'
                             serieName='Moneys'
+                            onSegmentClick={(data) => console.log(data.name)}
                         />
                     </Card>
                     <Card>
@@ -269,8 +268,11 @@ const Application = () => {
     );
 };
 
-createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <Application />
-    </React.StrictMode>,
-);
+const rootElement = document.getElementById('root');
+if (rootElement) {
+    createRoot(rootElement).render(
+        <React.StrictMode>
+            <Application />
+        </React.StrictMode>,
+    );
+}
