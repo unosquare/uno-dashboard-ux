@@ -15,7 +15,7 @@ export type ChartDecoratorsSettings = {
     setLegendHeight?: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const colors = ['blue', 'slate', 'gray', 'zinc', 'neutral', 'stone', 'red', 'orange', 'amber'];
+const colors = ['blue', 'slate', 'gray', 'zinc', 'yellow', 'stone', 'red', 'orange', 'amber'];
 
 const getMap = (keys: string[]) => {
     const map = new Map<string, string>();
