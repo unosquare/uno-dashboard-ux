@@ -64,6 +64,15 @@ const chartData = [
     { name: 'Group A', Value: 10.15 },
     { name: 'Group B', Value: 20.1 },
     { name: 'Group C', Value: 30.25 },
+    { name: 'Group D', Value: 10.15 },
+    { name: 'Group E', Value: 20.1 },
+    { name: 'Group F', Value: 30.25 },
+    { name: 'Group G', Value: 10.15 },
+    { name: 'Group H', Value: 20.1 },
+    { name: 'Group I', Value: 30.25 },
+    { name: 'Group J', Value: 10.15 },
+    { name: 'Group K', Value: 20.1 },
+    { name: 'Group L', Value: 30.25 },
 ];
 
 const chartBarData = [
