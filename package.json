@@ -23,7 +23,7 @@
         "tailwind-styled-components": "^2.2.0",
         "uno-js": "^3.127.17",
         "uuid": "^11.1.0",
-        "zustand": "5.0.5"
+        "zustand": "5.0.6"
     },
     "devDependencies": {
         "@biomejs/biome": "2.0.5",
