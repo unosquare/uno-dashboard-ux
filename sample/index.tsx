@@ -4,26 +4,30 @@ import { createRoot } from 'react-dom/client';
 import {
     Alert,
     AwaitableMetric,
+    Badge,
+    BadgeDelta,
     BasicToolbar,
     Blur,
     Burger,
     Button,
     Card,
-    Col,
     ChartBar,
     ChartBarV2,
     ChartFunnel,
+    Col,
     ComposedLineChart,
     DataChart,
+    DateRangePicker,
     Dialog,
-    DialogPanel,
     DialogHeader,
+    DialogPanel,
     ErrorBoundary,
     Flex,
     Footer,
     Grid,
     InfoDialog,
     InfoDialogTitle,
+    Legend,
     MenuContainer,
     MenuSection,
     MenuSubSection,
@@ -31,16 +35,16 @@ import {
     NavBarTitle,
     PieChart,
     SearchBox,
-    StyledMenuActions,
-    StyledMenuSearchBox,
-    ThemeSwitcher,
-    UnoContainer,
     Select,
     SelectItem,
+    StyledMenuActions,
+    StyledMenuSearchBox,
+    Text,
+    ThemeSwitcher,
+    UnoContainer,
     VirtualSelect,
     useAlertStore,
     useToggle,
-    Text,
     DateRangePicker,
     Badge,
     Legend,
@@ -67,6 +71,15 @@ const chartData = [
     { name: 'Group A', Value: 10.15 },
     { name: 'Group B', Value: 20.1 },
     { name: 'Group C', Value: 30.25 },
+    { name: 'Group D', Value: 10.15 },
+    { name: 'Group E', Value: 20.1 },
+    { name: 'Group F', Value: 30.25 },
+    { name: 'Group G', Value: 10.15 },
+    { name: 'Group H', Value: 20.1 },
+    { name: 'Group I', Value: 30.25 },
+    { name: 'Group J', Value: 10.15 },
+    { name: 'Group K', Value: 20.1 },
+    { name: 'Group L', Value: 30.25 },
 ];
 
 const chartBarData = [
@@ -201,9 +214,7 @@ const Application = () => {
                             <Badge color='blue' size='sm'>
                                 10%
                             </Badge>
-                            <BadgeDelta>
-                                +10%
-                            </BadgeDelta>
+                            <BadgeDelta>+10%</BadgeDelta>
                         </Flex>
                     </Card>
                     <Card>
@@ -218,12 +229,13 @@ const Application = () => {
                         />
                     </Card>
                     <Card>
-                        <Legend className='mb-6' categories={Object.values(chartData).map(x => x.name)} />
+                        <Legend className='mb-6' categories={Object.values(chartData).map((x) => x.name)} />
                         <PieChart
                             rawData={loading ? undefined : chartData}
                             dataCallback={(d) => Object.values(d).map((x) => ({ name: x.name, value: x.Value }))}
                             legendFormatType='money'
                             serieName='Moneys'
+                            onSegmentClick={(data) => console.log(data.name)}
                         />
                     </Card>
                     <Card>
@@ -313,9 +325,11 @@ const Application = () => {
     );
 };
 
-// biome-ignore lint/style/noNonNullAssertion: <explanation>
-createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <Application />
-    </React.StrictMode>,
-);
+const rootElement = document.getElementById('root');
+if (rootElement) {
+    createRoot(rootElement).render(
+        <React.StrictMode>
+            <Application />
+        </React.StrictMode>,
+    );
+}

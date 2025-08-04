@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { Button } from '../Button';
 import { DatePicker } from '../DatePicker';
@@ -23,17 +23,26 @@ export const Form = <T, TData>({
     onChange,
     saveLabel,
     columns = 3,
+    syncFieldName,
 }: FormSettings<T, TData>) => {
     const {
         register,
         watch,
         control,
         trigger,
-        reset,
+        setValue,
         formState: { isValid },
     } = useForm({ defaultValues: { table: initialData } });
     const { fields } = useFieldArray({ control, name: 'table' });
     const [disable, setDisable] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!syncFieldName) return;
+        const syncIndex = initialData.findIndex((f) => f.name === syncFieldName);
+        if (syncIndex !== -1) {
+            setValue(`table.${syncIndex}.value`, initialData[syncIndex].value);
+        }
+    }, [initialData, setValue, syncFieldName]);
 
     const onSaveData = async () => {
         const result = await trigger(undefined, { shouldFocus: true });
@@ -44,7 +53,6 @@ export const Form = <T, TData>({
         try {
             const data = extractData<T, TData>(watch('table'));
             await onSave(data);
-            reset({ table: initialData });
         } catch (e) {
             console.error('Data could not be saved', e);
         }
