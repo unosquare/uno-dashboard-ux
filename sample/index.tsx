@@ -12,6 +12,7 @@ import {
     Button,
     Card,
     ChartBar,
+    ChartBarV2,
     ChartFunnel,
     Col,
     ComposedLineChart,
@@ -44,6 +45,12 @@ import {
     VirtualSelect,
     useAlertStore,
     useToggle,
+    DateRangePicker,
+    Badge,
+    Legend,
+    BadgeDelta,
+    PieChartV2,
+    DataChartV2,
 } from '../src';
 import '../src/resources/global.css';
 import FormSample from './FormSample';
@@ -106,6 +113,20 @@ const Application = () => {
     const barClick = (ev: string) => {
         console.log(ev);
         setCounter((x) => x + 1);
+    };
+
+    const barClickV2 = (ev: {name: string}) => {
+        console.log(ev.name);
+        setCounter((x) => x + 1);
+    };
+
+    const pieClick = (ev: {label: string, percentage: string, value: number }) => {
+        console.log(ev.label, ev.percentage, ev.value);
+    };
+
+    const lineClick = (ev: any) => {
+        const { index, entry } = ev;
+        console.log(`${index} ${entry.name}`);
     };
 
     return (
@@ -218,6 +239,14 @@ const Application = () => {
                         />
                     </Card>
                     <Card>
+                        <Legend className='mb-6' categories={Object.values(chartData).map(x => x.name)} />
+                        <PieChartV2
+                            rawData={loading ? undefined : chartData}
+                            dataCallback={(d) => Object.values(d).map((x) => ({ name: x.name, value: x.Value }))}
+                            onClick={pieClick}
+                        />
+                    </Card>
+                    <Card>
                         <Text className='font-medium'>Line Chart</Text>
                         <DataChart
                             rawData={loading ? undefined : toggle ? chartData : []}
@@ -225,6 +254,15 @@ const Application = () => {
                             className='mt-5'
                             legendFormatType='percentage'
                             onClick={console.log}
+                        />
+                    </Card>
+                    <Card>
+                        <Text className='font-medium'>Line Chart V2</Text>
+                        <DataChartV2
+                            rawData={loading ? undefined : toggle ? chartData : []}
+                            className='mt-5'
+                            legendFormatType='percentage'
+                            onClick={lineClick}
                         />
                     </Card>
                     <Card>
@@ -236,6 +274,16 @@ const Application = () => {
                             legendFormatType='decimal'
                             legend
                             onClick={barClick}
+                        />
+                    </Card>
+                    <Card>
+                        <Text className='font-medium'>Bar Chart V2</Text>
+                        <ChartBarV2
+                            className='mt-5'
+                            refLineY={{ value: 20, label: 'Ref Line', color: 'red' }}
+                            rawData={loading ? undefined : toggle ? chartData : chartBarData}
+                            onClick={barClickV2} 
+                            layout={'horizontal'}                       
                         />
                     </Card>
                     <Card>

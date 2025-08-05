@@ -93,3 +93,27 @@ export const isValueInArray = (value: any, array: any[]): boolean => {
 
     return false;
 };
+
+interface AxisConfig {
+    positiveLines: number;
+    negativeLines: number;
+    totalLines: number;
+    positiveRange: number;
+    negativeRange: number;
+}
+
+export const calculateAxisConfig = (maxValue: number, minValue: number): AxisConfig => {
+    const positiveLines = 5;
+    const negativeLines = minValue < 0 ? 5 : 0;
+    const totalLines = minValue < 0 ? 10 : positiveLines;
+
+    return {
+        positiveLines,
+        negativeLines,
+        totalLines,
+        positiveRange: maxValue / positiveLines,
+        negativeRange: minValue < 0 ? Math.abs(minValue) / negativeLines : 0,
+    };
+};
+
+export const formatValue = (value: number): string => (value % 1 === 0 ? value.toString() : value.toFixed(2));

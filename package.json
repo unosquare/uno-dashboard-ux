@@ -11,6 +11,7 @@
         "@fluentui/react-icons": "^2.0.307",
         "@headlessui/react": "2.2.0",
         "combobox": "npm:@headlessui/react@0.0.0-insiders.ce17c6d",
+        "d3-shape": "^3.2.0",
         "date-fns": "^3.6.0",
         "react": "^18.3.1",
         "react-day-picker": "^8.10.1",
