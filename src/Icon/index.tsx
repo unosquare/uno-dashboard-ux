@@ -1,6 +1,6 @@
 import React from 'react';
 import { type Color, type Size, Sizes } from '../constants';
-import { type IconVariant, getIconColors, makeClassName } from '../theme';
+import { getIconColors, type IconVariant, makeClassName } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
 
 const makeIconClassName = makeClassName('Icon');

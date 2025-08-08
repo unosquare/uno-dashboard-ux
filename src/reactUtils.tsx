@@ -1,10 +1,8 @@
 import React, { createContext } from 'react';
 import type { SelectItemProps } from './Select';
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export function mergeRefs<T = any>(refs: Array<React.MutableRefObject<T> | React.LegacyRef<T>>): React.RefCallback<T> {
+export function mergeRefs<T>(refs: Array<React.MutableRefObject<T> | React.LegacyRef<T>>): React.RefCallback<T> {
     return (value) => {
-        // biome-ignore lint/complexity/noForEach: <explanation>
         refs.forEach((ref) => {
             if (typeof ref === 'function') {
                 ref(value);
@@ -62,9 +60,7 @@ export const CalendarIcon = ({ ...props }) => (
 );
 
 interface SelectedValueContextValue {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     selectedValue: any;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     handleValueChange?: (value: any) => void;
 }
 

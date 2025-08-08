@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import type { Color } from '../constants';
 import { colorPalette, getColorClassNames, makeClassName, themeColorRange } from '../theme';
@@ -26,7 +26,7 @@ const getPositionLeft = (value: number | undefined, maxValue: number): number =>
 const sumNumericArray = (arr: number[]) => arr.reduce((prefixSum, num) => prefixSum + num, 0);
 
 const BarLabels = ({ values }: { values: number[] }) => {
-    const sumValues = useMemo(() => sumNumericArray(values), [values]);
+    const sumValues = sumNumericArray(values);
     let prefixSum = 0;
     let sumConsecutiveHiddenLabels = 0;
     return (
@@ -49,7 +49,7 @@ const BarLabels = ({ values }: { values: number[] }) => {
                     prefixSum >= 0.1 * sumValues;
                 sumConsecutiveHiddenLabels = showLabel
                     ? 0
-                    : // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+                    : // biome-ignore lint/suspicious/noAssignInExpressions: This is OK
                       (sumConsecutiveHiddenLabels += widthPercentage);
 
                 const widthPositionLeft = getPositionLeft(widthPercentage, sumValues);
@@ -91,11 +91,11 @@ export const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>((p
         ...other
     } = props;
 
-    const markerBgColor = useMemo(() => getMarkerBgColor(markerValue, values, colors), [markerValue, values, colors]);
+    const markerBgColor = getMarkerBgColor(markerValue, values, colors);
 
-    const maxValue = useMemo(() => sumNumericArray(values), [values]);
+    const maxValue = sumNumericArray(values);
 
-    const markerPositionLeft: number = useMemo(() => getPositionLeft(markerValue, maxValue), [markerValue, maxValue]);
+    const markerPositionLeft = getPositionLeft(markerValue, maxValue);
 
     return (
         <div ref={ref} className={unoTwMerge(makeCategoryBarClassName('root'), className)} {...other}>

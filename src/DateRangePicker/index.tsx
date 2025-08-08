@@ -12,10 +12,10 @@ import { enUS } from 'date-fns/locale';
 import React, { type ReactElement, useMemo, useState } from 'react';
 import type { DateRange, DayPickerRangeProps } from 'react-day-picker';
 import { Calendar } from '../Calendar';
-import { SelectItem } from '../Select';
 import type { Color } from '../constants';
 import { useInternalState } from '../hooks';
-import { CalendarIcon, XCircleIcon, constructValueToNameMapping, getNodeText } from '../reactUtils';
+import { CalendarIcon, constructValueToNameMapping, getNodeText, XCircleIcon } from '../reactUtils';
+import { SelectItem } from '../Select';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
 
@@ -231,7 +231,6 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                 },
             );
         } else {
-            // biome-ignore lint/complexity/noForEach: <explanation>
             defaultOptions.forEach((option) => {
                 x.set(option.value, {
                     text: option.text,
@@ -248,7 +247,6 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
             return constructValueToNameMapping(children);
         }
         const valueToNameMapping = new Map<string, string>();
-        // biome-ignore lint/complexity/noForEach: <explanation>
         defaultOptions.forEach((option) => valueToNameMapping.set(option.value, option.text));
         return valueToNameMapping;
     }, [children]);
@@ -265,7 +263,7 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
     const isClearEnabled = enableClear && !disabled;
 
     const handleSelectClick = (value: string) => {
-        // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        // biome-ignore lint/style/noNonNullAssertion: This is OK
         const { from, to } = selectValues.get(value)!;
         const toDate = to ?? TODAY;
         onValueChange?.({ from, to: toDate, selectValue: value });
@@ -382,7 +380,6 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
                                 ((v: DateRange) => {
                                     onValueChange?.({ from: v?.from, to: v?.to });
                                     setSelectedValue({ from: v?.from, to: v?.to });
-                                    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                                 }) as any
                             }
                             locale={locale}

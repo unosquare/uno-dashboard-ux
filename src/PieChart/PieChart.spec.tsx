@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 import { PieChart } from './index';
 
 describe('PieChart', () => {
@@ -26,7 +25,7 @@ describe('PieChart', () => {
 
     it('renders loading', () => {
         const undefinedValue: number[] | undefined = undefined;
-        const callback = (data: number[]) => [];
+        const callback = (_data: number[]) => [];
 
         const { container } = render(<PieChart rawData={undefinedValue} dataCallback={callback} />);
 

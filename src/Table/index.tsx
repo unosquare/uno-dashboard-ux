@@ -1,19 +1,20 @@
 import type React from 'react';
-import { useCallback } from 'react';
-import { type PropsWithChildren, startTransition, useEffect, useMemo, useState } from 'react';
+import { type PropsWithChildren, startTransition, useEffect, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { twMerge } from 'tailwind-merge';
 import { createCsv } from 'uno-js';
 import { v4 as uuidv4 } from 'uuid';
+import type { ClassNameComponent, DataComponent, SortDirection, TableCellTypes, TableColumn } from '../constants';
 import { ExportCsvButton } from '../ExportCsvButton';
 import { Flex } from '../Flex';
+import { useDebounce } from '../hooks';
 import { NoData } from '../NoData';
 import { SearchOrClearButton } from '../SearchBox';
 import { TableCell, TableCellContent } from '../TableCell';
 import { TextInput } from '../TextInput';
-import type { ClassNameComponent, DataComponent, SortDirection, TableCellTypes, TableColumn } from '../constants';
-import { useDebounce } from '../hooks';
 import { getAlignment } from '../utils';
+import { renderToRowString } from './exportCsv';
+import { searchData, searchFooter, sortData } from './sortData';
 import { TableBase } from './TableBase';
 import { TableBody } from './TableBody';
 import { TableFoot } from './TableFoot';
@@ -21,17 +22,15 @@ import { TableFooterCell } from './TableFooterCell';
 import { TableHeaders } from './TableHeaders';
 import { TableRow } from './TableRow';
 import { ShimmerTable } from './TableShimmer';
-import { renderToRowString } from './exportCsv';
-import { searchData, searchFooter, sortData } from './sortData';
 
 export * from './sortData';
-export * from './TableRow';
-export * from './TableBody';
 export * from './TableBase';
+export * from './TableBody';
 export * from './TableFoot';
 export * from './TableFooterCell';
 export * from './TableHead';
 export * from './TableHeaderCell';
+export * from './TableRow';
 
 export type TableSettings<TDataIn> = DataComponent<TDataIn, TableCellTypes[][]> &
     ClassNameComponent & {
@@ -115,7 +114,7 @@ export const Table = <TDataIn,>({
     dataCallback,
     className = '',
 }: PropsWithChildren<TableSettings<TDataIn>>) => {
-    const dataTransformFn = useMemo(() => dataCallback ?? defaultTranform, [dataCallback]);
+    const dataTransformFn = dataCallback ?? defaultTranform;
     const [rawDataState, setRawDataState] = useState<TDataIn>();
     const [definitions, setDefinitions] = useState(columns);
     const [data, setData] = useState<TableCellTypes[][]>([]);
@@ -131,13 +130,10 @@ export const Table = <TDataIn,>({
         });
     });
 
-    const setSearchValue = useCallback(
-        (x = '') => {
-            setSearch(x);
-            debouncedSearch();
-        },
-        [debouncedSearch],
-    );
+    const setSearchValue = (x = '') => {
+        setSearch(x);
+        debouncedSearch();
+    };
 
     const onSearchInternal = ({ target }: React.ChangeEvent<HTMLInputElement>) => setSearchValue(target.value);
 
@@ -186,10 +182,7 @@ export const Table = <TDataIn,>({
         return [];
     };
 
-    const icon = useMemo(
-        () => () => <SearchOrClearButton hasValue={search.length > 0} onClick={setSearchValue} />,
-        [search, setSearchValue],
-    );
+    const icon = () => <SearchOrClearButton hasValue={search.length > 0} onClick={setSearchValue} />;
 
     return (
         <>

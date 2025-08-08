@@ -1,17 +1,19 @@
 import type React from 'react';
 import { type ReactElement, useState } from 'react';
-import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, Cell, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { twMerge } from 'tailwind-merge';
 import { v4 as uuidv4 } from 'uuid';
-import { ChartDecorators } from '../ChartCommon';
+import { getMap } from '../ChartCommon';
+import { ChartLegend } from '../ChartLegend';
 import { ChartBarShimmer } from '../ChartShimmers';
-import { Flex } from '../Flex';
-import { NoData } from '../NoData';
+import { ChartTooltip } from '../ChartTooltip';
 import type { ChartComponent, LegendFormatType } from '../constants';
+import { Flex } from '../Flex';
 import { useChart } from '../hooks';
+import { NoData } from '../NoData';
 import { BaseColors, colorPalette, getColorClassNames } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
-import { formatTicks } from '../utils';
+import { formatTicks, getValueFormatted } from '../utils';
 
 type XAxisPrimaryFormatter = (input: string) => string;
 
@@ -49,10 +51,8 @@ export const ChartBar = <T,>({
     const [legendHeight, setLegendHeight] = useState(60);
     const [dataStore, categoryColors, keys] = useChart(rawData, dataCallback);
 
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const tickFormatter = (t: any) => (legendFormatType ? formatTicks(Number(t), legendFormatType) : t) as string;
 
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const onClickEvent = (event: any) => {
         if (event?.activeLabel && onClick) onClick(String(event.activeLabel), Number(event.activeTooltipIndex));
     };
@@ -93,15 +93,50 @@ export const ChartBar = <T,>({
                                 'dark:fill-dark-unodashboard-content',
                             )}
                         />
-                        {ChartDecorators({
-                            keys,
-                            refLineY,
-                            legendFormatType,
-                            categoryColors,
-                            legend,
-                            legendHeight,
-                            setLegendHeight,
-                        })}
+                        {refLineY ? (
+                            <ReferenceLine
+                                key='refLineY'
+                                y={refLineY.value}
+                                label={{
+                                    position: 'insideTopRight',
+                                    value: refLineY.label,
+                                    fontSize: 11,
+                                    offset: 7,
+                                }}
+                                stroke={refLineY.color}
+                            />
+                        ) : null}
+                        <Tooltip
+                            key='tooltip'
+                            wrapperStyle={{ outline: 'none' }}
+                            isAnimationActive={false}
+                            cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
+                            content={({ active, payload, label }) => (
+                                <ChartTooltip
+                                    active={active}
+                                    payload={payload as any}
+                                    label={label as string}
+                                    valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}
+                                    categoryColors={categoryColors}
+                                />
+                            )}
+                        />
+                        {legend ? (
+                            <Legend
+                                key='legend'
+                                iconType='circle'
+                                height={legendHeight}
+                                content={({ payload }) =>
+                                    ChartLegend(
+                                        { payload },
+                                        categoryColors.size === 0 ? getMap(keys) : categoryColors,
+                                        setLegendHeight,
+                                        undefined,
+                                        undefined,
+                                    )
+                                }
+                            />
+                        ) : null}
                         {keys.map((property) =>
                             stacked ? (
                                 <Bar

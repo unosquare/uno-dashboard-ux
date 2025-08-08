@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Color } from '../constants';
-import { type ValueFormatter, colorPalette, getColorClassNames, makeClassName } from '../theme';
+import { colorPalette, getColorClassNames, makeClassName, type ValueFormatter } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
 
 const makeBarListClassName = makeClassName('BarList');
@@ -9,7 +9,6 @@ type Bar<T> = T & {
     key?: string;
     value: number;
     name: React.ReactNode;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     icon?: React.JSXElementConstructor<any>;
     href?: string;
     target?: string;
@@ -41,19 +40,19 @@ function BarListInner<T>(
     ref: React.ForwardedRef<HTMLDivElement>,
 ) {
     const Component = onValueChange ? 'button' : 'div';
-    const sortedData = React.useMemo(() => {
+    const sortedData = (() => {
         if (sortOrder === 'none') {
             return data;
         }
         return [...data].sort((a, b) => {
             return sortOrder === 'ascending' ? a.value - b.value : b.value - a.value;
         });
-    }, [data, sortOrder]);
+    })();
 
-    const widths = React.useMemo(() => {
+    const widths = (() => {
         const maxValue = Math.max(...sortedData.map((item) => item.value), 0);
         return sortedData.map((item) => (item.value === 0 ? 0 : Math.max((item.value / maxValue) * 100, 2)));
-    }, [sortedData]);
+    })();
 
     const rowHeight = 'h-8';
 
@@ -61,7 +60,6 @@ function BarListInner<T>(
         <div
             ref={ref}
             className={unoTwMerge(makeBarListClassName('root'), 'flex justify-between space-x-6', className)}
-            aria-sort={sortOrder}
             {...other}
         >
             <div className={unoTwMerge(makeBarListClassName('bars'), 'relative w-full space-y-1.5')}>

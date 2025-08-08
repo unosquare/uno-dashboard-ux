@@ -1,10 +1,9 @@
-import { useMemo } from 'react';
 import { Cell, Pie, PieChart as PieChartRechart, ResponsiveContainer, Tooltip } from 'recharts';
 import { twMerge } from 'tailwind-merge';
 import { ChartTooltip } from '../ChartTooltip';
+import type { ChartComponent, ChartData } from '../constants';
 import { Flex } from '../Flex';
 import { NoData } from '../NoData';
-import type { ChartComponent, ChartData } from '../constants';
 import { BaseColors, colorPalette, constructCategoryColors, getColorClassNames, themeColorRange } from '../theme';
 import { getValueFormatted } from '../utils';
 
@@ -21,10 +20,7 @@ export const PieChart = <T,>({
     serieName = 'Data',
     onSegmentClick,
 }: PieChartProps<T>) => {
-    const dataTransformFn = useMemo(
-        () => dataCallback ?? ((data: T) => data as unknown as ChartData[]),
-        [dataCallback],
-    );
+    const dataTransformFn = dataCallback ?? ((data: T) => data as unknown as ChartData[]);
     const dataStore: ChartData[] = (rawData && dataTransformFn(rawData)) || [];
     const categoryColors = constructCategoryColors(
         dataStore.map((x) => x.name),
@@ -67,7 +63,6 @@ export const PieChart = <T,>({
                         content={({ active, payload }) => (
                             <ChartTooltip
                                 active={active}
-                                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                                 payload={payload as any[]}
                                 label={serieName}
                                 valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}

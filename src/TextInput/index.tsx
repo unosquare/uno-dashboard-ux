@@ -6,7 +6,6 @@ export type TextInputProps = Omit<BaseInputProps, 'stepper' | 'makeInputClassNam
     defaultValue?: string;
     value?: string;
     onValueChange?: (value: string) => void;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     icon?: React.ElementType | React.JSXElementConstructor<any>;
     error?: boolean;
     errorMessage?: string;

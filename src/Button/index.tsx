@@ -39,7 +39,7 @@ export const ButtonIconOrSpinner = ({
     needMargin,
     transitionStatus,
 }: ButtonIconOrSpinnerProps) => {
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    // biome-ignore lint/style/noNonNullAssertion: This is OK
     Icon = Icon!;
 
     const margin = !needMargin
@@ -49,7 +49,6 @@ export const ButtonIconOrSpinner = ({
           : unoTwMerge('-mr-1', 'ml-1.5');
 
     const defaultSpinnerSize = unoTwMerge('w-0 h-0');
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const spinnerSize: { [key: string]: any } = {
         default: defaultSpinnerSize,
         entering: defaultSpinnerSize,
@@ -126,7 +125,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
         const [transitionState, toggleTransition] = useTransition({ timeout: 50 });
 
-        // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+        // biome-ignore lint/correctness/useExhaustiveDependencies: This is OK
         useEffect(() => {
             toggleTransition(loading);
         }, [loading]);

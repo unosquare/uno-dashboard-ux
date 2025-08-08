@@ -1,20 +1,32 @@
 import { useMemo, useState } from 'react';
-import { Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import { ChartDecorators } from '../ChartCommon';
+import {
+    Bar,
+    CartesianGrid,
+    ComposedChart,
+    Legend,
+    Line,
+    ReferenceLine,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from 'recharts';
+import { getMap } from '../ChartCommon';
+import { ChartLegend } from '../ChartLegend';
 import { ChartLineShimmer } from '../ChartShimmers';
+import { ChartTooltip } from '../ChartTooltip';
+import type { ChartComponent, LegendFormatType } from '../constants';
 import { Flex } from '../Flex';
 import { NoData } from '../NoData';
-import type { ChartComponent, LegendFormatType } from '../constants';
 import { BaseColors, colorPalette, constructCategoryColors, getColorClassNames, themeColorRange } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
-import { formatTicks } from '../utils';
+import { formatTicks, getValueFormatted } from '../utils';
 
 export type legendXAxis = { left: LegendFormatType; right: LegendFormatType };
 export type lineChart = { dataKey: string; yAxisId: string };
 
 interface ComposedLineChartSettings<TDataIn> extends ChartComponent<TDataIn, Record<string, unknown>[]> {
     legend?: boolean;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     onClick?: (e: any) => void;
     domain?: number;
     unit?: string;
@@ -36,6 +48,8 @@ const xPadding = {
     right: 20,
 };
 
+const legendFormatType = 'number';
+
 export const ComposedLineChart = <T,>({
     dataCallback,
     rawData,
@@ -55,12 +69,9 @@ export const ComposedLineChart = <T,>({
     const [legendHeight, setLegendHeight] = useState(60);
     const dataStore: Record<string, unknown>[] = (rawData && dataTransformFn(rawData)) || [];
 
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const tickFormatter = (t: any, orientation: 'left' | 'right') =>
         legendFormatTypes ? formatTicks(Number(t), legendFormatTypes[orientation]) : String(t);
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const leftTickFormatter = (t: any) => tickFormatter(t, 'left');
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const rightTickFormatter = (t: any) => tickFormatter(t, 'right');
 
     const categoryColors = constructCategoryColors(
@@ -138,15 +149,50 @@ export const ComposedLineChart = <T,>({
                             allowDecimals
                             orientation='right'
                         />
-                        {ChartDecorators({
-                            keys,
-                            refLineY,
-                            legendFormatType: 'number',
-                            categoryColors,
-                            legend,
-                            legendHeight,
-                            setLegendHeight,
-                        })}
+                        {refLineY ? (
+                            <ReferenceLine
+                                key='refLineY'
+                                y={refLineY.value}
+                                label={{
+                                    position: 'insideTopRight',
+                                    value: refLineY.label,
+                                    fontSize: 11,
+                                    offset: 7,
+                                }}
+                                stroke={refLineY.color}
+                            />
+                        ) : null}
+                        <Tooltip
+                            key='tooltip'
+                            wrapperStyle={{ outline: 'none' }}
+                            isAnimationActive={false}
+                            cursor={{ stroke: '#d1d5db', strokeWidth: 1 }}
+                            content={({ active, payload, label }) => (
+                                <ChartTooltip
+                                    active={active}
+                                    payload={payload as any}
+                                    label={label as string}
+                                    valueFormatter={(value: number) => getValueFormatted(value, legendFormatType)}
+                                    categoryColors={categoryColors}
+                                />
+                            )}
+                        />
+                        {legend ? (
+                            <Legend
+                                key='legend'
+                                iconType='circle'
+                                height={legendHeight}
+                                content={({ payload }) =>
+                                    ChartLegend(
+                                        { payload },
+                                        categoryColors.size === 0 ? getMap(keys) : categoryColors,
+                                        setLegendHeight,
+                                        undefined,
+                                        undefined,
+                                    )
+                                }
+                            />
+                        ) : null}
                     </ComposedChart>
                 </ResponsiveContainer>
             ) : (

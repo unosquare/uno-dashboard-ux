@@ -221,7 +221,6 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>((pro
                                     onValueChange?.(v);
                                     setSelectedValue(v);
                                     close();
-                                    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                                 }) as any
                             }
                             locale={locale}

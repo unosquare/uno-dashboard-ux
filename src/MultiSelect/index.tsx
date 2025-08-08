@@ -1,8 +1,8 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react';
-import React, { useRef, useMemo, isValidElement, useState, useContext } from 'react';
+import React, { isValidElement, useContext, useMemo, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useInternalState } from '../hooks';
-import { ArrowDownHeadIcon, SelectedValueContext, XCircleIcon, getFilteredOptions } from '../reactUtils';
+import { ArrowDownHeadIcon, getFilteredOptions, SelectedValueContext, XCircleIcon } from '../reactUtils';
 import { getSelectButtonColors, makeClassName } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
 import { isValueInArray } from '../utils';
@@ -90,7 +90,6 @@ export interface MultiSelectProps extends React.HTMLAttributes<HTMLInputElement>
     placeholder?: string;
     placeholderSearch?: string;
     disabled?: boolean;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     icon?: React.ElementType | React.JSXElementConstructor<any>;
     required?: boolean;
     error?: boolean;
@@ -181,7 +180,6 @@ export const MultiSelect = React.forwardRef<HTMLInputElement, MultiSelectProps>(
                         <option className='hidden' value='' disabled hidden>
                             {placeholder}
                         </option>
-                        {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
                         {filteredOptions.map((child: any) => {
                             const value = child.props.value;
                             const name = child.props.children;
@@ -201,7 +199,6 @@ export const MultiSelect = React.forwardRef<HTMLInputElement, MultiSelectProps>(
                             ((values: string[]) => {
                                 onValueChange?.(values);
                                 setSelectedValue(values);
-                                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                             }) as any
                         }
                         disabled={disabled}

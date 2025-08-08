@@ -85,7 +85,6 @@ export const moneyToNumber = (value: unknown) => {
     return isMoneyObject(value) ? value.Amount : 0;
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const isValueInArray = (value: any, array: any[]): boolean => {
     for (let i = 0; i < array.length; i++) {
         if (array[i] === value) return true;

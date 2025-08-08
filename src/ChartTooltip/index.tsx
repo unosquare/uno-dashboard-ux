@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import type { Color } from '../constants';
-import { BaseColors, type ValueFormatter, colorPalette, getColorClassNames } from '../theme';
+import { BaseColors, colorPalette, getColorClassNames, type ValueFormatter } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
 
 export const ChartTooltipFrame = ({ children }: { children: React.ReactNode }) => (
@@ -68,7 +68,6 @@ export const ChartTooltipRow = ({ value, name, color }: ChartTooltipRowProps) =>
 
 export interface ChartTooltipProps {
     active: boolean | undefined;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     payload: any[];
     label: string;
     categoryColors: Map<string, Color | string>;
@@ -77,7 +76,6 @@ export interface ChartTooltipProps {
 
 export const ChartTooltip = ({ active, payload, label, categoryColors, valueFormatter }: ChartTooltipProps) => {
     if (active && payload) {
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         const filteredPayload = payload.filter((item: any) => item.type !== 'none');
 
         return (

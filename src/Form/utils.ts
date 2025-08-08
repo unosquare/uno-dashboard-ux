@@ -4,7 +4,7 @@ import { type FormField, FormFieldTypes } from '../constants';
 
 export const extractData = <T, TData>(data: FormField<T>[]) =>
     data.reduce(
-        // biome-ignore lint/performance/noAccumulatingSpread: <explanation>
+        // biome-ignore lint/performance/noAccumulatingSpread: This is OK
         (acc, field) => ({ ...acc, [field.name]: field.value }),
         {} as TData,
     );

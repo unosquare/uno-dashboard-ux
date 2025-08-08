@@ -1,4 +1,4 @@
-import React, { type ReactNode, useState, useRef } from 'react';
+import React, { type ReactNode, useRef, useState } from 'react';
 import { mergeRefs } from '../reactUtils';
 import { getSelectButtonColors, hasValue } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
@@ -14,13 +14,11 @@ export interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputEleme
     type?: 'text' | 'email' | 'url' | 'number' | 'search' | 'tel';
     defaultValue?: string | number;
     value?: string | number;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     icon?: React.ElementType | React.JSXElementConstructor<any>;
     error?: boolean;
     errorMessage?: string;
     disabled?: boolean;
     stepper?: ReactNode;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     onValueChange?: (value: any) => void;
     makeInputClassName: (className: string) => string;
     pattern?: string;

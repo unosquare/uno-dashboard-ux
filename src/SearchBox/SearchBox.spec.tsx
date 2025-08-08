@@ -1,5 +1,4 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import React from 'react';
 import { SearchBox } from './index';
 
 describe('SearchBox', () => {

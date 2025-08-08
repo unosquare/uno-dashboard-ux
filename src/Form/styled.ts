@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+
 const InputBase = tw.input`
     py-[7px]
     px-2

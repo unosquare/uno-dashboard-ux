@@ -49,20 +49,12 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [isArrowDownPressed, setIsArrowDownPressed] = React.useState(false);
-    const handleArrowDownPress = React.useCallback(() => {
-        setIsArrowDownPressed(true);
-    }, []);
-    const handleArrowDownRelease = React.useCallback(() => {
-        setIsArrowDownPressed(false);
-    }, []);
+    const handleArrowDownPress = () => setIsArrowDownPressed(true);
+    const handleArrowDownRelease = () => setIsArrowDownPressed(false);
 
     const [isArrowUpPressed, setIsArrowUpPressed] = React.useState(false);
-    const handleArrowUpPress = React.useCallback(() => {
-        setIsArrowUpPressed(true);
-    }, []);
-    const handleArrowUpRelease = React.useCallback(() => {
-        setIsArrowUpPressed(false);
-    }, []);
+    const handleArrowUpPress = () => setIsArrowUpPressed(true);
+    const handleArrowUpRelease = () => setIsArrowUpPressed(false);
 
     return (
         <BaseInput

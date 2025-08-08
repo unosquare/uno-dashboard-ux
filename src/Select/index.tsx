@@ -1,7 +1,7 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react';
-import React, { useRef, Children, useMemo, isValidElement } from 'react';
+import React, { Children, isValidElement, useMemo, useRef } from 'react';
 import { useInternalState } from '../hooks';
-import { ArrowDownHeadIcon, XCircleIcon, constructValueToNameMapping } from '../reactUtils';
+import { ArrowDownHeadIcon, constructValueToNameMapping, XCircleIcon } from '../reactUtils';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
 
@@ -14,7 +14,6 @@ export interface SelectProps extends React.HTMLAttributes<HTMLInputElement> {
     onValueChange?: (value: string) => void;
     placeholder?: string;
     disabled?: boolean;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     icon?: React.JSXElementConstructor<any>;
     enableClear?: boolean;
     required?: boolean;
@@ -87,7 +86,6 @@ export const Select = React.forwardRef<HTMLInputElement, SelectProps>(
                         <option className='hidden' value='' disabled hidden>
                             {placeholder}
                         </option>
-                        {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
                         {childrenArray.map((child: any) => {
                             const value = child.props.value;
                             const name = child.props.children;
@@ -107,7 +105,6 @@ export const Select = React.forwardRef<HTMLInputElement, SelectProps>(
                             ((value: string) => {
                                 onValueChange?.(value);
                                 setSelectedValue(value);
-                                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                             }) as any
                         }
                         disabled={disabled}

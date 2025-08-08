@@ -72,7 +72,6 @@ export const TabGroup = React.forwardRef<HTMLDivElement, TabGroupProps>(
             ref={ref}
             defaultIndex={defaultIndex}
             selectedIndex={index}
-            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
             onChange={onIndexChange as any}
             className={unoTwMerge(makeTabGroupClassName('root'), 'w-full', className)}
             {...other}

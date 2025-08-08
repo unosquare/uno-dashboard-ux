@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 import { ChartBar, type ChartBarSettings } from './index';
 
 describe('ChartBar', () => {
@@ -34,7 +33,7 @@ describe('ChartBar', () => {
 
     it('renders loading', () => {
         const undefinedValue: number[] | undefined = undefined;
-        const callback = (data: number[]) => [];
+        const callback = (_data: number[]) => [];
 
         const { container } = render(<ChartBar rawData={undefinedValue} dataCallback={callback} />);
 

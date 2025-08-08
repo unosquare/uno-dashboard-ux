@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { Button } from '../Button';
+import { FormFieldTypes } from '../constants';
 import { DatePicker } from '../DatePicker';
 import { Flex } from '../Flex';
 import { MultiSelect, MultiSelectItem } from '../MultiSelect';
 import { NumberInput } from '../NumberInput';
 import { Select, SelectItem } from '../Select';
+import { StyledFieldGroup, StyledFormContainer } from '../styled';
 import { Textarea } from '../TextArea';
 import { Text } from '../TextElements';
 import { TextInput } from '../TextInput';
 import { VirtualSelect } from '../VirtualSelect';
-import { FormFieldTypes } from '../constants';
-import { StyledFieldGroup, StyledFormContainer } from '../styled';
 import type { FormSettings } from './formSettings';
 import { StyledCheckbox, StyledFileInput } from './styled';
 import { extractData, getFieldBaseProps, onMultiSelectChange, onSelectChange } from './utils';
@@ -84,7 +84,6 @@ export const Form = <T, TData>({
                                             control={control}
                                             render={({ field }) => (
                                                 <DatePicker
-                                                    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                                                     value={field.value as any}
                                                     onValueChange={(value) => {
                                                         field.onChange(value);

@@ -1,8 +1,7 @@
 import { render } from '@testing-library/react';
-import React from 'react';
-import { TableCellContent } from '../TableCell';
 import type { TableCellTypes, TableColumn } from '../constants';
-import { Table, getColumnSorting } from './index';
+import { TableCellContent } from '../TableCell';
+import { getColumnSorting, Table } from './index';
 
 describe('getColumnSorting', () => {
     it('returns 1 when the column is sortable', () => {
@@ -128,7 +127,7 @@ describe('Table', () => {
     it('renders with shimmer', () => {
         const data: undefined | TableCellTypes[][] = undefined;
         const { container } = render(
-            <Table columns={tableColumns} rawData={data} dataCallback={(x: undefined | TableCellTypes[][]) => []} />,
+            <Table columns={tableColumns} rawData={data} dataCallback={(_x: undefined | TableCellTypes[][]) => []} />,
         );
 
         const shimmer = container.querySelector('.loading-shimmer');

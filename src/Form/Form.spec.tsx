@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import React from 'react';
-import { Form } from '../Form';
 import { FormFieldTypes } from '../constants';
+import { Form } from '../Form';
 
 describe('Form', () => {
     it('displays the correct initial values', () => {
@@ -26,7 +25,6 @@ describe('Form', () => {
 
         const saveMock = jest.fn();
 
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         const onSave = (data: any) => {
             saveMock(data);
             return Promise.resolve();

@@ -1,6 +1,6 @@
-import { Text } from '../TextElements';
 import type { ReadOnlyFormSettings } from '../constants';
 import { StyledFieldGroup, StyledFormContainer } from '../styled';
+import { Text } from '../TextElements';
 
 export const ReadOnlyForm = ({ initialData, columns = 3 }: ReadOnlyFormSettings<string | number>) => (
     <StyledFormContainer fields={initialData.length} columns={columns}>

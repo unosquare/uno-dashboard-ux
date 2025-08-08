@@ -47,10 +47,7 @@ export const useChart = <T>(
     rawData: T | undefined,
     dataCallback: ((data: T) => Record<string, unknown>[]) | undefined,
 ): [Record<string, unknown>[], Map<string, string>, string[]] => {
-    const dataTransformFn = useMemo(
-        () => dataCallback ?? ((data: T) => data as unknown as Record<string, unknown>[]),
-        [dataCallback],
-    );
+    const dataTransformFn = dataCallback ?? ((data: T) => data as unknown as Record<string, unknown>[]);
 
     const [dataStore, setDataStore] = useState<Record<string, unknown>[]>([]);
     const [categoryColors, setCategoryColors] = useState<Map<string, string>>(new Map());

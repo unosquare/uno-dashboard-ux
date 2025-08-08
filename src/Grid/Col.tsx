@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeClassName } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
-import { type GridClassesMapping, colSpan, colSpanLg, colSpanMd, colSpanSm } from './styles';
+import { colSpan, colSpanLg, colSpanMd, colSpanSm, type GridClassesMapping } from './styles';
 
 const makeColClassName = makeClassName('Col');
 

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useInternalState } from '../hooks';
 import { mergeRefs } from '../reactUtils';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
@@ -11,7 +11,6 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
     errorMessage?: string;
     disabled?: boolean;
     autoHeight?: boolean;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     onValueChange?: (value: any) => void;
 }
 
@@ -40,7 +39,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
         const hasSelection = hasValue(val);
 
-        // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+        // biome-ignore lint/correctness/useExhaustiveDependencies: This is OK
         useEffect(() => {
             const textAreaHTMLRef = inputRef.current;
             if (autoHeight && textAreaHTMLRef) {

@@ -66,11 +66,9 @@ export const Calendar = <T extends DayPickerSingleProps | DayPickerRangeProps>({
 }: T & { enableYearNavigation: boolean }) => (
     <DayPicker
         showOutsideDays={true}
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         mode={mode as any}
         defaultMonth={defaultMonth}
         selected={selected}
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         onSelect={onSelect as any}
         locale={locale}
         disabled={disabled}

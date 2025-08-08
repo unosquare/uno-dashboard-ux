@@ -3,8 +3,8 @@ import { Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Responsive
 import { twMerge } from 'tailwind-merge';
 import { v4 as uuidv4 } from 'uuid';
 import { ChartLegend } from '../ChartLegend';
-import { Flex } from '../Flex';
 import type { ClassNameComponent, Color } from '../constants';
+import { Flex } from '../Flex';
 import { colorPalette, getColorClassNames } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
 

@@ -6,9 +6,9 @@ import {
     ComboboxOptions,
     Transition,
 } from '@headlessui/react';
-import React, { useRef, useMemo, isValidElement } from 'react';
+import React, { isValidElement, useMemo, useRef } from 'react';
 import { useInternalState } from '../hooks';
-import { ArrowDownHeadIcon, XCircleIcon, constructValueToNameMapping, getFilteredOptions } from '../reactUtils';
+import { ArrowDownHeadIcon, constructValueToNameMapping, getFilteredOptions, XCircleIcon } from '../reactUtils';
 import { getSelectButtonColors, hasValue, makeClassName } from '../theme';
 import { unoTwMerge } from '../unoTwMerge';
 
@@ -70,7 +70,6 @@ export interface SearchSelectProps extends React.HTMLAttributes<HTMLInputElement
     onValueChange?: (value: string) => void;
     placeholder?: string;
     disabled?: boolean;
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     icon?: React.ElementType | React.JSXElementConstructor<any>;
     required?: boolean;
     error?: boolean;
@@ -159,7 +158,6 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                         <option className='hidden' value='' disabled hidden>
                             {placeholder}
                         </option>
-                        {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
                         {filteredOptions.map((child: any) => (
                             <option className='hidden' key={child.props.value} value={child.props.value}>
                                 {child.props.children}
@@ -175,7 +173,6 @@ export const SearchSelect = React.forwardRef<HTMLInputElement, SearchSelectProps
                             ((value: string) => {
                                 onValueChange?.(value);
                                 setSelectedValue(value);
-                                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
                             }) as any
                         }
                         disabled={disabled}

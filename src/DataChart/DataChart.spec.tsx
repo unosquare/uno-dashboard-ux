@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 import { identity } from 'uno-js';
 import { DataChart } from './index';
 
@@ -16,7 +15,7 @@ describe('DataChart', () => {
 
     it('renders loading', () => {
         const undefinedValue: number[] | undefined = undefined;
-        const callback = (data: number[]) => [];
+        const callback = (_data: number[]) => [];
 
         const { container } = render(<DataChart rawData={undefinedValue} dataCallback={callback} />);
 
