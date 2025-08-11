@@ -48,8 +48,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       uno-js:
-        specifier: ^3.127.24
-        version: 3.127.24
+        specifier: ^3.127.26
+        version: 3.127.26
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
@@ -2940,8 +2940,8 @@ packages:
   undici-types@7.10.0:
     resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
 
-  uno-js@3.127.24:
-    resolution: {integrity: sha512-J4kbvv6+dO4PcmdzQtNVXXhE89gBYKaH/A3fHMBAelZKwi+4MrZW+IWfcAneUvf+5yqMtwOuZIajFSv6OIsygg==}
+  uno-js@3.127.26:
+    resolution: {integrity: sha512-ZKruxUIAHLl4v0E5kBkd4OSWpK1W9MRU/sk/8NTv2Bvju7s4qROl8gFwOlqbfyK2uPJ2Ci7MyNuzNdzijURikQ==}
 
   unrs-resolver@1.9.0:
     resolution: {integrity: sha512-wqaRu4UnzBD2ABTC1kLfBjAqIDZ5YUTr/MLGa7By47JV1bJDSW7jq/ZSLigB7enLe7ubNaJhtnBXgrc/50cEhg==}
@@ -6294,7 +6294,7 @@ snapshots:
 
   undici-types@7.10.0: {}
 
-  uno-js@3.127.24: {}
+  uno-js@3.127.26: {}
 
   unrs-resolver@1.9.0:
     dependencies:
