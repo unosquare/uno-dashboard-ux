@@ -81,13 +81,13 @@
 
 @layer components {
     body {
-        overflow: hidden !important;
+        overflow: hidden;
         @apply p-0 m-0;
     }
 
     #root {
         height: 100%;
-        overflow: hidden !important;
+        overflow: hidden;
     }
 
     input::-webkit-outer-spin-button,

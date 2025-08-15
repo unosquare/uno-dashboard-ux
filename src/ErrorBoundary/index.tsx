@@ -6,13 +6,12 @@ export const ErrorImage = (props: React.ComponentPropsWithRef<'svg'>) => (
     <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' {...props}>
         <title>Error</title>
         <defs>
-            <path id='a' d='M0 0h386v189.5H0z' />
+            <path d='M0 0h386v189.5H0z' />
             <path
-                id='c'
                 fillRule='evenodd'
                 d='m232.84 83.64 2.41 2.41-.31.31-2.41-2.41-2.41 2.41-.31-.31 2.41-2.41-2.41-2.41.31-.31 2.41 2.41 2.41-2.41.31.31-2.41 2.41z'
             />
-            <mask id='b' maskContentUnits='userSpaceOnUse' maskUnits='userSpaceOnUse'>
+            <mask maskContentUnits='userSpaceOnUse' maskUnits='userSpaceOnUse'>
                 <path d='M0 0h386v189.5H0z' />
                 <use xlinkHref='#a' fill='#fff' />
             </mask>

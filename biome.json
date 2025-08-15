@@ -6,7 +6,8 @@
         "useIgnoreFile": false
     },
     "files": {
-        "ignoreUnknown": false
+        "ignoreUnknown": false,
+        "includes": ["**", "!**/src/**/*.css"]
     },
     "formatter": {
         "enabled": true,
@@ -26,7 +27,10 @@
             },
 			"suspicious":{
 				"noExplicitAny": "off"
-			}
+			},
+            "correctness": {
+                "noNestedComponentDefinitions": "off"
+            }
         }
     },
     "javascript": {

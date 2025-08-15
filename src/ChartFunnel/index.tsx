@@ -22,9 +22,7 @@ export const ChartFunnel = <T,>({ rawData, dataCallback, formatType, calculateSi
                         className={unoTwMerge(
                             'rounded-sm h-[25px] mb-[5px] flex items-center justify-center',
                             entry.value
-                                ? calculateSizes.sizes[
-                                      calculateSizes.orderedValues.findIndex((x) => x === entry.value) ?? 0
-                                  ]
+                                ? calculateSizes.sizes[calculateSizes.orderedValues.indexOf(entry.value) ?? 0]
                                 : 'w-[30%]',
                             getColorClassNames(themeColorRange[index], colorPalette.text).bgColor,
                         )}

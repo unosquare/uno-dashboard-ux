@@ -1,7 +1,7 @@
 import type * as React from 'react';
 
 export const UnoLogo = (props: React.ComponentPropsWithRef<'svg'>) => (
-    <svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 204' {...props}>
+    <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 204' {...props}>
         <defs>
             <style>{'.cls-1,.cls-2{fill:#fff}.cls-1{fill-rule:evenodd}'}</style>
         </defs>

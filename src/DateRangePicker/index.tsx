@@ -247,7 +247,9 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
             return constructValueToNameMapping(children);
         }
         const valueToNameMapping = new Map<string, string>();
-        defaultOptions.forEach((option) => valueToNameMapping.set(option.value, option.text));
+        defaultOptions.forEach((option) => {
+            valueToNameMapping.set(option.value, option.text);
+        });
         return valueToNameMapping;
     }, [children]);
 
