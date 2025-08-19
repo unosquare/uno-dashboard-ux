@@ -4,10 +4,11 @@ import { translateType } from '../utils';
 
 const zeroString = '0.00';
 
-const renderDateString = (cell: Date) => {
-    const year = cell.getFullYear();
-    const month = String(cell.getMonth() + 1).padStart(2, '0');
-    const day = String(cell.getDate()).padStart(2, '0');
+const renderDateString = (cell: Date | string) => {
+    const date = cell instanceof Date ? cell : new Date(cell);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
 };
 
@@ -15,7 +16,7 @@ const renderCellString = (cell: TableCellTypes, dataType?: DataTypes) => {
     const cellString = String(cell);
     if (cellString == null || cellString === ' ') return 'N/A';
 
-    if (dataType === 'date') return renderDateString(cell as Date);
+    if (dataType === 'date') return renderDateString(cell as Date | string);
 
     return formatter(cellString, translateType(dataType)) ?? cellString;
 };
