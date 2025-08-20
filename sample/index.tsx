@@ -41,17 +41,17 @@ import {
     Text,
     ThemeSwitcher,
     UnoContainer,
-    VirtualSelect,
     useAlertStore,
     useToggle,
+    VirtualSelect,
 } from '../src';
 import '../src/resources/global.css';
+import { getLargeSelectOptions } from './data';
 import FormSample from './FormSample';
 import OnlineTable from './OnlineTable';
 import ReadOnlyFormSample from './ReadOnlyFormSample';
 import RegularTable from './RegularTable';
 import YearSelectorSample from './YearSelectorSample';
-import { getLargeSelectOptions } from './data';
 
 export enum options {
     A = 'Apple',
@@ -106,6 +106,10 @@ const Application = () => {
     const barClick = (ev: string) => {
         console.log(ev);
         setCounter((x) => x + 1);
+    };
+
+    const clickOnMetric = () => {
+        console.log('Metric clicked');
     };
 
     return (
@@ -195,6 +199,8 @@ const Application = () => {
                             </Badge>
                             <BadgeDelta>+10%</BadgeDelta>
                         </Flex>
+                        <Text>Metric 2</Text>
+                        <AwaitableMetric onClick={clickOnMetric}>{!loading ? '50%' : undefined}</AwaitableMetric>
                     </Card>
                     <Card>
                         <ChartFunnel
