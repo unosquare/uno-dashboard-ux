@@ -7,7 +7,7 @@ const zeroString = '0.00';
 const renderDateString = (cell: Date | string) => {
     const date = cell instanceof Date ? cell : new Date(cell);
 
-    if (isNaN(date.getTime())) {
+    if (Number.isNaN(date.getTime())) {
         return 'N/A';
     }
 
