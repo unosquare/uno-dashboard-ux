@@ -8,7 +8,7 @@
         "tailwind.config.js"
     ],
     "dependencies": {
-        "@fluentui/react-icons": "^2.0.309",
+        "@fluentui/react-icons": "^2.0.310",
         "@headlessui/react": "2.2.0",
         "combobox": "npm:@headlessui/react@0.0.0-insiders.ce17c6d",
         "date-fns": "^3.6.0",
@@ -34,7 +34,7 @@
         "@testing-library/jest-dom": "^6.8.0",
         "@testing-library/react": "^16.3.0",
         "@types/jest": "^30.0.0",
-        "@types/node": "^24.3.1",
+        "@types/node": "^24.4.0",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.1",
         "@types/uuid": "^10.0.0",
@@ -45,7 +45,7 @@
         "lint-staged": "^16.1.6",
         "postcss-loader": "^8.2.0",
         "tailwindcss": "^4.1.13",
-        "ts-jest": "^29.4.1",
+        "ts-jest": "^29.4.2",
         "react-compiler-runtime": "19.1.0-rc.3",
         "typescript": "^5.9.2"
     },
