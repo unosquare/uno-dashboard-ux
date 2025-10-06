@@ -17,7 +17,7 @@ const generateFakeData = () =>
             length: 6,
         },
         (_, i) => ({
-            name: `Loading ${i + 1}`,
+            name: `Thinking ${i + 1}`,
             Loading: Math.floor(Math.random() * 100),
         }),
     );
