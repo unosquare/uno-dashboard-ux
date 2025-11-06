@@ -15,4 +15,7 @@ module.exports = {
     },
     testMatch: ['<rootDir>/src/**/*.spec.tsx', '<rootDir>/src/**/*.test.ts'],
     setupFilesAfterEnv: ['<rootDir>/jest-setup.tsx'],
+    transformIgnorePatterns: [
+    'node_modules/(?!(uuid)/)',
+  ],
 };

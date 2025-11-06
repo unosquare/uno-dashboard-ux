@@ -91,6 +91,8 @@ export const Form = <T, TData>({
                                                     }}
                                                     disabled={disable || updatedField.disabled}
                                                     enableClear={false}
+                                                    minDate={updatedField.minDate}
+                                                    maxDate={updatedField.maxDate}
                                                     className='my-1'
                                                     ref={field.ref}
                                                 />
