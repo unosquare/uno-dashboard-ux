@@ -121,6 +121,8 @@ export type FormField<T> = ReadOnlyFormField<T> & {
     disabled?: boolean;
     notRequired?: boolean;
     loading?: boolean;
+    minDate?: Date;
+    maxDate?: Date;
 };
 
 export interface ReadOnlyFormSettings<T> {
