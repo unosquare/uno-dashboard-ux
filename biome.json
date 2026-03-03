@@ -23,7 +23,8 @@
             "a11y": {
                 "useKeyWithClickEvents": "off",
 				"noStaticElementInteractions": "off",
-				"useAriaPropsSupportedByRole": "off"
+				"useAriaPropsSupportedByRole": "off",
+                "noSvgWithoutTitle": "off"
             },
 			"suspicious":{
 				"noExplicitAny": "off"

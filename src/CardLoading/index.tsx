@@ -9,8 +9,8 @@ export const CardLoading = () => (
         className='block w-full h-full p-4'
     >
         <title>Loading...</title>
-        <circle fill='none' stroke='#304FF3' strokeWidth={4} cx={50} cy={50} r={44} style={{ opacity: 0.5 }} />
-        <circle fill='#304FF3' stroke='none' strokeWidth='3' cx='8' cy='54' r='6'>
+        <circle fill='none' stroke='#0522DE' strokeWidth={4} cx={50} cy={50} r={44} style={{ opacity: 0.5 }} />
+        <circle fill='#0522DE' stroke='none' strokeWidth='3' cx='8' cy='54' r='6'>
             <animateTransform
                 attributeName='transform'
                 dur='2s'

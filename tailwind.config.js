@@ -19,8 +19,8 @@ module.exports = {
                         faint: '#eff6ff', // blue-50
                         muted: '#bfdbfe', // blue-200
                         subtle: '#60a5fa', // blue-400
-                        DEFAULT: '#304FF3', // blue-500
-                        emphasis: '#1d4ed8', // blue-700
+                        DEFAULT: '#0522DE', // blue-500
+                        emphasis: '#040FBC', // blue-700
                         inverted: '#ffffff', // white
                     },
                     background: {

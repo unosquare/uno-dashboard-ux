@@ -33,10 +33,10 @@
     }
 
     *::-webkit-scrollbar-thumb {
-        background: #304ff3;
+        background: #0522DE;
         border-radius: 100vh;
         height: 20px;
-        border: 1px solid #304ff3;
+        border: 1px solid #0522DE;
     }
 
     @keyframes shimmer {
