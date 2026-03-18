@@ -1,3 +1,4 @@
+** Important - This repository has been archived. We are not longer maintaining this project.  **
 # uno-dashboard-ux
 
 A comprehensive React component library for building modern dashboard interfaces, developed by Unosquare. Built with TypeScript, Tailwind CSS, and powered by Recharts for data visualization.
